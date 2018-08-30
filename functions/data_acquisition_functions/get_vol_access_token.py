@@ -15,5 +15,5 @@ def get_vol_access_token(id, key):
     except requests.exceptions.RequestException as e:
         print("Failed - get_vol_access_token()") 
         send_email("brianshaller@gmail.com", "Failed - get_vol_access_token() at " +
-                str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")), e)
+                str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()

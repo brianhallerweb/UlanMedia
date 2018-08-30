@@ -1,7 +1,15 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-
+/*
+app.get("/test", (req, res) =>
+ var spawn = require(“child_process”).spawn;
+  var process = spawn(‘python’, [“./test.py”]);
+  process.stdout.on(‘data’, function (data) {
+    res.send(data.toString());
+  });
+);
+*/
 
 app.get("/yesterday", (req, res) =>
   res.sendFile(path.join(__dirname, "../reports/yesterday_campaigns_data.html"))

@@ -5,9 +5,9 @@ def create_df(data, output_html):
     df = pd.DataFrame(data)
     df["max_lead_cpa"] = df["max_lead_cpa"].astype("float64")
     df["max_sale_cpa"] = df["max_sale_cpa"].astype("float64")
-    df["epc"] = df["revenue"] / df["clicks"]
-    df["lead_cpa"] = df["cost"] / df["leads"]
-    df["sale_cpa"] = df["cost"] / df["sales"]
+    df["epc"] = round(df["revenue"] / df["clicks"], 2)
+    df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
+    df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
     df["profit"] = df["revenue"] - df["cost"]
 
     # profit < - max_sale_cpa 
