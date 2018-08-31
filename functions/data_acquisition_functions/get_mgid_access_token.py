@@ -1,5 +1,5 @@
 import requests
-import datetime
+from datetime import datetime
 import sys
 from functions.misc.send_email import send_email
 
@@ -14,12 +14,12 @@ def get_mgid_access_token(login, password):
             return res.json()["token"]
         except:
             send_email("brianshaller@gmail.com", "Failed - mgid token access at " +
-                       str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")), "Http status code error - mgid token access failed.")
+                       str(datetime.now().strftime("%Y-%m-%d %H:%M")), "Http status code error - mgid token access failed.")
             sys.exit()
     except requests.exceptions.RequestException as e:
         print("Failed - get_mgid_access_token()")
         send_email("brianshaller@gmail.com", "Failed - get_mgid_access_token() at " +
-                   str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")), e)
+                   str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
 
 

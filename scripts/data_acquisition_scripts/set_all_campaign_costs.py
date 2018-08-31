@@ -7,6 +7,7 @@ from functions.data_acquisition_functions.get_all_campaign_revenues_by_traffic_s
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
 from functions.misc.send_email import send_email
+from functions.misc.update_campaign_sets import update_campaign_sets 
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 mgid_token = get_mgid_access_token(mgid_login, mgid_password)
@@ -26,10 +27,12 @@ vol_end_date = today
 # get cost by campaign from mgid
 mgid_campaign_costs = get_mgid_campaign_costs(mgid_token, mgid_client_id,
                                               mgid_start_date, mgid_end_date)
+
+# get a new version of the campaign_sets text file that Mike regularly edits
+campaign_sets = update_campaign_sets() 
+
 # update voluum's records on cost per campaign
 # also, add up the total cost of all campaigns
-# remember that campaign_sets is an array of dictionaries created in the
-# config.py file.
 total_campaign_cost = 0
 for row in campaign_sets:
     mgid_campaign_id = str(row["mgid_id"])

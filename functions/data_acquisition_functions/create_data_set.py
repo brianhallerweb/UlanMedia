@@ -1,6 +1,7 @@
 from config.config import *
 from functions.data_acquisition_functions.get_all_campaign_conversions_by_traffic_source import get_all_campaign_conversions_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
+from functions.misc.update_campaign_sets import update_campaign_sets
 
 def create_data_set(vol_token, mgid_token, start_date, end_date, output_name):
     # get leads, sales, and revenue by campaign from voluum 
@@ -11,6 +12,9 @@ def create_data_set(vol_token, mgid_token, start_date, end_date, output_name):
     mgid_campaign_data = get_mgid_campaign_costs(mgid_token, mgid_client_id,
                                               start_date,
                                               end_date)["campaigns-stat"]
+
+    # get a new version of the campaign_sets text file that Mike regularly edits
+    campaign_sets = update_campaign_sets() 
 
     # create an array of dicts where each dict is a campaign
     # the stats in each campaign come from both mgid and voluum
