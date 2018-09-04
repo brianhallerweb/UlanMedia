@@ -4,7 +4,8 @@
   "author": "Brian Haller",
   "scripts": {
     "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server",
+    "start": "nodemon server/server"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
