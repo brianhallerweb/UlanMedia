@@ -26,7 +26,7 @@ module.exports = {
     proxy: [
       {
         context: ['/records/'],
-        target: 'http://localhost:8081',
+        target: 'http://localhost:3000',
       },
     ],
     historyApiFallback: true,

@@ -90,6 +90,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.listen('8081', () => {
-  console.log(`dashboard-react running on port 8081...`);
+app.listen('3000', () => {
+  console.log(`dashboard running on port 3000...`);
 });
