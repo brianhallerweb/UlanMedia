@@ -2,55 +2,94 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const {PythonShell} = require('python-shell');
 
-app.get('/yesterday', (req, res) => {
-  var spawn = require('child_process').spawnSync;
-  var process = spawn('python3', [
-    '../../scripts/data_analysis_scripts/create_yesterday_report.py',
-  ]);
-  res.sendFile(
-    path.join(__dirname, '../reports/yesterday_campaigns_data.html'),
+app.get('/records/yesterday', (req, res) => {
+  const pyshell = new PythonShell(
+    '../../scripts/data_analysis_scripts/create_yesterday_json.py',
   );
+
+  pyshell.on('message', function(message) {
+    res.send(message);
+  });
+
+  pyshell.end(function(err) {
+    if (err) {
+      throw err;
+    }
+  });
 });
 
-app.get('/7days', (req, res) => {
-  var spawn = require('child_process').spawnSync;
-  var process = spawn('python3', [
-    '../../scripts/data_analysis_scripts/create_seven_report.py',
-  ]);
-  res.sendFile(path.join(__dirname, '../reports/seven_campaigns_data.html'));
-});
-
-app.get('/30days', (req, res) => {
-  var spawn = require('child_process').spawnSync;
-  var process = spawn('python3', [
-    '../../scripts/data_analysis_scripts/create_thirty_report.py',
-  ]);
-  res.sendFile(path.join(__dirname, '../reports/thirty_campaigns_data.html'));
-});
-
-app.get('/90days', (req, res) => {
-  var spawn = require('child_process').spawnSync;
-  var process = spawn('python3', [
-    '../../scripts/data_analysis_scripts/create_ninety_report.py',
-  ]);
-  res.sendFile(path.join(__dirname, '../reports/ninety_campaigns_data.html'));
-});
-
-app.get('/180days', (req, res) => {
-  var spawn = require('child_process').spawnSync;
-  var process = spawn('python3', [
-    '../../scripts/data_analysis_scripts/create_oneeighty_report.py',
-  ]);
-  res.sendFile(
-    path.join(__dirname, '../reports/oneeighty_campaigns_data.html'),
+app.get('/records/7days', (req, res) => {
+  const pyshell = new PythonShell(
+    '../../scripts/data_analysis_scripts/create_seven_json.py',
   );
+
+  pyshell.on('message', function(message) {
+    res.send(message);
+  });
+
+  pyshell.end(function(err) {
+    if (err) {
+      throw err;
+    }
+  });
 });
+
+app.get('/records/30days', (req, res) => {
+  const pyshell = new PythonShell(
+    '../../scripts/data_analysis_scripts/create_thirty_json.py',
+  );
+
+  pyshell.on('message', function(message) {
+    res.send(message);
+  });
+
+  pyshell.end(function(err) {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+app.get('/records/90days', (req, res) => {
+  const pyshell = new PythonShell(
+    '../../scripts/data_analysis_scripts/create_ninety_json.py',
+  );
+
+  pyshell.on('message', function(message) {
+    res.send(message);
+  });
+
+  pyshell.end(function(err) {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+app.get('/records/180days', (req, res) => {
+  const pyshell = new PythonShell(
+    '../../scripts/data_analysis_scripts/create_oneeighty_json.py',
+  );
+
+  pyshell.on('message', function(message) {
+    res.send(message);
+  });
+
+  pyshell.end(function(err) {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+app.use(express.static('../public'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.listen('3000', () => {
-  console.log(`dashboard running on port 3000...`);
+app.listen('8081', () => {
+  console.log(`dashboard-react running on port 8081...`);
 });
