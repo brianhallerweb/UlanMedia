@@ -68,7 +68,7 @@ class CampaignsRecords extends Component {
             <th>epc</th>
             <th className="ttc1">
               c1
-              <span className="tttextc1">{'c1 = profit < - maxSaleCpa'}</span>
+              <span className="tttextc1">{'c1 = profit < maxSaleCpa'}</span>
             </th>
             <th className="ttc2">
               c2

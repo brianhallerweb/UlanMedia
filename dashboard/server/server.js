@@ -4,83 +4,44 @@ const app = express();
 const path = require('path');
 const {PythonShell} = require('python-shell');
 
+const pythonOptions = {
+  pythonPath: '/usr/bin/python3',
+  pythonOptions: ['-u'],
+  scriptPath: '../../scripts/data_analysis_scripts/',
+};
+
 app.get('/records/yesterday', (req, res) => {
-  const pyshell = new PythonShell(
-    '../../scripts/data_analysis_scripts/create_yesterday_json.py',
-  );
-
-  pyshell.on('message', function(message) {
-    res.send(message);
-  });
-
-  pyshell.end(function(err) {
-    if (err) {
-      throw err;
-    }
+  PythonShell.run('create_yesterday_json.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
   });
 });
 
 app.get('/records/7days', (req, res) => {
-  const pyshell = new PythonShell(
-    '../../scripts/data_analysis_scripts/create_seven_json.py',
-  );
-
-  pyshell.on('message', function(message) {
-    res.send(message);
-  });
-
-  pyshell.end(function(err) {
-    if (err) {
-      throw err;
-    }
+  PythonShell.run('create_seven_json.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
   });
 });
 
 app.get('/records/30days', (req, res) => {
-  const pyshell = new PythonShell(
-    '../../scripts/data_analysis_scripts/create_thirty_json.py',
-  );
-
-  pyshell.on('message', function(message) {
-    res.send(message);
-  });
-
-  pyshell.end(function(err) {
-    if (err) {
-      throw err;
-    }
+  PythonShell.run('create_thirty_json.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
   });
 });
 
 app.get('/records/90days', (req, res) => {
-  const pyshell = new PythonShell(
-    '../../scripts/data_analysis_scripts/create_ninety_json.py',
-  );
-
-  pyshell.on('message', function(message) {
-    res.send(message);
-  });
-
-  pyshell.end(function(err) {
-    if (err) {
-      throw err;
-    }
+  PythonShell.run('create_ninety_json.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
   });
 });
 
 app.get('/records/180days', (req, res) => {
-  const pyshell = new PythonShell(
-    '../../scripts/data_analysis_scripts/create_oneeighty_json.py',
-  );
-
-  pyshell.on('message', function(message) {
-    res.send(message);
-  });
-
-  pyshell.end(function(err) {
-    if (err) {
-      throw err;
-    }
+  PythonShell.run('create_oneeighty_json.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
   });
 });
 
