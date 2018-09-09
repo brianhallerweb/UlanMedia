@@ -41,13 +41,13 @@ class CampaignRecord extends Component {
       textArr.push(
         `Campaign cost (\$${cost}) is more than one half of maxSaleCPA (\$${0.5 *
           maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 1.5 maxLeadCPA (\$${1.5 *
-          maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+          maxLeadCPA}) --- (cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA)`,
       );
     }
     if (cost > 2 * maxSaleCPA && leadCPA > maxLeadCPA) {
       textArr.push(
         `Campaign cost (\$${cost}) is more than double maxSaleCPA (\$${2 *
-          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)`,
       );
     }
     let toolTipText = '';
