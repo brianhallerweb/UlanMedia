@@ -21,23 +21,38 @@ class CampaignRecord extends Component {
   createTooltip(profit, maxSaleCPA, clicks, leads, cost, maxLeadCPA, leadCPA) {
     const textArr = [];
     if (profit < -maxSaleCPA) {
-      textArr.push('profit < -1 * maxSaleCPA');
+      textArr.push(
+        `Campaign is losing (\$${profit}) more than one maxSaleCPA (\$${maxSaleCPA}) --- (profit < -1*maxSaleCPA)`,
+      );
     }
     if (clicks > 1000 && leads == 0) {
-      textArr.push('clicks > 1000 AND leads = 0');
+      textArr.push(
+        `Campaign has more than 1000 clicks (${clicks}) but no leads (${leads}) --- (clicks > 1000 AND leads = 0)`,
+      );
     }
     if (cost > 0.3 * maxSaleCPA && leadCPA > 2 * maxLeadCPA) {
-      textArr.push('cost > 0.3 * maxSaleCpa && leadCPA > 2 * maxLeadCPA');
+      textArr.push(
+        `Campaign cost (\$${cost}) is more than one third of maxSaleCPA (\$${0.3 *
+          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than double maxLeadCPA (\$${2 *
+          maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+      );
     }
     if (cost > 0.5 * maxSaleCPA && leadCPA > 1.5 * maxLeadCPA) {
-      textArr.push('cost > 0.5 * maxSaleCPA && leadCPA > 1.5 * maxLeadCPA');
+      textArr.push(
+        `Campaign cost (\$${cost}) is more than one half of maxSaleCPA (\$${0.5 *
+          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 1.5 maxLeadCPA (\$${1.5 *
+          maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+      );
     }
     if (cost > 2 * maxSaleCPA && leadCPA > maxLeadCPA) {
-      textArr.push('cost > 2 * maxSaleCPA && leadCPA > maxLeadCPA');
+      textArr.push(
+        `Campaign cost (\$${cost}) is more than double maxSaleCPA (\$${2 *
+          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+      );
     }
     let toolTipText = '';
     for (let i = 0; i < textArr.length; i++) {
-      toolTipText += `${i + 1}. ${textArr[i]}\n`;
+      toolTipText += `\u2022 ${textArr[i]}\n`;
     }
     return toolTipText;
   }

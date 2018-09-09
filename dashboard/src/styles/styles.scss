@@ -38,7 +38,7 @@ table th {
 .tooltip .tooltiptext {
     visibility: hidden;
     background-color: #555;
-    width: 460px;
+    width: 1200px;
     color: #fff;
     text-align: left;
     padding: 10px 10px;
@@ -51,7 +51,7 @@ table th {
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -100px;
 
     /* Fade in tooltip */
     opacity: 0;
