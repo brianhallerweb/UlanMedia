@@ -9,7 +9,7 @@ from functions.misc.send_email import send_email
 import pandas
 import json
 import sys
-from functions.data_acquisition_functions.create_data_set import create_data_set
+from functions.data_acquisition_functions.create_by_campaigns_data_set import create_by_campaigns_data_set
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 mgid_token = get_mgid_access_token(mgid_login, mgid_password)
@@ -24,8 +24,8 @@ start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
 print(start_date + " to " + end_date)
 
-create_data_set(vol_token, mgid_token, start_date, end_date,
-        "yesterday_campaigns_data")
+create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date,
+        "yesterday_by_campaigns_data")
 
 #############################################
 # create a data set for 7 days 
@@ -37,8 +37,8 @@ start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
 print(start_date + " to " + end_date)
 
-create_data_set(vol_token, mgid_token, start_date, end_date,
-        "seven_campaigns_data")
+create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date,
+        "seven_by_campaigns_data")
 
 #############################################
 # create a data set for 30 days 
@@ -50,8 +50,8 @@ start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
 print(start_date + " to " + end_date)
 
-create_data_set(vol_token, mgid_token, start_date, end_date,
-        "thirty_campaigns_data")
+create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date,
+        "thirty_by_campaigns_data")
 
 #############################################
 # create a data set for 90 days 
@@ -63,8 +63,8 @@ start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
 print(start_date + " to " + end_date)
 
-create_data_set(vol_token, mgid_token, start_date, end_date,
-        "ninety_campaigns_data")
+create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date,
+        "ninety_by_campaigns_data")
 
 #############################################
 # create a data set for 180 days 
@@ -76,5 +76,5 @@ start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
 print(start_date + " to " + end_date)
 
-create_data_set(vol_token, mgid_token, start_date, end_date,
-        "oneeighty_campaigns_data")
+create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date,
+        "oneeighty_by_campaigns_data")

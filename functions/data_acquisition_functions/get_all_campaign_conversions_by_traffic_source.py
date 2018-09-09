@@ -49,6 +49,6 @@ def get_all_campaign_conversions_by_traffic_source(token,
     except requests.exceptions.RequestException as e:
         print("Failed - get_all_campaign_conversions_by_traffic_source()") 
         send_email("brianshaller@gmail.com", "Failed - get_all_campaign_conversions_by_traffic_source at " +
-                str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")), e)
+                str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
 

@@ -2,8 +2,9 @@ from config.config import *
 from functions.data_acquisition_functions.get_all_campaign_conversions_by_traffic_source import get_all_campaign_conversions_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
 from functions.misc.update_campaign_sets import update_campaign_sets
+import json
 
-def create_data_set(vol_token, mgid_token, start_date, end_date, output_name):
+def create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date, output_name):
     # get leads, sales, and revenue by campaign from voluum 
     vol_campaign_data = get_all_campaign_conversions_by_traffic_source(vol_token,
                                                        mgidVolTrafficSourceId
@@ -48,9 +49,12 @@ def create_data_set(vol_token, mgid_token, start_date, end_date, output_name):
             campaign_data["revenue"] = 0
         campaigns_data.append(campaign_data)
 
-    with open(f"../../data/{output_name}.py", "w") as file:
-        file.write(f"{output_name} = ")
-        file.write(f"{campaigns_data}")
+
+    with open(f"../../data/by_campaigns_data/{output_name}.json", "w") as file:
+        json.dump(campaigns_data, file)
+    #with open(f"../../data/{output_name}.py", "w") as file:
+        #file.write(f"{output_name} = ")
+        #file.write(f"{campaigns_data}")
 
     print(f"{output_name} created")
 

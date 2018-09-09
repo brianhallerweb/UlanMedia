@@ -2,47 +2,29 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const {PythonShell} = require('python-shell');
 
+app.use(bodyParser.json());
 const pythonOptions = {
   pythonPath: '/usr/bin/python3',
   pythonOptions: ['-u'],
-  scriptPath: '../../scripts/data_analysis_scripts/',
+  scriptPath: '../../scripts/data_analysis_scripts/by_campaigns_scripts/',
 };
 
-app.get('/records/yesterday', (req, res) => {
-  PythonShell.run('create_yesterday_json.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
-  });
-});
-
-app.get('/records/7days', (req, res) => {
-  PythonShell.run('create_seven_json.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
-  });
-});
-
-app.get('/records/30days', (req, res) => {
-  PythonShell.run('create_thirty_json.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
-  });
-});
-
-app.get('/records/90days', (req, res) => {
-  PythonShell.run('create_ninety_json.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
-  });
-});
-
-app.get('/records/180days', (req, res) => {
-  PythonShell.run('create_oneeighty_json.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
-  });
+app.post('/records', (req, res) => {
+  pythonOptions['args'] = [];
+  for (let arg in req.body) {
+    pythonOptions['args'].push(req.body[arg]);
+  }
+  PythonShell.run(
+    'create_by_campaigns_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
 });
 
 app.use(express.static('../public'));
