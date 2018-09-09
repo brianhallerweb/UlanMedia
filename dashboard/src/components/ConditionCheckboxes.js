@@ -49,7 +49,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         />
         <span>
           {
-            'Campaign cost is more than one half of maxSaleCPA AND leadCPA is more than 1.5 maxLeadCPA --- cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA'
+            'Campaign cost is more than half of maxSaleCPA AND leadCPA is more than 1.5x maxLeadCPA --- (cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA)'
           }
         </span>
       </div>
@@ -61,7 +61,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         />
         <span>
           {
-            'Campaign cost is more than double maxSaleCPA AND leadCPA is more than maxLeadCPA --- cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA'
+            'Campaign cost is more than 2x maxSaleCPA AND leadCPA is more than maxLeadCPA --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)'
           }
         </span>
       </div>
