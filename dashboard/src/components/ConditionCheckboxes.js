@@ -9,6 +9,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c1"
+          checked
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -21,6 +22,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c2"
+          checked
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -33,6 +35,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c3"
+          checked
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -45,6 +48,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c4"
+          checked
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>

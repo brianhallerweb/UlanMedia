@@ -4,7 +4,9 @@ import {NavLink} from 'react-router-dom';
 
 const DatesDropdown = ({selectDateRange}) => (
   <div>
-    <select onChange={e => selectDateRange(e.target.value)}>
+    <select
+      onChange={e => selectDateRange(e.target.value)}
+      defaultValue="seven_by_campaigns_data">
       <option value="yesterday_by_campaigns_data">Yesterday</option>
       <option value="seven_by_campaigns_data">7 days</option>
       <option value="thirty_by_campaigns_data">30 days</option>

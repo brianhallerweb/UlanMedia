@@ -8,11 +8,11 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dateRange: 'yesterday_by_campaigns_data',
-      c1: false,
-      c2: false,
-      c3: false,
-      c4: false,
+      dateRange: 'seven_by_campaigns_data',
+      c1: true,
+      c2: true,
+      c3: true,
+      c4: true,
       error: false,
       campaignsRecords: [],
     };
