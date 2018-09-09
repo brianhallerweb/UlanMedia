@@ -45,6 +45,12 @@ class CampaignRecord extends Component {
           maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)`,
       );
     }
+    if (profit < -3 * maxSaleCPA) {
+      textArr.push(
+        `Campaign profit (\$${profit}) is less than -3x maxSaleCPA (\$${-3 *
+          maxSaleCPA}) --- (profit < -3*maxSaleCPA)`,
+      );
+    }
     let toolTipText = '';
     for (let i = 0; i < textArr.length; i++) {
       toolTipText += `\u2022 ${textArr[i]}\n`;

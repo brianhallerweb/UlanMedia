@@ -35,8 +35,13 @@ result3 = df[c3]
 c4 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
 result4 = df[c4]
 
-conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5]]
-conditions_dfs = [result1, result2, result3, result4]
+# profit < -3*maxSaleCPA 
+c5 = (df["profit"] < -3*df["max_sale_cpa"])
+result5 = df[c5]
+
+conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
+        sys.argv[6]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):

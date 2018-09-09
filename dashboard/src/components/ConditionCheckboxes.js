@@ -2,14 +2,14 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
-const ConditionCheckboxes = ({toggleCondition}) => {
+const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5}) => {
   return (
     <div>
       <div>
         <input
           type="checkbox"
           name="c1"
-          checked
+          checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -22,7 +22,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c2"
-          checked
+          checked={c2}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -35,7 +35,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c3"
-          checked
+          checked={c3}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -48,12 +48,25 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         <input
           type="checkbox"
           name="c4"
-          checked
+          checked={c4}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
           {
             'Campaign cost is more than 2x maxSaleCPA AND leadCPA is more than maxLeadCPA --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)'
+          }
+        </span>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          name="c5"
+          checked={c5}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {
+            'Campaign profit is less than -3x maxSaleCPA --- (profit < -3*maxSaleCPA)'
           }
         </span>
       </div>

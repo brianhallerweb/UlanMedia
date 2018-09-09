@@ -13,6 +13,7 @@ class Home extends Component {
       c2: true,
       c3: true,
       c4: true,
+      c5: false,
       error: false,
       campaignsRecords: [],
     };
@@ -38,6 +39,7 @@ class Home extends Component {
         c2: this.state.c2,
         c3: this.state.c3,
         c4: this.state.c4,
+        c5: this.state.c5,
       }),
     })
       .then(res => {
@@ -56,7 +58,13 @@ class Home extends Component {
   }
 
   isConditionSelected() {
-    if (this.state.c1 || this.state.c2 || this.state.c3 || this.state.c4) {
+    if (
+      this.state.c1 ||
+      this.state.c2 ||
+      this.state.c3 ||
+      this.state.c4 ||
+      this.state.c5
+    ) {
       return true;
     } else {
       return false;
@@ -70,6 +78,11 @@ class Home extends Component {
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
+          c1={this.state.c1}
+          c2={this.state.c2}
+          c3={this.state.c3}
+          c4={this.state.c4}
+          c5={this.state.c5}
           submitForm={this.submitForm.bind(this)}
           isConditionSelected={this.isConditionSelected.bind(this)}
         />
