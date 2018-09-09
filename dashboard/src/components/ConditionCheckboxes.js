@@ -65,9 +65,7 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5}) => {
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {
-            'Campaign profit is less than -3x maxSaleCPA --- (profit < -3*maxSaleCPA)'
-          }
+          {'Campaign lost more than 3x maxSaleCPA --- (profit < -3*maxSaleCPA)'}
         </span>
       </div>
     </div>

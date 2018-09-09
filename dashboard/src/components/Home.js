@@ -13,7 +13,7 @@ class Home extends Component {
       c2: true,
       c3: true,
       c4: true,
-      c5: false,
+      c5: true,
       error: false,
       campaignsRecords: [],
     };
