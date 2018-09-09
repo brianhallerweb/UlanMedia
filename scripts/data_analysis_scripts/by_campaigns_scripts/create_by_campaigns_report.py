@@ -11,35 +11,32 @@ with open(f'/home/bsh/Documents/UlanMedia/data/by_campaigns_data/{filename}.json
 df = pd.DataFrame(data)
 df["max_lead_cpa"] = df["max_lead_cpa"].astype("float64")
 df["max_sale_cpa"] = df["max_sale_cpa"].astype("float64")
-df["epc"] = round(df["revenue"] / df["clicks"], 2)
+df["epc"] = round(df["revenue"] / df["clicks"], 3)
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
-
-# profit < -1*max_sale_cpa 
-c1 = df["profit"] < -df["max_sale_cpa"]
-result1 = df[c1]
+df = df[df["profit"] < -df["max_sale_cpa"]]
 
 # clicks > 1000 and leads = 0
-c2 = (df["clicks"] > 1000) & (df["leads"] == 0)
-result2 = df[c2]
+c1 = (df["clicks"] > 1000) & (df["leads"] == 0)
+result1 = df[c1]
     
 # cost > 0.3*maxSaleCPA and leadCPA > 2*maxLeadCPA 
-c3 = (df["cost"] > 0.3*df["max_sale_cpa"]) & (df["lead_cpa"] >
+c2 = (df["cost"] > 0.3*df["max_sale_cpa"]) & (df["lead_cpa"] >
 2*df["max_lead_cpa"])
-result3 = df[c3] 
+result2 = df[c2] 
 
 # cost > 0.5*maxSaleCPA and leadCPA > 1.5*maxLeadCPA    
-c4 = (df["cost"] > 0.5*df["max_sale_cpa"]) & (df["lead_cpa"] >
+c3 = (df["cost"] > 0.5*df["max_sale_cpa"]) & (df["lead_cpa"] >
 1.5*df["max_lead_cpa"])
-result4 = df[c4]
+result3 = df[c3]
 
 # cost > 2*maxSaleCPA and leadCPA > maxLeadCPA 
-c5 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
-result5 = df[c5]
+c4 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
+result4 = df[c4]
 
-conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6]]
-conditions_dfs = [result1, result2, result3, result4, result5]
+conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5]]
+conditions_dfs = [result1, result2, result3, result4]
 
 final_result = None 
 for i in range(len(conditions_args)):
