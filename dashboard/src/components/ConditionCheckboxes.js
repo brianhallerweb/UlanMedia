@@ -13,7 +13,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         />
         <span>
           {
-            'Campaign is losing more than one maxSaleCPA --- (profit < -1*maxSaleCpa)'
+            'Campaign has more than 1000 clicks but no leads --- (clicks > 1000 AND leads = 0)'
           }
         </span>
       </div>
@@ -25,7 +25,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         />
         <span>
           {
-            'Campaign has more than 1000 clicks but no leads --- (clicks > 1000 AND leads = 0)'
+            'Campaign cost is more than a third of maxSaleCPA AND leadCPA is more than 2x maxLeadCPA --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)'
           }
         </span>
       </div>
@@ -37,18 +37,6 @@ const ConditionCheckboxes = ({toggleCondition}) => {
         />
         <span>
           {
-            'Campaign cost is more than a third of maxSaleCPA AND leadCPA is more than 2x maxLeadCPA --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)'
-          }
-        </span>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {
             'Campaign cost is more than half of maxSaleCPA AND leadCPA is more than 1.5x maxLeadCPA --- (cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA)'
           }
         </span>
@@ -56,7 +44,7 @@ const ConditionCheckboxes = ({toggleCondition}) => {
       <div>
         <input
           type="checkbox"
-          name="c5"
+          name="c4"
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>

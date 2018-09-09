@@ -20,11 +20,6 @@ class CampaignRecord extends Component {
 
   createTooltip(profit, maxSaleCPA, clicks, leads, cost, maxLeadCPA, leadCPA) {
     const textArr = [];
-    if (profit < -maxSaleCPA) {
-      textArr.push(
-        `Campaign is losing (\$${profit}) more than one maxSaleCPA (\$${maxSaleCPA}) --- (profit < -1*maxSaleCPA)`,
-      );
-    }
     if (clicks > 1000 && leads == 0) {
       textArr.push(
         `Campaign has more than 1000 clicks (${clicks}) but no leads (${leads}) --- (clicks > 1000 AND leads = 0)`,

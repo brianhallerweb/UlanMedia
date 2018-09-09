@@ -13,7 +13,6 @@ class Home extends Component {
       c2: false,
       c3: false,
       c4: false,
-      c5: false,
       error: false,
       campaignsRecords: [],
     };
@@ -39,7 +38,6 @@ class Home extends Component {
         c2: this.state.c2,
         c3: this.state.c3,
         c4: this.state.c4,
-        c5: this.state.c5,
       }),
     })
       .then(res => {
@@ -58,13 +56,7 @@ class Home extends Component {
   }
 
   isConditionSelected() {
-    if (
-      this.state.c1 ||
-      this.state.c2 ||
-      this.state.c3 ||
-      this.state.c4 ||
-      this.state.c5
-    ) {
+    if (this.state.c1 || this.state.c2 || this.state.c3 || this.state.c4) {
       return true;
     } else {
       return false;
