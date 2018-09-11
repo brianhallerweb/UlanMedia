@@ -12,11 +12,11 @@ class CampaignByDay extends Component {
       <tr>
         <td>{this.props.dayRecord.day}</td>
         <td>{this.props.dayRecord.clicks}</td>
-        <td>{this.props.dayRecord.cost}</td>
-        <td>{this.props.dayRecord.cpc}</td>
-        <td>{this.props.dayRecord.revenue}</td>
+        <td>${this.props.dayRecord.cost}</td>
+        <td>${this.props.dayRecord.cpc}</td>
+        <td>${this.props.dayRecord.revenue}</td>
         <td>{this.props.dayRecord.conversions}</td>
-        <td>{this.props.dayRecord.conversion_cpa}</td>
+        <td>${this.props.dayRecord.conversion_cpa}</td>
       </tr>
     );
   }

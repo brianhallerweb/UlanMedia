@@ -83,16 +83,16 @@ class CampaignRecord extends Component {
           </span>
         </td>
         <td>{this.clicks}</td>
-        <td>{this.cost}</td>
-        <td>{this.revenue}</td>
-        <td>{this.profit}</td>
+        <td>${this.cost}</td>
+        <td>${this.revenue}</td>
+        <td>${this.profit}</td>
         <td>{this.leads}</td>
-        <td>{this.lead_cpa}</td>
-        <td>{this.max_lead_cpa}</td>
+        <td>${this.lead_cpa}</td>
+        <td>${this.max_lead_cpa}</td>
         <td>{this.sales}</td>
-        <td>{this.sale_cpa}</td>
-        <td>{this.max_sale_cpa}</td>
-        <td>{this.epc}</td>
+        <td>${this.sale_cpa}</td>
+        <td>${this.max_sale_cpa}</td>
+        <td>${this.epc}</td>
       </tr>
     );
   }
