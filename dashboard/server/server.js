@@ -6,16 +6,34 @@ const bodyParser = require('body-parser');
 const {PythonShell} = require('python-shell');
 
 app.use(bodyParser.json());
-const pythonOptions = {
-  pythonPath: '/usr/bin/python3',
-  pythonOptions: ['-u'],
-  scriptPath: '../../scripts/data_analysis_scripts/by_campaigns_scripts/',
-};
+
+app.post('/records/byday', (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath:
+      '../../scripts/data_analysis_scripts/by_campaigns_by_days_scripts/',
+    args: [req.body.name],
+  };
+  PythonShell.run(
+    'create_by_campaigns_by_days_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
 
 app.post('/records', (req, res) => {
-  pythonOptions['args'] = [];
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_analysis_scripts/by_campaigns_scripts/',
+    args: [],
+  };
   for (let arg in req.body) {
-    pythonOptions['args'].push(req.body[arg]);
+    pythonOptions.args.push(req.body[arg]);
   }
   PythonShell.run(
     'create_by_campaigns_report.py',

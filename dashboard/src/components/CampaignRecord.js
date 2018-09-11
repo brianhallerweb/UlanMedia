@@ -1,5 +1,6 @@
 //@format
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class CampaignRecord extends Component {
   constructor(props) {
@@ -62,7 +63,13 @@ class CampaignRecord extends Component {
     return (
       <tr>
         <td className="tooltip">
-          {this.props.campaign.name}
+          <Link
+            to={{
+              pathname: `/campaign/${this.props.campaign.name}/`,
+            }}
+            target="_blank">
+            {this.props.campaign.name}
+          </Link>
           <span className="tooltiptext">
             {this.createTooltip(
               this.profit,
