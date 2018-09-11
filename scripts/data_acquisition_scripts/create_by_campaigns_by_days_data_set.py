@@ -11,7 +11,7 @@ vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 
 start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(50)
 start_date_pst = start_date_utc.astimezone(pytz.timezone("America/Los_Angeles"))
-end_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(1)
+end_date_utc = pytz.utc.localize(datetime.utcnow())
 end_date_pst = end_date_utc.astimezone(pytz.timezone("America/Los_Angeles"))
 start_date = start_date_pst.strftime("%Y-%m-%d")
 end_date = end_date_pst.strftime("%Y-%m-%d")
