@@ -53,7 +53,7 @@ class CampaignRecord extends Component {
     }
     if (profit < -3 * maxSaleCPA) {
       textArr.push(
-        `Campaign lost (\$${profit}) more than -3x maxSaleCPA (\$${-3 *
+        `Campaign lost (\$${profit}) more than 3x maxSaleCPA (\$${-3 *
           maxSaleCPA}) --- (profit < -3*maxSaleCPA)`,
       );
     }
