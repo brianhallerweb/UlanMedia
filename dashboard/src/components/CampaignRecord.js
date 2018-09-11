@@ -26,6 +26,11 @@ class CampaignRecord extends Component {
         `Campaign has more than 1000 clicks (${clicks}) but no leads (${leads}) --- (clicks > 1000 AND leads = 0)`,
       );
     }
+    if (cost > 0.25 * maxSaleCPA && leadCPA > 3 * maxLeadCPA) {
+      textArr.push(
+        `Campaign cost (${cost}) is more than a quarter of maxSaleCPA (${maxSaleCPA}) AND leadCPA (${leadCPA}) is more than 3x maxLeadCPA (${maxLeadCPA}) --- (cost > 0.25*maxSaleCPA && leadCPA > 3*maxLeadCPA)`,
+      );
+    }
     if (cost > 0.3 * maxSaleCPA && leadCPA > 2 * maxLeadCPA) {
       textArr.push(
         `Campaign cost (\$${cost}) is more than a third of maxSaleCPA (\$${0.3 *
@@ -48,7 +53,7 @@ class CampaignRecord extends Component {
     }
     if (profit < -3 * maxSaleCPA) {
       textArr.push(
-        `Campaign profit (\$${profit}) is less than -3x maxSaleCPA (\$${-3 *
+        `Campaign lost (\$${profit}) more than -3x maxSaleCPA (\$${-3 *
           maxSaleCPA}) --- (profit < -3*maxSaleCPA)`,
       );
     }

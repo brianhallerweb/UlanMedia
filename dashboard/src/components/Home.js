@@ -14,6 +14,7 @@ class Home extends Component {
       c3: true,
       c4: true,
       c5: true,
+      c6: true,
       error: false,
       campaignsRecords: [],
     };
@@ -40,6 +41,7 @@ class Home extends Component {
         c3: this.state.c3,
         c4: this.state.c4,
         c5: this.state.c5,
+        c6: this.state.c6,
       }),
     })
       .then(res => {
@@ -63,7 +65,8 @@ class Home extends Component {
       this.state.c2 ||
       this.state.c3 ||
       this.state.c4 ||
-      this.state.c5
+      this.state.c5 ||
+      this.state.c6
     ) {
       return true;
     } else {
@@ -83,6 +86,7 @@ class Home extends Component {
           c3={this.state.c3}
           c4={this.state.c4}
           c5={this.state.c5}
+          c6={this.state.c6}
           submitForm={this.submitForm.bind(this)}
           isConditionSelected={this.isConditionSelected.bind(this)}
         />

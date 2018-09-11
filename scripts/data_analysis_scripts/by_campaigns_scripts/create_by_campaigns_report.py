@@ -20,28 +20,32 @@ df = df[df["profit"] < -df["max_sale_cpa"]]
 # clicks > 1000 and leads = 0
 c1 = (df["clicks"] > 1000) & (df["leads"] == 0)
 result1 = df[c1]
+
+#cost > 0.25*maxSaleCPA && leadCPA > 3*maxLeadCPA
+c2 = (df["cost"] > 0.25*df["max_sale_cpa"]) & (df["lead_cpa"] > 3*df["max_lead_cpa"])
+result2 = df[c2]
     
 # cost > 0.3*maxSaleCPA and leadCPA > 2*maxLeadCPA 
-c2 = (df["cost"] > 0.3*df["max_sale_cpa"]) & (df["lead_cpa"] >
+c3 = (df["cost"] > 0.3*df["max_sale_cpa"]) & (df["lead_cpa"] >
 2*df["max_lead_cpa"])
-result2 = df[c2] 
+result3 = df[c3] 
 
 # cost > 0.5*maxSaleCPA and leadCPA > 1.5*maxLeadCPA    
-c3 = (df["cost"] > 0.5*df["max_sale_cpa"]) & (df["lead_cpa"] >
+c4 = (df["cost"] > 0.5*df["max_sale_cpa"]) & (df["lead_cpa"] >
 1.5*df["max_lead_cpa"])
-result3 = df[c3]
-
-# cost > 2*maxSaleCPA and leadCPA > maxLeadCPA 
-c4 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
 result4 = df[c4]
 
-# profit < -3*maxSaleCPA 
-c5 = (df["profit"] < -3*df["max_sale_cpa"])
+# cost > 2*maxSaleCPA and leadCPA > maxLeadCPA 
+c5 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
 result5 = df[c5]
 
+# profit < -3*maxSaleCPA 
+c6 = (df["profit"] < -3*df["max_sale_cpa"])
+result6 = df[c6]
+
 conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
-        sys.argv[6]]
-conditions_dfs = [result1, result2, result3, result4, result5]
+        sys.argv[6], sys.argv[7]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6]
 
 final_result = None 
 for i in range(len(conditions_args)):
