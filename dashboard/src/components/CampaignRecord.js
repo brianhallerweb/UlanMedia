@@ -28,7 +28,9 @@ class CampaignRecord extends Component {
     }
     if (cost > 0.25 * maxSaleCPA && leadCPA > 3 * maxLeadCPA) {
       textArr.push(
-        `Campaign cost (${cost}) is more than a quarter of maxSaleCPA (${maxSaleCPA}) AND leadCPA (${leadCPA}) is more than 3x maxLeadCPA (${maxLeadCPA}) --- (cost > 0.25*maxSaleCPA && leadCPA > 3*maxLeadCPA)`,
+        `Campaign cost (\$${cost}) is more than a quarter of maxSaleCPA (\$${0.25 *
+          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 3x maxLeadCPA (\$${3 *
+          maxLeadCPA}) --- (cost > 0.25*maxSaleCPA AND leadCPA > 3*maxLeadCPA)`,
       );
     }
     if (cost > 0.3 * maxSaleCPA && leadCPA > 2 * maxLeadCPA) {

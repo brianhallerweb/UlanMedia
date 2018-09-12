@@ -28,7 +28,7 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5, c6}) => {
         />
         <span>
           {
-            'Campaign cost is more than a quarter of maxSaleCPA AND leadCPA is more than 3x maxLeadCPA --- (cost > 0.25*maxSaleCPA && leadCPA > 3*maxLeadCPA)'
+            'Campaign cost is more than a quarter of maxSaleCPA AND leadCPA is more than 3x maxLeadCPA --- (cost > 0.25*maxSaleCPA AND leadCPA > 3*maxLeadCPA)'
           }
         </span>
       </div>
