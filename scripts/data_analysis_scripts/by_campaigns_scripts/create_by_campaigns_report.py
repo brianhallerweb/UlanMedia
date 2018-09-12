@@ -15,7 +15,7 @@ df["epc"] = round(df["revenue"] / df["clicks"], 3)
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
-df = df[df["profit"] < -df["max_sale_cpa"]]
+df = df[df["profit"] < -1 * float(sys.argv[2]) * df["max_sale_cpa"]]
 
 # clicks > 1000 and leads = 0
 c1 = (df["clicks"] > 1000) & (df["leads"] == 0)
@@ -39,13 +39,9 @@ result4 = df[c4]
 c5 = (df["cost"] > 2*df["max_sale_cpa"]) & (df["lead_cpa"] > df["max_lead_cpa"])
 result5 = df[c5]
 
-# profit < -3*maxSaleCPA 
-c6 = (df["profit"] < -3*df["max_sale_cpa"])
-result6 = df[c6]
-
-conditions_args = [sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
-        sys.argv[6], sys.argv[7]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6]
+conditions_args = [sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6],
+        sys.argv[7]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):

@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
-const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5, c6}) => {
+const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5}) => {
   return (
     <div>
       <div>
@@ -70,17 +70,6 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4, c5, c6}) => {
           {
             'Campaign cost is more than 2x maxSaleCPA AND leadCPA is more than maxLeadCPA --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)'
           }
-        </span>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign lost more than 3x maxSaleCPA --- (profit < -3*maxSaleCPA)'}
         </span>
       </div>
     </div>
