@@ -19,16 +19,17 @@ def get_all_campaigns_daily_stats(token,
             # 1,000,000 conversions returned, this exception will be raised. 
             raise Exception("voluum didn't return all the conversion data.")
         print("all campaign data returned from voluum")
-
+        
         campaigns_data = {} 
         for campaign in campaigns["rows"]:
+            campaign_id = campaign["campaignId"]
             campaign_name = re.sub(r"^.* - ", "",campaign["campaignName"], count=1)        
-            if campaign_name not in campaigns_data:
-                campaigns_data[campaign_name] = [{"name": campaign_name,
+            if campaign_id not in campaigns_data:
+                campaigns_data[campaign_id] = [{"vol_id": campaign_id, "name": campaign_name,
                     "visits": campaign["visits"], "conversions":
                     campaign["conversions"], "cost": campaign["cost"], "revenue": campaign["revenue"], "day": campaign["day"]}]
-            elif campaign_name in campaigns_data:
-                campaigns_data[campaign_name].append({"name": campaign_name,
+            elif campaign_id in campaigns_data:
+                campaigns_data[campaign_id].append({"vol_id": campaign_id, "name": campaign_name,
                     "visits": campaign["visits"], "conversions":
                     campaign["conversions"], "cost": campaign["cost"], "revenue": campaign["revenue"], "day": campaign["day"]})
             

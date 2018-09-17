@@ -13,7 +13,7 @@ app.post('/records/byday', (req, res) => {
     pythonOptions: ['-u'],
     scriptPath:
       '../../scripts/data_analysis_scripts/by_campaigns_by_days_scripts/',
-    args: [req.body.name],
+    args: [req.body.id],
   };
   PythonShell.run(
     'create_by_campaigns_by_days_report.py',

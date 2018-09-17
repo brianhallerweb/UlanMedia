@@ -48,7 +48,8 @@ for i in range(len(conditions_args)):
     if conditions_args[i] == "true" and final_result is None:
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
-        final_result = final_result.merge(conditions_dfs[i], how="outer", on=["name", "clicks",
+        final_result = final_result.merge(conditions_dfs[i], how="outer",
+        on=["vol_id", "name", "clicks",
             "cost", "imps", "leads", "max_lead_cpa", "max_sale_cpa", "epc",
             "mgid_id", "revenue", "sales","vol_id", "lead_cpa", "sale_cpa",
             "profit"] )
@@ -56,7 +57,7 @@ for i in range(len(conditions_args)):
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result["sort"] = final_result["name"].str[4:]
 final_result = final_result.sort_values("sort")
-json_final_result = json.dumps(final_result[["name", "clicks", "cost", "revenue", "profit", "leads","lead_cpa", "max_lead_cpa", "sales", "sale_cpa","max_sale_cpa","epc"]].to_dict("records"))
+json_final_result = json.dumps(final_result[["vol_id", "name", "clicks", "cost", "revenue", "profit", "leads","lead_cpa", "max_lead_cpa", "sales", "sale_cpa","max_sale_cpa","epc"]].to_dict("records"))
 
 print(json_final_result)
 

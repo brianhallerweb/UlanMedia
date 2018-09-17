@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 class CampaignRecord extends Component {
   constructor(props) {
     super(props);
+    this.vol_id = this.props.campaign.vol_id;
+    this.name = this.props.campaign.name;
     this.clicks = this.props.campaign.clicks;
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;
@@ -70,10 +72,10 @@ class CampaignRecord extends Component {
         <td className="tooltip">
           <Link
             to={{
-              pathname: `/campaign/${this.props.campaign.name}/`,
+              pathname: `/campaign/${this.vol_id}/`,
             }}
             target="_blank">
-            {this.props.campaign.name}
+            {this.name}
           </Link>
           <span className="tooltiptext">
             {this.createTooltip(

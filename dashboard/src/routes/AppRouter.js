@@ -9,7 +9,7 @@ const AppRouter = () => (
     <div>
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/campaign/:name" component={CampaignByDays} />
+        <Route path="/campaign/:id" component={CampaignByDays} />
         <Route component={RedirectToHome} />
       </Switch>
     </div>

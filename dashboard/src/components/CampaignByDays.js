@@ -15,7 +15,7 @@ class CampaignByDays extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: this.props.match.params.name,
+        id: this.props.match.params.id,
       }),
     })
       .then(res => {
@@ -34,7 +34,9 @@ class CampaignByDays extends Component {
   render() {
     return (
       <div>
-        <h3>{this.props.match.params.name}</h3>
+        <h3>
+          {this.state.dayRecords.length > 0 && this.state.dayRecords[0].name}
+        </h3>
         <table>
           <thead>
             <tr>
