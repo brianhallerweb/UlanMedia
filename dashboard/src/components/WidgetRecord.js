@@ -12,6 +12,7 @@ class WidgetRecord extends Component {
     return (
       <tr>
         <td>{this.props.widgetRecord.name}</td>
+        <td>{this.props.widgetRecord.widget_id}</td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>

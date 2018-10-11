@@ -13,6 +13,7 @@ class WidgetsRecords extends Component {
         <thead>
           <tr>
             <th>Campaign</th>
+            <th>Widget ID</th>
             <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
