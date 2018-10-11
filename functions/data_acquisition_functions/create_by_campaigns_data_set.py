@@ -1,7 +1,7 @@
 from config.config import *
 from functions.data_acquisition_functions.get_all_campaign_conversions_by_traffic_source import get_all_campaign_conversions_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
-from functions.misc.update_campaign_sets import update_campaign_sets
+from functions.misc.get_campaign_sets import get_campaign_sets
 import json
 
 def create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date, output_name):
@@ -15,7 +15,7 @@ def create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date, ou
                                               end_date)["campaigns-stat"]
 
     # get a new version of the campaign_sets text file that Mike regularly edits
-    campaign_sets = update_campaign_sets() 
+    campaign_sets = get_campaign_sets() 
 
     # create an array of dicts where each dict is a campaign
     # the stats in each campaign come from both mgid and voluum
@@ -52,9 +52,6 @@ def create_by_campaigns_data_set(vol_token, mgid_token, start_date, end_date, ou
 
     with open(f"../../data/by_campaigns_data/{output_name}.json", "w") as file:
         json.dump(campaigns_data, file)
-    #with open(f"../../data/{output_name}.py", "w") as file:
-        #file.write(f"{output_name} = ")
-        #file.write(f"{campaigns_data}")
 
     print(f"{output_name} created")
 

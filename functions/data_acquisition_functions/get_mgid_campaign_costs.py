@@ -1,5 +1,5 @@
 import requests
-import datetime
+from datetime import datetime
 import sys
 from functions.misc.send_email import send_email
 
@@ -11,5 +11,5 @@ def get_mgid_campaign_costs(token, client_id, start, end):
         return res.json()
     except requests.exceptions.RequestException as e:
         print("Failed - get_mgid_campaign_costs")
-        send_email("brianshaller@gmail.com", "Failed -                get_mgid_campaign_costs() at " + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")), e)
+        send_email("brianshaller@gmail.com", "Failed -                get_mgid_campaign_costs() at " + str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()

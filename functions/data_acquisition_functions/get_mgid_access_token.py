@@ -11,7 +11,9 @@ def get_mgid_access_token(login, password):
                                                                             "no-cache"}, data={"email": login, "password":
                                                                                                password})
         try:
-            return res.json()["token"]
+            token = res.json()["token"] 
+            return token
+
         except:
             send_email("brianshaller@gmail.com", "Failed - mgid token access at " +
                        str(datetime.now().strftime("%Y-%m-%d %H:%M")), "Http status code error - mgid token access failed.")
@@ -21,5 +23,4 @@ def get_mgid_access_token(login, password):
         send_email("brianshaller@gmail.com", "Failed - get_mgid_access_token() at " +
                    str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
-
 

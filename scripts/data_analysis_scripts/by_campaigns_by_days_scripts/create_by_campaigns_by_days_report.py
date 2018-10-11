@@ -15,6 +15,7 @@ df["cpc"] = round(df["cost"]/df["clicks"], 3)
 df["conversion_cpa"] = round(df["cost"]/df["conversions"], 2)
 
 df = df.replace([np.inf, -np.inf], 0)
+df = df.replace(np.nan, "NaN")
 df = df.sort_values("day", ascending=False)
 
 json_final_result = json.dumps(df[["vol_id", "name", "day", "clicks", "cost",

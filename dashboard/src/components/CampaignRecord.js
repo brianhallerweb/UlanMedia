@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 class CampaignRecord extends Component {
   constructor(props) {
     super(props);
+    this.mgid_id = this.props.campaign.mgid_id;
     this.vol_id = this.props.campaign.vol_id;
     this.name = this.props.campaign.name;
     this.clicks = this.props.campaign.clicks;
@@ -70,13 +71,7 @@ class CampaignRecord extends Component {
     return (
       <tr>
         <td className="tooltip">
-          <Link
-            to={{
-              pathname: `/campaign/${this.vol_id}/`,
-            }}
-            target="_blank">
-            {this.name}
-          </Link>
+          {this.name}
           <span className="tooltiptext">
             {this.createTooltip(
               this.profit,
@@ -88,6 +83,26 @@ class CampaignRecord extends Component {
               this.lead_cpa,
             )}
           </span>
+          <div>
+            <Link
+              to={{
+                pathname: `/campaign/days/${this.vol_id}/`,
+              }}
+              target="_blank">
+              days
+            </Link>
+          </div>
+          <div>
+            <Link
+              to={{
+                pathname: `/campaign/widgets/${this.vol_id}/${this.mgid_id}/${
+                  this.name
+                }/`,
+              }}
+              target="_blank">
+              widgets
+            </Link>
+          </div>
         </td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>
