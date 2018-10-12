@@ -10,7 +10,7 @@ from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
-def create_by_widgets_data_set(widget_id, date_range, output_name):
+def create_by_child_widgets_data_set(child_widget_id, date_range, output_name):
     campaigns = get_campaign_sets()
 
     widget_data = {}
@@ -19,17 +19,17 @@ def create_by_widgets_data_set(widget_id, date_range, output_name):
         with open(f'/home/bsh/Documents/UlanMedia/data/by_campaigns_by_widgets_data/{campaign["vol_id"]}_{date_range}_by_campaigns_by_widgets_data.json', 'r') as file:
              data = json.load(file)
 
-        if widget_id not in data.keys():
+        if child_widget_id not in data.keys():
             continue
         else:
-            widget_data[campaign["vol_id"]] = data[widget_id]
+            widget_data[campaign["vol_id"]] = data[child_widget_id]
             widget_data[campaign["vol_id"]]["vol_id"] = campaign["vol_id"]
             widget_data[campaign["vol_id"]]["mgid_id"] = campaign["mgid_id"]
             widget_data[campaign["vol_id"]]["name"] = campaign["name"]
             
     complete_widget_data = widget_data 
 
-    with open(f"../../data/by_widgets_data/{output_name}.json", "w") as file:
+    with open(f"../../data/by_child_widgets_data/{output_name}.json", "w") as file:
         json.dump(complete_widget_data, file)
 
     print(f"{output_name} created")

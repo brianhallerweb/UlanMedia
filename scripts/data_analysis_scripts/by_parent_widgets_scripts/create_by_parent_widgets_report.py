@@ -8,15 +8,18 @@ date_range = sys.argv[1]
 widget_id = sys.argv[2]
 #widget_id = "5718588"
 
-with open(f'/home/bsh/Documents/UlanMedia/data/by_widgets_data/{widget_id}_{date_range}_by_widgets_data.json', 'r') as file:
-     data = json.load(file)
+with open(f'/home/bsh/Documents/UlanMedia/data/by_parent_widgets_data/{widget_id}_{date_range}_by_parent_widgets_data.json', 'r') as file:
+     campaigns = json.load(file)
 
-# The json data is a dictionary with each voluum id as a key and each widget
-# for that campaign as
-# a value. The loop below simple takes the values and puts them into a list. 
-campaigns = []
-for campaign in data.values():
-    campaigns.append(campaign)
+# 10/12 I think this is working properly. A major distinction between looking
+# and child widgets and parent widgets is that a campaign will have multiple 
+# parent widgets in one campaign but only 1 child widget, I think
+# When I originally made the scripts to create a data set for parent widgets it 
+# was overwritting parent widgets everytime a new one was encountered. I fixed
+# that problem by creating a list of dictionaries, rather than a dictionary of
+# dictionaries, with each vol_id as a key, as I did with the child widgets 
+# data acquisition script
+for campaign in campaigns:
     # the referrer column of each widget is a list of refferers. I am not sure
     # how to best handle lists inside of data frames so, for now, I am just 
     # going to concatenate them into a space separated string. 

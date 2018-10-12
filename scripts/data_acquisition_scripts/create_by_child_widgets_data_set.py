@@ -5,7 +5,7 @@ import sys
 import json
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token 
-from functions.data_acquisition_functions.create_by_widgets_data_set import create_by_widgets_data_set
+from functions.data_acquisition_functions.create_by_child_widgets_data_set import create_by_child_widgets_data_set
 from functions.misc.create_pst_date_range import create_pst_date_range 
 from functions.misc.get_campaign_sets import get_campaign_sets
 
@@ -21,8 +21,8 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 widget_id = sys.argv[1]
 date_range = sys.argv[2]
 
-create_by_widgets_data_set(widget_id, date_range,
-        f"{widget_id}_{date_range}_by_widgets_data")
+create_by_child_widgets_data_set(widget_id, date_range,
+        f"{widget_id}_{date_range}_by_child_widgets_data")
 
 
 
