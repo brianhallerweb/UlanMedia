@@ -7,9 +7,10 @@ const {PythonShell} = require('python-shell');
 
 app.use(bodyParser.json());
 
-// this is the only route that creates a data set
+////////////////////////////
+// these are the only routes that create data sets
 // The others just create reports
-app.post('/records/createByWidgetsDataset', (req, res) => {
+app.post('/records/parent/createByWidgetsDataset', (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -17,7 +18,7 @@ app.post('/records/createByWidgetsDataset', (req, res) => {
     args: [req.body.widgetID, req.body.dateRange],
   };
   PythonShell.run(
-    'create_by_widgets_data_set.py',
+    'create_by_parent_widgets_data_set.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -26,11 +27,30 @@ app.post('/records/createByWidgetsDataset', (req, res) => {
   );
 });
 
-app.post('/records/ByWidgets', (req, res) => {
+app.post('/records/child/createByWidgetsDataset', (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/by_widgets_scripts/',
+    scriptPath: '../../scripts/data_acquisition_scripts/',
+    args: [req.body.widgetID, req.body.dateRange],
+  };
+  PythonShell.run(
+    'create_by_child_widgets_data_set.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.sendStatus(200);
+    },
+  );
+});
+///////////////////////////
+
+app.post('/records/ByParentWidgets', (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath:
+      '../../scripts/data_analysis_scripts/by_parent_widgets_scripts/',
     args: [
       req.body.dateRange,
       req.body.widgetID,
@@ -40,7 +60,30 @@ app.post('/records/ByWidgets', (req, res) => {
     ],
   };
   PythonShell.run(
-    'create_by_widgets_report.py',
+    'create_by_parent_widgets_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
+
+app.post('/records/ByChildWidgets', (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_analysis_scripts/by_child_widgets_scripts/',
+    args: [
+      req.body.dateRange,
+      req.body.widgetID,
+      req.body.precondition,
+      req.body.c1,
+      req.body.c2,
+    ],
+  };
+  PythonShell.run(
+    'create_by_child_widgets_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;

@@ -16,10 +16,21 @@ class CampaignByWidgetRecord extends Component {
           <div>
             <Link
               to={{
-                pathname: `/widgets/${this.props.widgetRecord.widget_id}`,
+                pathname: `/widgets/parent/${this.props.widgetRecord.widget_id.match(
+                  /^\d*/,
+                )}`,
               }}
               target="_blank">
-              all campaigns
+              all campaigns for parent widget
+            </Link>
+          </div>
+          <div>
+            <Link
+              to={{
+                pathname: `/widgets/child/${this.props.widgetRecord.widget_id}`,
+              }}
+              target="_blank">
+              all campaigns for child widget
             </Link>
           </div>
         </td>

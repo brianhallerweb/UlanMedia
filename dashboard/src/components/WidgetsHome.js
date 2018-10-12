@@ -8,8 +8,8 @@ class WidgetsHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      widgetType: this.props.match.params.widgetType,
       widgetID: this.props.match.params.widgetID,
-      datasetCreated: 'not yet started',
       widgetRecords: [],
       dateRange: 'seven',
       precondition: 5,
@@ -32,7 +32,7 @@ class WidgetsHome extends Component {
   }
 
   submitForm() {
-    fetch('/records/createByWidgetsDataset', {
+    fetch(`/records/${this.state.widgetType}/createByWidgetsDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,25 +49,29 @@ class WidgetsHome extends Component {
         return res;
       })
       .then(() =>
-        fetch('/records/ByWidgets', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        fetch(
+          `/records/By${this.state.widgetType.charAt(0).toUpperCase() +
+            this.state.widgetType.slice(1)}Widgets`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              dateRange: this.state.dateRange,
+              widgetID: this.state.widgetID,
+              precondition: this.state.precondition,
+              c1: this.state.c1,
+              c2: this.state.c2,
+            }),
           },
-          body: JSON.stringify({
-            dateRange: this.state.dateRange,
-            widgetID: this.state.widgetID,
-            precondition: this.state.precondition,
-            c1: this.state.c1,
-            c2: this.state.c2,
-          }),
-        }),
+        ),
       )
       .then(res => res.json())
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({datasetCreated: true, widgetRecords: records, error});
+        this.setState({widgetRecords: records, error});
       })
       .catch(err => console.log(err));
   }
@@ -88,7 +92,6 @@ class WidgetsHome extends Component {
         <WidgetsRecords
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
-          datasetCreated={this.state.datasetCreated}
         />
       </div>
     );

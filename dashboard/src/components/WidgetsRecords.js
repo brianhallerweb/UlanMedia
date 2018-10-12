@@ -27,8 +27,9 @@ class WidgetsRecords extends Component {
           </tr>
         </thead>
         <tbody>
+          {/* 10/12 I am leaving each record without a key because there is nothing unique about each record. Both volID and wigetID can be duplicated*/}
           {this.props.widgetRecords.map(widgetRecord => (
-            <WidgetRecord key={widgetRecord.name} widgetRecord={widgetRecord} />
+            <WidgetRecord widgetRecord={widgetRecord} />
           ))}
         </tbody>
       </table>
@@ -38,7 +39,6 @@ class WidgetsRecords extends Component {
   render() {
     return (
       <div>
-        {!this.props.datasetCreated && <p>data sets loading...</p>}
         {this.props.error && <p>no widgets found</p>}
         {this.props.widgetRecords.length > 0 && this.createTable()}
       </div>
