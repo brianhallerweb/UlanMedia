@@ -4,7 +4,7 @@ spreadsheet where each row is a widget in one particular campaign.
 
 ### Web app hierarchy 
 
-campaigns_for_all_campaigns
+campaigns_for_all_campaigns\n
 &nbsp;&nbsp;&nbsp;&nbsp;days_for_one_campaign
     offers_for_one_campaign
     ads_for_one_campaign
