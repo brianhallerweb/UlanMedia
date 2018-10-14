@@ -1,11 +1,12 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-const RedirectToCampaignsHome = () => (
+const RedirectToHome = () => (
   <div>
-    <Redirect to="/" />
+    <Redirect to="/campaigns" />
   </div>
 );
 
-export default RedirectToCampaignsHome;
+export default RedirectToHome;
+
 

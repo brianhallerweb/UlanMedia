@@ -38,12 +38,9 @@ def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date,
         return widgets_data 
     except requests.exceptions.RequestException as e:
         print("Failed - get_mgid_widget_clicks_and_costs_by_campaign")
-        #send_email("brianshaller@gmail.com", "Failed - get_mgid_widget_clicks_and_costs_by_campaign() at " + str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
-        send_email("brianshaller@gmail.com", "Failed - get_mgid_widget_clicks_and_costs_by_campaign() at " +
-                str(datetime.now().strftime("%Y-%m-%d %H:%M")), token)
-        #10/5/2018 - now I want to see what the token is instead of just seeing
-        #e. It may be that the token has an unusual character or something
-        #instead of emailing e, I checked to see what the  response was and
-        # I received the response and it was just <response [401]>
+        send_email("brianshaller@gmail.com", "Failed - get_mgid_widget_clicks_and_costs_by_campaign() at " + str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
+        # 10/14/2018 - I am still getting an occasional error on this function
+        # but it has yet to fail on digital ocean and I think the problem might
+        # be due to something about different internet connections. 
         sys.exit()
 
