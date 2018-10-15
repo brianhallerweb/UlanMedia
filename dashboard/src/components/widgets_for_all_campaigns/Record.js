@@ -14,24 +14,28 @@ class Record extends Component {
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
-            <Link
-              to={{
-                pathname: `/widgets/parent/${this.props.widgetRecord.widget_id.match(
-                  /^\d*/,
-                )}`,
-              }}
-              target="_blank">
-              all campaigns for parent widget
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={{
-                pathname: `/widgets/child/${this.props.widgetRecord.widget_id}`,
-              }}
-              target="_blank">
-              all campaigns for child widget
-            </Link>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/widgets/parent/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}`,
+                }}
+                target="_blank">
+                parent widget
+              </Link>
+            </div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/widgets/child/${
+                    this.props.widgetRecord.widget_id
+                  }`,
+                }}
+                target="_blank">
+                child widget
+              </Link>
+            </div>
           </div>
         </td>
         <td>{this.props.widgetRecord.clicks}</td>

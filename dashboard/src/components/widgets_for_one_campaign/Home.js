@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
+import GlobalNavBar from '../GlobalNavBar';
 
 class Home extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class Home extends Component {
     return (
       <div>
         <Title name={this.props.match.params.name} />
+        <GlobalNavBar />
         <NavBar
           datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}

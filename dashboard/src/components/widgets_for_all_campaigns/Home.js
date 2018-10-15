@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
+import GlobalNavBar from '../GlobalNavBar';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      volid: this.props.match.params.volid,
       widgetRecords: [],
       dateRange: 'seven',
       precondition: 5,
@@ -31,16 +31,13 @@ class Home extends Component {
   }
 
   submitForm() {
-    console.log('disabled button');
-    /*
-    fetch('/records/widgetsForOneCampaign', {
+    fetch('/records/widgetsForAllCampaigns', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        volid: this.state.volid,
         precondition: this.state.precondition,
         c1: this.state.c1,
         c2: this.state.c2,
@@ -53,15 +50,14 @@ class Home extends Component {
         this.setState({widgetRecords: records, error});
       })
       .catch(err => console.log(err));
-      */
   }
 
   render() {
     return (
       <div>
         <Title name={this.props.match.params.name} />
+        <GlobalNavBar />
         <NavBar
-          datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}

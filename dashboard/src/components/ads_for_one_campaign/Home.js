@@ -1,10 +1,13 @@
-import React from "react";
+// @format
+import React from 'react';
+import Title from './Title';
+import GlobalNavBar from '../GlobalNavBar';
 
 const Home = () => (
   <div>
-	ads for one campaign 
+    <Title />
+    <GlobalNavBar />
   </div>
 );
 
 export default Home;
-

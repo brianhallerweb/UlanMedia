@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
+import GlobalNavBar from '../GlobalNavBar';
 
 class Home extends Component {
   constructor(props) {
@@ -75,6 +76,7 @@ class Home extends Component {
     return (
       <div>
         <Title ID={this.props.match.params.widgetID} />
+        <GlobalNavBar />
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}

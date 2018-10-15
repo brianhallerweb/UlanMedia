@@ -84,43 +84,45 @@ class Record extends Component {
             )}
           </span>
           <div>
-            <Link
-              to={{
-                pathname: `/campaign/days/${this.vol_id}/`,
-              }}
-              target="_blank">
-              days
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={{
-                pathname: `/campaign/widgets/${this.vol_id}/${this.mgid_id}/${
-                  this.name
-                }/`,
-              }}
-              target="_blank">
-              widgets
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={{
-                pathname: `/campaign/offers/${this.vol_id}/`,
-              }}
-              target="_blank">
-              offers
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={{
-                pathname: `/campaign/ads/${this.vol_id}/${this.mgid_id}
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/campaign/days/${this.vol_id}/`,
+                }}
+                target="_blank">
+                days
+              </Link>
+            </div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/campaign/widgets/${this.vol_id}/${this.mgid_id}/${
+                    this.name
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/campaign/offers/${this.vol_id}/`,
+                }}
+                target="_blank">
+                offers
+              </Link>
+            </div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/campaign/ads/${this.vol_id}
                 /`,
-              }}
-              target="_blank">
-              ads
-            </Link>
+                }}
+                target="_blank">
+                ads
+              </Link>
+            </div>
           </div>
         </td>
         <td>{this.clicks}</td>

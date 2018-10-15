@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Header from "../components/Header";
 import campaigns_for_all_campaignsHome from "../components/campaigns_for_all_campaigns/Home";
 import widgets_for_all_campaignsHome from "../components/widgets_for_all_campaigns/Home";
 import ads_for_all_campaignsHome from "../components/ads_for_all_campaigns/Home";
@@ -16,7 +15,6 @@ import RedirectToHome from "../components/RedirectToCampaignsHome"
 const AppRouter = () => (
   <BrowserRouter>
     <div>
-	<Header />
       <Switch>
         <Route path="/campaigns" exact={true} component={campaigns_for_all_campaignsHome} />
         <Route path="/widgets" exact={true} component={widgets_for_all_campaignsHome} />
