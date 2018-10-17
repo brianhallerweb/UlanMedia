@@ -88,6 +88,7 @@ class Home extends Component {
           c1={this.state.c1}
           c2={this.state.c2}
           submitForm={this.submitForm.bind(this)}
+          loading={this.state.loading}
         />
         <Records
           error={this.state.error}

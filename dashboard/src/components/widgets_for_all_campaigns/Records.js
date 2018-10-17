@@ -39,7 +39,9 @@ class Records extends Component {
       <div>
         {this.props.loading && <p>loading...</p>}
         {this.props.error && <p>no widgets found</p>}
-        {this.props.widgetRecords.length > 0 && this.createTable()}
+        {this.props.widgetRecords.length > 0 &&
+          !this.props.loading &&
+          this.createTable()}
       </div>
     );
   }

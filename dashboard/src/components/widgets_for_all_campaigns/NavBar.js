@@ -19,12 +19,12 @@ class NavBar extends Component {
           }}>
           <DatesDropdown selectDateRange={this.props.selectDateRange} />
           <p>
-            Widget cost greater than
+            Widget cost greater than{' '}
             <input
               type="number"
               name="quantity"
               min="0"
-              max="20"
+              max="100"
               step="1"
               value={this.props.precondition}
               onChange={e => this.props.selectPrecondition(e.target.value)}
@@ -35,7 +35,7 @@ class NavBar extends Component {
             c1={this.props.c1}
             c2={this.props.c2}
           />
-          <input type="submit" value="submit" />
+          <input type="submit" value="submit" disabled={this.props.loading} />
         </form>
       </div>
     );

@@ -1,3 +1,4 @@
+from config.config import *
 import requests
 import re
 from datetime import datetime
@@ -11,7 +12,7 @@ def get_all_campaign_conversions_by_traffic_source(token,
     #the start date and today. The end date is only used to filter out clicks
     #(visitTimestamp) between start_date and end_date.
     today = datetime.now().strftime("%Y-%m-%d")
-    url=f"https://api.voluum.com/report/conversions?from={start_date}T00%3A00%3A00Z&to={today}T00:00:00Z&tz=America%2FLos_Angeles&filter={traffic_source_id}&sort=campaignName&direction=asc&columns=transactionId&columns=revenue&columns=campaignName&columns=trafficSourceId&groupBy=conversion&offset=0&limit=100000&include=ACTIVE&conversionTimeMode=VISIT"
+    url=f"https://api.voluum.com/report/conversions?from={start_date}T00%3A00%3A00Z&to={today}T00:00:00Z&tz={mgid_timezone}&filter={traffic_source_id}&sort=campaignName&direction=asc&columns=transactionId&columns=revenue&columns=campaignName&columns=trafficSourceId&groupBy=conversion&offset=0&limit=100000&include=ACTIVE&conversionTimeMode=VISIT"
     try:
         campaigns = requests.get(url, headers = {"cwauth-token": token}).json()
         if campaigns["totalRows"] != len(campaigns["rows"]):

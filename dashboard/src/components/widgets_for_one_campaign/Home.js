@@ -12,7 +12,7 @@ class Home extends Component {
       volid: this.props.match.params.volid,
       widgetRecords: [],
       dateRange: 'seven',
-      precondition: 5,
+      precondition: 2,
       error: false,
       loading: false,
       c1: false,

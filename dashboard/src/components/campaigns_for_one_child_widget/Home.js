@@ -87,6 +87,7 @@ class Home extends Component {
           precondition={this.state.precondition}
           c1={this.state.c1}
           c2={this.state.c2}
+          loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
         />
         <Records

@@ -1,4 +1,5 @@
 import requests
+from config.config import *
 import re
 from datetime import datetime
 import sys
@@ -7,7 +8,7 @@ from functions.misc.send_email import send_email
 
 def get_all_campaigns_daily_stats(token,
         traffic_source_id, start_date, end_date):
-    url = f"https://api.voluum.com/report?from={start_date}T00%3A00%3A00Z&to={end_date}T00:00:00Z&tz=America%2FLos_Angeles&sort=campaignName&direction=desc&columns=campaignName&columns=day&columns=campaignId&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=cpv&groupBy=campaign&groupBy=day&offset=0&limit=1000000&include=ACTIVE&conversionTimeMode=VISIT&filter1=traffic-source&filter1Value={traffic_source_id}";
+    url = f"https://api.voluum.com/report?from={start_date}T00%3A00%3A00Z&to={end_date}T00:00:00Z&tz={mgid_timezone}&sort=campaignName&direction=desc&columns=campaignName&columns=day&columns=campaignId&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=cpv&groupBy=campaign&groupBy=day&offset=0&limit=1000000&include=ACTIVE&conversionTimeMode=VISIT&filter1=traffic-source&filter1Value={traffic_source_id}";
     try:
         campaigns = requests.get(url, headers = {"cwauth-token": token}).json()
         #the data that returns is a list of dictionaries. Each dictionary is a

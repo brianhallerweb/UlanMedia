@@ -31,8 +31,9 @@ df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 
-# cost greater than x 
-df = df[df["cost"] > float(sys.argv[3])]
+# widget lost more than x times max_lead_cpa
+# This is the prerequisite condition for every report
+df = df[df["profit"] < -1 * float(sys.argv[3]) * df["max_lead_cpa"]]
 
 # leads >= 1
 c1 = df["leads"] >= 1

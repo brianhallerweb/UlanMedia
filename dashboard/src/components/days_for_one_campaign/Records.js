@@ -34,7 +34,7 @@ class Records extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.state.loading && 'loading'}>
         <h3>
           {this.state.dayRecords.length > 0 && this.state.dayRecords[0].name}
         </h3>

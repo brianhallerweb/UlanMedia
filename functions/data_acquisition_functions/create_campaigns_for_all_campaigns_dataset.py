@@ -2,17 +2,30 @@ from config.config import *
 from functions.data_acquisition_functions.get_all_campaign_conversions_by_traffic_source import get_all_campaign_conversions_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
 from functions.misc.get_campaign_sets import get_campaign_sets
+from functions.misc.create_vol_date_range import create_vol_date_range
+from functions.misc.create_mgid_date_range import create_mgid_date_range
 import json
 
-def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, start_date, end_date, output_name):
+def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
+    vol_dates = create_vol_date_range(days_ago, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    mgid_dates = create_mgid_date_range(days_ago, mgid_timezone)
+    mgid_start_date = mgid_dates[0]
+    mgid_end_date = mgid_dates[1]
+    print(f"vol start date: {vol_start_date}")
+    print(f"vol end date: {vol_end_date}")
+    print(f"mgid start date: {mgid_start_date}")
+    print(f"mgid end date: {mgid_end_date}")
+
     # get leads, sales, and revenue by campaign from voluum 
     vol_campaign_data = get_all_campaign_conversions_by_traffic_source(vol_token,
                                                        mgidVolTrafficSourceId
-                                                       , start_date, end_date)
+                                                       , vol_start_date, vol_end_date)
     # get clicks, imps, and cost by campaign from mgid
     mgid_campaign_data = get_mgid_campaign_costs(mgid_token, mgid_client_id,
-                                              start_date,
-                                              end_date)["campaigns-stat"]
+                                              mgid_start_date,
+                                              mgid_end_date)["campaigns-stat"]
 
     # get a new version of the campaign_sets text file that Mike regularly edits
     campaign_sets = get_campaign_sets() 

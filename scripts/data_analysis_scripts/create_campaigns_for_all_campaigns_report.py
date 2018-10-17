@@ -15,6 +15,8 @@ df["epc"] = round(df["revenue"] / df["clicks"], 3)
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
+
+# The prerequisite condition for every report
 df = df[df["profit"] < -1 * float(sys.argv[2]) * df["max_sale_cpa"]]
 
 # clicks > 1000 and leads = 0

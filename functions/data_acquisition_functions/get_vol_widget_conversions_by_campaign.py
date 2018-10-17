@@ -1,3 +1,4 @@
+from config.config import *
 import requests
 import re
 from datetime import datetime
@@ -7,7 +8,7 @@ import sys
 def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
         end_date):
     try:
-        url =f"https://api.voluum.com/report/conversions?from={start_date}T00%3A00%3A00Z&to={end_date}T00%3A00%3A00Z&tz=America%2FLos_Angeles&sort=customVariable1&direction=asc&columns=transactionId&columns=customVariable1&groupBy=conversion&offset=0&limit=100000&include=ACTIVE&conversionTimeMode=VISIT&filter1=campaign&filter1Value={campaign_id}"
+        url = f"https://api.voluum.com/report/conversions?from={start_date}T00%3A00%3A00Z&to={end_date}T00%3A00%3A00Z&tz={mgid_timezone}&sort=customVariable1&direction=asc&columns=transactionId&columns=customVariable1&groupBy=conversion&offset=0&limit=100000&include=ACTIVE&conversionTimeMode=VISIT&filter1=campaign&filter1Value={campaign_id}"
         response = requests.get(url, headers = {"cwauth-token": token})
         response.raise_for_status()
         # All the logic below takes each conversion in the response and accumulates
