@@ -39,6 +39,7 @@ class Records extends Component {
   render() {
     return (
       <div>
+        {this.props.loading && <p>loading...</p>}
         {this.props.error && <p>no campaigns found</p>}
         {this.props.campaignsRecords.length > 0 && this.createTable()}
       </div>

@@ -14,6 +14,7 @@ class Home extends Component {
       dateRange: 'seven',
       precondition: 5,
       error: false,
+      loading: false,
       c1: false,
       c2: false,
     };
@@ -32,6 +33,8 @@ class Home extends Component {
   }
 
   submitForm() {
+    this.setState({loading: true});
+
     fetch(`/records/createCampaignsForOneChildWidgetDataset`, {
       method: 'POST',
       headers: {
@@ -67,7 +70,7 @@ class Home extends Component {
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({widgetRecords: records, error});
+        this.setState({widgetRecords: records, error, loading: false});
       })
       .catch(err => console.log(err));
   }
@@ -88,6 +91,7 @@ class Home extends Component {
         />
         <Records
           error={this.state.error}
+          loading={this.state.loading}
           widgetRecords={this.state.widgetRecords}
         />
       </div>

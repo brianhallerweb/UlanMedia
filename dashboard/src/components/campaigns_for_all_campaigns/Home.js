@@ -17,6 +17,7 @@ class Home extends Component {
       c4: true,
       c5: true,
       error: false,
+      loading: false,
       campaignsRecords: [],
     };
   }
@@ -45,6 +46,7 @@ class Home extends Component {
   }
 
   submitForm() {
+    this.setState({loading: true});
     fetch('/records/campaignsForAllCampaigns', {
       method: 'POST',
       headers: {
@@ -70,7 +72,7 @@ class Home extends Component {
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({campaignsRecords: records, error});
+        this.setState({campaignsRecords: records, error, loading: false});
       })
       .catch(err => console.log(err));
   }
@@ -111,6 +113,7 @@ class Home extends Component {
         />
         <Records
           error={this.state.error}
+          loading={this.state.loading}
           campaignsRecords={this.state.campaignsRecords}
         />
       </div>

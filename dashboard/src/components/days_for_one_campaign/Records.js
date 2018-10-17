@@ -5,10 +5,11 @@ import Record from './Record';
 class Records extends Component {
   constructor(props) {
     super(props);
-    this.state = {dayRecords: []};
+    this.state = {dayRecords: [], loading: false};
   }
 
   componentDidMount() {
+    this.setState({loading: true});
     fetch('/records/daysForOneCampaign', {
       method: 'POST',
       headers: {
@@ -26,7 +27,7 @@ class Records extends Component {
       })
       .then(res => res.json())
       .then(dayRecords => {
-        this.setState({dayRecords});
+        this.setState({dayRecords, loading: false});
       })
       .catch(err => console.log(err));
   }
@@ -37,6 +38,7 @@ class Records extends Component {
         <h3>
           {this.state.dayRecords.length > 0 && this.state.dayRecords[0].name}
         </h3>
+        {this.state.loading && <p>loading...</p>}
         <table>
           <thead>
             <tr>
