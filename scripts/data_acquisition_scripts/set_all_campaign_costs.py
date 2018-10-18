@@ -6,23 +6,20 @@ from functions.data_acquisition_functions.set_vol_campaign_cost import set_vol_c
 from functions.data_acquisition_functions.get_all_campaign_revenues_by_traffic_source import get_all_campaign_revenues_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
+from functions.misc.create_mgid_date_range import create_mgid_date_range
+from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.send_email import send_email
 from functions.misc.get_campaign_sets import get_campaign_sets 
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 
-# Set start and end dates to collect data and update records for yesterday
-today_utc = pytz.utc.localize(datetime.utcnow())
-today_pst = today_utc.astimezone(pytz.timezone("America/Los_Angeles"))
-yesterday_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(1)
-yesterday_pst = yesterday_utc.astimezone(pytz.timezone("America/Los_Angeles"))
-today = today_pst.strftime("%Y-%m-%d")
-yesterday = yesterday_pst.strftime("%Y-%m-%d")
-mgid_start_date = yesterday 
-mgid_end_date = yesterday 
-vol_start_date = yesterday
-vol_end_date = today
+vol_dates = create_vol_date_range(1, mgid_timezone)
+vol_start_date = vol_dates[0]
+vol_end_date = vol_dates[1]
+mgid_dates = create_mgid_date_range(1, mgid_timezone)
+mgid_start_date = mgid_dates[0]
+mgid_end_date = mgid_dates[1]
 
 # get cost by campaign from mgid
 mgid_campaign_costs = get_mgid_campaign_costs(mgid_token, mgid_client_id,

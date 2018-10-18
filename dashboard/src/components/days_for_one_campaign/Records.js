@@ -38,7 +38,7 @@ class Records extends Component {
         <h3>
           {this.state.dayRecords.length > 0 && this.state.dayRecords[0].name}
         </h3>
-        {this.state.loading && <p>loading...</p>}
+        {this.state.loading && <div className="loader" />}
         <table>
           <thead>
             <tr>
