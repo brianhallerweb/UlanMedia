@@ -3,10 +3,12 @@ import json
 import pandas as pd
 import numpy as np
 
-date_range = sys.argv[1]
+# for troubleshooting
 #date_range = "seven"
-widget_id = sys.argv[2]
 #widget_id = "5718588"
+
+date_range = sys.argv[1]
+widget_id = sys.argv[2]
 
 with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_child_widget/{widget_id}_{date_range}_campaigns_for_one_child_widget_dataset.json', 'r') as file:
      data = json.load(file)
@@ -36,7 +38,8 @@ df["profit"] = round(df["revenue"] - df["cost"], 2)
 
 # cost greater than x 
 df = df[df["cost"] > float(sys.argv[3])]
-#df = df[df["cost"] > 5]
+# for troubleshooting
+df = df[df["cost"] > 5]
 
 # leads >= 1
 c1 = df["leads"] >= 1
@@ -47,7 +50,8 @@ c2 = df["sales"] >= 1
 result2 = df[c2]
 
 conditions_args = [sys.argv[4], sys.argv[5]]
-#conditions_args = ["false", "false"]
+# for troubleshooting 
+conditions_args = ["false", "false"]
 conditions_dfs = [result1, result2]
 
 final_result = None 
@@ -67,6 +71,13 @@ if final_result is None:
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("cost", ascending=False)
+
+# add a summary row at the bottom
+summary = final_result.sum(numeric_only=True)
+summary = summary.round(2)
+summary["name"] = "summary"
+final_result = final_result.append(summary, ignore_index=True)
+final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
             "revenue", "sales", "widget_id","name", "lead_cpa", "sale_cpa", "profit",

@@ -6,7 +6,7 @@ const DatesDropdown = ({selectDateRange}) => (
   <div>
     <select
       onChange={e => selectDateRange(e.target.value)}
-      defaultValue="seven">
+      defaultValue="ninety">
       <option value="yesterday">Yesterday</option>
       <option value="seven">7 days</option>
       <option value="thirty">30 days</option>

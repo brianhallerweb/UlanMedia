@@ -19,7 +19,7 @@ class NavBar extends Component {
           }}>
           <DatesDropdown selectDateRange={this.props.selectDateRange} />
           <p>
-            Campaign lost more than{' '}
+            Widget lost more than{' '}
             <input
               type="number"
               name="quantity"
@@ -29,7 +29,7 @@ class NavBar extends Component {
               value={this.props.precondition}
               onChange={e => this.props.selectPrecondition(e.target.value)}
             />
-            x maxLeadCPA
+            x maxSaleCPA
           </p>
           <ConditionCheckboxes
             toggleCondition={this.props.toggleCondition}

@@ -71,6 +71,14 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("cost", ascending=False)
 
+# add a summary row at the bottom
+summary = final_result.sum(numeric_only=True)
+summary = summary.round(2)
+summary["name"] = "summary"
+final_result = final_result.append(summary, ignore_index=True)
+final_result = final_result.replace(np.nan, "")
+
+
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
             "revenue", "sales", "widget_id","name", "lead_cpa", "sale_cpa", "profit",
             "status", "global_status"]].to_dict("records"))

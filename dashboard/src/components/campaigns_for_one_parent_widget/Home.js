@@ -11,8 +11,8 @@ class Home extends Component {
     this.state = {
       widgetID: this.props.match.params.widgetID,
       widgetRecords: [],
-      dateRange: 'seven',
-      precondition: 5,
+      dateRange: 'ninety',
+      precondition: 0,
       error: false,
       loading: false,
       c1: false,

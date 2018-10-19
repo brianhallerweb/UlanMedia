@@ -24,7 +24,7 @@ class NavBar extends Component {
               type="number"
               name="quantity"
               min="0"
-              max="20"
+              max="10"
               step="1"
               value={this.props.precondition}
               onChange={e => this.props.selectPrecondition(e.target.value)}

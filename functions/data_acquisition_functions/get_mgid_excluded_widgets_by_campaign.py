@@ -26,7 +26,5 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
         return excluded_widgets
     except requests.exceptions.RequestException as e:
         print("Failed - get_mgid_excluded_widgets_by_campaign")
-        #send_email("brianshaller@gmail.com", "Failed - get_mgid_excluded_widgets_by_campaign() at " + str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
-        send_email("brianshaller@gmail.com", "Failed - get_mgid_excluded_widgets_by_campaign() at " +
-                str(datetime.now().strftime("%Y-%m-%d %H:%M")), token)
+        send_email("brianshaller@gmail.com", "Failed - get_mgid_excluded_widgets_by_campaign() at " + str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
