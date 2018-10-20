@@ -13,10 +13,6 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
     mgid_dates = create_mgid_date_range(days_ago, mgid_timezone)
     mgid_start_date = mgid_dates[0]
     mgid_end_date = mgid_dates[1]
-    print(f"vol start date: {vol_start_date}")
-    print(f"vol end date: {vol_end_date}")
-    print(f"mgid start date: {mgid_start_date}")
-    print(f"mgid end date: {mgid_end_date}")
 
     # get leads, sales, and revenue by campaign from voluum 
     vol_campaign_data = get_all_campaign_conversions_by_traffic_source(vol_token,
@@ -49,13 +45,10 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         campaign_data["clicks"] = mgid_campaign_data[mgid_campaign_id]["clicks"]
         campaign_data["imps"] = mgid_campaign_data[mgid_campaign_id]["imps"]
         campaign_data["cost"] = mgid_campaign_data[mgid_campaign_id]["spent"]
-        if campaign_name in vol_campaign_data:
-            leads = vol_campaign_data[campaign_name]["leads"]
-            sales = vol_campaign_data[campaign_name]["sales"]
-            revenue = vol_campaign_data[campaign_name]["revenue"]
-            campaign_data["leads"] = leads
-            campaign_data["sales"] = sales
-            campaign_data["revenue"] = revenue
+        if vol_campaign_id in vol_campaign_data:
+            campaign_data["leads"] = vol_campaign_data[vol_campaign_id]["leads"]
+            campaign_data["sales"] = vol_campaign_data[vol_campaign_id]["sales"]
+            campaign_data["revenue"] = vol_campaign_data[vol_campaign_id]["revenue"]
         else:
             campaign_data["leads"] = 0
             campaign_data["sales"] = 0

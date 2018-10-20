@@ -14,7 +14,7 @@ def get_all_campaigns_daily_stats(token,
         #the data that returns is a list of dictionaries. Each dictionary is a
         #campaign for 1 day of the time period queried. You want to organize
         #the data into a dictionary of campaigns, with each campaign being a
-        #list of dictionaries representing eachday of the time period queried. 
+        #list of dictionaries representing each day of the time period queried. 
         if campaigns["totalRows"] != len(campaigns["rows"]):
             # The get request has a limit of 1,000,000 so if there are more than 
             # 1,000,000 conversions returned, this exception will be raised. 

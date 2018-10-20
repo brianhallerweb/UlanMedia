@@ -22,9 +22,10 @@ def get_all_campaign_conversions_by_traffic_source(token,
         print("all campaign data returned from voluum")
         campaigns_data = {} 
         for campaign in campaigns["rows"]:
+            vol_id = campaign["campaignId"]
             campaign_name = re.sub(r"^.* - ", "",campaign["campaignName"], count=1)        
-            if campaign_name not in campaigns_data:
-                campaigns_data[campaign_name] = {"name": campaign_name, "revenue": 0,
+            if vol_id not in campaigns_data:
+                campaigns_data[vol_id] = {"name": campaign_name, "revenue": 0,
                         "leads": 0, "sales": 0}
         for campaign in campaigns["rows"]:
             visit_date = re.sub(r"[\s].*", "", campaign["visitTimestamp"])
@@ -36,6 +37,7 @@ def get_all_campaign_conversions_by_traffic_source(token,
             # clicks that occurred between start_date and end_date.
             if visit_date >= start_date and visit_date <= end_date:
                 revenue = campaign["revenue"]
+                vol_id = campaign["campaignId"]
                 campaign_name = re.sub(r"^.* - ", "",campaign["campaignName"], count=1)        
                 lead = 0
                 sale = 0
@@ -43,9 +45,9 @@ def get_all_campaign_conversions_by_traffic_source(token,
                     lead = 1
                 elif campaign["transactionId"] == "deposit":
                     sale = 1
-                campaigns_data[campaign_name]["leads"] += lead
-                campaigns_data[campaign_name]["sales"] += sale
-                campaigns_data[campaign_name]["revenue"] += revenue 
+                campaigns_data[vol_id]["leads"] += lead
+                campaigns_data[vol_id]["sales"] += sale
+                campaigns_data[vol_id]["revenue"] += revenue 
         return campaigns_data 
     except requests.exceptions.RequestException as e:
         print("Failed - get_all_campaign_conversions_by_traffic_source()") 
