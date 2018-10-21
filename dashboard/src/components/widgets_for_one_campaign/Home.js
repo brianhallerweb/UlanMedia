@@ -72,6 +72,7 @@ class Home extends Component {
           c2={this.state.c2}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
+          maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
         <Records
           loading={this.state.loading}

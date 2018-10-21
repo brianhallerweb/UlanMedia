@@ -29,7 +29,8 @@ class NavBar extends Component {
               value={this.props.precondition}
               onChange={e => this.props.selectPrecondition(e.target.value)}
             />
-            x maxSaleCPA
+            x maxLeadCPA ($
+            {this.props.maxLeadCPA})
           </p>
           <ConditionCheckboxes
             toggleCondition={this.props.toggleCondition}

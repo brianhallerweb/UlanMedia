@@ -23,7 +23,7 @@ const AppRouter = () => (
         <Route path="/campaign/days/:volid" component={days_for_one_campaignHome} />
         <Route path="/campaign/offers/:volid" component={offers_for_one_campaignHome} />
         <Route path="/campaign/ads/:volid" component={ads_for_one_campaignHome} />
-        <Route path="/campaign/widgets/:volid/:mgidid/:name" component={widgets_for_one_campaignHome} />
+        <Route path="/campaign/widgets/:volid/:mgidid/:max_lead_cpa/:name" component={widgets_for_one_campaignHome} />
         <Route path="/widgets/parent/:widgetID" component={campaigns_for_one_parent_widgetHome} />
         <Route path="/widgets/child/:widgetID" component={campaigns_for_one_child_widgetHome} />
         <Route component={RedirectToHome} />
