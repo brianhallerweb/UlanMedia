@@ -39,6 +39,7 @@ class Home extends Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
         widgetID: this.state.widgetID,

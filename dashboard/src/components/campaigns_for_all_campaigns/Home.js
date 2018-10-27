@@ -4,6 +4,7 @@ import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
+import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Home extends Component {
       error: false,
       loading: false,
       campaignsRecords: [],
+      authenticated: 'not yet checked',
     };
   }
 
@@ -51,6 +53,7 @@ class Home extends Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
@@ -96,6 +99,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {!this.state.authenticated && <Redirect to="/" />}
         <Title />
         <GlobalNavBar />
         <NavBar
