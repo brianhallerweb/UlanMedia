@@ -52,10 +52,20 @@ userSchema.methods.generateAuthToken = function() {
     .sign({_id: this._id.toHexString(), access}, process.env.JWT_SECRET)
     .toString();
 
-  this.tokens[0] = {access, token};
+  this.tokens.push({access, token});
 
   return this.save().then(() => {
     return token;
+  });
+};
+
+userSchema.methods.removeToken = function(token) {
+  return this.update({
+    $pull: {
+      tokens: {
+        token,
+      },
+    },
   });
 };
 

@@ -44,6 +44,33 @@ app.post('/records/users/login', (req, res) => {
     });
 });
 
+app.delete('/records/users/logout', authenticate, (req, res) => {
+  req.user
+    .removeToken(req.token)
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch(() => {
+      res.status(500).send();
+    });
+});
+
+// this route is only for removing extra tokens in the database
+// eventually, I think this should go in a script to be run as a cron job
+// every couple weeks. Unless there is an expiration date on tokens in the
+// database?
+// For now, I will just run it through postman just like the signup.
+//app.put('/records/users/removetokens', (req, res) => {
+//  User.findOne({email: 'michael@hallerweb.com'})
+//    .then(user => User.findByIdAndUpdate(user.id, {tokens: []}))
+//    .then(() => {
+//      res.status(200).send();
+//    })
+//    .catch(() => {
+//      res.status(500).send();
+//    });
+//});
+
 ////////////////////////////
 // these are the only routes that create data sets
 // The others just create reports

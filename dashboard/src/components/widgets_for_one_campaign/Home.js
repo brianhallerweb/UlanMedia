@@ -1,5 +1,6 @@
 //@format
 import React, {Component} from 'react';
+import Logout from '../Logout';
 import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
@@ -49,6 +50,20 @@ class Home extends Component {
         c2: this.state.c2,
       }),
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(records => {
         let error;
@@ -61,6 +76,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Logout />
         <Title name={this.props.match.params.name} />
         <GlobalNavBar />
         <NavBar

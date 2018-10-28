@@ -26,7 +26,7 @@ class Login extends Component {
     })
       .then(res => {
         if (!res.ok) {
-          this.setState({error: true});
+          this.setState({error: true, password: ''});
           throw Error(res.statusText);
         }
         return res;
@@ -41,7 +41,7 @@ class Login extends Component {
   render() {
     return (
       <div style={{margin: 40}}>
-        <h3>Ulan Media Dashboard</h3>
+        <h3 style={{paddingLeft: 5}}>Ulan Media Dashboard</h3>
         <form
           onSubmit={e => {
             e.preventDefault();
@@ -51,6 +51,7 @@ class Login extends Component {
             <input
               type="text"
               placeholder="email"
+              value={this.state.email}
               onChange={e => {
                 this.setState({email: e.target.value});
               }}
@@ -60,6 +61,7 @@ class Login extends Component {
             <input
               type="password"
               placeholder="password"
+              value={this.state.password}
               onChange={e => {
                 this.setState({password: e.target.value});
               }}
