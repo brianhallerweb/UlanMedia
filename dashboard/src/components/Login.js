@@ -71,7 +71,9 @@ class Login extends Component {
             <input type="submit" value="Submit" />
           </div>
         </form>
-        {this.state.tokenAcquired && <Redirect to="/" />}
+        {this.state.tokenAcquired && (
+          <Redirect to={this.props.location.location || '/'} />
+        )}
         {this.state.error && <p style={{color: 'red'}}>incorrect login</p>}
       </div>
     );
