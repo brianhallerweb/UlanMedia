@@ -11,27 +11,6 @@ const User = require('./models/user');
 
 app.use(bodyParser.json());
 
-////////////////////////////////
-//security stuff
-
-// sign up
-// I only used this route to create the michael@hallerweb.com
-// user once. I did it through postman.
-// It is not a route that is accessible through the web app
-//app.post('/records/users', (req, res) => {
-//  const user = new User({
-//    email: req.body.email,
-//    password: req.body.password,
-//  });
-//  user
-//    .generateAuthToken()
-//    .then(token => {
-//      res.header('x-auth', token).json(user);
-//    })
-//    .catch(err => res.status(500).json(err));
-//});
-
-// login
 app.post('/records/users/login', (req, res) => {
   User.findByCredentials(req.body.email, req.body.password)
     .then(user => {
@@ -54,22 +33,6 @@ app.delete('/records/users/logout', authenticate, (req, res) => {
       res.status(500).send();
     });
 });
-
-// this route is only for removing extra tokens in the database
-// eventually, I think this should go in a script to be run as a cron job
-// every couple weeks. Unless there is an expiration date on tokens in the
-// database?
-// For now, I will just run it through postman just like the signup.
-//app.put('/records/users/removetokens', (req, res) => {
-//  User.findOne({email: 'michael@hallerweb.com'})
-//    .then(user => User.findByIdAndUpdate(user.id, {tokens: []}))
-//    .then(() => {
-//      res.status(200).send();
-//    })
-//    .catch(() => {
-//      res.status(500).send();
-//    });
-//});
 
 ////////////////////////////
 // these are the only routes that create data sets

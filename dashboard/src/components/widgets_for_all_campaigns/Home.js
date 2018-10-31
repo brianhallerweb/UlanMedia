@@ -5,6 +5,7 @@ import Title from './Title';
 import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
+import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Home extends Component {
       dateRange: 'seven',
       precondition: 20,
       error: false,
+      authenticated: true,
       loading: false,
       c1: false,
       c2: false,
@@ -74,6 +76,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <Title name={this.props.match.params.name} />
         <GlobalNavBar />

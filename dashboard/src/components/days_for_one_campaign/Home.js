@@ -4,6 +4,7 @@ import Logout from '../Logout';
 import Title from './Title';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
+import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Home extends Component {
       campaignID: this.props.match.params.widgetID,
       dayRecords: [],
       loading: false,
+      authenticated: true,
     };
   }
 
@@ -51,6 +53,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <Title dayRecords={this.state.dayRecords} />
         <GlobalNavBar />
