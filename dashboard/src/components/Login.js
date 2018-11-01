@@ -14,14 +14,16 @@ class Login extends Component {
   }
 
   submitForm() {
+    const email = this.state.email.trim();
+    const password = this.state.password.trim();
     fetch('/records/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
+        email,
+        password,
       }),
     })
       .then(res => {

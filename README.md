@@ -17,3 +17,10 @@ widgets_for_all_campaigns
 offers_for_all_campaigns  
 ads_for_all_campaigns  
 
+### Authentication
+
+There are two separate systems for authentication: one on the server
+(authentication middleware) and on in React Router, the client side router (a created a higher order
+component <ProtectedRoute/>). I have detailed explanations of those approaches
+in separate repositories. The repositories are called secure_todos_API and
+protected_route. 
