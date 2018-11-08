@@ -10,6 +10,8 @@ def create_days_for_one_campaign_dataset(vol_token, mgid_token, days_ago, output
     print(f"vol start date: {vol_start_date}")
     print(f"vol end date: {vol_end_date}")
 
+    #mgid_token is not used yet
+
     # get daily stats by campaign by day  
     daily_stats = get_all_campaigns_daily_stats(vol_token,
                                                        mgidVolTrafficSourceId
