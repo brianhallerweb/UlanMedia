@@ -9,7 +9,8 @@ with open(f'/home/bsh/Documents/UlanMedia/data/days_for_one_campaign/days_for_on
 campaign_id = sys.argv[1]
 
 df = pd.DataFrame(data[campaign_id])
-df["clicks"] = df["visits"]
+# df["clicks"] = df["visits"]
+df["clicks"] = df["clicks"]
 df["cost"] = round(df["cost"], 2)
 df["cpc"] = round(df["cost"]/df["clicks"], 3)
 df["conversion_cpa"] = round(df["cost"]/df["conversions"], 2)
