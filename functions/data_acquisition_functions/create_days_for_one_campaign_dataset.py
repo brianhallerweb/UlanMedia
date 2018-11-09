@@ -12,21 +12,12 @@ import pytz
 import requests
 import sys
 
-# todo:
-# add try catch blocks to mgid and vol requests
-# get rid of get_all_campaigns_daily_stats.py
-# update with git
-# update with git on digital ocean
-# manually get the data on digital ocean
-# update the cron job to make sure the timing is right
-
 # This function will create a json data set where each key is a vol campaign id
 # and each value is a list of dictionaries, where is dictionary is a collection
 # of daily stats for one day. Only use this function if you want to create a 
 # dataset with all 50 days. To update an existing data set with new daily stats for
 # yesterday (and delete the daily stats for 51 days ago) use
-# add_yesterday_for_days_for_one_campaign_dataset()
-
+# add_yesterday_in_days_for_one_campaign_dataset()
 
 def create_days_for_one_campaign_dataset(vol_token, mgid_token, days_ago, 
         output_name):
@@ -71,12 +62,10 @@ def create_days_for_one_campaign_dataset(vol_token, mgid_token, days_ago,
                 vol_end_date, mgid_timezone)
         mgid_response = get_mgid_daily_stats_data(mgid_token, mgid_start_date,
                 mgid_end_date)
-        # mgid_response = get_mgid_daily_stats_data(mgid_token, mgid_start_date,
-                # mgid_end_date)
     
         # fill in the daily_stats dictionary
         # each key is a vol campaign id
-        # each value should be a dictionary of data, some from mgid, some from vol
+        # each value is a dictionary of data, some from mgid, some from vol
         # data from mgid
              # clicks
              # cost
