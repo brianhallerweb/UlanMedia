@@ -48,11 +48,11 @@ const AppRouter = () => (
           Component={widgets_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/widgets/parent/:widgetID"
+          path="/widget/parent/:widgetID"
           Component={campaigns_for_one_parent_widgetHome}
         />
         <PrivateRoute
-          path="/widgets/child/:widgetID"
+          path="/widget/child/:widgetID"
           Component={campaigns_for_one_child_widgetHome}
         />
         <PrivateRoute Component={RedirectToCampaignsHome} />
