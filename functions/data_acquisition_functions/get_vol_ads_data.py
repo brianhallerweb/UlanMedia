@@ -2,6 +2,7 @@ from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.send_email import send_email
 import requests
+import sys
 from datetime import datetime
 
 def get_vol_ads_data(token, start_date, end_date, timezone):

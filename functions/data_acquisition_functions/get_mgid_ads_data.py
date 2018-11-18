@@ -4,6 +4,7 @@ from functions.misc.send_email import send_email
 from datetime import datetime
 import requests
 import re
+import sys
 
 def get_mgid_ads_data(token, mgid_client_id):
     try:
