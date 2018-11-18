@@ -27,10 +27,10 @@ def get_vol_ads_data(token, start_date, end_date, timezone):
                 ad_id = ad["customVariable3"]
                 ads_data[ad_id] = {} 
                 ads_data[ad_id]["ad_id"] = ad_id
-                ads_data[ad_id]["ad_clicks"] = ad["visits"]
-                ads_data[ad_id]["ad_cost"] = ad["cost"]
-                ads_data[ad_id]["ad_conversions"] = ad["conversions"]
-                ads_data[ad_id]["ad_revenue"] = ad["revenue"]
+                ads_data[ad_id]["clicks"] = ad["visits"]
+                ads_data[ad_id]["cost"] = ad["cost"]
+                ads_data[ad_id]["conversions"] = ad["conversions"]
+                ads_data[ad_id]["revenue"] = ad["revenue"]
         return ads_data
     except requests.exceptions.RequestException as e:
             print("Failed - get_vol_ads_data()")

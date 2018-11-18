@@ -39,12 +39,12 @@ def get_mgid_ads_data(token, mgid_client_id):
                 # extract data and put into variables
                 ad_id = str(ad["id"])
                 campaign_id = str(ad["campaignId"])
-                ad_url = ad["url"]
-                ad_status = ad["status"]["code"]
+                url = ad["url"]
+                status = ad["status"]["code"]
                 # extract image name from the url using regex
                 pattern = re.compile(r'(&img=)([^&]*)')
-                res = pattern.findall(ad_url)
-                ad_image = res[0][1]
+                res = pattern.findall(url)
+                image = res[0][1]
                 # add an ad to ads_data
                 # ads_data is a dictionary of ad ids. Each ad id is a dictionary of data
                 # for that ad. 
@@ -52,13 +52,13 @@ def get_mgid_ads_data(token, mgid_client_id):
                 # fill in the data for a particular ad.  
                 ads_data[ad_id]["ad_id"] = ad_id
                 ads_data[ad_id]["campaign_id"] = campaign_id
-                ads_data[ad_id]["ad_url"] = ad_url
-                ads_data[ad_id]["ad_image"] = ad_image
-                if ad_status == "goodPerformance":
+                ads_data[ad_id]["url"] = url
+                ads_data[ad_id]["image"] = image
+                if status == "goodPerformance":
                     ads_data[ad_id]["status"] = "active"
-                elif ad_status == "onModeration":
+                elif status == "onModeration":
                     ads_data[ad_id]["status"] = "pending"
-                elif ad_status == "rejected":
+                elif status == "rejected":
                     ads_data[ad_id]["status"] = "rejected"
         
         return ads_data
