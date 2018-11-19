@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'seven',
-      c1: false,
+      precondition: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -35,10 +35,9 @@ class Home extends Component {
     this.setState({dateRange: dateRange, precondition: precondition});
   }
 
-  toggleCondition(condition) {
-    this.setState({[condition]: !this.state[condition]});
+  selectPrecondition(num) {
+    this.setState({precondition: num});
   }
-
 
   submitForm() {
     this.setState({loading: true});
@@ -50,7 +49,7 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        c1: this.state.c1,
+        precondition: this.state.precondition,
       }),
     })
       .then(res => {
@@ -85,7 +84,8 @@ class Home extends Component {
         <GlobalNavBar />
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
-          toggleCondition={this.toggleCondition.bind(this)}
+          selectPrecondition={this.selectPrecondition.bind(this)}
+          precondition={this.state.precondition}
           c1={this.state.c1}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}

@@ -22,7 +22,6 @@ class Records extends Component {
             <th>CVR</th>
             <th>EPC</th>
             <th>CPA</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
