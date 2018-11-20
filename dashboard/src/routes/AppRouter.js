@@ -13,24 +13,21 @@ import days_for_one_campaignHome from '../components/days_for_one_campaign/Home'
 import widgets_for_one_campaignHome from '../components/widgets_for_one_campaign/Home';
 import campaigns_for_one_parent_widgetHome from '../components/campaigns_for_one_parent_widget/Home';
 import campaigns_for_one_child_widgetHome from '../components/campaigns_for_one_child_widget/Home';
+import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import RedirectToCampaignsHome from '../components/RedirectToCampaignsHome';
 
 const AppRouter = () => (
   <BrowserRouter>
     <div>
       <Switch>
+	// login route
         <Route path="/login" component={Login} />
 
+	// campaigns routes
         <PrivateRoute
           path="/campaigns"
           Component={campaigns_for_all_campaignsHome}
         />
-        <PrivateRoute
-          path="/widgets"
-          Component={widgets_for_all_campaignsHome}
-        />
-        <PrivateRoute path="/ads" Component={ads_for_all_campaignsHome} />
-        <PrivateRoute path="/offers" Component={offers_for_all_campaignsHome} />
         <PrivateRoute
           path="/campaign/days/:volid"
           Component={days_for_one_campaignHome}
@@ -47,6 +44,12 @@ const AppRouter = () => (
           path="/campaign/widgets/:volid/:mgidid/:max_lead_cpa/:name"
           Component={widgets_for_one_campaignHome}
         />
+
+	// widgets routes
+        <PrivateRoute
+          path="/widgets"
+          Component={widgets_for_all_campaignsHome}
+        />
         <PrivateRoute
           path="/widget/parent/:widgetID"
           Component={campaigns_for_one_parent_widgetHome}
@@ -55,6 +58,15 @@ const AppRouter = () => (
           path="/widget/child/:widgetID"
           Component={campaigns_for_one_child_widgetHome}
         />
+
+	// ads routes
+        <PrivateRoute path="/ads" Component={ads_for_all_campaignsHome} />
+        <PrivateRoute path="/ad/:image" Component={campaigns_for_one_adHome} />
+	
+	// offers routes
+        <PrivateRoute path="/offers" Component={offers_for_all_campaignsHome} />
+
+	// redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToCampaignsHome} />
       </Switch>
     </div>

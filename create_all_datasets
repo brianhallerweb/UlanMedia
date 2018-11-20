@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python create_campaigns_for_all_campaigns_datasets.py
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python add_yesterday_in_days_for_one_campaign_dataset.py
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python create_widgets_for_one_campaign_datasets.py
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python create_widgets_for_all_campaigns_datasets.py
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python create_ads_for_all_campaigns_datasets.py
+

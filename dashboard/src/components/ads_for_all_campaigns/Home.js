@@ -21,17 +21,6 @@ class Home extends Component {
   }
 
   selectDateRange(dateRange) {
-    let precondition;
-    if (dateRange === 'yesterday' || dateRange === 'seven') {
-      precondition = 0.25;
-    } else if (dateRange === 'thirty') {
-      precondition = 0.5;
-    } else if (dateRange === 'ninety') {
-      precondition = 1;
-    } else if (dateRange === 'oneeighty') {
-      precondition = 2;
-    }
-
     this.setState({dateRange: dateRange, precondition: precondition});
   }
 

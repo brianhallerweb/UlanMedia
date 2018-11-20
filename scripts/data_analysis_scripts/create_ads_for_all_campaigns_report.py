@@ -20,7 +20,9 @@ df["cost"] = round(df["cost"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
-df["epc"] = round(df["revenue"] / df["clicks"], 2)
+# epc uses the series.round method. It doesn't appear to do anything different
+# from python's round()
+df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 
 # The prerequisite condition for every report
