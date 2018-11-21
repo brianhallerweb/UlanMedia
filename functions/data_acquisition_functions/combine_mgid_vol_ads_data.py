@@ -1,4 +1,5 @@
 from config.config import *
+import sys
 
 def combine_mgid_vol_ads_data(mgid_data, vol_data):
     # This function will combine the mgid ads data and the vol ads data. Both

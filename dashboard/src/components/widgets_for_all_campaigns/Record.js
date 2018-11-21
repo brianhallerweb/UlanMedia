@@ -47,7 +47,22 @@ class Record extends Component {
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.sale_cpa.toFixed(2)}</td>
         <td>{this.props.widgetRecord.status}</td>
-        <td>{this.props.widgetRecord.global_status}</td>
+        <td>
+	    {this.props.widgetRecord.global_status}
+	    {this.props.widgetRecord.global_status === "not yet listed" ? 
+			    <ul>
+			      <li>
+                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=whitelist`}>add to white</a>
+			      </li>
+			      <li>
+                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=blacklist`}>add to black</a>
+			      </li>
+			      <li>
+                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=greylist`}>add to grey</a>
+			      </li>
+			    </ul> 
+			    : ""}
+	</td>
       </tr>
     );
   }

@@ -1,11 +1,6 @@
 //@format
 import React from 'react';
 
-const Title = () => (
-	<div>
-	<h3 class="text-primary">campaigns for all campaigns</h3>
-	<button class="btn btn-primary">test</button>
-	</div>
-);
+const Title = () => <h3>campaigns for all campaigns</h3>
 
 export default Title;
