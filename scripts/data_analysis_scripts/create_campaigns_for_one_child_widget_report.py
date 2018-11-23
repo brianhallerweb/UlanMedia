@@ -49,10 +49,14 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-conditions_args = [sys.argv[4], sys.argv[5]]
+# status == included
+c3 = df["status"] == "included"
+result3 = df[c3]
+
+conditions_args = [sys.argv[4], sys.argv[5], sys.argv[6]]
 # for troubleshooting 
-conditions_args = ["false", "false"]
-conditions_dfs = [result1, result2]
+# conditions_args = ["false", "false", "false"]
+conditions_dfs = [result1, result2, result3]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -70,12 +74,14 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values("cost", ascending=False)
+final_result = final_result.sort_values("name", ascending=True)
 
 # add a summary row at the bottom
 summary = final_result.sum(numeric_only=True)
 summary = summary.round(2)
 summary["name"] = "summary"
+summary["lead_cpa"] = summary["lead_cpa"] / len(final_result.index)
+summary["sale_cpa"] = summary["sale_cpa"] / len(final_result.index)
 final_result = final_result.append(summary, ignore_index=True)
 final_result = final_result.replace(np.nan, "")
 

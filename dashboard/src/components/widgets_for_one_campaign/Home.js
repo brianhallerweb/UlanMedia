@@ -20,6 +20,7 @@ class Home extends Component {
       loading: false,
       c1: false,
       c2: false,
+      c3: false,
     };
   }
 
@@ -50,6 +51,7 @@ class Home extends Component {
         precondition: this.state.precondition,
         c1: this.state.c1,
         c2: this.state.c2,
+        c3: this.state.c3,
       }),
     })
       .then(res => {
@@ -90,6 +92,7 @@ class Home extends Component {
           precondition={this.state.precondition}
           c1={this.state.c1}
           c2={this.state.c2}
+          c3={this.state.c3}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}

@@ -25,6 +25,7 @@ class Record extends Component {
                 parent widget
               </Link>
             </div>
+
             <div className="rowLink">
               <Link
                 to={{
@@ -35,6 +36,12 @@ class Record extends Component {
                 target="_blank">
                 child widget
               </Link>
+            </div>
+
+            <div className="rowLink">
+              <a href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=all&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
+                exclude
+              </a>
             </div>
           </div>
         </td>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
-const ConditionCheckboxes = ({toggleCondition, c1, c2}) => {
+const ConditionCheckboxes = ({toggleCondition, c1, c2, c3}) => {
   return (
     <div>
       <div>
@@ -22,6 +22,16 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2}) => {
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>{'Widget has 1 or more sales --- (sales > 1)'}</span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c3"
+          checked={c3}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>{'Widget status is included --- (status = included)'}</span>
       </div>
     </div>
   );

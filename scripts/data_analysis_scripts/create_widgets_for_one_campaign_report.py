@@ -43,8 +43,12 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-conditions_args = [sys.argv[4], sys.argv[5]]
-conditions_dfs = [result1, result2]
+# status == included
+c3 = df["status"] == "included"
+result3 = df[c3]
+
+conditions_args = [sys.argv[4], sys.argv[5], sys.argv[6]]
+conditions_dfs = [result1, result2, result3]
 
 final_result = None 
 for i in range(len(conditions_args)):

@@ -36,6 +36,7 @@ class NavBar extends Component {
             toggleCondition={this.props.toggleCondition}
             c1={this.props.c1}
             c2={this.props.c2}
+            c3={this.props.c3}
           />
           <input type="submit" value="submit" disabled={this.props.loading} />
         </form>
