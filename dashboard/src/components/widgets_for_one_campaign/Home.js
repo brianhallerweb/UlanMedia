@@ -12,15 +12,16 @@ class Home extends Component {
     super(props);
     this.state = {
       volid: this.props.match.params.volid,
+      mgidid: this.props.match.params.mgidid,
       widgetRecords: [],
       dateRange: 'seven',
       precondition: 2,
+      precondition2: "all",
       error: false,
       authenticated: true,
       loading: false,
       c1: false,
       c2: false,
-      c3: false,
     };
   }
 
@@ -36,6 +37,10 @@ class Home extends Component {
     this.setState({precondition: num});
   }
 
+  selectPrecondition2(toInclude) {
+    this.setState({precondition2: toInclude});
+  }
+
   submitForm() {
     this.setState({loading: true});
 
@@ -49,9 +54,9 @@ class Home extends Component {
         dateRange: this.state.dateRange,
         volid: this.state.volid,
         precondition: this.state.precondition,
+        precondition2: this.state.precondition2,
         c1: this.state.c1,
         c2: this.state.c2,
-        c3: this.state.c3,
       }),
     })
       .then(res => {
@@ -78,6 +83,7 @@ class Home extends Component {
   }
 
   render() {
+	  console.log(this.state.precondition2)
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
@@ -88,11 +94,12 @@ class Home extends Component {
           datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
+          selectPrecondition2={this.selectPrecondition2.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
           precondition={this.state.precondition}
+          precondition2={this.state.precondition2}
           c1={this.state.c1}
           c2={this.state.c2}
-          c3={this.state.c3}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
@@ -101,6 +108,7 @@ class Home extends Component {
           loading={this.state.loading}
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
+	  mgidid={this.state.mgidid}
         />
       </div>
     );

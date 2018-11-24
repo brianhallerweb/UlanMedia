@@ -96,6 +96,7 @@ app.post('/records/campaignsForOneParentWidget', authenticate, (req, res) => {
       req.body.dateRange,
       req.body.widgetID,
       req.body.precondition,
+      req.body.precondition2,
       req.body.c1,
       req.body.c2,
       req.body.c3,
@@ -120,9 +121,9 @@ app.post('/records/campaignsForOneChildWidget', authenticate, (req, res) => {
       req.body.dateRange,
       req.body.widgetID,
       req.body.precondition,
+      req.body.precondition2,
       req.body.c1,
       req.body.c2,
-      req.body.c3
     ],
   };
   PythonShell.run(

@@ -32,8 +32,14 @@ df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 
 # widget lost more than x times max_lead_cpa
-# This is the prerequisite condition for every report
+# This is the precondition for every report
 df = df[df["profit"] < -1 * float(sys.argv[3]) * df["max_lead_cpa"]]
+
+# filter on widget status
+# This is the precondition2 for every report
+status = sys.argv[4]
+if status != "all":
+    df = df[df["status"] == sys.argv[4]]
 
 # leads >= 1
 c1 = df["leads"] >= 1
@@ -43,12 +49,8 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-# status == included
-c3 = df["status"] == "included"
-result3 = df[c3]
-
-conditions_args = [sys.argv[4], sys.argv[5], sys.argv[6]]
-conditions_dfs = [result1, result2, result3]
+conditions_args = [sys.argv[5], sys.argv[6]]
+conditions_dfs = [result1, result2]
 
 final_result = None 
 for i in range(len(conditions_args)):

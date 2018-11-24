@@ -39,7 +39,13 @@ df["profit"] = round(df["revenue"] - df["cost"], 2)
 # cost greater than x 
 df = df[df["cost"] > float(sys.argv[3])]
 # for troubleshooting
-df = df[df["cost"] > 5]
+#df = df[df["cost"] > 5]
+
+# filter on widget status
+# This is the precondition2 for every report
+status = sys.argv[4]
+if status != "all":
+    df = df[df["status"] == sys.argv[4]]
 
 # leads >= 1
 c1 = df["leads"] >= 1
@@ -49,14 +55,10 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-# status == included
-c3 = df["status"] == "included"
-result3 = df[c3]
-
-conditions_args = [sys.argv[4], sys.argv[5], sys.argv[6]]
+conditions_args = [sys.argv[5], sys.argv[6]]
 # for troubleshooting 
-# conditions_args = ["false", "false", "false"]
-conditions_dfs = [result1, result2, result3]
+# conditions_args = ["false", "false"]
+conditions_dfs = [result1, result2]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -65,7 +67,7 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="outer",
         on=["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id","name", "lead_cpa", "sale_cpa", "profit",
+            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit",
             "status", "global_status"]
             )
 
@@ -77,16 +79,19 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("name", ascending=True)
 
 # add a summary row at the bottom
-summary = final_result.sum(numeric_only=True)
-summary = summary.round(2)
-summary["name"] = "summary"
-summary["lead_cpa"] = summary["lead_cpa"] / len(final_result.index)
-summary["sale_cpa"] = summary["sale_cpa"] / len(final_result.index)
-final_result = final_result.append(summary, ignore_index=True)
-final_result = final_result.replace(np.nan, "")
+if len(final_result.index) > 0:
+    summary = final_result.sum(numeric_only=True)
+    summary = summary.round(2)
+    summary["name"] = "summary"
+    summary["lead_cpa"] = summary["lead_cpa"] / len((final_result[final_result["leads"] >=
+        1]).index)
+    summary["sale_cpa"] = summary["sale_cpa"] / len((final_result[final_result["sales"] >=
+        1]).index)
+    final_result = final_result.append(summary, ignore_index=True)
+    final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id","name", "lead_cpa", "sale_cpa", "profit",
+            "revenue", "sales", "widget_id", "mgid_id", "name", "lead_cpa", "sale_cpa", "profit",
             "status", "global_status"]].to_dict("records"))
 
 print(json_final_result)
