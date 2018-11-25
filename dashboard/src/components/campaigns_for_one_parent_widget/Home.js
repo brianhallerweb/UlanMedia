@@ -15,7 +15,7 @@ class Home extends Component {
       widgetRecords: [],
       dateRange: 'ninety',
       precondition: 0,
-      precondition2: "all",
+      precondition2: 'all',
       error: false,
       authenticated: true,
       loading: false,
@@ -113,7 +113,10 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
-        <p>(this report takes up to 30 sec because it has to generate the report before displaying it)</p>
+        <p>
+          (this report may take up to 30 sec because it has to generate the data
+          before displaying the report)
+        </p>
         <Records
           error={this.state.error}
           loading={this.state.loading}

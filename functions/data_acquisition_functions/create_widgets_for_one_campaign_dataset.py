@@ -21,10 +21,6 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     mgid_dates = create_mgid_date_range(days_ago, mgid_timezone)
     mgid_start_date = mgid_dates[0]
     mgid_end_date = mgid_dates[1]
-    print(f"vol start date: {vol_start_date}")
-    print(f"vol end date: {vol_end_date}")
-    print(f"mgid start date: {mgid_start_date}")
-    print(f"mgid end date: {mgid_end_date}")
 
     # extract needed campaign info
     mgid_campaign_id = str(campaign["mgid_id"])
@@ -69,7 +65,9 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             for key in vol_widget:
                 mgid_widget_data[widget_id][key] = vol_widget[key]
 
-        if widget_id not in excluded_widgets:
+        # 11/25 I changed this conditional to use parent widget id because
+        # excluded_widgets is a list of parent widget ids
+        if pattern.search(widget_id).group() not in excluded_widgets:
             mgid_widget_data[widget_id]['status'] = "included" 
         else:
             mgid_widget_data[widget_id]['status'] = "excluded" 

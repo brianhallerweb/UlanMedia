@@ -8,27 +8,39 @@ class Record extends Component {
     this.state = {};
   }
 
+  addRowLinks() {
+    return (
+      <div>
+        <div className="rowLink">
+          <a
+            href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
+              this.props.widgetRecord.mgid_id
+            }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+            target="_blank">
+            exclude
+          </a>
+        </div>
+
+        <div className="rowLink">
+          <a
+            href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+              this.props.widgetRecord.mgid_id
+            }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+            target="_blank">
+            mgid
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <tr>
         <td>
-	  {this.props.widgetRecord.name}
-	    
-	  <div> 
-            <div className="rowLink">
-              <a href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${this.props.widgetRecord.mgid_id}&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
-                exclude
-              </a>
-            </div>
-
-            <div className="rowLink">
-              <a href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${this.props.widgetRecord.mgid_id}?search=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
-                mgid
-              </a>
-            </div>
-          </div>
-
-	</td>
+          {this.props.widgetRecord.name}
+          {this.props.widgetRecord.name !== 'summary' && this.addRowLinks()}
+        </td>
         <td>{this.props.widgetRecord.widget_id}</td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>

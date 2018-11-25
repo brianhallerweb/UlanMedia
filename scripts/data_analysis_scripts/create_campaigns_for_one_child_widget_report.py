@@ -32,6 +32,10 @@ for campaign in data.values():
 
 df = pd.DataFrame(campaigns)
 
+# this condition handles the case where the parent/child dataset is empty.
+# The first time I noticed this possibility was when mike excluded a widget
+# from all campaigns. The next day, when the app created a dataset for
+# campaigns_for_one_parent/child_widget, that dataset was empty. 
 if len(df.index) == 0:
     print(json.dumps(campaigns))
     sys.exit()
