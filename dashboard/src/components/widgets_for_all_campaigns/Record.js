@@ -53,7 +53,6 @@ class Record extends Component {
         <td>${this.props.widgetRecord.lead_cpa.toFixed(2)}</td>
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.sale_cpa.toFixed(2)}</td>
-        <td>{this.props.widgetRecord.status}</td>
         <td>
 	    {this.props.widgetRecord.global_status}
 	    {this.props.widgetRecord.global_status === "not yet listed" ? 
