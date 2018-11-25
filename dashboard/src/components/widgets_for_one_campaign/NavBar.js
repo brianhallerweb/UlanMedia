@@ -18,12 +18,13 @@ class NavBar extends Component {
             this.props.submitForm();
           }}>
           <DatesDropdown selectDateRange={this.props.selectDateRange} />
+	  <span>Status </span>
           <select
             onChange={e => this.props.selectPrecondition2(e.target.value)}
             defaultValue="all">
-            <option value="all">Status = all</option>
-            <option value="included">Status = included</option>
-            <option value="excluded">Status = excluded</option>
+            <option value="all">all</option>
+            <option value="included">included</option>
+            <option value="excluded">excluded</option>
           </select>
           <p>
             Widget lost more than{' '}

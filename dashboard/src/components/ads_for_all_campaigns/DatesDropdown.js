@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 
 const DatesDropdown = ({selectDateRange}) => (
   <div>
+    <span>Date range </span>
     <select
       onChange={e => selectDateRange(e.target.value)}
       defaultValue="seven">

@@ -113,6 +113,7 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        <p>(this report takes up to 30 sec because it has to generate the report before displaying it)</p>
         <Records
           error={this.state.error}
           loading={this.state.loading}
