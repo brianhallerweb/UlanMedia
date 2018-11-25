@@ -83,10 +83,16 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["name"] = "summary"
-    summary["lead_cpa"] = summary["lead_cpa"] / len((final_result[final_result["leads"] >=
-        1]).index)
-    summary["sale_cpa"] = summary["sale_cpa"] / len((final_result[final_result["sales"] >=
-        1]).index)
+    number_of_leads = len((final_result[final_result["leads"] >= 1]).index)
+    if number_of_leads > 0:
+        summary["lead_cpa"] = summary["lead_cpa"] / number_of_leads
+    else:
+        summary["lead_cpa"] = 0 
+    number_of_sales = len((final_result[final_result["sales"] >= 1]).index)
+    if number_of_sales > 0:
+        summary["sale_cpa"] = summary["sale_cpa"] / number_of_sales
+    else:
+        summary["sale_cpa"] = 0
     final_result = final_result.append(summary, ignore_index=True)
     final_result = final_result.replace(np.nan, "")
 
