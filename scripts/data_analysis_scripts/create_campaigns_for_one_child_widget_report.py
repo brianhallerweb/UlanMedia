@@ -32,6 +32,10 @@ for campaign in data.values():
 
 df = pd.DataFrame(campaigns)
 
+if len(df.index) == 0:
+    print(json.dumps(campaigns))
+    sys.exit()
+
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
