@@ -99,7 +99,6 @@ app.post('/records/campaignsForOneParentWidget', authenticate, (req, res) => {
       req.body.precondition2,
       req.body.c1,
       req.body.c2,
-      req.body.c3,
     ],
   };
   PythonShell.run(
