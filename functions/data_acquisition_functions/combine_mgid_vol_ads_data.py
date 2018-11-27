@@ -1,17 +1,18 @@
 from config.config import *
 import sys
+import json
+from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
+from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
+from functions.data_acquisition_functions.get_mgid_ads_data import get_mgid_ads_data
+from functions.data_acquisition_functions.get_vol_ads_data import get_vol_ads_data
+from functions.misc.create_vol_date_range import create_vol_date_range
 
-def combine_mgid_vol_ads_data(mgid_data, vol_data):
+def combine_mgid_vol_ads_data(mgid_token, vol_token,date_range, mgid_data, vol_data):
     # This function will combine the mgid ads data and the vol ads data. Both
     # data sets are dictionaries with keys = ad id and values = dictionaries of
-    # data for that ad id. Each ad in each campaign has a unique ad id.
-    # However, ads are actually repeated across multiple campaigns. The
-    # identification for each truly unique ad is its image name (image). So,
-    # combining the ads data from mgid and vol means creating a new dictionary
-    # with key = image and value = dictionary of summary stats for each ad
-    # comibined across all campaigns. 
+    # data for that ad id. 
     
-    # start by combining mgid and vol by ad_id
+    # combining mgid and vol by ad_id
     # For convenience, Vol data is added to the existing mgid data. The name of
     # the combined data is changed from mgid_data to combined_ads_data_by_ad_id
     # afterward.
@@ -28,19 +29,9 @@ def combine_mgid_vol_ads_data(mgid_data, vol_data):
             ad["cost"] = 0
             ad["conversions"] = 0
             ad["revenue"] = 0 
-    combined_ads_data_by_ad_id = mgid_data    
+    combined_ads = mgid_data    
 
-    # Now create a new dictionary with keys = image
-    combined_ads_data_by_ad_image = {}   
-    for ad in combined_ads_data_by_ad_id.values():
-        image = ad["image"]
-        if image in combined_ads_data_by_ad_image:
-            combined_ads_data_by_ad_image[image]["clicks"] += ad["clicks"] 
-            combined_ads_data_by_ad_image[image]["conversions"] += ad["conversions"] 
-            combined_ads_data_by_ad_image[image]["cost"] += ad["cost"] 
-            combined_ads_data_by_ad_image[image]["revenue"] += ad["revenue"] 
-        else:
-            combined_ads_data_by_ad_image[image] = ad
+    with open(f"../../data/ads/{date_range}_ads_dataset.json", "w") as file:
+        json.dump(combined_ads, file)
 
-    return combined_ads_data_by_ad_image
 
