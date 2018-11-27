@@ -22,7 +22,7 @@ class Record extends Component {
                   )}`,
                 }}
                 target="_blank">
-                parent widget
+                parent
               </Link>
             </div>
 
@@ -34,12 +34,28 @@ class Record extends Component {
                   }`,
                 }}
                 target="_blank">
-                child widget
+                child
               </Link>
             </div>
 
             <div className="rowLink">
-              <a href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=all&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
+              <Link
+                to={{
+                  pathname: `/widget/total/${
+                    this.props.widgetRecord.widget_id
+                  }`,
+                }}
+                target="_blank">
+                total
+              </Link>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=all&widgetIDs=${this.props.widgetRecord.widget_id.match(
+                  /^\d*/,
+                )}`}
+                target="_blank">
                 exclude
               </a>
             </div>
@@ -54,21 +70,41 @@ class Record extends Component {
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.sale_cpa.toFixed(2)}</td>
         <td>
-	    {this.props.widgetRecord.global_status}
-	    {this.props.widgetRecord.global_status === "not yet listed" ? 
-			    <div>
-			      <div className="rowLink">
-                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=whitelist`}>white</a>
-			      </div>
-			      <div className="rowLink">
-                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=blacklist`}>black</a>
-			      </div>
-			      <div className="rowLink">
-                                <a target="_blank" href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}&list=greylist`}>grey</a>
-			      </div>
-			    </div> 
-			    : ""}
-	</td>
+          {this.props.widgetRecord.global_status}
+          {this.props.widgetRecord.global_status === 'not yet listed' ? (
+            <div>
+              <div className="rowLink">
+                <a
+                  target="_blank"
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}&list=whitelist`}>
+                  white
+                </a>
+              </div>
+              <div className="rowLink">
+                <a
+                  target="_blank"
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}&list=blacklist`}>
+                  black
+                </a>
+              </div>
+              <div className="rowLink">
+                <a
+                  target="_blank"
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}&list=greylist`}>
+                  grey
+                </a>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+        </td>
       </tr>
     );
   }

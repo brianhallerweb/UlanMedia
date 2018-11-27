@@ -27,11 +27,12 @@ class Records extends Component {
           </tr>
         </thead>
         <tbody>
-          {/* 10/12 I am leaving each record without a key because there is nothing unique about each record. Both volID and wigetID can be duplicated
-	  11/24 I think I might be able to use mgid_id for the key?
-		  */}
+          {/* 11/27 For the key, I am using a concatenation of mgid id and widget id. I think that concatenation is unique for each row.*/}
           {this.props.widgetRecords.map(widgetRecord => (
-            <Record widgetRecord={widgetRecord} />
+            <Record
+              key={String(widgetRecord.mgid_id) + widgetRecord.widget_id}
+              widgetRecord={widgetRecord}
+            />
           ))}
         </tbody>
       </table>
@@ -39,9 +40,10 @@ class Records extends Component {
   }
 
   render() {
+    console.log(this.props.widgetRecords);
     return (
       <div>
-        {this.props.loading && <div className="loader"/>}
+        {this.props.loading && <div className="loader" />}
         {this.props.error && <p>no widgets found</p>}
         {this.props.widgetRecords.length > 0 &&
           !this.props.loading &&

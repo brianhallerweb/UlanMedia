@@ -45,6 +45,27 @@ app.delete('/records/users/logout', authenticate, (req, res) => {
 // these are the only routes that create data sets
 // The others just create reports
 app.post(
+  '/records/createCampaignsForOneTotalWidgetDataset',
+  authenticate,
+  (req, res) => {
+    const pythonOptions = {
+      pythonPath: '/usr/bin/python3',
+      pythonOptions: ['-u'],
+      scriptPath: '../../scripts/data_acquisition_scripts/',
+      args: [req.body.widgetID, req.body.dateRange],
+    };
+    PythonShell.run(
+      'create_campaigns_for_one_total_widget_dataset.py',
+      pythonOptions,
+      (err, results) => {
+        if (err) throw err;
+        res.sendStatus(200);
+      },
+    );
+  },
+);
+
+app.post(
   '/records/createCampaignsForOneParentWidgetDataset',
   authenticate,
   (req, res) => {
@@ -86,6 +107,29 @@ app.post(
   },
 );
 ///////////////////////////
+app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_analysis_scripts/',
+    args: [
+      req.body.dateRange,
+      req.body.widgetID,
+      req.body.precondition,
+      req.body.precondition2,
+      req.body.c1,
+      req.body.c2,
+    ],
+  };
+  PythonShell.run(
+    'create_campaigns_for_one_total_widget_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
 
 app.post('/records/campaignsForOneParentWidget', authenticate, (req, res) => {
   const pythonOptions = {

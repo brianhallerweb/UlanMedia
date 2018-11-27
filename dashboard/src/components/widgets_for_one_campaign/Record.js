@@ -22,9 +22,10 @@ class Record extends Component {
                   )}`,
                 }}
                 target="_blank">
-                parent widget
+                parent
               </Link>
             </div>
+
             <div className="rowLink">
               <Link
                 to={{
@@ -33,18 +34,38 @@ class Record extends Component {
                   }`,
                 }}
                 target="_blank">
-                child widget
+                child
               </Link>
             </div>
-	    
+
             <div className="rowLink">
-              <a href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${this.props.mgidid}&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
+              <Link
+                to={{
+                  pathname: `/widget/total/${
+                    this.props.widgetRecord.widget_id
+                  }`,
+                }}
+                target="_blank">
+                total
+              </Link>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
+                  this.props.mgidid
+                }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+                target="_blank">
                 exclude
               </a>
             </div>
 
             <div className="rowLink">
-              <a href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${this.props.mgidid}?search=${this.props.widgetRecord.widget_id.match(/^\d*/,)}`} target="_blank">
+              <a
+                href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+                  this.props.mgidid
+                }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+                target="_blank">
                 mgid
               </a>
             </div>
