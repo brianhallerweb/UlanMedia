@@ -40,7 +40,6 @@ class Records extends Component {
   }
 
   render() {
-    console.log(this.props.widgetRecords);
     return (
       <div>
         {this.props.loading && <div className="loader" />}
