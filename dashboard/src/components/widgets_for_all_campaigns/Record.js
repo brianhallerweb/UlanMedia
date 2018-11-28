@@ -17,6 +17,18 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
+                  pathname: `/widget/total/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}`,
+                }}
+                target="_blank">
+                total
+              </Link>
+            </div>
+
+            <div className="rowLink">
+              <Link
+                to={{
                   pathname: `/widget/parent/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
                   )}`,
@@ -35,18 +47,6 @@ class Record extends Component {
                 }}
                 target="_blank">
                 child
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/total/${
-                    this.props.widgetRecord.widget_id
-                  }`,
-                }}
-                target="_blank">
-                total
               </Link>
             </div>
 
@@ -76,7 +76,7 @@ class Record extends Component {
               <div className="rowLink">
                 <a
                   target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
                   )}&list=whitelist`}>
                   white
@@ -85,7 +85,7 @@ class Record extends Component {
               <div className="rowLink">
                 <a
                   target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
                   )}&list=blacklist`}>
                   black
@@ -94,7 +94,7 @@ class Record extends Component {
               <div className="rowLink">
                 <a
                   target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
+                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
                   )}&list=greylist`}>
                   grey

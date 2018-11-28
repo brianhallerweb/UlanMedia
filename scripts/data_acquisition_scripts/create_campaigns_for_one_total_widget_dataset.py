@@ -1,6 +1,5 @@
 from config.config import *
 from datetime import datetime, timedelta
-
 import sys
 import json
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 

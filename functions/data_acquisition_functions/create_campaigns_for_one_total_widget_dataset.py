@@ -19,13 +19,36 @@ def create_campaigns_for_one_total_widget_dataset(total_widget_id, date_range, o
         with open(f'/home/bsh/Documents/UlanMedia/data/widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_widgets_for_one_campaign_dataset.json', 'r') as file:
              data = json.load(file)
 
+        widget_ids_with_matching_total = []
         for widget_id in list(data.keys()):
-            if widget_id == total_widget_id:
-                temp = data[widget_id] 
-                temp["vol_id"] = campaign["vol_id"]
-                temp["mgid_id"] = campaign["mgid_id"]
-                temp["name"] = campaign["name"]
-                widget_data.append(temp)
+            if widget_id.startswith(total_widget_id):
+                widget_ids_with_matching_total.append(widget_id)
+
+        total_widget_data = {}
+        for widget_id in widget_ids_with_matching_total:
+            if not total_widget_data:
+                total_widget_data = {
+                "widget_id": total_widget_id, 
+                "vol_id": campaign["vol_id"],
+                "mgid_id": campaign["mgid_id"],
+                "name": campaign["name"],
+                "max_lead_cpa": data[widget_id]["max_lead_cpa"],
+                "max_sale_cpa": data[widget_id]["max_sale_cpa"],
+                "clicks": data[widget_id]["clicks"], 
+                "cost": data[widget_id]["cost"],
+                "sales": data[widget_id]["sales"],
+                "leads": data[widget_id]["leads"],
+                "revenue": data[widget_id]["revenue"],
+                }
+            else:
+                total_widget_data["clicks"] += data[widget_id]["clicks"]
+                total_widget_data["cost"] += data[widget_id]["cost"]
+                total_widget_data["sales"] += data[widget_id]["sales"]
+                total_widget_data["leads"] += data[widget_id]["leads"]
+                total_widget_data["revenue"] += data[widget_id]["revenue"]
+
+        if total_widget_data:
+            widget_data.append(total_widget_data)
             
     complete_widget_data = widget_data 
 

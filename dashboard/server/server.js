@@ -116,7 +116,6 @@ app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
       req.body.dateRange,
       req.body.widgetID,
       req.body.precondition,
-      req.body.precondition2,
       req.body.c1,
       req.body.c2,
     ],

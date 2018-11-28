@@ -15,7 +15,6 @@ class Home extends Component {
       widgetRecords: [],
       dateRange: 'ninety',
       precondition: 0,
-      precondition2: 'all',
       error: false,
       authenticated: true,
       loading: false,
@@ -34,10 +33,6 @@ class Home extends Component {
 
   selectPrecondition(num) {
     this.setState({precondition: num});
-  }
-
-  selectPrecondition2(toInclude) {
-    this.setState({precondition2: toInclude});
   }
 
   submitForm() {
@@ -79,7 +74,6 @@ class Home extends Component {
             dateRange: this.state.dateRange,
             widgetID: this.state.widgetID,
             precondition: this.state.precondition,
-            precondition2: this.state.precondition2,
             c1: this.state.c1,
             c2: this.state.c2,
           }),
@@ -104,10 +98,8 @@ class Home extends Component {
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
-          selectPrecondition2={this.selectPrecondition2.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
           precondition={this.state.precondition}
-          precondition2={this.state.precondition2}
           c1={this.state.c1}
           c2={this.state.c2}
           loading={this.state.loading}

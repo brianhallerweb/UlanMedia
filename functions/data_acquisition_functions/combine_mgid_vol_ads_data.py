@@ -14,12 +14,13 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token,date_range, mgid_data, vol_d
     
     # combining mgid and vol by ad_id
     # For convenience, Vol data is added to the existing mgid data. The name of
-    # the combined data is changed from mgid_data to combined_ads_data_by_ad_id
-    # afterward.
+    # the combined data is changed from mgid_data to combined_ads afterwards.
     for ad in mgid_data.values():
         ad_id = ad["ad_id"]  
         if ad_id in vol_data:
             vol_ad_data = vol_data[ad_id]
+            ad["vol_id"] = vol_ad_data["vol_id"]
+            ad["name"] = vol_ad_data["name"]
             ad["clicks"] = vol_ad_data["clicks"]
             ad["cost"] = vol_ad_data["cost"]
             ad["conversions"] = vol_ad_data["conversions"]

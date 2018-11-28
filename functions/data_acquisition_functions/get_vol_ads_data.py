@@ -14,6 +14,7 @@ def get_vol_ads_data(token, start_date, end_date, timezone):
         ads_data = {}
         for campaign in campaigns:
             vol_id = campaign["vol_id"]
+            name = campaign["name"]
             url = f"https://api.voluum.com/report?from={start_date}T00%3A00%3A00Z&to={end_date}T00%3A00%3A00Z&tz={timezone}&sort=visits&direction=desc&columns=customVariable3&columns=visits&columns=conversions&columns=revenue&groupBy=custom-variable-3&offset=0&limit=100&include=ACTIVE&conversionTimeMode=VISIT&filter1=campaign&filter1Value={vol_id}"
 
             res = requests.get(url, headers = {"cwauth-token":
@@ -28,6 +29,8 @@ def get_vol_ads_data(token, start_date, end_date, timezone):
                 ad_id = ad["customVariable3"]
                 ads_data[ad_id] = {} 
                 ads_data[ad_id]["ad_id"] = ad_id
+                ads_data[ad_id]["vol_id"] = vol_id
+                ads_data[ad_id]["name"] = name 
                 ads_data[ad_id]["clicks"] = ad["visits"]
                 ads_data[ad_id]["cost"] = ad["cost"]
                 ads_data[ad_id]["conversions"] = ad["conversions"]

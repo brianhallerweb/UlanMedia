@@ -11,18 +11,6 @@ widget_id = sys.argv[2]
 with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_total_widget/{widget_id}_{date_range}_campaigns_for_one_total_widget_dataset.json', 'r') as file:
      campaigns = json.load(file)
 
-for campaign in campaigns:
-    # the referrer column of each widget is a list of refferers. I am not sure
-    # how to best handle lists inside of data frames so, for now, I am just 
-    # going to concatenate them into a space separated string. 
-    referrers = ""
-    for referrer in campaign["referrer"]:
-        if referrers == "":
-            referrers = referrer
-        else:
-            referrers = f"{referrers} {referrer}"
-    campaign["referrer"] = referrers
-
 df = pd.DataFrame(campaigns)
 
 # this condition handles the case where the total widget dataset is empty.
@@ -36,17 +24,11 @@ if len(df.index) == 0:
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
+df["cost"] = round(df["cost"], 2)
 
 # cost greater than x 
 df = df[df["cost"] > float(sys.argv[3])]
 #df = df[df["cost"] > 5]
-
-# filter on widget status
-# This is the precondition2 for every report
-status = sys.argv[4]
-if status != "all":
-    df = df[df["status"] == sys.argv[4]]
-
 
 # leads >= 1
 c1 = df["leads"] >= 1
@@ -56,7 +38,7 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-conditions_args = [sys.argv[5], sys.argv[6]]
+conditions_args = [sys.argv[4], sys.argv[5]]
 #conditions_args = ["false", "false"]
 conditions_dfs = [result1, result2]
 
@@ -66,9 +48,8 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="outer",
-        on=["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit",
-            "status", "global_status"]
+        on=["clicks", "cost", "leads", 
+            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit"]
             )
 
 if final_result is None:
@@ -98,10 +79,8 @@ if len(final_result.index) > 0:
     final_result = final_result.append(summary, ignore_index=True)
     final_result = final_result.replace(np.nan, "")
 
-
-
-json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
+json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit",
-            "status", "global_status"]].to_dict("records"))
+            ]].to_dict("records"))
 
 print(json_final_result)

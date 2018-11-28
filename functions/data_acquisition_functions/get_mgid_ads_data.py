@@ -52,7 +52,7 @@ def get_mgid_ads_data(token, mgid_client_id):
                 ads_data[ad_id] = {}
                 # fill in the data for a particular ad.  
                 ads_data[ad_id]["ad_id"] = ad_id
-                ads_data[ad_id]["campaign_id"] = campaign_id
+                ads_data[ad_id]["mgid_id"] = campaign_id
                 ads_data[ad_id]["url"] = url
                 ads_data[ad_id]["image"] = image
                 if status == "goodPerformance":
