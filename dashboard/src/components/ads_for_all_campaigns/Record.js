@@ -35,13 +35,13 @@ class Record extends Component {
           </div>
         </td>
         <td>{this.clicks}</td>
-        <td>${this.cost.toFixed(2)}</td>
+        <td>${this.cost}</td>
         <td>${this.revenue}</td>
-        <td>${this.profit.toFixed(2)}</td>
+        <td>${this.profit}</td>
         <td>{this.conversions}</td>
-        <td>{this.cvr.toFixed(2)}%</td>
-        <td>${this.epc.toFixed(3)}</td>
-        <td>${this.cpa.toFixed(2)}</td>
+        <td>{this.cvr}%</td>
+        <td>${this.epc}</td>
+        <td>${this.cpa}</td>
       </tr>
     );
   }
