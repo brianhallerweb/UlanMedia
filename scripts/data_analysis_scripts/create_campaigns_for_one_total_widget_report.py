@@ -4,9 +4,7 @@ import pandas as pd
 import numpy as np
 
 date_range = sys.argv[1]
-#date_range = "seven"
 widget_id = sys.argv[2]
-#widget_id = "5718588"
 
 with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_total_widget/{widget_id}_{date_range}_campaigns_for_one_total_widget_dataset.json', 'r') as file:
      campaigns = json.load(file)
@@ -30,6 +28,12 @@ df["cost"] = round(df["cost"], 2)
 df = df[df["cost"] > float(sys.argv[3])]
 #df = df[df["cost"] > 5]
 
+# filter on widget status
+# This is the precondition2 for every report
+status = sys.argv[4]
+if status != "all":
+    df = df[df["status"] == sys.argv[4]]
+
 # leads >= 1
 c1 = df["leads"] >= 1
 result1 = df[c1]
@@ -38,7 +42,7 @@ result1 = df[c1]
 c2 = df["sales"] >= 1
 result2 = df[c2]
 
-conditions_args = [sys.argv[4], sys.argv[5]]
+conditions_args = [sys.argv[5], sys.argv[6]]
 #conditions_args = ["false", "false"]
 conditions_dfs = [result1, result2]
 
@@ -49,7 +53,8 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="outer",
         on=["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit"]
+            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa",
+            "sale_cpa", "profit", "status", "global_status"]
             )
 
 if final_result is None:
@@ -81,6 +86,6 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit",
-            ]].to_dict("records"))
+            "status", "global_status"]].to_dict("records"))
 
 print(json_final_result)

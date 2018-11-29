@@ -42,8 +42,25 @@ app.delete('/records/users/logout', authenticate, (req, res) => {
 });
 
 ////////////////////////////
-// these are the only routes that create data sets
-// The others just create reports
+// these are the routes that create data sets
+// the others just create reports
+app.post('/records/createCampaignsForOneAd', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_acquisition_scripts/',
+    args: [req.body.adID, req.body.dateRange],
+  };
+  PythonShell.run(
+    'create_campaigns_for_one_ad_dataset.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.sendStatus(200);
+    },
+  );
+});
+
 app.post(
   '/records/createCampaignsForOneTotalWidgetDataset',
   authenticate,
@@ -116,6 +133,7 @@ app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
       req.body.dateRange,
       req.body.widgetID,
       req.body.precondition,
+      req.body.precondition2,
       req.body.c1,
       req.body.c2,
     ],

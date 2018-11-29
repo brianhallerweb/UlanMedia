@@ -34,6 +34,8 @@ def create_campaigns_for_one_total_widget_dataset(total_widget_id, date_range, o
                 "name": campaign["name"],
                 "max_lead_cpa": data[widget_id]["max_lead_cpa"],
                 "max_sale_cpa": data[widget_id]["max_sale_cpa"],
+                "status": data[widget_id]["status"],
+                "global_status": data[widget_id]["global_status"],
                 "clicks": data[widget_id]["clicks"], 
                 "cost": data[widget_id]["cost"],
                 "sales": data[widget_id]["sales"],

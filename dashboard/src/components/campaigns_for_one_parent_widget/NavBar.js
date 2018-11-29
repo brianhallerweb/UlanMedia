@@ -18,7 +18,7 @@ class NavBar extends Component {
             this.props.submitForm();
           }}>
           <DatesDropdown selectDateRange={this.props.selectDateRange} />
-	  <span>Status </span>
+          <span>Status </span>
           <select
             onChange={e => this.props.selectPrecondition2(e.target.value)}
             defaultValue="all">
