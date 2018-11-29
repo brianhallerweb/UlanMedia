@@ -44,22 +44,26 @@ app.delete('/records/users/logout', authenticate, (req, res) => {
 ////////////////////////////
 // these are the routes that create data sets
 // the others just create reports
-app.post('/records/createCampaignsForOneAd', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.adID, req.body.dateRange],
-  };
-  PythonShell.run(
-    'create_campaigns_for_one_ad_dataset.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.sendStatus(200);
-    },
-  );
-});
+app.post(
+  '/records/createCampaignsForOneAdDataset',
+  authenticate,
+  (req, res) => {
+    const pythonOptions = {
+      pythonPath: '/usr/bin/python3',
+      pythonOptions: ['-u'],
+      scriptPath: '../../scripts/data_acquisition_scripts/',
+      args: [req.body.adImage, req.body.dateRange],
+    };
+    PythonShell.run(
+      'create_campaigns_for_one_ad_dataset.py',
+      pythonOptions,
+      (err, results) => {
+        if (err) throw err;
+        res.sendStatus(200);
+      },
+    );
+  },
+);
 
 app.post(
   '/records/createCampaignsForOneTotalWidgetDataset',
@@ -124,6 +128,7 @@ app.post(
   },
 );
 ///////////////////////////
+
 app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
@@ -285,6 +290,26 @@ app.post('/records/adsForAllCampaigns', authenticate, (req, res) => {
   }
   PythonShell.run(
     'create_ads_for_all_campaigns_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
+
+app.post('/records/campaignsForOneAd', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_analysis_scripts/',
+    args: [],
+  };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
+  PythonShell.run(
+    'create_campaigns_for_one_ad_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;

@@ -63,7 +63,10 @@ const AppRouter = () => (
         />
         // ads routes
         <PrivateRoute path="/ads" Component={ads_for_all_campaignsHome} />
-        <PrivateRoute path="/ad/:image" Component={campaigns_for_one_adHome} />
+        <PrivateRoute
+          path="/ad/:adImage"
+          Component={campaigns_for_one_adHome}
+        />
         // offers routes
         <PrivateRoute path="/offers" Component={offers_for_all_campaignsHome} />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route

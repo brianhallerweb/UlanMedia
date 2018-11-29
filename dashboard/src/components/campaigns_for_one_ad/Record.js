@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.image = this.props.ad.image;
+    this.name = this.props.ad.name;
     this.clicks = this.props.ad.clicks;
     this.cost = this.props.ad.cost;
     this.revenue = this.props.ad.revenue;
@@ -21,17 +21,19 @@ class Record extends Component {
     return (
       <tr>
         <td>
-	    {this.image}
+          {this.name}
+          <div>
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/campaign/days/${this.vol_id}/`,
+                  pathname: `/test/`,
                 }}
                 target="_blank">
-                days
+                ads
               </Link>
             </div>
-	</td>
+          </div>
+        </td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>

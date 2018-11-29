@@ -13,7 +13,7 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Image</th>
+            <th>Name</th>
             <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
@@ -26,7 +26,7 @@ class Records extends Component {
         </thead>
         <tbody>
           {this.props.adsRecords.map(adRecord => (
-            <Record key={adRecord.image} ad={adRecord} />
+            <Record key={adRecord.mgid_id} ad={adRecord} />
           ))}
         </tbody>
       </table>

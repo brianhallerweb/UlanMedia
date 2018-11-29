@@ -21,19 +21,19 @@ class Record extends Component {
     return (
       <tr>
         <td>
-	    {this.image}
-	    <div>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/ad/${this.image}/`,
-                  }}
-                  target="_blank">
-                  ad 
-                </Link>
-              </div>
-	    </div>
-	</td>
+          {this.image}
+          <div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/ad/${this.image}/`,
+                }}
+                target="_blank">
+                campaigns
+              </Link>
+            </div>
+          </div>
+        </td>
         <td>{this.clicks}</td>
         <td>${this.cost.toFixed(2)}</td>
         <td>${this.revenue}</td>
