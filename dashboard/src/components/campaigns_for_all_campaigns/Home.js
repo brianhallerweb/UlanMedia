@@ -11,7 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dateRange: 'seven',
+      dateRange: 'thirty',
       precondition: 0.25,
       c1: true,
       c2: true,
@@ -114,6 +114,7 @@ class Home extends Component {
         <GlobalNavBar />
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
+          dateRange={this.state.dateRange}
           selectPrecondition={this.selectPrecondition.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
           precondition={this.state.precondition}

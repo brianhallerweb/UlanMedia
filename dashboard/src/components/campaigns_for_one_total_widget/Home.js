@@ -102,6 +102,7 @@ class Home extends Component {
         <Title ID={this.props.match.params.widgetID} />
         <GlobalNavBar />
         <NavBar
+          dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           selectPrecondition2={this.selectPrecondition2.bind(this)}

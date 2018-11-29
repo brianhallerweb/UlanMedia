@@ -16,9 +16,12 @@ class NavBar extends Component {
             e.preventDefault();
             this.props.submitForm();
           }}>
-          <DatesDropdown selectDateRange={this.props.selectDateRange} />
+          <DatesDropdown
+            selectDateRange={this.props.selectDateRange}
+            dateRange={this.props.dateRange}
+          />
           <p>
-            EPC greater than or equal to {' '}
+            EPC greater than or equal to{' '}
             <input
               type="number"
               name="quantity"
@@ -29,10 +32,7 @@ class NavBar extends Component {
               onChange={e => this.props.selectPrecondition(e.target.value)}
             />
           </p>
-          <input
-            type="submit"
-            value="Submit"
-          />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );

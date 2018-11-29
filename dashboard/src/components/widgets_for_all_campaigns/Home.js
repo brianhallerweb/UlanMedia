@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       widgetRecords: [],
-      dateRange: 'seven',
+      dateRange: 'thirty',
       precondition: 20,
       error: false,
       authenticated: true,
@@ -81,6 +81,7 @@ class Home extends Component {
         <Title name={this.props.match.params.name} />
         <GlobalNavBar />
         <NavBar
+          dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}

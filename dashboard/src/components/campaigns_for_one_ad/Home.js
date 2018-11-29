@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       adImage: this.props.match.params.adImage,
-      dateRange: 'seven',
+      dateRange: 'ninety',
       precondition: 0,
       error: false,
       authenticated: true,
@@ -102,6 +102,7 @@ class Home extends Component {
         <Title adImage={this.state.adImage} />
         <GlobalNavBar />
         <NavBar
+          dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           precondition={this.state.precondition}

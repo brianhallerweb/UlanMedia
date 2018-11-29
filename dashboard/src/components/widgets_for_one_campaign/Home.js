@@ -14,9 +14,9 @@ class Home extends Component {
       volid: this.props.match.params.volid,
       mgidid: this.props.match.params.mgidid,
       widgetRecords: [],
-      dateRange: 'seven',
+      dateRange: 'ninety',
       precondition: 2,
-      precondition2: "all",
+      precondition2: 'all',
       error: false,
       authenticated: true,
       loading: false,
@@ -83,7 +83,6 @@ class Home extends Component {
   }
 
   render() {
-	  console.log(this.state.precondition2)
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
@@ -91,6 +90,7 @@ class Home extends Component {
         <Title name={this.props.match.params.name} />
         <GlobalNavBar />
         <NavBar
+          dateRange={this.state.dateRange}
           datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
@@ -108,7 +108,7 @@ class Home extends Component {
           loading={this.state.loading}
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
-	  mgidid={this.state.mgidid}
+          mgidid={this.state.mgidid}
         />
       </div>
     );

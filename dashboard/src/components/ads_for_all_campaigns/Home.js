@@ -11,7 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dateRange: 'seven',
+      dateRange: 'ninety',
       precondition: 0,
       error: false,
       authenticated: true,
@@ -72,6 +72,7 @@ class Home extends Component {
         <Title />
         <GlobalNavBar />
         <NavBar
+          dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           precondition={this.state.precondition}
