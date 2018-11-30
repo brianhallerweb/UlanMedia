@@ -1,7 +1,6 @@
 //@format
 import React, {Component} from 'react';
 import DatesDropdown from './DatesDropdown';
-import ConditionCheckboxes from './ConditionCheckboxes';
 
 class NavBar extends Component {
   constructor(props) {
@@ -22,25 +21,18 @@ class NavBar extends Component {
             dateRange={this.props.dateRange}
           />
           <p>
-            Widget cost greater than{' '}
+            EPC greater than or equal to{' '}
             <input
               type="number"
               name="quantity"
               min="0"
-              max="100"
-              step="1"
+              max="1"
+              step=".01"
               value={this.props.precondition}
               onChange={e => this.props.selectPrecondition(e.target.value)}
             />
           </p>
-          <ConditionCheckboxes
-            toggleCondition={this.props.toggleCondition}
-            c1={this.props.c1}
-            c2={this.props.c2}
-            c3={this.props.c3}
-            c4={this.props.c4}
-          />
-          <input type="submit" value="submit" disabled={this.props.loading} />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );

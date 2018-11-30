@@ -6,8 +6,8 @@ import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import widgets_for_all_campaignsHome from '../components/widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
-import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
+import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
 import widgets_for_one_campaignHome from '../components/widgets_for_one_campaign/Home';
@@ -62,6 +62,10 @@ const AppRouter = () => (
           Component={campaigns_for_one_total_widgetHome}
         />
         // ads routes
+        <PrivateRoute
+          path="/ads/:volid/:name"
+          Component={ads_for_one_campaignHome}
+        />
         <PrivateRoute path="/ads" Component={ads_for_all_campaignsHome} />
         <PrivateRoute
           path="/ad/:adImage"

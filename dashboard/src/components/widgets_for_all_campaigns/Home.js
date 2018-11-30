@@ -18,7 +18,9 @@ class Home extends Component {
       authenticated: true,
       loading: false,
       c1: false,
-      c2: false,
+      c2: true,
+      c3: true,
+      c4: true,
     };
   }
 
@@ -48,6 +50,8 @@ class Home extends Component {
         precondition: this.state.precondition,
         c1: this.state.c1,
         c2: this.state.c2,
+        c3: this.state.c3,
+        c4: this.state.c4,
       }),
     })
       .then(res => {
@@ -88,6 +92,8 @@ class Home extends Component {
           precondition={this.state.precondition}
           c1={this.state.c1}
           c2={this.state.c2}
+          c3={this.state.c3}
+          c4={this.state.c4}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

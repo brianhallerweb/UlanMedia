@@ -94,13 +94,13 @@ if len(final_result.index) > 0:
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
-        summary["lead_cpa"] = summary["cost"] / summary["leads"]
+        summary["lead_cpa"] = round(summary["cost"] / summary["leads"], 2)
     else:
         summary["lead_cpa"] = 0 
     rows_with_sales = final_result[final_result["sales"] >= 1]
     number_of_rows_with_sales = len(rows_with_sales.index)
     if number_of_rows_with_sales > 0:
-        summary["sale_cpa"] = summary["cost"] / summary["sales"]
+        summary["sale_cpa"] = round(summary["cost"] / summary["sales"], 2)
     else:
         summary["sale_cpa"] = 0
     final_result = final_result.append(summary, ignore_index=True)

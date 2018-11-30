@@ -1,6 +1,6 @@
 //@format
 import React from 'react';
 
-const Title = () => <h3>ads for one campaign</h3>;
+const Title = ({name}) => <h3>ads for one campaign ({name})</h3>;
 
 export default Title;

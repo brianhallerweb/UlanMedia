@@ -45,6 +45,27 @@ app.delete('/records/users/logout', authenticate, (req, res) => {
 // these are the routes that create data sets
 // the others just create reports
 app.post(
+  '/records/createAdsForOneCampaignDataset',
+  authenticate,
+  (req, res) => {
+    const pythonOptions = {
+      pythonPath: '/usr/bin/python3',
+      pythonOptions: ['-u'],
+      scriptPath: '../../scripts/data_acquisition_scripts/',
+      args: [req.body.volID, req.body.dateRange],
+    };
+    PythonShell.run(
+      'create_ads_for_one_campaign_dataset.py',
+      pythonOptions,
+      (err, results) => {
+        if (err) throw err;
+        res.sendStatus(200);
+      },
+    );
+  },
+);
+
+app.post(
   '/records/createCampaignsForOneAdDataset',
   authenticate,
   (req, res) => {
@@ -128,6 +149,23 @@ app.post(
   },
 );
 ///////////////////////////
+//
+app.post('/records/adsForOneCampaign', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/data_analysis_scripts/',
+    args: [req.body.dateRange, req.body.volID, req.body.precondition],
+  };
+  PythonShell.run(
+    'create_ads_for_one_campaign_report.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
 
 app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
   const pythonOptions = {
