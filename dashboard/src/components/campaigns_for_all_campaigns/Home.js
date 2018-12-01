@@ -50,7 +50,7 @@ class Home extends Component {
 
   submitForm() {
     this.setState({loading: true});
-    fetch('/records/campaignsForAllCampaigns', {
+    fetch('/api/createCampaignsForAllCampaignsReport', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

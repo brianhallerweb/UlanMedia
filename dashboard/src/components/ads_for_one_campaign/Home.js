@@ -33,7 +33,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch(`/records/createAdsForOneCampaignDataset`, {
+    fetch(`/api/createAdsForOneCampaignDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ class Home extends Component {
         return res;
       })
       .then(() =>
-        fetch('/records/adsForOneCampaign', {
+        fetch('/api/createAdsForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

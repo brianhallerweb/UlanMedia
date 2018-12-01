@@ -16,7 +16,7 @@ class Login extends Component {
   submitForm() {
     const email = this.state.email.trim();
     const password = this.state.password.trim();
-    fetch('/records/users/login', {
+    fetch('/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

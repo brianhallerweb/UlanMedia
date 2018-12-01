@@ -25,7 +25,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     proxy: [
       {
-        context: ['/records/'],
+        context: ['/api/'],
         target: 'http://localhost:3000',
       },
     ],

@@ -39,7 +39,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch('/records/widgetsForAllCampaigns', {
+    fetch('/api/createWidgetsForAllCampaignsReport', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ from config.config import *
 import json
 
 
-def create_ads_for_all_campaigns_dataset(mgid_token, vol_token, date_range):
+def create_ads_for_all_campaigns_dataset(date_range):
 
     with open(f'/home/bsh/Documents/UlanMedia/data/ads/{date_range}_ads_dataset.json', 'r') as file:
         ads = json.load(file)

@@ -44,7 +44,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch('/records/widgetsForOneCampaign', {
+    fetch('/api/createWidgetsForOneCampaignReport', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

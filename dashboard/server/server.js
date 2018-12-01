@@ -1,360 +1,144 @@
 //@format
 require('../../config/config');
 require('./db/mongoose');
+
 const express = require('express');
 const app = express();
-const authenticate = require('./middleware/authenticate');
 const path = require('path');
 const bodyParser = require('body-parser');
 const {PythonShell} = require('python-shell');
+
+const login = require('./controllers/user_controllers/login');
+const logout = require('./controllers/user_controllers/logout');
+const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
+const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
+const createCampaignsForOneTotalWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_total_widget_dataset');
+const createCampaignsForOneParentWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_parent_widget_dataset');
+const createCampaignsForOneChildWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_child_widget_dataset');
+const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
+const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
+const createCampaignsForOneTotalWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_total_widget_report');
+const createCampaignsForOneParentWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_parent_widget_report');
+const createCampaignsForOneChildWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_child_widget_report');
+const createWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_widgets_for_one_campaign_report');
+const createWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_widgets_for_all_campaigns_report');
+const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
+const createCampaignsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_all_campaigns_report');
+const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
+const createCampaignsForOneAdReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_ad_report');
+
+const authenticate = require('./middleware/authenticate');
 const User = require('./models/user');
 
+///////////// Middleware /////////////////
 app.use(bodyParser.json());
+//---------------------------------------
 
-app.post('/records/users/login', (req, res) => {
-  // this conditional is my temporary way of validating the user password
-  // I don't know the correct way to validate so, for now, I am just
-  // checking that the password isn't too long.
-  if (req.body.password.length > 15) {
-    res.status(404).send('password too long');
-  } else {
-    User.findByCredentials(req.body.email, req.body.password)
-      .then(user => {
-        return user.generateAuthToken().then(token => {
-          res.header('x-auth', token).send(user);
-        });
-      })
-      .catch(err => {
-        res.status(500).send(err);
-      });
-  }
-});
+//////// User routes //////////////
+app.post('/api/users/login', login);
 
-app.delete('/records/users/logout', authenticate, (req, res) => {
-  req.user
-    .removeToken(req.token)
-    .then(() => {
-      res.status(200).send();
-    })
-    .catch(() => {
-      res.status(500).send();
-    });
-});
+app.delete('/api/users/logout', authenticate, logout);
+//---------------------------------------
 
-////////////////////////////
-// these are the routes that create data sets
-// the others just create reports
+/////// Data Acquisition Routes /////
 app.post(
-  '/records/createAdsForOneCampaignDataset',
+  '/api/createAdsForOneCampaignDataset',
   authenticate,
-  (req, res) => {
-    const pythonOptions = {
-      pythonPath: '/usr/bin/python3',
-      pythonOptions: ['-u'],
-      scriptPath: '../../scripts/data_acquisition_scripts/',
-      args: [req.body.volID, req.body.dateRange],
-    };
-    PythonShell.run(
-      'create_ads_for_one_campaign_dataset.py',
-      pythonOptions,
-      (err, results) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      },
-    );
-  },
+  createAdsForOneCampaignDataset,
 );
 
 app.post(
-  '/records/createCampaignsForOneAdDataset',
+  '/api/createAdsForAllCampaignsDataset',
   authenticate,
-  (req, res) => {
-    const pythonOptions = {
-      pythonPath: '/usr/bin/python3',
-      pythonOptions: ['-u'],
-      scriptPath: '../../scripts/data_acquisition_scripts/',
-      args: [req.body.adImage, req.body.dateRange],
-    };
-    PythonShell.run(
-      'create_campaigns_for_one_ad_dataset.py',
-      pythonOptions,
-      (err, results) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      },
-    );
-  },
+  createAdsForAllCampaignsDataset,
 );
 
 app.post(
-  '/records/createCampaignsForOneTotalWidgetDataset',
+  '/api/createCampaignsForOneAdDataset',
   authenticate,
-  (req, res) => {
-    const pythonOptions = {
-      pythonPath: '/usr/bin/python3',
-      pythonOptions: ['-u'],
-      scriptPath: '../../scripts/data_acquisition_scripts/',
-      args: [req.body.widgetID, req.body.dateRange],
-    };
-    PythonShell.run(
-      'create_campaigns_for_one_total_widget_dataset.py',
-      pythonOptions,
-      (err, results) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      },
-    );
-  },
+  createCampaignsForOneAdDataset,
 );
 
 app.post(
-  '/records/createCampaignsForOneParentWidgetDataset',
+  '/api/createCampaignsForOneTotalWidgetDataset',
   authenticate,
-  (req, res) => {
-    const pythonOptions = {
-      pythonPath: '/usr/bin/python3',
-      pythonOptions: ['-u'],
-      scriptPath: '../../scripts/data_acquisition_scripts/',
-      args: [req.body.widgetID, req.body.dateRange],
-    };
-    PythonShell.run(
-      'create_campaigns_for_one_parent_widget_dataset.py',
-      pythonOptions,
-      (err, results) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      },
-    );
-  },
+  createCampaignsForOneTotalWidgetDataset,
 );
 
 app.post(
-  '/records/createCampaignsForOneChildWidgetDataset',
+  '/api/createCampaignsForOneParentWidgetDataset',
   authenticate,
-  (req, res) => {
-    const pythonOptions = {
-      pythonPath: '/usr/bin/python3',
-      pythonOptions: ['-u'],
-      scriptPath: '../../scripts/data_acquisition_scripts/',
-      args: [req.body.widgetID, req.body.dateRange],
-    };
-    PythonShell.run(
-      'create_campaigns_for_one_child_widget_dataset.py',
-      pythonOptions,
-      (err, results) => {
-        if (err) throw err;
-        res.sendStatus(200);
-      },
-    );
-  },
+  createCampaignsForOneParentWidgetDataset,
 );
-///////////////////////////
-//
-app.post('/records/adsForOneCampaign', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [req.body.dateRange, req.body.volID, req.body.precondition],
-  };
-  PythonShell.run(
-    'create_ads_for_one_campaign_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
 
-app.post('/records/campaignsForOneTotalWidget', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.widgetID,
-      req.body.precondition,
-      req.body.precondition2,
-      req.body.c1,
-      req.body.c2,
-    ],
-  };
-  PythonShell.run(
-    'create_campaigns_for_one_total_widget_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createCampaignsForOneChildWidgetDataset',
+  authenticate,
+  createCampaignsForOneChildWidgetDataset,
+);
+//---------------------------------------
 
-app.post('/records/campaignsForOneParentWidget', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.widgetID,
-      req.body.precondition,
-      req.body.precondition2,
-      req.body.c1,
-      req.body.c2,
-    ],
-  };
-  PythonShell.run(
-    'create_campaigns_for_one_parent_widget_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+/////// Data Analysis Routes ///////////
+app.post(
+  '/api/createAdsForOneCampaignReport',
+  authenticate,
+  createAdsForOneCampaignReport,
+);
 
-app.post('/records/campaignsForOneChildWidget', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.widgetID,
-      req.body.precondition,
-      req.body.precondition2,
-      req.body.c1,
-      req.body.c2,
-    ],
-  };
-  PythonShell.run(
-    'create_campaigns_for_one_child_widget_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createCampaignsForOneTotalWidgetReport',
+  authenticate,
+  createCampaignsForOneTotalWidgetReport,
+);
 
-app.post('/records/widgetsForOneCampaign', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'create_widgets_for_one_campaign_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createCampaignsForOneParentWidgetReport',
+  authenticate,
+  createCampaignsForOneParentWidgetReport,
+);
 
-app.post('/records/widgetsForAllCampaigns', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'create_widgets_for_all_campaigns_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createCampaignsForOneChildWidgetReport',
+  authenticate,
+  createCampaignsForOneChildWidgetReport,
+);
 
-app.post('/records/daysForOneCampaign', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [req.body.volid],
-  };
-  PythonShell.run(
-    'create_days_for_one_campaign_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createWidgetsForOneCampaignReport',
+  authenticate,
+  createWidgetsForOneCampaignReport,
+);
 
-app.post('/records/campaignsForAllCampaigns', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'create_campaigns_for_all_campaigns_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createWidgetsForAllCampaignsReport',
+  authenticate,
+  createWidgetsForAllCampaignsReport,
+);
 
-app.post('/records/adsForAllCampaigns', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'create_ads_for_all_campaigns_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createDaysForOneCampaignReport',
+  authenticate,
+  createDaysForOneCampaignReport,
+);
 
-app.post('/records/campaignsForOneAd', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'create_campaigns_for_one_ad_report.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
+app.post(
+  '/api/createCampaignsForAllCampaignsReport',
+  authenticate,
+  createCampaignsForAllCampaignsReport,
+);
+
+app.post(
+  '/api/createAdsForAllCampaignsReport',
+  authenticate,
+  createAdsForAllCampaignsReport,
+);
+
+app.post(
+  '/api/createCampaignsForOneAdReport',
+  authenticate,
+  createCampaignsForOneAdReport,
+);
+//--------------------------------------------
 
 app.use(express.static('../public'));
 

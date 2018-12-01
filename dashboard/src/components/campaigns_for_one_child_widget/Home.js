@@ -43,7 +43,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch(`/records/createCampaignsForOneChildWidgetDataset`, {
+    fetch(`/api/createCampaignsForOneChildWidgetDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ class Home extends Component {
         return res;
       })
       .then(() =>
-        fetch(`/records/campaignsForOneChildWidget`, {
+        fetch(`/api/createCampaignsForOneChildWidgetReport`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

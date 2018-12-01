@@ -11,7 +11,7 @@ class Logout extends Component {
   }
 
   logout() {
-    fetch('/records/users/logout', {
+    fetch('/api/users/logout', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
