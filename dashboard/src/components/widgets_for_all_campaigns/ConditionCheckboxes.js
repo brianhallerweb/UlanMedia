@@ -36,7 +36,7 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2, c3, c4}) => {
           checked={c3}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>{'Widget leadCVR is less than 25% --- (leadCVR < .25)'}</span>
+        <span>{'Widget leadCVR is less than .25% --- (leadCVR < .25)'}</span>
       </div>
 
       <div>
