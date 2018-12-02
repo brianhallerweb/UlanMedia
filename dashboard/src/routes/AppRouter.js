@@ -37,10 +37,6 @@ const AppRouter = () => (
           Component={offers_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/campaign/ads/:volid"
-          Component={ads_for_one_campaignHome}
-        />
-        <PrivateRoute
           path="/campaign/widgets/:volid/:mgidid/:max_lead_cpa/:name"
           Component={widgets_for_one_campaignHome}
         />

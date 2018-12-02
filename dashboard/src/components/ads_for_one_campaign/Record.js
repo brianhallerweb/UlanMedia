@@ -20,7 +20,20 @@ class Record extends Component {
   render() {
     return (
       <tr>
-        <td>{this.image}</td>
+        <td>
+          {this.image}
+          <div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/ad/${this.image}/`,
+                }}
+                target="_blank">
+                campaigns
+              </Link>
+            </div>
+          </div>
+        </td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
