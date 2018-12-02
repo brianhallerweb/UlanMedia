@@ -6,6 +6,10 @@ from functions.misc.create_mgid_date_range import create_mgid_date_range
 from functions.misc.create_vol_date_range import create_vol_date_range
 import json
 import re
+import sys
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
+
 
 def add_yesterday_in_days_for_one_campaign_dataset(vol_token, mgid_token):
 
@@ -56,27 +60,49 @@ def add_yesterday_in_days_for_one_campaign_dataset(vol_token, mgid_token):
         # revenue
         # name
         # day
+
+    # Some of this code is complicated and going to be very difficult to
+    # understand. The reason for all the loops and conditionals is that if
+    # a campaign does not have any data for a particular day, voluum
+    # returns nothing rather than returning a response that says clicks=0,
+    # etc. That is why I had to create lists of campaigns with data and
+    # campaigns without data. 
+    campaigns_with_day_data = []
+    campaigns_without_day_data = []
+    day = ""
     for campaign in vol_response:
         vol_id = campaign["campaignId"]
-        # this conditional is necessary when old data from voluum returns
-        # a campaign that has been excluded from campaign sets. 
-        if vol_id in campaigns_lookup:
+        day = campaign["day"]
+        campaigns_with_day_data.append(vol_id)
+        # this conditional will exclude vol responses from campaigns that
+        # are no longer in campaign_sets.txt
+        if vol_id in daily_stats:
             mgid_id = str(campaigns_lookup[vol_id])
-        else:
-            break
-        
-        daily_stats[vol_id].append({"vol_id": vol_id,
-                "conversions": campaign["conversions"],
-                "revenue": campaign["revenue"],
-                "name": re.sub(r"^.* - ", "",campaign["campaignName"], count=1),
-                "day": campaign["day"],
-                "clicks": mgid_response[mgid_id]["clicks"],
-                "cost": mgid_response[mgid_id]["spent"],
-                    })
+            daily_stats[vol_id].append({"vol_id": vol_id,
+                    "conversions": campaign["conversions"],
+                    "revenue": campaign["revenue"],
+                    "name": re.sub(r"^.* - ", "",campaign["campaignName"], count=1),
+                    "day": campaign["day"],
+                    "clicks": mgid_response[mgid_id]["clicks"],
+                    "cost": mgid_response[mgid_id]["spent"],
+                        })
+    for campaign in daily_stats.keys():
+        if campaign not in campaigns_with_day_data:
+            campaigns_without_day_data.append(campaign)
+    for campaign in campaigns_without_day_data:
+        daily_stats[campaign].append({"vol_id": campaign,
+               "conversions": 0,
+               "revenue": 0,
+               "name": "",
+               "day": day,
+               "clicks": 0,
+               "cost": 0,
+                   })
 
     for campaign in days_for_one_campaign_dataset:
         # add daily stats for yesterday
-        days_for_one_campaign_dataset[campaign].insert(0, daily_stats[campaign] )
+        days_for_one_campaign_dataset[campaign].insert(0,
+                daily_stats[campaign][0] )
         # remove daily stats for 50 days ago
         days_for_one_campaign_dataset[campaign].pop()
 

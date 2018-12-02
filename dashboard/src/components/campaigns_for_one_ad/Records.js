@@ -13,7 +13,7 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Image</th>
+            <th>Campaign</th>
             <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
