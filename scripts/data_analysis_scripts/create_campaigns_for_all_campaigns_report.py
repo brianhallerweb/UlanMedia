@@ -56,6 +56,9 @@ for i in range(len(conditions_args)):
             "mgid_id", "revenue", "sales","vol_id", "lead_cpa", "sale_cpa",
             "profit"] )
 
+if final_result is None:
+    final_result = df
+
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["name"].str[4:]

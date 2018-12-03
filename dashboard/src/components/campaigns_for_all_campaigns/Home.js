@@ -89,22 +89,6 @@ class Home extends Component {
       .catch(err => console.log(err));
   }
 
-  //true enables submit button
-  //false disables submit button
-  isConditionSelected() {
-    if (
-      this.state.c1 ||
-      this.state.c2 ||
-      this.state.c3 ||
-      this.state.c4 ||
-      this.state.c5
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   render() {
     return (
       <div>
@@ -124,7 +108,6 @@ class Home extends Component {
           c4={this.state.c4}
           c5={this.state.c5}
           submitForm={this.submitForm.bind(this)}
-          isConditionSelected={this.isConditionSelected.bind(this)}
           loading={this.state.loading}
         />
         <Records

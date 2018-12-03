@@ -42,11 +42,7 @@ class NavBar extends Component {
             c4={this.props.c4}
             c5={this.props.c5}
           />
-          <input
-            type="submit"
-            value="Submit"
-            disabled={!this.props.isConditionSelected() || this.props.loading}
-          />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );

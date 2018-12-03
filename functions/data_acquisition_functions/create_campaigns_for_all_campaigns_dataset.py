@@ -5,6 +5,7 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.create_mgid_date_range import create_mgid_date_range
 import json
+import sys
 
 def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
@@ -31,11 +32,13 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
     # the campaign data is only collected for campains in campaign_sets.txt
     campaigns_data = []
     for row in campaign_sets:
-        mgid_campaign_id = str(row["mgid_id"])
-        vol_campaign_id = str(row["vol_id"])
-        campaign_name = str(row["name"])
-        max_lead_cpa = str(row["max_lead_cpa"])
-        max_sale_cpa = str(row["max_sale_cpa"])
+        mgid_campaign_id = row["mgid_id"]
+        vol_campaign_id = row["vol_id"]
+        campaign_name = row["name"]
+        # 12/03 I changed max lead cpa and max sale cpa to stay as integers
+        # rather than convert to string, as I had done before. 
+        max_lead_cpa = row["max_lead_cpa"]
+        max_sale_cpa = row["max_sale_cpa"]
         campaign_data = {}
         campaign_data["mgid_id"] = mgid_campaign_id
         campaign_data["vol_id"] = vol_campaign_id

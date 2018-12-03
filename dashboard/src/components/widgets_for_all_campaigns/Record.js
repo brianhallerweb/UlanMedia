@@ -22,7 +22,7 @@ class Record extends Component {
                   )}`,
                 }}
                 target="_blank">
-                total
+                campaigns
               </Link>
             </div>
 
@@ -35,18 +35,6 @@ class Record extends Component {
                 }}
                 target="_blank">
                 parent
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/child/${
-                    this.props.widgetRecord.widget_id
-                  }`,
-                }}
-                target="_blank">
-                child
               </Link>
             </div>
 
