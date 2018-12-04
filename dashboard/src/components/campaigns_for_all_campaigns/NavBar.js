@@ -26,7 +26,7 @@ class NavBar extends Component {
             <input
               type="number"
               name="quantity"
-              min=".25"
+              min="0"
               max="3"
               step=".25"
               value={this.props.precondition}
