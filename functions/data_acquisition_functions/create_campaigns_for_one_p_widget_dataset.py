@@ -10,25 +10,25 @@ from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
-def create_campaigns_for_one_total_widget_dataset(total_widget_id, date_range, output_name):
+def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, output_name):
     campaigns = get_campaign_sets()
 
     widget_data = [] 
 
     for campaign in campaigns:
-        with open(f'/home/bsh/Documents/UlanMedia/data/widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_widgets_for_one_campaign_dataset.json', 'r') as file:
+        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              data = json.load(file)
 
-        widget_ids_with_matching_total = []
+        widget_ids_with_matching_parent = []
         for widget_id in list(data.keys()):
-            if widget_id.startswith(total_widget_id):
-                widget_ids_with_matching_total.append(widget_id)
+            if widget_id.startswith(parent_widget_id):
+                widget_ids_with_matching_parent.append(widget_id)
 
-        total_widget_data = {}
-        for widget_id in widget_ids_with_matching_total:
-            if not total_widget_data:
-                total_widget_data = {
-                "widget_id": total_widget_id, 
+        parent_widget_data = {}
+        for widget_id in widget_ids_with_matching_parent:
+            if not parent_widget_data:
+                parent_widget_data = {
+                "widget_id": parent_widget_id, 
                 "vol_id": campaign["vol_id"],
                 "mgid_id": campaign["mgid_id"],
                 "name": campaign["name"],
@@ -43,18 +43,18 @@ def create_campaigns_for_one_total_widget_dataset(total_widget_id, date_range, o
                 "revenue": data[widget_id]["revenue"],
                 }
             else:
-                total_widget_data["clicks"] += data[widget_id]["clicks"]
-                total_widget_data["cost"] += data[widget_id]["cost"]
-                total_widget_data["sales"] += data[widget_id]["sales"]
-                total_widget_data["leads"] += data[widget_id]["leads"]
-                total_widget_data["revenue"] += data[widget_id]["revenue"]
+                parent_widget_data["clicks"] += data[widget_id]["clicks"]
+                parent_widget_data["cost"] += data[widget_id]["cost"]
+                parent_widget_data["sales"] += data[widget_id]["sales"]
+                parent_widget_data["leads"] += data[widget_id]["leads"]
+                parent_widget_data["revenue"] += data[widget_id]["revenue"]
 
-        if total_widget_data:
-            widget_data.append(total_widget_data)
+        if parent_widget_data:
+            widget_data.append(parent_widget_data)
             
     complete_widget_data = widget_data 
 
-    with open(f"../../data/campaigns_for_one_total_widget/{output_name}.json", "w") as file:
+    with open(f"../../data/campaigns_for_one_p_widget/{output_name}.json", "w") as file:
         json.dump(complete_widget_data, file)
 
     print(f"{output_name} created")

@@ -13,8 +13,9 @@ from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.create_mgid_date_range import create_mgid_date_range
 
 
-def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
+def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         campaign, days_ago, output_name):
+    # create mgid and vol dates
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
     vol_start_date = vol_dates[0]
     vol_end_date = vol_dates[1]
@@ -22,19 +23,18 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     mgid_start_date = mgid_dates[0]
     mgid_end_date = mgid_dates[1]
 
-    # extract needed campaign info
-    mgid_campaign_id = str(campaign["mgid_id"])
+    # extract needed campaign info from mgid and vol
+    mgid_campaign_id = campaign["mgid_id"]
     vol_campaign_id = campaign["vol_id"]
     max_lead_cpa = campaign["max_lead_cpa"] 
     max_sale_cpa = campaign["max_sale_cpa"] 
-
 
     # get clicks and costs for each widget from mgid
     mgid_widget_data = get_mgid_widget_clicks_and_costs_by_campaign(mgid_token,
             mgid_campaign_id, mgid_start_date,
             mgid_end_date)
 
-    # get conversion data for each widget from voluum
+    # get conversion data for each widget from vol
     vol_results = get_vol_widget_conversions_by_campaign(vol_token,
             vol_campaign_id, vol_start_date,
             vol_end_date)
@@ -45,6 +45,8 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
+
+    # regex for extracting parent widget id
     pattern = re.compile(r'\d*')
 
     # merge the data from mgid and voluum into one dictionary
@@ -65,16 +67,14 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             for key in vol_widget:
                 mgid_widget_data[widget_id][key] = vol_widget[key]
 
-        # 11/25 I changed this conditional to use parent widget id because
-        # excluded_widgets is a list of parent widget ids
+        # This regex on widget_id extracts the parent widget_id
+        # The reason for this extraction is that the white grey black
+        # lists, and excluded_list only include parent widget ids.
         if pattern.search(widget_id).group() not in excluded_widgets:
             mgid_widget_data[widget_id]['status'] = "included" 
         else:
             mgid_widget_data[widget_id]['status'] = "excluded" 
 
-        # This regex on widget_id extracts the parent widget_id
-        # The reason for this extraction is that the white grey black
-        # lists only include parent widget ids.
         if pattern.search(widget_id).group() in widget_whitelist:
             mgid_widget_data[widget_id]['global_status'] = "whitelist" 
         elif pattern.search(widget_id).group() in widget_greylist:
@@ -84,14 +84,9 @@ def create_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         else:
             mgid_widget_data[widget_id]['global_status'] = "not yet listed" 
 
- 
-
     complete_widget_data = mgid_widget_data
-    #complete_widget_data = []
-    #for widget in mgid_widget_data.values():
-    #    complete_widget_data.append(widget)
 
-    with open(f"../../data/widgets_for_one_campaign/{output_name}.json", "w") as file:
+    with open(f"../../data/p_and_c_widgets_for_one_campaign/{output_name}.json", "w") as file:
         json.dump(complete_widget_data, file)
 
     print(f"{output_name} created")

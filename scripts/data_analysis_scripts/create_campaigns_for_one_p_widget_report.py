@@ -6,12 +6,12 @@ import numpy as np
 date_range = sys.argv[1]
 widget_id = sys.argv[2]
 
-with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_total_widget/{widget_id}_{date_range}_campaigns_for_one_total_widget_dataset.json', 'r') as file:
+with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_p_widget/{widget_id}_{date_range}_campaigns_for_one_p_widget_dataset.json', 'r') as file:
      campaigns = json.load(file)
 
 df = pd.DataFrame(campaigns)
 
-# this condition handles the case where the total widget dataset is empty.
+# this condition handles the case where the parent widget dataset is empty.
 # The first time I noticed this possibility was when mike excluded a widget
 # from all campaigns. The next day, when the app created a dataset for
 # campaigns_for_one_parent/child_widget, that dataset was empty. 
