@@ -1,7 +1,7 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createCampaignsForOneParentWidgetDataset(req, res) {
+function createCampaignsForOnePWidgetDataset(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -9,7 +9,7 @@ function createCampaignsForOneParentWidgetDataset(req, res) {
     args: [req.body.widgetID, req.body.dateRange],
   };
   PythonShell.run(
-    'create_campaigns_for_one_parent_widget_dataset.py',
+    'create_campaigns_for_one_p_widget_dataset.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -18,4 +18,4 @@ function createCampaignsForOneParentWidgetDataset(req, res) {
   );
 }
 
-module.exports = createCampaignsForOneParentWidgetDataset;
+module.exports = createCampaignsForOnePWidgetDataset;

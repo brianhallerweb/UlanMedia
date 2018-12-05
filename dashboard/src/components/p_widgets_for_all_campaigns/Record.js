@@ -17,24 +17,12 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/widget/total/${this.props.widgetRecord.widget_id.match(
+                  pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
                   )}`,
                 }}
                 target="_blank">
                 campaigns
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/parent/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                parent
               </Link>
             </div>
 

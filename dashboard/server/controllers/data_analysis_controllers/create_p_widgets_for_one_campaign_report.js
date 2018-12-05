@@ -1,22 +1,18 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createCampaignsForOneTotalWidgetReport(req, res) {
+function createPWidgetsForOneCampaignReport(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.widgetID,
-      req.body.precondition,
-      req.body.precondition2,
-      req.body.c1,
-      req.body.c2,
-    ],
+    args: [],
   };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
   PythonShell.run(
-    'create_campaigns_for_one_total_widget_report.py',
+    'create_p_widgets_for_one_campaign_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -25,4 +21,4 @@ function createCampaignsForOneTotalWidgetReport(req, res) {
   );
 }
 
-module.exports = createCampaignsForOneTotalWidgetReport;
+module.exports = createPWidgetsForOneCampaignReport;

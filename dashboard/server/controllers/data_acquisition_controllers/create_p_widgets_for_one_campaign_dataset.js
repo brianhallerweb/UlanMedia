@@ -1,15 +1,15 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createCampaignsForOneTotalWidgetDataset(req, res) {
+function createPWidgetsForOneCampaignDataset(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.widgetID, req.body.dateRange],
+    args: [req.body.volID, req.body.dateRange],
   };
   PythonShell.run(
-    'create_campaigns_for_one_total_widget_dataset.py',
+    'create_p_widgets_for_one_campaign_dataset.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -18,4 +18,4 @@ function createCampaignsForOneTotalWidgetDataset(req, res) {
   );
 }
 
-module.exports = createCampaignsForOneTotalWidgetDataset;
+module.exports = createPWidgetsForOneCampaignDataset;

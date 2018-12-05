@@ -12,16 +12,15 @@ const login = require('./controllers/user_controllers/login');
 const logout = require('./controllers/user_controllers/logout');
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
-const createCampaignsForOneTotalWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_total_widget_dataset');
-const createCampaignsForOneParentWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_parent_widget_dataset');
+const createCampaignsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_p_widget_dataset');
 const createCampaignsForOneChildWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_child_widget_dataset');
+const createPWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_campaign_dataset');
 const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
-const createCampaignsForOneTotalWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_total_widget_report');
-const createCampaignsForOneParentWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_parent_widget_report');
+const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
 const createCampaignsForOneChildWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_child_widget_report');
-const createWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_widgets_for_one_campaign_report');
-const createWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_widgets_for_all_campaigns_report');
+const createPWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_one_campaign_report');
+const createPWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_all_campaigns_report');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
 const createCampaignsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_all_campaigns_report');
 const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
@@ -54,21 +53,21 @@ app.post(
 );
 
 app.post(
+  '/api/createPWidgetsForOneCampaignDataset',
+  authenticate,
+  createPWidgetsForOneCampaignDataset,
+);
+
+app.post(
   '/api/createCampaignsForOneAdDataset',
   authenticate,
   createCampaignsForOneAdDataset,
 );
 
 app.post(
-  '/api/createCampaignsForOneTotalWidgetDataset',
+  '/api/createCampaignsForOnePWidgetDataset',
   authenticate,
-  createCampaignsForOneTotalWidgetDataset,
-);
-
-app.post(
-  '/api/createCampaignsForOneParentWidgetDataset',
-  authenticate,
-  createCampaignsForOneParentWidgetDataset,
+  createCampaignsForOnePWidgetDataset,
 );
 
 app.post(
@@ -86,15 +85,9 @@ app.post(
 );
 
 app.post(
-  '/api/createCampaignsForOneTotalWidgetReport',
+  '/api/createCampaignsForOnePWidgetReport',
   authenticate,
-  createCampaignsForOneTotalWidgetReport,
-);
-
-app.post(
-  '/api/createCampaignsForOneParentWidgetReport',
-  authenticate,
-  createCampaignsForOneParentWidgetReport,
+  createCampaignsForOnePWidgetReport,
 );
 
 app.post(
@@ -104,15 +97,15 @@ app.post(
 );
 
 app.post(
-  '/api/createWidgetsForOneCampaignReport',
+  '/api/createPWidgetsForOneCampaignReport',
   authenticate,
-  createWidgetsForOneCampaignReport,
+  createPWidgetsForOneCampaignReport,
 );
 
 app.post(
-  '/api/createWidgetsForAllCampaignsReport',
+  '/api/createPWidgetsForAllCampaignsReport',
   authenticate,
-  createWidgetsForAllCampaignsReport,
+  createPWidgetsForAllCampaignsReport,
 );
 
 app.post(

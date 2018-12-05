@@ -11,10 +11,11 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      widgetID: this.props.match.params.widgetID,
+      volid: this.props.match.params.volid,
+      mgidid: this.props.match.params.mgidid,
       widgetRecords: [],
       dateRange: 'ninety',
-      precondition: 0,
+      precondition: 2,
       precondition2: 'all',
       error: false,
       authenticated: true,
@@ -43,14 +44,14 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch(`/api/createCampaignsForOneTotalWidgetDataset`, {
+    fetch(`/api/createPWidgetsForOneCampaignDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        widgetID: this.state.widgetID,
+        volID: this.state.volid,
         dateRange: this.state.dateRange,
       }),
     })
@@ -69,7 +70,7 @@ class Home extends Component {
         return res;
       })
       .then(() =>
-        fetch(`/api/createCampaignsForOneTotalWidgetReport`, {
+        fetch('/api/createPWidgetsForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
-            widgetID: this.state.widgetID,
+            volid: this.state.volid,
             precondition: this.state.precondition,
             precondition2: this.state.precondition2,
             c1: this.state.c1,
@@ -85,6 +86,20 @@ class Home extends Component {
           }),
         }),
       )
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(records => {
         let error;
@@ -99,10 +114,11 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title ID={this.props.match.params.widgetID} />
+        <Title name={this.props.match.params.name} />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
+          datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           selectPrecondition2={this.selectPrecondition2.bind(this)}
@@ -111,17 +127,15 @@ class Home extends Component {
           precondition2={this.state.precondition2}
           c1={this.state.c1}
           c2={this.state.c2}
-          loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
-        />
-        <p>
-          (this report may take up to 30 sec because it has to generate the data
-          before displaying the report)
-        </p>
-        <Records
-          error={this.state.error}
           loading={this.state.loading}
+          maxLeadCPA={this.props.match.params.max_lead_cpa}
+        />
+        <Records
+          loading={this.state.loading}
+          error={this.state.error}
           widgetRecords={this.state.widgetRecords}
+          mgidid={this.state.mgidid}
         />
       </div>
     );

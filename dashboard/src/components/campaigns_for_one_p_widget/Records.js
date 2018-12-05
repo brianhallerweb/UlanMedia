@@ -12,22 +12,23 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Widget ID</th>
+            <th>Campaign</th>
+            <th>P Widget</th>
             <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
             <th>Leads</th>
             <th>Lead CPA</th>
-            <th>Lead CVR</th>
             <th>Sales</th>
             <th>Sale CPA</th>
+            <th>Status</th>
             <th>Global Status</th>
           </tr>
         </thead>
         <tbody>
           {this.props.widgetRecords.map(widgetRecord => (
-            <Record key={widgetRecord.widget_id} widgetRecord={widgetRecord} />
+            <Record key={widgetRecord.mgid_id} widgetRecord={widgetRecord} />
           ))}
         </tbody>
       </table>

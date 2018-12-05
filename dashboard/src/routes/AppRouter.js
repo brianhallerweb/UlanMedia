@@ -4,16 +4,15 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
-import widgets_for_all_campaignsHome from '../components/widgets_for_all_campaigns/Home';
+import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
 import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
-import widgets_for_one_campaignHome from '../components/widgets_for_one_campaign/Home';
-import campaigns_for_one_parent_widgetHome from '../components/campaigns_for_one_parent_widget/Home';
+import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_campaign/Home';
+import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
 import campaigns_for_one_child_widgetHome from '../components/campaigns_for_one_child_widget/Home';
-import campaigns_for_one_total_widgetHome from '../components/campaigns_for_one_total_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import RedirectToCampaignsHome from '../components/RedirectToCampaignsHome';
 
@@ -37,25 +36,21 @@ const AppRouter = () => (
           Component={offers_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/campaign/widgets/:volid/:mgidid/:max_lead_cpa/:name"
-          Component={widgets_for_one_campaignHome}
+          path="/pwidgetsforonecampaign/:volid/:mgidid/:max_lead_cpa/:name"
+          Component={p_widgets_for_one_campaignHome}
         />
         // widgets routes
         <PrivateRoute
-          path="/widgets"
-          Component={widgets_for_all_campaignsHome}
+          path="/pwidgetsforallcampaigns"
+          Component={p_widgets_for_all_campaignsHome}
         />
         <PrivateRoute
-          path="/widget/parent/:widgetID"
-          Component={campaigns_for_one_parent_widgetHome}
+          path="/campaignsforonepwidget/:widgetID"
+          Component={campaigns_for_one_p_widgetHome}
         />
         <PrivateRoute
           path="/widget/child/:widgetID"
           Component={campaigns_for_one_child_widgetHome}
-        />
-        <PrivateRoute
-          path="/widget/total/:widgetID"
-          Component={campaigns_for_one_total_widgetHome}
         />
         // ads routes
         <PrivateRoute

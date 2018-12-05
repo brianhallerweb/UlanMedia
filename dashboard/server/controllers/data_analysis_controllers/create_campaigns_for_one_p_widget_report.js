@@ -1,7 +1,7 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createCampaignsForOneParentWidgetReport(req, res) {
+function createCampaignsForOnePWidgetReport(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -16,7 +16,7 @@ function createCampaignsForOneParentWidgetReport(req, res) {
     ],
   };
   PythonShell.run(
-    'create_campaigns_for_one_parent_widget_report.py',
+    'create_campaigns_for_one_p_widget_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -25,4 +25,4 @@ function createCampaignsForOneParentWidgetReport(req, res) {
   );
 }
 
-module.exports = createCampaignsForOneParentWidgetReport;
+module.exports = createCampaignsForOnePWidgetReport;

@@ -96,12 +96,12 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/campaign/widgets/${this.vol_id}/${this.mgid_id}/${
-                    this.max_lead_cpa
-                  }/${this.name}/`,
+                  pathname: `/pwidgetsforonecampaign/${this.vol_id}/${
+                    this.mgid_id
+                  }/${this.max_lead_cpa}/${this.name}/`,
                 }}
                 target="_blank">
-                widgets
+                p widgets
               </Link>
             </div>
             <div className="rowLink">

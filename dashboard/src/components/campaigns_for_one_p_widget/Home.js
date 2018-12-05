@@ -11,11 +11,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      volid: this.props.match.params.volid,
-      mgidid: this.props.match.params.mgidid,
+      widgetID: this.props.match.params.widgetID,
       widgetRecords: [],
       dateRange: 'ninety',
-      precondition: 2,
+      precondition: 0,
       precondition2: 'all',
       error: false,
       authenticated: true,
@@ -44,19 +43,15 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch('/api/createWidgetsForOneCampaignReport', {
+    fetch(`/api/createCampaignsForOnePWidgetDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
+        widgetID: this.state.widgetID,
         dateRange: this.state.dateRange,
-        volid: this.state.volid,
-        precondition: this.state.precondition,
-        precondition2: this.state.precondition2,
-        c1: this.state.c1,
-        c2: this.state.c2,
       }),
     })
       .then(res => {
@@ -73,6 +68,23 @@ class Home extends Component {
         }
         return res;
       })
+      .then(() =>
+        fetch(`/api/createCampaignsForOnePWidgetReport`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth': localStorage.getItem('token'),
+          },
+          body: JSON.stringify({
+            dateRange: this.state.dateRange,
+            widgetID: this.state.widgetID,
+            precondition: this.state.precondition,
+            precondition2: this.state.precondition2,
+            c1: this.state.c1,
+            c2: this.state.c2,
+          }),
+        }),
+      )
       .then(res => res.json())
       .then(records => {
         let error;
@@ -87,11 +99,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title name={this.props.match.params.name} />
+        <Title ID={this.props.match.params.widgetID} />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
-          datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
           selectPrecondition={this.selectPrecondition.bind(this)}
           selectPrecondition2={this.selectPrecondition2.bind(this)}
@@ -100,15 +111,17 @@ class Home extends Component {
           precondition2={this.state.precondition2}
           c1={this.state.c1}
           c2={this.state.c2}
+          loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
-          loading={this.state.loading}
-          maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
+        <p>
+          (this report may take up to 30 sec because it has to generate the data
+          before displaying the report)
+        </p>
         <Records
-          loading={this.state.loading}
           error={this.state.error}
+          loading={this.state.loading}
           widgetRecords={this.state.widgetRecords}
-          mgidid={this.state.mgidid}
         />
       </div>
     );

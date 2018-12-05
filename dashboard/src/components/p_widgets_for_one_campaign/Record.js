@@ -15,42 +15,6 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id}
           <div>
             <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/total/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                total
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/parent/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                parent
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/widget/child/${
-                    this.props.widgetRecord.widget_id
-                  }`,
-                }}
-                target="_blank">
-                child
-              </Link>
-            </div>
-
-            <div className="rowLink">
               <a
                 href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
                   this.props.mgidid
