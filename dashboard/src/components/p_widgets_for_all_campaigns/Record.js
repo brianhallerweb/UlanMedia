@@ -26,6 +26,20 @@ class Record extends Component {
               </Link>
             </div>
 
+            {this.props.widgetRecord.has_children && (
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                      /^\d*/,
+                    )}`,
+                  }}
+                  target="_blank">
+                  children
+                </Link>
+              </div>
+            )}
+
             <div className="rowLink">
               <a
                 href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=all&widgetIDs=${this.props.widgetRecord.widget_id.match(

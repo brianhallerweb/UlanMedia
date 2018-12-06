@@ -2,8 +2,7 @@ import json
 import re
 import sys
 
-# you are still working on this but it looks good to me.
-def create_c_widgets_for_one_p_widget_dataset(campaigns, date_range, p_widget):
+def create_c_widgets_for_one_p_widget_dataset(campaigns, p_widget, date_range):
     c_widgets_for_one_p_widget = {}
 
     for campaign in campaigns:
@@ -15,7 +14,7 @@ def create_c_widgets_for_one_p_widget_dataset(campaigns, date_range, p_widget):
         for widget in data:
            extracted_p_widget = pattern.search(widget).group()
            if extracted_p_widget != p_widget:
-               break;
+               continue;
            if widget in c_widgets_for_one_p_widget:
                c_widgets_for_one_p_widget[widget]["clicks"] += data[widget]["clicks"]
                c_widgets_for_one_p_widget[widget]["cost"] += data[widget]["cost"]
@@ -25,5 +24,5 @@ def create_c_widgets_for_one_p_widget_dataset(campaigns, date_range, p_widget):
            else:
                c_widgets_for_one_p_widget[widget] = data[widget]
 
-    with open(f"../../data/c_widgets_for_one_p_widget/{date_range}_{p_widget}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
+    with open(f"../../data/c_widgets_for_one_p_widget/{p_widget}_{date_range}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
         json.dump(c_widgets_for_one_p_widget, file)

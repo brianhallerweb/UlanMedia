@@ -23,5 +23,11 @@ def create_p_widgets_for_all_campaigns_dataset(campaigns, date_range):
                p_widgets_for_all_campaigns[parent_widget] = data[widget]
                p_widgets_for_all_campaigns[parent_widget]["widget_id"] = parent_widget
 
+           if widget is not parent_widget:
+               p_widgets_for_all_campaigns[parent_widget]["has_children"] = True
+           else:
+               p_widgets_for_all_campaigns[parent_widget]["has_children"] = False
+        
+
     with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)

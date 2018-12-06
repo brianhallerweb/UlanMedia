@@ -11,6 +11,7 @@ import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
 import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_campaign/Home';
+import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_widget/Home';
 import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
 import campaigns_for_one_child_widgetHome from '../components/campaigns_for_one_child_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
@@ -43,6 +44,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/pwidgetsforallcampaigns"
           Component={p_widgets_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/cwidgetsforonepwidget/:pWidgetID"
+          Component={c_widgets_for_one_p_widgetHome}
         />
         <PrivateRoute
           path="/campaignsforonepwidget/:widgetID"
