@@ -4,6 +4,9 @@ import re
 from datetime import datetime
 from functions.misc.send_email import send_email
 import sys
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
+
 
 def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
         end_date):
@@ -15,6 +18,18 @@ def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
         # them into widgets_data, which is a dictionary of widgets. So the end
         # result is a dictionary of accumulated conversion data for each widget for
         # the chosen period of time.
+        for conversion in response.json()["rows"]:
+            print("postback")
+            print(conversion["postbackTimestamp"])
+            print("visit")
+            print(conversion["visitTimestamp"])
+            print("type of conversion")
+            if conversion["transactionId"] == "account":
+                print("lead") 
+            elif conversion["transactionId"] == "deposit":
+                print("sale") 
+            print("#######################")
+        sys.exit()
         if response.json()["rows"] == []:
             return {} 
         response = response.json()["rows"]
@@ -33,16 +48,19 @@ def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
             elif conversion["transactionId"] == "deposit":
                 sale = 1
             if widget_id not in widgets_data:
-                widgets_data[widget_id] = {"widget_id": widget_id, "revenue":
-                        revenue, "leads": lead, "sales": sale, "referrer": []}
+                widgets_data[widget_id] = {"widget_id": widget_id,
+                        "revenue": revenue, 
+                        "leads": lead, 
+                        "sales": sale, 
+                        "referrer": []}
                 if referrer != []:
                     widgets_data[widget_id]["referrer"].append(referrer)
             elif widget_id in widgets_data:
-                widgets_data[widget_id] = {"widget_id": widget_id, "revenue":
-                        widgets_data[widget_id]["revenue"] + revenue, "leads":
-                        widgets_data[widget_id]["leads"] + lead, "sales":
-                        widgets_data[widget_id]["sales"] + sale, "referrer":
-                        widgets_data[widget_id]["referrer"]} 
+                widgets_data[widget_id] = {"widget_id": widget_id,
+                        "revenue": widgets_data[widget_id]["revenue"] + revenue,
+                        "leads": widgets_data[widget_id]["leads"] + lead,
+                        "sales": widgets_data[widget_id]["sales"] + sale,
+                        "referrer": widgets_data[widget_id]["referrer"]} 
                 if referrer not in widgets_data[widget_id]["referrer"] and referrer != []:
                     widgets_data[widget_id]["referrer"].append(referrer)
         return widgets_data 

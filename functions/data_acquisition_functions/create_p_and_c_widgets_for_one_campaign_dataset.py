@@ -60,6 +60,7 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         if widget_id not in vol_results:
             mgid_widget_data[widget_id]['revenue'] = 0.0 
             mgid_widget_data[widget_id]['leads'] = 0 
+            # why is sales 0.0 and not just 0
             mgid_widget_data[widget_id]['sales'] = 0.0 
             mgid_widget_data[widget_id]['referrer'] = [] 
         else:

@@ -35,9 +35,6 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         mgid_campaign_id = row["mgid_id"]
         vol_campaign_id = row["vol_id"]
         campaign_name = row["name"]
-        # 12/03 I changed max lead cpa and max sale cpa to stay as integers
-        # rather than convert to string, as I had done before.I don't expect
-        # that change to cause any problems.
         max_lead_cpa = row["max_lead_cpa"]
         max_sale_cpa = row["max_sale_cpa"]
         campaign_data = {}
