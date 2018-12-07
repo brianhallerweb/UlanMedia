@@ -6,7 +6,7 @@ import numpy as np
 p_widget_id = sys.argv[1]
 # p_widget_id = "5493425"
 date_range = sys.argv[2]
-date_range = "ninety"
+# date_range = "ninety"
 
 with open(f'/home/bsh/Documents/UlanMedia/data/c_widgets_for_one_p_widget/{p_widget_id}_{date_range}_c_widgets_for_one_p_widget_dataset.json', 'r') as file:
      data = json.load(file)

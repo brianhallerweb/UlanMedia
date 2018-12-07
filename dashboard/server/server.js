@@ -13,12 +13,14 @@ const logout = require('./controllers/user_controllers/logout');
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
 const createCampaignsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_p_widget_dataset');
+const createCampaignsForOneCWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_c_widget_dataset');
 const createCampaignsForOneChildWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_child_widget_dataset');
 const createPWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_campaign_dataset');
 const createCWidgetsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_p_widget_dataset');
 const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
 const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
+const createCampaignsForOneCWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_c_widget_report');
 const createCampaignsForOneChildWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_child_widget_report');
 const createPWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_one_campaign_report');
 const createCWidgetsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_one_p_widget_report');
@@ -67,6 +69,12 @@ app.post(
 );
 
 app.post(
+  '/api/createCWidgetsForOneCWidgetDataset',
+  authenticate,
+  createCWidgetsForOnePWidgetDataset,
+);
+
+app.post(
   '/api/createCampaignsForOneAdDataset',
   authenticate,
   createCampaignsForOneAdDataset,
@@ -76,6 +84,12 @@ app.post(
   '/api/createCampaignsForOnePWidgetDataset',
   authenticate,
   createCampaignsForOnePWidgetDataset,
+);
+
+app.post(
+  '/api/createCampaignsForOneCWidgetDataset',
+  authenticate,
+  createCampaignsForOneCWidgetDataset,
 );
 
 app.post(
@@ -96,6 +110,12 @@ app.post(
   '/api/createCampaignsForOnePWidgetReport',
   authenticate,
   createCampaignsForOnePWidgetReport,
+);
+
+app.post(
+  '/api/createCampaignsForOneCWidgetReport',
+  authenticate,
+  createCampaignsForOneCWidgetReport,
 );
 
 app.post(

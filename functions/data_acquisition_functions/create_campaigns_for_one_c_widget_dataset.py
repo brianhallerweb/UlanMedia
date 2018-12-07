@@ -1,14 +1,7 @@
-from datetime import datetime, timedelta
 from config.config import *
 import json
 import sys
-from functions.data_acquisition_functions.get_mgid_widget_clicks_and_costs_by_campaign import get_mgid_widget_clicks_and_costs_by_campaign
-from functions.data_acquisition_functions.get_vol_widget_conversions_by_campaign import get_vol_widget_conversions_by_campaign
-from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_campaign_sets import get_campaign_sets
-from functions.misc.get_whitelist import get_whitelist
-from functions.misc.get_greylist import get_greylist
-from functions.misc.get_blacklist import get_blacklist
 
 def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_name):
     campaigns = get_campaign_sets()
@@ -16,20 +9,13 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_na
     widget_data = [] 
 
     for campaign in campaigns:
-        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+        vol_id = campaign["vol_id"]
+        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              data = json.load(file)
 
-       # I am here, why can't a match a c widget id with a widget in any of the
-       # p and c widgets for one campaigns. If the c widget exists, it must be
-       # in some campaign. That c widget ultimately came from p and c widgets
-       # for one campaign. Here I am looping through all the p and c widgets
-       # for one campaigns, so I should be able to find it. My data is a day or
-       # so old so maybe that is the problem? Start by updating your data. 
         c_widget_data = {}
-        for widget in data.keys():
-
+        for widget in data:
             if widget == c_widget_id:
-                print("here")
                 c_widget_data = {
                 "widget_id": widget, 
                 "vol_id": campaign["vol_id"],
