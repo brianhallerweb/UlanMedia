@@ -22,7 +22,7 @@ class NavBar extends Component {
             dateRange={this.props.dateRange}
           />
           <p>
-            Campaign lost more than{' '}
+            Campaign cost is more than{' '}
             <input
               type="number"
               name="quantity"

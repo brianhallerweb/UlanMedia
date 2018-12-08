@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'thirty',
-      precondition: 0.25,
+      precondition: 0,
       c1: true,
       c2: true,
       c3: true,
