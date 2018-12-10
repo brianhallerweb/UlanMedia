@@ -78,8 +78,8 @@ class Record extends Component {
                   target="_blank"
                   href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
-                  )}&list=blacklist`}>
-                  black
+                  )}&list=greylist`}>
+                  grey
                 </a>
               </div>
               <div className="rowLink">
@@ -87,8 +87,8 @@ class Record extends Component {
                   target="_blank"
                   href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
-                  )}&list=greylist`}>
-                  grey
+                  )}&list=blacklist`}>
+                  black
                 </a>
               </div>
             </div>

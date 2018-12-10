@@ -27,17 +27,33 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
     # get a new version of the campaign_sets text file that Mike regularly edits
     campaign_sets = get_campaign_sets() 
 
-    # create an array of dicts where each dict is a campaign
+    # create an dictionary to hold data and metadata
+    # the metadata is for request dates
+    # the data is an array of dicts where each dict is a campaign
     # the stats in each campaign come from both mgid and voluum
     # the campaign data is only collected for campains in campaign_sets.txt
-    campaigns_data = []
+    
+    campaigns_data = {"metadata": {"mgid_start_date": mgid_start_date,
+                                   "mgid_end_date": mgid_end_date, 
+                                   "vol_start_date": vol_start_date,
+                                   "vol_end_date": vol_end_date,},
+                      "data": []
+                      }
     for row in campaign_sets:
+        # extract the data out of a single campaign 
         mgid_campaign_id = row["mgid_id"]
         vol_campaign_id = row["vol_id"]
         campaign_name = row["name"]
         max_lead_cpa = row["max_lead_cpa"]
         max_sale_cpa = row["max_sale_cpa"]
+
+        # create an empty dict to hold the final data for a single campaign
         campaign_data = {}
+
+        # fill in the single campaign data
+        # some data comes from campaigns_sets.txt
+        # some data comes from mgid
+        # some data comes from vol
         campaign_data["mgid_id"] = mgid_campaign_id
         campaign_data["vol_id"] = vol_campaign_id
         campaign_data["name"] = campaign_name
@@ -54,7 +70,7 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
             campaign_data["leads"] = 0
             campaign_data["sales"] = 0
             campaign_data["revenue"] = 0
-        campaigns_data.append(campaign_data)
+        campaigns_data["data"].append(campaign_data)
 
 
     with open(f"../../data/campaigns_for_all_campaigns/{output_name}.json", "w") as file:

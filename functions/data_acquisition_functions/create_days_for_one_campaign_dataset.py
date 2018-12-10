@@ -116,5 +116,5 @@ def create_days_for_one_campaign_dataset(vol_token, mgid_token, days_ago,
     # create a json file
     with open(f"../../data/days_for_one_campaign/{output_name}.json", "w") as file:
           json.dump(daily_stats, file)
-    print(f"{output_name} created")
 
+    print(f"{output_name} created")

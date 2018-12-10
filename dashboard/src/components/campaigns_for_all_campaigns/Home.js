@@ -12,6 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'thirty',
+      requestDates: '',
       precondition: 0,
       c1: true,
       c2: true,
@@ -84,7 +85,14 @@ class Home extends Component {
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({campaignsRecords: records, error, loading: false});
+        this.setState({
+          campaignsRecords: records,
+          error,
+          loading: false,
+          requestDates: `${records[0]['vol_start_date']} to ${
+            records[0]['vol_end_date']
+          }`,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -110,6 +118,7 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           error={this.state.error}
           loading={this.state.loading}

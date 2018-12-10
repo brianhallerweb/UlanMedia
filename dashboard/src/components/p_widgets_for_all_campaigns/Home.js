@@ -19,9 +19,13 @@ class Home extends Component {
       authenticated: true,
       loading: false,
       c1: false,
-      c2: true,
-      c3: true,
-      c4: true,
+      c2: false,
+      c3: false,
+      c4: false,
+      c5: true,
+      c6: true,
+      c7: true,
+      c8: true,
     };
   }
 
@@ -86,6 +90,10 @@ class Home extends Component {
             c2: this.state.c2,
             c3: this.state.c3,
             c4: this.state.c4,
+            c5: this.state.c5,
+            c6: this.state.c6,
+            c7: this.state.c7,
+            c8: this.state.c8,
           }),
         }),
       )
@@ -129,6 +137,10 @@ class Home extends Component {
           c2={this.state.c2}
           c3={this.state.c3}
           c4={this.state.c4}
+          c5={this.state.c5}
+          c6={this.state.c6}
+          c7={this.state.c7}
+          c8={this.state.c8}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

@@ -38,24 +38,35 @@ df["profit"] = round(df["revenue"] - df["cost"], 2)
 # cost greater than x 
 df = df[df["cost"] > float(sys.argv[2])]
 
-# global status is "not yet listed"
+# global status conditions 
 c1 = df["global_status"] == "not yet listed"
 result1 = df[c1]
-
-# leads is 0
-c2 = df["leads"] == 0
+c2 = df["global_status"] == "whitelist"
 result2 = df[c2]
-
-# Widget leadCVR is less than 0.25%
-c3 = df["lead_cvr"] < .25
+c3 = df["global_status"] == "greylist"
 result3 = df[c3]
-
-# Widget saleCPA is more than $500
-c4 = np.isfinite(df["sale_cpa"]) & df["sale_cpa"] > 500
+c4 = df["global_status"] == "blacklist"
 result4 = df[c4]
 
-conditions_args = [sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6]]
-conditions_dfs = [result1, result2, result3, result4]
+# leads is 0
+c5 = df["leads"] == 0
+result5 = df[c5]
+
+# Widget leadCVR is less than 0.25%
+c6 = df["lead_cvr"] < .25
+result6 = df[c6]
+
+# Widget saleCPA is more than $500
+c7 = np.isfinite(df["sale_cpa"]) & df["sale_cpa"] > 500
+result7 = df[c7]
+
+# Widget lost more than $200
+c8 = df["profit"] < -200
+result8 = df[c8]
+
+conditions_args = [sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6],
+        sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6, result7, result8]
 
 final_result = None 
 for i in range(len(conditions_args)):
