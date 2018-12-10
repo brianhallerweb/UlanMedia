@@ -22,7 +22,7 @@ class Record extends Component {
               `,
             }}
             target="_blank">
-            campaigns
+            p widgets
           </Link>
         </div>
 
