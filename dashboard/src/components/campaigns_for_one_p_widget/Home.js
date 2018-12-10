@@ -14,6 +14,7 @@ class Home extends Component {
       widgetID: this.props.match.params.widgetID,
       widgetRecords: [],
       dateRange: 'ninety',
+      requestDates: '',
       precondition: 0,
       precondition2: 'all',
       error: false,
@@ -68,6 +69,14 @@ class Home extends Component {
         }
         return res;
       })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          requestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
+      })
       .then(() =>
         fetch(`/api/createCampaignsForOnePWidgetReport`, {
           method: 'POST',
@@ -114,10 +123,7 @@ class Home extends Component {
           loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
         />
-        <p>
-          (this report may take up to 30 sec because it has to generate the data
-          before displaying the report)
-        </p>
+        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           error={this.state.error}
           loading={this.state.loading}

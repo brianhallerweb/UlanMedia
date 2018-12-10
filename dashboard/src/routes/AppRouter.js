@@ -58,10 +58,6 @@ const AppRouter = () => (
           path="/campaignsforonecwidget/:widgetID"
           Component={campaigns_for_one_c_widgetHome}
         />
-        <PrivateRoute
-          path="/widget/child/:widgetID"
-          Component={campaigns_for_one_child_widgetHome}
-        />
         // ads routes
         <PrivateRoute
           path="/ads/:volid/:name"

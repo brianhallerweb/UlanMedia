@@ -13,7 +13,7 @@ function createCampaignsForOneCWidgetDataset(req, res) {
     pythonOptions,
     (err, results) => {
       if (err) throw err;
-      res.sendStatus(200);
+      res.send(results[0]);
     },
   );
 }

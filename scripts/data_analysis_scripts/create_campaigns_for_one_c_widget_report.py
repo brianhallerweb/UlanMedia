@@ -6,11 +6,10 @@ import numpy as np
 date_range = sys.argv[1]
 c_widget_id = sys.argv[2]
 
-# c_widget_id = "5658751s406217030"
-# date_range = "thirty"
-
 with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_c_widget/{c_widget_id}_{date_range}_campaigns_for_one_c_widget_dataset.json', 'r') as file:
-     campaigns = json.load(file)
+     json_file = json.load(file)
+
+campaigns = json_file["data"]
 
 df = pd.DataFrame(campaigns)
 
@@ -53,7 +52,8 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="outer",
         on=["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa",
+            "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
+            "max_lead_cpa", "lead_cpa", "max_sale_cpa",
             "sale_cpa", "profit", "status", "global_status"]
             )
 
@@ -85,7 +85,8 @@ if len(final_result.index) > 0:
     final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id","name", "mgid_id", "lead_cpa", "sale_cpa", "profit",
+            "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
+            "max_lead_cpa", "lead_cpa", "max_sale_cpa", "sale_cpa", "profit",
             "status", "global_status"]].to_dict("records"))
 
 print(json_final_result)

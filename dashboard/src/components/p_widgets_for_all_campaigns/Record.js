@@ -35,7 +35,7 @@ class Record extends Component {
                     )}`,
                   }}
                   target="_blank">
-                  children
+                  c widgets
                 </Link>
               </div>
             )}

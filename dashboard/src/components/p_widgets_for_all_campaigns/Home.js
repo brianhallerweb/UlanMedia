@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       widgetRecords: [],
       dateRange: 'thirty',
+      requestDates: '',
       precondition: 20,
       error: false,
       authenticated: true,
@@ -39,7 +40,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true});
 
-    fetch('/api/createPWidgetsForAllCampaignsReport', {
+    fetch('/api/createPWidgetsForAllCampaignsDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,13 +48,47 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        precondition: this.state.precondition,
-        c1: this.state.c1,
-        c2: this.state.c2,
-        c3: this.state.c3,
-        c4: this.state.c4,
       }),
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          requestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
+      })
+      .then(() =>
+        fetch('/api/createPWidgetsForAllCampaignsReport', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth': localStorage.getItem('token'),
+          },
+          body: JSON.stringify({
+            dateRange: this.state.dateRange,
+            precondition: this.state.precondition,
+            c1: this.state.c1,
+            c2: this.state.c2,
+            c3: this.state.c3,
+            c4: this.state.c4,
+          }),
+        }),
+      )
       .then(res => {
         if (!res.ok) {
           if (res.status == 401) {
@@ -97,6 +132,7 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           error={this.state.error}
           loading={this.state.loading}

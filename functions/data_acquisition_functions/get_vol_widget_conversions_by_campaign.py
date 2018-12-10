@@ -1,11 +1,9 @@
 from config.config import *
 import requests
 import re
+import sys
 from datetime import datetime
 from functions.misc.send_email import send_email
-import sys
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
 
 
 def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
@@ -18,24 +16,23 @@ def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,
         # them into widgets_data, which is a dictionary of widgets. So the end
         # result is a dictionary of accumulated conversion data for each widget for
         # the chosen period of time.
-        for conversion in response.json()["rows"]:
-            print("postback")
-            print(conversion["postbackTimestamp"])
-            print("visit")
-            print(conversion["visitTimestamp"])
-            print("type of conversion")
-            if conversion["transactionId"] == "account":
-                print("lead") 
-            elif conversion["transactionId"] == "deposit":
-                print("sale") 
-            print("#######################")
-        sys.exit()
+
         if response.json()["rows"] == []:
             return {} 
         response = response.json()["rows"]
         widgets_data = {}
         domain_pattern = re.compile("^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)")
         for conversion in response:
+            # conversions are returned based on their conversion date
+            # (postbackTimestamp). That means that if the conversion date is
+            # within the specified date range, the conversion will be included.
+            # However, we only want to include conversions that have the
+            # original click in the specified date range. This conditional
+            # check that the orignal click is within with specified date range. 
+            start_date_in_date_format = datetime.strptime(start_date, "%Y-%m-%d")
+            click_date_in_date_format = datetime.strptime(conversion["visitTimestamp"], "%Y-%m-%d %I:%M:%S %p")
+            if start_date_in_date_format > click_date_in_date_format:
+                continue
             widget_id = conversion["customVariable1"]
             revenue = conversion["revenue"]
             referrer = domain_pattern.findall(conversion["referrerDomain"])

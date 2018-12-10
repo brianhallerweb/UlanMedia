@@ -4,5 +4,5 @@ import sys
 vol_id = sys.argv[1]
 date_range = sys.argv[2]
 
-create_p_widgets_for_one_campaign_dataset(vol_id, date_range)
+print(create_p_widgets_for_one_campaign_dataset(vol_id, date_range))
 

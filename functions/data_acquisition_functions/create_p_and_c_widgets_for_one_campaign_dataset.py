@@ -24,23 +24,34 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     mgid_end_date = mgid_dates[1]
 
     # extract needed campaign info from mgid and vol
-    mgid_campaign_id = campaign["mgid_id"]
-    vol_campaign_id = campaign["vol_id"]
+    mgid_id = campaign["mgid_id"]
+    vol_id = campaign["vol_id"]
     max_lead_cpa = campaign["max_lead_cpa"] 
     max_sale_cpa = campaign["max_sale_cpa"] 
 
+    # create a metadata dictionary
+    metadata = {"mgid_start_date": mgid_start_date,
+            "mgid_end_date": mgid_end_date,
+            "vol_start_date": vol_start_date,
+            "vol_end_date": vol_end_date,
+            "mgid_id": campaign["mgid_id"],
+            "vol_id": campaign["vol_id"],
+            "max_lead_cpa": campaign["max_lead_cpa"],
+            "max_sale_cpa": campaign["max_sale_cpa"] 
+             }
+
     # get clicks and costs for each widget from mgid
     mgid_widget_data = get_mgid_widget_clicks_and_costs_by_campaign(mgid_token,
-            mgid_campaign_id, mgid_start_date,
+            mgid_id, mgid_start_date,
             mgid_end_date)
 
     # get conversion data for each widget from vol
     vol_results = get_vol_widget_conversions_by_campaign(vol_token,
-            vol_campaign_id, vol_start_date,
+            vol_id, vol_start_date,
             vol_end_date)
     
     excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
-            mgid_campaign_id)
+            mgid_id)
 
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
@@ -51,16 +62,17 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
 
     # merge the data from mgid and voluum into one dictionary
     for widget_id in mgid_widget_data:
-        # add max_lead_cpa and max_sale_cpa to each widget
-        # this is used in the data_analysis script for filtering
-        # purposes
-        mgid_widget_data[widget_id]['max_lead_cpa'] = max_lead_cpa 
-        mgid_widget_data[widget_id]['max_sale_cpa'] = max_sale_cpa 
+        # add vol_id, mgid_id, max_lead_cpa and max_sale_cpa to each widget
+        # I'm going to try to put this in the metadata section
+        # mgid_widget_data[widget_id]['mgid_id'] = max_lead_cpa 
+        # mgid_widget_data[widget_id]['vol_id'] = max_lead_cpa 
+        # mgid_widget_data[widget_id]['max_sale_cpa'] = max_sale_cpa 
+        # mgid_widget_data[widget_id]['max_sale_cpa'] = max_sale_cpa 
 
         if widget_id not in vol_results:
             mgid_widget_data[widget_id]['revenue'] = 0.0 
             mgid_widget_data[widget_id]['leads'] = 0 
-            # why is sales 0.0 and not just 0
+            # 12/7/18 why is sales 0.0 and not just 0
             mgid_widget_data[widget_id]['sales'] = 0.0 
             mgid_widget_data[widget_id]['referrer'] = [] 
         else:
@@ -87,8 +99,11 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
 
     complete_widget_data = mgid_widget_data
 
+    complete_data_ready_for_json = {"metadata": metadata,
+            "data": complete_widget_data}
+
     with open(f"../../data/p_and_c_widgets_for_one_campaign/{output_name}.json", "w") as file:
-        json.dump(complete_widget_data, file)
+        json.dump(complete_data_ready_for_json, file)
 
     print(f"{output_name} created")
 

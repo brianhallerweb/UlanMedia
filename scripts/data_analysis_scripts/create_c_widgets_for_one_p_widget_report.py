@@ -9,7 +9,9 @@ date_range = sys.argv[2]
 # date_range = "ninety"
 
 with open(f'/home/bsh/Documents/UlanMedia/data/c_widgets_for_one_p_widget/{p_widget_id}_{date_range}_c_widgets_for_one_p_widget_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+
+data = json_file["data"]
 
 # The json data is a dictionary with each widget id as a key and each widget as
 # a value. The loop below simple takes the values and puts them into a list. 

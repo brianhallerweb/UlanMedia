@@ -17,8 +17,7 @@ for campaign in campaigns:
     vol_id = campaign["vol_id"]
 
     # yesterday
-    # days_ago = 1
-    days_ago = 7
+    days_ago = 1
     create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             campaign, days_ago,
             f"{vol_id}_yesterday_p_and_c_widgets_for_one_campaign_dataset")

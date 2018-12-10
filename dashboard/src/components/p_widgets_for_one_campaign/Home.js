@@ -14,8 +14,9 @@ class Home extends Component {
       volid: this.props.match.params.volid,
       mgidid: this.props.match.params.mgidid,
       widgetRecords: [],
+      requestDates: '',
       dateRange: 'ninety',
-      precondition: 2,
+      precondition: 0,
       precondition2: 'all',
       error: false,
       authenticated: true,
@@ -68,6 +69,14 @@ class Home extends Component {
           throw Error(res.statusText);
         }
         return res;
+      })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          requestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
       })
       .then(() =>
         fetch('/api/createPWidgetsForOneCampaignReport', {
@@ -131,6 +140,7 @@ class Home extends Component {
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
+        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           loading={this.state.loading}
           error={this.state.error}

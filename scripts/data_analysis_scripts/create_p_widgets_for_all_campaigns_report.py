@@ -7,7 +7,8 @@ import math
 date_range = sys.argv[1]
 
 with open(f'/home/bsh/Documents/UlanMedia/data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+data = json_file["data"]     
 
 # The json data is a dictionary with each widget id as a key and each widget
 # (summary of all campaigns) as 

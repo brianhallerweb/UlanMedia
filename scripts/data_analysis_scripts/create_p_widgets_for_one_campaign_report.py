@@ -7,7 +7,11 @@ date_range = sys.argv[1]
 volid = sys.argv[2]
 
 with open(f'/home/bsh/Documents/UlanMedia/data/p_widgets_for_one_campaign/{volid}_{date_range}_p_widgets_for_one_campaign_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+
+metadata = json_file["metadata"]
+data = json_file["data"]
+
 
 # The json data is a dictionary with each widget id as a key and each widget as
 # a value. The loop below simple takes the values and puts them into a list. 
@@ -34,7 +38,7 @@ df["profit"] = round(df["revenue"] - df["cost"], 2)
 
 # widget lost more than x times max_lead_cpa
 # This is the precondition for every report
-df = df[df["profit"] < -1 * float(sys.argv[3]) * df["max_lead_cpa"]]
+df = df[df["profit"] < -1 * float(sys.argv[3]) * metadata["max_lead_cpa"]]
 
 # filter on widget status
 # This is the precondition2 for every report

@@ -12,6 +12,21 @@ class Record extends Component {
     return (
       <div>
         <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/pwidgetsforonecampaign/${
+                this.props.widgetRecord.vol_id
+              }/${this.props.widgetRecord.mgid_id}/${
+                this.props.widgetRecord.max_lead_cpa
+              }/${this.props.widgetRecord.name}/
+              `,
+            }}
+            target="_blank">
+            p widgets
+          </Link>
+        </div>
+
+        <div className="rowLink">
           <a
             href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
               this.props.widgetRecord.mgid_id
