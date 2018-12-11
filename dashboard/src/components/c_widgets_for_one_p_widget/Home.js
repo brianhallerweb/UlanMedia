@@ -14,7 +14,8 @@ class Home extends Component {
       pWidgetID: this.props.match.params.pWidgetID,
       widgetRecords: [],
       dateRange: 'ninety',
-      requestDates: '',
+      volRequestDates: '',
+      mgidRequestDates: '',
       precondition: 0,
       precondition2: 'all',
       error: false,
@@ -72,8 +73,11 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
-          requestDates: `${file.metadata.vol_start_date} to ${
+          volRequestDates: `${file.metadata.vol_start_date} to ${
             file.metadata.vol_end_date
+          }`,
+          mgidRequestDates: `${file.metadata.mgid_start_date} to ${
+            file.metadata.mgid_end_date
           }`,
         });
       })
@@ -122,7 +126,11 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title pWidgetID={this.state.pWidgetID} />
+        <Title
+          pWidgetID={this.state.pWidgetID}
+          mgidRequestDates={this.state.mgidRequestDates}
+          volRequestDates={this.state.volRequestDates}
+        />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
@@ -139,7 +147,6 @@ class Home extends Component {
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
-        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           loading={this.state.loading}
           error={this.state.error}

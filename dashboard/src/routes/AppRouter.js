@@ -14,7 +14,6 @@ import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_camp
 import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_widget/Home';
 import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
 import campaigns_for_one_c_widgetHome from '../components/campaigns_for_one_c_widget/Home';
-import campaigns_for_one_child_widgetHome from '../components/campaigns_for_one_child_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import RedirectToCampaignsHome from '../components/RedirectToCampaignsHome';
 

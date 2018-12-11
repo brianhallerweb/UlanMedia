@@ -13,7 +13,8 @@ class Home extends Component {
     this.state = {
       widgetRecords: [],
       dateRange: 'thirty',
-      requestDates: '',
+      mgidRequestDates: '',
+      volRequestDates: '',
       precondition: 20,
       error: false,
       authenticated: true,
@@ -71,7 +72,10 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
-          requestDates: `${file.metadata.vol_start_date} to ${
+          mgidRequestDates: `${file.metadata.mgid_start_date} to ${
+            file.metadata.mgid_end_date
+          }`,
+          volRequestDates: `${file.metadata.vol_start_date} to ${
             file.metadata.vol_end_date
           }`,
         });
@@ -125,7 +129,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title name={this.props.match.params.name} />
+        <Title
+          mgidRequestDates={this.state.mgidRequestDates}
+          volRequestDates={this.state.volRequestDates}
+        />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
@@ -144,7 +151,6 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
-        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           error={this.state.error}
           loading={this.state.loading}
