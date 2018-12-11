@@ -130,7 +130,7 @@ class Home extends Component {
         <Title
           name={this.props.match.params.name}
           mgidRequestDates={this.state.mgidRequestDates}
-          volRequestDates={this.stat.volRequestDates}
+          volRequestDates={this.state.volRequestDates}
         />
         <GlobalNavBar />
         <NavBar
