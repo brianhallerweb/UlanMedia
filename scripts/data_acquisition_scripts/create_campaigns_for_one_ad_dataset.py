@@ -5,6 +5,6 @@ import sys
 ad_image = sys.argv[1]
 date_range = sys.argv[2]
 
-create_campaigns_for_one_ad_dataset(ad_image, date_range)
+print(create_campaigns_for_one_ad_dataset(ad_image, date_range))
 
 

@@ -8,7 +8,8 @@ from functions.data_acquisition_functions.get_vol_ads_data import get_vol_ads_da
 from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.get_campaign_sets import get_campaign_sets
 
-def combine_mgid_vol_ads_data(mgid_token, vol_token,date_range, mgid_data, vol_data):
+def combine_mgid_vol_ads_data(mgid_token, vol_token, date_range,vol_start_date,
+        vol_end_date, mgid_data, vol_data):
     # This function will combine the mgid ads data and the vol ads data. Both
     # data sets are dictionaries with keys = ad id and values = dictionaries of
     # data for that ad id. 
@@ -21,14 +22,18 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token,date_range, mgid_data, vol_d
         campaign["name"]]
     
     # combining mgid and vol by ad_id
-    combined_ads = {}
+    combined_ads = {"metadata": {"vol_start_date": vol_start_date,
+                                 "vol_end_date": vol_end_date
+                                 },
+                    "data": {}
+                   }
     for ad in mgid_data.values():
         ad_id = ad["ad_id"]  
         mgid_id = ad["mgid_id"]
-        if int(mgid_id) not in campaigns_lookup:
+        if mgid_id not in campaigns_lookup:
             continue
-        vol_id = campaigns_lookup[int(mgid_id)][0]
-        name = campaigns_lookup[int(mgid_id)][1]
+        vol_id = campaigns_lookup[mgid_id][0]
+        name = campaigns_lookup[mgid_id][1]
         if ad_id in vol_data:
             vol_ad_data = vol_data[ad_id]
             ad["vol_id"] = vol_id
@@ -44,7 +49,7 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token,date_range, mgid_data, vol_d
             ad["cost"] = 0
             ad["conversions"] = 0
             ad["revenue"] = 0 
-        combined_ads[ad_id] = ad 
+        combined_ads["data"][ad_id] = ad 
 
     with open(f"../../data/ads/{date_range}_ads_dataset.json", "w") as file:
         json.dump(combined_ads, file)

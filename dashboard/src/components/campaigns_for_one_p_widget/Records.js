@@ -27,8 +27,11 @@ class Records extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.widgetRecords.map(widgetRecord => (
-            <Record key={widgetRecord.mgid_id} widgetRecord={widgetRecord} />
+          {this.props.campaignRecords.map(campaignRecord => (
+            <Record
+              key={campaignRecord.mgid_id}
+              campaignRecord={campaignRecord}
+            />
           ))}
         </tbody>
       </table>
@@ -40,7 +43,7 @@ class Records extends Component {
       <div>
         {this.props.loading && <div className="loader" />}
         {this.props.error && <p>no widgets found</p>}
-        {this.props.widgetRecords.length > 0 &&
+        {this.props.campaignRecords.length > 0 &&
           !this.props.loading &&
           this.createTable()}
       </div>

@@ -25,8 +25,8 @@ class Records extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.adsRecords.map(adRecord => (
-            <Record key={adRecord.mgid_id} ad={adRecord} />
+          {this.props.campaignRecords.map(campaignRecord => (
+            <Record key={campaignRecord.mgid_id} campaign={campaignRecord} />
           ))}
         </tbody>
       </table>
@@ -38,7 +38,7 @@ class Records extends Component {
       <div>
         {this.props.loading && <div className="loader" />}
         {this.props.error && !this.props.loading && <p>no ads found</p>}
-        {this.props.adsRecords.length > 0 &&
+        {this.props.campaignRecords.length > 0 &&
           !this.props.loading &&
           this.createTable()}
       </div>

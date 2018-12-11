@@ -13,11 +13,12 @@ class Home extends Component {
     this.state = {
       adImage: this.props.match.params.adImage,
       dateRange: 'ninety',
+      volRequestDates: '',
       precondition: 0,
       error: false,
       authenticated: true,
       loading: false,
-      adsRecords: [],
+      campaignRecords: [],
     };
   }
 
@@ -30,7 +31,7 @@ class Home extends Component {
   }
 
   submitForm() {
-    this.setState({loading: true});
+    this.setState({loading: true, volRequestDates: ''});
 
     fetch(`/api/createCampaignsForOneAdDataset`, {
       method: 'POST',
@@ -56,6 +57,14 @@ class Home extends Component {
           throw Error(res.statusText);
         }
         return res;
+      })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          volRequestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
       })
       .then(() =>
         fetch('/api/createCampaignsForOneAdReport', {
@@ -89,7 +98,7 @@ class Home extends Component {
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({adsRecords: records, error, loading: false});
+        this.setState({campaignRecords: records, error, loading: false});
       })
       .catch(err => console.log(err));
   }
@@ -99,7 +108,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title adImage={this.state.adImage} />
+        <Title
+          adImage={this.state.adImage}
+          volRequestDates={this.state.volRequestDates}
+        />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
@@ -112,7 +124,7 @@ class Home extends Component {
         <Records
           error={this.state.error}
           loading={this.state.loading}
-          adsRecords={this.state.adsRecords}
+          campaignRecords={this.state.campaignRecords}
         />
       </div>
     );

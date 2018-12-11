@@ -14,6 +14,7 @@ class Home extends Component {
       volID: this.props.match.params.volid,
       name: this.props.match.params.name,
       dateRange: 'ninety',
+      volRequestDates: '',
       precondition: 0,
       error: false,
       authenticated: true,
@@ -31,7 +32,7 @@ class Home extends Component {
   }
 
   submitForm() {
-    this.setState({loading: true});
+    this.setState({loading: true, volRequestDates: ''});
 
     fetch(`/api/createAdsForOneCampaignDataset`, {
       method: 'POST',
@@ -57,6 +58,14 @@ class Home extends Component {
           throw Error(res.statusText);
         }
         return res;
+      })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          volRequestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
       })
       .then(() =>
         fetch('/api/createAdsForOneCampaignReport', {
@@ -100,7 +109,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title name={this.state.name} />
+        <Title
+          name={this.state.name}
+          volRequestDates={this.state.volRequestDates}
+        />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}

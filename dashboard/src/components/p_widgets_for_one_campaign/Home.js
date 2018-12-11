@@ -44,7 +44,7 @@ class Home extends Component {
   }
 
   submitForm() {
-    this.setState({loading: true});
+    this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
     fetch(`/api/createPWidgetsForOneCampaignDataset`, {
       method: 'POST',

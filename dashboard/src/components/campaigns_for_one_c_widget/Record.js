@@ -15,10 +15,10 @@ class Record extends Component {
           <Link
             to={{
               pathname: `/pwidgetsforonecampaign/${
-                this.props.widgetRecord.vol_id
-              }/${this.props.widgetRecord.mgid_id}/${
-                this.props.widgetRecord.max_lead_cpa
-              }/${this.props.widgetRecord.name}/
+                this.props.campaignRecord.vol_id
+              }/${this.props.campaignRecord.mgid_id}/${
+                this.props.campaignRecord.max_lead_cpa
+              }/${this.props.campaignRecord.name}/
               `,
             }}
             target="_blank">
@@ -29,8 +29,8 @@ class Record extends Component {
         <div className="rowLink">
           <a
             href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
-              this.props.widgetRecord.mgid_id
-            }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+              this.props.campaignRecord.mgid_id
+            }&widgetIDs=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
             target="_blank">
             exclude
           </a>
@@ -39,8 +39,8 @@ class Record extends Component {
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-              this.props.widgetRecord.mgid_id
-            }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+              this.props.campaignRecord.mgid_id
+            }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
             target="_blank">
             mgid
           </a>
@@ -53,20 +53,20 @@ class Record extends Component {
     return (
       <tr>
         <td>
-          {this.props.widgetRecord.name}
-          {this.props.widgetRecord.name !== 'summary' && this.addRowLinks()}
+          {this.props.campaignRecord.name}
+          {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
-        <td>{this.props.widgetRecord.widget_id}</td>
-        <td>{this.props.widgetRecord.clicks}</td>
-        <td>${this.props.widgetRecord.cost}</td>
-        <td>${this.props.widgetRecord.revenue}</td>
-        <td>${this.props.widgetRecord.profit}</td>
-        <td>{this.props.widgetRecord.leads}</td>
-        <td>${this.props.widgetRecord.lead_cpa}</td>
-        <td>{this.props.widgetRecord.sales}</td>
-        <td>${this.props.widgetRecord.sale_cpa}</td>
-        <td>{this.props.widgetRecord.status}</td>
-        <td>{this.props.widgetRecord.global_status}</td>
+        <td>{this.props.campaignRecord.widget_id}</td>
+        <td>{this.props.campaignRecord.clicks}</td>
+        <td>${this.props.campaignRecord.cost}</td>
+        <td>${this.props.campaignRecord.revenue}</td>
+        <td>${this.props.campaignRecord.profit}</td>
+        <td>{this.props.campaignRecord.leads}</td>
+        <td>${this.props.campaignRecord.lead_cpa}</td>
+        <td>{this.props.campaignRecord.sales}</td>
+        <td>${this.props.campaignRecord.sale_cpa}</td>
+        <td>{this.props.campaignRecord.status}</td>
+        <td>{this.props.campaignRecord.global_status}</td>
       </tr>
     );
   }

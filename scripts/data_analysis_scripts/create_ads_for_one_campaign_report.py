@@ -9,7 +9,9 @@ vol_id = sys.argv[2]
 # vol_id = "4ff2a836-8790-4e07-9f45-98b05c3a393a"
 
 with open(f'/home/bsh/Documents/UlanMedia/data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+
+data = json_file["data"]
 
 df = pd.DataFrame(data)
 df["cost"] = round(df["cost"], 2)

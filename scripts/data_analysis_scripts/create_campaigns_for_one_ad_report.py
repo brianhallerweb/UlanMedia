@@ -5,11 +5,11 @@ import numpy as np
 
 date_range = sys.argv[1]
 ad_image = sys.argv[2]
-# date_range = "seven"
-# ad_image = "cashpile3.jpg"
 
 with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_ad/{ad_image}_{date_range}_campaigns_for_one_ad_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+
+data = json_file["data"]
 
 df = pd.DataFrame(data)
 df["cost"] = round(df["cost"], 2)

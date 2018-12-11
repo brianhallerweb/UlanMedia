@@ -5,16 +5,16 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.name = this.props.ad.name;
-    this.volID = this.props.ad.vol_id;
-    this.clicks = this.props.ad.clicks;
-    this.cost = this.props.ad.cost;
-    this.revenue = this.props.ad.revenue;
-    this.profit = this.props.ad.profit;
-    this.conversions = this.props.ad.conversions;
-    this.cvr = this.props.ad.cvr;
-    this.epc = this.props.ad.epc;
-    this.cpa = this.props.ad.cpa;
+    this.name = this.props.campaign.name;
+    this.volID = this.props.campaign.vol_id;
+    this.clicks = this.props.campaign.clicks;
+    this.cost = this.props.campaign.cost;
+    this.revenue = this.props.campaign.revenue;
+    this.profit = this.props.campaign.profit;
+    this.conversions = this.props.campaign.conversions;
+    this.cvr = this.props.campaign.cvr;
+    this.epc = this.props.campaign.epc;
+    this.cpa = this.props.campaign.cpa;
     this.state = {};
   }
 
@@ -27,10 +27,10 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/ads/${this.volID}/${this.name}/`,
+                  pathname: `/campaigns/${this.volID}/${this.name}/`,
                 }}
                 target="_blank">
-                ads
+                campaigns
               </Link>
             </div>
           </div>

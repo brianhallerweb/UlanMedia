@@ -1,3 +1,4 @@
+import sys
 from config.config import *
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
@@ -20,7 +21,8 @@ vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezo
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
-combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, mgid_data, vol_data)
+combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
+        vol_end_date, mgid_data, vol_data)
 
 print(f"{date_range} ads dataset created")
 
@@ -35,7 +37,8 @@ vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezo
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
-combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, mgid_data, vol_data)
+combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
+        vol_end_date, mgid_data, vol_data)
 
 print(f"{date_range} ads dataset created")
 
@@ -50,7 +53,8 @@ vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezo
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
-combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, mgid_data, vol_data)
+combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
+        vol_end_date, mgid_data, vol_data)
 
 print(f"{date_range} ads dataset created")
 
@@ -65,7 +69,8 @@ vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezo
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
-combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, mgid_data, vol_data)
+combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
+        vol_end_date, mgid_data, vol_data)
 
 print(f"{date_range} ads dataset created")
 
@@ -80,6 +85,7 @@ vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezo
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
-combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, mgid_data, vol_data)
+combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
+        vol_end_date, mgid_data, vol_data)
 
 print(f"{date_range} ads dataset created")

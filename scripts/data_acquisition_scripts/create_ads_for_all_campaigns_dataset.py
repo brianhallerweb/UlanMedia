@@ -4,6 +4,6 @@ import sys
 
 date_range = sys.argv[1]
 
-create_ads_for_all_campaigns_dataset(date_range)
+print(create_ads_for_all_campaigns_dataset(date_range))
 
 

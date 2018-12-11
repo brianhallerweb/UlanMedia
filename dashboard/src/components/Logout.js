@@ -34,7 +34,9 @@ class Logout extends Component {
   render() {
     return (
       <div>
-        <button style={{fontSize: 10}} onClick={this.logout.bind(this)}>
+        <button
+          style={{fontSize: 10, marginBottom: 10}}
+          onClick={this.logout.bind(this)}>
           logout
         </button>
 

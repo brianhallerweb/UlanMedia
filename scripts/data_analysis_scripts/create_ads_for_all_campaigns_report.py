@@ -6,7 +6,9 @@ import numpy as np
 date_range = sys.argv[1]
 
 with open(f'/home/bsh/Documents/UlanMedia/data/ads_for_all_campaigns/{date_range}_ads_for_all_campaigns_dataset.json', 'r') as file:
-     data = json.load(file)
+     json_file = json.load(file)
+
+data = json_file["data"]
 
 # The json data is a dictionary with each ad_image name as a key and the
 # summaries of each ad stats as a value

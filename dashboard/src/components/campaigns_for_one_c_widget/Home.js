@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       widgetID: this.props.match.params.widgetID,
-      widgetRecords: [],
+      campaignRecords: [],
       dateRange: 'ninety',
       volRequestDates: '',
       mgidRequestDates: '',
@@ -43,7 +43,7 @@ class Home extends Component {
   }
 
   submitForm() {
-    this.setState({loading: true});
+    this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
     fetch(`/api/createCampaignsForOneCWidgetDataset`, {
       method: 'POST',
@@ -102,13 +102,12 @@ class Home extends Component {
       .then(records => {
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({widgetRecords: records, error, loading: false});
+        this.setState({campaignRecords: records, error, loading: false});
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.widgetRecords);
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
@@ -140,7 +139,7 @@ class Home extends Component {
         <Records
           error={this.state.error}
           loading={this.state.loading}
-          widgetRecords={this.state.widgetRecords}
+          campaignRecords={this.state.campaignRecords}
         />
       </div>
     );
