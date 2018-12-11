@@ -14,6 +14,8 @@ data = json_file["data"]
 df = pd.DataFrame(data)
 df["vol_start_date"] = metadata["vol_start_date"]
 df["vol_end_date"] = metadata["vol_end_date"]
+df["mgid_start_date"] = metadata["mgid_start_date"]
+df["mgid_end_date"] = metadata["mgid_end_date"]
 df["max_lead_cpa"] = df["max_lead_cpa"].astype("float64")
 df["max_sale_cpa"] = df["max_sale_cpa"].astype("float64")
 df["epc"] = round(df["revenue"] / df["clicks"], 3)
@@ -56,7 +58,7 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="outer",
-        on=["vol_start_date", "vol_end_date","mgid_id", "vol_id", "name", "clicks",
+        on=["mgid_start_date", "mgid_end_date","vol_start_date", "vol_end_date","mgid_id", "vol_id", "name", "clicks",
             "cost", "imps", "leads", "max_lead_cpa", "max_sale_cpa", "epc",
             "mgid_id", "revenue", "sales","vol_id", "lead_cpa", "sale_cpa",
             "profit"] )
@@ -68,7 +70,7 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["name"].str[4:]
 final_result = final_result.sort_values("sort")
-json_final_result = json.dumps(final_result[["vol_start_date", "vol_end_date","mgid_id", "vol_id", "name", "clicks", "cost", "revenue", "profit", "leads","lead_cpa", "max_lead_cpa", "sales", "sale_cpa","max_sale_cpa","epc"]].to_dict("records"))
+json_final_result = json.dumps(final_result[["mgid_start_date", "mgid_end_date","vol_start_date", "vol_end_date", "vol_id", "name", "clicks", "cost", "revenue", "profit", "leads","lead_cpa", "max_lead_cpa", "sales", "sale_cpa","max_sale_cpa","epc"]].to_dict("records"))
 
 print(json_final_result)
 

@@ -57,11 +57,11 @@ c6 = df["lead_cvr"] < .25
 result6 = df[c6]
 
 # Widget saleCPA is more than $500
-c7 = np.isfinite(df["sale_cpa"]) & df["sale_cpa"] > 500
+c7 = np.isfinite(df["sale_cpa"]) & (df["sale_cpa"] > 500)
 result7 = df[c7]
 
-# Widget lost more than $200
-c8 = df["profit"] < -200
+# Widget lost more than $100
+c8 = df["profit"] < -100
 result8 = df[c8]
 
 conditions_args = [sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6],

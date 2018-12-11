@@ -12,7 +12,8 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'thirty',
-      requestDates: '',
+      volRequestDates: '',
+      mgidRequestDates: '',
       precondition: 0,
       c1: true,
       c2: true,
@@ -89,8 +90,11 @@ class Home extends Component {
           campaignsRecords: records,
           error,
           loading: false,
-          requestDates: `${records[0]['vol_start_date']} to ${
+          volRequestDates: `${records[0]['vol_start_date']} to ${
             records[0]['vol_end_date']
+          }`,
+          mgidRequestDates: `${records[0]['mgid_start_date']} to ${
+            records[0]['mgid_end_date']
           }`,
         });
       })
@@ -102,7 +106,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title />
+        <Title
+          volRequestDates={this.state.volRequestDates}
+          mgidRequestDates={this.state.mgidRequestDates}
+        />
         <GlobalNavBar />
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
@@ -118,7 +125,6 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
-        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           error={this.state.error}
           loading={this.state.loading}

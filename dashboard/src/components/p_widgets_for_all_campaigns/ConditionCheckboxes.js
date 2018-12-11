@@ -108,7 +108,7 @@ const ConditionCheckboxes = ({
           checked={c8}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>{'Widget lost more than $200 --- (profit < 200)'}</span>
+        <span>{'Widget lost more than $100 --- (profit < -100)'}</span>
       </div>
     </div>
   );
