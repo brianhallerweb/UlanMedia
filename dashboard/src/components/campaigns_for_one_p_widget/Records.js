@@ -13,7 +13,6 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Campaign</th>
-            <th>P Widget</th>
             <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
