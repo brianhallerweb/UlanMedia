@@ -28,7 +28,6 @@ df["cost"] = round(df["cost"], 2)
 
 # cost greater than x 
 df = df[df["cost"] > float(sys.argv[3])]
-#df = df[df["cost"] > 5]
 
 # filter on widget status
 # This is the precondition2 for every report

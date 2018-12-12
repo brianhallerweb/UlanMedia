@@ -13,19 +13,21 @@ class Record extends Component {
       <tr>
         <td>
           {this.props.widgetRecord.widget_id}
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforonecwidget/${
-                    this.props.widgetRecord.widget_id
-                  }/`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
+          {this.props.widgetRecord.widget_id !== 'summary' && (
+            <div>
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/campaignsforonecwidget/${
+                      this.props.widgetRecord.widget_id
+                    }/`,
+                  }}
+                  target="_blank">
+                  campaigns
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
