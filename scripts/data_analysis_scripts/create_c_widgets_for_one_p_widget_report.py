@@ -23,6 +23,7 @@ if len(df.index) == 0:
     print(json.dumps({}))
     sys.exit()
 
+
 df["cost"] = round(df["cost"], 2)
 df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
@@ -30,7 +31,8 @@ df["profit"] = round(df["revenue"] - df["cost"], 2)
 
 # widget lost more than x times max_lead_cpa
 # This is the precondition for every report
-df = df[df["profit"] < -1 * float(sys.argv[3]) * df["max_lead_cpa"]]
+# df = df[df["profit"] < -1 * float(sys.argv[3]) * df["max_lead_cpa"]]
+df = df[df["profit"] < -1 * 0 * df["max_lead_cpa"]]
 
 
 # filter on widget status

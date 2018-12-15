@@ -3,4 +3,5 @@ cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python3 cre
 cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python3 add_yesterday_in_days_for_one_campaign_dataset.py
 cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python3 create_p_and_c_widgets_for_one_campaign_datasets.py
 cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
+cd /home/bsh/Documents/UlanMedia/scripts/data_acquisition_scripts && python3 create_offers_datasets.py
 

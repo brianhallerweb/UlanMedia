@@ -62,12 +62,6 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
 
     # merge the data from mgid and voluum into one dictionary
     for widget_id in mgid_widget_data:
-        # add vol_id, mgid_id, max_lead_cpa and max_sale_cpa to each widget
-        # I'm going to try to put this in the metadata section
-        # mgid_widget_data[widget_id]['mgid_id'] = max_lead_cpa 
-        # mgid_widget_data[widget_id]['vol_id'] = max_lead_cpa 
-        # mgid_widget_data[widget_id]['max_sale_cpa'] = max_sale_cpa 
-        # mgid_widget_data[widget_id]['max_sale_cpa'] = max_sale_cpa 
 
         if widget_id not in vol_results:
             mgid_widget_data[widget_id]['revenue'] = 0.0 

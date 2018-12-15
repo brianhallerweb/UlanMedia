@@ -49,9 +49,8 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                c_widgets_for_one_p_widget["data"][widget]["max_lead_cpa"] = metadata["max_lead_cpa"]
                c_widgets_for_one_p_widget["data"][widget]["max_sale_cpa"] = metadata["max_sale_cpa"]
 
-
     with open(f"../../data/c_widgets_for_one_p_widget/{p_widget}_{date_range}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
         json.dump(c_widgets_for_one_p_widget, file)
     
-    print(json.dumps(c_widgets_for_one_p_widget))
+    return json.dumps(c_widgets_for_one_p_widget)
 
