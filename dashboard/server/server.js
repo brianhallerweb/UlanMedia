@@ -12,6 +12,7 @@ const login = require('./controllers/user_controllers/login');
 const logout = require('./controllers/user_controllers/logout');
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
+const createCampaignsForOneOfferDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_offer_dataset');
 const createCampaignsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_p_widget_dataset');
 const createCampaignsForOneCWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_c_widget_dataset');
 const createPWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_campaign_dataset');
@@ -20,6 +21,7 @@ const createCWidgetsForOnePWidgetDataset = require('./controllers/data_acquisiti
 const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createOffersForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_campaigns_dataset');
 const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
+const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
 const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
 const createCampaignsForOneCWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_c_widget_report');
 const createPWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_one_campaign_report');
@@ -94,6 +96,12 @@ app.post(
 );
 
 app.post(
+  '/api/createCampaignsForOneOfferDataset',
+  authenticate,
+  createCampaignsForOneOfferDataset,
+);
+
+app.post(
   '/api/createCampaignsForOnePWidgetDataset',
   authenticate,
   createCampaignsForOnePWidgetDataset,
@@ -154,6 +162,12 @@ app.post(
   '/api/createCampaignsForAllCampaignsReport',
   authenticate,
   createCampaignsForAllCampaignsReport,
+);
+
+app.post(
+  '/api/createCampaignsForOneOfferReport',
+  authenticate,
+  createCampaignsForOneOfferReport,
 );
 
 app.post(

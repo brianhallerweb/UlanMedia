@@ -15,6 +15,7 @@ import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_wi
 import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
 import campaigns_for_one_c_widgetHome from '../components/campaigns_for_one_c_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
+import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/Home';
 import RedirectToCampaignsHome from '../components/RedirectToCampaignsHome';
 
 const AppRouter = () => (
@@ -52,6 +53,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/campaignsforonepwidget/:widgetID"
           Component={campaigns_for_one_p_widgetHome}
+        />
+        <PrivateRoute
+          path="/campaignsforoneoffer/:offerID"
+          Component={campaigns_for_one_offerHome}
         />
         <PrivateRoute
           path="/campaignsforonecwidget/:widgetID"

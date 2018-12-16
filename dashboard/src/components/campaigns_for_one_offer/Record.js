@@ -5,17 +5,16 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.offerID = this.props.offer.offerID;
-    this.offerFlow = this.props.offer.offerFlow;
-    this.offerName = this.props.offer.offerName;
-    this.clicks = this.props.offer.clicks;
-    this.cost = this.props.offer.cost;
-    this.revenue = this.props.offer.revenue;
-    this.profit = this.props.offer.profit;
-    this.conversions = this.props.offer.conversions;
-    this.cvr = this.props.offer.cvr;
-    this.epc = this.props.offer.epc;
-    this.cpa = this.props.offer.cpa;
+    this.campaignName = this.props.campaign.campaignName;
+    this.volID = this.props.campaign.campaignID;
+    this.clicks = this.props.campaign.clicks;
+    this.cost = this.props.campaign.cost;
+    this.revenue = this.props.campaign.revenue;
+    this.profit = this.props.campaign.profit;
+    this.conversions = this.props.campaign.conversions;
+    this.cvr = this.props.campaign.cvr;
+    this.epc = this.props.campaign.epc;
+    this.cpa = this.props.campaign.cpa;
     this.state = {};
   }
 
@@ -23,20 +22,19 @@ class Record extends Component {
     return (
       <tr>
         <td>
-          {this.offerFlow}
+          {this.campaignName}
           <div>
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/campaignsforoneoffer/${this.offerID}/`,
+                  pathname: `/offersforonecampaign/${this.volID}/`,
                 }}
                 target="_blank">
-                campaigns
+                offers
               </Link>
             </div>
           </div>
         </td>
-        <td>{this.offerName}</td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
