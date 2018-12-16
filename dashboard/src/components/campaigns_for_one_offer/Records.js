@@ -37,7 +37,7 @@ class Records extends Component {
     return (
       <div>
         {this.props.loading && <div className="loader" />}
-        {this.props.error && !this.props.loading && <p>no ads found</p>}
+        {this.props.error && !this.props.loading && <p>no campaigns found</p>}
         {this.props.campaignRecords.length > 0 &&
           !this.props.loading &&
           this.createTable()}
