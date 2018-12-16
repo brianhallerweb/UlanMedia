@@ -40,9 +40,6 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
                 offer_name = offer_string_parts[1]
                 offer_flow = offer_string_parts[2]
 
-            if offer_flow == "(bin: unitedKingdom - English)":
-                print(offer_name)
-            
             if offerID not in offers["data"][campaignID]:
                 offers["data"][campaignID][offerID] = {"clicks": row["visits"],
                                                "cost": row["cost"],
