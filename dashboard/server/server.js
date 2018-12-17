@@ -20,6 +20,7 @@ const createPWidgetsForAllCampaignsDataset = require('./controllers/data_acquisi
 const createCWidgetsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_p_widget_dataset');
 const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createOffersForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_campaigns_dataset');
+const createOffersForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_campaign_dataset');
 const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
 const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
 const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
@@ -31,6 +32,7 @@ const createDaysForOneCampaignReport = require('./controllers/data_analysis_cont
 const createCampaignsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_all_campaigns_report');
 const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
 const createOffersForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_offers_for_all_campaigns_report');
+const createOffersForOneCampaignReport = require('./controllers/data_analysis_controllers/create_offers_for_one_campaign_report');
 const createCampaignsForOneAdReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_ad_report');
 
 const authenticate = require('./middleware/authenticate');
@@ -63,6 +65,12 @@ app.post(
   '/api/createOffersForAllCampaignsDataset',
   authenticate,
   createOffersForAllCampaignsDataset,
+);
+
+app.post(
+  '/api/createOffersForOneCampaignDataset',
+  authenticate,
+  createOffersForOneCampaignDataset,
 );
 
 app.post(
@@ -180,6 +188,12 @@ app.post(
   '/api/createOffersForAllCampaignsReport',
   authenticate,
   createOffersForAllCampaignsReport,
+);
+
+app.post(
+  '/api/createOffersForOneCampaignReport',
+  authenticate,
+  createOffersForOneCampaignReport,
 );
 
 app.post(

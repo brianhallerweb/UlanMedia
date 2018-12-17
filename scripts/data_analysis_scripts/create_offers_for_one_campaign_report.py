@@ -4,9 +4,9 @@ import pandas as pd
 import numpy as np
 
 date_range = sys.argv[1]
-offer_id = sys.argv[2]
+campaign_id = sys.argv[2]
 
-with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_offer/{offer_id}_{date_range}_campaigns_for_one_offer_dataset.json', 'r') as file:
+with open(f'/home/bsh/Documents/UlanMedia/data/offers_for_one_campaign/{campaign_id}_{date_range}_offers_for_one_campaign_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
@@ -54,11 +54,11 @@ final_result = final_result.sort_values(["offerFlow", "clicks"],
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
-    summary["campaignName"] = "summary"
+    summary["offerFlow"] = "summary"
     final_result = final_result.append(summary, ignore_index=True)
     final_result = final_result.replace(np.nan, "")
 
-json_final_result = json.dumps(final_result[["campaignID","campaignName", "clicks",
+json_final_result = json.dumps(final_result[["offerID","offerName", "offerFlow", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa"]].to_dict("records"))
 

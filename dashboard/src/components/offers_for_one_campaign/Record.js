@@ -24,19 +24,21 @@ class Record extends Component {
       <tr>
         <td>
           {this.offerFlow}
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforoneoffer/${this.offerID}/${
-                    this.offerName
-                  }`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
+          {this.offerFlow != 'summary' && (
+            <div>
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/campaignsforoneoffer/${this.offerID}/${
+                      this.offerName
+                    }`,
+                  }}
+                  target="_blank">
+                  campaigns
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </td>
         <td>{this.offerName}</td>
         <td>{this.clicks}</td>
