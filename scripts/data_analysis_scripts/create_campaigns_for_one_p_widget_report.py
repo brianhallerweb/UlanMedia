@@ -44,7 +44,6 @@ c2 = df["sales"] >= 1
 result2 = df[c2]
 
 conditions_args = [sys.argv[5], sys.argv[6]]
-#conditions_args = ["false", "false"]
 conditions_dfs = [result1, result2]
 
 final_result = None 

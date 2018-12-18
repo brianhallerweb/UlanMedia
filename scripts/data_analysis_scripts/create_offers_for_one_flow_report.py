@@ -4,14 +4,18 @@ import pandas as pd
 import numpy as np
 
 date_range = sys.argv[1]
-offer_id = sys.argv[2]
+offer_flow = sys.argv[2]
 
-with open(f'/home/bsh/Documents/UlanMedia/data/campaigns_for_one_offer/{offer_id}_{date_range}_campaigns_for_one_offer_dataset.json', 'r') as file:
+with open(f'/home/bsh/Documents/UlanMedia/data/offers_for_one_flow/{offer_flow}_{date_range}_offers_for_one_flow_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
 
-df = pd.DataFrame(data)
+offers = []
+for offer in data.values():
+    offers.append(offer)
+
+df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)
 df["revenue"] = round(df["profit"] + df["cost"], 2)
 df["profit"] = round(df["profit"], 2)
@@ -54,7 +58,7 @@ final_result = final_result.sort_values(["offerFlow", "clicks"],
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
-    summary["campaignName"] = "summary"
+    summary["offerName"] = "summary"
     summary["cvr"] = round((summary["conversions"] / summary["clicks"]) * 100,
         2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 3)
@@ -62,7 +66,7 @@ if len(final_result.index) > 0:
     final_result = final_result.append(summary, ignore_index=True)
     final_result = final_result.replace(np.nan, "")
 
-json_final_result = json.dumps(final_result[["campaignID","campaignName", "clicks",
+json_final_result = json.dumps(final_result[["offerID","offerName", "offerFlow", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa"]].to_dict("records"))
 

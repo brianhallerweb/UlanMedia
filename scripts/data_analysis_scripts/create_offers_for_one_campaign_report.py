@@ -55,6 +55,10 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["offerFlow"] = "summary"
+    summary["cvr"] = round((summary["conversions"] / summary["clicks"]) * 100,
+        2)
+    summary["epc"] = round(summary["revenue"] / summary["clicks"], 3)
+    summary["cpa"] = round(summary["cost"] / summary["conversions"], 2)
     final_result = final_result.append(summary, ignore_index=True)
     final_result = final_result.replace(np.nan, "")
 

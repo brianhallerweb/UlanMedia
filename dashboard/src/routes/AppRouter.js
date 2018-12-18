@@ -9,6 +9,7 @@ import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home'
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
 import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
+import offers_for_one_flowHome from '../components/offers_for_one_flow/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
 import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_campaign/Home';
 import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_widget/Home';
@@ -61,6 +62,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/offersforonecampaign/:volID/:campaignName"
           Component={offers_for_one_campaignHome}
+        />
+        <PrivateRoute
+          path="/offersforoneflow/:offerFlow"
+          Component={offers_for_one_flowHome}
         />
         <PrivateRoute
           path="/campaignsforonecwidget/:widgetID"
