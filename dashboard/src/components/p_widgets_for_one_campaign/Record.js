@@ -65,6 +65,7 @@ class Record extends Component {
         <td>${this.props.widgetRecord.profit}</td>
         <td>{this.props.widgetRecord.leads}</td>
         <td>${this.props.widgetRecord.lead_cpa}</td>
+        <td>{this.props.widgetRecord.lead_cvr}%</td>
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.sale_cpa}</td>
         <td>{this.props.widgetRecord.status}</td>

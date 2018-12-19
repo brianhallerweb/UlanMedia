@@ -23,9 +23,7 @@ const AppRouter = () => (
   <BrowserRouter>
     <div>
       <Switch>
-        // login route
         <Route path="/login" component={Login} />
-        // campaigns routes
         <PrivateRoute
           path="/campaigns"
           Component={campaigns_for_all_campaignsHome}
@@ -35,14 +33,9 @@ const AppRouter = () => (
           Component={days_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/campaign/offers/:volid"
-          Component={offers_for_one_campaignHome}
-        />
-        <PrivateRoute
           path="/pwidgetsforonecampaign/:volid/:mgidid/:max_lead_cpa/:name"
           Component={p_widgets_for_one_campaignHome}
         />
-        // widgets routes
         <PrivateRoute
           path="/pwidgetsforallcampaigns"
           Component={p_widgets_for_all_campaignsHome}
@@ -71,7 +64,6 @@ const AppRouter = () => (
           path="/campaignsforonecwidget/:widgetID"
           Component={campaigns_for_one_c_widgetHome}
         />
-        // ads routes
         <PrivateRoute
           path="/ads/:volid/:name"
           Component={ads_for_one_campaignHome}
@@ -81,8 +73,6 @@ const AppRouter = () => (
           path="/ad/:adImage"
           Component={campaigns_for_one_adHome}
         />
-        // offers routes
-        <PrivateRoute path="/offers" Component={offers_for_all_campaignsHome} />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToCampaignsHome} />
       </Switch>

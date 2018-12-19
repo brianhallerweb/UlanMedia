@@ -4,17 +4,20 @@ import {NavLink} from 'react-router-dom';
 
 const ConditionCheckboxes = ({
   toggleCondition,
+  setConditionValue,
   c1,
+  c1Value,
   c2,
+  c2Value,
   c3,
+  c3Value,
   c4,
+  c4Value,
   c5,
-  c6,
-  c7,
-  c8,
+  c5Value,
 }) => {
   return (
-    <div>
+    <div style={{paddingTop: 15, paddingBottom: 15}}>
       <div>
         <input
           type="checkbox"
@@ -22,11 +25,15 @@ const ConditionCheckboxes = ({
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>
-          {
-            'Widget global status is Not Yet Listed --- (globalStatus == "not yet listed")'
-          }
-        </span>
+        <span>Widget global status is </span>
+        <select
+          onChange={e => setConditionValue('c1Value', e.target.value)}
+          defaultValue={c1Value}>
+          <option value="not yet listed">not yet listed</option>
+          <option value="whitelist">whitelist</option>
+          <option value="greylist">greylist</option>
+          <option value="blacklist">blacklist</option>
+        </select>
       </div>
 
       <div>
@@ -37,9 +44,16 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {
-            'Widget global status is whitelisted --- (globalStatus == "whitelist")'
-          }
+          {'Widget cost is more than $'}
+          <input
+            type="number"
+            name="c2Value"
+            min="0"
+            max="100"
+            step="10"
+            value={c2Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
         </span>
       </div>
 
@@ -51,9 +65,16 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {
-            'Widget global status is greylisted --- (globalStatus == "greylist")'
-          }
+          {'Widget lost more than $'}
+          <input
+            type="number"
+            name="c3Value"
+            min="0"
+            max="100"
+            step="10"
+            value={c3Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
         </span>
       </div>
 
@@ -65,9 +86,17 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {
-            'Widget global status is blacklisted --- (globalStatus == "blacklist")'
-          }
+          {'Widget leadCVR is less than or equal to '}
+          <input
+            type="number"
+            name="c4Value"
+            min="0"
+            max=".50"
+            step=".25"
+            value={c4Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'%'}
         </span>
       </div>
 
@@ -78,37 +107,18 @@ const ConditionCheckboxes = ({
           checked={c5}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>{'Widget leads is 0 --- (leads == 0)'}</span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>{'Widget leadCVR is less than 0.25% --- (leadCVR < 0.25)'}</span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c7"
-          checked={c7}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>{'Widget saleCPA is more than $500 --- (saleCPA > 500)'}</span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c8"
-          checked={c8}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>{'Widget lost more than $100 --- (profit < -100)'}</span>
+        <span>
+          {'Widget saleCPA is more than $'}
+          <input
+            type="number"
+            name="c5Value"
+            min="200"
+            max="500"
+            step="20"
+            value={c5Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
       </div>
     </div>
   );

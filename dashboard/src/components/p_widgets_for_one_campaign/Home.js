@@ -16,14 +16,20 @@ class Home extends Component {
       widgetRecords: [],
       mgidRequestDates: '',
       volRequestDates: '',
-      dateRange: 'ninety',
-      precondition: 0,
-      precondition2: 'all',
+      dateRange: 'oneeighty',
       error: false,
       authenticated: true,
       loading: false,
       c1: false,
+      c1Value: 'all',
       c2: false,
+      c2Value: 'not yet listed',
+      c3: true,
+      c3Value: 10,
+      c4: false,
+      c4Value: 10,
+      c5: false,
+      c5Value: 0,
     };
   }
 
@@ -35,12 +41,8 @@ class Home extends Component {
     this.setState({[condition]: !this.state[condition]});
   }
 
-  selectPrecondition(num) {
-    this.setState({precondition: num});
-  }
-
-  selectPrecondition2(toInclude) {
-    this.setState({precondition2: toInclude});
+  setConditionValue(condition, conditionValue) {
+    this.setState({[condition]: conditionValue});
   }
 
   submitForm() {
@@ -92,10 +94,16 @@ class Home extends Component {
           body: JSON.stringify({
             dateRange: this.state.dateRange,
             volid: this.state.volid,
-            precondition: this.state.precondition,
-            precondition2: this.state.precondition2,
+            c1Value: this.state.c1Value,
+            c2Value: this.state.c2Value,
+            c3Value: this.state.c3Value,
+            c4Value: this.state.c4Value,
+            c5Value: this.state.c5Value,
             c1: this.state.c1,
             c2: this.state.c2,
+            c3: this.state.c3,
+            c4: this.state.c4,
+            c5: this.state.c5,
           }),
         }),
       )
@@ -137,13 +145,18 @@ class Home extends Component {
           dateRange={this.state.dateRange}
           datasetsCreated={this.state.datasetsCreated}
           selectDateRange={this.selectDateRange.bind(this)}
-          selectPrecondition={this.selectPrecondition.bind(this)}
-          selectPrecondition2={this.selectPrecondition2.bind(this)}
+          setConditionValue={this.setConditionValue.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
-          precondition={this.state.precondition}
-          precondition2={this.state.precondition2}
           c1={this.state.c1}
+          c1Value={this.state.c1Value}
           c2={this.state.c2}
+          c2Value={this.state.c2Value}
+          c3={this.state.c3}
+          c3Value={this.state.c3Value}
+          c4={this.state.c4}
+          c4Value={this.state.c4Value}
+          c5={this.state.c5}
+          c5Value={this.state.c5Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}

@@ -35,45 +35,35 @@ df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 
-# cost greater than x 
-df = df[df["cost"] > float(sys.argv[2])]
-
-# global status conditions 
-c1 = df["global_status"] == "not yet listed"
+# global status conditions (not yet listed, whitelist, greylist, blacklist)
+c1 = df["global_status"] == sys.argv[2]
 result1 = df[c1]
-c2 = df["global_status"] == "whitelist"
+
+# widget cost is more than xxx
+c2 = df["cost"] > float(sys.argv[3])
 result2 = df[c2]
-c3 = df["global_status"] == "greylist"
+
+# widget lost more than xxx
+c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
-c4 = df["global_status"] == "blacklist"
+
+# widget leadCVR is less than or equal to xxx
+c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[5]))
 result4 = df[c4]
 
-# leads is 0
-c5 = df["leads"] == 0
+# widget saleCPA is more than xxx
+c5 = np.isfinite(df["sale_cpa"]) & (df["sale_cpa"] > float(sys.argv[6]))
 result5 = df[c5]
 
-# Widget leadCVR is less than 0.25%
-c6 = df["lead_cvr"] < .25
-result6 = df[c6]
-
-# Widget saleCPA is more than $500
-c7 = np.isfinite(df["sale_cpa"]) & (df["sale_cpa"] > 500)
-result7 = df[c7]
-
-# Widget lost more than $100
-c8 = df["profit"] < -100
-result8 = df[c8]
-
-conditions_args = [sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6],
-        sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6, result7, result8]
+conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
     if conditions_args[i] == "true" and final_result is None:
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
-        final_result = final_result.merge(conditions_dfs[i], how="outer",
+        final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", "referrer",
             "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
             "status", "global_status", "has_children"]

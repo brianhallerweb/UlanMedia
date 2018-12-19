@@ -15,18 +15,19 @@ class Home extends Component {
       dateRange: 'thirty',
       mgidRequestDates: '',
       volRequestDates: '',
-      precondition: 20,
       error: false,
       authenticated: true,
       loading: false,
       c1: false,
-      c2: false,
+      c1Value: 'not yet listed',
+      c2: true,
+      c2Value: 10,
       c3: false,
+      c3Value: 10,
       c4: false,
-      c5: true,
-      c6: true,
-      c7: true,
-      c8: true,
+      c4Value: 0,
+      c5: false,
+      c5Value: 200,
     };
   }
 
@@ -38,8 +39,8 @@ class Home extends Component {
     this.setState({[condition]: !this.state[condition]});
   }
 
-  selectPrecondition(num) {
-    this.setState({precondition: num});
+  setConditionValue(condition, conditionValue) {
+    this.setState({[condition]: conditionValue});
   }
 
   submitForm() {
@@ -89,15 +90,16 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
-            precondition: this.state.precondition,
+            c1Value: this.state.c1Value,
+            c2Value: this.state.c2Value,
+            c3Value: this.state.c3Value,
+            c4Value: this.state.c4Value,
+            c5Value: this.state.c5Value,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
             c4: this.state.c4,
             c5: this.state.c5,
-            c6: this.state.c6,
-            c7: this.state.c7,
-            c8: this.state.c8,
           }),
         }),
       )
@@ -137,17 +139,18 @@ class Home extends Component {
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
-          selectPrecondition={this.selectPrecondition.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
-          precondition={this.state.precondition}
+          setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}
+          c1Value={this.state.c1Value}
           c2={this.state.c2}
+          c2Value={this.state.c2Value}
           c3={this.state.c3}
+          c3Value={this.state.c3Value}
           c4={this.state.c4}
+          c4Value={this.state.c4Value}
           c5={this.state.c5}
-          c6={this.state.c6}
-          c7={this.state.c7}
-          c8={this.state.c8}
+          c5Value={this.state.c5Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
