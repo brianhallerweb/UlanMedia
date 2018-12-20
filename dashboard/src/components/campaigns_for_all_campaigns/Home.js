@@ -14,12 +14,14 @@ class Home extends Component {
       dateRange: 'thirty',
       volRequestDates: '',
       mgidRequestDates: '',
-      precondition: 0,
       c1: true,
-      c2: true,
-      c3: true,
-      c4: true,
-      c5: true,
+      c1Value: 100,
+      c2: false,
+      c2Value: 100,
+      c3: false,
+      c3Value: 0,
+      c4: false,
+      c4Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -46,8 +48,8 @@ class Home extends Component {
     this.setState({[condition]: !this.state[condition]});
   }
 
-  selectPrecondition(num) {
-    this.setState({precondition: num});
+  setConditionValue(condition, conditionValue) {
+    this.setState({[condition]: conditionValue});
   }
 
   submitForm() {
@@ -61,12 +63,14 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        precondition: this.state.precondition,
+        c1Value: this.state.c1Value,
+        c2Value: this.state.c2Value,
+        c3Value: this.state.c3Value,
+        c4Value: this.state.c4Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
         c4: this.state.c4,
-        c5: this.state.c5,
       }),
     })
       .then(res => {
@@ -115,14 +119,16 @@ class Home extends Component {
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
           dateRange={this.state.dateRange}
-          selectPrecondition={this.selectPrecondition.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
-          precondition={this.state.precondition}
+          setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}
+          c1Value={this.state.c1Value}
           c2={this.state.c2}
+          c2Value={this.state.c2Value}
           c3={this.state.c3}
+          c3Value={this.state.c3Value}
           c4={this.state.c4}
-          c5={this.state.c5}
+          c4Value={this.state.c4Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

@@ -25,11 +25,11 @@ const AppRouter = () => (
       <Switch>
         <Route path="/login" component={Login} />
         <PrivateRoute
-          path="/campaigns"
+          path="/campaignsforallcampaigns"
           Component={campaigns_for_all_campaignsHome}
         />
         <PrivateRoute
-          path="/campaign/days/:volid"
+          path="/daysforonecampaign/:volid"
           Component={days_for_one_campaignHome}
         />
         <PrivateRoute
@@ -53,6 +53,10 @@ const AppRouter = () => (
           Component={campaigns_for_one_offerHome}
         />
         <PrivateRoute
+          path="/offersforallcampaigns"
+          Component={offers_for_all_campaignsHome}
+        />
+        <PrivateRoute
           path="/offersforonecampaign/:volID/:campaignName"
           Component={offers_for_one_campaignHome}
         />
@@ -65,12 +69,15 @@ const AppRouter = () => (
           Component={campaigns_for_one_c_widgetHome}
         />
         <PrivateRoute
-          path="/ads/:volid/:name"
+          path="/adsforonecampaign/:volid/:name"
           Component={ads_for_one_campaignHome}
         />
-        <PrivateRoute path="/ads" Component={ads_for_all_campaignsHome} />
         <PrivateRoute
-          path="/ad/:adImage"
+          path="/adsforallcampaigns"
+          Component={ads_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/campaignsforonead/:adImage"
           Component={campaigns_for_one_adHome}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route

@@ -5,7 +5,10 @@ import {NavLink} from 'react-router-dom';
 const GlobalNavBar = () => (
   <div className="globalNavBar">
     <li className="globalNavItem">
-      <NavLink to={'/campaigns'} target="_blank" activeClassName="is-active">
+      <NavLink
+        to={'/campaignsforallcampaigns'}
+        target="_blank"
+        activeClassName="is-active">
         campaigns
       </NavLink>
     </li>
@@ -20,13 +23,19 @@ const GlobalNavBar = () => (
     </li>
 
     <li className="globalNavItem">
-      <NavLink to={'/offers'} target="_blank" activeClassName="is-active">
+      <NavLink
+        to={'/offersforallcampaigns'}
+        target="_blank"
+        activeClassName="is-active">
         offers
       </NavLink>
     </li>
 
     <li className="globalNavItem">
-      <NavLink to={'/ads'} target="_blank" activeClassName="is-active">
+      <NavLink
+        to={'/adsforallcampaigns'}
+        target="_blank"
+        activeClassName="is-active">
         ads
       </NavLink>
     </li>

@@ -1,9 +1,23 @@
+//@format
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
-const ConditionCheckboxes = ({toggleCondition, c1, c2}) => {
+const ConditionCheckboxes = ({
+  toggleCondition,
+  setConditionValue,
+  c1,
+  c1Value,
+  c2,
+  c2Value,
+  c3,
+  c3Value,
+  c4,
+  c4Value,
+  c5,
+  c5Value,
+}) => {
   return (
-    <div>
+    <div style={{paddingTop: 15, paddingBottom: 15}}>
       <div>
         <input
           type="checkbox"
@@ -11,7 +25,14 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2}) => {
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>{'Widget has 1 or more leads --- (leads > 1)'}</span>
+        <span>Widget status is </span>
+        <select
+          onChange={e => setConditionValue('c1Value', e.target.value)}
+          defaultValue={c1Value}>
+          <option value="all">all</option>
+          <option value="included">included</option>
+          <option value="excluded">excluded</option>
+        </select>
       </div>
 
       <div>
@@ -21,9 +42,80 @@ const ConditionCheckboxes = ({toggleCondition, c1, c2}) => {
           checked={c2}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>{'Widget has 1 or more sales --- (sales > 1)'}</span>
+        <span>Widget global status is </span>
+        <select
+          onChange={e => setConditionValue('c2Value', e.target.value)}
+          defaultValue={c2Value}>
+          <option value="not yet listed">not yet listed</option>
+          <option value="whitelist">whitelist</option>
+          <option value="greylist">greylist</option>
+          <option value="blacklist">blacklist</option>
+        </select>
       </div>
 
+      <div>
+        <input
+          type="checkbox"
+          name="c3"
+          checked={c3}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Widget cost is more than $'}
+          <input
+            type="number"
+            name="c3Value"
+            min="0"
+            max="100"
+            step="10"
+            value={c3Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c4"
+          checked={c4}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Widget lost more than $'}
+          <input
+            type="number"
+            name="c4Value"
+            min="0"
+            max="100"
+            step="10"
+            value={c4Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c5"
+          checked={c5}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Widget leadCVR is less than or equal to '}
+          <input
+            type="number"
+            name="c5Value"
+            min="0"
+            max=".50"
+            step=".25"
+            value={c5Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'%'}
+        </span>
+      </div>
     </div>
   );
 };

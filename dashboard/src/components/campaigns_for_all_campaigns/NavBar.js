@@ -21,26 +21,17 @@ class NavBar extends Component {
             selectDateRange={this.props.selectDateRange}
             dateRange={this.props.dateRange}
           />
-          <p>
-            Campaign cost is more than{' '}
-            <input
-              type="number"
-              name="quantity"
-              min="-10000"
-              max="3"
-              step=".25"
-              value={this.props.precondition}
-              onChange={e => this.props.selectPrecondition(e.target.value)}
-            />
-            x maxSaleCPA
-          </p>
           <ConditionCheckboxes
             toggleCondition={this.props.toggleCondition}
+            setConditionValue={this.props.setConditionValue}
             c1={this.props.c1}
+            c1Value={this.props.c1Value}
             c2={this.props.c2}
+            c2Value={this.props.c2Value}
             c3={this.props.c3}
+            c3Value={this.props.c3Value}
             c4={this.props.c4}
-            c5={this.props.c5}
+            c4Value={this.props.c4Value}
           />
           <input type="submit" value="Submit" />
         </form>

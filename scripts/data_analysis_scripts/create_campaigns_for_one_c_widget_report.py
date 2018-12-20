@@ -21,39 +21,41 @@ df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cost"] = round(df["cost"], 2)
+df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 
-# cost greater than x 
-df = df[df["cost"] > float(sys.argv[3])]
-# df = df[df["cost"] > 0]
-
-# filter on widget status
-# This is the precondition2 for every report
-status = sys.argv[4]
-# status = "all" 
-if status != "all":
-    df = df[df["status"] == sys.argv[4]]
-
-# leads >= 1
-c1 = df["leads"] >= 1
+# status conditions (all, included, excluded)
+c1 = df["status"] == sys.argv[3]
 result1 = df[c1]
 
-# sales >= 1
-c2 = df["sales"] >= 1
+# global status conditions (not yet listed, whitelist, greylist, blacklist)
+c2 = df["global_status"] == sys.argv[4]
 result2 = df[c2]
 
-conditions_args = [sys.argv[5], sys.argv[6]]
-# conditions_args = ["false", "false"]
-conditions_dfs = [result1, result2]
+# widget cost is more than xxx
+c3 = df["cost"] > float(sys.argv[5])
+result3 = df[c3]
+
+# widget lost more than xxx
+c4 = df["profit"] < -1 * float(sys.argv[6])
+result4 = df[c4]
+
+# widget leadCVR is less than or equal to xxx
+c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[7]))
+result5 = df[c5]
+
+conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11],
+        sys.argv[12]]
+conditions_dfs = [result1, result2, result3, result4, result5,]
 
 final_result = None 
 for i in range(len(conditions_args)):
     if conditions_args[i] == "true" and final_result is None:
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
-        final_result = final_result.merge(conditions_dfs[i], how="outer",
+        final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "max_lead_cpa", "lead_cpa", "max_sale_cpa",
+            "max_lead_cpa", "lead_cpa","lead_cvr", "max_sale_cpa",
             "sale_cpa", "profit", "status", "global_status"]
             )
 
@@ -86,7 +88,7 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "max_lead_cpa", "lead_cpa", "max_sale_cpa", "sale_cpa", "profit",
+            "max_lead_cpa", "lead_cpa","lead_cvr", "max_sale_cpa", "sale_cpa", "profit",
             "status", "global_status"]].to_dict("records"))
 
 print(json_final_result)

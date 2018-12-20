@@ -26,7 +26,7 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/ad/${this.image}/`,
+                  pathname: `/campaignsforonead/${this.image}/`,
                 }}
                 target="_blank">
                 campaigns

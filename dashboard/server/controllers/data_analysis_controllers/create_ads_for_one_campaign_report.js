@@ -6,8 +6,11 @@ function createAdsForOneCampaignReport(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [req.body.dateRange, req.body.volID, req.body.precondition],
+    args: [],
   };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
   PythonShell.run(
     'create_ads_for_one_campaign_report.py',
     pythonOptions,

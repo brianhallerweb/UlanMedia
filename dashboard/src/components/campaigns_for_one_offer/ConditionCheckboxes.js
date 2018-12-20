@@ -13,7 +13,7 @@ const ConditionCheckboxes = ({
   c3Value,
 }) => {
   return (
-    <div>
+    <div style={{paddingTop: 15, paddingBottom: 15}}>
       <div>
         <input
           type="checkbox"

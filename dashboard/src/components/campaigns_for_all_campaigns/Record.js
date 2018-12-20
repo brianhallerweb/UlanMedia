@@ -15,6 +15,7 @@ class Record extends Component {
     this.leads = this.props.campaign.leads;
     this.lead_cpa = this.props.campaign.lead_cpa;
     this.max_lead_cpa = this.props.campaign.max_lead_cpa;
+    this.lead_cvr = this.props.campaign.lead_cvr;
     this.sales = this.props.campaign.sales;
     this.sale_cpa = this.props.campaign.sale_cpa;
     this.max_sale_cpa = this.props.campaign.max_sale_cpa;
@@ -87,7 +88,7 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/campaign/days/${this.vol_id}/`,
+                  pathname: `/daysforonecampaign/${this.vol_id}/`,
                 }}
                 target="_blank">
                 days
@@ -133,6 +134,7 @@ class Record extends Component {
         <td>{this.leads}</td>
         <td>${this.lead_cpa}</td>
         <td>${this.max_lead_cpa}</td>
+        <td>{this.lead_cvr}%</td>
         <td>{this.sales}</td>
         <td>${this.sale_cpa}</td>
         <td>${this.max_sale_cpa}</td>

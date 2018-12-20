@@ -13,9 +13,14 @@ class Home extends Component {
     this.state = {
       volID: this.props.match.params.volid,
       name: this.props.match.params.name,
-      dateRange: 'ninety',
+      dateRange: 'oneeighty',
       volRequestDates: '',
-      precondition: 0,
+      c1: true,
+      c1Value: 20,
+      c2: false,
+      c2Value: 50,
+      c3: false,
+      c3Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -27,8 +32,12 @@ class Home extends Component {
     this.setState({dateRange: dateRange});
   }
 
-  selectPrecondition(num) {
-    this.setState({precondition: num});
+  toggleCondition(condition) {
+    this.setState({[condition]: !this.state[condition]});
+  }
+
+  setConditionValue(condition, conditionValue) {
+    this.setState({[condition]: conditionValue});
   }
 
   submitForm() {
@@ -77,7 +86,12 @@ class Home extends Component {
           body: JSON.stringify({
             dateRange: this.state.dateRange,
             volID: this.state.volID,
-            precondition: this.state.precondition,
+            c1Value: this.state.c1Value,
+            c2Value: this.state.c2Value,
+            c3Value: this.state.c3Value,
+            c1: this.state.c1,
+            c2: this.state.c2,
+            c3: this.state.c3,
           }),
         }),
       )
@@ -117,8 +131,14 @@ class Home extends Component {
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
-          selectPrecondition={this.selectPrecondition.bind(this)}
-          precondition={this.state.precondition}
+          toggleCondition={this.toggleCondition.bind(this)}
+          setConditionValue={this.setConditionValue.bind(this)}
+          c1={this.state.c1}
+          c1Value={this.state.c1Value}
+          c2={this.state.c2}
+          c2Value={this.state.c2Value}
+          c3={this.state.c3}
+          c3Value={this.state.c3Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

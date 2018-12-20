@@ -19,12 +19,13 @@ class Records extends Component {
             <th>Revenue</th>
             <th>Profit</th>
             <th>Leads</th>
-            <th>Lead_cpa</th>
-            <th>Max_Lead_cpa</th>
+            <th>Lead CPA</th>
+            <th>Max Lead CPA</th>
+            <th>Lead CVR</th>
             <th>Sales</th>
-            <th>Sale_cpa</th>
-            <th>Max_Sale_cpa</th>
-            <th>epc</th>
+            <th>Sale CPA</th>
+            <th>Max Sale CPA</th>
+            <th>EPC</th>
           </tr>
         </thead>
         <tbody>

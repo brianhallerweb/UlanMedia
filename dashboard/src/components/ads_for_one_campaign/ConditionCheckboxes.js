@@ -11,10 +11,6 @@ const ConditionCheckboxes = ({
   c2Value,
   c3,
   c3Value,
-  c4,
-  c4Value,
-  c5,
-  c5Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -26,13 +22,13 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign cost is more than $'}
+          {'Ad cost is more than $'}
           <input
             type="number"
             name="c1Value"
             min="0"
             max="1000"
-            step="50"
+            step="20"
             value={c1Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
@@ -47,13 +43,13 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign lost more than $'}
+          {'Ad lost more than $'}
           <input
             type="number"
             name="c2Value"
-            min="100"
-            max="1000"
-            step="100"
+            min="50"
+            max="500"
+            step="50"
             value={c2Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
@@ -68,7 +64,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign leadCVR is less than or equal to '}
+          {'Ad CVR is less than or equal to '}
           <input
             type="number"
             name="c3Value"
@@ -79,27 +75,6 @@ const ConditionCheckboxes = ({
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'%'}
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          checked={c4}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign EPC is more than $'}
-          <input
-            type="number"
-            name="c4Value"
-            min="0"
-            max=".20"
-            step=".005"
-            value={c4Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
         </span>
       </div>
     </div>

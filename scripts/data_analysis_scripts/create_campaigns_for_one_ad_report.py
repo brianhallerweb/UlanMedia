@@ -16,14 +16,36 @@ df["cost"] = round(df["cost"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
-# epc uses the series.round method. It doesn't appear to do anything different
-# from python's round()
 df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 
-# The prerequisite condition for every report
-final_result = df[df["epc"] >= float(sys.argv[3])]
-# final_result = df[df["epc"] >= float(0)]
+# ad cost is more than xxx
+c1 = df["cost"] > float(sys.argv[3])
+result1 = df[c1]
+
+# ad lost more than xxx
+c2 = df["profit"] < -1 * float(sys.argv[4])
+result2 = df[c2]
+
+# ad cvr is less than or equal to xxx
+c3 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[5]))
+result3 = df[c3]
+
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]]
+conditions_dfs = [result1, result2, result3]
+
+final_result = None 
+for i in range(len(conditions_args)):
+    if conditions_args[i] == "true" and final_result is None:
+        final_result = conditions_dfs[i]
+    elif conditions_args[i] == "true":
+        final_result = final_result.merge(conditions_dfs[i], how="inner",
+        on=["image", "clicks",
+    "cost", "revenue", "profit","conversions", "cvr",
+    "epc", "cpa", "name", "mgid_id", "vol_id"] )
+
+if final_result is None:
+    final_result = df
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")

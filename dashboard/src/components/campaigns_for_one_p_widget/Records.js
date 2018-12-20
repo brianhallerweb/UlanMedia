@@ -19,6 +19,7 @@ class Records extends Component {
             <th>Profit</th>
             <th>Leads</th>
             <th>Lead CPA</th>
+            <th>Lead CVR</th>
             <th>Sales</th>
             <th>Sale CPA</th>
             <th>Status</th>
