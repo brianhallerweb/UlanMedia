@@ -6,15 +6,11 @@ function createCampaignsForOnePWidgetReport(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.widgetID,
-      req.body.precondition,
-      req.body.precondition2,
-      req.body.c1,
-      req.body.c2,
-    ],
+    args: [],
   };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
   PythonShell.run(
     'create_campaigns_for_one_p_widget_report.py',
     pythonOptions,
