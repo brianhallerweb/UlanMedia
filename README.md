@@ -1,4 +1,6 @@
-The file naming convention is organized around the the observational type (row
+### Naming convention 
+
+The page names are organized around the the observational type (row
 type) of each spreadsheet. For example, widgets_for_one_campaign means a
 spreadsheet where each row is a widget in one particular campaign. 
 
