@@ -6,11 +6,20 @@ spreadsheet where each row is a widget in one particular campaign.
 
 ### Web app map 
 
-![Alt text](/ulanmediadashboard.jpg)
+![Alt text](/full_dashboard_map.jpg)
 
 ### How the reports are generated
 
-write the general process of acquiring the data and creating reports
+In most cases, reports are generated in 3 stages. 
+1. Get all data in through a CRON job and save it to a json file. 
+2. Refine the data to with a "data acquisition step". That usually involves
+   filtering the data by some condition (e.g. widgets for one campaign) and
+saving to another json file. This step is done on-demand with a python child process
+in the web app. 
+3. Further refine the data to to include only what will be visually displayed
+   as a report in the web app. This step is done on-demand with a pandas child
+process. The data is immediately displayed as html by React - no json file is
+saved. 
 
 ### Authentication
 
