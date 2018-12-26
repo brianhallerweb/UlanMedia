@@ -18,7 +18,7 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      c1: false,
+      c1: true,
       c1Value: 'not yet listed',
       c2: true,
       c2Value: 10,
@@ -29,6 +29,10 @@ class Home extends Component {
       c5: false,
       c5Value: 200,
     };
+  }
+
+  componentDidMount() {
+    this.submitForm();
   }
 
   selectDateRange(dateRange) {

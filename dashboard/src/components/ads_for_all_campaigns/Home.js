@@ -26,6 +26,10 @@ class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    this.submitForm();
+  }
+
   selectDateRange(dateRange) {
     this.setState({dateRange: dateRange});
   }

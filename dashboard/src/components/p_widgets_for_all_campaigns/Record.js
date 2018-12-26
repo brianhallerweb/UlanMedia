@@ -5,15 +5,15 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {clicked: false};
   }
 
   render() {
     return (
-      <tr>
+      <tr className={this.state.clicked && 'clicked'}>
         <td>
           {this.props.widgetRecord.widget_id}
-          <div>
+          <div onClick={() => this.setState({clicked: true})}>
             <div className="rowLink">
               <Link
                 to={{

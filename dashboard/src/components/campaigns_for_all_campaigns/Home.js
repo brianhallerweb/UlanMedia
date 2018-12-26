@@ -29,6 +29,10 @@ class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    this.submitForm();
+  }
+
   selectDateRange(dateRange) {
     let precondition;
     if (dateRange === 'yesterday' || dateRange === 'seven') {

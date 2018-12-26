@@ -76,6 +76,11 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["name"] = "summary"
+    if summary["clicks"] == 0:
+        summary["lead_cvr"] = 0
+    else:
+        summary["lead_cvr"] = round((summary["leads"] / summary["clicks"]) * 100,
+        2)
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
