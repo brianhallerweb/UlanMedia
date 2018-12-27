@@ -13,7 +13,7 @@ class Record extends Component {
       <tr className={this.state.clicked && 'clicked'}>
         <td>
           {this.props.widgetRecord.widget_id}
-          <div onClick={() => this.setState({clicked: true})}>
+          <div>
             <div className="rowLink">
               <Link
                 to={{
@@ -63,7 +63,7 @@ class Record extends Component {
         <td>
           {this.props.widgetRecord.global_status}
           {this.props.widgetRecord.global_status === 'not yet listed' ? (
-            <div>
+            <div onClick={() => this.setState({clicked: true})}>
               <div className="rowLink">
                 <a
                   target="_blank"
