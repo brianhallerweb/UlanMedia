@@ -77,8 +77,7 @@ app.post(
 );
 
 app.get('/api/pWidgetsForAllCampaignsTrainingData', (req, res) => {
-  pwidgetsforallcampaignstrainingdatas
-    .find()
+  PWidgetsForAllCampaignsTrainingData.find()
     .then(widgets => res.json(widgets))
     .catch(err => res.status(500).json(err));
 });
