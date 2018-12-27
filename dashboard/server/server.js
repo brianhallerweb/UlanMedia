@@ -76,15 +76,11 @@ app.post(
   },
 );
 
-app.get(
-  '/api/pWidgetsForAllCampaignsTrainingData',
-  authenticate,
-  (req, res) => {
-    PWidgetsForAllCampaignsTrainingData.find()
-      .then(widgets => res.json(widgets))
-      .catch(err => res.status(500).json(err));
-  },
-);
+app.get('/api/pWidgetsForAllCampaignsTrainingData', (req, res) => {
+  PWidgetsForAllCampaignsTrainingDatas.find()
+    .then(widgets => res.json(widgets))
+    .catch(err => res.status(500).json(err));
+});
 
 //---------------------------------------
 
