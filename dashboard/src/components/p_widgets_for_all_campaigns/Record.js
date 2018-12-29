@@ -121,6 +121,9 @@ class Record extends Component {
                   black
                 </a>
               </div>
+              <div className="rowLink">
+                <span className="fakeLink">wait</span>
+              </div>
             </div>
           ) : (
             ''
