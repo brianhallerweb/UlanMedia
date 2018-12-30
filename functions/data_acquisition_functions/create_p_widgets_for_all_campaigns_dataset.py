@@ -2,10 +2,16 @@ import json
 from functions.misc.get_campaign_sets import get_campaign_sets 
 import re
 import sys
+from functions.misc.get_whitelist import get_whitelist
+from functions.misc.get_greylist import get_greylist
+from functions.misc.get_blacklist import get_blacklist
 
 def create_p_widgets_for_all_campaigns_dataset(date_range):
 
     campaigns = get_campaign_sets()
+    widget_whitelist = get_whitelist()
+    widget_greylist = get_greylist()
+    widget_blacklist = get_blacklist()
 
     p_widgets_for_all_campaigns = {"metadata":{}, "data":{}}
 
@@ -32,6 +38,14 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
            else:
                p_widgets_for_all_campaigns["data"][parent_widget] = json_file["data"][widget]
                p_widgets_for_all_campaigns["data"][parent_widget]["widget_id"] = parent_widget
+               if parent_widget in widget_whitelist:
+                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "whitelist" 
+               elif parent_widget in widget_greylist:
+                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "greylist" 
+               elif parent_widget in widget_blacklist:
+                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "blacklist" 
+               else:
+                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "not yet listed" 
 
            if widget is not parent_widget:
                p_widgets_for_all_campaigns["data"][parent_widget]["has_children"] = True
