@@ -17,7 +17,7 @@ import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_wi
 import campaigns_for_one_c_widgetHome from '../components/campaigns_for_one_c_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/Home';
-import RedirectToCampaignsHome from '../components/RedirectToCampaignsHome';
+import RedirectToHome from '../components/RedirectToHome';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -81,7 +81,7 @@ const AppRouter = () => (
           Component={campaigns_for_one_adHome}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
-        <PrivateRoute Component={RedirectToCampaignsHome} />
+        <PrivateRoute Component={RedirectToHome} />
       </Switch>
     </div>
   </BrowserRouter>
