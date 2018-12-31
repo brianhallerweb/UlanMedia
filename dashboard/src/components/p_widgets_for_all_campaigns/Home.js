@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       widgetRecords: [],
-      dateRange: 'thirty',
+      dateRange: 'oneeighty',
       mgidRequestDates: '',
       volRequestDates: '',
       error: false,
