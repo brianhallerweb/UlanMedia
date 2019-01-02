@@ -1,4 +1,3 @@
-//@format
 require('../../config/config');
 require('./db/mongoose');
 

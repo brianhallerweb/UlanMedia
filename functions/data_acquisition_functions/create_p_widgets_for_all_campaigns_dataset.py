@@ -1,22 +1,32 @@
 import json
+from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
 import re
 import sys
+from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 
+from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
 def create_p_widgets_for_all_campaigns_dataset(date_range):
-
     campaigns = get_campaign_sets()
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
+    # I am trying to update status on every click but all the requests really
+    # hurt the performance. So I am commenting everything that has to do with
+    # updating status in every script that derives from p and c widgets for one
+    # campaign. 
+    # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
+
     p_widgets_for_all_campaigns = {"metadata":{}, "data":{}}
 
     for campaign in campaigns:
         vol_id = campaign["vol_id"] 
+        # mgid_id = campaign["mgid_id"] 
+        # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
         with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
@@ -38,6 +48,12 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
            else:
                p_widgets_for_all_campaigns["data"][parent_widget] = json_file["data"][widget]
                p_widgets_for_all_campaigns["data"][parent_widget]["widget_id"] = parent_widget
+
+               # if parent_widget in excluded_widgets:
+                   # p_widgets_for_all_campaigns["data"][parent_widget]['status'] = "excluded" 
+               # else:
+                   # p_widgets_for_all_campaigns["data"][parent_widget]['status'] = "included" 
+
                if parent_widget in widget_whitelist:
                    p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "whitelist" 
                elif parent_widget in widget_greylist:

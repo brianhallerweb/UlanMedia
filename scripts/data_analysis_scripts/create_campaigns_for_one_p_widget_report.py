@@ -47,9 +47,13 @@ result4 = df[c4]
 c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[7]))
 result5 = df[c5]
 
-conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11],
-        sys.argv[12]]
-conditions_dfs = [result1, result2, result3, result4, result5,]
+# widget clicks are >= xxx OR cost >= xxx
+c6 = (df["clicks"] >= float(sys.argv[8])) | (df["cost"] >= float(sys.argv[9]))
+result6= df[c6]
+
+conditions_args = [sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13],
+        sys.argv[14], sys.argv[15]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6]
 
 
 final_result = None 

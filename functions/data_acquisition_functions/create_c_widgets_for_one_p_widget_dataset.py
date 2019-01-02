@@ -1,9 +1,37 @@
+from config.config import *
 import json
 import re
 import sys
 from functions.misc.get_campaign_sets import get_campaign_sets 
+from functions.misc.get_whitelist import get_whitelist
+from functions.misc.get_greylist import get_greylist
+from functions.misc.get_blacklist import get_blacklist
+from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 
 def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
+    # 1/1/19 global status is added here, as opposed to on create_p_and_c_widgets for
+    # one campaign so that it will update everytime the submit button is
+    # clicked rather than only once every day. 
+    widget_whitelist = get_whitelist()
+    widget_greylist = get_greylist()
+    widget_blacklist = get_blacklist()
+    # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
+            # mgid_id)
+    # if p_widget in excluded_widgets:
+        # p_widget_status = "excluded"
+    # else:
+        # p_widget_status = "included"
+
+    p_widget_global_status = ""
+    if p_widget in widget_whitelist:
+       p_widget_global_status = "whitelist" 
+    elif p_widget in widget_greylist:
+       p_widget_global_status = "greylist" 
+    elif p_widget in widget_blacklist:
+       p_widget_global_status = "blacklist" 
+    else:
+       p_widget_global_status = "not yet listed" 
+
     c_widgets_for_one_p_widget = {"metadata": {"mgid_start_date": "",
                                  "mgid_end_date": "",
                                  "vol_start_date": "",
@@ -44,6 +72,8 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                c_widgets_for_one_p_widget["data"][widget]["sales"] += data[widget]["sales"]
            else:
                c_widgets_for_one_p_widget["data"][widget] = data[widget]
+               # c_widgets_for_one_p_widget["data"][widget]["status"] = status
+               c_widgets_for_one_p_widget["data"][widget]["global_status"] = p_widget_global_status
                c_widgets_for_one_p_widget["data"][widget]["vol_id"] = metadata["vol_id"]
                c_widgets_for_one_p_widget["data"][widget]["mgid_id"] = metadata["vol_id"]
                c_widgets_for_one_p_widget["data"][widget]["max_lead_cpa"] = metadata["max_lead_cpa"]

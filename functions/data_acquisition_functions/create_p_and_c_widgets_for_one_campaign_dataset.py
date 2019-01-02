@@ -53,9 +53,9 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
             mgid_id)
 
-    widget_whitelist = get_whitelist()
-    widget_greylist = get_greylist()
-    widget_blacklist = get_blacklist()
+    # widget_whitelist = get_whitelist()
+    # widget_greylist = get_greylist()
+    # widget_blacklist = get_blacklist()
 
     # regex for extracting parent widget id
     pattern = re.compile(r'\d*')
@@ -67,12 +67,19 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             mgid_widget_data[widget_id]['revenue'] = 0.0 
             mgid_widget_data[widget_id]['leads'] = 0 
             # 12/7/18 why is sales 0.0 and not just 0
-            mgid_widget_data[widget_id]['sales'] = 0.0 
+            # mgid_widget_data[widget_id]['sales'] = 0.0 
+            mgid_widget_data[widget_id]['sales'] = 0 
             mgid_widget_data[widget_id]['referrer'] = [] 
         else:
             vol_widget = vol_results[widget_id]
             for key in vol_widget:
                 mgid_widget_data[widget_id][key] = vol_widget[key]
+
+        # 1/1/19 - I removed the status and global status data acquisition from
+        # this script because it needs to be updated upon "submit" on the
+        # dashboard. When using the dashboard, we often change the status and
+        # global status of widgets and we want that to be reflected
+        # immediately - or at least on the next "submit"
 
         # This regex on widget_id extracts the parent widget_id
         # The reason for this extraction is that the white grey black
@@ -82,14 +89,14 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         else:
             mgid_widget_data[widget_id]['status'] = "excluded" 
 
-        if pattern.search(widget_id).group() in widget_whitelist:
-            mgid_widget_data[widget_id]['global_status'] = "whitelist" 
-        elif pattern.search(widget_id).group() in widget_greylist:
-            mgid_widget_data[widget_id]['global_status'] = "greylist" 
-        elif pattern.search(widget_id).group() in widget_blacklist:
-            mgid_widget_data[widget_id]['global_status'] = "blacklist" 
-        else:
-            mgid_widget_data[widget_id]['global_status'] = "not yet listed" 
+        # if pattern.search(widget_id).group() in widget_whitelist:
+            # mgid_widget_data[widget_id]['global_status'] = "whitelist" 
+        # elif pattern.search(widget_id).group() in widget_greylist:
+            # mgid_widget_data[widget_id]['global_status'] = "greylist" 
+        # elif pattern.search(widget_id).group() in widget_blacklist:
+            # mgid_widget_data[widget_id]['global_status'] = "blacklist" 
+        # else:
+            # mgid_widget_data[widget_id]['global_status'] = "not yet listed" 
 
     complete_widget_data = mgid_widget_data
 

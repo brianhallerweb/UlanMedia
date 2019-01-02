@@ -11,6 +11,29 @@ from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
 def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, output_name):
+    # 1/1/19 global status is added here, as opposed to on create_p_and_c_widgets for
+    # one campaign so that it will update everytime the submit button is
+    # clicked rather than only once every day. 
+    widget_whitelist = get_whitelist()
+    widget_greylist = get_greylist()
+    widget_blacklist = get_blacklist()
+    # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
+            # mgid_id)
+    # if parent_widget_id in excluded_widgets:
+        # parent_widget_status = "excluded"
+    # else:
+        # parent_widget_status = "included"
+
+    parent_widget_global_status = ""
+    if parent_widget_id in widget_whitelist:
+       parent_widget_global_status = "whitelist" 
+    elif parent_widget_id in widget_greylist:
+       parent_widget_global_status = "greylist" 
+    elif parent_widget_id in widget_blacklist:
+       parent_widget_global_status = "blacklist" 
+    else:
+       parent_widget_global_status = "not yet listed" 
+
     campaigns = get_campaign_sets()
 
     widget_data = {"metadata": {"mgid_start_date": "",
@@ -55,7 +78,8 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
                 "max_lead_cpa": campaign["max_lead_cpa"],
                 "max_sale_cpa": campaign["max_sale_cpa"],
                 "status": data[widget_id]["status"],
-                "global_status": data[widget_id]["global_status"],
+                # "status": parent_widget_status,
+                "global_status": parent_widget_global_status,
                 "clicks": data[widget_id]["clicks"], 
                 "cost": data[widget_id]["cost"],
                 "sales": data[widget_id]["sales"],
