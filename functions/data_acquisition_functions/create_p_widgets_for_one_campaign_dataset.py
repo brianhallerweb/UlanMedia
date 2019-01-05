@@ -6,6 +6,7 @@ from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.misc.get_campaign_sets import get_campaign_sets 
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
+import os
 
 def create_p_widgets_for_one_campaign_dataset(vol_id, date_range):
     campaigns = get_campaign_sets()
@@ -23,7 +24,7 @@ def create_p_widgets_for_one_campaign_dataset(vol_id, date_range):
                                  "data": {}
                                 } 
 
-    with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
        json_file = json.load(file)
 
     metadata = json_file["metadata"]

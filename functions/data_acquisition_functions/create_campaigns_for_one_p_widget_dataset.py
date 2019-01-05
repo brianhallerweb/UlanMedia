@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from config.config import *
 import json
+import os
 import sys
 from functions.data_acquisition_functions.get_mgid_widget_clicks_and_costs_by_campaign import get_mgid_widget_clicks_and_costs_by_campaign
 from functions.data_acquisition_functions.get_vol_widget_conversions_by_campaign import get_vol_widget_conversions_by_campaign
@@ -45,7 +46,7 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
                   } 
 
     for campaign in campaigns:
-        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{campaign["vol_id"]}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              json_file = json.load(file)
 
         metadata = json_file["metadata"]

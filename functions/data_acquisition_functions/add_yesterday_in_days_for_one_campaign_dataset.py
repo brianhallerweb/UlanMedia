@@ -5,6 +5,7 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.create_mgid_date_range import create_mgid_date_range
 from functions.misc.create_vol_date_range import create_vol_date_range
 import json
+import os
 import re
 import sys
 import pprint
@@ -19,7 +20,7 @@ def add_yesterday_in_days_for_one_campaign_dataset(vol_token, mgid_token):
     for campaign in campaigns_sets:
         campaigns_lookup[campaign["vol_id"]] = campaign["mgid_id"]
 
-    with open(f'/home/bsh/Documents/UlanMedia/data/days_for_one_campaign/days_for_one_campaign_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_campaign/days_for_one_campaign_dataset.json', 'r') as file:
          days_for_one_campaign_dataset = json.load(file)
          
 

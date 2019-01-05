@@ -2,6 +2,7 @@ import json
 from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
 import re
+import os
 import sys
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
@@ -27,7 +28,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
         vol_id = campaign["vol_id"] 
         # mgid_id = campaign["mgid_id"] 
         # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
-        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
         p_widgets_for_all_campaigns["metadata"]["mgid_start_date"] = json_file["metadata"]["mgid_start_date"]

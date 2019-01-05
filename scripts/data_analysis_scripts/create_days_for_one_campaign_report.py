@@ -1,9 +1,10 @@
 import sys
+import os
 import json
 import pandas as pd
 import numpy as np
 
-with open(f'/home/bsh/Documents/UlanMedia/data/days_for_one_campaign/days_for_one_campaign_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_campaign/days_for_one_campaign_dataset.json', 'r') as file:
      data = json.load(file)
 
 campaign_id = sys.argv[1]

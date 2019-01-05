@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 import pandas as pd
 import numpy as np
@@ -6,7 +7,7 @@ import numpy as np
 p_widget_id = sys.argv[1]
 date_range = sys.argv[2]
 
-with open(f'/home/bsh/Documents/UlanMedia/data/c_widgets_for_one_p_widget/{p_widget_id}_{date_range}_c_widgets_for_one_p_widget_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/c_widgets_for_one_p_widget/{p_widget_id}_{date_range}_c_widgets_for_one_p_widget_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]

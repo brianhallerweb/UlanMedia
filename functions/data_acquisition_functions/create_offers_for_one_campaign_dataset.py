@@ -1,10 +1,11 @@
 from config.config import *
 import json
 import sys
+import os
 
 def create_offers_for_one_campaign_dataset(date_range, vol_id):
 
-    with open(f'/home/bsh/Documents/UlanMedia/data/offers/{date_range}_offers_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     metadata = json_file["metadata"]

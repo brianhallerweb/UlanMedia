@@ -2,6 +2,7 @@ from config.config import *
 import json
 import sys
 from functions.misc.get_campaign_sets import get_campaign_sets
+import os
 
 def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_name):
     campaigns = get_campaign_sets()
@@ -16,7 +17,7 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_na
 
     for campaign in campaigns:
         vol_id = campaign["vol_id"]
-        with open(f'/home/bsh/Documents/UlanMedia/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              json_file = json.load(file)
         
         metadata = json_file["metadata"]

@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 import pandas as pd
 import numpy as np
@@ -6,7 +7,7 @@ import numpy as np
 date_range = sys.argv[1]
 vol_id = sys.argv[2]
 
-with open(f'/home/bsh/Documents/UlanMedia/data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
