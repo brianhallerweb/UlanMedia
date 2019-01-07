@@ -68,6 +68,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][parent_widget]["has_children"] = True
            else:
                p_widgets_for_all_campaigns["data"][parent_widget]["has_children"] = False
+
         
 
     with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:

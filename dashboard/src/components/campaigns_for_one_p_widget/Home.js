@@ -27,11 +27,15 @@ class Home extends Component {
       c3Value: 10,
       c4: false,
       c4Value: 10,
-      c5: true,
+      c5: false,
       c5Value: 0.25,
-      c6: true,
+      c6: false,
       c6Value1: 700,
       c6Value2: 30,
+      needsReview: false,
+      campaignsCount: 0,
+      goodCampaignsCount: 0,
+      badCampaignsCount: 0,
     };
   }
 
@@ -49,6 +53,59 @@ class Home extends Component {
 
   setConditionValue(condition, conditionValue) {
     this.setState({[condition]: conditionValue});
+  }
+
+  isNeedsReview() {
+    if (
+      this.state.c1 ||
+      this.state.c2 ||
+      this.state.c3 ||
+      this.state.c3 ||
+      this.state.c4 ||
+      this.state.c5 ||
+      this.state.c6
+    ) {
+      return this.setState({needsReview: false});
+    }
+
+    let campaignsCount = 0;
+    let goodCampaignsCount = 0;
+    let badCampaignsCount = 0;
+    for (let campaign of this.state.campaignRecords) {
+      if (campaign.name !== 'summary') {
+        campaignsCount += 1;
+      }
+
+      if (
+        campaign.name !== 'summary' &&
+        campaign.lead_cvr < 0.25 &&
+        (campaign.cost >= 30 || campaign.clicks >= 700)
+      ) {
+        badCampaignsCount += 1;
+      }
+
+      if (
+        campaign.name !== 'summary' &&
+        campaign.lead_cvr > 0.25 &&
+        (campaign.leads >= 3 || campaign.sales >= 1)
+      ) {
+        goodCampaignsCount += 1;
+      }
+    }
+
+    if (
+      (goodCampaignsCount >= 3 && badCampaignsCount === 0) ||
+      (goodCampaignsCount > 0 && badCampaignsCount > 0) ||
+      (goodCampaignsCount === 0 && badCampaignsCount >= 3) ||
+      (badCampaignsCount >= 1 && goodCampaignsCount === 0)
+    ) {
+      this.setState({
+        campaignsCount,
+        goodCampaignsCount,
+        badCampaignsCount,
+        needsReview: true,
+      });
+    }
   }
 
   submitForm() {
@@ -122,10 +179,12 @@ class Home extends Component {
         records.length ? (error = false) : (error = true);
         this.setState({campaignRecords: records, error, loading: false});
       })
+      .then(() => this.isNeedsReview())
       .catch(err => console.log(err));
   }
 
   render() {
+    console.log(this.state.needsReview);
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
@@ -158,6 +217,14 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
+        {this.state.needsReview && (
+          <div>
+            <p>total campaigns: {this.state.campaignsCount}</p>
+            <p>good campaigns: {this.state.goodCampaignsCount}</p>
+            <p>bad campaigns: {this.state.badCampaignsCount}</p>
+            <p style={{color: 'red'}}>NEEDS REVIEW</p>
+          </div>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}
