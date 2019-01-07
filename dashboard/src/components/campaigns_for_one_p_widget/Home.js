@@ -71,7 +71,12 @@ class Home extends Component {
     let campaignsCount = 0;
     let goodCampaignsCount = 0;
     let badCampaignsCount = 0;
+    let totalLoss = 0;
     for (let campaign of this.state.campaignRecords) {
+      if (campaign.name === 'summary') {
+        totalLoss = campaign.profit;
+      }
+
       if (campaign.name !== 'summary') {
         campaignsCount += 1;
       }
@@ -97,7 +102,7 @@ class Home extends Component {
       (goodCampaignsCount >= 3 && badCampaignsCount === 0) ||
       (goodCampaignsCount > 0 && badCampaignsCount > 0) ||
       (goodCampaignsCount === 0 && badCampaignsCount >= 3) ||
-      (badCampaignsCount >= 1 && goodCampaignsCount === 0)
+      (goodCampaignsCount === 0 && badCampaignsCount > 0 && totalLoss <= -60)
     ) {
       this.setState({
         campaignsCount,
