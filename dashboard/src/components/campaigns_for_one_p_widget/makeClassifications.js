@@ -75,18 +75,18 @@ function finalJudgement(
   totalProfit,
 ) {
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
-    return `According to the current flow chart\n\np widget is WHITE\n\np widget is bad in ${badCampaignsCount} campaigns\np widget is good in ${goodCampaignsCount} campaigns\n\nINCLUDE the p widget in all campaigns`;
+    return `According to the current flow chart\n\np widget is WHITE\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nINCLUDE the p widget in all campaigns`;
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
-    return `According to the current flow chart\n\np widget is GREY\n\np widget is bad in ${badCampaignsCount} campaigns\np widget is good in ${goodCampaignsCount} campaigns\n\nEXCLUDE it in bad campaigns`;
+    return `According to the current flow chart\n\np widget is GREY\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nEXCLUDE it in bad campaigns`;
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
-    return `According to the the current flow chart\n\np widget is BLACK\n\np widget is bad in ${badCampaignsCount} campaigns\np widget is good in ${goodCampaignsCount} campaigns\n\nEXCLUDE the p widget in all campaigns`;
+    return `According to the the current flow chart\n\np widget is BLACK\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nEXCLUDE it in all campaigns`;
   } else if (
     goodCampaignsCount === 0 &&
     badCampaignsCount > 0 &&
     totalProfit <= -60
   ) {
-    return `According to the current flow chart\n\np widget is BLACK\n\np widget is bad in ${badCampaignsCount} campaigns\np widget is good in ${goodCampaignsCount} campaigns\np widget has a total loss of ${-1 *
-      totalProfit}\n\nEXCLUDE the p widget in all campaigns`;
+    return `According to the current flow chart\n\np widget is BLACK\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget has a total loss of ${-1 *
+      totalProfit}\n\nEXCLUDE it in all campaigns`;
   } else {
     return `According to the current flow chart\n\np widget is WAIT\n\nWAIT in all campaigns`;
   }
