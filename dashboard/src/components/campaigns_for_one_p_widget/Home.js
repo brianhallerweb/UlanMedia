@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import makeClassifications from './makeClassifications';
 
 class Home extends Component {
   constructor(props) {
@@ -32,10 +33,7 @@ class Home extends Component {
       c6: false,
       c6Value1: 700,
       c6Value2: 30,
-      needsReview: false,
-      campaignsCount: 0,
-      goodCampaignsCount: 0,
-      badCampaignsCount: 0,
+      classifications: '',
     };
   }
 
@@ -55,66 +53,13 @@ class Home extends Component {
     this.setState({[condition]: conditionValue});
   }
 
-  isNeedsReview() {
-    if (
-      this.state.c1 ||
-      this.state.c2 ||
-      this.state.c3 ||
-      this.state.c3 ||
-      this.state.c4 ||
-      this.state.c5 ||
-      this.state.c6
-    ) {
-      return this.setState({needsReview: false});
-    }
-
-    let campaignsCount = 0;
-    let goodCampaignsCount = 0;
-    let badCampaignsCount = 0;
-    let totalLoss = 0;
-    for (let campaign of this.state.campaignRecords) {
-      if (campaign.name === 'summary') {
-        totalLoss = campaign.profit;
-      }
-
-      if (campaign.name !== 'summary') {
-        campaignsCount += 1;
-      }
-
-      if (
-        campaign.name !== 'summary' &&
-        campaign.lead_cvr < 0.25 &&
-        (campaign.cost >= 30 || campaign.clicks >= 700)
-      ) {
-        badCampaignsCount += 1;
-      }
-
-      if (
-        campaign.name !== 'summary' &&
-        campaign.lead_cvr > 0.25 &&
-        (campaign.leads >= 3 || campaign.sales >= 1)
-      ) {
-        goodCampaignsCount += 1;
-      }
-    }
-
-    if (
-      (goodCampaignsCount >= 3 && badCampaignsCount === 0) ||
-      (goodCampaignsCount > 0 && badCampaignsCount > 0) ||
-      (goodCampaignsCount === 0 && badCampaignsCount >= 3) ||
-      (goodCampaignsCount === 0 && badCampaignsCount > 0 && totalLoss <= -60)
-    ) {
-      this.setState({
-        campaignsCount,
-        goodCampaignsCount,
-        badCampaignsCount,
-        needsReview: true,
-      });
-    }
-  }
-
   submitForm() {
-    this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
+    this.setState({
+      loading: true,
+      classifications: '',
+      mgidRequestDates: '',
+      volRequestDates: '',
+    });
 
     fetch(`/api/createCampaignsForOnePWidgetDataset`, {
       method: 'POST',
@@ -184,7 +129,18 @@ class Home extends Component {
         records.length ? (error = false) : (error = true);
         this.setState({campaignRecords: records, error, loading: false});
       })
-      .then(() => this.isNeedsReview())
+      .then(() =>
+        makeClassifications(
+          this.state.c1,
+          this.state.c2,
+          this.state.c3,
+          this.state.c4,
+          this.state.c5,
+          this.state.c6,
+          this.state.campaignRecords,
+        ),
+      )
+      .then(classifications => this.setState({classifications}))
       .catch(err => console.log(err));
   }
 
@@ -221,14 +177,7 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
-        {this.state.needsReview && (
-          <div>
-            <p>total campaigns: {this.state.campaignsCount}</p>
-            <p>good campaigns: {this.state.goodCampaignsCount}</p>
-            <p>bad campaigns: {this.state.badCampaignsCount}</p>
-            <p style={{color: 'red'}}>NEEDS REVIEW</p>
-          </div>
-        )}
+        <div style={{whiteSpace: 'pre-wrap'}}>{this.state.classifications}</div>
         <Records
           error={this.state.error}
           loading={this.state.loading}
