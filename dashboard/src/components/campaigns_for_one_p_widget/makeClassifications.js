@@ -75,7 +75,7 @@ function finalJudgement(
   totalProfit,
 ) {
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
-    return `According to the current flow chart\n\np widget is WHITE\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nINCLUDE the p widget in all campaigns`;
+    return `According to the current flow chart\n\np widget is WHITE\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nINCLUDE the it in all campaigns`;
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
     return `According to the current flow chart\n\np widget is GREY\n\np widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\nEXCLUDE it in bad campaigns`;
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
