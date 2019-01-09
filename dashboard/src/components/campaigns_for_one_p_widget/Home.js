@@ -33,7 +33,7 @@ class Home extends Component {
       c6: false,
       c6Value1: 700,
       c6Value2: 30,
-      classifications: '',
+      classification: '',
     };
   }
 
@@ -56,7 +56,7 @@ class Home extends Component {
   submitForm() {
     this.setState({
       loading: true,
-      classifications: '',
+      classification: '',
       mgidRequestDates: '',
       volRequestDates: '',
     });
@@ -125,22 +125,24 @@ class Home extends Component {
       )
       .then(res => res.json())
       .then(records => {
-        let error;
-        records.length ? (error = false) : (error = true);
-        this.setState({campaignRecords: records, error, loading: false});
-      })
-      .then(() =>
-        makeClassifications(
+        let classification = makeClassifications(
           this.state.c1,
           this.state.c2,
           this.state.c3,
           this.state.c4,
           this.state.c5,
           this.state.c6,
-          this.state.campaignRecords,
-        ),
-      )
-      .then(classifications => this.setState({classifications}))
+          records,
+        );
+        let error;
+        records.length ? (error = false) : (error = true);
+        this.setState({
+          campaignRecords: records,
+          error,
+          loading: false,
+          classification,
+        });
+      })
       .catch(err => console.log(err));
   }
 
@@ -177,7 +179,9 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
-        <div style={{whiteSpace: 'pre-wrap'}}>{this.state.classifications}</div>
+        <div style={{whiteSpace: 'pre-wrap', paddingTop: 10}}>
+          {this.state.classification}
+        </div>
         <Records
           error={this.state.error}
           loading={this.state.loading}

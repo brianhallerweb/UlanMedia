@@ -24,6 +24,7 @@ class Records extends Component {
             <th>Sale CPA</th>
             <th>Status</th>
             <th>Global Status</th>
+            <th>Classification</th>
           </tr>
         </thead>
         <tbody>

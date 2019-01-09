@@ -7,6 +7,23 @@ class Record extends Component {
     super(props);
     this.state = {};
   }
+  stylizeClassification(row) {
+    if (row === 'bad') {
+      return (
+        <td style={{color: 'red', fontWeight: 900}}>
+          {this.props.campaignRecord.classification}
+        </td>
+      );
+    } else if (row === 'good') {
+      return (
+        <td style={{color: 'green', fontWeight: 900}}>
+          {this.props.campaignRecord.classification}
+        </td>
+      );
+    } else {
+      return <td>{this.props.campaignRecord.classification}</td>;
+    }
+  }
 
   addRowLinks() {
     return (
@@ -67,6 +84,7 @@ class Record extends Component {
         <td>${this.props.campaignRecord.sale_cpa}</td>
         <td>{this.props.campaignRecord.status}</td>
         <td>{this.props.campaignRecord.global_status}</td>
+        {this.stylizeClassification(this.props.campaignRecord.classification)}
       </tr>
     );
   }

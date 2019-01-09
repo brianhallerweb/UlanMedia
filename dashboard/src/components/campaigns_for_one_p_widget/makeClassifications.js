@@ -1,6 +1,8 @@
 //@format
 
 function makeClassifications(c1, c2, c3, c4, c5, c6, campaignRecords) {
+  addCampaignClassifications(campaignRecords);
+
   const stopClassificationMessage = isCheckboxChecked(c1, c2, c3, c4, c5, c6);
   if (stopClassificationMessage) {
     return stopClassificationMessage;
@@ -12,7 +14,7 @@ function makeClassifications(c1, c2, c3, c4, c5, c6, campaignRecords) {
   const badCampaignsCount = totals.badCampaignsCount;
   const totalProfit = totals.totalProfit;
 
-  return finalJudgement(
+  return classifyPWidget(
     campaignsCount,
     goodCampaignsCount,
     badCampaignsCount,
@@ -29,9 +31,40 @@ function makeClassifications(c1, c2, c3, c4, c5, c6, campaignRecords) {
 ///////////////////////////////////////////////////
 
 // helper functions
+
+function addCampaignClassifications(campaignRecords) {
+  for (let campaign of campaignRecords) {
+    if (campaign.name === 'summary') {
+      continue;
+    }
+    if (campaign.lead_cvr >= 0.25) {
+      if (campaign.leads >= 3) {
+        campaign.classification = 'good';
+        continue;
+      } else {
+        if (campaign.sales >= 1) {
+          campaign.classification = 'good';
+          continue;
+        } else {
+          campaign.classification = 'wait';
+          continue;
+        }
+      }
+    } else {
+      if (campaign.cost < 30 && campaign.clicks < 700) {
+        campaign.classification = 'wait';
+        continue;
+      } else {
+        campaign.classification = 'bad';
+        continue;
+      }
+    }
+  }
+}
+
 function isCheckboxChecked(c1, c2, c3, c4, c5, c6) {
   if (c1 || c2 || c3 || c3 || c4 || c5 || c6) {
-    return 'all checkboxes must be unchecked to classify';
+    return 'all checkboxes must be unchecked to classify the p widget';
   }
 }
 
@@ -68,7 +101,7 @@ function calculateCampaignsTotals(campaignRecords) {
   return {campaignsCount, goodCampaignsCount, badCampaignsCount, totalProfit};
 }
 
-function finalJudgement(
+function classifyPWidget(
   campaignsCount,
   goodCampaignsCount,
   badCampaignsCount,
