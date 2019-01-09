@@ -39,11 +39,11 @@ function addCampaignClassifications(campaignRecords) {
     }
     if (campaign.lead_cvr >= 0.25) {
       if (campaign.leads >= 3) {
-        campaign.classification = 'good';
+        campaign.classification = 'GOOD';
         continue;
       } else {
         if (campaign.sales >= 1) {
-          campaign.classification = 'good';
+          campaign.classification = 'GOOD';
           continue;
         } else {
           campaign.classification = 'wait';
@@ -55,7 +55,7 @@ function addCampaignClassifications(campaignRecords) {
         campaign.classification = 'wait';
         continue;
       } else {
-        campaign.classification = 'bad';
+        campaign.classification = 'BAD';
         continue;
       }
     }
