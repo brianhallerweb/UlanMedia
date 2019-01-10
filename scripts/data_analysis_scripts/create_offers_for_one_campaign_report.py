@@ -52,6 +52,7 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values(["offerFlow", "clicks"],
         ascending=[True, False])
 
+# add a summary row at the top
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
@@ -67,7 +68,7 @@ if len(final_result.index) > 0:
         summary["cpa"] = 0
     else:
         summary["cpa"] = round(summary["cost"] / summary["conversions"], 2)
-    final_result = final_result.append(summary, ignore_index=True)
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["offerID","offerName", "offerFlow", "clicks",

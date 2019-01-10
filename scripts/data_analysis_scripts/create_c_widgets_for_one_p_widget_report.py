@@ -73,7 +73,7 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("cost", ascending=False)
 
-# add a summary row at the bottom
+# add a summary row at the top
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
@@ -90,7 +90,7 @@ if len(final_result.index) > 0:
         summary["sale_cpa"] = round(summary["cost"] / summary["sales"], 2)
     else:
         summary["sale_cpa"] = 0
-    final_result = final_result.append(summary, ignore_index=True)
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
 

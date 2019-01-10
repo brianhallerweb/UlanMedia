@@ -18,22 +18,28 @@ class Record extends Component {
     this.state = {};
   }
 
+  addRowLinks() {
+    return (
+      <div>
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/adsforonecampaign/${this.volID}/${this.name}/`,
+            }}
+            target="_blank">
+            ads
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <tr>
         <td>
           {this.name}
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/adsforonecampaign/${this.volID}/${this.name}/`,
-                }}
-                target="_blank">
-                ads
-              </Link>
-            </div>
-          </div>
+          {this.name !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>

@@ -8,57 +8,63 @@ class Record extends Component {
     this.state = {};
   }
 
+  addRowLinks() {
+    return (
+      <div>
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`,
+            }}
+            target="_blank">
+            campaigns
+          </Link>
+        </div>
+
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`,
+            }}
+            target="_blank">
+            c widgets
+          </Link>
+        </div>
+
+        <div className="rowLink">
+          <a
+            href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
+              this.props.mgidid
+            }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+            target="_blank">
+            exclude
+          </a>
+        </div>
+
+        <div className="rowLink">
+          <a
+            href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+              this.props.mgidid
+            }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+            target="_blank">
+            mgid
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <tr>
         <td>
-          {this.props.widgetRecord.widget_id}
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                c widgets
-              </Link>
-            </div>
-
-            <div className="rowLink">
-              <a
-                href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
-                  this.props.mgidid
-                }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
-                target="_blank">
-                exclude
-              </a>
-            </div>
-
-            <div className="rowLink">
-              <a
-                href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-                  this.props.mgidid
-                }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
-                target="_blank">
-                mgid
-              </a>
-            </div>
-          </div>
-        </td>
+	{this.props.widgetRecord.widget_id}
+          {this.props.widgetRecord.widget_id !== 'summary' && this.addRowLinks()}
+	</td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>

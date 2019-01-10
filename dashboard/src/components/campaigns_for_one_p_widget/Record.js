@@ -8,15 +8,21 @@ class Record extends Component {
     this.state = {};
   }
   stylizeClassification(row) {
-    if (row === 'BAD') {
+    if (row === 'BLACK') {
       return (
         <td style={{color: 'red', fontWeight: 900}}>
           {this.props.campaignRecord.classification}
         </td>
       );
-    } else if (row === 'GOOD') {
+    } else if (row === 'WHITE') {
       return (
         <td style={{color: 'green', fontWeight: 900}}>
+          {this.props.campaignRecord.classification}
+        </td>
+      );
+    } else if (row === 'GREY') {
+      return (
+        <td style={{color: 'yellow', fontWeight: 900}}>
           {this.props.campaignRecord.classification}
         </td>
       );
@@ -73,6 +79,7 @@ class Record extends Component {
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
+        {this.stylizeClassification(this.props.campaignRecord.classification)}
         <td>{this.props.campaignRecord.clicks}</td>
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
@@ -84,7 +91,6 @@ class Record extends Component {
         <td>${this.props.campaignRecord.sale_cpa}</td>
         <td>{this.props.campaignRecord.status}</td>
         <td>{this.props.campaignRecord.global_status}</td>
-        {this.stylizeClassification(this.props.campaignRecord.classification)}
       </tr>
     );
   }

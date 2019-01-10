@@ -1,49 +1,17 @@
 //@format
 
-function makeClassifications(c1, c2, c3, c4, c5, c6, campaignRecords) {
-  addCampaignClassifications(campaignRecords);
-
-  const stopClassificationMessage = isCheckboxChecked(c1, c2, c3, c4, c5, c6);
-  if (stopClassificationMessage) {
-    return stopClassificationMessage;
-  }
-
-  const totals = calculateCampaignsTotals(campaignRecords);
-  const campaignsCount = totals.campaignsCount;
-  const goodCampaignsCount = totals.goodCampaignsCount;
-  const badCampaignsCount = totals.badCampaignsCount;
-  const totalProfit = totals.totalProfit;
-
-  return classifyPWidget(
-    campaignsCount,
-    goodCampaignsCount,
-    badCampaignsCount,
-    totalProfit,
-  );
-}
-
-//////////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-
-// helper functions
-
-function addCampaignClassifications(campaignRecords) {
+function classifyCampaigns(campaignRecords) {
   for (let campaign of campaignRecords) {
     if (campaign.name === 'summary') {
       continue;
     }
     if (campaign.lead_cvr >= 0.25) {
       if (campaign.leads >= 3) {
-        campaign.classification = 'GOOD';
+        campaign.classification = 'WHITE';
         continue;
       } else {
         if (campaign.sales >= 1) {
-          campaign.classification = 'GOOD';
+          campaign.classification = 'WHITE';
           continue;
         } else {
           campaign.classification = 'wait';
@@ -55,12 +23,51 @@ function addCampaignClassifications(campaignRecords) {
         campaign.classification = 'wait';
         continue;
       } else {
-        campaign.classification = 'BAD';
+        campaign.classification = 'BLACK';
         continue;
       }
     }
   }
+  return campaignRecords;
 }
+
+function classifyPWidget(c1, c2, c3, c4, c5, c6, campaignRecords) {
+  const stopClassificationMessage = isCheckboxChecked(c1, c2, c3, c4, c5, c6);
+  if (stopClassificationMessage) {
+    return stopClassificationMessage;
+  }
+
+  const totals = calculateCampaignsTotals(campaignRecords);
+  const campaignsCount = totals.campaignsCount;
+  const goodCampaignsCount = totals.goodCampaignsCount;
+  const badCampaignsCount = totals.badCampaignsCount;
+  const totalProfit = totals.totalProfit;
+
+  addSummaryRowClassification(
+    campaignRecords,
+    campaignsCount,
+    goodCampaignsCount,
+    badCampaignsCount,
+    totalProfit,
+  );
+
+  return finalJudgement(
+    campaignsCount,
+    goodCampaignsCount,
+    badCampaignsCount,
+    totalProfit,
+  );
+}
+
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
+// helper functions
 
 function isCheckboxChecked(c1, c2, c3, c4, c5, c6) {
   if (c1 || c2 || c3 || c3 || c4 || c5 || c6) {
@@ -101,7 +108,31 @@ function calculateCampaignsTotals(campaignRecords) {
   return {campaignsCount, goodCampaignsCount, badCampaignsCount, totalProfit};
 }
 
-function classifyPWidget(
+function addSummaryRowClassification(
+  campaignRecords,
+  campaignsCount,
+  goodCampaignsCount,
+  badCampaignsCount,
+  totalProfit,
+) {
+  if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
+    campaignRecords[0].classification = 'WHITE';
+  } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
+    campaignRecords[0].classification = 'GREY';
+  } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
+    campaignRecords[0].classification = 'BLACK';
+  } else if (
+    goodCampaignsCount === 0 &&
+    badCampaignsCount > 0 &&
+    totalProfit <= -60
+  ) {
+    campaignRecords[0].classification = 'BLACK';
+  } else {
+    campaignRecords[0].classification = 'wait';
+  }
+}
+
+function finalJudgement(
   campaignsCount,
   goodCampaignsCount,
   badCampaignsCount,
@@ -125,4 +156,4 @@ function classifyPWidget(
   }
 }
 
-export default makeClassifications;
+export {classifyCampaigns, classifyPWidget};

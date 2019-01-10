@@ -16,12 +16,8 @@ class Record extends Component {
     this.cpa = this.props.ad.cpa;
     this.state = {};
   }
-
-  render() {
+  addRowLinks() {
     return (
-      <tr>
-        <td>
-          {this.image}
           <div>
             <div className="rowLink">
               <Link
@@ -33,6 +29,16 @@ class Record extends Component {
               </Link>
             </div>
           </div>
+    );
+  }
+
+
+  render() {
+    return (
+      <tr>
+        <td>
+          {this.image}
+          {this.image !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.clicks}</td>
         <td>${this.cost}</td>

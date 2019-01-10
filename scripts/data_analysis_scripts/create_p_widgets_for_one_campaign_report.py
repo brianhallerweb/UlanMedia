@@ -80,6 +80,33 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("cost", ascending=False)
 
+# add a summary row at the top
+if len(final_result.index) > 0:
+    summary = final_result.sum(numeric_only=True)
+    summary = summary.round(2)
+    summary["widget_id"] = "summary"
+    if summary["clicks"] == 0:
+        summary["lead_cvr"] = 0
+    else:
+        summary["lead_cvr"] = round((summary["leads"] / summary["clicks"]) * 100,
+        2)
+    rows_with_leads = final_result[final_result["leads"] >= 1]
+    number_of_rows_with_leads = len(rows_with_leads.index)
+    if number_of_rows_with_leads > 0:
+        summary["lead_cpa"] = round(summary["cost"] / summary["leads"], 2)
+    else:
+        summary["lead_cpa"] = 0 
+    rows_with_sales = final_result[final_result["sales"] >= 1]
+    number_of_rows_with_sales = len(rows_with_sales.index)
+    if number_of_rows_with_sales > 0:
+        summary["sale_cpa"] = round(summary["cost"] / summary["sales"], 2)
+    else:
+        summary["sale_cpa"] = 0
+    # Append summary onto the top
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
+    final_result = final_result.replace(np.nan, "")
+
+
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
             "revenue", "sales", "widget_id", "lead_cpa", "sale_cpa","lead_cvr", "profit",
             "status", "global_status"]].to_dict("records"))

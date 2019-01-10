@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
-import makeClassifications from './makeClassifications';
+import {classifyCampaigns, classifyPWidget} from './classifications';
 
 class Home extends Component {
   constructor(props) {
@@ -124,8 +124,9 @@ class Home extends Component {
         }),
       )
       .then(res => res.json())
+      .then(records => classifyCampaigns(records))
       .then(records => {
-        let classification = makeClassifications(
+        let classification = classifyPWidget(
           this.state.c1,
           this.state.c2,
           this.state.c3,

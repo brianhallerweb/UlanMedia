@@ -52,6 +52,29 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["cost"]
 final_result = final_result.sort_values("sort", ascending=False)
+
+# add a summary row at the top
+if len(final_result.index) > 0:
+    summary = final_result.sum(numeric_only=True)
+    summary = summary.round(2)
+    summary["name"] = "summary"
+    if summary["clicks"] == 0:
+        summary["cvr"] = 0
+        summary["epc"] = 0
+    else:
+        summary["cvr"] = round((summary["conversions"] / summary["clicks"]) * 100,
+        2)
+        summary["epc"] = round((summary["revenue"] / summary["clicks"]),
+        2)
+    if summary["conversions"] == 0:
+        summary["cpa"] = 0
+    else:
+        summary["cpa"] = round((summary["cost"] / summary["conversions"]),
+        2)
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
+    final_result = final_result.replace(np.nan, "")
+
+
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "name", "mgid_id", "vol_id"]].to_dict("records"))
