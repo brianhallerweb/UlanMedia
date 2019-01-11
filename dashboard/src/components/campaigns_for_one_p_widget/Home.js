@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
-import {classifyCampaigns, classifyPWidget} from './classifications';
+import {classifyCampaigns, classifyPWidget} from './classificationFunctions';
 
 class Home extends Component {
   constructor(props) {

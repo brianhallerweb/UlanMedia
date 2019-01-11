@@ -78,6 +78,7 @@ class Record extends Component {
             </div>
           </div>
         </td>
+        <td>{this.props.widgetRecord.classification}</td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>

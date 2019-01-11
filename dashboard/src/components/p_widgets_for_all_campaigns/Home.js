@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import {classifyPWidget} from './classificationFunctions';
 
 class Home extends Component {
   constructor(props) {
@@ -136,6 +137,12 @@ class Home extends Component {
       .catch(err => console.log(err));
   }
 
+  classifyPWidgets() {
+    for (let widget of this.state.widgetRecords) {
+      classifyPWidget(widget.widget_id);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -167,6 +174,13 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.widgetRecords.length > 0 && (
+          <button
+            style={{marginTop: 10}}
+            onClick={() => this.classifyPWidgets()}>
+            classify p widgets
+          </button>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

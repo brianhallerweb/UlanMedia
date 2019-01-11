@@ -165,7 +165,6 @@ class Home extends Component {
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
-        {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <Records
           loading={this.state.loading}
           error={this.state.error}
