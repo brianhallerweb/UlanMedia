@@ -151,18 +151,18 @@ function finalJudgement(
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
     return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\n\np widget is WHITE\n\nINCLUDE it in all campaigns`;
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is GREY\n\nEXCLUDE it in bad campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\n\np widget is GREY\n\nEXCLUDE it in bad campaigns`;
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else if (
     goodCampaignsCount === 0 &&
     badCampaignsCount > 0 &&
     totalProfit <= -60
   ) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\np widget has a total loss of ${-1 *
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\np widget has a total loss of ${-1 *
       totalProfit}\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is WAIT\n\nINCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\n\np widget is WAIT\n\nINCLUDE it in all campaigns`;
   }
 }
 
