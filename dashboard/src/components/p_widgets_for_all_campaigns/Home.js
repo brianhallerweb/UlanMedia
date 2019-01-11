@@ -138,6 +138,7 @@ class Home extends Component {
   }
 
   classifyPWidgets() {
+    console.log('processing data...');
     for (let widget of this.state.widgetRecords) {
       classifyPWidget(widget.widget_id);
     }
