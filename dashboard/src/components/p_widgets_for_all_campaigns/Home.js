@@ -178,7 +178,7 @@ class Home extends Component {
           <button
             style={{marginTop: 10}}
             onClick={() => this.classifyPWidgets()}>
-            classify p widgets
+            classify p widgets (look in console)
           </button>
         )}
         <Records
