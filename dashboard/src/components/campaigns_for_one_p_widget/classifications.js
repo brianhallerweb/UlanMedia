@@ -7,11 +7,11 @@ function classifyCampaigns(campaignRecords) {
     }
     if (campaign.lead_cvr >= 0.25) {
       if (campaign.leads >= 3) {
-        campaign.classification = 'WHITE';
+        campaign.classification = 'GOOD';
         continue;
       } else {
         if (campaign.sales >= 1) {
-          campaign.classification = 'WHITE';
+          campaign.classification = 'GOOD';
           continue;
         } else {
           campaign.classification = 'wait';
@@ -23,7 +23,7 @@ function classifyCampaigns(campaignRecords) {
         campaign.classification = 'wait';
         continue;
       } else {
-        campaign.classification = 'BLACK';
+        campaign.classification = 'BAD';
         continue;
       }
     }
@@ -116,17 +116,17 @@ function addSummaryRowClassification(
   totalProfit,
 ) {
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
-    campaignRecords[0].classification = 'WHITE';
+    campaignRecords[0].classification = 'GOOD';
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
     campaignRecords[0].classification = 'GREY';
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
-    campaignRecords[0].classification = 'BLACK';
+    campaignRecords[0].classification = 'BAD';
   } else if (
     goodCampaignsCount === 0 &&
     badCampaignsCount > 0 &&
     totalProfit <= -60
   ) {
-    campaignRecords[0].classification = 'BLACK';
+    campaignRecords[0].classification = 'BAD';
   } else {
     campaignRecords[0].classification = 'wait';
   }
@@ -139,20 +139,20 @@ function finalJudgement(
   totalProfit,
 ) {
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
-    return `According to the current flow chart\n\np widget is WHITE\n\np widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\nINCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is WHITE\n\nINCLUDE it in all campaigns`;
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
-    return `According to the current flow chart\n\np widget is GREY\n\np widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\nEXCLUDE it in black campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is GREY\n\nEXCLUDE it in bad campaigns`;
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
-    return `According to the the current flow chart\n\np widget is BLACK\n\np widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\nEXCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else if (
     goodCampaignsCount === 0 &&
     badCampaignsCount > 0 &&
     totalProfit <= -60
   ) {
-    return `According to the current flow chart\n\np widget is BLACK\n\np widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\np widget has a total loss of ${-1 *
-      totalProfit}\n\nEXCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget has a total loss of ${-1 *
+      totalProfit}\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else {
-    return `According to the current flow chart\n\np widget is WAIT\n\np widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\nINCLUDE it in all campaigns`;
+    return `p widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\np widget is WAIT\n\nINCLUDE it in all campaigns`;
   }
 }
 
