@@ -41,6 +41,7 @@ function classifyPWidget(c1, c2, c3, c4, c5, c6, campaignRecords) {
   const campaignsCount = totals.campaignsCount;
   const goodCampaignsCount = totals.goodCampaignsCount;
   const badCampaignsCount = totals.badCampaignsCount;
+  const waitCampaignsCount = totals.waitCampaignsCount;
   const totalProfit = totals.totalProfit;
 
   addSummaryRowClassification(
@@ -55,6 +56,7 @@ function classifyPWidget(c1, c2, c3, c4, c5, c6, campaignRecords) {
     campaignsCount,
     goodCampaignsCount,
     badCampaignsCount,
+    waitCampaignsCount,
     totalProfit,
   );
 }
@@ -79,6 +81,7 @@ function calculateCampaignsTotals(campaignRecords) {
   let campaignsCount = 0;
   let goodCampaignsCount = 0;
   let badCampaignsCount = 0;
+  let waitCampaignsCount = 0;
   let totalProfit = 0;
   for (let campaign of campaignRecords) {
     if (campaign.name === 'summary') {
@@ -95,17 +98,23 @@ function calculateCampaignsTotals(campaignRecords) {
       (campaign.cost >= 30 || campaign.clicks >= 700)
     ) {
       badCampaignsCount += 1;
-    }
-
-    if (
+    } else if (
       campaign.name !== 'summary' &&
       campaign.lead_cvr > 0.25 &&
       (campaign.leads >= 3 || campaign.sales >= 1)
     ) {
       goodCampaignsCount += 1;
+    } else {
+      waitCampaignsCount += 1;
     }
   }
-  return {campaignsCount, goodCampaignsCount, badCampaignsCount, totalProfit};
+  return {
+    campaignsCount,
+    goodCampaignsCount,
+    badCampaignsCount,
+    waitCampaignsCount,
+    totalProfit,
+  };
 }
 
 function addSummaryRowClassification(
@@ -136,23 +145,24 @@ function finalJudgement(
   campaignsCount,
   goodCampaignsCount,
   badCampaignsCount,
+  waitCampaignsCount,
   totalProfit,
 ) {
   if (goodCampaignsCount >= 3 && badCampaignsCount === 0) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is WHITE\n\nINCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount} campaigns\n\np widget is WHITE\n\nINCLUDE it in all campaigns`;
   } else if (goodCampaignsCount > 0 && badCampaignsCount > 0) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is GREY\n\nEXCLUDE it in bad campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is GREY\n\nEXCLUDE it in bad campaigns`;
   } else if (goodCampaignsCount === 0 && badCampaignsCount >= 3) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else if (
     goodCampaignsCount === 0 &&
     badCampaignsCount > 0 &&
     totalProfit <= -60
   ) {
-    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget has a total loss of ${-1 *
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\np widget has a total loss of ${-1 *
       totalProfit}\n\np widget is BLACK\n\nEXCLUDE it in all campaigns (black list the p widget)`;
   } else {
-    return `p widget is white in ${goodCampaignsCount} campaigns\np widget is black in ${badCampaignsCount} campaigns\n\np widget is WAIT\n\nINCLUDE it in all campaigns`;
+    return `p widget is good in ${goodCampaignsCount} campaigns\np widget is bad in ${badCampaignsCount} campaigns\np widget is wait in ${waitCampaignsCount}\n\np widget is WAIT\n\nINCLUDE it in all campaigns`;
   }
 }
 
