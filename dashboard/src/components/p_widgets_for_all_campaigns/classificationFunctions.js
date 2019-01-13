@@ -1,7 +1,7 @@
 //@format
 
 function classifyPWidget(pWidgetID) {
-  fetch(`/api/createCampaignsForOnePWidgetDataset`, {
+   fetch(`/api/createCampaignsForOnePWidgetDataset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
