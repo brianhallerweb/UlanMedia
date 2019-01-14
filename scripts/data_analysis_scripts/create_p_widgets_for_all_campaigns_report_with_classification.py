@@ -63,7 +63,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
-            "status", "global_status"]
+            "status", "global_status", "classification"]
             )
 
 if final_result is None:

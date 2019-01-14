@@ -179,14 +179,24 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
             if p_widget["for_all_campaigns"]["global_status"] == "not yet listed":
                 p_widget["for_all_campaigns"]["classification"] = "wait"
                 continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
+                p_widget["for_all_campaigns"]["classification"] = "white"
+                continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "greylist":
+                p_widget["for_all_campaigns"]["classification"] = "grey"
+                continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
+                p_widget["for_all_campaigns"]["classification"] = "white"
+                continue
             else:
-                p_widget["for_all_campaigns"]["classification"] = p_widget["for_all_campaigns"]["global_status"]
+                p_widget["for_all_campaigns"]["classification"] = "wait"
                 continue
 
     # The final step is to remove "for_each_campaign" "good_campaigns_count"
     # "bad_campaigns_count" and "wait_campaigns_count" from each widget
     for p_widget in p_widgets_for_all_campaigns["data"]:
         p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
+        
 
     with open(f"../../data/p_widgets_for_all_campaigns_with_classification/{date_range}_p_widgets_for_all_campaigns_dataset_with_classification.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
