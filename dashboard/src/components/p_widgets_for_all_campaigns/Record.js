@@ -53,17 +53,19 @@ class Record extends Component {
               </Link>
             </div>
 
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                c widgets
-              </Link>
-            </div>
+            {this.props.widgetRecord.has_children && (
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                      /^\d*/,
+                    )}`,
+                  }}
+                  target="_blank">
+                  c widgets
+                </Link>
+              </div>
+            )}
 
             <div className="rowLink">
               <a

@@ -29,7 +29,7 @@ class Home extends Component {
       c4Value: 0,
       c5: false,
       c5Value: 200,
-      c6: true,
+      c6: false,
       c6Value1: 1000,
       c6Value2: 50,
     };
