@@ -36,7 +36,7 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
         # set up the p_widgets_for_all_campaings["data"] data structure and
         # fill in the "for_all_campaigns" value. The data structure looks like
         # this:
-        # p_widgets_for_all_campaigns["data"] = {"for_all_campaigns": {row data
+        # p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {row data
         # for p_widgets_for_all_campaigns page}, 
         #                                         "for_each_campaign": [{row
         #                                             data for
@@ -109,7 +109,7 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
     # "for_all_campaigns" value) and data for each campaign (the
     # "for_each_campaign" value)
      
-    # loop through the each campaign for each p widget and determine the
+    # loop through each campaign for each p widget and determine the
     # good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
     for p_widget in p_widgets_for_all_campaigns["data"]:
         for campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
@@ -156,19 +156,22 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
             elif (p_widget["good_campaigns_count"] > 0) & (p_widget["bad_campaigns_count"] > 0):
                 p_widget["for_all_campaigns"]["classification"] = "grey"
                 continue
-            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
-                p_widget["for_all_campaigns"]["classification"] = "black"
-                continue
             elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 3):
                 p_widget["for_all_campaigns"]["classification"] = "black"
                 continue
+            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
+                p_widget["for_all_campaigns"]["classification"] = "black"
+                continue
             else:
                 p_widget["for_all_campaigns"]["classification"] = "wait"
+                continue
         else:
             if p_widget["for_all_campaigns"]["global_status"] == "not yet listed":
                 p_widget["for_all_campaigns"]["classification"] = "wait"
+                continue
             else:
                 p_widget["for_all_campaigns"]["classification"] = p_widget["for_all_campaigns"]["global_status"]
+                continue
             
     # The final step is to remove "for_each_campaign" "good_campaigns_count"
     # "bad_campaigns_count" and "wait_campaigns_count" from each widget
