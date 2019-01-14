@@ -78,10 +78,19 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
            else:
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["has_children"] = False
 
+
         # for each campaign, accumulate c widgets for one p widget together
         # into one p widget
         # The result of this is that p_widgets_for_one_campaign is a dictionary
         # of individual p_widgets in one campaign. 
+        # 1/14/19 I'm not sure why I have to load the file again here but I was
+        # having some unexpected results when I tried to reuse the file data
+        # that was loaded in the previous step. It's as if that data was
+        # mutated in some way, but I don't see how that is possible. Anyway, it
+        # works properly when I reload the data at this step. 
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+            json_file = json.load(file)
+
         p_widgets_for_one_campaign = {}
         for widget in json_file["data"]:
             parent_widget = pattern.search(widget).group()
@@ -102,6 +111,7 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
                 p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"].append(p_widgets_for_one_campaign[p_widget])
             else:
                 p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"] = [p_widgets_for_one_campaign[p_widget]]
+
 
     ############################################################
     # At this point, p_widgets_for_all_campaigns["data"] is a dictionary of
@@ -133,7 +143,7 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
                 if (campaign["cost"] > 30) | (campaign["clicks"] > 700):
                     p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1
                     continue;
-                elif ((campaign["cost"] > 10) & (campaign["cost"] < 30)) | ((campaign["clicks"] > 300) & (campaign["clicks"] < 700)):
+                elif ((campaign["cost"] > 10) & (campaign["cost"] <= 30)) | ((campaign["clicks"] > 300) & (campaign["clicks"] <= 700)):
                     if campaign["leads"] == 0:
                         p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
                         continue;
@@ -172,13 +182,12 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
             else:
                 p_widget["for_all_campaigns"]["classification"] = p_widget["for_all_campaigns"]["global_status"]
                 continue
-            
+
     # The final step is to remove "for_each_campaign" "good_campaigns_count"
     # "bad_campaigns_count" and "wait_campaigns_count" from each widget
     for p_widget in p_widgets_for_all_campaigns["data"]:
         p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
-        
-    
+
     with open(f"../../data/p_widgets_for_all_campaigns_with_classification/{date_range}_p_widgets_for_all_campaigns_dataset_with_classification.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
 
