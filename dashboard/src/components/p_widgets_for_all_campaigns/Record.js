@@ -84,9 +84,9 @@ class Record extends Component {
         </td>
         <td>{`${this.props.widgetRecord.classification} (${
           this.props.widgetRecord.good_campaigns_count
-        }/${this.props.widgetRecord.bad_campaigns_count}/${
+        }g/${this.props.widgetRecord.bad_campaigns_count}b/${
           this.props.widgetRecord.wait_campaigns_count
-        })`}</td>
+        }w)`}</td>
         <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
