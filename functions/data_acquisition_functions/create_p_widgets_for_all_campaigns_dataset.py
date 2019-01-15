@@ -9,6 +9,8 @@ from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign 
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
+from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
+from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 
 def create_p_widgets_for_all_campaigns_dataset(date_range):
     campaigns = get_campaign_sets()
@@ -122,72 +124,24 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
         for campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/wait
             # counts are recorded
-            if campaign["clicks"] == 0:
+            classification = classify_campaign_for_one_p_widget(campaign)
+            if classification == "good":
+               p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
+            elif classification == "half good": 
+               p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += .5 
+            elif classification == "bad": 
+               p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1 
+            elif classification == "half bad": 
+               p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
+            elif classification == "wait": 
                p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1
-               continue
-            elif campaign["leads"]/campaign["clicks"]*100 >= 0.25: 
-                if campaign["sales"] >= 1:
-                    p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
-                    continue
-                else:
-                    if campaign["leads"] >= 3:
-                        p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
-                        continue
-                    else:
-                        p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += .5
-                        continue
-            else:
-                if (campaign["cost"] > 30) | (campaign["clicks"] > 700):
-                    p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1
-                    continue;
-                elif ((campaign["cost"] > 10) & (campaign["cost"] <= 30)) & ((campaign["clicks"] > 300) & (campaign["clicks"] <= 700)):
-                    if campaign["leads"] == 0:
-                        p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
-                        continue;
-                    else:
-                        p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1 
-                        continue;
-                elif ((campaign["cost"] < 10) | (campaign["clicks"] < 300)):
-                    p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1 
-                    continue;
                     
     ############################################################
     # At this point, p_widgets_for_all_campaigns["data"] includes good/bad/wait
     # campaign counts for each p widget. Using those counts, the classify the p widget into white/grey/black following the flow chart
 
     for p_widget in p_widgets_for_all_campaigns["data"].values():
-        if (p_widget["for_all_campaigns"]["cost"] >= 10) | (p_widget["for_all_campaigns"]["clicks"] >= 300):
-            if (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] == 0):
-                p_widget["for_all_campaigns"]["classification"] = "white"
-                continue
-            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
-                p_widget["for_all_campaigns"]["classification"] = "black"
-                continue
-            elif (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] >= 3):
-                p_widget["for_all_campaigns"]["classification"] = "grey"
-                continue
-            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 3):
-                p_widget["for_all_campaigns"]["classification"] = "black"
-                continue
-            else:
-                p_widget["for_all_campaigns"]["classification"] = "wait"
-                continue
-        else:
-            if p_widget["for_all_campaigns"]["global_status"] == "not yet listed":
-                p_widget["for_all_campaigns"]["classification"] = "wait"
-                continue
-            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
-                p_widget["for_all_campaigns"]["classification"] = "white"
-                continue
-            elif p_widget["for_all_campaigns"]["global_status"] == "greylist":
-                p_widget["for_all_campaigns"]["classification"] = "grey"
-                continue
-            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
-                p_widget["for_all_campaigns"]["classification"] = "white"
-                continue
-            else:
-                p_widget["for_all_campaigns"]["classification"] = "wait"
-                continue
+        p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
     # The final step is to remove "for_each_campaign" "good_campaigns_count"
     # "bad_campaigns_count" and "wait_campaigns_count" from each widget
@@ -196,7 +150,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["bad_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["wait_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
-        
+
     with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
 

@@ -11,8 +11,7 @@ from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
 
 
 def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, output_name):
@@ -93,27 +92,7 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
         if parent_widget_data:
             # this is where each campaign is classified as good, half good,
             # bad, half bad, wait
-            if parent_widget_data["clicks"] == 0:
-               parent_widget_data["classification"] = "wait"
-            elif parent_widget_data["leads"]/parent_widget_data["clicks"]*100 >= 0.25:
-                if parent_widget_data["sales"] >= 1:
-                    parent_widget_data["classification"] = "good"
-                else:
-                    if parent_widget_data["leads"] >= 3:
-                        parent_widget_data["classification"] = "good"
-                    else:
-                        parent_widget_data["classification"] = "half good"
-            else:
-                if (parent_widget_data["cost"] > 30) | (parent_widget_data["clicks"] > 700):
-                    parent_widget_data["classification"] = "bad"
-                elif ((parent_widget_data["cost"] > 10) & (parent_widget_data["cost"] <= 30)) & ((parent_widget_data["clicks"] > 300) & (parent_widget_data["clicks"] <= 700)):
-                    if parent_widget_data["leads"] == 0:
-                        parent_widget_data["classification"] = "half bad"
-                    else:
-                        parent_widget_data["classification"] = "wait"
-                elif ((parent_widget_data["cost"] < 10) | (parent_widget_data["clicks"] < 300)):
-                    parent_widget_data["classification"] = "wait"
-
+            parent_widget_data["classification"] = classify_campaign_for_one_p_widget(parent_widget_data)
             widget_data["data"].append(parent_widget_data)
             
     complete_widget_data = widget_data 
