@@ -11,15 +11,19 @@ from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
-
 def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, output_name):
+    # 1/1/19 global status is added here, as opposed to on create_p_and_c_widgets for
+    # one campaign so that it will update everytime the submit button is
+    # clicked rather than only once every day. 
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
-
+    # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
+            # mgid_id)
+    # if parent_widget_id in excluded_widgets:
+        # parent_widget_status = "excluded"
+    # else:
+        # parent_widget_status = "included"
 
     parent_widget_global_status = ""
     if parent_widget_id in widget_whitelist:
@@ -91,29 +95,6 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
                 parent_widget_data["revenue"] += data[widget_id]["revenue"]
 
         if parent_widget_data:
-            # this is where each campaign is classified as good, half good,
-            # bad, half bad, wait
-            if parent_widget_data["clicks"] == 0:
-               parent_widget_data["classification"] = "wait"
-            elif parent_widget_data["leads"]/parent_widget_data["clicks"]*100 >= 0.25:
-                if parent_widget_data["sales"] >= 1:
-                    parent_widget_data["classification"] = "good"
-                else:
-                    if parent_widget_data["leads"] >= 3:
-                        parent_widget_data["classification"] = "good"
-                    else:
-                        parent_widget_data["classification"] = "half good"
-            else:
-                if (parent_widget_data["cost"] > 30) | (parent_widget_data["clicks"] > 700):
-                    parent_widget_data["classification"] = "bad"
-                elif ((parent_widget_data["cost"] > 10) & (parent_widget_data["cost"] <= 30)) | ((parent_widget_data["clicks"] > 300) & (parent_widget_data["clicks"] <= 700)):
-                    if parent_widget_data["leads"] == 0:
-                        parent_widget_data["classification"] = "half bad"
-                    else:
-                        parent_widget_data["classification"] = "wait"
-                elif ((parent_widget_data["cost"] < 10) | (parent_widget_data["clicks"] < 300)):
-                    parent_widget_data["classification"] = "wait"
-
             widget_data["data"].append(parent_widget_data)
             
     complete_widget_data = widget_data 

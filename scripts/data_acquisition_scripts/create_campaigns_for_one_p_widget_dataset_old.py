@@ -10,9 +10,6 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 widget_id = sys.argv[1]
 date_range = sys.argv[2]
 
-# widget_id = "5712703"
-# date_range = "oneeighty"
-
 print(create_campaigns_for_one_p_widget_dataset(widget_id, date_range, f"{widget_id}_{date_range}_campaigns_for_one_p_widget_dataset"))
 
 

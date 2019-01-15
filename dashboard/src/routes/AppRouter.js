@@ -45,7 +45,7 @@ const AppRouter = () => (
           Component={c_widgets_for_one_p_widgetHome}
         />
         <PrivateRoute
-          path="/campaignsforonepwidget/:widgetID"
+          path="/campaignsforonepwidget/:widgetID/:classification/:goodCampaignsCount/:badCampaignsCount/:waitCampaignsCount"
           Component={campaigns_for_one_p_widgetHome}
         />
         <PrivateRoute
