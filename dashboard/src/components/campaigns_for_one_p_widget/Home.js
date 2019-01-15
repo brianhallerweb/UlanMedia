@@ -6,7 +6,6 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
-//import {classifyCampaigns, classifyPWidget} from './classificationFunctions';
 
 class Home extends Component {
   constructor(props) {
@@ -37,7 +36,6 @@ class Home extends Component {
       c6: false,
       c6Value1: 700,
       c6Value2: 30,
-      //      classification: '',
     };
   }
 
@@ -128,17 +126,7 @@ class Home extends Component {
         }),
       )
       .then(res => res.json())
-      //    .then(records => classifyCampaigns(records))
       .then(records => {
-        //let classification = classifyPWidget(
-        //this.state.c1,
-        //this.state.c2,
-        //this.state.c3,
-        //this.state.c4,
-        //this.state.c5,
-        //this.state.c6,
-        //records,
-        //);
         records[0][
           'classification'
         ] = this.state.pWidgetClassification.toUpperCase();
@@ -148,7 +136,6 @@ class Home extends Component {
           campaignRecords: records,
           error,
           loading: false,
-          //         classification,
         });
       })
       .catch(err => console.log(err));
@@ -187,11 +174,6 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
-        {
-          //<div style={{whiteSpace: 'pre-wrap', paddingTop: 10}}>
-          //{this.state.classification}
-          //</div>
-        }
         <div>p widget is good in {this.state.goodCampaignsCount} campaigns</div>
         <div>p widget is bad in {this.state.badCampaignsCount} campaigns</div>
         <div>p widget is wait in {this.state.waitCampaignsCount} campaigns</div>

@@ -16,18 +16,10 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    # I am trying to update status on every click but all the requests really
-    # hurt the performance. So I am commenting everything that has to do with
-    # updating status in every script that derives from p and c widgets for one
-    # campaign. 
-    # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
-
     p_widgets_for_all_campaigns = {"metadata":{}, "data":{}}
 
     for campaign in campaigns:
         vol_id = campaign["vol_id"] 
-        # mgid_id = campaign["mgid_id"] 
-        # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
@@ -38,39 +30,173 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
 
         pattern = re.compile(r'\d*')
 
+        # set up the p_widgets_for_all_campaings["data"] data structure and
+        # fill in the "for_all_campaigns" value. The data structure looks like
+        # this:
+        # p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {row data
+        # for p_widgets_for_all_campaigns page}, 
+        #                                         "for_each_campaign": [{row
+        #                                             data for
+        #                                             campaigns_for_one_p_widget
+        #                                             page}, {}, ...], 
+        #                                        "good_campaigns_count" = 0, 
+        #                                        "bad_campaigns_count" = 0, 
+        #                                        "wait_campaigns_count" = 0
+        # }
+        # "for_all_campaigns" means the accumulated data for all the campaigns
+        # that include the particular p widget.
+        # "for each campaign" is a list of each campaign for one particular p
+        # widget
+        
         for widget in json_file["data"]:
            parent_widget = pattern.search(widget).group()
            if parent_widget in p_widgets_for_all_campaigns["data"]:
-               p_widgets_for_all_campaigns["data"][parent_widget]["clicks"] += json_file["data"][widget]["clicks"]
-               p_widgets_for_all_campaigns["data"][parent_widget]["cost"] += json_file["data"][widget]["cost"]
-               p_widgets_for_all_campaigns["data"][parent_widget]["revenue"] += json_file["data"][widget]["revenue"]
-               p_widgets_for_all_campaigns["data"][parent_widget]["leads"] += json_file["data"][widget]["leads"]
-               p_widgets_for_all_campaigns["data"][parent_widget]["sales"] += json_file["data"][widget]["sales"]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["clicks"] += json_file["data"][widget]["clicks"]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["cost"] += json_file["data"][widget]["cost"]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["revenue"] += json_file["data"][widget]["revenue"]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["leads"] += json_file["data"][widget]["leads"]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["sales"] += json_file["data"][widget]["sales"]
            else:
-               p_widgets_for_all_campaigns["data"][parent_widget] = json_file["data"][widget]
-               p_widgets_for_all_campaigns["data"][parent_widget]["widget_id"] = parent_widget
-
-               # if parent_widget in excluded_widgets:
-                   # p_widgets_for_all_campaigns["data"][parent_widget]['status'] = "excluded" 
-               # else:
-                   # p_widgets_for_all_campaigns["data"][parent_widget]['status'] = "included" 
+               p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {}, "for_each_campaign": [], "good_campaigns_count": 0, "bad_campaigns_count": 0, "wait_campaigns_count": 0}
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"] = json_file["data"][widget]
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["widget_id"] = parent_widget
 
                if parent_widget in widget_whitelist:
-                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "whitelist" 
+                   p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]['global_status'] = "whitelist" 
                elif parent_widget in widget_greylist:
-                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "greylist" 
+                   p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]['global_status'] = "greylist" 
                elif parent_widget in widget_blacklist:
-                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "blacklist" 
+                   p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]['global_status'] = "blacklist" 
                else:
-                   p_widgets_for_all_campaigns["data"][parent_widget]['global_status'] = "not yet listed" 
+                   p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
            if widget is not parent_widget:
-               p_widgets_for_all_campaigns["data"][parent_widget]["has_children"] = True
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["has_children"] = True
            else:
-               p_widgets_for_all_campaigns["data"][parent_widget]["has_children"] = False
+               p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["has_children"] = False
 
+
+        # for each campaign, accumulate c widgets for one p widget together
+        # into one p widget
+        # The result of this is that p_widgets_for_one_campaign is a dictionary
+        # of individual p_widgets in one campaign. 
+        # 1/14/19 I'm not sure why I have to load the file again here but I was
+        # having some unexpected results when I tried to reuse the file data
+        # that was loaded in the previous step. It's as if that data was
+        # mutated in some way, but I don't see how that is possible. Anyway, it
+        # works properly when I reload the data at this step. 
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+            json_file = json.load(file)
+
+        p_widgets_for_one_campaign = {}
+        for widget in json_file["data"]:
+            parent_widget = pattern.search(widget).group()
+            if parent_widget in p_widgets_for_one_campaign:
+                p_widgets_for_one_campaign[parent_widget]["clicks"] += json_file["data"][widget]["clicks"]
+                p_widgets_for_one_campaign[parent_widget]["cost"] += json_file["data"][widget]["cost"]
+                p_widgets_for_one_campaign[parent_widget]["revenue"] += json_file["data"][widget]["revenue"]
+                p_widgets_for_one_campaign[parent_widget]["leads"] += json_file["data"][widget]["leads"]
+                p_widgets_for_one_campaign[parent_widget]["sales"] += json_file["data"][widget]["sales"]
+            else:
+                p_widgets_for_one_campaign[parent_widget] = json_file["data"][widget]
+                p_widgets_for_one_campaign[parent_widget]["widget_id"] = parent_widget
+                
+
+        # Add each p_widget_for_one_campaign to the list of campaigns for each p widget
+        for p_widget in p_widgets_for_one_campaign:
+            if p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
+                p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"].append(p_widgets_for_one_campaign[p_widget])
+            else:
+                p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"] = [p_widgets_for_one_campaign[p_widget]]
+
+
+    ############################################################
+    # At this point, p_widgets_for_all_campaigns["data"] is a dictionary of
+    # p_widgets, each with accumulated data for all campaigns (the
+    # "for_all_campaigns" value) and data for each campaign (the
+    # "for_each_campaign" value)
+     
+    # loop through each campaign for each p widget and determine the
+    # good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
+    for p_widget in p_widgets_for_all_campaigns["data"]:
+        for campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
+            # This is where each campaign is classified and the good/bad/wait
+            # counts are recorded
+            if campaign["clicks"] == 0:
+               p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1
+               continue
+            elif campaign["leads"]/campaign["clicks"]*100 >= 0.25: 
+                if campaign["sales"] >= 1:
+                    p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
+                    continue
+                else:
+                    if campaign["leads"] >= 3:
+                        p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
+                        continue
+                    else:
+                        p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += .5
+                        continue
+            else:
+                if (campaign["cost"] > 30) | (campaign["clicks"] > 700):
+                    p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1
+                    continue;
+                elif ((campaign["cost"] > 10) & (campaign["cost"] <= 30)) & ((campaign["clicks"] > 300) & (campaign["clicks"] <= 700)):
+                    if campaign["leads"] == 0:
+                        p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
+                        continue;
+                    else:
+                        p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1 
+                        continue;
+                elif ((campaign["cost"] < 10) | (campaign["clicks"] < 300)):
+                    p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1 
+                    continue;
+                    
+    ############################################################
+    # At this point, p_widgets_for_all_campaigns["data"] includes good/bad/wait
+    # campaign counts for each p widget. Using those counts, the classify the p widget into white/grey/black following the flow chart
+
+    for p_widget in p_widgets_for_all_campaigns["data"].values():
+        if (p_widget["for_all_campaigns"]["cost"] >= 10) | (p_widget["for_all_campaigns"]["clicks"] >= 300):
+            if (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] == 0):
+                p_widget["for_all_campaigns"]["classification"] = "white"
+                continue
+            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
+                p_widget["for_all_campaigns"]["classification"] = "black"
+                continue
+            elif (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] >= 3):
+                p_widget["for_all_campaigns"]["classification"] = "grey"
+                continue
+            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 3):
+                p_widget["for_all_campaigns"]["classification"] = "black"
+                continue
+            else:
+                p_widget["for_all_campaigns"]["classification"] = "wait"
+                continue
+        else:
+            if p_widget["for_all_campaigns"]["global_status"] == "not yet listed":
+                p_widget["for_all_campaigns"]["classification"] = "wait"
+                continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
+                p_widget["for_all_campaigns"]["classification"] = "white"
+                continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "greylist":
+                p_widget["for_all_campaigns"]["classification"] = "grey"
+                continue
+            elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
+                p_widget["for_all_campaigns"]["classification"] = "white"
+                continue
+            else:
+                p_widget["for_all_campaigns"]["classification"] = "wait"
+                continue
+
+    # The final step is to remove "for_each_campaign" "good_campaigns_count"
+    # "bad_campaigns_count" and "wait_campaigns_count" from each widget
+    for p_widget in p_widgets_for_all_campaigns["data"]:
+        p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["good_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] 
+        p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["bad_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] 
+        p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["wait_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] 
+        p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
         
-
     with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
 

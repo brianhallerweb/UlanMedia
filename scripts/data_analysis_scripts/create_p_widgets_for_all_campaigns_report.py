@@ -6,6 +6,7 @@ import numpy as np
 import math
 
 date_range = sys.argv[1]
+# date_range = "oneeighty"
 
 with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
@@ -17,16 +18,6 @@ data = json_file["data"]
 widgets = []
 for widget in data.values():
     widgets.append(widget)
-    # the referrer column of each widget is a list of refferers. I am not sure
-    # how to best handle lists inside of data frames so, for now, I am just 
-    # going to concatenate them into a space separated string. 
-    referrers = ""
-    for referrer in widget["referrer"]:
-        if referrers == "":
-            referrers = referrer
-        else:
-            referrers = f"{referrers} {referrer}"
-    widget["referrer"] = referrers
 
 df = pd.DataFrame(widgets)
 
@@ -70,9 +61,11 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["clicks", "cost", "leads", "referrer",
+        on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
-            "status", "global_status", "has_children"]
+            "status", "global_status", "classification", "has_children",
+            "good_campaigns_count", "bad_campaigns_count",
+            "wait_campaigns_count"]
             )
 
 if final_result is None:
@@ -80,10 +73,14 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values("cost", ascending=False)
+final_result = final_result.sort_values(["classification", "cost"],
+        ascending=[True, False])
 
-json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
+
+json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa","lead_cvr", "sale_cpa", "profit",
-            "status", "global_status", "has_children"]].to_dict("records"))
+            "status","global_status", "classification", "has_children",
+            "good_campaigns_count", "bad_campaigns_count",
+            "wait_campaigns_count"]].to_dict("records"))
 
 print(json_final_result)
