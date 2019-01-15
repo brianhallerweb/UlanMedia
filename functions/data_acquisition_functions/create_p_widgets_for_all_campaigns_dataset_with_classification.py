@@ -143,7 +143,7 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
                 if (campaign["cost"] > 30) | (campaign["clicks"] > 700):
                     p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1
                     continue;
-                elif ((campaign["cost"] > 10) & (campaign["cost"] <= 30)) | ((campaign["clicks"] > 300) & (campaign["clicks"] <= 700)):
+                elif ((campaign["cost"] > 10) & (campaign["cost"] <= 30)) & ((campaign["clicks"] > 300) & (campaign["clicks"] <= 700)):
                     if campaign["leads"] == 0:
                         p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
                         continue;
@@ -163,13 +163,13 @@ def create_p_widgets_for_all_campaigns_dataset_with_classification(date_range):
             if (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] == 0):
                 p_widget["for_all_campaigns"]["classification"] = "white"
                 continue
-            elif (p_widget["good_campaigns_count"] > 0) & (p_widget["bad_campaigns_count"] > 0):
+            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
+                p_widget["for_all_campaigns"]["classification"] = "black"
+                continue
+            elif (p_widget["good_campaigns_count"] >= 3) & (p_widget["bad_campaigns_count"] >= 3):
                 p_widget["for_all_campaigns"]["classification"] = "grey"
                 continue
             elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 3):
-                p_widget["for_all_campaigns"]["classification"] = "black"
-                continue
-            elif (p_widget["good_campaigns_count"] == 0) & (p_widget["bad_campaigns_count"] >= 1) & (p_widget["for_all_campaigns"]["revenue"] - p_widget["for_all_campaigns"]["cost"] < -60):
                 p_widget["for_all_campaigns"]["classification"] = "black"
                 continue
             else:

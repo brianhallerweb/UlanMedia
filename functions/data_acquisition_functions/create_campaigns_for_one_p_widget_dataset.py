@@ -106,7 +106,7 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
             else:
                 if (parent_widget_data["cost"] > 30) | (parent_widget_data["clicks"] > 700):
                     parent_widget_data["classification"] = "bad"
-                elif ((parent_widget_data["cost"] > 10) & (parent_widget_data["cost"] <= 30)) | ((parent_widget_data["clicks"] > 300) & (parent_widget_data["clicks"] <= 700)):
+                elif ((parent_widget_data["cost"] > 10) & (parent_widget_data["cost"] <= 30)) & ((parent_widget_data["clicks"] > 300) & (parent_widget_data["clicks"] <= 700)):
                     if parent_widget_data["leads"] == 0:
                         parent_widget_data["classification"] = "half bad"
                     else:
