@@ -10,19 +10,11 @@ class Record extends Component {
 
   stylizeClassification(row) {
     if ((row === 'bad') | (row === 'half bad')) {
-      return (
-        <td style={{color: 'red', fontWeight: 900}}>
-          {this.props.campaignRecord.classification}
-        </td>
-      );
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
     } else if ((row === 'good') | (row === 'half good')) {
-      return (
-        <td style={{color: 'green', fontWeight: 900}}>
-          {this.props.campaignRecord.classification}
-        </td>
-      );
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
     } else {
-      return <td>{this.props.campaignRecord.classification}</td>;
+      return <td>{row}</td>;
     }
   }
 
