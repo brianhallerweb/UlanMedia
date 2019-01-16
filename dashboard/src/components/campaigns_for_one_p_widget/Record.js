@@ -77,7 +77,6 @@ class Record extends Component {
         <td>{this.props.campaignRecord.sales}</td>
         <td>${this.props.campaignRecord.sale_cpa}</td>
         <td>{this.props.campaignRecord.status}</td>
-        <td>{this.props.campaignRecord.global_status}</td>
       </tr>
     );
   }

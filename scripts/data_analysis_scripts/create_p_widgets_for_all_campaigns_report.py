@@ -73,8 +73,8 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values(["classification", "cost"],
-        ascending=[True, False])
+final_result = final_result.sort_values(["profits", "classification"],
+        ascending=[False, True])
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
