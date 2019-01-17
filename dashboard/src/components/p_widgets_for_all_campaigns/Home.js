@@ -18,7 +18,7 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      c1: true,
+      c1: false,
       c1Value: 'not yet listed',
       c2: true,
       c2Value: 10,
