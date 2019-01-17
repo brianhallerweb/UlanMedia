@@ -127,9 +127,11 @@ class Home extends Component {
       )
       .then(res => res.json())
       .then(records => {
-        records[0][
-          'classification'
-        ] = this.state.pWidgetClassification.toUpperCase();
+        if (records.length) {
+          records[0][
+            'classification'
+          ] = this.state.pWidgetClassification.toUpperCase();
+        }
         let error;
         records.length ? (error = false) : (error = true);
         this.setState({
