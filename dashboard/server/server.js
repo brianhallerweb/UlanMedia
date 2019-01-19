@@ -43,7 +43,6 @@ const createCampaignsForOneAdReport = require('./controllers/data_analysis_contr
 
 const authenticate = require('./middleware/authenticate');
 const User = require('./models/user');
-const PWidgetsForAllCampaignsTrainingData = require('./models/pWidgetsForAllCampaignsTrainingData');
 
 ///////////// Middleware /////////////////
 app.use(bodyParser.json());
@@ -53,38 +52,6 @@ app.use(bodyParser.json());
 app.post('/api/users/login', login);
 
 app.delete('/api/users/logout', authenticate, logout);
-//---------------------------------------
-
-//////// Training data routes //////////////
-app.post(
-  '/api/pWidgetsForAllCampaignsTrainingData',
-  authenticate,
-  (req, res) => {
-    new PWidgetsForAllCampaignsTrainingData({
-      widgetID: req.body.widgetID,
-      clicks: req.body.clicks,
-      cost: req.body.cost,
-      revenue: req.body.revenue,
-      profit: req.body.profit,
-      leads: req.body.leads,
-      leadCPA: req.body.leadCPA,
-      leadCVR: req.body.leadCVR,
-      sales: req.body.sales,
-      saleCPA: req.body.saleCPA,
-      globalStatusDecision: req.body.globalStatusDecision,
-    })
-      .save()
-      .then(result => res.json(result))
-      .catch(err => res.status(500).json(err));
-  },
-);
-
-app.get('/api/pWidgetsForAllCampaignsTrainingData', (req, res) => {
-  PWidgetsForAllCampaignsTrainingData.find()
-    .then(widgets => res.json(widgets))
-    .catch(err => res.status(500).json(err));
-});
-
 //---------------------------------------
 
 //////// p widget list routes //////////////

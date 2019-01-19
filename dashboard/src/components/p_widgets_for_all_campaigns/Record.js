@@ -8,33 +8,6 @@ class Record extends Component {
     this.state = {clicked: false};
   }
 
-  addTrainingData(decision) {
-    fetch('/api/pWidgetsForAllCampaignsTrainingData', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth': localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        widgetID: this.props.widgetRecord.widget_id,
-        clicks: this.props.widgetRecord.clicks,
-        cost: this.props.widgetRecord.cost,
-        revenue: this.props.widgetRecord.revenue,
-        profit: this.props.widgetRecord.profit,
-        leads: this.props.widgetRecord.leads,
-        leadCPA: this.props.widgetRecord.lead_cpa,
-        leadCVR: this.props.widgetRecord.lead_cvr,
-        sales: this.props.widgetRecord.sales,
-        saleCPA: this.props.widgetRecord.sale_cpa,
-        globalStatusDecision: decision,
-      }),
-    }).then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-    });
-  }
-
   render() {
     return (
       <tr className={this.state.clicked && 'clicked'}>
