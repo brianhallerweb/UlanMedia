@@ -64,7 +64,8 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
             "status", "global_status", "classification", "has_children",
-            "good_campaigns_count", "bad_campaigns_count",
+            "good_campaigns_count",
+            "bad_campaigns_count","bad_campaigns_included_count",
             "wait_campaigns_count"]
             )
 
@@ -80,7 +81,7 @@ final_result = final_result.sort_values(["profit", "classification"],
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa","lead_cvr", "sale_cpa", "profit",
             "status","global_status", "classification", "has_children",
-            "good_campaigns_count", "bad_campaigns_count",
+            "good_campaigns_count", "bad_campaigns_count","bad_campaigns_included_count",
             "wait_campaigns_count"]].to_dict("records"))
 
 print(json_final_result)
