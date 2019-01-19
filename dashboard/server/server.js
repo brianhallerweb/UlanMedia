@@ -93,7 +93,7 @@ app.get('/api/readwhitelist', (req, res) => {
     if (err) {
       throw Error(err);
     }
-    const pWidgets = data.split('\n');
+    const pWidgets = data.trim().split('\n');
     res.json(pWidgets);
   });
 });
@@ -103,7 +103,7 @@ app.get('/api/readgreylist', (req, res) => {
     if (err) {
       throw Error(err);
     }
-    const pWidgets = data.split('\n');
+    const pWidgets = data.trim().split('\n');
     res.json(pWidgets);
   });
 });
@@ -113,7 +113,7 @@ app.get('/api/readblacklist', (req, res) => {
     if (err) {
       throw Error(err);
     }
-    const pWidgets = data.split('\n');
+    const pWidgets = data.trim().split('\n');
     res.json(pWidgets);
   });
 });

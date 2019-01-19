@@ -66,9 +66,6 @@ class ListPWidgetConfirmation extends Component {
             Yes, confirm listing
           </button>
         </div>
-        <div style={{marginTop: 10}}>
-          <button onClick={() => close()}>No, close without listing</button>
-        </div>
         {this.state.response && (
           <div>
             <p style={{color: 'green'}}>{this.state.responseMessage}</p>
