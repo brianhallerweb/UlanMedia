@@ -1,3 +1,4 @@
+//@format
 require('../../config/config');
 require('./db/mongoose');
 
@@ -6,6 +7,9 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const {PythonShell} = require('python-shell');
+
+const fs = require('fs');
+const addToList = require('./addToList');
 
 const login = require('./controllers/user_controllers/login');
 const logout = require('./controllers/user_controllers/logout');
@@ -79,6 +83,43 @@ app.get('/api/pWidgetsForAllCampaignsTrainingData', (req, res) => {
   PWidgetsForAllCampaignsTrainingData.find()
     .then(widgets => res.json(widgets))
     .catch(err => res.status(500).json(err));
+});
+
+//---------------------------------------
+
+//////// p widget list routes //////////////
+app.get('/api/readwhitelist', (req, res) => {
+  fs.readFile('../../p_widget_lists/whitelist.txt', 'utf8', (err, data) => {
+    if (err) {
+      throw Error(err);
+    }
+    const pWidgets = data.split('\n');
+    res.json(pWidgets);
+  });
+});
+
+app.get('/api/readgreylist', (req, res) => {
+  fs.readFile('../../p_widget_lists/greylist.txt', 'utf8', (err, data) => {
+    if (err) {
+      throw Error(err);
+    }
+    const pWidgets = data.split('\n');
+    res.json(pWidgets);
+  });
+});
+
+app.get('/api/readblacklist', (req, res) => {
+  fs.readFile('../../p_widget_lists/blacklist.txt', 'utf8', (err, data) => {
+    if (err) {
+      throw Error(err);
+    }
+    const pWidgets = data.split('\n');
+    res.json(pWidgets);
+  });
+});
+
+app.post('/api/addtolist', authenticate, (req, res) => {
+  res.json(addToList(req.body.pWidgetID, req.body.listType));
 });
 
 //---------------------------------------

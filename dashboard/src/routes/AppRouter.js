@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
+import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
 import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
@@ -17,6 +18,7 @@ import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_wi
 import campaigns_for_one_c_widgetHome from '../components/campaigns_for_one_c_widget/Home';
 import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/Home';
+import p_widgets_for_all_campaignsListPWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ListPWidgetConfirmation';
 import RedirectToHome from '../components/RedirectToHome';
 
 const AppRouter = () => (
@@ -27,6 +29,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/campaignsforallcampaigns"
           Component={campaigns_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/countriesforallcampaigns"
+          Component={countries_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/daysforonecampaign/:volid"
@@ -79,6 +85,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/campaignsforonead/:adImage"
           Component={campaigns_for_one_adHome}
+        />
+        <PrivateRoute
+          path="/listpwidgetconfirmation/:pWidgetID/:listType"
+          Component={p_widgets_for_all_campaignsListPWidgetConfirmation}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToHome} />

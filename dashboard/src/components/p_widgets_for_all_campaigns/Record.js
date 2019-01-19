@@ -101,34 +101,37 @@ class Record extends Component {
           {this.props.widgetRecord.global_status === 'not yet listed' ? (
             <div onClick={() => this.setState({clicked: true})}>
               <div className="rowLink">
-                <a
-                  onClick={() => this.addTrainingData('white')}
-                  target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}&list=whitelist`}>
+                <Link
+                  to={{
+                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                      /^\d*/,
+                    )}/white`,
+                  }}
+                  target="_blank">
                   white
-                </a>
+                </Link>
               </div>
               <div className="rowLink">
-                <a
-                  onClick={() => this.addTrainingData('grey')}
-                  target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}&list=greylist`}>
+                <Link
+                  to={{
+                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                      /^\d*/,
+                    )}/grey`,
+                  }}
+                  target="_blank">
                   grey
-                </a>
+                </Link>
               </div>
               <div className="rowLink">
-                <a
-                  onClick={() => this.addTrainingData('black')}
-                  target="_blank"
-                  href={`http://ulanmedia.com/mgid/add-widgets-to-list-form.php?widgetIDs=${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}&list=blacklist`}>
+                <Link
+                  to={{
+                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                      /^\d*/,
+                    )}/black`,
+                  }}
+                  target="_blank">
                   black
-                </a>
+                </Link>
               </div>
               <div className="rowLink">
                 <span className="fakeLink">wait</span>

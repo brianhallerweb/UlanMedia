@@ -125,6 +125,15 @@ class Home extends Component {
         <Logout />
         <Title volRequestDates={this.state.volRequestDates} />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          <a
+            style={{fontSize: 12}}
+            href="https://drive.google.com/file/d/11vrRshcg1rzJCEGfW9Ux1lu6LbrX0c9b/view?usp=sharing"
+            target="_blank">
+            flowchart
+          </a>
+        </div>
+
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}

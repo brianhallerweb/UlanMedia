@@ -5,9 +5,12 @@ from functions.misc.send_email import send_email
 
 def get_whitelist():
     try:
-        res = requests.get("https://www.ulanmedia.com/mgid/widgets_whitelist.txt")
+        # res = requests.get("https://www.ulanmedia.com/mgid/widgets_whitelist.txt")
+        # res.raise_for_status()
+        # return res.text.splitlines()
+        res = requests.get("https://ulanmedia.brianhaller.net/api/readwhitelist")
         res.raise_for_status()
-        return res.text.splitlines()
+        return res.json()
     except requests.exceptions.RequestException as e:
             print("Failed to update campaign sets")
             print(e)

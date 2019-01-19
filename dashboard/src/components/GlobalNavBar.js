@@ -27,6 +27,12 @@ const GlobalNavBar = () => (
         ads
       </NavLink>
     </li>
+
+    <li className="globalNavItem">
+      <NavLink to={'/countriesforallcampaigns'} activeClassName="is-active">
+        countries
+      </NavLink>
+    </li>
   </div>
 );
 

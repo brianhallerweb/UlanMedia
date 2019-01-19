@@ -120,6 +120,14 @@ class Home extends Component {
           mgidRequestDates={this.state.mgidRequestDates}
         />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          <a
+            style={{fontSize: 12}}
+            href="https://github.com/brianhallerweb/UlanMedia/raw/master/full_dashboard_map.jpg"
+            target="_blank">
+            flowchart
+          </a>
+        </div>
         <NavBar
           selectDateRange={this.selectDateRange.bind(this)}
           dateRange={this.state.dateRange}

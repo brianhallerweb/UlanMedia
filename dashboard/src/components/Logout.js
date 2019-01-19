@@ -39,15 +39,6 @@ class Logout extends Component {
           onClick={this.logout.bind(this)}>
           logout
         </button>
-        <div>
-          <a
-            style={{fontSize: 12}}
-            href="https://github.com/brianhallerweb/UlanMedia/raw/master/full_dashboard_map.jpg"
-            target="_blank">
-            view dashboard map
-          </a>
-        </div>
-        {this.state.tokenRemoved && <Redirect to="/login" />}
       </div>
     );
   }
