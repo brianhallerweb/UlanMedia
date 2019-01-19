@@ -4,6 +4,14 @@ const fs = require('fs');
 function addToList(pWidgetID, listType) {
   const currentListStatus = getCurrentListStatus(pWidgetID);
   let message = '';
+  if (isNaN(pWidgetID) || pWidgetID.trim() === '') {
+    //test if p widget is number
+    //this doesn't mean in the variable "type" sense.
+    //pWidgetID is a string, but it needs to be a number in the "12345"
+    //sense
+    message = 'p widget not added to list - invalid id';
+    return message;
+  }
   for (let key in currentListStatus) {
     if (key === listType && currentListStatus[key] === true) {
       message = `p widget already in ${listType} list`;
