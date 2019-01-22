@@ -33,10 +33,8 @@ class NavBar extends Component {
             c4={this.props.c4}
             c4Value={this.props.c4Value}
             c5={this.props.c5}
-            c5Value={this.props.c5Value}
-            c6={this.props.c6}
-            c6Value1={this.props.c6Value1}
-            c6Value2={this.props.c6Value2}
+            c5Value1={this.props.c5Value1}
+            c5Value2={this.props.c5Value2}
           />
           <input type="submit" value="submit" disabled={this.props.loading} />
         </form>

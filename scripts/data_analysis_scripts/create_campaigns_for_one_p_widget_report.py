@@ -32,29 +32,24 @@ df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 c1 = df["status"] == sys.argv[3]
 result1 = df[c1]
 
-# global status conditions (not yet listed, whitelist, greylist, blacklist)
-c2 = df["global_status"] == sys.argv[4]
+# widget cost is more than xxx
+c2 = df["cost"] > float(sys.argv[4])
 result2 = df[c2]
 
-# widget cost is more than xxx
-c3 = df["cost"] > float(sys.argv[5])
+# widget lost more than xxx
+c3 = df["profit"] < -1 * float(sys.argv[5])
 result3 = df[c3]
 
-# widget lost more than xxx
-c4 = df["profit"] < -1 * float(sys.argv[6])
+# widget leadCVR is less than or equal to xxx
+c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[6]))
 result4 = df[c4]
 
-# widget leadCVR is less than or equal to xxx
-c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[7]))
-result5 = df[c5]
-
 # widget clicks are >= xxx OR cost >= xxx
-c6 = (df["clicks"] >= float(sys.argv[8])) | (df["cost"] >= float(sys.argv[9]))
-result6= df[c6]
+c5 = (df["clicks"] >= float(sys.argv[7])) | (df["cost"] >= float(sys.argv[8]))
+result5= df[c5]
 
-conditions_args = [sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13],
-        sys.argv[14], sys.argv[15]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6]
+conditions_args = [sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 
 final_result = None 
@@ -66,7 +61,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "max_lead_cpa", "lead_cpa", "lead_cvr",
-            "max_sale_cpa", "sale_cpa", "profit", "status", "global_status",
+            "max_sale_cpa", "sale_cpa", "profit", "status",
             "classification"]
             )
 
@@ -106,6 +101,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "max_lead_cpa", "lead_cpa","lead_cvr", "max_sale_cpa", "sale_cpa", "profit",
-            "status", "global_status", "classification"]].to_dict("records"))
+            "status", "classification"]].to_dict("records"))
 
 print(json_final_result)
