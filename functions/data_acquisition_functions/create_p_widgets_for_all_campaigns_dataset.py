@@ -59,11 +59,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["leads"] += json_file["data"][widget]["leads"]
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["sales"] += json_file["data"][widget]["sales"]
            else:
-               p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {}, "for_each_campaign": [],
-                       "good_campaigns_count": 0, 
-                       "bad_campaigns_count": 0,
-                       "bad_campaigns_included_count": 0, 
-                       "wait_campaigns_count": 0}
+               p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {}, "for_each_campaign": [], "good_campaigns_count": 0, "bad_campaigns_count": 0, "wait_campaigns_count": 0}
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"] = json_file["data"][widget]
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["widget_id"] = parent_widget
 
@@ -135,8 +131,6 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += .5 
             elif classification == "bad": 
                p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += 1 
-            elif classification == "bad and included": 
-               p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_included_count"] += 1 
             elif classification == "half bad": 
                p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
             elif classification == "wait": 
@@ -154,7 +148,6 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
     for p_widget in p_widgets_for_all_campaigns["data"]:
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["good_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["bad_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] 
-        p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["bad_campaigns_included_count"] = p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_included_count"] 
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["wait_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
 

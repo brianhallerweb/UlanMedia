@@ -9,10 +9,7 @@ def classify_campaign_for_one_p_widget(campaign):
                 else:
                     return "half good" 
             else:
-                if ((campaign["cost"] >= 30) | (campaign["clicks"] >= 700) &
-                        (campaign["status"] == "included")):
-                    return "bad and included"
-                elif (campaign["cost"] >= 30) | (campaign["clicks"] >= 700):
+                if (campaign["cost"] >= 30) | (campaign["clicks"] >= 700):
                     return "bad"
                 elif (campaign["cost"] >= 10) & (campaign["cost"] <= 30):
                     if campaign["leads"] == 0:

@@ -22,8 +22,6 @@ class Home extends Component {
       pWidgetClassification: this.props.match.params.classification,
       goodCampaignsCount: this.props.match.params.goodCampaignsCount,
       badCampaignsCount: this.props.match.params.badCampaignsCount,
-      badCampaignsIncludedCount: this.props.match.params
-        .badCampaignsIncludedCount,
       waitCampaignsCount: this.props.match.params.waitCampaignsCount,
       c1: false,
       c1Value: 'all',
@@ -180,10 +178,6 @@ class Home extends Component {
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
         <div>p widget is good in {this.state.goodCampaignsCount} campaigns</div>
         <div>p widget is bad in {this.state.badCampaignsCount} campaigns</div>
-        <div>
-          p widget is bad and included in {this.state.badCampaignsIncludedCount}{' '}
-          campaigns
-        </div>
         <div>p widget is wait in {this.state.waitCampaignsCount} campaigns</div>
         <div>
           p widget is {this.state.pWidgetClassification.toUpperCase()} overall

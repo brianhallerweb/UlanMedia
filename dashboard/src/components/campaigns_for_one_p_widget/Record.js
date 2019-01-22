@@ -9,7 +9,7 @@ class Record extends Component {
   }
 
   stylizeClassification(row) {
-    if ((row === 'bad') | (row === 'bad and included') | (row === 'half bad')) {
+    if ((row === 'bad') | (row === 'half bad')) {
       return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
     } else if ((row === 'good') | (row === 'half good')) {
       return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;

@@ -19,6 +19,7 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
+
     parent_widget_global_status = ""
     if parent_widget_id in widget_whitelist:
        parent_widget_global_status = "whitelist" 
