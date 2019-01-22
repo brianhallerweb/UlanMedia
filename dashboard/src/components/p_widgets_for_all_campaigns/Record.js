@@ -71,48 +71,44 @@ class Record extends Component {
         <td>${this.props.widgetRecord.sale_cpa}</td>
         <td>
           {this.props.widgetRecord.global_status}
-          {this.props.widgetRecord.global_status === 'not yet listed' ? (
-            <div onClick={() => this.setState({clicked: true})}>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                      /^\d*/,
-                    )}/white`,
-                  }}
-                  target="_blank">
-                  white
-                </Link>
-              </div>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                      /^\d*/,
-                    )}/grey`,
-                  }}
-                  target="_blank">
-                  grey
-                </Link>
-              </div>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                      /^\d*/,
-                    )}/black`,
-                  }}
-                  target="_blank">
-                  black
-                </Link>
-              </div>
-              <div className="rowLink">
-                <span className="fakeLink">wait</span>
-              </div>
+          <div onClick={() => this.setState({clicked: true})}>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}/white`,
+                }}
+                target="_blank">
+                white
+              </Link>
             </div>
-          ) : (
-            ''
-          )}
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}/grey`,
+                }}
+                target="_blank">
+                grey
+              </Link>
+            </div>
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}/black`,
+                }}
+                target="_blank">
+                black
+              </Link>
+            </div>
+            <div className="rowLink">
+              <span className="fakeLink">wait</span>
+            </div>
+          </div>
         </td>
       </tr>
     );
