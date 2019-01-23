@@ -54,6 +54,31 @@ app.post('/api/users/login', login);
 app.delete('/api/users/logout', authenticate, logout);
 //---------------------------------------
 
+//////// exclude campaign(s) routes //////////////
+app.post('/api/excludecampaign', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/misc/',
+    args: [],
+  };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
+  PythonShell.run(
+    'exclude_campaign_for_one_p_widget.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
+
+//app.post('/api/exludeallcampaigns', );
+
+//---------------------------------------
+
 //////// p widget list routes //////////////
 app.get('/api/readwhitelist', (req, res) => {
   fs.readFile('../../p_widget_lists/whitelist.txt', 'utf8', (err, data) => {

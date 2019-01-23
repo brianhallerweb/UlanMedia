@@ -5,7 +5,13 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {badAndIncluded: false};
+  }
+
+  componentDidMount() {
+    if (this.props.campaignRecord.badAndIncluded) {
+      this.setState({badAndIncluded: true});
+    }
   }
 
   stylizeClassification(row) {
@@ -37,13 +43,15 @@ class Record extends Component {
         </div>
 
         <div className="rowLink">
-          <a
-            href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
-              this.props.campaignRecord.mgid_id
-            }&widgetIDs=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
+          <Link
+            to={{
+              pathname: `/excludecampaignconfirmation/${this.props.campaignRecord.widget_id.match(
+                /^\d*/,
+              )}/${this.props.campaignRecord.mgid_id}`,
+            }}
             target="_blank">
             exclude
-          </a>
+          </Link>
         </div>
 
         <div className="rowLink">
@@ -61,7 +69,8 @@ class Record extends Component {
 
   render() {
     return (
-      <tr>
+      <tr
+        style={this.state.badAndIncluded ? {backgroundColor: '#d9534f'} : null}>
         <td>
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
