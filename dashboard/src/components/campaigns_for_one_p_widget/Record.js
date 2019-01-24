@@ -70,7 +70,7 @@ class Record extends Component {
   render() {
     return (
       <tr
-        style={this.state.badAndIncluded ? {backgroundColor: '#d9534f'} : null}>
+        style={this.state.badAndIncluded ? {backgroundColor: '#f08080'} : null}>
         <td>
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
