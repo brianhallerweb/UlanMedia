@@ -5,8 +5,8 @@ import sys
 
 # This script will exclude all campaigns for one p widget
 
-# widget_id = sys.argv[1]
-widget_id = "5676562"
+widget_id = sys.argv[1]
+# widget_id = "5676562"
 
 mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 
