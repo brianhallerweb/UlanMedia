@@ -54,6 +54,43 @@ app.post('/api/users/login', login);
 app.delete('/api/users/logout', authenticate, logout);
 //---------------------------------------
 
+//////// Campaign sets route //////////////
+app.get('/api/getcampaignsets', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/misc/',
+    args: [],
+  };
+  PythonShell.run('get_campaign_sets.py', pythonOptions, (err, results) => {
+    if (err) throw err;
+    res.send(results[0]);
+  });
+});
+//---------------------------------------
+
+//////// update excluded p widget list routes //////////////
+app.post('/api/updateoneexcludedpwidgetslist', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/misc/',
+    args: [],
+  };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
+  PythonShell.run(
+    'update_one_excluded_p_widgets_list.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
+//---------------------------------------
+
 //////// exclude campaign(s) routes //////////////
 app.post('/api/excludecampaign', authenticate, (req, res) => {
   const pythonOptions = {
@@ -75,7 +112,25 @@ app.post('/api/excludecampaign', authenticate, (req, res) => {
   );
 });
 
-//app.post('/api/exludeallcampaigns', );
+app.post('/api/excludepwidget', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/misc/',
+    args: [],
+  };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
+  PythonShell.run(
+    'exclude_p_widget_for_all_campaigns.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
 
 //---------------------------------------
 

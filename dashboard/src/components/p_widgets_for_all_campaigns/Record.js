@@ -45,13 +45,15 @@ class Record extends Component {
             )}
 
             <div className="rowLink">
-              <a
-                href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=all&widgetIDs=${this.props.widgetRecord.widget_id.match(
-                  /^\d*/,
-                )}`}
+              <Link
+                to={{
+                  pathname: `/excludepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}`,
+                }}
                 target="_blank">
                 exclude
-              </a>
+              </Link>
             </div>
           </div>
         </td>

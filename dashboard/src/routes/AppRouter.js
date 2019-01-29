@@ -20,6 +20,7 @@ import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/Home';
 import p_widgets_for_all_campaignsListPWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ListPWidgetConfirmation';
 import campaigns_for_one_p_widgetExcludeCampaignConfirmation from '../components/campaigns_for_one_p_widget/ExcludeCampaignConfirmation';
+import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
 import RedirectToHome from '../components/RedirectToHome';
 
 const AppRouter = () => (
@@ -94,6 +95,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/excludecampaignconfirmation/:pWidgetID/:mgidCampaignID"
           Component={campaigns_for_one_p_widgetExcludeCampaignConfirmation}
+        />
+        <PrivateRoute
+          path="/excludepwidgetconfirmation/:pWidgetID"
+          Component={p_widgets_for_all_campaignsExcludePWidgetConfirmation}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToHome} />
