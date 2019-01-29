@@ -3,6 +3,7 @@ from config.config import *
 import json
 import os
 import sys
+import re
 from functions.data_acquisition_functions.get_mgid_widget_clicks_and_costs_by_campaign import get_mgid_widget_clicks_and_costs_by_campaign
 from functions.data_acquisition_functions.get_vol_widget_conversions_by_campaign import get_vol_widget_conversions_by_campaign
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
@@ -47,6 +48,7 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
         metadata = json_file["metadata"]
         data = json_file["data"]
         
+
         # add metadata
         if not widget_data["metadata"]["mgid_start_date"]:
              widget_data["metadata"]["mgid_start_date"] = metadata["mgid_start_date"]
@@ -62,9 +64,23 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
         for widget_id in list(data.keys()):
             if widget_id.startswith(parent_widget_id):
                 widget_ids_with_matching_parent.append(widget_id)
-        
+
+        # 1/24/19 This is supposed to help update the campaign status on each submit
+        # press on campaigns_for_one_p_widget
+        # list of excluded widgets
+        # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, campaign["mgid_id"])
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
+             excluded_widgets = json.load(file)
+        # regex for extracting parent widget id
+        pattern = re.compile(r'\d*')
+
         parent_widget_data = {}
         for widget_id in widget_ids_with_matching_parent:
+            if pattern.search(widget_id).group() not in excluded_widgets:
+                widget_status = "included" 
+            else:
+                widget_status = "excluded" 
+
             if not parent_widget_data:
                 parent_widget_data = {
                 "widget_id": parent_widget_id, 
@@ -73,8 +89,8 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
                 "name": campaign["name"],
                 "max_lead_cpa": campaign["max_lead_cpa"],
                 "max_sale_cpa": campaign["max_sale_cpa"],
-                "status": data[widget_id]["status"],
-                # "status": parent_widget_status,
+                # "status": data[widget_id]["status"],
+                "status": widget_status,
                 "global_status": parent_widget_global_status,
                 "clicks": data[widget_id]["clicks"], 
                 "cost": data[widget_id]["cost"],

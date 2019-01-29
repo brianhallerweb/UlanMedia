@@ -37,3 +37,4 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
 # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 # data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "527383")
 # print(data)
+# It just returns a list of string p widgets

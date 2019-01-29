@@ -63,7 +63,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
-            "status", "global_status", "classification", "has_children",
+            "global_status", "classification", "has_children",
             "good_campaigns_count", "bad_campaigns_count",
             "wait_campaigns_count"]
             )
@@ -79,7 +79,7 @@ final_result = final_result.sort_values(["profit", "classification"],
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cpa","lead_cvr", "sale_cpa", "profit",
-            "status","global_status", "classification", "has_children",
+            "global_status", "classification", "has_children",
             "good_campaigns_count", "bad_campaigns_count",
             "wait_campaigns_count"]].to_dict("records"))
 

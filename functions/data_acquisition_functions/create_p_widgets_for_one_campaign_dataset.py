@@ -8,13 +8,18 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 import os
 
-def create_p_widgets_for_one_campaign_dataset(vol_id, date_range):
+def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     campaigns = get_campaign_sets()
+    mgid_id = ""
+    for campaign in campaigns:
+        if campaign["vol_id"] == vol_id:
+            mgid_id = campaign["mgid_id"]
+
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
-    # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
-            # mgid_id)
+
+    excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
     p_widgets_for_one_campaign = {"metadata": {"mgid_start_date": "",
                                  "mgid_end_date": "",
@@ -45,10 +50,10 @@ def create_p_widgets_for_one_campaign_dataset(vol_id, date_range):
            p_widgets_for_one_campaign["data"][parent_widget] = data[widget]
            p_widgets_for_one_campaign["data"][parent_widget]["widget_id"] = parent_widget
 
-           # if parent_widget in excluded_widgets:
-               # p_widgets_for_one_campaign["data"][parent_widget]['status'] = "excluded" 
-           # else:
-               # p_widgets_for_one_campaign["data"][parent_widget]['status'] = "included" 
+           if parent_widget in excluded_widgets:
+               p_widgets_for_one_campaign["data"][parent_widget]['status'] = "excluded" 
+           else:
+               p_widgets_for_one_campaign["data"][parent_widget]['status'] = "included" 
 
            if parent_widget in widget_whitelist:
                p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "whitelist" 
