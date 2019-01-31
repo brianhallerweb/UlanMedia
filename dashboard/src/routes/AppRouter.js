@@ -102,7 +102,7 @@ const AppRouter = () => (
           Component={p_widgets_for_all_campaignsExcludePWidgetConfirmation}
         />
         <PrivateRoute
-          path="/excludeonecampaignforallblacklistedpwidgets/:mgidID"
+          path="/excludeonecampaignforallblacklistedpwidgets"
           Component={ExcludeOneCampaignForAllBlacklistedPWidgets}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route

@@ -33,6 +33,14 @@ const GlobalNavBar = () => (
         countries
       </NavLink>
     </li>
+
+    <li className="globalNavItem">
+      <NavLink
+        to={'/excludeonecampaignforallblacklistedpwidgets'}
+        activeClassName="is-active">
+        exclude new campaign from all blacklist widgets
+      </NavLink>
+    </li>
   </div>
 );
 

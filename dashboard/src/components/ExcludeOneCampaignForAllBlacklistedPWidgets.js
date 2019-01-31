@@ -9,46 +9,12 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
     this.state = {
       authenticated: true,
       blacklistedPWidgets: [],
-      mgidID: this.props.match.params.mgidID,
-      campaignName: '',
+      mgidCampaignID: '',
     };
   }
 
   componentDidMount() {
-    this.findCampaignName();
     this.getBlacklistedPWidgets();
-  }
-
-  findCampaignName() {
-    fetch(`/api/getcampaignsets`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth': localStorage.getItem('token'),
-      },
-    })
-      .then(res => {
-        if (!res.ok) {
-          if (res.status == 401) {
-            //the case when a token is in the browser but it doesn't
-            //match what it is in the database. This can happen when the
-            //token is manipulated in the browser or if the tokens are
-            //deleted from the database without the user logging out.
-            localStorage.removeItem('token');
-            this.setState({authenticated: false});
-          }
-          throw Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(campaigns => {
-        for (let campaign of campaigns) {
-          if (campaign.mgid_id === this.state.mgidID) {
-            this.setState({campaignName: campaign.name});
-          }
-        }
-      })
-      .catch(err => console.log(err));
   }
 
   getBlacklistedPWidgets() {
@@ -63,7 +29,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
       .catch(err => console.log(err));
   }
 
-  excludeOneCampaign(pWidgetID, mgidID) {
+  excludeOneCampaign(pWidgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
       fetch(`/api/excludecampaign`, {
         method: 'POST',
@@ -73,7 +39,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         },
         body: JSON.stringify({
           pWidgetID,
-          mgidID,
+          mgidCampaignID,
         }),
       })
         .then(res => {
@@ -101,16 +67,18 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
     for (let pWidgetID of this.state.blacklistedPWidgets) {
       const result = await this.excludeOneCampaign(
         pWidgetID,
-        this.state.mgidID,
+        this.state.mgidCampaignID,
       );
-      if (result.id === Number(this.state.mgidID)) {
+      if (result.id === Number(this.state.mgidCampaignID)) {
         console.log(
-          `campaign ${this.state.mgidID} excluded from p widget ${pWidgetID}`,
+          `campaign ${
+            this.state.mgidCampaignID
+          } excluded from p widget ${pWidgetID}`,
         );
       } else {
         console.log(
           `ERROR: campaign ${
-            this.state.mgidID
+            this.state.mgidCampaignID
           } failed to be excluded from p widget ${pWidgetID}. The next line will show the error`,
         );
         console.log(result);
@@ -124,19 +92,25 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <p>
-          Are you sure you want to exclude campaign {this.state.campaignName}{' '}
-          from all blacklisted p widgets?
-        </p>
+        <h3>Exclude one campaign from all blacklisted p widgets</h3>
+        <div>Enter mgid campain id to exclude:</div>
+        <input
+          type="text"
+          value={this.state.mgidCampaignID}
+          onChange={e => this.setState({mgidCampaignID: e.target.value})}
+        />
         <div>
           <button
-            disabled={!this.state.blacklistedPWidgets.length > 0}
+            disabled={
+              !this.state.blacklistedPWidgets.length > 0 &&
+              !this.state.mgidCampaignID
+            }
             onClick={() => this.excludeCampaign()}>
-            Yes, confirm exclutions
+            confirm exclutions
           </button>
         </div>
         <div>
-          <p>Look in browser console for feedback</p>
+          <p style={{fontSize: 12}}>(Look in browser console for feedback)</p>
         </div>
       </div>
     );
