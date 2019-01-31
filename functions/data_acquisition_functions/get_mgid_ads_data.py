@@ -18,8 +18,8 @@ def get_mgid_ads_data(token, mgid_client_id):
         # The need for multiple requests is handled by a while loop. 
         request_number = 0
         ads_data = {}
-        while len(ads_data) == request_number * 1000:
-            url = f"https://api.mgid.com/v1/goodhits/clients/{mgid_client_id}/teasers?token={token}&limit=1000&start={request_number * 1000}"
+        while len(ads_data) == request_number * 700:
+            url = f"https://api.mgid.com/v1/goodhits/clients/{mgid_client_id}/teasers?token={token}&limit=700&start={request_number * 700}"
             request_number = request_number + 1
             res = requests.get(url)
             res.raise_for_status()
