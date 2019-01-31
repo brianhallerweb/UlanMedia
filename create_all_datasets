@@ -4,4 +4,5 @@ cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 add_yesterday_in_da
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_p_and_c_widgets_for_one_campaign_datasets.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_datasets.py
+cd $ULANMEDIAAPP/scripts/misc && python3 update_all_excluded_p_widgets_lists.py
 

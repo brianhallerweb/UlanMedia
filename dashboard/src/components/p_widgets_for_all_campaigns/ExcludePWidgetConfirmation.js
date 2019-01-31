@@ -46,15 +46,16 @@ class ExcludePWidgetConfirmation extends Component {
       .catch(err => console.log(err));
   }
 
-  updateOneExcludedPWidgetsList(mgidCampaignID) {
+  excludeOneCampaign(pWidgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/updateoneexcludedpwidgetslist`, {
+      fetch(`/api/excludecampaign`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-auth': localStorage.getItem('token'),
         },
         body: JSON.stringify({
+          pWidgetID,
           mgidCampaignID,
         }),
       })
@@ -79,16 +80,15 @@ class ExcludePWidgetConfirmation extends Component {
     });
   }
 
-  excludeOneCampaign(pWidgetID, mgidCampaignID) {
+  updateOneExcludedPWidgetsList(mgidCampaignID) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/excludecampaign`, {
+      fetch(`/api/updateoneexcludedpwidgetslist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-auth': localStorage.getItem('token'),
         },
         body: JSON.stringify({
-          pWidgetID,
           mgidCampaignID,
         }),
       })

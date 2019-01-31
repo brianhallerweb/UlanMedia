@@ -5,8 +5,8 @@ import json
 import sys
 from functions.misc.get_campaign_sets import get_campaign_sets 
 
-
 mgid_token = get_mgid_access_token(mgid_login, mgid_password)
+
 mgid_id = sys.argv[1]
 
 excluded_p_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token,
