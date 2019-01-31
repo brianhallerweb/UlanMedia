@@ -8,6 +8,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
     super(props);
     this.state = {
       authenticated: true,
+      loading: false,
       blacklistedPWidgets: [],
       mgidCampaignID: '',
     };
@@ -64,6 +65,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
   }
 
   async excludeCampaign() {
+    this.setState({loading: true});
     for (let pWidgetID of this.state.blacklistedPWidgets) {
       const result = await this.excludeOneCampaign(
         pWidgetID,
@@ -84,6 +86,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         console.log(result);
       }
     }
+    this.setState({loading: false});
     console.log('END OF EXCLUDE SCRIPT');
   }
 
@@ -112,6 +115,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         <div>
           <p style={{fontSize: 12}}>(Look in browser console for feedback)</p>
         </div>
+        {this.state.loading && <div className="loader" />}
       </div>
     );
   }
