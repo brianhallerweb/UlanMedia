@@ -105,7 +105,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         <div>
           <button
             disabled={
-              !this.state.blacklistedPWidgets.length > 0 &&
+              !this.state.blacklistedPWidgets.length > 0 ||
               !this.state.mgidCampaignID
             }
             onClick={() => this.excludeCampaign()}>
