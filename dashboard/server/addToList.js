@@ -1,6 +1,15 @@
 //@format
 const fs = require('fs');
 
+// 2/1/19
+// this code is a mess but it works. It adds p widgets to white/grey/black
+// lists and cleans and maintains those lists in the process.
+// One thing that might be confusing is that the global_status column shown on
+// the web app always (whether in development or production) comes from ulanmedia.brianhaller.net.
+// In development, adding to list only impacts the development white/grey/black
+// lists. However the global_status column still comes from
+// ulanmedia.brianhaller.net when in development.
+
 function addToList(pWidgetID, listType) {
   const currentListStatus = getCurrentListStatus(pWidgetID);
   let message = '';
@@ -14,12 +23,25 @@ function addToList(pWidgetID, listType) {
   }
   for (let key in currentListStatus) {
     if (key === listType && currentListStatus[key] === true) {
-      message = `p widget already in ${listType} list`;
+      if (message === '') {
+        message = `p widget already in ${listType} list`;
+      } else {
+        message += ` and  already in ${listType} list`;
+      }
     } else if (key === listType && currentListStatus[key] === false) {
       writeToList(pWidgetID, key);
-      message = `p widget added to ${listType} list`;
+      if (message === '') {
+        message = `p widget added to ${listType} list`;
+      } else {
+        message += ` and added to ${listType} list`;
+      }
     } else if (currentListStatus[key] === true) {
       eraseFromList(pWidgetID, key);
+      if (message === '') {
+        message = `p widget erased from ${key} list`;
+      } else {
+        message += ` and erased from ${key} list`;
+      }
     }
   }
   return message;

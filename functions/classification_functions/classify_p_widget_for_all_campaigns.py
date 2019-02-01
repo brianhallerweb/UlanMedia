@@ -13,8 +13,8 @@ def classify_p_widget_for_all_campaigns(p_widget):
     else:
         if p_widget["for_all_campaigns"]["global_status"] == "not yet listed":
             return "wait"
-        elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":
-            return "white"
+        elif p_widget["for_all_campaigns"]["global_status"] == "blacklist":
+            return "black"
         elif p_widget["for_all_campaigns"]["global_status"] == "greylist":
             return "grey"
         elif p_widget["for_all_campaigns"]["global_status"] == "whitelist":

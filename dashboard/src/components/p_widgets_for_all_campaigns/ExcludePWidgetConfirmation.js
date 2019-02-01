@@ -11,8 +11,6 @@ class ExcludePWidgetConfirmation extends Component {
       campaigns: [],
       pWidgetID: this.props.match.params.pWidgetID,
       loading: false,
-      showMessages: false,
-      messages: [],
     };
   }
 
@@ -114,9 +112,7 @@ class ExcludePWidgetConfirmation extends Component {
   }
 
   //excludeAllCampaigns is the important function on this page. It is what
-  //excludes each campaign from a p widget, one by one. All the other
-  //code on this page either helps this function or it is just for
-  //displaying feedback messages.
+  //excludes each campaign from a p widget, one by one.
   async excludeAllCampaigns() {
     // This function is async because I wanted to slow down the requests
     // to mgid. It excludes each campaign, one at a time.
@@ -132,28 +128,25 @@ class ExcludePWidgetConfirmation extends Component {
         campaign.mgid_id,
       );
 
-      this.setState({
-        showMessages: true,
-        messages: this.state.messages.concat(excluded),
-      });
-      this.setState({
-        messages: this.state.messages.concat(updated),
-      });
+      if (excluded.id) {
+        console.log(
+          `campaign ${campaign.mgid_id} successfully excluded from p widget${
+            this.state.pWidgetID
+          }`,
+        );
+        console.log(updated);
+      } else {
+        console.log(
+          `ERROR: campaign ${campaign.mgid_id} failed to be excluded from ${
+            this.state.pWidgetID
+          }. The specific error is on the next line. `,
+        );
+        console.log(excluded);
+      }
     }
 
-    // This is just stuff for feedback messages on the web app.
-    this.setState({loading: false, showMessages: false});
-    if (this.state.errorCount > 0) {
-      this.setState({
-        finalResultMessage:
-          'Failed, something went wrong. You need to investigate further because some campaigns were not excluded or some lists of excluded p widgets were not updated. Remember that some campaigns may have been successfully excluded.',
-      });
-    } else {
-      this.setState({
-        finalResultMessage:
-          'Successfully excluded all campaigns and updated all excluded p widgets lists. The new "excluded" campaign status will be immediately reflected on the web app.',
-      });
-    }
+    this.setState({loading: false});
+    console.log('END OF EXCLUDE SCRIPT');
   }
 
   render() {
@@ -172,52 +165,15 @@ class ExcludePWidgetConfirmation extends Component {
             Yes, confirm exclution
           </button>
         </div>
+        <p style={{fontSize: 12}}>
+          Look in browser console for feedback (ctrl+shift+j)
+        </p>
         {this.state.loading && (
           <div style={{margin: 10}}>
             <div className="loader" />
             <div>This will take a 5-10 minutes...</div>
           </div>
         )}
-        {this.state.showMessages && (
-          <div>
-            {this.state.messages.map(message => {
-              if (typeof message === 'string') {
-                return (
-                  <p
-                    key={message}
-                    style={{color: 'green', margin: 0, fontSize: 14}}>
-                    {message}
-                  </p>
-                );
-              }
-              if (message.id) {
-                return (
-                  <p
-                    key={message.id}
-                    style={{color: 'green', margin: 0, fontSize: 14}}>
-                    campaign {message.id} successfully excluded
-                  </p>
-                );
-              } else {
-                this.setState({errorCount: this.state.errorCount + 1});
-                return (
-                  <li style={{color: 'red'}}>error excluding a campaign</li>
-                );
-              }
-            })}
-          </div>
-        )}
-        {this.state.messages.length === this.state.campaigns.length * 2 &&
-          this.state.messages.length > 0 && (
-            <div>
-              <div style={{marginTop: 10, color: 'green'}}>
-                {this.state.finalResultMessage}
-              </div>
-              <div style={{marginTop: 10}}>
-                <button onClick={() => close()}>close tab</button>
-              </div>
-            </div>
-          )}
       </div>
     );
   }

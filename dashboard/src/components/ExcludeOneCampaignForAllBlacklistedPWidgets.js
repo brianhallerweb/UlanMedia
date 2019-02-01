@@ -71,6 +71,12 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         pWidgetID,
         this.state.mgidCampaignID,
       );
+      if (!result.id) {
+        if (result.errors[0] === '[ERROR_CAMPAIGN_DOES_NOT_EXIST]') {
+          console.log(`campaign id error: ${result.errors[0]}`);
+          break;
+        }
+      }
       if (result.id === Number(this.state.mgidCampaignID)) {
         console.log(
           `campaign ${
@@ -98,6 +104,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         <h3>Exclude one campaign from all blacklisted p widgets</h3>
         <div>Enter mgid campain id to exclude:</div>
         <input
+          style={{marginTop: 4, marginBottom: 6}}
           type="text"
           value={this.state.mgidCampaignID}
           onChange={e => this.setState({mgidCampaignID: e.target.value})}
@@ -113,7 +120,9 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
           </button>
         </div>
         <div>
-          <p style={{fontSize: 12}}>(Look in browser console for feedback)</p>
+          <p style={{fontSize: 12}}>
+            Look in browser console for feedback (ctrl+shift+j)
+          </p>
         </div>
         {this.state.loading && <div className="loader" />}
       </div>

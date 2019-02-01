@@ -18,6 +18,7 @@ class ExcludeCampaignConfirmation extends Component {
       errorMessage: '',
     };
   }
+
   confirmExcludeCampaign() {
     this.setState({loading: true});
     fetch(`/api/excludecampaign`, {
@@ -48,9 +49,7 @@ class ExcludeCampaignConfirmation extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.id === Number(this.state.mgidCampaignID)) {
-          this.setState({
-            successMessage1: `Campaign ${res.id} successfully excluded`,
-          });
+          console.log(`Campaign ${res.id} successfully excluded`);
         } else {
           throw Error(
             `There was an error. Campaign ${
@@ -85,21 +84,17 @@ class ExcludeCampaignConfirmation extends Component {
         }
       })
       .then(() => {
+        console.log(
+          `Campaign ${this.state.mgidCampaignID} status updated to "excluded"`,
+        );
         this.setState({
           loading: false,
-          successResponse: true,
-          successMessage2: `Campaign ${
-            this.state.mgidCampaignID
-          } status updated to "excluded"`,
         });
       })
       .catch(err => {
         console.log(err);
         this.setState({
           loading: false,
-          successResponse: true,
-          errorResponse: true,
-          errorMessage: err.message,
         });
       });
   }
@@ -118,25 +113,9 @@ class ExcludeCampaignConfirmation extends Component {
             Yes, confirm exclution
           </button>
         </div>
-        {this.state.successResponse && (
-          <div>
-            <p style={{color: 'green'}}>{this.state.successMessage1}</p>
-            <p style={{color: 'green'}}>{this.state.successMessage2}</p>
-          </div>
-        )}
-        {this.state.errorResponse && (
-          <div>
-            <p style={{color: 'red'}}>{this.state.errorMessage}</p>
-          </div>
-        )}
-        {this.state.errorResponse ||
-          (this.state.successResponse && (
-            <div>
-              <div style={{marginTop: 10}}>
-                <button onClick={() => close()}>close tab</button>
-              </div>
-            </div>
-          ))}
+        <p style={{fontSize: 12}}>
+          Look in browser console for feedback (ctrl+shift+j)
+        </p>
         {this.state.loading && <div className="loader" />}
       </div>
     );

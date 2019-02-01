@@ -37,7 +37,8 @@ const GlobalNavBar = () => (
     <li className="globalNavItem">
       <NavLink
         to={'/excludeonecampaignforallblacklistedpwidgets'}
-        activeClassName="is-active">
+        activeClassName="is-active"
+        target="_blank">
         exclude new campaign from all blacklisted widgets
       </NavLink>
     </li>
