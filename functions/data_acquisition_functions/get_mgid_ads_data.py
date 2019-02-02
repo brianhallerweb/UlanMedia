@@ -1,5 +1,4 @@
 from config.config import *
-from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 from functions.misc.send_email import send_email
 from datetime import datetime
 import requests

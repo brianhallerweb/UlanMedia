@@ -1,6 +1,4 @@
 from config.config import *
-from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
-from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
 from functions.data_acquisition_functions.get_vol_daily_stats_data import get_vol_daily_stats_data
 from functions.data_acquisition_functions.get_mgid_daily_stats_data import get_mgid_daily_stats_data
 from functions.misc.get_campaign_sets import get_campaign_sets

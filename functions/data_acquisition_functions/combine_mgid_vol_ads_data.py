@@ -1,8 +1,6 @@
 from config.config import *
 import sys
 import json
-from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
-from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 from functions.data_acquisition_functions.get_mgid_ads_data import get_mgid_ads_data
 from functions.data_acquisition_functions.get_vol_ads_data import get_vol_ads_data
 from functions.misc.create_vol_date_range import create_vol_date_range

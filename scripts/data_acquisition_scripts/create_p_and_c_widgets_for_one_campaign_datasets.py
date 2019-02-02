@@ -1,4 +1,5 @@
 from config.config import *
+from config.mgid_token import mgid_token
 from datetime import datetime, timedelta
 import pytz
 import sys
@@ -7,7 +8,6 @@ from functions.data_acquisition_functions.get_vol_access_token import get_vol_ac
 from functions.data_acquisition_functions.create_p_and_c_widgets_for_one_campaign_dataset import create_p_and_c_widgets_for_one_campaign_dataset
 from functions.misc.get_campaign_sets import get_campaign_sets 
 
-mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 
 campaigns = get_campaign_sets()

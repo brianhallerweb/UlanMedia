@@ -4,7 +4,6 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 import re
 import os
 import sys
-from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist

@@ -1,4 +1,5 @@
 from config.config import *
+from config.mgid_token import mgid_token
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 import json
@@ -12,8 +13,6 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 # In other words, the campaign "status" is updated whenever a campaign is
 # excluded through the web app. If you exclude/include a campaign without using
 # the web app, the campaign "status" column will be out of sync on the web app. 
-
-mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 
 campaigns = get_campaign_sets()
 

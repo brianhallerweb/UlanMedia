@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import pytz
 from config.config import *
+from config.mgid_token import mgid_token
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
 from functions.data_acquisition_functions.set_vol_campaign_cost import set_vol_campaign_cost
 from functions.data_acquisition_functions.get_all_campaign_revenues_by_traffic_source import get_all_campaign_revenues_by_traffic_source
@@ -12,7 +13,6 @@ from functions.misc.send_email import send_email
 from functions.misc.get_campaign_sets import get_campaign_sets 
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
-mgid_token = get_mgid_access_token(mgid_login, mgid_password)
 
 vol_dates = create_vol_date_range(1, mgid_timezone)
 vol_start_date = vol_dates[0]
