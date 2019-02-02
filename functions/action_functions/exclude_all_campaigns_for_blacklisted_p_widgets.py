@@ -1,4 +1,5 @@
 import json
+from functions.misc.send_email import send_email
 from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
 import re
@@ -11,10 +12,6 @@ from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
-
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
 
 def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
     campaigns = get_campaign_sets()
@@ -82,6 +79,7 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
                 p_widgets_for_one_campaign[parent_widget]["sales"] += json_file["data"][widget]["sales"]
             else:
                 p_widgets_for_one_campaign[parent_widget] = json_file["data"][widget]
+                p_widgets_for_one_campaign[parent_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[parent_widget]["widget_id"] = parent_widget
                 if parent_widget not in excluded_widgets:
                     p_widgets_for_one_campaign[parent_widget]["status"] = "included"
@@ -104,17 +102,27 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
     # "for_all_campaigns" value) and data for each campaign (the
     # "for_each_campaign" value)
      
-    # loop through each campaign for each p widget and determine the
-    # good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
+    # loop through each campaign and look for blacklisted p widgets with
+    # "included" campaigns
+
+    # emails_sent acts as a counter for the number of found blacklisted p
+    # wicdgets with included campaigns. The count is only important because if
+    # > 0, which is what it will be most days, I need to send an email that
+    # says all is well. 
+    emails_sent = 0
     for p_widget in p_widgets_for_all_campaigns.values():
         if p_widget["for_all_campaigns"]["global_status"] == "blacklist":
             for campaign in p_widget["for_each_campaign"]:
                 if campaign["status"] == "included":
-                    print(f'found an included campaign on a blacklisted p widget\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign unknown')
+                    message = f'found an included campaign on a blacklisted p widget:\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign {campaign["mgid_id"]}'
+                    print(message)
+                    emails_sent += 1
+                    send_email("brianshaller@gmail.com", 'URGENT ERROR - found an "included" campaign in a blacklisted widget', message)
 
-# So far this function should find black listed p widgets and scan through
-# their campaigns to find "included" ones. 
-                    
-# this function returned an "included" campaign in a blacklisted p widget. The
-# campaign was inaccurately labeled as "included" so you need to find out why. 
-exclude_all_campaigns_for_blacklisted_p_widgets("oneeighty")
+    if emails_sent == 0:
+        # send email saying no "included" campaigns on blacklisted widgets
+        # were found. 
+        message = 'success - campaigns for blacklisted widgets are all excluded'
+        print(message)
+        send_email("brianshaller@gmail.com", message, message)
+
