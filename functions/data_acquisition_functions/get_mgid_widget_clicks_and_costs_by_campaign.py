@@ -2,11 +2,17 @@ import requests
 from datetime import datetime
 import sys
 from functions.misc.send_email import send_email
+from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
+
 
 def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date, end_date):
     try:
         url =f"https://api.mgid.com/v1/goodhits/campaigns/{campaign_id}/quality-analysis?token={token}&campaignId={campaign_id}&dateInterval=interval&startDate={start_date}&endDate={end_date}";
         response = requests.get(url) 
+        if response.status_code == 401:
+            mgid_token = get_and_return_new_mgid_token()
+            return get_mgid_widget_clicks_and_costs_by_campaign(mgid_token, campaign_id, start_date, end_date)
+
         response.raise_for_status()
         response = response.json()
         # The logic below esstenially loops through each each widget and records

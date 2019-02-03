@@ -4,6 +4,8 @@ from datetime import datetime
 import requests
 import re
 import sys
+from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
+
 
 def get_mgid_ads_data(token, mgid_client_id):
     try:
@@ -21,6 +23,9 @@ def get_mgid_ads_data(token, mgid_client_id):
             url = f"https://api.mgid.com/v1/goodhits/clients/{mgid_client_id}/teasers?token={token}&limit=700&start={request_number * 700}"
             request_number = request_number + 1
             res = requests.get(url)
+            if res.status_code == 401:
+                mgid_token = get_and_return_new_mgid_token()
+                return get_mgid_ads_data(mgid_token, mgid_client_id)
             res.raise_for_status()
             res = res.json()
             # The response is a dictionary of ad ids. Each ad is a dictionary

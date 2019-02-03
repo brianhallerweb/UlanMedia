@@ -3,11 +3,17 @@ from datetime import datetime
 import requests
 import sys
 from functions.misc.send_email import send_email
+from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
+
 
 def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campaign_id):
     url=f"https://api.mgid.com/v1/goodhits/clients/{mgid_client_id}/campaigns/{mgid_campaign_id}?token={mgid_token}";
     try:
         response = requests.get(url)
+        if response.status_code == 401:
+            new_mgid_token = get_and_return_new_mgid_token()
+            return get_mgid_excluded_widgets_by_campaign(new_mgid_token, mgid_client_id, mgid_campaign_id)
+
         response.raise_for_status()
         response = response.json()
         # the response is a dictionary of lists. The keys are widget ids.

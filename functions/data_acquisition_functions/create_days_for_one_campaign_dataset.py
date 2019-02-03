@@ -7,7 +7,6 @@ import json
 import re
 from datetime import datetime, timedelta
 import pytz
-import requests
 import sys
 
 # This function will create a json data set where each key is a vol campaign id
