@@ -1,8 +1,8 @@
 from config.config import *
-import json
-import sys
 from functions.misc.get_campaign_sets import get_campaign_sets
 import os
+import json
+import sys
 
 def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_name):
     campaigns = get_campaign_sets()

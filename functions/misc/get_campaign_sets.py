@@ -1,9 +1,10 @@
-import requests
+from functions.misc.send_email import send_email
 from datetime import datetime
 import sys
+import requests
+
 import pandas as pd
 from pandas.compat import StringIO
-from functions.misc.send_email import send_email
 
 def get_campaign_sets():
     try:

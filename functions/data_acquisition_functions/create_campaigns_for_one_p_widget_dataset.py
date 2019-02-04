@@ -1,19 +1,17 @@
-from datetime import datetime, timedelta
 from config.config import *
-import json
-import os
-import sys
-import re
 from functions.data_acquisition_functions.get_mgid_widget_clicks_and_costs_by_campaign import get_mgid_widget_clicks_and_costs_by_campaign
 from functions.data_acquisition_functions.get_vol_widget_conversions_by_campaign import get_vol_widget_conversions_by_campaign
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
+from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
-
-from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
-
+from datetime import datetime, timedelta
+import json
+import os
+import sys
+import re
 
 def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, output_name):
     widget_whitelist = get_whitelist()

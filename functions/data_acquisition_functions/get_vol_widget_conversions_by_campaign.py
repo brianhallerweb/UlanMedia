@@ -1,9 +1,9 @@
 from config.config import *
+from functions.misc.send_email import send_email
+from datetime import datetime
 import requests
 import re
 import sys
-from datetime import datetime
-from functions.misc.send_email import send_email
 
 
 def get_vol_widget_conversions_by_campaign(token, campaign_id, start_date,

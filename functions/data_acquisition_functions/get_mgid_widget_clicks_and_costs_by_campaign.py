@@ -1,9 +1,8 @@
-import requests 
-from datetime import datetime
-import sys
 from functions.misc.send_email import send_email
 from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
-
+from datetime import datetime
+import requests 
+import sys
 
 def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date, end_date):
     try:

@@ -1,12 +1,12 @@
-import json
 from config.config import *
-import re
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.misc.get_campaign_sets import get_campaign_sets 
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 import os
+import json
+import re
 
 def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     campaigns = get_campaign_sets()

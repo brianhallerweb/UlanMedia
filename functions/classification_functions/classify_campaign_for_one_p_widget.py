@@ -1,30 +1,45 @@
 def classify_campaign_for_one_p_widget(campaign):
-    if campaign["clicks"] > 0:
-        if (campaign["sales"] > 0) & ((campaign["revenue"] - campaign["cost"]) > 0):
+    clicks = campaign["clicks"] 
+    cost = campaign["cost"] 
+    leads = campaign["leads"] 
+    sales = campaign["sales"] 
+    revenue = campaign["revenue"] 
+    profit = revenue - cost 
+    max_lead_cpa = campaign["max_lead_cpa"]
+    if clicks == 0:
+        cvr = 0
+    else:
+        cvr = leads / clicks * 100
+    if leads == 0:
+        lead_cpa = 0
+    else:
+        lead_cpa = cost / leads
+
+
+    if clicks == 0:
+        return "wait"
+    else:
+        if (sales > 0) & (profit > 0):
             return "good"
         else:
-            if (campaign["leads"]/campaign["clicks"]*100) >= 0.20:
-                if campaign["leads"] > 2:
-                    return "good" 
-                else:
-                    return "half good" 
+            if (leads >= 3) & (lead_cpa < max_lead_cpa):
+                return "good"
+            elif (leads == 1 | leads == 2) & (lead_cpa < max_lead_cpa):
+                return "half good"
             else:
-                if (campaign["cost"] >= 50) | (campaign["clicks"] >= 1000):
+                if cost > (4 * max_lead_cpa):
                     return "bad"
-                elif ((campaign["cost"] >= 30) & (campaign["cost"] <= 50)) & ((campaign["clicks"] >= 700) & (campaign["clicks"] <= 1000)):
-                    if campaign["leads"] == 0:
+                elif cost > (3 * max_lead_cpa):
+                    if leads > 0:
+                        return "half bad"
+                    else:
                         return "bad"
-                    else: 
-                        return "half bad"
-                elif ((campaign["cost"] >= 10) & (campaign["cost"] <= 30)) & ((campaign["clicks"] >= 300) & (campaign["clicks"] <= 700)):
-                    if campaign["leads"] == 0:
-                        return "half bad"
-                    else: 
+                elif cost > (2 * max_lead_cpa):
+                    if leads > 0:
                         return "wait"
-                elif (campaign["cost"] <= 10) | (campaign["clicks"] <= 300):
-                    return "wait"
+                    else:
+                        return "half bad"
                 else:
                     return "wait"
-    else:
-        return "wait"
+
 

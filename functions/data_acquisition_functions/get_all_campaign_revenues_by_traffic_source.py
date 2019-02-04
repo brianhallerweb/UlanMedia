@@ -1,9 +1,8 @@
 from config.config import *
-import requests
 from datetime import datetime
+import requests
 import sys
 from functions.misc.send_email import send_email
-
 
 def get_all_campaign_revenues_by_traffic_source(token, traffic_source_id,
         start_date, end_date):

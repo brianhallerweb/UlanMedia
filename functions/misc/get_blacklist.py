@@ -1,7 +1,7 @@
-import requests
-from datetime import datetime
-import sys
 from functions.misc.send_email import send_email
+from datetime import datetime
+import requests
+import sys
 
 def get_blacklist():
     try:

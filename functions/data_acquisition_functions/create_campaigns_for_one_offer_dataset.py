@@ -1,8 +1,8 @@
 from config.config import *
+from functions.misc.get_campaign_sets import get_campaign_sets 
 import json
 import os
 import sys
-from functions.misc.get_campaign_sets import get_campaign_sets 
 
 def create_campaigns_for_one_offer_dataset(date_range, offer_id):
 

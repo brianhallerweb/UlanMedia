@@ -3,9 +3,9 @@ from functions.data_acquisition_functions.get_vol_daily_stats_data import get_vo
 from functions.data_acquisition_functions.get_mgid_daily_stats_data import get_mgid_daily_stats_data
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.send_email import send_email
+from datetime import datetime, timedelta
 import json
 import re
-from datetime import datetime, timedelta
 import pytz
 import sys
 

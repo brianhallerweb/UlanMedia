@@ -1,10 +1,10 @@
-import requests
 from config.config import *
+from functions.misc.send_email import send_email
+from datetime import datetime
+import requests
 import json
 import sys
 import re
-from datetime import datetime
-from functions.misc.send_email import send_email
 
 def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
     try:

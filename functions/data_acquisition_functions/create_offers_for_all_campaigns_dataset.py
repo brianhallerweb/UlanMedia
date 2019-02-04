@@ -3,7 +3,6 @@ import json
 import sys
 import os
 
-
 def create_offers_for_all_campaigns_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:

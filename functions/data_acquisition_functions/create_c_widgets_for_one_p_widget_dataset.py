@@ -1,13 +1,13 @@
 from config.config import *
-import json
-import re
-import os
-import sys
+from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_campaign_sets import get_campaign_sets 
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
-from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
+import json
+import re
+import os
+import sys
 
 def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
     # 1/1/19 global status is added here, as opposed to on create_p_and_c_widgets for

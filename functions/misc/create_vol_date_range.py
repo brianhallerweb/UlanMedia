@@ -1,6 +1,6 @@
+from config.config import *
 from datetime import datetime, timedelta
 import pytz
-from config.config import *
 
 def create_vol_date_range(days_ago, timezone):
     start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)

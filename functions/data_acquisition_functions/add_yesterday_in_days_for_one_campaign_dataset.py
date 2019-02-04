@@ -8,8 +8,6 @@ import json
 import os
 import re
 import sys
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
 
 
 def add_yesterday_in_days_for_one_campaign_dataset(vol_token, mgid_token):

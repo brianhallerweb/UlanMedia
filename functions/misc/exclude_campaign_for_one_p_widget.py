@@ -1,9 +1,9 @@
+from functions.misc.get_new_mgid_token import get_new_mgid_token
+from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
 import requests
 import json
 import os
 import re
-from functions.misc.get_new_mgid_token import get_new_mgid_token
-from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
 
 
 def exclude_campaign_for_one_p_widget(token, client_id, widget_id, campaign_id):

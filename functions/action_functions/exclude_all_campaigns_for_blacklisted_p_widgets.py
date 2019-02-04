@@ -1,10 +1,6 @@
-import json
-from functions.misc.send_email import send_email
 from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
-import re
-import os
-import sys
+from functions.misc.send_email import send_email
 from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token 
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_whitelist import get_whitelist
@@ -12,6 +8,10 @@ from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
+import re
+import os
+import sys
+import json
 
 def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
     campaigns = get_campaign_sets()

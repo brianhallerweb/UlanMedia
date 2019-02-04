@@ -1,11 +1,10 @@
 from config.config import *
+from functions.misc.send_email import send_email
+from datetime import datetime
 import requests
 import re
-from datetime import datetime
 import sys
 import json
-from functions.misc.send_email import send_email
-
 
 def get_all_campaign_conversions_by_traffic_source(token,
         traffic_source_id, start_date, end_date):

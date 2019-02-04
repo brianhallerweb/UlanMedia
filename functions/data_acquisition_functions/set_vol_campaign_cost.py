@@ -1,8 +1,8 @@
+from functions.misc.send_email import send_email
+from datetime import datetime
 import requests
 import json
 import sys
-from datetime import datetime
-from functions.misc.send_email import send_email
 
 def set_vol_campaign_cost(token, campaign_id, start_date, end_date, cost):
     if cost <= 0:

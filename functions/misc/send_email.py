@@ -1,5 +1,5 @@
-import smtplib
 from config.config import *
+import smtplib
 
 def send_email(to, subject, msg):
     try:

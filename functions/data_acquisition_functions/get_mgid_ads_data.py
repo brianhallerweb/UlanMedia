@@ -1,11 +1,10 @@
 from config.config import *
 from functions.misc.send_email import send_email
+from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
 from datetime import datetime
 import requests
 import re
 import sys
-from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
-
 
 def get_mgid_ads_data(token, mgid_client_id):
     try:
