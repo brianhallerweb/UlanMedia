@@ -86,7 +86,6 @@ def create_campaigns_for_one_p_widget_dataset(parent_widget_id, date_range, outp
                 "name": campaign["name"],
                 "max_lead_cpa": campaign["max_lead_cpa"],
                 "max_sale_cpa": campaign["max_sale_cpa"],
-                # "status": data[widget_id]["status"],
                 "status": widget_status,
                 "global_status": parent_widget_global_status,
                 "clicks": data[widget_id]["clicks"], 

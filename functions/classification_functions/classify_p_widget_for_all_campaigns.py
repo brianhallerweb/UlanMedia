@@ -9,30 +9,30 @@ def classify_p_widget_for_all_campaigns(p_widget):
     wait_campaigns_count = p_widget["wait_campaigns_count"]
 
     if global_status == "blacklist":
-        return "black"
+        return "blacklist"
     elif (cost < 10) | (clicks < 300):
         if global_status == "whitelist":
-            return "white"
+            return "whitelist"
         elif global_status == "greylist":
-            return "grey"
+            return "greylist"
         else:
             return "wait"
     else:
         # grey
         if (global_status == "greylist") & (good_campaigns_count > 0):
-            return "grey"
+            return "greylist"
         elif (good_campaigns_count > 2) & (bad_campaigns_count > 0):
-            return "grey"
+            return "greylist"
         # white
         elif (global_status == "whitelist") & (bad_campaigns_count == 0):
-            return "white"
+            return "whitelist"
         elif (good_campaigns_count > 2) & (bad_campaigns_count == 0):
-            return "white"
+            return "whitelist"
         # black 
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 2):
-            return "black"
+            return "blacklist"
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (profit < -60):
-            return "black"
+            return "blacklist"
         # wait
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):
             return "wait"
