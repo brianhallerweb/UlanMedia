@@ -117,12 +117,13 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
                     message = f'found an included campaign on a blacklisted p widget:\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign {campaign["mgid_id"]}'
                     print(message)
                     emails_sent += 1
-                    send_email("brianshaller@gmail.com", 'URGENT ERROR - found an "included" campaign in a blacklisted widget', message)
+                    send_email("brianshaller@gmail.com", 'ALERT - found an "included" campaign in a blacklisted widget', message)
 
     if emails_sent == 0:
         # send email saying no "included" campaigns on blacklisted widgets
         # were found. 
-        message = 'success - campaigns for blacklisted widgets are all excluded'
+        message = 'ok - campaigns for blacklisted widgets are all excluded'
         print(message)
         send_email("brianshaller@gmail.com", message, message)
+        send_email("mikeseo@gmail.com", message, message)
 
