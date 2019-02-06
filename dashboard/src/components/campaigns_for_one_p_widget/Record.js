@@ -82,6 +82,7 @@ class Record extends Component {
         <td>${this.props.campaignRecord.profit}</td>
         <td>{this.props.campaignRecord.leads}</td>
         <td>${this.props.campaignRecord.lead_cpa}</td>
+        <td>${this.props.campaignRecord.max_lead_cpa}</td>
         <td>{this.props.campaignRecord.lead_cvr}%</td>
         <td>{this.props.campaignRecord.sales}</td>
         <td>${this.props.campaignRecord.sale_cpa}</td>

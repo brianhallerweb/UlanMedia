@@ -1,4 +1,4 @@
-def classify_campaign_for_one_p_widget(campaign):
+def classify_campaign_for_one_p_widget(campaign, p_widget_total_sales):
     clicks = campaign["clicks"] 
     cost = campaign["cost"] 
     leads = campaign["leads"] 
@@ -6,6 +6,7 @@ def classify_campaign_for_one_p_widget(campaign):
     revenue = campaign["revenue"] 
     profit = revenue - cost 
     max_lead_cpa = campaign["max_lead_cpa"]
+    max_sale_cpa = campaign["max_sale_cpa"]
     if clicks == 0:
         cvr = 0
     else:
@@ -27,19 +28,36 @@ def classify_campaign_for_one_p_widget(campaign):
             elif (leads == 1 | leads == 2) & (lead_cpa < max_lead_cpa):
                 return "half good"
             else:
-                if cost > (4 * max_lead_cpa):
-                    return "bad"
-                elif cost > (3 * max_lead_cpa):
-                    if leads > 0:
-                        return "half bad"
-                    else:
+                # there is a new rule here
+                if  p_widget_total_sales == 0:
+                    if cost > (4 * max_lead_cpa):
                         return "bad"
-                elif cost > (2 * max_lead_cpa):
-                    if leads > 0:
-                        return "wait"
+                    elif cost > (3 * max_lead_cpa):
+                        if leads > 0:
+                            return "half bad"
+                        else:
+                            return "bad"
+                    elif cost > (2 * max_lead_cpa):
+                        if leads > 0:
+                            return "wait"
+                        else:
+                            return "half bad"
                     else:
-                        return "half bad"
+                        return "wait"
                 else:
-                    return "wait"
+                    if cost > (1 * max_sale_cpa):
+                        return "bad"
+                    elif cost > (0.5 * max_lead_cpa):
+                        if leads > 0:
+                            return "half bad"
+                        else:
+                            return "bad"
+                    elif cost > (3 * max_lead_cpa):
+                        if leads > 0:
+                            return "wait"
+                        else:
+                            return "half bad"
+                    else:
+                        return "wait"
 
 

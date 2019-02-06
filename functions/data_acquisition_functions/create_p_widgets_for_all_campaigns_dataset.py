@@ -102,6 +102,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                 p_widgets_for_one_campaign[parent_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[parent_widget]["widget_id"] = parent_widget
                 p_widgets_for_one_campaign[parent_widget]["max_lead_cpa"] = campaign["max_lead_cpa"]
+                p_widgets_for_one_campaign[parent_widget]["max_sale_cpa"] = campaign["max_sale_cpa"]
                 
 
         # Add each p_widget_for_one_campaign to the list of campaigns for each p widget
@@ -121,10 +122,11 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
     # loop through each campaign for each p widget and determine the
     # good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
     for p_widget in p_widgets_for_all_campaigns["data"]:
+        total_sales = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["sales"]
         for campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/wait
             # counts are recorded
-            classification = classify_campaign_for_one_p_widget(campaign)
+            classification = classify_campaign_for_one_p_widget(campaign, total_sales)
             if classification == "good":
                p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] += 1
             elif classification == "half good": 
