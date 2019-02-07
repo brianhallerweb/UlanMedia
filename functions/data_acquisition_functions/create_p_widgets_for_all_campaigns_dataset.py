@@ -12,22 +12,86 @@ import sys
 import json
 
 def create_p_widgets_for_all_campaigns_dataset(date_range):
+    # The goal of this function is to return a json dataset for
+    # p_widgets_for_all_campaigns. That means each row is a p_widget and each
+    # column is data for all campaigns in that p widget.
+    #
+    # The resulting data structure looks like this:
+    # {"metadata": {"mgid_start_date": "2018-08-09",
+    #               "mgid_end_date": "2019-02-04",
+    #               "vol_start_date": "2018-08-09",
+    #               "vol_end_date": "2019-02-05"},
+    #  "data": {"21391": {"widget_id": "21391", 
+    #                     "clicks": 140, 
+    #                     "cost": 3.0, 
+    #                     "revenue": 0.0, 
+    #                     "leads": 5, 
+    #                     "sales": 0, 
+    #                     "referrer": ["mgid.com"],
+    #                     "global_status": "not yet listed",
+    #                     "has_children": "false",
+    #                     "classification": "wait",
+    #                     "good_campaigns_count": 0,
+    #                     "bad_campaigns_count": 0,
+    #                     "wait_campaigns_count": 18},
+    #           "15865": {...},
+    #           .
+    #           .
+    #           .
+    #           }
+    # }
+    ########################################################
+
+    # 1. get some prerequisite data
+
     campaigns = get_campaign_sets()
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
+    ########################################################
+
+    # 2. set up the basic data structure you want to create
+
     p_widgets_for_all_campaigns = {"metadata":{}, "data":{}}
+
+    #########################################################
+
+    # 3. Add the metadata. The metadata are the date ranges of the mgid and vol
+    # request dates. All p_and_c_widgets_for_one_campaign files have the same
+    # date ranges so I am just using the first campaign. 
+
+    vol_id_for_adding_metadata = campaigns[0]["vol_id"]
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{campaigns[0]["vol_id"]}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
+        json_file = json.load(file)
+    p_widgets_for_all_campaigns["metadata"]["mgid_start_date"] = json_file["metadata"]["mgid_start_date"]
+    p_widgets_for_all_campaigns["metadata"]["mgid_end_date"] = json_file["metadata"]["mgid_end_date"] 
+    p_widgets_for_all_campaigns["metadata"]["vol_start_date"] = json_file["metadata"]["vol_start_date"]
+    p_widgets_for_all_campaigns["metadata"]["vol_end_date"] = json_file["metadata"]["vol_end_date"]
+
+    # At this point in the process, p_widgets_for_all_campaigns looks like this:
+    #{ 'metadata': { 'mgid_end_date': '2019-02-04',
+    #                'mgid_start_date': '2018-08-09',
+    #                'vol_end_date': '2019-02-05',
+    #                'vol_start_date': '2018-08-09'},
+    #  'data': {}
+    #  }
+
+    #########################################################
+
+    # 4. Loop through each campaign to accumulate the most of the data for
+    # p_widgets_for_all_campaigns. This step will create
+    # p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
+    # The reason for the key "for_all_campaigns" is that there needs to
+    # temporarily be other keys as well. In the next few steps, I will create
+    # these keys: "for_all_campaigns", "for_each_campaign",
+    # "good_campaigns_count", "bad_campaigns_count", and
+    # "wait_campaigns_count".
 
     for campaign in campaigns:
         vol_id = campaign["vol_id"] 
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
-
-        p_widgets_for_all_campaigns["metadata"]["mgid_start_date"] = json_file["metadata"]["mgid_start_date"]
-        p_widgets_for_all_campaigns["metadata"]["mgid_end_date"] = json_file["metadata"]["mgid_end_date"] 
-        p_widgets_for_all_campaigns["metadata"]["vol_start_date"] = json_file["metadata"]["vol_start_date"]
-        p_widgets_for_all_campaigns["metadata"]["vol_end_date"] = json_file["metadata"]["vol_end_date"]
 
         pattern = re.compile(r'\d*')
 
@@ -58,7 +122,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["leads"] += json_file["data"][widget]["leads"]
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["sales"] += json_file["data"][widget]["sales"]
            else:
-               p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {}, "for_each_campaign": [], "good_campaigns_count": 0, "bad_campaigns_count": 0, "wait_campaigns_count": 0}
+               p_widgets_for_all_campaigns["data"][parent_widget] = {"for_all_campaigns": {}}
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"] = json_file["data"][widget]
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["widget_id"] = parent_widget
 
@@ -75,17 +139,64 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["has_children"] = True
            else:
                p_widgets_for_all_campaigns["data"][parent_widget]["for_all_campaigns"]["has_children"] = False
+               
 
+    # At this point in the process, p_widgets_for_all_campaigns looks like this:
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'}}, 
+    #              '123456': { 'for_all_campaigns : {data...}}
+    #              ...
+    #              ...
+    #              ...
+    #            },
 
-        # for each campaign, accumulate c widgets for one p widget together
-        # into one p widget
-        # The result of this is that p_widgets_for_one_campaign is a dictionary
-        # of individual p_widgets in one campaign. 
-        # 1/14/19 I'm not sure why I have to load the file again here but I was
-        # having some unexpected results when I tried to reuse the file data
-        # that was loaded in the previous step. It's as if that data was
-        # mutated in some way, but I don't see how that is possible. Anyway, it
-        # works properly when I reload the data at this step. 
+    #########################################################
+
+    # 5. Loop through each p widget in p_widgets_for_all_campaigns to create
+    # the data stucture (list) to hold
+    # "for_each_campaign"
+    
+    for p_widget in p_widgets_for_all_campaigns["data"]:
+        p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"] = []
+    
+    # At this point in the process, p_widgets_for_all_campaigns looks like this:
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'},
+    #                         'for_each_campaign': []}, 
+    #              '123456': { 'for_all_campaigns : {data...},
+    #                          'for_each_campaign': []}, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
+
+    #########################################################
+    # 6. loop through each campaign to accumulate and add the data for
+    # p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]
+    for campaign in campaigns:
+        vol_id = campaign["vol_id"] 
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
@@ -112,15 +223,72 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
             else:
                 p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"] = [p_widgets_for_one_campaign[p_widget]]
 
-
-    ############################################################
-    # At this point, p_widgets_for_all_campaigns["data"] is a dictionary of
-    # p_widgets, each with accumulated data for all campaigns (the
-    # "for_all_campaigns" value) and data for each campaign (the
-    # "for_each_campaign" value)
+    # At this point in the process, p_widgets_for_all_campaigns looks like this:
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]}, 
+    #              '123456': { 'for_all_campaigns : {data...},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]}, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
+    #################################################################33
      
-    # loop through each campaign for each p widget and determine the
-    # good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
+    # 7. Loop through each p widget in p_widgets_for_all_campaigns to create
+    # the data stucture to hold "good_campaigns_count", "bad_campaigns_count",
+    # and "wait_campaigns_count"
+    
+    for p_widget in p_widgets_for_all_campaigns["data"]:
+        p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] = 0
+        p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] = 0
+        p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] = 0
+
+    # At this point in the process, p_widgets_for_all_campaigns looks like this:
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 0, 
+    #                         'bad_campaigns_count': 0, 
+    #                         'wait_campaigns_count': 0, 
+    #                       }, 
+    #              '123456': { 'for_all_campaigns : {data...},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 0, 
+    #                         'bad_campaigns_count': 0, 
+    #                         'wait_campaigns_count': 0, 
+    #                        }, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
+     
+    #################################################################33
+
+    # 8. loop through each campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]
+    # and add good_campaigns_count, bad_campaigns_count, and wait_campaigns_count
     for p_widget in p_widgets_for_all_campaigns["data"]:
         total_sales = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["sales"]
         for campaign in p_widgets_for_all_campaigns["data"][p_widget]["for_each_campaign"]:
@@ -137,23 +305,136 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
                p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] += .5 
             elif classification == "wait": 
                p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] += 1
+
+    # At this point in the process, p_widgets_for_all_campaigns looks like this
+    # (the good/bad/wait counts are filled in):
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5, 
+    #                       }, 
+    #              '123456': { 'for_all_campaigns : {data...},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5, 
+    #                        }, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
                     
-    ############################################################
-    # At this point, p_widgets_for_all_campaigns["data"] includes good/bad/wait
-    # campaign counts for each p widget. Using those counts, the classify the p widget into white/grey/black following the flow chart
+    #############################################################
+
+    # 9. loop through each p widget in p_widgets_for_all_campaigns["data"] and
+    # add its classification (white/grey/black) into p_widget["for_all_campaigns"]
 
     for p_widget in p_widgets_for_all_campaigns["data"].values():
         p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
-    # The final step is to remove "for_each_campaign" "good_campaigns_count"
-    # "bad_campaigns_count" and "wait_campaigns_count" from each widget
+    # At this point in the process, p_widgets_for_all_campaigns looks like this
+    # ("for_all_campaigns" has a "classification" key):
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897': { 'for_all_campaigns': { 'clicks': 8,
+    #                                    'classification': 'wait',
+    #                                    'cost': 0.16,
+    #                                    'global_status': 'not yet listed',
+    #                                    'has_children': False,
+    #                                    'leads': 0,
+    #                                    'referrer': [],
+    #                                    'revenue': 0.0,
+    #                                    'sales': 0,
+    #                                    'widget_id': '986897'},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5, 
+    #                       }, 
+    #              '123456': { 'for_all_campaigns : {data...},
+    #                         'for_each_campaign': [{campaign 1 data},{campaign 2 data}, ...]
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5, 
+    #                        }, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
+
+    ##############################################################
+
+    # 10. remove "for_each_campaign" "good_campaigns_count" "bad_campaigns_count" and 
+    # "wait_campaigns_count" from each widget and add "good_campaigns_count" "bad_campaigns_count"
+    # and "wait_campaigns_count" to p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
     for p_widget in p_widgets_for_all_campaigns["data"]:
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["good_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["good_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["bad_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]["wait_campaigns_count"] = p_widgets_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] 
         p_widgets_for_all_campaigns["data"][p_widget] = p_widgets_for_all_campaigns["data"][p_widget]["for_all_campaigns"]
 
+    # At this point in the process, p_widgets_for_all_campaigns looks like this
+    # ("for_all_campaigns" has a "classification" key):
+    # {'metadata': { 'mgid_end_date': '2019-02-04',
+    #              'mgid_start_date': '2018-08-09',
+    #              'vol_end_date': '2019-02-05',
+    #              'vol_start_date': '2018-08-09'},
+    # {"data":   '986897':  { 'clicks': 8,
+    #                         'classification': 'wait',
+    #                         'cost': 0.16,
+    #                         'global_status': 'not yet listed',
+    #                         'has_children': False,
+    #                         'leads': 0,
+    #                         'referrer': [],
+    #                         'revenue': 0.0,
+    #                         'sales': 0,
+    #                         'widget_id': '986897',
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5,},
+    #             '986123':  { 'clicks': 8,
+    #                         'classification': 'wait',
+    #                         'cost': 0.16,
+    #                         'global_status': 'not yet listed',
+    #                         'has_children': False,
+    #                         'leads': 0,
+    #                         'referrer': [],
+    #                         'revenue': 0.0,
+    #                         'sales': 0,
+    #                         'widget_id': '986897',
+    #                         'good_campaigns_count': 5, 
+    #                         'bad_campaigns_count': 5, 
+    #                         'wait_campaigns_count': 5, 
+    #                       }, 
+    #              ...
+    #              ...
+    #              ...
+    #            },
+
+    ############################################################
+    # 11. Save p_widgets_for_all_campaigns to a json file and return it as a
+    # json file 
+
     with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
 
     return json.dumps(p_widgets_for_all_campaigns)
+
+
+
+
