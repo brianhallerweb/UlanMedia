@@ -39,9 +39,9 @@ def classify_campaign_for_one_p_widget(campaign, p_widget_total_sales):
             else:
                 # here
 
-                if  p_widget_total_sales == 0:
+                if  p_widget_total_sales ==0:
                     if cost > (5 * max_lead_cpa):
-                        if (leads > 0) & (leap_cpa < (1.5 * max_lead_cpa)):
+                        if (leads > 0) & (lead_cpa < (1.5 * max_lead_cpa)):
                             return "half bad"
                         else:
                             return "bad"
