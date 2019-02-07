@@ -47,7 +47,7 @@ def classify_campaign_for_one_p_widget(campaign, p_widget_total_sales):
                 else:
                     if cost > (1 * max_sale_cpa):
                         return "bad"
-                    elif cost > (0.5 * max_lead_cpa):
+                    elif cost > (0.5 * max_sale_cpa):
                         if leads > 0:
                             return "half bad"
                         else:
