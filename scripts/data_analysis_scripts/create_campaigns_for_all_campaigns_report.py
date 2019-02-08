@@ -18,11 +18,13 @@ df["vol_start_date"] = metadata["vol_start_date"]
 df["vol_end_date"] = metadata["vol_end_date"]
 df["mgid_start_date"] = metadata["mgid_start_date"]
 df["mgid_end_date"] = metadata["mgid_end_date"]
-df["max_lead_cpa"] = df["max_lead_cpa"].astype("float64")
-df["max_sale_cpa"] = df["max_sale_cpa"].astype("float64")
+df["mpl"] = df["max_lead_cpa"].astype("float64")
+df["mps"] = df["max_sale_cpa"].astype("float64")
+df["cpc"] = round(df["cost"] / df["clicks"], 3)
 df["epc"] = round(df["revenue"] / df["clicks"], 3)
-df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
-df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
+df["cpl"] = round(df["cost"] / df["leads"], 3)
+df["epl"] = round(df["revenue"] / df["leads"], 3)
+df["cps"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 
@@ -52,8 +54,9 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["mgid_start_date", "mgid_end_date","vol_start_date", "vol_end_date","mgid_id", "vol_id", "name", "clicks",
-            "cost", "imps", "leads", "max_lead_cpa", "max_sale_cpa", "epc",
-            "mgid_id", "revenue", "sales","vol_id", "lead_cpa", "lead_cvr", "sale_cpa",
+            "cost", "imps", "leads", "mpl", "mps", "cpc",
+            "epc", "epl",
+            "mgid_id", "revenue", "sales","vol_id", "cpl", "cps",
             "profit"] )
 
 if final_result is None:
@@ -65,8 +68,8 @@ final_result["sort"] = final_result["name"].str[4:]
 final_result = final_result.sort_values("sort")
 json_final_result = json.dumps(final_result[["mgid_start_date",
     "mgid_end_date","vol_start_date", "vol_end_date", "vol_id", "name",
-    "clicks", "cost", "revenue", "profit", "leads","lead_cpa",
-    "max_lead_cpa","lead_cvr", "sales", "sale_cpa","max_sale_cpa","epc"]].to_dict("records"))
+    "clicks", "cost", "revenue", "profit", "leads",
+    "mpl","cpl", "epl", "sales", "cps","mps","cpc", "epc"]].to_dict("records"))
 
 print(json_final_result)
 
