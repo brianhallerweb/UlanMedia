@@ -14,14 +14,9 @@ class Home extends Component {
       dateRange: 'thirty',
       volRequestDates: '',
       mgidRequestDates: '',
-      c1: true,
-      c1Value: 100,
+      c1: false,
       c2: false,
-      c2Value: 100,
       c3: false,
-      c3Value: 0,
-      c4: false,
-      c4Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -52,10 +47,6 @@ class Home extends Component {
     this.setState({[condition]: !this.state[condition]});
   }
 
-  setConditionValue(condition, conditionValue) {
-    this.setState({[condition]: conditionValue});
-  }
-
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
@@ -67,14 +58,9 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        c1Value: this.state.c1Value,
-        c2Value: this.state.c2Value,
-        c3Value: this.state.c3Value,
-        c4Value: this.state.c4Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
-        c4: this.state.c4,
       }),
     })
       .then(res => {
@@ -132,15 +118,9 @@ class Home extends Component {
           selectDateRange={this.selectDateRange.bind(this)}
           dateRange={this.state.dateRange}
           toggleCondition={this.toggleCondition.bind(this)}
-          setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}
-          c1Value={this.state.c1Value}
           c2={this.state.c2}
-          c2Value={this.state.c2Value}
           c3={this.state.c3}
-          c3Value={this.state.c3Value}
-          c4={this.state.c4}
-          c4Value={this.state.c4Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
