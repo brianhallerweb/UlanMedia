@@ -6,6 +6,7 @@ from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.create_mgid_date_range import create_mgid_date_range
 import json
 import sys
+import re
 
 def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
@@ -24,7 +25,7 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
                                               mgid_start_date,
                                               mgid_end_date)["campaigns-stat"]
 
-    # get a new version of the campaign_sets text file that Mike regularly edits
+    # get campaign_sets
     campaign_sets = get_campaign_sets() 
 
     # create an dictionary to hold data and metadata
@@ -39,6 +40,8 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
                                    "vol_end_date": vol_end_date,},
                       "data": []
                       }
+
+    pattern = re.compile(r'.*cpc_(.*)')
     for row in campaign_sets:
         # extract the data out of a single campaign 
         mgid_campaign_id = row["mgid_id"]
@@ -46,6 +49,8 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         campaign_name = row["name"]
         max_lead_cpa = row["max_lead_cpa"]
         max_sale_cpa = row["max_sale_cpa"]
+        res = pattern.findall(campaign_name)
+        max_cpc = list(res)[0]
 
         # create an empty dict to hold the final data for a single campaign
         campaign_data = {}
@@ -59,6 +64,7 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         campaign_data["name"] = campaign_name
         campaign_data["max_lead_cpa"] = max_lead_cpa
         campaign_data["max_sale_cpa"] = max_sale_cpa
+        campaign_data["max_cpc"] = max_cpc
         campaign_data["clicks"] = mgid_campaign_data[mgid_campaign_id]["clicks"]
         campaign_data["imps"] = mgid_campaign_data[mgid_campaign_id]["imps"]
         campaign_data["cost"] = mgid_campaign_data[mgid_campaign_id]["spent"]

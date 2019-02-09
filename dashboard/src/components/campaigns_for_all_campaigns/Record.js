@@ -21,6 +21,7 @@ class Record extends Component {
     this.epc = this.props.campaign.epc;
     this.cpl = this.props.campaign.cpl;
     this.epl = this.props.campaign.epl;
+    this.mpc = this.props.campaign.mpc;
     this.state = {};
   }
 
@@ -134,7 +135,7 @@ class Record extends Component {
         <td>{this.clicks}</td>
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
-        <td>mpc</td>
+        <td>${this.mpc}</td>
         <td>{this.leads}</td>
         <td>${this.cpl}</td>
         <td>${this.epl}</td>

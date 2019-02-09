@@ -20,6 +20,7 @@ df["mgid_start_date"] = metadata["mgid_start_date"]
 df["mgid_end_date"] = metadata["mgid_end_date"]
 df["mpl"] = df["max_lead_cpa"].astype("float64")
 df["mps"] = df["max_sale_cpa"].astype("float64")
+df["mpc"] = df["max_cpc"].astype("float64")
 df["cpc"] = round(df["cost"] / df["clicks"], 3)
 df["epc"] = round(df["revenue"] / df["clicks"], 3)
 df["cpl"] = round(df["cost"] / df["leads"], 3)
@@ -56,7 +57,7 @@ for i in range(len(conditions_args)):
         on=["mgid_start_date", "mgid_end_date","vol_start_date", "vol_end_date","mgid_id", "vol_id", "name", "clicks",
             "cost", "imps", "leads", "mpl", "mps", "cpc",
             "epc", "epl",
-            "mgid_id", "revenue", "sales","vol_id", "cpl", "cps",
+            "mgid_id", "revenue", "sales","vol_id", "cpl", "cps", "mpc",
             "profit"] )
 
 if final_result is None:
@@ -68,7 +69,7 @@ final_result["sort"] = final_result["name"].str[4:]
 final_result = final_result.sort_values("sort")
 json_final_result = json.dumps(final_result[["mgid_start_date",
     "mgid_end_date","vol_start_date", "vol_end_date", "vol_id", "name",
-    "clicks", "cost", "revenue", "profit", "leads",
+    "clicks", "cost", "revenue", "profit", "leads","mpc",
     "mpl","cpl", "epl", "sales", "cps","mps","cpc", "epc"]].to_dict("records"))
 
 print(json_final_result)
