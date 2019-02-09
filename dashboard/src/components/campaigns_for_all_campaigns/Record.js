@@ -73,7 +73,12 @@ class Record extends Component {
 
   render() {
     return (
-      <tr>
+      <tr
+        style={
+          this.profit > 0
+            ? {backgroundColor: '#90ee90'}
+            : {backgroundColor: '#f08080'}
+        }>
         <td className="tooltip">
           {this.name}
           <span className="tooltiptext">

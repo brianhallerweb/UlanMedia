@@ -17,6 +17,15 @@ class Home extends Component {
       c1: false,
       c2: false,
       c3: false,
+      c4: false,
+      c5: false,
+      c6: false,
+      c7: false,
+      c8: false,
+      c9: false,
+      c7Value: 0.02,
+      c8Value: 2,
+      c9Value: 100,
       error: false,
       authenticated: true,
       loading: false,
@@ -47,6 +56,10 @@ class Home extends Component {
     this.setState({[condition]: !this.state[condition]});
   }
 
+  setConditionValue(condition, conditionValue) {
+    this.setState({[condition]: conditionValue});
+  }
+
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
@@ -58,9 +71,18 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
+        c7Value: this.state.c7Value,
+        c8Value: this.state.c8Value,
+        c9Value: this.state.c9Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
+        c4: this.state.c4,
+        c5: this.state.c5,
+        c6: this.state.c6,
+        c7: this.state.c7,
+        c8: this.state.c8,
+        c9: this.state.c9,
       }),
     })
       .then(res => {
@@ -118,9 +140,19 @@ class Home extends Component {
           selectDateRange={this.selectDateRange.bind(this)}
           dateRange={this.state.dateRange}
           toggleCondition={this.toggleCondition.bind(this)}
+          setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}
           c2={this.state.c2}
           c3={this.state.c3}
+          c4={this.state.c4}
+          c5={this.state.c5}
+          c6={this.state.c6}
+          c7={this.state.c7}
+          c8={this.state.c8}
+          c9={this.state.c9}
+          c7Value={this.state.c7Value}
+          c8Value={this.state.c8Value}
+          c9Value={this.state.c9Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
