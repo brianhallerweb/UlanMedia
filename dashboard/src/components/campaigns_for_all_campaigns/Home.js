@@ -15,7 +15,9 @@ class Home extends Component {
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
+      c1Value: 10,
       c2: false,
+      c2Value: 100,
       c3: false,
       c4: false,
       c5: false,
@@ -23,9 +25,17 @@ class Home extends Component {
       c7: false,
       c8: false,
       c9: false,
-      c7Value: 0.02,
-      c8Value: 2,
-      c9Value: 100,
+      c9Value: 0.02,
+      c10: false,
+      c10Value: 2,
+      c11: false,
+      c11Value: 100,
+      c12: false,
+      c12Value: 0.02,
+      c13: false,
+      c13Value: 2,
+      c14: false,
+      c14Value: 100,
       error: false,
       authenticated: true,
       loading: false,
@@ -71,9 +81,14 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        c7Value: this.state.c7Value,
-        c8Value: this.state.c8Value,
+        c1Value: this.state.c1Value,
+        c2Value: this.state.c2Value,
         c9Value: this.state.c9Value,
+        c10Value: this.state.c10Value,
+        c11Value: this.state.c11Value,
+        c12Value: this.state.c12Value,
+        c13Value: this.state.c13Value,
+        c14Value: this.state.c14Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
@@ -83,6 +98,11 @@ class Home extends Component {
         c7: this.state.c7,
         c8: this.state.c8,
         c9: this.state.c9,
+        c10: this.state.c10,
+        c11: this.state.c11,
+        c12: this.state.c12,
+        c13: this.state.c13,
+        c14: this.state.c14,
       }),
     })
       .then(res => {
@@ -150,9 +170,19 @@ class Home extends Component {
           c7={this.state.c7}
           c8={this.state.c8}
           c9={this.state.c9}
-          c7Value={this.state.c7Value}
-          c8Value={this.state.c8Value}
+          c10={this.state.c10}
+          c11={this.state.c11}
+          c12={this.state.c12}
+          c13={this.state.c13}
+          c14={this.state.c14}
+          c1Value={this.state.c1Value}
+          c2Value={this.state.c2Value}
           c9Value={this.state.c9Value}
+          c10Value={this.state.c10Value}
+          c11Value={this.state.c11Value}
+          c12Value={this.state.c12Value}
+          c13Value={this.state.c13Value}
+          c14Value={this.state.c14Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

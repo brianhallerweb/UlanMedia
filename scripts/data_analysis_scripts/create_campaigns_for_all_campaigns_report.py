@@ -29,36 +29,53 @@ df["cps"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 
-c1 = df["cpc"] > df["epc"]
+c1 = df["cost"] > float(sys.argv[2])
 result1 = df[c1]
 
-c2 = df["cpc"] > df["epc"]
+c2 = df["profit"] < -1 * float(sys.argv[3])
 result2 = df[c2]
 
 c3 = df["cpc"] > df["epc"]
 result3 = df[c3]
 
-c4 = df["epc"] > df["cpc"]
+c4 = df["cpc"] > df["epc"]
 result4 = df[c4]
 
-c5 = df["epl"] > df["cpl"]
+c5 = df["cpc"] > df["epc"]
 result5 = df[c5]
 
-c6 = df["eps"] > df["cps"]
+c6 = df["epc"] > df["cpc"]
 result6 = df[c6]
 
-c7 = ((df["mpc"] + float(sys.argv[2])) <= df["epc"]) | ((df["mpc"] - float(sys.argv[2])) >= df["epc"])
+c7 = df["epl"] > df["cpl"]
 result7 = df[c7]
 
-c8 = ((df["mpl"] + float(sys.argv[3])) <= df["epl"]) | ((df["mpl"] - float(sys.argv[3])) >= df["epl"])
+c8 = df["eps"] > df["cps"]
 result8 = df[c8]
 
-c9 = ((df["mps"] + float(sys.argv[4])) <= df["eps"]) | ((df["mps"] - float(sys.argv[4])) >= df["eps"])
+c9 = ((df["mpc"] - float(sys.argv[4])) >= df["epc"])
 result9 = df[c9]
 
+c10 = ((df["mpl"] - float(sys.argv[5])) >= df["epl"])
+result10 = df[c10]
 
-conditions_args = [sys.argv[5], sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6, result7, result8, result9]
+c11 = ((df["mps"] - float(sys.argv[6])) >= df["eps"])
+result11 = df[c11]
+
+c12 = ((df["mpc"] + float(sys.argv[7])) <= df["epc"])
+result12 = df[c12]
+
+c13 = ((df["mpl"] + float(sys.argv[8])) <= df["epl"])
+result13 = df[c13]
+
+c14 = ((df["mps"] + float(sys.argv[9])) <= df["eps"])
+result14 = df[c14]
+
+
+conditions_args = [sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13], sys.argv[14], sys.argv[15], sys.argv[16], sys.argv[17], sys.argv[18], sys.argv[19], sys.argv[20], sys.argv[21], sys.argv[22], sys.argv[23]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6,
+        result7, result8, result9, result10, result11, result12, result13,
+        result14]
 
 final_result = None 
 for i in range(len(conditions_args)):
