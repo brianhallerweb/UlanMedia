@@ -42,7 +42,7 @@ class Records extends Component {
 
   render() {
     return (
-      <div className="tableBox">
+      <div>
         {this.props.loading && <div className="loader" />}
         {this.props.error && !this.props.loading && <p>no campaigns found</p>}
         {this.props.campaignsRecords.length > 0 &&
