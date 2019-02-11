@@ -9,7 +9,36 @@ import json
 import re
 
 def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
+    # The goal of this function is to return a json dataset for
+    # p_widgets_for_one_campaign. That means each row is a p_widget and each
+    # column is data for one campaign. 
+    #
+    # The resulting data structure looks like this:
+    # {"metadata": {"mgid_start_date": "2018-08-09",
+    #               "mgid_end_date": "2019-02-04",
+    #               "vol_start_date": "2018-08-09",
+    #               "vol_end_date": "2019-02-05"},
+    #  "data": {"21391": {"widget_id": "21391",
+    #                     "clicks": 140,
+    #                     "cost": 3.0,
+    #                     "revenue": 0.0,
+    #                     "leads": 5,
+    #                     "sales": 0,
+    #                     "referrer": ["mgid.com"],
+    #                     "status": "included"
+    #                     "global_status": "not yet listed",
+    #           "15865": {...},
+    #           .
+    #           .
+    #           .
+    #           }
+    # }
+    ########################################################
+
+    # 1. get some prerequisite data
+
     campaigns = get_campaign_sets()
+
     mgid_id = ""
     for campaign in campaigns:
         if campaign["vol_id"] == vol_id:
@@ -19,7 +48,12 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
+        excluded_widgets = json.load(file)
+
+    ########################################################
+
+    # 2. set up the basic data structure you want to create
 
     p_widgets_for_one_campaign = {"metadata": {"mgid_start_date": "",
                                  "mgid_end_date": "",
@@ -29,13 +63,21 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
                                  "data": {}
                                 } 
 
+    ########################################################
+    
+    # 3. add the metadata
+
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
        json_file = json.load(file)
 
-    metadata = json_file["metadata"]
+    p_widgets_for_one_campaign["metadata"] = json_file["metadata"]
+
+    ########################################################
+
+    # 4. loop through p and c widgets for one campaign and create p widgets for
+    # one campaign
+
     data = json_file["data"]
-    
-    p_widgets_for_one_campaign["metadata"] = metadata
 
     pattern = re.compile(r'\d*')
     for widget in data:
@@ -63,6 +105,11 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
                p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "blacklist" 
            else:
                p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "not yet listed" 
+
+    ############################################################
+
+    # 5. Save p_widgets_for_all_campaigns to a json file and return it as a
+    # json file 
 
     with open(f"../../data/p_widgets_for_one_campaign/{vol_id}_{date_range}_p_widgets_for_one_campaign_dataset.json", "w") as file:
         json.dump(p_widgets_for_one_campaign, file)

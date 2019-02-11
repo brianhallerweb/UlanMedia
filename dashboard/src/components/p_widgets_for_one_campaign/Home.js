@@ -33,9 +33,9 @@ class Home extends Component {
     };
   }
 
-  //componentDidMount() {
-  //this.submitForm();
-  //}
+  componentDidMount() {
+    this.submitForm();
+  }
 
   selectDateRange(dateRange) {
     this.setState({dateRange: dateRange});
@@ -165,10 +165,6 @@ class Home extends Component {
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
-        <div>
-          Warning: This page is not fully functional. It has not been maintained
-          since 1/1/19
-        </div>
         <Records
           loading={this.state.loading}
           error={this.state.error}
