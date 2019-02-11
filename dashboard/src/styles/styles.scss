@@ -38,6 +38,11 @@
     margin-right: 10px;
 }
 
+// checkboxes
+.inputBox {
+    width: 38px;
+}
+
 // links underneath campaign name in each row
 .rowLink {
     display: inline;
@@ -48,7 +53,6 @@
     color: blue;
     text-decoration: underline;
 }
-
 
 // the report tables 
 table {
@@ -82,32 +86,32 @@ th {
 }
 
 // tooltip code
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-.tooltip .tooltiptext {
-    visibility: hidden;
-    background-color: #555;
-    width: 1200px;
-    color: #fff;
-    text-align: left;
-    padding: 10px 10px;
+//.tooltip {
+    //position: relative;
+    //display: inline-block;
+//}
+//.tooltip .tooltiptext {
+    //visibility: hidden;
+    //background-color: #555;
+    //width: 1200px;
+    //color: #fff;
+    //text-align: left;
+    //padding: 10px 10px;
 
-    //needed for tooltip to respect line breaks
-    white-space: pre-line;
+    ////needed for tooltip to respect line breaks
+    //white-space: pre-line;
 
-    //Position the tooltip text
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -100px;
+    ////Position the tooltip text
+    //position: absolute;
+    //z-index: 1;
+    //bottom: 125%;
+    //left: 50%;
+    //margin-left: -100px;
 
-}
+//}
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-} 
+//.tooltip:hover .tooltiptext {
+    //visibility: visible;
+    //opacity: 1;
+//} 
 

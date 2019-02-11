@@ -46,6 +46,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Widget cost is more than $'}
           <input
+            className="inputBox"
             type="number"
             name="c2Value"
             min="0"
@@ -67,6 +68,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Widget lost more than $'}
           <input
+            className="inputBox"
             type="number"
             name="c3Value"
             min="0"
@@ -88,6 +90,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Widget leadCVR is less than or equal to '}
           <input
+            className="inputBox"
             type="number"
             name="c4Value"
             min="0"
@@ -110,6 +113,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Widget has clicks greater than or equal to '}
           <input
+            style={{width: 40}}
             type="number"
             name="c5Value1"
             min="0"
@@ -120,6 +124,7 @@ const ConditionCheckboxes = ({
           />
           {' OR cost greater than or equal to $'}
           <input
+            className="inputBox"
             type="number"
             name="c5Value2"
             min="0"

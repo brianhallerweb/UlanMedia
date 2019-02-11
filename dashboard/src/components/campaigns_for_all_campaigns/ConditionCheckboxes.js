@@ -40,6 +40,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign cost more than '}
           <input
+            className="inputBox"
             type="number"
             name="c1Value"
             min="0"
@@ -61,6 +62,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign lost more than '}
           <input
+            className="inputBox"
             type="number"
             name="c2Value"
             min="0"
@@ -151,6 +153,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPC is '}
           <input
+            className="inputBox"
             type="number"
             name="c9Value"
             min="0"
@@ -173,6 +176,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPL is '}
           <input
+            className="inputBox"
             type="number"
             name="c10Value"
             min="0"
@@ -195,6 +199,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPS is '}
           <input
+            className="inputBox"
             type="number"
             name="c11Value"
             min="0"
@@ -220,6 +225,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPC is '}
           <input
+            className="inputBox"
             type="number"
             name="c12Value"
             min="0"
@@ -242,6 +248,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPL is '}
           <input
+            className="inputBox"
             type="number"
             name="c13Value"
             min="0"
@@ -264,6 +271,7 @@ const ConditionCheckboxes = ({
         <span>
           {'Campaign MPS is '}
           <input
+            className="inputBox"
             type="number"
             name="c14Value"
             min="0"
