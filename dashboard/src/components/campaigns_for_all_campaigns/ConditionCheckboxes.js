@@ -154,12 +154,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c9Value"
             min="0"
-            max="1"
-            step=".01"
+            max="l000"
+            step="1"
             value={c9Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' greater than EPC'}
+          {'% greater than EPC'}
         </span>
       </div>
 
@@ -176,12 +176,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c10Value"
             min="0"
-            max="10"
+            max="l000"
             step="1"
             value={c10Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' greater than EPL'}
+          {'% greater than EPL'}
         </span>
       </div>
 
@@ -198,12 +198,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c11Value"
             min="0"
-            max="1000"
-            step="25"
+            max="l000"
+            step="1"
             value={c11Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' greater than EPS'}
+          {'% greater than EPS'}
         </span>
       </div>
 
@@ -223,12 +223,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c12Value"
             min="0"
-            max="1"
-            step=".01"
+            max="l000"
+            step="1"
             value={c12Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' less than EPC'}
+          {'% less than EPC'}
         </span>
       </div>
 
@@ -245,12 +245,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c13Value"
             min="0"
-            max="10"
+            max="l000"
             step="1"
             value={c13Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' less than EPL'}
+          {'% less than EPL'}
         </span>
       </div>
 
@@ -267,12 +267,12 @@ const ConditionCheckboxes = ({
             type="number"
             name="c14Value"
             min="0"
-            max="1000"
-            step="25"
+            max="l000"
+            step="1"
             value={c14Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' less than EPS'}
+          {'% less than EPS'}
         </span>
       </div>
     </div>

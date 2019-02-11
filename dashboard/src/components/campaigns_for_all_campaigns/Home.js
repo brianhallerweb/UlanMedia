@@ -11,7 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dateRange: 'thirty',
+      dateRange: 'oneeighty',
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
@@ -25,17 +25,17 @@ class Home extends Component {
       c7: false,
       c8: false,
       c9: false,
-      c9Value: 0.02,
+      c9Value: 30,
       c10: false,
-      c10Value: 2,
+      c10Value: 30,
       c11: false,
-      c11Value: 100,
+      c11Value: 30,
       c12: false,
-      c12Value: 0.02,
+      c12Value: 30,
       c13: false,
-      c13Value: 2,
+      c13Value: 30,
       c14: false,
-      c14Value: 100,
+      c14Value: 30,
       error: false,
       authenticated: true,
       loading: false,
@@ -121,19 +121,25 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
-        let error;
-        records.length ? (error = false) : (error = true);
-        this.setState({
-          campaignsRecords: records,
-          error,
-          loading: false,
-          volRequestDates: `${records[0]['vol_start_date']} to ${
-            records[0]['vol_end_date']
-          }`,
-          mgidRequestDates: `${records[0]['mgid_start_date']} to ${
-            records[0]['mgid_end_date']
-          }`,
-        });
+        if (records.length) {
+          this.setState({
+            campaignsRecords: records,
+            error: false,
+            loading: false,
+            volRequestDates: `${records[0]['vol_start_date']} to ${
+              records[0]['vol_end_date']
+            }`,
+            mgidRequestDates: `${records[0]['mgid_start_date']} to ${
+              records[0]['mgid_end_date']
+            }`,
+          });
+        } else {
+          this.setState({
+            campaignsRecords: records,
+            error: true,
+            loading: false,
+          });
+        }
       })
       .catch(err => console.log(err));
   }

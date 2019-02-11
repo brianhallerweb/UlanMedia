@@ -53,22 +53,22 @@ result7 = df[c7]
 c8 = df["eps"] > df["cps"]
 result8 = df[c8]
 
-c9 = ((df["mpc"] - float(sys.argv[4])) >= df["epc"])
+c9 = ((df["mpc"] - float(sys.argv[4])/100*df["epc"]) >= df["epc"])
 result9 = df[c9]
 
-c10 = ((df["mpl"] - float(sys.argv[5])) >= df["epl"])
+c10 = ((df["mpl"] - float(sys.argv[5])/100*df["epl"]) >= df["epl"])
 result10 = df[c10]
 
-c11 = ((df["mps"] - float(sys.argv[6])) >= df["eps"])
+c11 = ((df["mps"] - float(sys.argv[6])/100*df["eps"]) >= df["eps"])
 result11 = df[c11]
 
-c12 = ((df["mpc"] + float(sys.argv[7])) <= df["epc"])
+c12 = ((df["mpc"] + float(sys.argv[7])/100*df["epc"]) <= df["epc"])
 result12 = df[c12]
 
-c13 = ((df["mpl"] + float(sys.argv[8])) <= df["epl"])
+c13 = ((df["mpl"] + float(sys.argv[8])/100*df["epl"]) <= df["epl"])
 result13 = df[c13]
 
-c14 = ((df["mps"] + float(sys.argv[9])) <= df["eps"])
+c14 = ((df["mps"] + float(sys.argv[9])/100*df["eps"]) <= df["eps"])
 result14 = df[c14]
 
 

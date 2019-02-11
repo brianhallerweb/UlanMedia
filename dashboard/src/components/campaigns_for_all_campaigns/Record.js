@@ -26,50 +26,52 @@ class Record extends Component {
     this.state = {};
   }
 
-  createTooltip(profit, maxSaleCPA, clicks, leads, cost, maxLeadCPA, leadCPA) {
-    const textArr = [];
-    if (clicks > 1000 && leads == 0) {
-      textArr.push(
-        `Campaign has more than 1000 clicks (${clicks}) but no leads (${leads}) --- (clicks > 1000 AND leads = 0)`,
-      );
-    }
-    if (cost > 0.25 * maxSaleCPA && leadCPA > 3 * maxLeadCPA) {
-      textArr.push(
-        `Campaign cost (\$${cost}) is more than a quarter of maxSaleCPA (\$${0.25 *
-          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 3x maxLeadCPA (\$${3 *
-          maxLeadCPA}) --- (cost > 0.25*maxSaleCPA AND leadCPA > 3*maxLeadCPA)`,
-      );
-    }
-    if (cost > 0.3 * maxSaleCPA && leadCPA > 2 * maxLeadCPA) {
-      textArr.push(
-        `Campaign cost (\$${cost}) is more than a third of maxSaleCPA (\$${0.3 *
-          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 2x maxLeadCPA (\$${2 *
-          maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
-      );
-    }
-    if (cost > 0.5 * maxSaleCPA && leadCPA > 1.5 * maxLeadCPA) {
-      textArr.push(
-        `Campaign cost (\$${cost}) is more than half of maxSaleCPA (\$${0.5 *
-          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 1.5x maxLeadCPA (\$${1.5 *
-          maxLeadCPA}) --- (cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA)`,
-      );
-    }
-    if (cost > 2 * maxSaleCPA && leadCPA > maxLeadCPA) {
-      textArr.push(
-        `Campaign cost (\$${cost}) is more than 2x maxSaleCPA (\$${2 *
-          maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)`,
-      );
-    }
+  // 2/10/19 I disabled the tool tips because they are totally out of date and
+  // not being used at this time.
+  //createTooltip(profit, maxSaleCPA, clicks, leads, cost, maxLeadCPA, leadCPA) {
+  //const textArr = [];
+  //if (clicks > 1000 && leads == 0) {
+  //textArr.push(
+  //`Campaign has more than 1000 clicks (${clicks}) but no leads (${leads}) --- (clicks > 1000 AND leads = 0)`,
+  //);
+  //}
+  //if (cost > 0.25 * maxSaleCPA && leadCPA > 3 * maxLeadCPA) {
+  //textArr.push(
+  //`Campaign cost (\$${cost}) is more than a quarter of maxSaleCPA (\$${0.25 *
+  //maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 3x maxLeadCPA (\$${3 *
+  //maxLeadCPA}) --- (cost > 0.25*maxSaleCPA AND leadCPA > 3*maxLeadCPA)`,
+  //);
+  //}
+  //if (cost > 0.3 * maxSaleCPA && leadCPA > 2 * maxLeadCPA) {
+  //textArr.push(
+  //`Campaign cost (\$${cost}) is more than a third of maxSaleCPA (\$${0.3 *
+  //maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 2x maxLeadCPA (\$${2 *
+  //maxLeadCPA}) --- (cost > 0.3*maxSaleCPA AND leadCPA > 2*maxLeadCPA)`,
+  //);
+  //}
+  //if (cost > 0.5 * maxSaleCPA && leadCPA > 1.5 * maxLeadCPA) {
+  //textArr.push(
+  //`Campaign cost (\$${cost}) is more than half of maxSaleCPA (\$${0.5 *
+  //maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than 1.5x maxLeadCPA (\$${1.5 *
+  //maxLeadCPA}) --- (cost > 0.5*maxSaleCPA AND leadCPA > 1.5*maxLeadCPA)`,
+  //);
+  //}
+  //if (cost > 2 * maxSaleCPA && leadCPA > maxLeadCPA) {
+  //textArr.push(
+  //`Campaign cost (\$${cost}) is more than 2x maxSaleCPA (\$${2 *
+  //maxSaleCPA}) AND leadCPA (\$${leadCPA}) is more than maxLeadCPA (\$${maxLeadCPA}) --- (cost > 2*maxSaleCPA AND leadCPA > maxLeadCPA)`,
+  //);
+  //}
 
-    let toolTipText = `Campaign lost ${(-profit / maxSaleCPA).toFixed(
-      2,
-    )}x of maxSaleCPA (\$${-profit})\n
-	  `;
-    for (let i = 0; i < textArr.length; i++) {
-      toolTipText += `\u2022 ${textArr[i]}\n`;
-    }
-    return toolTipText;
-  }
+  //let toolTipText = `Campaign lost ${(-profit / maxSaleCPA).toFixed(
+  //2,
+  //)}x of maxSaleCPA (\$${-profit})\n
+  //`;
+  //for (let i = 0; i < textArr.length; i++) {
+  //toolTipText += `\u2022 ${textArr[i]}\n`;
+  //}
+  //return toolTipText;
+  //}
 
   render() {
     return (
@@ -79,19 +81,24 @@ class Record extends Component {
             ? {backgroundColor: '#90ee90'}
             : {backgroundColor: '#f08080'}
         }>
-        <td className="tooltip">
+        <td>
+          {/*<td className="tooltip">*/}
           {this.name}
-          <span className="tooltiptext">
-            {this.createTooltip(
-              this.profit,
-              this.max_sale_cpa,
-              this.clicks,
-              this.leads,
-              this.cost,
-              this.max_lead_cpa,
-              this.lead_cpa,
-            )}
+          {/*
+	    <span className="tooltiptext">
+            {
+	      this.createTooltip(
+	      this.profit,
+	      this.max_sale_cpa,
+	      this.clicks,
+	      this.leads,
+	      this.cost,
+	      this.max_lead_cpa,
+	      this.lead_cpa,)
+            }
+
           </span>
+	   */}
           <div>
             <div className="rowLink">
               <Link
