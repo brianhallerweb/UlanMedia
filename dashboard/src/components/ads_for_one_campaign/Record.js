@@ -14,24 +14,25 @@ class Record extends Component {
     this.cvr = this.props.ad.cvr;
     this.epc = this.props.ad.epc;
     this.cpa = this.props.ad.cpa;
+    this.cpc = this.props.ad.cpc;
+    this.epa = this.props.ad.epa;
     this.state = {};
   }
   addRowLinks() {
     return (
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforonead/${this.image}/`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
-            </div>
-          </div>
+      <div>
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/campaignsforonead/${this.image}/`,
+            }}
+            target="_blank">
+            campaigns
+          </Link>
+        </div>
+      </div>
     );
   }
-
 
   render() {
     return (
@@ -40,14 +41,16 @@ class Record extends Component {
           {this.image}
           {this.image !== 'summary' && this.addRowLinks()}
         </td>
-        <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
-        <td>{this.conversions}</td>
-        <td>{this.cvr}%</td>
+        <td>{this.clicks}</td>
+        <td>${this.cpc}</td>
         <td>${this.epc}</td>
+        <td>{this.conversions}</td>
         <td>${this.cpa}</td>
+        <td>${this.epa}</td>
+        <td>{this.cvr}%</td>
       </tr>
     );
   }

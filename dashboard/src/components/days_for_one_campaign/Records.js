@@ -16,12 +16,16 @@ class Records extends Component {
           <thead>
             <tr>
               <th>Day</th>
-              <th>Clicks</th>
               <th>Cost</th>
-              <th>CPC</th>
               <th>Revenue</th>
+              <th>Profit</th>
+              <th>Clicks</th>
+              <th>CPC</th>
+              <th>EPC</th>
               <th>Conversions</th>
-              <th>Conversion CPA</th>
+              <th>CPA</th>
+              <th>EPA</th>
+              <th>CVR</th>
             </tr>
           </thead>
           <tbody>

@@ -14,14 +14,16 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Image</th>
-            <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
-            <th>Conversions</th>
-            <th>CVR</th>
+            <th>Clicks</th>
+            <th>CPC</th>
             <th>EPC</th>
+            <th>Conversions</th>
             <th>CPA</th>
+            <th>EPA</th>
+            <th>CVR</th>
           </tr>
         </thead>
         <tbody>

@@ -2,8 +2,8 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 
-const Title = ({offerName, volRequestDates}) => {
-  const title = `campaigns for one offer (${offerName})`;
+const Title = ({fullOfferName, volRequestDates}) => {
+  const title = `campaigns for one offer (${fullOfferName})`;
   return (
     <div className="title">
       <Helmet>

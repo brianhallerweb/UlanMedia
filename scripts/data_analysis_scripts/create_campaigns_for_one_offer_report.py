@@ -20,6 +20,8 @@ df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
 df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
+df["cpc"] = round(df["cost"] / df["clicks"], 2)
+df["epa"] = round(df["revenue"] / df["conversions"], 2)
 
 c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]
@@ -39,9 +41,9 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["offerID","offerName", "offerFlow", "clicks",
+        on=["campaignName", "offerID","offerName", "offerFlow",  "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa"]
+    "epc", "cpa", "cpc", "epa"]
             )
 
 if final_result is None:
@@ -71,9 +73,9 @@ if len(final_result.index) > 0:
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
-json_final_result = json.dumps(final_result[["campaignID","campaignName", "clicks",
+json_final_result = json.dumps(final_result[["campaignName", "offerID","offerName", "offerFlow",  "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa"]].to_dict("records"))
+    "epc", "cpa", "cpc", "epa"]].to_dict("records"))
 
 print(json_final_result)
 

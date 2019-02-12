@@ -16,6 +16,8 @@ class Record extends Component {
     this.cvr = this.props.offer.cvr;
     this.epc = this.props.offer.epc;
     this.cpa = this.props.offer.cpa;
+    this.epa = this.props.offer.epa;
+    this.cpc = this.props.offer.cpc;
     this.state = {};
   }
 
@@ -28,9 +30,10 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/campaignsforoneoffer/${this.offerID}/${
-                    this.offerName
-                  }`,
+                  pathname: `/campaignsforoneoffer/${this.offerID}/${this
+                    .offerName +
+                    ' ' +
+                    this.offerFlow}`,
                 }}
                 target="_blank">
                 campaigns
@@ -50,14 +53,16 @@ class Record extends Component {
           </div>
         </td>
         <td>{this.offerName}</td>
-        <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
-        <td>{this.conversions}</td>
-        <td>{this.cvr}%</td>
+        <td>{this.clicks}</td>
+        <td>{this.cpc}</td>
         <td>${this.epc}</td>
+        <td>{this.conversions}</td>
         <td>${this.cpa}</td>
+        <td>${this.epa}</td>
+        <td>{this.cvr}%</td>
       </tr>
     );
   }

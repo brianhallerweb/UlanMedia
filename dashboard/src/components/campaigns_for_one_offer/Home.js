@@ -12,7 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       offerID: this.props.match.params.offerID,
-      offerName: this.props.match.params.offerName,
+      fullOfferName: this.props.match.params.fullOfferName,
       dateRange: 'ninety',
       volRequestDates: '',
       c1: true,
@@ -128,7 +128,7 @@ class Home extends Component {
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <Title
-          offerName={this.state.offerName}
+          fullOfferName={this.state.fullOfferName}
           volRequestDates={this.state.volRequestDates}
         />
         <GlobalNavBar />

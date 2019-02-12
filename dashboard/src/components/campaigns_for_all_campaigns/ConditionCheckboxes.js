@@ -38,7 +38,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign cost more than '}
+          {'Campaign cost more than $'}
           <input
             className="inputBox"
             type="number"
@@ -60,7 +60,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign lost more than '}
+          {'Campaign lost more than $'}
           <input
             className="inputBox"
             type="number"

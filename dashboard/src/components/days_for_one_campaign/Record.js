@@ -11,12 +11,16 @@ class Record extends Component {
     return (
       <tr>
         <td>{this.props.dayRecord.day}</td>
-        <td>{this.props.dayRecord.clicks}</td>
         <td>${this.props.dayRecord.cost}</td>
-        <td>${this.props.dayRecord.cpc}</td>
         <td>${this.props.dayRecord.revenue}</td>
+        <td>${this.props.dayRecord.profit}</td>
+        <td>{this.props.dayRecord.clicks}</td>
+        <td>${this.props.dayRecord.cpc}</td>
+        <td>${this.props.dayRecord.epc}</td>
         <td>{this.props.dayRecord.conversions}</td>
-        <td>${this.props.dayRecord.conversion_cpa}</td>
+        <td>${this.props.dayRecord.cpa}</td>
+        <td>${this.props.dayRecord.epa}</td>
+        <td>${this.props.dayRecord.cvr}</td>
       </tr>
     );
   }
