@@ -25,6 +25,9 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     #                     "leads": 5,
     #                     "sales": 0,
     #                     "referrer": ["mgid.com"],
+    #                     "mpc": ...,
+    #                     "mpl": ...,
+    #                     "mps": ...,
     #                     "status": "included"
     #                     "global_status": "not yet listed",
     #           "15865": {...},
@@ -40,9 +43,17 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     campaigns = get_campaign_sets()
 
     mgid_id = ""
+    mpc = ""
+    mpl = ""
+    mps = ""
+    mpc_pattern = re.compile(r'.*cpc_(.*)')
     for campaign in campaigns:
         if campaign["vol_id"] == vol_id:
             mgid_id = campaign["mgid_id"]
+            res = mpc_pattern.findall(campaign["name"])
+            mpc = list(res)[0]
+            mpl = campaign["max_lead_cpa"]
+            mps = campaign["max_sale_cpa"]
 
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
@@ -91,6 +102,9 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
        else:
            p_widgets_for_one_campaign["data"][parent_widget] = data[widget]
            p_widgets_for_one_campaign["data"][parent_widget]["widget_id"] = parent_widget
+           p_widgets_for_one_campaign["data"][parent_widget]["mpc"] = mpc 
+           p_widgets_for_one_campaign["data"][parent_widget]["mpl"] = mpl 
+           p_widgets_for_one_campaign["data"][parent_widget]["mps"] = mps 
 
            if parent_widget in excluded_widgets:
                p_widgets_for_one_campaign["data"][parent_widget]['status'] = "excluded" 

@@ -19,22 +19,18 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      c1: false,
-      c1Value: 'all',
+      c1: true,
+      c1Value: 10,
       c2: false,
-      c2Value: 'not yet listed',
-      c3: true,
-      c3Value: 10,
-      c4: false,
-      c4Value: 10,
-      c5: false,
-      c5Value: 0,
+      c2Value: 10,
+      c3: false,
+      c3Value: 0,
     };
   }
 
-  //componentDidMount() {
-  //this.submitForm();
-  //}
+  componentDidMount() {
+    this.submitForm();
+  }
 
   selectDateRange(dateRange) {
     this.setState({dateRange: dateRange});
@@ -100,13 +96,9 @@ class Home extends Component {
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
-            c4Value: this.state.c4Value,
-            c5Value: this.state.c5Value,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
-            c4: this.state.c4,
-            c5: this.state.c5,
           }),
         }),
       )
@@ -156,18 +148,10 @@ class Home extends Component {
           c2Value={this.state.c2Value}
           c3={this.state.c3}
           c3Value={this.state.c3Value}
-          c4={this.state.c4}
-          c4Value={this.state.c4Value}
-          c5={this.state.c5}
-          c5Value={this.state.c5Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
-        <div>
-          Warning: This page is not fully functional. It has not been maintained
-          since 1/1/19
-        </div>
         <Records
           loading={this.state.loading}
           error={this.state.error}

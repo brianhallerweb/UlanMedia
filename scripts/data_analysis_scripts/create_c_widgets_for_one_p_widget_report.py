@@ -24,36 +24,30 @@ if len(df.index) == 0:
     print(json.dumps({}))
     sys.exit()
 
-
 df["cost"] = round(df["cost"], 2)
-df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
-df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
-
-# status conditions (all, included, excluded)
-c1 = df["status"] == sys.argv[3]
-result1 = df[c1]
-
-# global status conditions (not yet listed, whitelist, greylist, blacklist)
-c2 = df["global_status"] == sys.argv[4]
-result2 = df[c2]
+df["cpc"] = round(df["cost"] / df["clicks"], 2)
+df["epc"] = round(df["revenue"] / df["clicks"], 2)
+df["cpl"] = round(df["cost"] / df["leads"], 2)
+df["epl"] = round(df["revenue"] / df["leads"], 2)
+df["cps"] = round(df["cost"] / df["sales"], 2)
+df["eps"] = round(df["revenue"] / df["sales"], 2)
 
 # widget cost is more than xxx
-c3 = df["cost"] > float(sys.argv[5])
-result3 = df[c3]
+c1 = df["cost"] > float(sys.argv[3])
+result1 = df[c1]
 
 # widget lost more than xxx
-c4 = df["profit"] < -1 * float(sys.argv[6])
-result4 = df[c4]
+c2 = df["profit"] < -1 * float(sys.argv[4])
+result2 = df[c2]
 
 # widget leadCVR is less than or equal to xxx
-c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[7]))
-result5 = df[c5]
+c3 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[5]))
+result3 = df[c3]
 
-conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11],
-        sys.argv[12]]
-conditions_dfs = [result1, result2, result3, result4, result5,]
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]]
+conditions_dfs = [result1, result2, result3]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -62,12 +56,12 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
-            "status", "global_status"]
-            )
-if final_result is None:
-    final_result = df
-
+            "revenue", "sales", "widget_id", "lead_cvr",
+            "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
+            "eps", "mps"]
+            )                                                                             
+if final_result is None:                                                                  
+    final_result = df                                                                     
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
@@ -81,21 +75,22 @@ if len(final_result.index) > 0:
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
-        summary["lead_cpa"] = round(summary["cost"] / summary["leads"], 2)
+        summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
     else:
-        summary["lead_cpa"] = 0 
+        summary["cpl"] = 0 
     rows_with_sales = final_result[final_result["sales"] >= 1]
     number_of_rows_with_sales = len(rows_with_sales.index)
     if number_of_rows_with_sales > 0:
-        summary["sale_cpa"] = round(summary["cost"] / summary["sales"], 2)
+        summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     else:
-        summary["sale_cpa"] = 0
+        summary["cps"] = 0
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
-            "status", "global_status"]].to_dict("records"))
+            "revenue", "sales", "widget_id", "lead_cvr",
+            "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
+            "eps", "mps"]].to_dict("records"))
 
 print(json_final_result)

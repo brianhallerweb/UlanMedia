@@ -33,10 +33,14 @@ for widget in data.values():
 df = pd.DataFrame(widgets)
 
 df["cost"] = round(df["cost"], 2)
-df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
-df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
+df["cpc"] = round(df["cost"] / df["clicks"], 2)
+df["epc"] = round(df["revenue"] / df["clicks"], 2)
+df["cpl"] = round(df["cost"] / df["leads"], 2)
+df["epl"] = round(df["revenue"] / df["leads"], 2)
+df["cps"] = round(df["cost"] / df["sales"], 2)
+df["eps"] = round(df["revenue"] / df["sales"], 2)
 
 # status conditions (all, included, excluded)
 c1 = df["status"] == sys.argv[3]
@@ -69,7 +73,8 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id", "lead_cpa", "sale_cpa","lead_cvr", "profit",
+            "revenue", "sales", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
+            "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
             "status", "global_status"]
             )
 
@@ -93,22 +98,23 @@ if len(final_result.index) > 0:
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
-        summary["lead_cpa"] = round(summary["cost"] / summary["leads"], 2)
+        summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
     else:
-        summary["lead_cpa"] = 0 
+        summary["cpl"] = 0 
     rows_with_sales = final_result[final_result["sales"] >= 1]
     number_of_rows_with_sales = len(rows_with_sales.index)
     if number_of_rows_with_sales > 0:
-        summary["sale_cpa"] = round(summary["cost"] / summary["sales"], 2)
+        summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     else:
-        summary["sale_cpa"] = 0
+        summary["cps"] = 0
     # Append summary onto the top
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id", "lead_cpa", "sale_cpa","lead_cvr", "profit",
+            "revenue", "sales", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
+            "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
             "status", "global_status"]].to_dict("records"))
 
 print(json_final_result)

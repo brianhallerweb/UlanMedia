@@ -62,15 +62,19 @@ class Record extends Component {
         }g/${this.props.widgetRecord.bad_campaigns_count}b/${
           this.props.widgetRecord.wait_campaigns_count
         }w)`}</td>
-        <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>
+        <td>{this.props.widgetRecord.clicks}</td>
+        <td>{this.props.widgetRecord.cpc}</td>
+        <td>{this.props.widgetRecord.epc}</td>
         <td>{this.props.widgetRecord.leads}</td>
-        <td>${this.props.widgetRecord.lead_cpa}</td>
+        <td>${this.props.widgetRecord.cpl}</td>
+        <td>${this.props.widgetRecord.epl}</td>
         <td>{this.props.widgetRecord.lead_cvr}%</td>
         <td>{this.props.widgetRecord.sales}</td>
-        <td>${this.props.widgetRecord.sale_cpa}</td>
+        <td>${this.props.widgetRecord.cps}</td>
+        <td>${this.props.widgetRecord.eps}</td>
         <td>
           {this.props.widgetRecord.global_status}
           <div onClick={() => this.setState({clicked: true})}>

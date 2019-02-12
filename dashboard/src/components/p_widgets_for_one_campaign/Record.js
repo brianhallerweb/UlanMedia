@@ -62,18 +62,25 @@ class Record extends Component {
     return (
       <tr>
         <td>
-	{this.props.widgetRecord.widget_id}
-          {this.props.widgetRecord.widget_id !== 'summary' && this.addRowLinks()}
-	</td>
-        <td>{this.props.widgetRecord.clicks}</td>
+          {this.props.widgetRecord.widget_id}
+          {this.props.widgetRecord.widget_id !== 'summary' &&
+            this.addRowLinks()}
+        </td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>
+        <td>{this.props.widgetRecord.clicks}</td>
+        <td>${this.props.widgetRecord.cpc}</td>
+        <td>${this.props.widgetRecord.epc}</td>
+        <td>${this.props.widgetRecord.mpc}</td>
         <td>{this.props.widgetRecord.leads}</td>
-        <td>${this.props.widgetRecord.lead_cpa}</td>
-        <td>{this.props.widgetRecord.lead_cvr}%</td>
+        <td>${this.props.widgetRecord.cpl}</td>
+        <td>${this.props.widgetRecord.epl}</td>
+        <td>${this.props.widgetRecord.mpl}</td>
         <td>{this.props.widgetRecord.sales}</td>
-        <td>${this.props.widgetRecord.sale_cpa}</td>
+        <td>${this.props.widgetRecord.cps}</td>
+        <td>${this.props.widgetRecord.eps}</td>
+        <td>${this.props.widgetRecord.mps}</td>
         <td>{this.props.widgetRecord.status}</td>
         <td>{this.props.widgetRecord.global_status}</td>
       </tr>

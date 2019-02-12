@@ -42,15 +42,18 @@ const ConditionCheckboxes = ({
           checked={c2}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Widget global status is </span>
-        <select
-          onChange={e => setConditionValue('c2Value', e.target.value)}
-          defaultValue={c2Value}>
-          <option value="not yet listed">not yet listed</option>
-          <option value="whitelist">whitelist</option>
-          <option value="greylist">greylist</option>
-          <option value="blacklist">blacklist</option>
-        </select>
+        <span>
+          {'Widget cost is more than $'}
+          <input
+            type="number"
+            name="c2Value"
+            min="0"
+            max="100"
+            step="10"
+            value={c2Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
       </div>
 
       <div>
@@ -61,7 +64,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Widget cost is more than $'}
+          {'Widget lost more than $'}
           <input
             type="number"
             name="c3Value"
@@ -82,35 +85,14 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Widget lost more than $'}
+          {'Widget leadCVR is less than or equal to '}
           <input
             type="number"
             name="c4Value"
             min="0"
-            max="100"
-            step="10"
-            value={c4Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c5"
-          checked={c5}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget leadCVR is less than or equal to '}
-          <input
-            type="number"
-            name="c5Value"
-            min="0"
             max=".50"
             step=".25"
-            value={c5Value}
+            value={c4Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'%'}

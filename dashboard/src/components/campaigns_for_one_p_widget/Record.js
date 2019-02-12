@@ -76,16 +76,21 @@ class Record extends Component {
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
         {this.stylizeClassification(this.props.campaignRecord.classification)}
-        <td>{this.props.campaignRecord.clicks}</td>
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>
+        <td>{this.props.campaignRecord.clicks}</td>
+        <td>{this.props.campaignRecord.cpc}</td>
+        <td>{this.props.campaignRecord.epc}</td>
+        <td>{this.props.campaignRecord.mpc}</td>
         <td>{this.props.campaignRecord.leads}</td>
-        <td>${this.props.campaignRecord.lead_cpa}</td>
-        <td>${this.props.campaignRecord.max_lead_cpa}</td>
-        <td>{this.props.campaignRecord.lead_cvr}%</td>
+        <td>{this.props.campaignRecord.cpl}</td>
+        <td>{this.props.campaignRecord.epl}</td>
+        <td>{this.props.campaignRecord.mpl}</td>
         <td>{this.props.campaignRecord.sales}</td>
-        <td>${this.props.campaignRecord.sale_cpa}</td>
+        <td>{this.props.campaignRecord.cps}</td>
+        <td>{this.props.campaignRecord.eps}</td>
+        <td>{this.props.campaignRecord.mps}</td>
         <td>{this.props.campaignRecord.status}</td>
       </tr>
     );

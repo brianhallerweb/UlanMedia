@@ -29,17 +29,19 @@ class Record extends Component {
             </div>
           )}
         </td>
-        <td>{this.props.widgetRecord.clicks}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>
+        <td>{this.props.widgetRecord.clicks}</td>
+        <td>${this.props.widgetRecord.cpc}</td>
+        <td>${this.props.widgetRecord.epc}</td>
         <td>{this.props.widgetRecord.leads}</td>
-        <td>${this.props.widgetRecord.lead_cpa}</td>
+        <td>${this.props.widgetRecord.cpl}</td>
+        <td>${this.props.widgetRecord.epl}</td>
         <td>{this.props.widgetRecord.lead_cvr}%</td>
         <td>{this.props.widgetRecord.sales}</td>
-        <td>${this.props.widgetRecord.sale_cpa}</td>
-        <td>{this.props.widgetRecord.status}</td>
-        <td>{this.props.widgetRecord.global_status}</td>
+        <td>${this.props.widgetRecord.cps}</td>
+        <td>${this.props.widgetRecord.eps}</td>
       </tr>
     );
   }

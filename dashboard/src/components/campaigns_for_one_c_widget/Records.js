@@ -13,18 +13,22 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Campaign</th>
-            <th>C Widget</th>
-            <th>Clicks</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
+            <th>Clicks</th>
+            <th>CPC</th>
+            <th>CPC</th>
+            <th>MPC</th>
             <th>Leads</th>
-            <th>Lead CPA</th>
-            <th>Lead CVR</th>
+            <th>CPL</th>
+            <th>EPL</th>
+            <th>MPL</th>
             <th>Sales</th>
-            <th>Sale CPA</th>
+            <th>CPS</th>
+            <th>EPS</th>
+            <th>MPS</th>
             <th>Status</th>
-            <th>Global Status</th>
           </tr>
         </thead>
         <tbody>

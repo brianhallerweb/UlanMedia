@@ -29,8 +29,8 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     #           "vol_id": "dc1351fe-b55a-49a6-a679-e04539ff1840",
     #           "mgid_id": "527378",
     #           "name": "bin_australia_all_desktop_cpc_0.07",
-    #           "max_lead_cpa": 10,
-    #           "max_sale_cpa": 300,
+    #           "mpl": 10,
+    #           "mps": 300,
     #           "status": "included",
     #           "global_status": "not yet listed",
     #           "clicks": 2,
@@ -43,8 +43,8 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     #            "vol_id": "4ff2a836-8790-4e07-9f45-98b05c3a393a",
     #            "mgid_id": "527382",
     #            "name": "bin_canada_all_desktop_cpc_0.07",
-    #            "max_lead_cpa": 10,
-    #            "max_sale_cpa": 300,
+    #            "mpl": 10,
+    #            "mpl": 300,
     #            "status": "included",
     #            "global_status": "not yet listed",
     #            "clicks": 7,
@@ -210,6 +210,7 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
+        mpc_pattern = re.compile(r'.*cpc_(.*)')
         p_widgets_for_one_campaign = {}
         for widget in json_file["data"]:
             parent_widget = pattern.search(widget).group()
@@ -225,9 +226,11 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
                 p_widgets_for_one_campaign[parent_widget]["vol_id"] = campaign["vol_id"]
                 p_widgets_for_one_campaign[parent_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[parent_widget]["name"] = campaign["name"]
-                p_widgets_for_one_campaign[parent_widget]["max_lead_cpa"] = campaign["max_lead_cpa"]
-                p_widgets_for_one_campaign[parent_widget]["max_sale_cpa"] = campaign["max_sale_cpa"]
-
+                p_widgets_for_one_campaign[parent_widget]["mpl"] = campaign["max_lead_cpa"]
+                p_widgets_for_one_campaign[parent_widget]["mps"] = campaign["max_sale_cpa"]
+                res = mpc_pattern.findall(campaign["name"])
+                p_widgets_for_one_campaign[parent_widget]["mpc"] = list(res)[0]
+                
         with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
             excluded_widgets = json.load(file)
         pattern = re.compile(r'\d*')
@@ -376,8 +379,8 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     #           'classification': 'wait'
     #           'cost': 5.249999999999994,
     #           'leads': 3,
-    #           'max_lead_cpa': 5,
-    #           'max_sale_cpa': 150,
+    #           'mpl': 5,
+    #           'mps': 150,
     #           'referrer': [],
     #           'revenue': 330.0,
     #           'sales': 1,

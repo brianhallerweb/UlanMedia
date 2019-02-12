@@ -212,8 +212,8 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
             else:
                 p_widgets_for_one_campaign[parent_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[parent_widget]["widget_id"] = parent_widget
-                p_widgets_for_one_campaign[parent_widget]["max_lead_cpa"] = campaign["max_lead_cpa"]
-                p_widgets_for_one_campaign[parent_widget]["max_sale_cpa"] = campaign["max_sale_cpa"]
+                p_widgets_for_one_campaign[parent_widget]["mpl"] = campaign["max_lead_cpa"]
+                p_widgets_for_one_campaign[parent_widget]["mps"] = campaign["max_sale_cpa"]
                 
 
         # Add each p_widget_for_one_campaign to the list of campaigns for each p widget

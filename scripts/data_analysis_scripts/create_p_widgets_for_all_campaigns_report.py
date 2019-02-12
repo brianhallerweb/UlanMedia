@@ -22,10 +22,16 @@ for widget in data.values():
 df = pd.DataFrame(widgets)
 
 df["cost"] = round(df["cost"], 2)
-df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
-df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
+df["cps"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
+df["cpc"] = round(df["cost"] / df["clicks"], 2)
+df["epc"] = round(df["revenue"] / df["clicks"], 2)
+df["cpl"] = round(df["cost"] / df["leads"], 2)
+df["epl"] = round(df["revenue"] / df["leads"], 2)
+df["cps"] = round(df["cost"] / df["sales"], 2)
+df["eps"] = round(df["revenue"] / df["sales"], 2)
+
 
 # global status conditions (not yet listed, whitelist, greylist, blacklist)
 c1 = df["global_status"] == sys.argv[2]
@@ -44,7 +50,7 @@ c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[5]))
 result4 = df[c4]
 
 # widget saleCPA is more than xxx
-c5 = np.isfinite(df["sale_cpa"]) & (df["sale_cpa"] > float(sys.argv[6]))
+c5 = np.isfinite(df["cps"]) & (df["cps"] > float(sys.argv[6]))
 result5 = df[c5]
 
 # widget clicks are >= xxx OR cost >= xxx
@@ -62,10 +68,10 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id", "lead_cpa", "lead_cvr", "sale_cpa", "profit",
+            "revenue", "sales", "widget_id", "lead_cvr", "profit",
             "global_status", "classification", "has_children",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count"]
+            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
             )
 
 if final_result is None:
@@ -78,9 +84,9 @@ final_result = final_result.sort_values(["profit", "classification"],
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
-            "revenue", "sales", "widget_id", "lead_cpa","lead_cvr", "sale_cpa", "profit",
+            "revenue", "sales", "widget_id", "lead_cvr", "profit",
             "global_status", "classification", "has_children",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count"]].to_dict("records"))
+            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
 
 print(json_final_result)
