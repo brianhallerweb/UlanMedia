@@ -7,6 +7,10 @@ def classify_p_widget_for_all_campaigns(p_widget):
     good_campaigns_count = p_widget["good_campaigns_count"]
     bad_campaigns_count = p_widget["bad_campaigns_count"]
     wait_campaigns_count = p_widget["wait_campaigns_count"]
+    if clicks > 0:
+        lead_cvr = p_widget["for_all_campaigns"]["leads"] / clicks
+    else:
+        lead_cvr = 0
 
     if global_status == "blacklist":
         return "blacklist"
@@ -31,7 +35,7 @@ def classify_p_widget_for_all_campaigns(p_widget):
         # black 
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 2):
             return "blacklist"
-        elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (profit < -60):
+        elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (lead_cvr < .002) & (profit < -60):
             return "blacklist"
         # wait
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):

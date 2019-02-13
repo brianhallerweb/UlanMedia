@@ -7,14 +7,16 @@ class Record extends Component {
     super(props);
     this.name = this.props.campaign.name;
     this.volID = this.props.campaign.vol_id;
-    this.clicks = this.props.campaign.clicks;
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;
     this.profit = this.props.campaign.profit;
-    this.conversions = this.props.campaign.conversions;
-    this.cvr = this.props.campaign.cvr;
+    this.clicks = this.props.campaign.clicks;
+    this.cpc = this.props.campaign.cpc;
     this.epc = this.props.campaign.epc;
+    this.conversions = this.props.campaign.conversions;
     this.cpa = this.props.campaign.cpa;
+    this.epa = this.props.campaign.epa;
+    this.cvr = this.props.campaign.cvr;
     this.state = {};
   }
 
@@ -41,14 +43,16 @@ class Record extends Component {
           {this.name}
           {this.name !== 'summary' && this.addRowLinks()}
         </td>
-        <td>{this.clicks}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
-        <td>{this.conversions}</td>
-        <td>{this.cvr}%</td>
+        <td>{this.clicks}</td>
+        <td>${this.cpc}</td>
         <td>${this.epc}</td>
+        <td>{this.conversions}</td>
         <td>${this.cpa}</td>
+        <td>${this.epa}</td>
+        <td>{this.cvr}%</td>
       </tr>
     );
   }

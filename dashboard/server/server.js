@@ -55,16 +55,12 @@ app.delete('/api/users/logout', authenticate, logout);
 //---------------------------------------
 
 //////// Campaign sets route //////////////
-app.get('/api/getcampaignsets', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/misc/',
-    args: [],
-  };
-  PythonShell.run('get_campaign_sets.py', pythonOptions, (err, results) => {
-    if (err) throw err;
-    res.send(results[0]);
+app.get('/api/readcampaignsets', (req, res) => {
+  fs.readFile('../../campaign_sets/campaign_sets.json', 'utf8', (err, data) => {
+    if (err) {
+      throw Error(err);
+    }
+    res.send(data);
   });
 });
 //---------------------------------------

@@ -17,8 +17,10 @@ df["cost"] = round(df["cost"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
+df["cpc"] = (df["cost"] / df["clicks"]).round(3)
 df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
+df["epa"] = round(df["revenue"] / df["conversions"], 2)
 
 # ad cost is more than xxx
 c1 = df["cost"] > float(sys.argv[3])
@@ -43,7 +45,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "name", "mgid_id", "vol_id"] )
+    "cpc", "epc", "cpa", "epa", "name", "mgid_id", "vol_id"] )
 
 if final_result is None:
     final_result = df
@@ -77,7 +79,7 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "name", "mgid_id", "vol_id"]].to_dict("records"))
+    "cpc", "epc", "cpa", "epa", "name", "mgid_id", "vol_id"]].to_dict("records"))
 
 print(json_final_result)
 
