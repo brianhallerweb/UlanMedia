@@ -17,6 +17,12 @@ const GlobalNavBar = () => (
     </li>
 
     <li className="globalNavItem">
+      <NavLink to={'/cwidgetsforallcampaigns'} activeClassName="is-active">
+        c widgets
+      </NavLink>
+    </li>
+
+    <li className="globalNavItem">
       <NavLink to={'/offersforallcampaigns'} activeClassName="is-active">
         offers
       </NavLink>

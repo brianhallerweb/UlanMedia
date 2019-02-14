@@ -6,6 +6,7 @@ import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
 import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_campaigns/Home';
+import c_widgets_for_all_campaignsHome from '../components/c_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
 import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
@@ -48,6 +49,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/pwidgetsforallcampaigns"
           Component={p_widgets_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/cwidgetsforallcampaigns"
+          Component={c_widgets_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/cwidgetsforonepwidget/:pWidgetID"
