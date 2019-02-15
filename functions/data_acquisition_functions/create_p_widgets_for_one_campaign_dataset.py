@@ -101,6 +101,8 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
            p_widgets_for_one_campaign["data"][parent_widget]["sales"] += data[widget]["sales"]
        else:
            p_widgets_for_one_campaign["data"][parent_widget] = data[widget]
+           p_widgets_for_one_campaign["data"][parent_widget]["vol_id"] = vol_id
+           p_widgets_for_one_campaign["data"][parent_widget]["mgid_id"] = mgid_id
            p_widgets_for_one_campaign["data"][parent_widget]["widget_id"] = parent_widget
            p_widgets_for_one_campaign["data"][parent_widget]["mpc"] = mpc 
            p_widgets_for_one_campaign["data"][parent_widget]["mpl"] = mpl 

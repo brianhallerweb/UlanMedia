@@ -12,7 +12,6 @@ class Home extends Component {
     super(props);
     this.state = {
       volid: this.props.match.params.volid,
-      mgidid: this.props.match.params.mgidid,
       widgetRecords: [],
       mgidRequestDates: '',
       volRequestDates: '',
@@ -169,7 +168,6 @@ class Home extends Component {
           loading={this.state.loading}
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
-          mgidid={this.state.mgidid}
         />
       </div>
     );

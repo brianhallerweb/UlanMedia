@@ -73,7 +73,7 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
+            "revenue", "sales", "vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
             "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
             "status", "global_status"]
             )
@@ -113,7 +113,7 @@ if len(final_result.index) > 0:
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
+            "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
             "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
             "status", "global_status"]].to_dict("records"))
 

@@ -97,7 +97,7 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["name"].str[4:]
 final_result = final_result.sort_values("sort")
 json_final_result = json.dumps(final_result[["mgid_start_date",
-    "mgid_end_date","vol_start_date", "vol_end_date", "vol_id", "name",
+    "mgid_end_date","vol_start_date", "vol_end_date", "mgid_id", "vol_id", "name",
     "clicks", "cost", "revenue", "profit", "leads","mpc",
     "mpl","cpl", "epl", "sales", "cps","mps","cpc","eps", "epc"]].to_dict("records"))
 

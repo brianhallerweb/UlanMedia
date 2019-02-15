@@ -43,7 +43,7 @@ const AppRouter = () => (
           Component={days_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/pwidgetsforonecampaign/:volid/:mgidid/:max_lead_cpa/:name"
+          path="/pwidgetsforonecampaign/:volid/:name"
           Component={p_widgets_for_one_campaignHome}
         />
         <PrivateRoute

@@ -38,7 +38,7 @@ class Record extends Component {
         <div className="rowLink">
           <a
             href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
-              this.props.mgidid
+              this.props.widgetRecord.mgid_id
             }&widgetIDs=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
             target="_blank">
             exclude
@@ -48,7 +48,7 @@ class Record extends Component {
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-              this.props.mgidid
+              this.props.widgetRecord.mgid_id
             }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
             target="_blank">
             mgid

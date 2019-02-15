@@ -113,8 +113,8 @@ class Record extends Component {
               <Link
                 to={{
                   pathname: `/pwidgetsforonecampaign/${this.vol_id}/${
-                    this.mgid_id
-                  }/${this.max_lead_cpa}/${this.name}/`,
+                    this.name
+                  }/`,
                 }}
                 target="_blank">
                 p widgets
