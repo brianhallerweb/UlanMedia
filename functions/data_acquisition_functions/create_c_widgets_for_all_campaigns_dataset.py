@@ -441,5 +441,3 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
     return json.dumps(c_widgets_for_all_campaigns)
 
 
-
-
