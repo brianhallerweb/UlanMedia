@@ -59,7 +59,7 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{mgid_id}_excluded_p_widgets.json', 'r') as file:
         excluded_widgets = json.load(file)
 
     ########################################################
