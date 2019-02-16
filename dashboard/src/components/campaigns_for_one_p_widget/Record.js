@@ -32,8 +32,6 @@ class Record extends Component {
             to={{
               pathname: `/pwidgetsforonecampaign/${
                 this.props.campaignRecord.vol_id
-              }/${this.props.campaignRecord.mgid_id}/${
-                this.props.campaignRecord.max_lead_cpa
               }/${this.props.campaignRecord.name}/
               `,
             }}
