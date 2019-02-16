@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 // 2/1/19
-// this code is a mess but it works. It adds p widgets to white/grey/black
+// this code is a mess but it works. It adds p or c widgets to white/grey/black
 // lists and cleans and maintains those lists in the process.
 // One thing that might be confusing is that the global_status column shown on
 // the web app always (whether in development or production) comes from ulanmedia.brianhaller.net.
@@ -10,35 +10,31 @@ const fs = require('fs');
 // lists. However the global_status column still comes from
 // ulanmedia.brianhaller.net when in development.
 
-function addToList(pWidgetID, listType) {
-  const currentListStatus = getCurrentListStatus(pWidgetID);
+function addToList(widgetID, listType) {
+  const currentListStatus = getCurrentListStatus(widgetID);
   let message = '';
-  if (isNaN(pWidgetID) || pWidgetID.trim() === '') {
-    //test if p widget is number
-    //this doesn't mean in the variable "type" sense.
-    //pWidgetID is a string, but it needs to be a number in the "12345"
-    //sense
-    message = 'p widget not added to list - invalid id';
+  if (widgetID.trim() === '') {
+    message = 'widget not added to list - invalid id';
     return message;
   }
   for (let key in currentListStatus) {
     if (key === listType && currentListStatus[key] === true) {
       if (message === '') {
-        message = `p widget already in ${listType} list`;
+        message = `widget already in ${listType} list`;
       } else {
-        message += ` and  already in ${listType} list`;
+        message += ` and already in ${listType} list`;
       }
     } else if (key === listType && currentListStatus[key] === false) {
-      writeToList(pWidgetID, key);
+      writeToList(widgetID, key);
       if (message === '') {
-        message = `p widget added to ${listType} list`;
+        message = `widget added to ${listType} list`;
       } else {
         message += ` and added to ${listType} list`;
       }
     } else if (currentListStatus[key] === true) {
-      eraseFromList(pWidgetID, key);
+      eraseFromList(widgetID, key);
       if (message === '') {
-        message = `p widget erased from ${key} list`;
+        message = `widget erased from ${key} list`;
       } else {
         message += ` and erased from ${key} list`;
       }
@@ -47,107 +43,107 @@ function addToList(pWidgetID, listType) {
   return message;
 }
 
-function writeToList(pWidgetID, listType) {
-  // This function is kind of convoluted but it just adds a p widget id to a
+function writeToList(widgetID, listType) {
+  // This function is kind of convoluted but it just adds a widget id to a
   // list.
   // It handles the cases of extra white space or extra lines.
-  let pWidgets = fs
-    .readFileSync(`../../p_widget_lists/${listType}list.txt`, 'utf8')
+  let widgets = fs
+    .readFileSync(`../../widget_lists/${listType}list.txt`, 'utf8')
     .trim()
     .split('\n');
-  const pWidgetsWithoutBlankLines = [];
-  for (let i = 0; i < pWidgets.length; i++) {
-    if (pWidgets[i] !== '') {
-      pWidgetsWithoutBlankLines.push(pWidgets[i].trim());
+  const widgetsWithoutBlankLines = [];
+  for (let i = 0; i < widgets.length; i++) {
+    if (widgets[i] !== '') {
+      widgetsWithoutBlankLines.push(widgets[i].trim());
     }
   }
-  const pWidgetsWithoughBlankLinesAndWithNewPWidgetID = pWidgetsWithoutBlankLines.concat(
-    pWidgetID,
+  const widgetsWithoughBlankLinesAndWithNewWidgetID = widgetsWithoutBlankLines.concat(
+    widgetID,
   );
 
   fs.writeFileSync(
-    `../../p_widget_lists/${listType}list.txt`,
-    pWidgetsWithoughBlankLinesAndWithNewPWidgetID.join('\n'),
+    `../../widget_lists/${listType}list.txt`,
+    widgetsWithoughBlankLinesAndWithNewWidgetID.join('\n'),
   );
 }
 
-function eraseFromList(pWidgetID, listType) {
-  let pWidgets = fs
-    .readFileSync(`../../p_widget_lists/${listType}list.txt`, 'utf8')
+function eraseFromList(widgetID, listType) {
+  let widgets = fs
+    .readFileSync(`../../widget_lists/${listType}list.txt`, 'utf8')
     .trim()
     .split('\n');
-  const pWidgetsWithoutBlankLines = [];
-  for (let i = 0; i < pWidgets.length; i++) {
-    if (pWidgets[i] !== '') {
-      pWidgetsWithoutBlankLines.push(pWidgets[i].trim());
+  const widgetsWithoutBlankLines = [];
+  for (let i = 0; i < widgets.length; i++) {
+    if (widgets[i] !== '') {
+      widgetsWithoutBlankLines.push(widgets[i].trim());
     }
   }
-  const pWidgetsWithoutBlankLinesAndWithPWidgetIDRemoved = [];
-  for (let i = 0; i < pWidgets.length; i++) {
-    if (pWidgetsWithoutBlankLines[i] !== pWidgetID) {
-      pWidgetsWithoutBlankLinesAndWithPWidgetIDRemoved.push(
-        pWidgetsWithoutBlankLines[i],
+  const widgetsWithoutBlankLinesAndWithWidgetIDRemoved = [];
+  for (let i = 0; i < widgets.length; i++) {
+    if (widgetsWithoutBlankLines[i] !== widgetID) {
+      widgetsWithoutBlankLinesAndWithWidgetIDRemoved.push(
+        widgetsWithoutBlankLines[i],
       );
     }
   }
 
   fs.writeFileSync(
-    `../../p_widget_lists/${listType}list.txt`,
-    pWidgetsWithoutBlankLinesAndWithPWidgetIDRemoved.join('\n'),
+    `../../widget_lists/${listType}list.txt`,
+    widgetsWithoutBlankLinesAndWithWidgetIDRemoved.join('\n'),
   );
 }
 
-function getCurrentListStatus(pWidgetID) {
+function getCurrentListStatus(widgetID) {
   const currentListStatus = {
     white: false,
     grey: false,
     black: false,
   };
-  if (isInWhiteList(pWidgetID)) {
+  if (isInWhiteList(widgetID)) {
     currentListStatus.white = true;
   }
-  if (isInGreyList(pWidgetID)) {
+  if (isInGreyList(widgetID)) {
     currentListStatus.grey = true;
   }
-  if (isInBlackList(pWidgetID)) {
+  if (isInBlackList(widgetID)) {
     currentListStatus.black = true;
   }
   return currentListStatus;
 }
 
-function isInWhiteList(pWidgetID) {
-  const pWidgets = fs
-    .readFileSync(`../../p_widget_lists/whitelist.txt`, 'utf8')
+function isInWhiteList(widgetID) {
+  const widgets = fs
+    .readFileSync(`../../widget_lists/whitelist.txt`, 'utf8')
     .trim()
     .split('\n');
-  for (let id of pWidgets) {
-    if (id === pWidgetID) {
+  for (let id of widgets) {
+    if (id === widgetID) {
       return true;
     }
   }
   return false;
 }
 
-function isInGreyList(pWidgetID) {
-  const pWidgets = fs
-    .readFileSync(`../../p_widget_lists/greylist.txt`, 'utf8')
+function isInGreyList(widgetID) {
+  const widgets = fs
+    .readFileSync(`../../widget_lists/greylist.txt`, 'utf8')
     .trim()
     .split('\n');
-  for (let id of pWidgets) {
-    if (id === pWidgetID) {
+  for (let id of widgets) {
+    if (id === widgetID) {
       return true;
     }
   }
   return false;
 }
 
-function isInBlackList(pWidgetID) {
-  const pWidgets = fs
-    .readFileSync(`../../p_widget_lists/blacklist.txt`, 'utf8')
+function isInBlackList(widgetID) {
+  const widgets = fs
+    .readFileSync(`../../widget_lists/blacklist.txt`, 'utf8')
     .trim()
     .split('\n');
-  for (let id of pWidgets) {
-    if (id === pWidgetID) {
+  for (let id of widgets) {
+    if (id === widgetID) {
       return true;
     }
   }

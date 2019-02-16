@@ -2,6 +2,6 @@ config/
 node_modules/
 **/__pycache__/
 data/
-p_widget_lists/
+widget_lists/
 excluded_p_widgets_lists/
 campaign_sets/

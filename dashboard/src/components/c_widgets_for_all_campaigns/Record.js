@@ -77,9 +77,9 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}/white`,
+                  pathname: `/listcwidgetconfirmation/${
+                    this.props.widgetRecord.widget_id
+                  }/white`,
                 }}
                 target="_blank">
                 white
@@ -88,9 +88,9 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}/grey`,
+                  pathname: `/listcwidgetconfirmation/${
+                    this.props.widgetRecord.widget_id
+                  }/grey`,
                 }}
                 target="_blank">
                 grey
@@ -99,9 +99,9 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}/black`,
+                  pathname: `/listcwidgetconfirmation/${
+                    this.props.widgetRecord.widget_id
+                  }/black`,
                 }}
                 target="_blank">
                 black

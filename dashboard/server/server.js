@@ -67,7 +67,7 @@ app.get('/api/readcampaignsets', (req, res) => {
 });
 //---------------------------------------
 
-//////// update excluded p widget list routes //////////////
+//////// exclude routes //////////////
 app.post('/api/updateoneexcludedpwidgetslist', authenticate, (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
@@ -87,9 +87,7 @@ app.post('/api/updateoneexcludedpwidgetslist', authenticate, (req, res) => {
     },
   );
 });
-//---------------------------------------
 
-//////// exclude campaign(s) routes //////////////
 app.post('/api/excludecampaign', authenticate, (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
@@ -132,9 +130,9 @@ app.post('/api/excludepwidget', authenticate, (req, res) => {
 
 //---------------------------------------
 
-//////// p widget list routes //////////////
+//////// widget list routes //////////////
 app.get('/api/readwhitelist', (req, res) => {
-  fs.readFile('../../p_widget_lists/whitelist.txt', 'utf8', (err, data) => {
+  fs.readFile('../../widget_lists/whitelist.txt', 'utf8', (err, data) => {
     if (err) {
       throw Error(err);
     }
@@ -144,7 +142,7 @@ app.get('/api/readwhitelist', (req, res) => {
 });
 
 app.get('/api/readgreylist', (req, res) => {
-  fs.readFile('../../p_widget_lists/greylist.txt', 'utf8', (err, data) => {
+  fs.readFile('../../widget_lists/greylist.txt', 'utf8', (err, data) => {
     if (err) {
       throw Error(err);
     }
@@ -154,7 +152,7 @@ app.get('/api/readgreylist', (req, res) => {
 });
 
 app.get('/api/readblacklist', (req, res) => {
-  fs.readFile('../../p_widget_lists/blacklist.txt', 'utf8', (err, data) => {
+  fs.readFile('../../widget_lists/blacklist.txt', 'utf8', (err, data) => {
     if (err) {
       throw Error(err);
     }
@@ -164,7 +162,7 @@ app.get('/api/readblacklist', (req, res) => {
 });
 
 app.post('/api/addtolist', authenticate, (req, res) => {
-  res.json(addToList(req.body.pWidgetID, req.body.listType));
+  res.json(addToList(req.body.widgetID, req.body.listType));
 });
 
 //---------------------------------------

@@ -3,19 +3,19 @@ import React, {Component} from 'react';
 import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
 
-class ListPWidgetConfirmation extends Component {
+class ListCWidgetConfirmation extends Component {
   constructor(props) {
     super(props);
     this.state = {
       authenticated: true,
-      pWidgetID: this.props.match.params.pWidgetID,
+      cWidgetID: this.props.match.params.cWidgetID,
       listType: this.props.match.params.listType,
       response: false,
       responseMessage: '',
     };
   }
 
-  confirmPWidgetListing() {
+  confirmCWidgetListing() {
     fetch(`/api/addtolist`, {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ class ListPWidgetConfirmation extends Component {
         'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        widgetID: this.state.pWidgetID,
+        widgetID: this.state.cWidgetID,
         listType: this.state.listType,
       }),
     })
@@ -58,11 +58,11 @@ class ListPWidgetConfirmation extends Component {
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <p>
-          Are you sure you want to list p widget {this.state.pWidgetID} as{' '}
+          Are you sure you want to list c widget {this.state.cWidgetID} as{' '}
           {this.state.listType}?
         </p>
         <div>
-          <button onClick={() => this.confirmPWidgetListing()}>
+          <button onClick={() => this.confirmCWidgetListing()}>
             Yes, confirm listing
           </button>
         </div>
@@ -79,4 +79,4 @@ class ListPWidgetConfirmation extends Component {
   }
 }
 
-export default ListPWidgetConfirmation;
+export default ListCWidgetConfirmation;
