@@ -26,26 +26,12 @@ class Record extends Component {
               </Link>
             </div>
 
-            {this.props.widgetRecord.has_children && (
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                      /^\d*/,
-                    )}`,
-                  }}
-                  target="_blank">
-                  c widgets
-                </Link>
-              </div>
-            )}
-
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/excludepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
+                  pathname: `/excludecwidgetconfirmation/${
+                    this.props.widgetRecord.widget_id
+                  }`,
                 }}
                 target="_blank">
                 exclude

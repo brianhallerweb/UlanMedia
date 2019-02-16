@@ -23,6 +23,7 @@ import p_widgets_for_all_campaignsListPWidgetConfirmation from '../components/p_
 import c_widgets_for_all_campaignsListCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ListCWidgetConfirmation';
 import campaigns_for_one_p_widgetExcludeCampaignConfirmation from '../components/campaigns_for_one_p_widget/ExcludeCampaignConfirmation';
 import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
+import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
 import ExcludeOneCampaignForAllBlacklistedPWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPWidgets';
 import RedirectToHome from '../components/RedirectToHome';
 
@@ -110,6 +111,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/excludepwidgetconfirmation/:pWidgetID"
           Component={p_widgets_for_all_campaignsExcludePWidgetConfirmation}
+        />
+        <PrivateRoute
+          path="/excludecwidgetconfirmation/:cWidgetID"
+          Component={c_widgets_for_all_campaignsExcludeCWidgetConfirmation}
         />
         <PrivateRoute
           path="/excludeonecampaignforallblacklistedpwidgets"
