@@ -105,7 +105,7 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range, output_na
                 mpc = list(res)[0]
                 p_widget = p_widget_pattern.search(widget).group()
                 status = ""
-                if p_widget in excluded_widgets:
+                if widget in excluded_widgets:
                     status = "excluded"
                 else:
                     status = "included"
