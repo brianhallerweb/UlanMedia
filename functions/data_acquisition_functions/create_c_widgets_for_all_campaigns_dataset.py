@@ -93,7 +93,8 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
-        pattern = re.compile(r'.*s.*')
+        c_widget_pattern = re.compile(r'.*s.*')
+        p_widget_pattern = re.compile(r'\d*')
 
         # set up the c_widgets_for_all_campaings["data"] data structure and
         # fill in the "for_all_campaigns" value. The data structure looks like
@@ -114,11 +115,12 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
         # widget
         
         for widget in json_file["data"]:
-           c_widget = pattern.search(widget)
+           c_widget = c_widget_pattern.search(widget)
            if c_widget == None:
                continue
            c_widget = c_widget.group()
-           p_widget = widget
+           p_widget = p_widget_pattern.search(widget).group()
+
            if c_widget in c_widgets_for_all_campaigns["data"]:
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["clicks"] += json_file["data"][widget]["clicks"]
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["cost"] += json_file["data"][widget]["cost"]
@@ -215,7 +217,7 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
 
         c_widgets_for_one_campaign = {}
         for widget in json_file["data"]:
-            c_widget = pattern.search(widget)
+            c_widget = c_widget_pattern.search(widget)
             if c_widget == None:
                 continue
             c_widget = c_widget.group()
