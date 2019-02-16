@@ -108,6 +108,27 @@ app.post('/api/excludecampaign', authenticate, (req, res) => {
   );
 });
 
+app.post('/api/excludecampaignforonecwidget', authenticate, (req, res) => {
+  const pythonOptions = {
+    pythonPath: '/usr/bin/python3',
+    pythonOptions: ['-u'],
+    scriptPath: '../../scripts/misc/',
+    args: [],
+  };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
+  PythonShell.run(
+    'exclude_campaign_for_one_c_widget.py',
+    pythonOptions,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results[0]);
+    },
+  );
+});
+
+// I think this route may be old and unused
 app.post('/api/excludepwidget', authenticate, (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',

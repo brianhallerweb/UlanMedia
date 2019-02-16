@@ -16,8 +16,6 @@ class Record extends Component {
             to={{
               pathname: `/pwidgetsforonecampaign/${
                 this.props.campaignRecord.vol_id
-              }/${this.props.campaignRecord.mgid_id}/${
-                this.props.campaignRecord.max_lead_cpa
               }/${this.props.campaignRecord.name}/
               `,
             }}
@@ -27,20 +25,22 @@ class Record extends Component {
         </div>
 
         <div className="rowLink">
-          <a
-            href={`http://ulanmedia.com/mgid/exclude-widgets-form.php?campaignIDs=${
-              this.props.campaignRecord.mgid_id
-            }&widgetIDs=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
+          <Link
+            to={{
+              pathname: `/excludecampaignforonecwidgetconfirmation/${
+                this.props.campaignRecord.widget_id
+              }/${this.props.campaignRecord.mgid_id}`,
+            }}
             target="_blank">
             exclude
-          </a>
+          </Link>
         </div>
 
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
               this.props.campaignRecord.mgid_id
-            }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
+            }?search=${this.props.campaignRecord.widget_id}`}
             target="_blank">
             mgid
           </a>

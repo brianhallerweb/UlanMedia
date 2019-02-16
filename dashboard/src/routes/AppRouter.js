@@ -22,6 +22,7 @@ import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/H
 import p_widgets_for_all_campaignsListPWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ListPWidgetConfirmation';
 import c_widgets_for_all_campaignsListCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ListCWidgetConfirmation';
 import campaigns_for_one_p_widgetExcludeCampaignConfirmation from '../components/campaigns_for_one_p_widget/ExcludeCampaignConfirmation';
+import campaigns_for_one_c_widgetExcludeCampaignForOneCWidgetConfirmation from '../components/campaigns_for_one_c_widget/ExcludeCampaignForOneCWidgetConfirmation';
 import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
 import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
 import ExcludeOneCampaignForAllBlacklistedPWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPWidgets';
@@ -107,6 +108,12 @@ const AppRouter = () => (
         <PrivateRoute
           path="/excludecampaignconfirmation/:pWidgetID/:mgidCampaignID"
           Component={campaigns_for_one_p_widgetExcludeCampaignConfirmation}
+        />
+        <PrivateRoute
+          path="/excludecampaignforonecwidgetconfirmation/:cWidgetID/:mgidCampaignID"
+          Component={
+            campaigns_for_one_c_widgetExcludeCampaignForOneCWidgetConfirmation
+          }
         />
         <PrivateRoute
           path="/excludepwidgetconfirmation/:pWidgetID"
