@@ -11,10 +11,6 @@ import os
 import sys
 import json
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
-
 def create_c_widgets_for_all_campaigns_dataset(date_range):
 
     # The goal of this function is to return a json dataset for
@@ -122,6 +118,7 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
            if c_widget == None:
                continue
            c_widget = c_widget.group()
+           p_widget = widget
            if c_widget in c_widgets_for_all_campaigns["data"]:
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["clicks"] += json_file["data"][widget]["clicks"]
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["cost"] += json_file["data"][widget]["cost"]
@@ -133,12 +130,24 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"] = json_file["data"][widget]
                c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["widget_id"] = c_widget
 
-               if c_widget in widget_whitelist:
-                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "whitelist" 
+               if (c_widget in widget_whitelist) & (p_widget in widget_whitelist):
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "pc_whitelist" 
+               elif p_widget in widget_whitelist:
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "p_whitelist" 
+               elif c_widget in widget_whitelist:
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "c_whitelist" 
+               elif (c_widget in widget_greylist) & (p_widget in widget_greylist):
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "pc_greylist" 
+               elif p_widget in widget_greylist:
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "p_greylist" 
                elif c_widget in widget_greylist:
-                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "greylist" 
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "c_greylist" 
+               elif (c_widget in widget_blacklist) & (p_widget in widget_blacklist):
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "pc_blacklist" 
+               elif p_widget in widget_blacklist:
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "p_blacklist" 
                elif c_widget in widget_blacklist:
-                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "blacklist" 
+                   c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "c_blacklist" 
                else:
                    c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
