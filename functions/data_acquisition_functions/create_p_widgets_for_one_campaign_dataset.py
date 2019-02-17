@@ -114,11 +114,11 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
                p_widgets_for_one_campaign["data"][parent_widget]['status'] = "included" 
 
            if parent_widget in widget_whitelist:
-               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "whitelist" 
+               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "p_whitelist" 
            elif parent_widget in widget_greylist:
-               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "greylist" 
+               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "p_greylist" 
            elif parent_widget in widget_blacklist:
-               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "blacklist" 
+               p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "p_blacklist" 
            else:
                p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "not yet listed" 
 
