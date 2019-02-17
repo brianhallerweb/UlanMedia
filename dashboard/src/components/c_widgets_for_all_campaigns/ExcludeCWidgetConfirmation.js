@@ -46,14 +46,14 @@ class ExcludeCWidgetConfirmation extends Component {
 
   excludeOneCampaign(cWidgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/excludecampaign`, {
+      fetch(`/api/excludecampaignforonecwidget`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-auth': localStorage.getItem('token'),
         },
         body: JSON.stringify({
-          pWidgetID,
+          cWidgetID,
           mgidCampaignID,
         }),
       })
@@ -112,8 +112,8 @@ class ExcludeCWidgetConfirmation extends Component {
   }
 
   //excludeAllCampaigns is the important function on this page. It is what
-  //excludes each campaign from a p widget, one by one.
-  async excludeAllCampaigns() {
+  //excludes each campaign from a c widget, one by one.
+  async excludeAllCampaignsForOneCWidget() {
     // This function is async because I wanted to slow down the requests
     // to mgid. It excludes each campaign, one at a time.
     this.setState({loading: true});
@@ -121,7 +121,7 @@ class ExcludeCWidgetConfirmation extends Component {
       //exclude one campaign and then update the list of excluded p
       //widgets for that campaign
       const excluded = await this.excludeOneCampaign(
-        this.state.pWidgetID,
+        this.state.cWidgetID,
         campaign.mgid_id,
       );
       const updated = await this.updateOneExcludedPWidgetsList(
@@ -130,15 +130,15 @@ class ExcludeCWidgetConfirmation extends Component {
 
       if (excluded.id) {
         console.log(
-          `campaign ${campaign.mgid_id} successfully excluded from p widget${
-            this.state.pWidgetID
+          `campaign ${campaign.mgid_id} successfully excluded from c widget ${
+            this.state.cWidgetID
           }`,
         );
         console.log(updated);
       } else {
         console.log(
           `ERROR: campaign ${campaign.mgid_id} failed to be excluded from ${
-            this.state.pWidgetID
+            this.state.cWidgetID
           }. The specific error is on the next line. `,
         );
         console.log(excluded);
@@ -161,14 +161,13 @@ class ExcludeCWidgetConfirmation extends Component {
         <div>
           <button
             disabled={!this.state.campaigns.length > 0}
-            onClick={() => this.excludeAllCampaigns()}>
+            onClick={() => this.excludeAllCampaignsForOneCWidget()}>
             Yes, confirm exclution
           </button>
         </div>
         <p style={{fontSize: 12}}>
           Look in browser console for feedback (ctrl+shift+j)
         </p>
-        <p>don't use this page yet</p>
         {this.state.loading && (
           <div style={{margin: 10}}>
             <div className="loader" />
