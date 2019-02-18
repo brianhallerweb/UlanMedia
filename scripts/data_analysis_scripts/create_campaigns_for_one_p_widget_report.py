@@ -70,7 +70,6 @@ for i in range(len(conditions_args)):
             "cps", "eps", "mps", "sale_cpa", "profit", "status",
             "classification"]
             )
-# update the columns to be: Campaign, Classification, Cost, Revenue, Profit, Clicks, CPC, EPC, MPC, Leads, CPL, EPL, MPL, Sales, CPS, EPS, MPS, Status.
 
 if final_result is None:
     final_result = df
@@ -103,7 +102,7 @@ if len(final_result.index) > 0:
     else:
         summary["cps"] = 0
     # Append summary onto the top
-    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result], sort=True)
     final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 

@@ -12,18 +12,18 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      widgetID: this.props.match.params.widgetID,
+      pWidgetID: this.props.match.params.pWidgetID,
       campaignRecords: [],
       dateRange: 'oneeighty',
-      volRequestDates: '',
-      mgidRequestDates: '',
       error: false,
       authenticated: true,
       loading: false,
-      pWidgetClassification: this.props.match.params.classification,
-      goodCampaignsCount: this.props.match.params.goodCampaignsCount,
-      badCampaignsCount: this.props.match.params.badCampaignsCount,
-      waitCampaignsCount: this.props.match.params.waitCampaignsCount,
+      volRequestDates: '',
+      mgidRequestDates: '',
+      pWidgetClassification: '',
+      goodCampaignsCount: '',
+      badCampaignsCount: '',
+      waitCampaignsCount: '',
       badAndIncludedCampaignsCount: 0,
       c1: false,
       c1Value: 'all',
@@ -71,7 +71,7 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        widgetID: this.state.widgetID,
+        pWidgetID: this.state.pWidgetID,
       }),
     })
       .then(res => {
@@ -97,6 +97,10 @@ class Home extends Component {
           mgidRequestDates: `${file.metadata.mgid_start_date} to ${
             file.metadata.mgid_end_date
           }`,
+          pWidgetClassification: file.metadata.p_widget_classification,
+          goodCampaignsCount: file.metadata.good_campaigns_count,
+          badCampaignsCount: file.metadata.bad_campaigns_count,
+          waitCampaignsCount: file.metadata.wait_campaigns_count,
         });
       })
       .then(() =>
@@ -108,7 +112,7 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
-            widgetID: this.state.widgetID,
+            pWidgetID: this.state.pWidgetID,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
@@ -151,7 +155,7 @@ class Home extends Component {
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <Title
-          ID={this.props.match.params.widgetID}
+          ID={this.state.pWidgetID}
           mgidRequestDates={this.state.mgidRequestDates}
           volRequestDates={this.state.volRequestDates}
         />
@@ -176,12 +180,23 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
-        <div>p widget is good in {this.state.goodCampaignsCount} campaigns</div>
-        <div>p widget is bad in {this.state.badCampaignsCount} campaigns</div>
-        <div>p widget is wait in {this.state.waitCampaignsCount} campaigns</div>
-        <div>
-          p widget is {this.state.pWidgetClassification.toUpperCase()} overall
-        </div>
+        {this.state.pWidgetClassification && (
+          <div>
+            <div>
+              p widget is good in {this.state.goodCampaignsCount} campaigns
+            </div>
+            <div>
+              p widget is bad in {this.state.badCampaignsCount} campaigns
+            </div>
+            <div>
+              p widget is wait in {this.state.waitCampaignsCount} campaigns
+            </div>
+            <div>
+              p widget is {this.state.pWidgetClassification.toUpperCase()}{' '}
+              overall
+            </div>
+          </div>
+        )}
         {this.state.badAndIncludedCampaignsCount !== 0 && (
           <div style={{color: 'red'}}>
             {this.state.badAndIncludedCampaignsCount} campaigns need to be

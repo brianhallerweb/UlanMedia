@@ -19,11 +19,7 @@ class Record extends Component {
                 to={{
                   pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
-                  )}/${this.props.widgetRecord.classification}/${
-                    this.props.widgetRecord.good_campaigns_count
-                  }/${this.props.widgetRecord.bad_campaigns_count}/${
-                    this.props.widgetRecord.wait_campaigns_count
-                  }`,
+                  )}`,
                 }}
                 target="_blank">
                 campaigns

@@ -6,7 +6,7 @@ function createCampaignsForOnePWidgetDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.widgetID, req.body.dateRange],
+    args: [req.body.pWidgetID, req.body.dateRange],
   };
   PythonShell.run(
     'create_campaigns_for_one_p_widget_dataset.py',

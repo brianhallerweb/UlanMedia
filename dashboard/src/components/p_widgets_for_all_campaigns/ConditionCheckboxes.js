@@ -33,9 +33,9 @@ const ConditionCheckboxes = ({
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
           <option value="not yet listed">not yet listed</option>
-          <option value="whitelist">whitelist</option>
-          <option value="greylist">greylist</option>
-          <option value="blacklist">blacklist</option>
+          <option value="p_whitelist">p_whitelist</option>
+          <option value="p_greylist">p_greylist</option>
+          <option value="p_blacklist">p_blacklist</option>
         </select>
       </div>
 
