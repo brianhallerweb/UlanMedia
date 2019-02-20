@@ -1,6 +1,4 @@
 from config.config import *
-from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
-from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist

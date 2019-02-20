@@ -1,8 +1,5 @@
 from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
-from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
-from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
-from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 import re
 import os
 import sys

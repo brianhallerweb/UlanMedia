@@ -11,6 +11,7 @@ import re
 
 def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         campaign, days_ago, output_name):
+
     # create mgid and vol dates
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
     vol_start_date = vol_dates[0]
@@ -20,20 +21,22 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     mgid_end_date = mgid_dates[1]
 
     # extract needed campaign info from mgid and vol
+    name = campaign["name"]
     mgid_id = campaign["mgid_id"]
     vol_id = campaign["vol_id"]
-    max_lead_cpa = campaign["max_lead_cpa"] 
-    max_sale_cpa = campaign["max_sale_cpa"] 
+    mpl = campaign["max_lead_cpa"] 
+    mps = campaign["max_sale_cpa"] 
 
     # create a metadata dictionary
     metadata = {"mgid_start_date": mgid_start_date,
             "mgid_end_date": mgid_end_date,
             "vol_start_date": vol_start_date,
             "vol_end_date": vol_end_date,
-            "mgid_id": campaign["mgid_id"],
-            "vol_id": campaign["vol_id"],
-            "max_lead_cpa": campaign["max_lead_cpa"],
-            "max_sale_cpa": campaign["max_sale_cpa"] 
+            "name": name,
+            "mgid_id": mgid_id,
+            "vol_id": vol_id,
+            "mpl": mpl,
+            "mps": mps 
              }
 
     # get clicks and costs for each widget from mgid
@@ -46,11 +49,8 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             vol_id, vol_start_date,
             vol_end_date)
     
-    # excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
-            # mgid_id)
-
-    # regex for extracting parent widget id
-    # pattern = re.compile(r'\d*')
+    excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
+            mgid_id)
 
     # merge the data from mgid and voluum into one dictionary
     for widget_id in mgid_widget_data:
@@ -65,19 +65,10 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             for key in vol_widget:
                 mgid_widget_data[widget_id][key] = vol_widget[key]
 
-        # 1/1/19 - I removed the status and global status data acquisition from
-        # this script because it needs to be updated upon "submit" on the
-        # dashboard. When using the dashboard, we often change the status and
-        # global status of widgets and we want that to be reflected
-        # immediately - or at least on the next "submit"
-
-        # This regex on widget_id extracts the parent widget_id
-        # The reason for this extraction is that the white grey black
-        # lists, and excluded_list only include parent widget ids.
-        # if pattern.search(widget_id).group() not in excluded_widgets:
-            # mgid_widget_data[widget_id]['status'] = "included" 
-        # else:
-            # mgid_widget_data[widget_id]['status'] = "excluded" 
+        if widget_id not in excluded_widgets:
+            mgid_widget_data[widget_id]['status'] = "included" 
+        else:
+            mgid_widget_data[widget_id]['status'] = "excluded" 
 
 
     complete_widget_data = mgid_widget_data

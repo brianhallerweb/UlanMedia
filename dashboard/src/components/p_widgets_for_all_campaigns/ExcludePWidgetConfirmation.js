@@ -19,7 +19,7 @@ class ExcludePWidgetConfirmation extends Component {
   }
 
   getCampaigns() {
-    fetch(`/api/getcampaignsets`, {
+    fetch(`/api/readcampaignsets`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ class ExcludePWidgetConfirmation extends Component {
 
   excludeOneCampaign(pWidgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/excludecampaign`, {
+      fetch(`/api/excludecampaignforoneporcwidget`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,39 +54,6 @@ class ExcludePWidgetConfirmation extends Component {
         },
         body: JSON.stringify({
           pWidgetID,
-          mgidCampaignID,
-        }),
-      })
-        .then(res => {
-          if (!res.ok) {
-            if (res.status == 401) {
-              //the case when a token is in the browser but it doesn't
-              //match what it is in the database. This can happen when the
-              //token is manipulated in the browser or if the tokens are
-              //deleted from the database without the user logging out.
-              localStorage.removeItem('token');
-              this.setState({authenticated: false});
-            }
-            throw Error(res.statusText);
-          }
-          return res.json();
-        })
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-  updateOneExcludedPWidgetsList(mgidCampaignID) {
-    return new Promise((resolve, reject) => {
-      fetch(`/api/updateoneexcludedpwidgetslist`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth': localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
           mgidCampaignID,
         }),
       })
@@ -124,17 +91,13 @@ class ExcludePWidgetConfirmation extends Component {
         this.state.pWidgetID,
         campaign.mgid_id,
       );
-      const updated = await this.updateOneExcludedPWidgetsList(
-        campaign.mgid_id,
-      );
 
       if (excluded.id) {
         console.log(
-          `campaign ${campaign.mgid_id} successfully excluded from p widget${
+          `campaign ${campaign.mgid_id} successfully excluded from p widget ${
             this.state.pWidgetID
           }`,
         );
-        console.log(updated);
       } else {
         console.log(
           `ERROR: campaign ${campaign.mgid_id} failed to be excluded from ${

@@ -1,6 +1,6 @@
 from config.config import *
-from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
-from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
+from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
+from functions.classification_functions.classify_p_or_c_widget_for_all_campaigns import classify_p_or_c_widget_for_all_campaigns
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -97,16 +97,6 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                 p_widgets_for_one_campaign[p_widget]["mpc"] = list(res)[0]
 
 
-        with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
-            excluded_widgets = json.load(file)
-        pattern = re.compile(r'\d*')
-
-        for p_widget in p_widgets_for_one_campaign:
-            if pattern.search(p_widget).group() not in excluded_widgets:
-                p_widgets_for_one_campaign[p_widget]["status"] = "included"
-            else:
-                p_widgets_for_one_campaign[p_widget]["status"] = "excluded"
-
         for p_widget in p_widgets_for_one_campaign:
             if complete_p_widgets[p_widget]["for_each_campaign"]:
                 complete_p_widgets[p_widget]["for_each_campaign"].append(p_widgets_for_one_campaign[p_widget])
@@ -127,7 +117,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
         for campaign in complete_p_widgets[p_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/wait
             # counts are recorded
-            classification = classify_campaign_for_one_p_widget(campaign, total_sales)
+            classification = classify_campaign_for_one_p_or_c_widget(campaign, total_sales)
             campaign["classification"] = classification
             if classification == "good":
                complete_p_widgets[p_widget]["good_campaigns_count"] += 1
@@ -145,7 +135,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     # 6. create the classification of each p widget
 
     for p_widget in complete_p_widgets.values():
-        p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
+        p_widget["for_all_campaigns"]["classification"] = classify_p_or_c_widget_for_all_campaigns(p_widget)
 
     ############################################################
 

@@ -21,7 +21,7 @@ class ExcludeCampaignConfirmation extends Component {
 
   confirmExcludeCampaign() {
     this.setState({loading: true});
-    fetch(`/api/excludecampaign`, {
+    fetch(`/api/excludecampaignforoneporcwidget`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,6 +50,9 @@ class ExcludeCampaignConfirmation extends Component {
       .then(res => {
         if (res.id === Number(this.state.mgidCampaignID)) {
           console.log(`Campaign ${res.id} successfully excluded`);
+          this.setState({
+            loading: false,
+          });
         } else {
           throw Error(
             `There was an error. Campaign ${
@@ -57,39 +60,6 @@ class ExcludeCampaignConfirmation extends Component {
             } was not excluded.`,
           );
         }
-      })
-      .then(() =>
-        fetch(`/api/updateoneexcludedpwidgetslist`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-auth': localStorage.getItem('token'),
-          },
-          body: JSON.stringify({
-            mgidCampaignID: this.state.mgidCampaignID,
-          }),
-        }),
-      )
-      .then(res => {
-        if (!res.ok) {
-          if (res.status == 401) {
-            //the case when a token is in the browser but it doesn't
-            //match what it is in the database. This can happen when the
-            //token is manipulated in the browser or if the tokens are
-            //deleted from the database without the user logging out.
-            localStorage.removeItem('token');
-            this.setState({authenticated: false});
-          }
-          throw Error(res.statusText);
-        }
-      })
-      .then(() => {
-        console.log(
-          `Campaign ${this.state.mgidCampaignID} status updated to "excluded"`,
-        );
-        this.setState({
-          loading: false,
-        });
       })
       .catch(err => {
         console.log(err);

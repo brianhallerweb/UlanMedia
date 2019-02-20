@@ -1,14 +1,14 @@
-def classify_p_widget_for_all_campaigns(p_widget):
-    global_status = p_widget["for_all_campaigns"]["global_status"]
-    clicks = p_widget["for_all_campaigns"]["clicks"] 
-    cost = p_widget["for_all_campaigns"]["cost"]
-    revenue = p_widget["for_all_campaigns"]["revenue"]
+def classify_p_or_c_widget_for_all_campaigns(p_or_c_widget):
+    global_status = p_or_c_widget["for_all_campaigns"]["global_status"]
+    clicks = p_or_c_widget["for_all_campaigns"]["clicks"] 
+    cost = p_or_c_widget["for_all_campaigns"]["cost"]
+    revenue = p_or_c_widget["for_all_campaigns"]["revenue"]
     profit = revenue - cost
-    good_campaigns_count = p_widget["good_campaigns_count"]
-    bad_campaigns_count = p_widget["bad_campaigns_count"]
-    wait_campaigns_count = p_widget["wait_campaigns_count"]
+    good_campaigns_count = p_or_c_widget["good_campaigns_count"]
+    bad_campaigns_count = p_or_c_widget["bad_campaigns_count"]
+    wait_campaigns_count = p_or_c_widget["wait_campaigns_count"]
     if clicks > 0:
-        lead_cvr = p_widget["for_all_campaigns"]["leads"] / clicks
+        lead_cvr = p_or_c_widget["for_all_campaigns"]["leads"] / clicks
     else:
         lead_cvr = 0
 

@@ -68,27 +68,8 @@ app.get('/api/readcampaignsets', (req, res) => {
 //---------------------------------------
 
 //////// exclude routes //////////////
-app.post('/api/updateoneexcludedpwidgetslist', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/misc/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'update_one_excluded_p_widgets_list.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
 
-app.post('/api/excludecampaign', authenticate, (req, res) => {
+app.post('/api/excludecampaignforoneporcwidget', authenticate, (req, res) => {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -99,48 +80,7 @@ app.post('/api/excludecampaign', authenticate, (req, res) => {
     pythonOptions.args.push(req.body[arg]);
   }
   PythonShell.run(
-    'exclude_campaign_for_one_p_widget.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
-
-app.post('/api/excludecampaignforonecwidget', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/misc/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'exclude_campaign_for_one_c_widget.py',
-    pythonOptions,
-    (err, results) => {
-      if (err) throw err;
-      res.send(results[0]);
-    },
-  );
-});
-
-// I think this route may be old and unused
-app.post('/api/excludepwidget', authenticate, (req, res) => {
-  const pythonOptions = {
-    pythonPath: '/usr/bin/python3',
-    pythonOptions: ['-u'],
-    scriptPath: '../../scripts/misc/',
-    args: [],
-  };
-  for (let arg in req.body) {
-    pythonOptions.args.push(req.body[arg]);
-  }
-  PythonShell.run(
-    'exclude_p_widget_for_all_campaigns.py',
+    'exclude_campaign_for_one_p_or_c_widget.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;

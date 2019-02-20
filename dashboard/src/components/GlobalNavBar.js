@@ -48,6 +48,15 @@ const GlobalNavBar = () => (
         exclude new campaign from all blacklisted widgets
       </NavLink>
     </li>
+
+    <li className="globalNavItem">
+      <NavLink
+        to={'/updatealldata'}
+        activeClassName="is-active"
+        target="_blank">
+        update all data
+      </NavLink>
+    </li>
   </div>
 );
 

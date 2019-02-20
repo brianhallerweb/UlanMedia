@@ -1,4 +1,4 @@
-def classify_campaign_for_one_p_widget(campaign, p_widget_total_sales):
+def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales):
     #################
     # define variables
     clicks = campaign["clicks"] 
@@ -37,16 +37,12 @@ def classify_campaign_for_one_p_widget(campaign, p_widget_total_sales):
             elif (leads == 1 | leads == 2) & (lead_cpa < mpl):
                 return "half good"
             else:
-                # here
-
-                if  p_widget_total_sales ==0:
+                if  p_or_c_widget_total_sales ==0:
                     if cost > (5 * mpl):
                         if (leads > 0) & (lead_cpa < (1.5 * mpl)):
                             return "half bad"
                         else:
                             return "bad"
-
-
                     elif cost > (3 * mpl):
                         if (leads > 0) & (lead_cpa < (2 * mpl)):
                             return "half bad"

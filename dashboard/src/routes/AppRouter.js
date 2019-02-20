@@ -26,6 +26,7 @@ import campaigns_for_one_c_widgetExcludeCampaignForOneCWidgetConfirmation from '
 import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
 import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
 import ExcludeOneCampaignForAllBlacklistedPWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPWidgets';
+import UpdateAllData from '../components/UpdateAllData';
 import RedirectToHome from '../components/RedirectToHome';
 
 const AppRouter = () => (
@@ -127,6 +128,7 @@ const AppRouter = () => (
           path="/excludeonecampaignforallblacklistedpwidgets"
           Component={ExcludeOneCampaignForAllBlacklistedPWidgets}
         />
+        <PrivateRoute path="/updatealldata" Component={UpdateAllData} />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToHome} />
       </Switch>

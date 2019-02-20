@@ -20,7 +20,7 @@ class Home extends Component {
       loading: false,
       c1: false,
       c1Value: 'not yet listed',
-      c2: true,
+      c2: false,
       c2Value: 10,
       c3: false,
       c3Value: 10,

@@ -19,9 +19,13 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
+      cWidgetClassification: '',
+      goodCampaignsCount: '',
+      badCampaignsCount: '',
+      waitCampaignsCount: '',
       c1: false,
       c1Value: 'all',
-      c2: true,
+      c2: false,
       c2Value: 10,
       c3: false,
       c3Value: 10,
@@ -83,6 +87,10 @@ class Home extends Component {
           mgidRequestDates: `${file.metadata.mgid_start_date} to ${
             file.metadata.mgid_end_date
           }`,
+          cWidgetClassification: file.metadata.c_widget_classification,
+          goodCampaignsCount: file.metadata.good_campaigns_count,
+          badCampaignsCount: file.metadata.bad_campaigns_count,
+          waitCampaignsCount: file.metadata.wait_campaigns_count,
         });
       })
       .then(() =>
@@ -143,6 +151,24 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
         />
         {this.state.requestDates && <p>{this.state.requestDates}</p>}
+        {this.state.cWidgetClassification && (
+          <div>
+            <div>
+              c widget is good in {this.state.goodCampaignsCount} campaigns
+            </div>
+            <div>
+              c widget is bad in {this.state.badCampaignsCount} campaigns
+            </div>
+            <div>
+              c widget is wait in {this.state.waitCampaignsCount} campaigns
+            </div>
+            <div>
+              c widget is {this.state.cWidgetClassification.toUpperCase()}{' '}
+              overall
+            </div>
+          </div>
+        )}
+
         <Records
           error={this.state.error}
           loading={this.state.loading}

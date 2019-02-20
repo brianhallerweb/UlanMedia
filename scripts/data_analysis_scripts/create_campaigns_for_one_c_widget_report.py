@@ -56,7 +56,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr", "cps", "eps", "mps",
-            "profit", "status"]
+            "profit", "status", "classification"]
             )
 
 if final_result is None:
@@ -89,6 +89,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr", "cps", "eps", "mps",
-            "profit", "status"]].to_dict("records"))
+            "profit", "status", "classification"]].to_dict("records"))
 
 print(json_final_result)
