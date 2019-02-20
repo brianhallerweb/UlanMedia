@@ -83,7 +83,8 @@ if len(final_result.index) > 0:
         summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     else:
         summary["cps"] = 0
-    final_result = final_result.append(summary, ignore_index=True)
+    # Append summary onto the top
+    final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result], sort=True)
     final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 

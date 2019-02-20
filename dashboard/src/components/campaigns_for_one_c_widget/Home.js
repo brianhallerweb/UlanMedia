@@ -116,6 +116,12 @@ class Home extends Component {
       )
       .then(res => res.json())
       .then(records => {
+        if (records.length) {
+          records[0][
+            'classification'
+          ] = this.state.cWidgetClassification.toUpperCase();
+        }
+
         let error;
         records.length ? (error = false) : (error = true);
         this.setState({campaignRecords: records, error, loading: false});
