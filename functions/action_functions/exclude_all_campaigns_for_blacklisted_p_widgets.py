@@ -6,8 +6,6 @@ from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign 
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
-from functions.classification_functions.classify_campaign_for_one_p_widget import classify_campaign_for_one_p_widget
-from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 import re
 import os
 import sys

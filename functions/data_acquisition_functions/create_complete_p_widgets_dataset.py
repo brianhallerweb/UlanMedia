@@ -1,6 +1,6 @@
 from config.config import *
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
-from functions.classification_functions.classify_p_or_c_widget_for_all_campaigns import classify_p_or_c_widget_for_all_campaigns
+from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -135,7 +135,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     # 6. create the classification of each p widget
 
     for p_widget in complete_p_widgets.values():
-        p_widget["for_all_campaigns"]["classification"] = classify_p_or_c_widget_for_all_campaigns(p_widget)
+        p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
     ############################################################
 

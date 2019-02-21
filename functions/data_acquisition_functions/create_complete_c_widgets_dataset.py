@@ -5,7 +5,7 @@ from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
-from functions.classification_functions.classify_p_or_c_widget_for_all_campaigns import classify_p_or_c_widget_for_all_campaigns
+from functions.classification_functions.classify_c_widget_for_all_campaigns import classify_c_widget_for_all_campaigns
 import re
 import os
 import sys
@@ -159,7 +159,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     # 6. 
 
     for c_widget in complete_c_widgets.values():
-        c_widget["for_all_campaigns"]["classification"] = classify_p_or_c_widget_for_all_campaigns(c_widget)
+        c_widget["for_all_campaigns"]["classification"] = classify_c_widget_for_all_campaigns(c_widget)
 
     ############################################################
 
