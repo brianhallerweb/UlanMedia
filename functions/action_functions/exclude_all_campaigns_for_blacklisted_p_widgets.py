@@ -40,11 +40,11 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
                p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]["widget_id"] = parent_widget
 
                if parent_widget in widget_whitelist:
-                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "whitelist" 
+                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "p_whitelist" 
                elif parent_widget in widget_greylist:
-                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "greylist" 
+                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "p_greylist" 
                elif parent_widget in widget_blacklist:
-                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "blacklist" 
+                   p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "p_blacklist" 
                else:
                    p_widgets_for_all_campaigns[parent_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
@@ -63,9 +63,6 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
-        with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{campaign["mgid_id"]}_excluded_p_widgets.json', 'r') as file:
-             excluded_widgets = json.load(file)
-
         p_widgets_for_one_campaign = {}
         for widget in json_file["data"]:
             parent_widget = pattern.search(widget).group()
@@ -79,11 +76,6 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
                 p_widgets_for_one_campaign[parent_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[parent_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[parent_widget]["widget_id"] = parent_widget
-                if parent_widget not in excluded_widgets:
-                    p_widgets_for_one_campaign[parent_widget]["status"] = "included"
-                else:
-                    p_widgets_for_one_campaign[parent_widget]["status"] = "excluded"
-
                 
 
         # Add each p_widget_for_one_campaign to the list of campaigns for each p widget
@@ -109,7 +101,7 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
     # says all is well. 
     emails_sent = 0
     for p_widget in p_widgets_for_all_campaigns.values():
-        if p_widget["for_all_campaigns"]["global_status"] == "blacklist":
+        if p_widget["for_all_campaigns"]["global_status"] == "p_blacklist":
             for campaign in p_widget["for_each_campaign"]:
                 if campaign["status"] == "included":
                     message = f'found an included campaign on a blacklisted p widget:\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign {campaign["mgid_id"]}'

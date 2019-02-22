@@ -13,30 +13,30 @@ def classify_p_widget_for_all_campaigns(p_widget):
         lead_cvr = 0
 
     if global_status == "p_blacklist":
-        return "p_blacklist"
+        return "black"
     elif (cost < 10) | (clicks < 300):
         if global_status == "p_whitelist":
-            return "p_whitelist"
+            return "white"
         elif global_status == "p_greylist":
-            return "p_greylist"
+            return "grey"
         else:
             return "wait"
     else:
         # grey
         if (global_status == "p_greylist") & (good_campaigns_count > 0):
-            return "p_greylist"
+            return "grey"
         elif (good_campaigns_count > 2) & (bad_campaigns_count > 0):
-            return "p_greylist"
+            return "grey"
         # white
         elif (global_status == "p_whitelist") & (bad_campaigns_count == 0):
-            return "p_whitelist"
+            return "white"
         elif (good_campaigns_count > 2) & (bad_campaigns_count == 0):
-            return "p_whitelist"
+            return "white"
         # black 
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 2):
-            return "p_blacklist"
+            return "black"
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (lead_cvr < .002) & (profit < -60):
-            return "p_blacklist"
+            return "black"
         # wait
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):
             return "wait"
