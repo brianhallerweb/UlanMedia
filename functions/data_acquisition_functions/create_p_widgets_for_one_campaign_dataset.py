@@ -59,8 +59,6 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/excluded_p_widgets_lists/{mgid_id}_excluded_p_widgets.json', 'r') as file:
-        excluded_widgets = json.load(file)
 
     ########################################################
 
@@ -107,11 +105,6 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
            p_widgets_for_one_campaign["data"][parent_widget]["mpc"] = mpc 
            p_widgets_for_one_campaign["data"][parent_widget]["mpl"] = mpl 
            p_widgets_for_one_campaign["data"][parent_widget]["mps"] = mps 
-
-           if parent_widget in excluded_widgets:
-               p_widgets_for_one_campaign["data"][parent_widget]['status'] = "excluded" 
-           else:
-               p_widgets_for_one_campaign["data"][parent_widget]['status'] = "included" 
 
            if parent_widget in widget_whitelist:
                p_widgets_for_one_campaign["data"][parent_widget]['global_status'] = "p_whitelist" 
