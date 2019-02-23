@@ -1,5 +1,5 @@
 #!/bin/sh 
-python $ULANMEDIAAPP/scripts/misc/update_campaign_sets_file.py
+cd $ULANMEDIAAPP/scripts/misc && python3 update_campaign_sets_file.py
 #cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_campaigns_for_all_campaigns_datasets.py
 #cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 add_yesterday_in_days_for_one_campaign_dataset.py
 #cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_p_and_c_widgets_for_one_campaign_datasets.py
