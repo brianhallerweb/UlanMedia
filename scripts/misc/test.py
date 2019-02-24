@@ -1,7 +1,7 @@
-import sys
-print(sys.path)
+# import sys
+# print(sys.path)
 
-from scripts.misc.say_hello import say_hello
+from scripts.functions.update_campaign_sets_file import update_campaign_sets_file
 
-print(say_hello())
+print(update_campaign_sets_file())
 
