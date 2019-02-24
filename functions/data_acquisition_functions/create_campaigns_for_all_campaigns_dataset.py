@@ -7,6 +7,7 @@ from functions.misc.create_mgid_date_range import create_mgid_date_range
 import json
 import sys
 import re
+import os
 
 
 def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
