@@ -8,6 +8,7 @@ import json
 import sys
 import re
 
+
 def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
     vol_start_date = vol_dates[0]
@@ -79,7 +80,7 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         campaigns_data["data"].append(campaign_data)
 
 
-    with open(f"../../data/campaigns_for_all_campaigns/{output_name}.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/campaigns_for_all_campaigns/{output_name}.json", "w") as file:
         json.dump(campaigns_data, file)
 
     print(f"{output_name} created")
