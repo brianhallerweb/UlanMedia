@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import json
 import sys
 import re
+import os
 
 def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         campaign, days_ago, output_name):
@@ -76,7 +77,7 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     complete_data_ready_for_json = {"metadata": metadata,
             "data": complete_widget_data}
 
-    with open(f"../../data/p_and_c_widgets_for_one_campaign/{output_name}.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/p_and_c_widgets_for_one_campaign/{output_name}.json", "w") as file:
         json.dump(complete_data_ready_for_json, file)
 
     print(f"{output_name} created")
