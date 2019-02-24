@@ -3,6 +3,7 @@ from datetime import datetime
 import sys
 import requests
 import json
+import os
 
 import pandas as pd
 from pandas.compat import StringIO
@@ -23,7 +24,7 @@ def update_campaign_sets_file():
         #    'mgid_id': '517506',
         #    'name': 'bin_world-wide-t2_swedish_mobile_cpc_0.04',
         #    'vol_id': 'e6f4ac2b-ccec-4606-bd1a-9084088c4df0'}
-        with open(f"../../campaign_sets/campaign_sets.json", "w") as file:
+        with open(f"{os.environ.get('ULANMEDIAAPP')}/campaign_sets/campaign_sets.json", "w") as file:
            json.dump(campaign_sets_data, file)
     except requests.exceptions.RequestException as e:
             print("Failed to update campaign sets file")
