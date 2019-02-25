@@ -5,6 +5,7 @@ import requests
 import json
 import sys
 import re
+import os
 
 def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
     try:
@@ -52,7 +53,7 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
                                                "offerFlow": offer_flow,
                                                }
 
-        with open(f"../../data/offers/{date_range}_offers_dataset.json", "w") as file:
+        with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers/{date_range}_offers_dataset.json", "w") as file:
             json.dump(offers, file)
 
     except requests.exceptions.RequestException as e:

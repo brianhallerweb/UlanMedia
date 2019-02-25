@@ -5,6 +5,7 @@ from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.get_campaign_sets import get_campaign_sets
 import sys
 import json
+import os
 
 def combine_mgid_vol_ads_data(mgid_token, vol_token, date_range,vol_start_date,
         vol_end_date, mgid_data, vol_data):
@@ -49,7 +50,7 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token, date_range,vol_start_date,
             ad["revenue"] = 0 
         combined_ads["data"][ad_id] = ad 
 
-    with open(f"../../data/ads/{date_range}_ads_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/ads/{date_range}_ads_dataset.json", "w") as file:
         json.dump(combined_ads, file)
 
 

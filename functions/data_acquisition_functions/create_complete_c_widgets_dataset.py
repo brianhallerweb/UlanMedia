@@ -166,7 +166,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     # 7. Save complete_p_widgets to a json file and return it as a
     # json file 
 
-    with open(f"../../data/complete_c_widgets/{output_name}.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_c_widgets/{output_name}.json", "w") as file:
         json.dump(complete_c_widgets, file)
 
     return complete_c_widgets
