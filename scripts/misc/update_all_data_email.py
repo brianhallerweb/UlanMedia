@@ -1,7 +1,9 @@
 from functions.misc.send_email import send_email
 from datetime import datetime
 
-message = "brianshaller@gmail.com", "updated all data " + str(datetime.now().strftime("%Y-%m-%d %H:%M"))
+message = "updated all data on ulanmedia.brianhaller.net at" + str(datetime.now().strftime("%Y-%m-%d %H:%M"))
+body = "Read the messages on scripts.brianhaller.net to ensure that all data was updated without any errors."
 
-send_email("brianshaller@gmail.com", message, message)
+send_email("brianshaller@gmail.com", message, body)
+send_email("mikeseo@gmail.com", message, body)
 
