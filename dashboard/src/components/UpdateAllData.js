@@ -8,12 +8,7 @@ class UpdateAllData extends Component {
     super(props);
     this.state = {
       authenticated: true,
-      loading: false,
     };
-  }
-
-  confirmUpdateAllData() {
-    console.log('test function ran. I will add the real function soon.');
   }
 
   render() {
@@ -23,13 +18,10 @@ class UpdateAllData extends Component {
         <Logout />
         <p>Are you sure you want to update all data?</p>
         <div>
-          <button onClick={() => this.confirmUpdateAllData()}>Yes</button>
+          <button>
+            <a href="http://scripts.brianhaller.net">Yes</a>
+          </button>
         </div>
-        <p style={{fontSize: 12}}>
-          This process will take about 30 minutes. Look in browser console for
-          feedback (ctrl+shift+j)
-        </p>
-        {this.state.loading && <div className="loader" />}
       </div>
     );
   }
