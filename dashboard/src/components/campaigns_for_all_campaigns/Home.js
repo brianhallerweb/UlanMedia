@@ -12,6 +12,8 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'oneeighty',
+      volRequestStartDate: '',
+      volRequestEndDate: '',
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
@@ -126,6 +128,8 @@ class Home extends Component {
             campaignsRecords: records,
             error: false,
             loading: false,
+            volRequestStartDate: records[0]['vol_start_date'],
+            volRequestEndDate: records[0]['vol_end_date'],
             volRequestDates: `${records[0]['vol_start_date']} to ${
               records[0]['vol_end_date']
             }`,
@@ -196,6 +200,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           campaignsRecords={this.state.campaignsRecords}
+          volRequestStartDate={this.state.volRequestStartDate}
+          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );

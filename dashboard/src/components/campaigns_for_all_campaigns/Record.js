@@ -101,6 +101,18 @@ class Record extends Component {
 	   */}
           <div>
             <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}`}
+                target="_blank">
+                months
+              </a>
+            </div>
+
+            <div className="rowLink">
               <Link
                 to={{
                   pathname: `/daysforonecampaign/${this.vol_id}/`,
@@ -139,6 +151,62 @@ class Record extends Component {
                 target="_blank">
                 ads
               </Link>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/country-code?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}`}
+                target="_blank">
+                countries
+              </a>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`
+https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/language?dateRange=custom-date&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}
+`}
+                target="_blank">
+                languages
+              </a>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`
+https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/device,os,browser?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=deviceName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}
+
+`}
+                target="_blank">
+                device/os/browser
+              </a>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`
+https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_ef605826-ad4d-458c-8a01-855e5a0f0601/report/isp?dateRange=custom-date&chart=0&columns=deviceName&columns=os&columns=browser&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=tree&include=ACTIVE&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}
+
+`}
+                target="_blank">
+                isp
+              </a>
             </div>
           </div>
         </td>
