@@ -3,7 +3,6 @@ from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.create_mgid_date_range import create_mgid_date_range
 from functions.data_acquisition_functions.get_mgid_widget_clicks_and_costs_by_campaign import get_mgid_widget_clicks_and_costs_by_campaign
 from functions.data_acquisition_functions.get_vol_widget_conversions_by_campaign import get_vol_widget_conversions_by_campaign
-from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from datetime import datetime, timedelta
 import json
 import sys
@@ -50,9 +49,6 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             vol_id, vol_start_date,
             vol_end_date)
     
-    excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id,
-            mgid_id)
-
     # merge the data from mgid and voluum into one dictionary
     for widget_id in mgid_widget_data:
 
@@ -65,12 +61,6 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             vol_widget = vol_results[widget_id]
             for key in vol_widget:
                 mgid_widget_data[widget_id][key] = vol_widget[key]
-
-        if widget_id not in excluded_widgets:
-            mgid_widget_data[widget_id]['status'] = "included" 
-        else:
-            mgid_widget_data[widget_id]['status'] = "excluded" 
-
 
     complete_widget_data = mgid_widget_data
 

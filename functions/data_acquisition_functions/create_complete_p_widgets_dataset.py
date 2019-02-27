@@ -1,6 +1,7 @@
 from config.config import *
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
+from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -72,8 +73,11 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     
     for campaign in campaigns:
         vol_id = campaign["vol_id"] 
+        mgid_id = campaign["mgid_id"] 
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
+
+        excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
         mpc_pattern = re.compile(r'.*cpc_(.*)')
         p_widgets_for_one_campaign = {}
@@ -88,6 +92,10 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             else:
                 p_widgets_for_one_campaign[p_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[p_widget]["widget_id"] = p_widget
+                if widget_id not in excluded_widgets:
+                    p_widgets_for_one_campaign[p_widget]['status'] = "included" 
+                else:
+                    p_widgets_for_one_campaign[p_widget]['status'] = "excluded" 
                 p_widgets_for_one_campaign[p_widget]["vol_id"] = campaign["vol_id"]
                 p_widgets_for_one_campaign[p_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[p_widget]["name"] = campaign["name"]

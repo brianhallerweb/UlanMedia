@@ -86,10 +86,12 @@ def create_complete_c_widgets_dataset(date_range, output_name):
         complete_c_widgets[c_widget]["for_each_campaign"] = []
     
     for campaign in campaigns:
-
         vol_id = campaign["vol_id"]
+        mgid_id = campaign["mgid_id"]
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              json_file = json.load(file)
+
+        excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
         c_widgets_for_one_campaign = {}
         c_widget_pattern = re.compile(r'.*s.*')
@@ -109,6 +111,10 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["sales"] += json_file["data"][widget]["sales"]
            else:
                 c_widgets_for_one_campaign[c_widget] = json_file["data"][widget]
+                if widget_id not in excluded_widgets:
+                    c_widgets_for_one_campaign[c_widget]['status'] = "included"
+                else:
+                    c_widgets_for_one_campaign[c_widget]['status'] = "excluded"
                 c_widgets_for_one_campaign[c_widget]["vol_id"] = campaign["vol_id"]
                 c_widgets_for_one_campaign[c_widget]["mgid_id"] = campaign["mgid_id"]
                 c_widgets_for_one_campaign[c_widget]["name"] = campaign["name"]
