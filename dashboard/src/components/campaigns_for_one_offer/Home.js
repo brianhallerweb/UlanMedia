@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       offerID: this.props.match.params.offerID,
       fullOfferName: this.props.match.params.fullOfferName,
-      dateRange: 'ninety',
+      dateRange: 'oneeighty',
       volRequestDates: '',
       c1: true,
       c1Value: 20,

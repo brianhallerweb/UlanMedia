@@ -75,7 +75,9 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["name"] = "summary"
-    summary["mpl"] = "NaN"
+    summary["mpc"] = ""
+    summary["mpl"] = ""
+    summary["mps"] = ""
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
     else:

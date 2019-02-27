@@ -31,6 +31,12 @@ class NavBar extends Component {
             c3={this.props.c3}
             c3Value={this.props.c3Value}
           />
+          <div style={{marginBottom: 10}}>
+            Remember the clicks, cost, CPC, EPC, CPA and CVR are going to be
+            just estimates and not very accurate, because they're based on
+            Voluum's total received clicks, not on MGID's legit billable clicks.
+          </div>
+
           <input type="submit" value="Submit" />
         </form>
       </div>
