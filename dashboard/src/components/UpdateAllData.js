@@ -8,6 +8,7 @@ class UpdateAllData extends Component {
     super(props);
     this.state = {
       authenticated: true,
+      loading: false,
     };
   }
 
@@ -18,10 +19,11 @@ class UpdateAllData extends Component {
         <Logout />
         <p>Are you sure you want to update all data?</p>
         <div>
-          <button>
+          <button onClick={() => this.setState({loading: true})}>
             <a href="http://scripts.brianhaller.net">Yes</a>
           </button>
         </div>
+        {this.state.loading && <div className="loader" />}
       </div>
     );
   }
