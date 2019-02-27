@@ -29,7 +29,7 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
             else:
                 value = re.sub(r'[\[\]]', "", value)
                 excluded_widgets.append(f"{key}s{value}")
-        # excluded_widgets is a list of excluded widget parent ids
+        # excluded_widgets is a list of excluded widget ids
         return excluded_widgets
     except requests.exceptions.RequestException as e:
         print("Failed - get_mgid_excluded_widgets_by_campaign")

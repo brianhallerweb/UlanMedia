@@ -3,6 +3,7 @@ def classify_p_widget_for_all_campaigns(p_widget):
     clicks = p_widget["for_all_campaigns"]["clicks"] 
     cost = p_widget["for_all_campaigns"]["cost"]
     revenue = p_widget["for_all_campaigns"]["revenue"]
+    leads = p_widget["for_all_campaigns"]["leads"]
     profit = revenue - cost
     good_campaigns_count = p_widget["good_campaigns_count"]
     bad_campaigns_count = p_widget["bad_campaigns_count"]
@@ -36,6 +37,8 @@ def classify_p_widget_for_all_campaigns(p_widget):
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 2):
             return "black"
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (lead_cvr < .002) & (profit < -60):
+            return "black"
+        elif (leads == 0) & (clicks > 1000) & (profit < -60):
             return "black"
         # wait
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):

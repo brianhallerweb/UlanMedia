@@ -45,21 +45,9 @@ result2 = df[c2]
 c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
 
-# widget leadCVR is less than or equal to xxx
-c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[5]))
-result4 = df[c4]
 
-# widget saleCPA is more than xxx
-c5 = np.isfinite(df["cps"]) & (df["cps"] > float(sys.argv[6]))
-result5 = df[c5]
-
-# widget clicks are >= xxx OR cost >= xxx
-c6 = (df["clicks"] >= float(sys.argv[7])) | (df["cost"] >= float(sys.argv[8]))
-result6= df[c6]
-
-conditions_args = [sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12],
-        sys.argv[13], sys.argv[14]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6]
+conditions_args = [sys.argv[5], sys.argv[6], sys.argv[7]]
+conditions_dfs = [result1, result2, result3]
 
 final_result = None 
 for i in range(len(conditions_args)):

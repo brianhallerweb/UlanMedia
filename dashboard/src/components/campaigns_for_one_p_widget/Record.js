@@ -78,17 +78,17 @@ class Record extends Component {
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>
         <td>{this.props.campaignRecord.clicks}</td>
-        <td>{this.props.campaignRecord.cpc}</td>
-        <td>{this.props.campaignRecord.epc}</td>
-        <td>{this.props.campaignRecord.mpc}</td>
+        <td>${this.props.campaignRecord.cpc}</td>
+        <td>${this.props.campaignRecord.epc}</td>
+        <td>${this.props.campaignRecord.mpc}</td>
         <td>{this.props.campaignRecord.leads}</td>
-        <td>{this.props.campaignRecord.cpl}</td>
-        <td>{this.props.campaignRecord.epl}</td>
-        <td>{this.props.campaignRecord.mpl}</td>
+        <td>${this.props.campaignRecord.cpl}</td>
+        <td>${this.props.campaignRecord.epl}</td>
+        <td>${this.props.campaignRecord.mpl}</td>
         <td>{this.props.campaignRecord.sales}</td>
-        <td>{this.props.campaignRecord.cps}</td>
-        <td>{this.props.campaignRecord.eps}</td>
-        <td>{this.props.campaignRecord.mps}</td>
+        <td>${this.props.campaignRecord.cps}</td>
+        <td>${this.props.campaignRecord.eps}</td>
+        <td>${this.props.campaignRecord.mps}</td>
         <td>{this.props.campaignRecord.status}</td>
       </tr>
     );

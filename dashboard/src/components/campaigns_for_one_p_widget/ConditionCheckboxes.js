@@ -11,11 +11,6 @@ const ConditionCheckboxes = ({
   c2Value,
   c3,
   c3Value,
-  c4,
-  c4Value,
-  c5,
-  c5Value1,
-  c5Value2,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -75,62 +70,6 @@ const ConditionCheckboxes = ({
             max="100"
             step="10"
             value={c3Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          checked={c4}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget leadCVR is less than or equal to '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c4Value"
-            min="0"
-            max=".50"
-            step=".25"
-            value={c4Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'%'}
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c5"
-          checked={c5}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget has clicks greater than or equal to '}
-          <input
-            style={{width: 40}}
-            type="number"
-            name="c5Value1"
-            min="0"
-            max="2000"
-            step="1"
-            value={c5Value1}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {' OR cost greater than or equal to $'}
-          <input
-            className="inputBox"
-            type="number"
-            name="c5Value2"
-            min="0"
-            max="100"
-            step="1"
-            value={c5Value2}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
