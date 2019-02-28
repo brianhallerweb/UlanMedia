@@ -34,21 +34,21 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
         else:
             if (leads >= 3) & (lead_cpa < mpl):
                 return "good"
-            elif (leads == 1 | leads == 2) & (lead_cpa < mpl):
+            elif ((leads == 1) | (leads == 2)) & (lead_cpa < mpl):
                 return "half good"
             else:
-                if  p_or_c_widget_total_sales ==0:
-                    if cost > (5 * mpl):
+                if  p_or_c_widget_total_sales == 0:
+                    if (cost > (5 * mpl)) & (clicks > 600):
                         if (leads > 0) & (lead_cpa < (1.5 * mpl)):
                             return "half bad"
                         else:
                             return "bad"
-                    elif cost > (3 * mpl):
+                    elif (cost > (3 * mpl)) & (clicks > 600):
                         if (leads > 0) & (lead_cpa < (2 * mpl)):
                             return "half bad"
                         else:
                             return "bad"
-                    elif cost > (2 * mpl):
+                    elif (cost > (2 * mpl)) & (clicks > 600):
                         if (leads > 0) & (lead_cpa < (3 * mpl)):
                             return "wait"
                         else:

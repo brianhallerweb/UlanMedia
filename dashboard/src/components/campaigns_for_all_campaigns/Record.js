@@ -78,8 +78,8 @@ class Record extends Component {
       <tr
         style={
           this.profit > 0
-            ? {backgroundColor: '#90ee90'}
-            : {backgroundColor: '#f08080'}
+            ? {backgroundColor: '#eafcea'}
+            : {backgroundColor: '#f7d9d9'}
         }>
         <td>
           {/*<td className="tooltip">*/}

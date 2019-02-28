@@ -1,4 +1,5 @@
 from config.config import *
+from config.mgid_token import mgid_token
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
@@ -88,6 +89,8 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
 
     data = json_file["data"]
 
+    excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
+
     pattern = re.compile(r'\d*')
     for widget in data:
        parent_widget = pattern.search(widget).group()
@@ -99,6 +102,10 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
            p_widgets_for_one_campaign["data"][parent_widget]["sales"] += data[widget]["sales"]
        else:
            p_widgets_for_one_campaign["data"][parent_widget] = data[widget]
+           if parent_widget not in excluded_widgets:
+                p_widgets_for_one_campaign["data"][parent_widget]["status"] = "included" 
+           else:
+                p_widgets_for_one_campaign["data"][parent_widget]["status"] = "excluded" 
            p_widgets_for_one_campaign["data"][parent_widget]["vol_id"] = vol_id
            p_widgets_for_one_campaign["data"][parent_widget]["mgid_id"] = mgid_id
            p_widgets_for_one_campaign["data"][parent_widget]["widget_id"] = parent_widget

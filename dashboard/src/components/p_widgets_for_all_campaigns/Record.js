@@ -53,11 +53,22 @@ class Record extends Component {
             </div>
           </div>
         </td>
-        <td>{`${this.props.widgetRecord.classification} (${
-          this.props.widgetRecord.good_campaigns_count
-        }g/${this.props.widgetRecord.bad_campaigns_count}b/${
-          this.props.widgetRecord.wait_campaigns_count
-        }w)`}</td>
+        <td>
+          <Link
+            to={{
+              pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}/${this.props.widgetRecord.classification}`,
+            }}
+            target="_blank">
+            {this.props.widgetRecord.classification}
+          </Link>
+          <div>
+            {`(${this.props.widgetRecord.good_campaigns_count}g/${
+              this.props.widgetRecord.bad_campaigns_count
+            }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
+          </div>
+        </td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

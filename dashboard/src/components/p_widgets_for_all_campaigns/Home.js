@@ -19,11 +19,13 @@ class Home extends Component {
       authenticated: true,
       loading: false,
       c1: false,
-      c1Value: 'not yet listed',
-      c2: true,
-      c2Value: 10,
-      c3: false,
+      c1Value: 'black',
+      c2: false,
+      c2Value: 'not yet listed',
+      c3: true,
       c3Value: 10,
+      c4: false,
+      c4Value: 10,
     };
   }
 
@@ -93,9 +95,11 @@ class Home extends Component {
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
+            c4Value: this.state.c4Value,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
+            c4: this.state.c4,
           }),
         }),
       )
@@ -151,6 +155,8 @@ class Home extends Component {
           c2Value={this.state.c2Value}
           c3={this.state.c3}
           c3Value={this.state.c3Value}
+          c4={this.state.c4}
+          c4Value={this.state.c4Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

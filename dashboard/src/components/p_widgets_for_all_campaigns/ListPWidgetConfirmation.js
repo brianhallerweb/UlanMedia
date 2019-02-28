@@ -61,6 +61,11 @@ class ListPWidgetConfirmation extends Component {
           Are you sure you want to list p widget {this.state.pWidgetID} as{' '}
           {this.state.listType}?
         </p>
+        {this.state.listType == 'grey' && (
+          <div style={{marginTop: 10, marginBottom: 15}}>
+            Remember to exclude the widget in bad campaigns
+          </div>
+        )}
         <div>
           <button onClick={() => this.confirmPWidgetListing()}>
             Yes, confirm listing
