@@ -1,4 +1,5 @@
 from config.config import *
+from config.mgid_token import mgid_token
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
@@ -92,7 +93,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             else:
                 p_widgets_for_one_campaign[p_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[p_widget]["widget_id"] = p_widget
-                if widget_id not in excluded_widgets:
+                if p_widget not in excluded_widgets:
                     p_widgets_for_one_campaign[p_widget]['status'] = "included" 
                 else:
                     p_widgets_for_one_campaign[p_widget]['status'] = "excluded" 

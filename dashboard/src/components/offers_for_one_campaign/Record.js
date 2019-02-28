@@ -31,9 +31,10 @@ class Record extends Component {
               <div className="rowLink">
                 <Link
                   to={{
-                    pathname: `/campaignsforoneoffer/${this.offerID}/${
-                      this.offerName
-                    }`,
+                    pathname: `/campaignsforoneoffer/${this.offerID}/${this
+                      .offerName +
+                      ' ' +
+                      this.offerFlow}`,
                   }}
                   target="_blank">
                   campaigns

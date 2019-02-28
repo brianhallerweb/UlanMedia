@@ -1,4 +1,5 @@
 from config.config import *
+from config.mgid_token import mgid_token
 from functions.misc.get_campaign_sets import get_campaign_sets 
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -111,7 +112,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["sales"] += json_file["data"][widget]["sales"]
            else:
                 c_widgets_for_one_campaign[c_widget] = json_file["data"][widget]
-                if widget_id not in excluded_widgets:
+                if c_widget not in excluded_widgets:
                     c_widgets_for_one_campaign[c_widget]['status'] = "included"
                 else:
                     c_widgets_for_one_campaign[c_widget]['status'] = "excluded"
