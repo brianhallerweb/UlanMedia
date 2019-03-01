@@ -26,13 +26,7 @@ class Home extends Component {
       c3Value: 10,
       c4: false,
       c4Value: 10,
-      c5: false,
-      c5Value: 0,
-      c6: false,
-      c6Value: 200,
-      c7: false,
-      c7Value1: 1000,
-      c7Value2: 50,
+      c4: false,
     };
   }
 
@@ -103,17 +97,11 @@ class Home extends Component {
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
             c4Value: this.state.c4Value,
-            c5Value: this.state.c5Value,
-            c6Value: this.state.c6Value,
-            c7Value1: this.state.c7Value1,
-            c7Value2: this.state.c7Value2,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
             c4: this.state.c4,
             c5: this.state.c5,
-            c6: this.state.c6,
-            c7: this.state.c7,
           }),
         }),
       )
@@ -172,12 +160,6 @@ class Home extends Component {
           c4={this.state.c4}
           c4Value={this.state.c4Value}
           c5={this.state.c5}
-          c5Value={this.state.c5Value}
-          c6={this.state.c6}
-          c6Value={this.state.c6Value}
-          c7={this.state.c7}
-          c7Value1={this.state.c7Value1}
-          c7Value2={this.state.c7Value2}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

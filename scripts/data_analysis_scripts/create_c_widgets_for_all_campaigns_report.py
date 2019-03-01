@@ -44,18 +44,30 @@ result3 = df[c3]
 c4 = df["profit"] < -1 * float(sys.argv[5])
 result4 = df[c4]
 
-c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[6]))
+mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
+        "c_greylist") | (df["global_status"] ==
+        "pc_greylist") | (df["global_status"] ==
+        "c_blacklist") | (df["global_status"] ==
+        "pc_blacklist"))
+
+mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
+        "c_whitelist") | (df["global_status"] ==
+        "pc_whitelist") | (df["global_status"] ==
+        "c_blacklist") | (df["global_status"] ==
+        "pc_blacklist"))
+
+mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
+        "c_whitelist") | (df["global_status"] ==
+        "pc_whitelist") | (df["global_status"] ==
+        "c_greylist") | (df["global_status"] ==
+        "pc_greylist"))
+
+c5 = mismatch1 | mismatch2 | mismatch3
 result5 = df[c5]
 
-c6 = np.isfinite(df["cps"]) & (df["cps"] > float(sys.argv[7]))
-result6 = df[c6]
-
-c7 = (df["clicks"] >= float(sys.argv[8])) | (df["cost"] >= float(sys.argv[9]))
-result7= df[c7]
-
-conditions_args = [sys.argv[10], sys.argv[11], sys.argv[12],
-        sys.argv[13], sys.argv[14], sys.argv[15], sys.argv[16]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6, result7]
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8],
+        sys.argv[9]]
+conditions_dfs = [result1, result2, result3, result4]
 
 final_result = None 
 for i in range(len(conditions_args)):

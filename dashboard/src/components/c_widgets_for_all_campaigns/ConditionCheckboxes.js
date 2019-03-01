@@ -14,12 +14,6 @@ const ConditionCheckboxes = ({
   c4,
   c4Value,
   c5,
-  c5Value,
-  c6,
-  c6Value,
-  c7,
-  c7Value1,
-  c7Value2,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -116,75 +110,7 @@ const ConditionCheckboxes = ({
           checked={c5}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>
-          {'Widget leadCVR is less than or equal to '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c5Value"
-            min="0"
-            max=".50"
-            step=".25"
-            value={c5Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'%'}
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget saleCPA is more than $'}
-          <input
-            className="inputBox"
-            type="number"
-            name="c6Value"
-            min="200"
-            max="500"
-            step="20"
-            value={c6Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c7"
-          checked={c7}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget has clicks greater than or equal to '}
-          <input
-            style={{width: 40}}
-            type="number"
-            name="c7Value1"
-            min="200"
-            max="2000"
-            step="20"
-            value={c7Value1}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {' OR cost greater than or equal to $'}
-          <input
-            className="inputBox"
-            type="number"
-            name="c7Value2"
-            min="0"
-            max="100"
-            step="5"
-            value={c7Value2}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
+        Widget classification doesn't match global status
       </div>
     </div>
   );

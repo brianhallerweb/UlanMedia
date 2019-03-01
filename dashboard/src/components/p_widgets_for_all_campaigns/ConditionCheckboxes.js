@@ -13,6 +13,7 @@ const ConditionCheckboxes = ({
   c3Value,
   c4,
   c4Value,
+  c5,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -94,6 +95,16 @@ const ConditionCheckboxes = ({
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c5"
+          checked={c5}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        Widget classification doesn't match global status
       </div>
     </div>
   );

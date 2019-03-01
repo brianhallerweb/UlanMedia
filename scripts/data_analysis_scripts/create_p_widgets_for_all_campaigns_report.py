@@ -6,7 +6,6 @@ import numpy as np
 import math
 
 date_range = sys.argv[1]
-# date_range = "oneeighty"
 
 with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
@@ -44,9 +43,24 @@ result3 = df[c3]
 c4 = df["profit"] < -1 * float(sys.argv[5])
 result4 = df[c4]
 
+mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
+        "p_greylist") | (df["global_status"] ==
+        "p_blacklist"))
 
-conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9]]
-conditions_dfs = [result1, result2, result3, result4]
+mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
+        "p_whitelist") | (df["global_status"] ==
+        "p_blacklist"))
+
+mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
+        "p_whitelist") | (df["global_status"] ==
+        "p_greylist"))
+
+c5 = mismatch1 | mismatch2 | mismatch3
+result5 = df[c5]
+
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9],
+        sys.argv[10]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
