@@ -19,7 +19,7 @@ class Home extends Component {
       authenticated: true,
       loading: false,
       c1: false,
-      c1Value: 'black',
+      c1Value: 'wait',
       c2: false,
       c2Value: 'not yet listed',
       c3: true,

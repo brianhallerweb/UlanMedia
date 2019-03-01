@@ -66,6 +66,11 @@ class ListPWidgetConfirmation extends Component {
             Remember to exclude the widget in bad campaigns
           </div>
         )}
+        {this.state.listType == 'black' && (
+          <div style={{marginTop: 10, marginBottom: 15}}>
+            Remember to exclude the widget in all campaigns
+          </div>
+        )}
         <div>
           <button onClick={() => this.confirmPWidgetListing()}>
             Yes, confirm listing
