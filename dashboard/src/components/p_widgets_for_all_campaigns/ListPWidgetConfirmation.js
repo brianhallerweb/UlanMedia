@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class ListPWidgetConfirmation extends Component {
   constructor(props) {
@@ -68,7 +69,15 @@ class ListPWidgetConfirmation extends Component {
         )}
         {this.state.listType == 'black' && (
           <div style={{marginTop: 10, marginBottom: 15}}>
-            Remember to exclude the widget in all campaigns
+            {'Remember to '}
+            <Link
+              to={{
+                pathname: `/excludepwidgetconfirmation/${this.state.pWidgetID}`,
+              }}
+              target="_blank">
+              exclude
+            </Link>
+            {' the widget in all campaigns'}
           </div>
         )}
         <div>
