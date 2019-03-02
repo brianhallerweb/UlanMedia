@@ -19,7 +19,7 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      c1: true,
+      c1: false,
       c1Value: 10,
       c2: false,
       c2Value: 10,
