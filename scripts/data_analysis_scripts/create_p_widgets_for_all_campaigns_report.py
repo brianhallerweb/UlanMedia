@@ -61,9 +61,12 @@ mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
 c5 = mismatch1 | mismatch2 | mismatch3
 result5 = df[c5]
 
+c6 = df["has_included_bad_campaigns"] == True 
+result6 = df[c6]
+
 conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9],
-        sys.argv[10]]
-conditions_dfs = [result1, result2, result3, result4, result5]
+        sys.argv[10], sys.argv[11]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -74,6 +77,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
             "global_status", "classification", "has_children",
+            "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
             )
@@ -89,7 +93,7 @@ final_result = final_result.sort_values(["profit", "classification"],
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
-            "global_status", "classification", "has_children",
+            "global_status", "classification", "has_children", "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
 

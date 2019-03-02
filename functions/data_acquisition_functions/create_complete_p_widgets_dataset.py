@@ -123,6 +123,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     for p_widget in complete_p_widgets:
         total_sales = complete_p_widgets[p_widget]["for_all_campaigns"]["sales"]
+        complete_p_widgets[p_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = False
         for campaign in complete_p_widgets[p_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/wait
             # counts are recorded
@@ -134,6 +135,8 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                complete_p_widgets[p_widget]["good_campaigns_count"] += .5 
             elif classification == "bad": 
                complete_p_widgets[p_widget]["bad_campaigns_count"] += 1 
+               if campaign["status"] == "included":
+                   complete_p_widgets[p_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = True
             elif classification == "half bad": 
                complete_p_widgets[p_widget]["bad_campaigns_count"] += .5 
             elif classification == "wait": 
