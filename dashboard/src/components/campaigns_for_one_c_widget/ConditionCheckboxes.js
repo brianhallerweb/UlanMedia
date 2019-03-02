@@ -11,10 +11,6 @@ const ConditionCheckboxes = ({
   c2Value,
   c3,
   c3Value,
-  c4,
-  c4Value,
-  c5,
-  c5Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -74,28 +70,6 @@ const ConditionCheckboxes = ({
             value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          checked={c4}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Widget leadCVR is less than or equal to '}
-          <input
-            type="number"
-            name="c4Value"
-            min="0"
-            max=".50"
-            step=".25"
-            value={c4Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'%'}
         </span>
       </div>
     </div>

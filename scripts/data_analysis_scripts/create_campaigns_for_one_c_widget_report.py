@@ -28,24 +28,17 @@ df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
 
-# status conditions (all, included, excluded)
 c1 = df["status"] == sys.argv[3]
 result1 = df[c1]
 
-# widget cost is more than xxx
 c2 = df["cost"] > float(sys.argv[4])
 result2 = df[c2]
 
-# widget lost more than xxx
 c3 = df["profit"] < -1 * float(sys.argv[5])
 result3 = df[c3]
 
-# widget leadCVR is less than or equal to xxx
-c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[6]))
-result4 = df[c4]
-
-conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]] 
-conditions_dfs = [result1, result2, result3, result4]
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]] 
+conditions_dfs = [result1, result2, result3]
 
 final_result = None 
 for i in range(len(conditions_args)):

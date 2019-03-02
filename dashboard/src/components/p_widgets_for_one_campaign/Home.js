@@ -23,7 +23,7 @@ class Home extends Component {
       c1Value: 'all',
       c2: false,
       c2Value: 'not yet listed',
-      c3: true,
+      c3: false,
       c3Value: 10,
       c4: false,
       c4Value: 10,
