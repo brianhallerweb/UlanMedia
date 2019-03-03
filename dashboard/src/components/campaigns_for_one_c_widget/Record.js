@@ -5,7 +5,13 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {badAndIncluded: false};
+  }
+
+  componentDidMount() {
+    if (this.props.campaignRecord.badAndIncluded) {
+      this.setState({badAndIncluded: true});
+    }
   }
 
   stylizeClassification(row) {
@@ -61,7 +67,8 @@ class Record extends Component {
 
   render() {
     return (
-      <tr>
+      <tr
+        style={this.state.badAndIncluded ? {backgroundColor: '#f7d9d9'} : null}>
         <td>
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}

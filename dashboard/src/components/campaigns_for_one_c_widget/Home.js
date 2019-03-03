@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForBadAndIncludedCampaigns from './checkForBadAndIncludedCampaigns';
 
 class Home extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Home extends Component {
       goodCampaignsCount: '',
       badCampaignsCount: '',
       waitCampaignsCount: '',
+      badAndIncludedCampaignsCount: 0,
       c1: false,
       c1Value: 'all',
       c2: false,
@@ -117,10 +119,18 @@ class Home extends Component {
             'classification'
           ] = this.state.cWidgetClassification.toUpperCase();
         }
+        let badAndIncludedCampaignsCount = checkForBadAndIncludedCampaigns(
+          records,
+        );
 
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({campaignRecords: records, error, loading: false});
+        this.setState({
+          campaignRecords: records,
+          badAndIncludedCampaignsCount,
+          error,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -168,7 +178,12 @@ class Home extends Component {
             </div>
           </div>
         )}
-
+        {this.state.badAndIncludedCampaignsCount !== 0 && (
+          <div style={{color: 'red'}}>
+            {this.state.badAndIncludedCampaignsCount} campaigns need to be
+            excluded from the c widget
+          </div>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}
