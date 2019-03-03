@@ -49,7 +49,8 @@ mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
         "pc_greylist") | (df["global_status"] ==
         "p_blacklist") | (df["global_status"] ==
         "c_blacklist") | (df["global_status"] ==
-        "pc_blacklist"))
+        "pc_blacklist")| (df["global_status"] ==
+        "not yet listed"))
 
 mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
         "p_whitelist") | (df["global_status"] ==
@@ -57,7 +58,8 @@ mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
         "pc_whitelist") | (df["global_status"] ==
         "p_blacklist") | (df["global_status"] ==
         "c_blacklist") | (df["global_status"] ==
-        "pc_blacklist"))
+        "pc_blacklist")| (df["global_status"] ==
+        "not yet listed"))
 
 mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
         "p_whitelist") | (df["global_status"] ==
@@ -65,7 +67,8 @@ mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
         "pc_whitelist") | (df["global_status"] ==
         "p_greylist") | (df["global_status"] ==
         "c_greylist") | (df["global_status"] ==
-        "pc_greylist"))
+        "pc_greylist") | (df["global_status"] ==
+        "not yet listed"))
 
 c5 = mismatch1 | mismatch2 | mismatch3
 result5 = df[c5]
