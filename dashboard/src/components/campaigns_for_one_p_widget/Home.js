@@ -26,7 +26,7 @@ class Home extends Component {
       waitCampaignsCount: '',
       badAndIncludedCampaignsCount: 0,
       c1: false,
-      c1Value: 'wait',
+      c1Value: 'not yet',
       c2: false,
       c2Value: 'all',
       c3: false,

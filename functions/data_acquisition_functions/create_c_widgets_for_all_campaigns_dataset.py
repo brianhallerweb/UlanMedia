@@ -48,7 +48,7 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
     for c_widget in c_widgets_for_all_campaigns["data"]:
         c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["good_campaigns_count"] = c_widgets_for_all_campaigns["data"][c_widget]["good_campaigns_count"] 
         c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["bad_campaigns_count"] = c_widgets_for_all_campaigns["data"][c_widget]["bad_campaigns_count"] 
-        c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["wait_campaigns_count"] = c_widgets_for_all_campaigns["data"][c_widget]["wait_campaigns_count"] 
+        c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]["not_yet_campaigns_count"] = c_widgets_for_all_campaigns["data"][c_widget]["not_yet_campaigns_count"] 
         c_widgets_for_all_campaigns["data"][c_widget] = c_widgets_for_all_campaigns["data"][c_widget]["for_all_campaigns"]
     
     ############################################################

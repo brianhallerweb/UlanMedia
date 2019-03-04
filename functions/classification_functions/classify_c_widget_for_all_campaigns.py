@@ -7,11 +7,13 @@ def classify_c_widget_for_all_campaigns(c_widget):
     profit = revenue - cost
     good_campaigns_count = c_widget["good_campaigns_count"]
     bad_campaigns_count = c_widget["bad_campaigns_count"]
-    wait_campaigns_count = c_widget["wait_campaigns_count"]
+    not_yet_campaigns_count = c_widget["not_yet_campaigns_count"]
     if clicks > 0:
         lead_cvr = c_widget["for_all_campaigns"]["leads"] / clicks
     else:
         lead_cvr = 0
+
+    ####################
 
     if (global_status == "c_blacklist") | (global_status == "pc_blacklist"):
         return "black"
@@ -21,7 +23,7 @@ def classify_c_widget_for_all_campaigns(c_widget):
         elif (global_status == "c_greylist") | (global_status == "pc_greylist"):
             return "grey"
         else:
-            return "wait"
+            return "not yet"
     else:
         # grey
         if ((global_status == "c_greylist") | (global_status == "pc_greylist")) & (good_campaigns_count > 0):
@@ -40,8 +42,8 @@ def classify_c_widget_for_all_campaigns(c_widget):
             return "black"
         elif (leads == 0) & (clicks > 1000) & (profit < -60):
             return "black"
-        # wait
+        # not yet
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):
-            return "wait"
+            return "not yet"
         else:
-            return "wait"
+            return "not yet"

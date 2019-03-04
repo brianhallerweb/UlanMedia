@@ -140,13 +140,14 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     for c_widget in complete_c_widgets:
         complete_c_widgets[c_widget]["good_campaigns_count"] = 0
         complete_c_widgets[c_widget]["bad_campaigns_count"] = 0
-        complete_c_widgets[c_widget]["wait_campaigns_count"] = 0
+        complete_c_widgets[c_widget]["not_yet_campaigns_count"] = 0
 
     for c_widget in complete_c_widgets:
         total_sales = complete_c_widgets[c_widget]["for_all_campaigns"]["sales"]
         complete_c_widgets[c_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = False
         for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
-            # This is where each campaign is classified and the good/bad/wait
+            # This is where each campaign is classified and the good/bad/not
+            # yet
             # counts are recorded
             classification = classify_campaign_for_one_p_or_c_widget(campaign, total_sales)
             campaign["classification"] = classification
@@ -160,8 +161,8 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                    complete_c_widgets[c_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = True
             elif classification == "half bad": 
                complete_c_widgets[c_widget]["bad_campaigns_count"] += .5 
-            elif classification == "wait": 
-               complete_c_widgets[c_widget]["wait_campaigns_count"] += 1
+            elif classification == "not yet": 
+               complete_c_widgets[c_widget]["not_yet_campaigns_count"] += 1
 
 
     #############################################################

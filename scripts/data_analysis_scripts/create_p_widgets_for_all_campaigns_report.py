@@ -58,7 +58,12 @@ mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
         "p_greylist") | (df["global_status"] ==
         "not yet listed"))
 
-c5 = mismatch1 | mismatch2 | mismatch3
+mismatch4 = (df["classification"] == "not yet") & ((df["global_status"] ==
+        "p_whitelist") | (df["global_status"] ==
+        "p_greylist") | (df["global_status"] ==
+        "p_blacklist"))
+
+c5 = mismatch1 | mismatch2 | mismatch3 | mismatch4
 result5 = df[c5]
 
 c6 = df["has_included_bad_campaigns"] == True 
@@ -79,7 +84,7 @@ for i in range(len(conditions_args)):
             "global_status", "classification", "has_children",
             "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
+            "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
             )
 
 if final_result is None:
@@ -95,6 +100,6 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
             "global_status", "classification", "has_children", "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
+            "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
 
 print(json_final_result)
