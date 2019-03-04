@@ -93,7 +93,7 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                             else:
                                 return "half bad"
                         else:
-                            return "half bad"
+                            return "not yet"
             else:
                 if leads >= 3:
                     return "good"
@@ -104,56 +104,5 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
 
 
                 
-
-
-
-    ########### old flow chart #################3
-    # if clicks == 0:
-        # return "not yet"
-    # else:
-        # if (sales > 0) & (profit > 0):
-            # return "good"
-        # else:
-            # if (leads >= 3) & (lead_cpa < mpl):
-                # return "good"
-            # elif (leads == 2) & (lead_cpa < mpl):
-                # return "half good"
-            # else:
-                # if  p_or_c_widget_total_sales == 0:
-                    # if (cost > (5 * mpl)) & (clicks > 600):
-                        # if (leads > 0) & (lead_cpa < (2 * mpl)):
-                            # return "half bad"
-                        # else:
-                            # return "bad"
-                    # elif (cost > (3 * mpl)) & (clicks > 600):
-                        # if (leads > 0) & (lead_cpa < (2.5 * mpl)):
-                            # return "half bad"
-                        # else:
-                            # return "bad"
-                    # elif (cost > (2 * mpl)) & (clicks > 600):
-                        # if (leads > 0) & (lead_cpa < (3 * mpl)):
-                            # return "not yet"
-                        # else:
-                            # return "half bad"
-                    # else:
-                        # return "not yet"
-                # else:
-                    # if cost > (1 * mps):
-                        # if (sales > 0) & (sale_cpa < (2 * mps)):
-                            # return "not yet"
-                        # else:
-                            # return "bad"
-                    # elif cost > (6 * mpl):
-                        # if (leads > 0) & (lead_cpa < (3 * mpl)):
-                            # return "half bad"
-                        # else:
-                            # return "bad"
-                    # elif cost > (3 * mpl):
-                        # if (leads > 0) & (lead_cpa < (6 * mpl)):
-                            # return "not yet"
-                        # else:
-                            # return "half bad"
-                    # else:
-                        # return "not yet"
 
 
