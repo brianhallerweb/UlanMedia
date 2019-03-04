@@ -24,7 +24,7 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
         # string.
         excluded_widgets = []
         for key, value in response["widgetsFilterUid"]["widgets"].items():
-            if value == "[]":
+            if (value == "[]") | (value == None):
                 excluded_widgets.append(key)
             else:
                 value = re.sub(r'[\[\]]', "", value)
@@ -41,6 +41,6 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
 # from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 
 # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
-# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "527383")
+# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "527385")
 # print(data)
 # It just returns a list of string p widgets
