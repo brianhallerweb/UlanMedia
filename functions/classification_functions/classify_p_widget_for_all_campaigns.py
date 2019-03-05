@@ -40,7 +40,7 @@ def classify_p_widget_for_all_campaigns(p_widget):
             return "black"
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (lead_cvr < .002) & (profit < -60):
             return "black"
-        elif (leads == 0) & (clicks > 1000) & (profit < -60):
+        elif (leads == 0) & (clicks > 2000) & (profit < -60):
             return "black"
         # not yet
         elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):
