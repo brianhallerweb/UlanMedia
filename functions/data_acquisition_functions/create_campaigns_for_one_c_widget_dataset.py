@@ -35,6 +35,7 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
     campaigns_for_one_c_widget["metadata"]["vol_start_date"] = json_file["metadata"]["vol_start_date"]
     campaigns_for_one_c_widget["metadata"]["vol_end_date"] = json_file["metadata"]["vol_end_date"]
     campaigns_for_one_c_widget["metadata"]["c_widget_classification"] = complete_c_widget["for_all_campaigns"]["classification"]
+    campaigns_for_one_c_widget["metadata"]["c_widget_global_status"] = complete_c_widget["for_all_campaigns"]["global_status"]
     campaigns_for_one_c_widget["metadata"]["good_campaigns_count"] = complete_c_widget["good_campaigns_count"]
     campaigns_for_one_c_widget["metadata"]["bad_campaigns_count"] = complete_c_widget["bad_campaigns_count"]
     campaigns_for_one_c_widget["metadata"]["not_yet_campaigns_count"] = complete_c_widget["not_yet_campaigns_count"]

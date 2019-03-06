@@ -21,9 +21,10 @@ class Home extends Component {
       volRequestDates: '',
       mgidRequestDates: '',
       pWidgetClassification: '',
+      pWidgetGlobalStatus: '',
       goodCampaignsCount: '',
       badCampaignsCount: '',
-      waitCampaignsCount: '',
+      notYetCampaignsCount: '',
       badAndIncludedCampaignsCount: 0,
       c1: false,
       c1Value: 'not yet',
@@ -95,9 +96,10 @@ class Home extends Component {
             file.metadata.mgid_end_date
           }`,
           pWidgetClassification: file.metadata.p_widget_classification,
+          pWidgetGlobalStatus: file.metadata.p_widget_global_status,
           goodCampaignsCount: file.metadata.good_campaigns_count,
           badCampaignsCount: file.metadata.bad_campaigns_count,
-          waitCampaignsCount: file.metadata.wait_campaigns_count,
+          notYetCampaignsCount: file.metadata.not_yet_campaigns_count,
         });
       })
       .then(() =>
@@ -188,11 +190,14 @@ class Home extends Component {
               p widget is bad in {this.state.badCampaignsCount} campaigns
             </div>
             <div>
-              p widget is wait in {this.state.waitCampaignsCount} campaigns
+              p widget is not yet in {this.state.notYetCampaignsCount} campaigns
             </div>
             <div>
-              p widget is {this.state.pWidgetClassification.toUpperCase()}{' '}
-              overall
+              p widget classification is{' '}
+              {this.state.pWidgetClassification.toUpperCase()}{' '}
+            </div>
+            <div>
+              p widget global status is {this.state.pWidgetGlobalStatus}
             </div>
           </div>
         )}

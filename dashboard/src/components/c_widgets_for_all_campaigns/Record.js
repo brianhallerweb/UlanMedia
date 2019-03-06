@@ -105,7 +105,7 @@ class Record extends Component {
               </Link>
             </div>
             <div className="rowLink">
-              <span className="fakeLink">wait</span>
+              <span className="fakeLink">not yet</span>
             </div>
           </div>
         </td>
