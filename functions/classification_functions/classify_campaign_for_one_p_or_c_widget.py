@@ -40,20 +40,51 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                 return "not yet"
             else:
                 if sales == 0:
-                    if cost >= (2.5 * mpl):
-                        if clicks < 1000:
+                    if cost > (4 * mpl):
+                        if lead_cpa > (3 * mpl):
+                            return "bad"
+                        elif lead_cpa > (2 * mpl):
                             return "half bad"
                         else:
+                            return "not yet"
+                    elif cost >= (3 * mpl):
+                        if lead_cpa > (3.5 * mpl):
                             return "bad"
+                        elif lead_cpa > (2.5 * mpl):
+                            return "half bad"
+                        else:
+                            return "not yet"
                     elif cost >= (2 * mpl):
-                        return "half bad"
+                        if lead_cpa > (4 * mpl):
+                            return "bad"
+                        elif lead_cpa > (3 * mpl):
+                            return "half bad"
+                        else:
+                            return "not yet"
                     else:
                         return "not yet"
                 else:
-                    if cost >= (4 * mpl):
-                        return "bad"
+                    if cost >= (5 * mpl):
+                        if lead_cpa > (3 * mpl):
+                            return "bad"
+                        elif lead_cpa > (2 * mpl):
+                            return "half bad"
+                        else:
+                            return "not yet"
+                    elif cost >= (4 * mpl):
+                        if lead_cpa > (3.5 * mpl):
+                            return "bad"
+                        elif lead_cpa > (2.5 * mpl):
+                            return "half bad"
+                        else:
+                            return "not yet"
                     elif cost >= (3 * mpl):
-                        return "half bad"
+                        if lead_cpa > (4 * mpl):
+                            return "bad"
+                        elif lead_cpa > (3 * mpl):
+                            return "half bad"
+                        else:
+                            return "not yet"
                     else:
                         return "not yet"
         else:
