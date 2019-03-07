@@ -54,20 +54,37 @@ class Record extends Component {
           </div>
         </td>
         <td>
-          <Link
-            to={{
-              pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-                /^\d*/,
-              )}/${this.props.widgetRecord.classification}`,
-            }}
-            target="_blank">
-            {this.props.widgetRecord.classification}
-          </Link>
-          <div>
-            {`(${this.props.widgetRecord.good_campaigns_count}g/${
-              this.props.widgetRecord.bad_campaigns_count
-            }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
-          </div>
+          {this.props.widgetRecord.classification !== 'not yet' ? (
+            <div>
+              <Link
+                to={{
+                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}/${this.props.widgetRecord.classification}`,
+                }}
+                target="_blank">
+                {this.props.widgetRecord.classification}
+              </Link>
+              <div>
+                {`(${this.props.widgetRecord.good_campaigns_count}g/${
+                  this.props.widgetRecord.bad_campaigns_count
+                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div
+                className="rowLink"
+                onClick={() => this.setState({clicked: true})}>
+                <span className="fakeLink">not yet</span>
+              </div>
+              <div>
+                {`(${this.props.widgetRecord.good_campaigns_count}g/${
+                  this.props.widgetRecord.bad_campaigns_count
+                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+              </div>
+            </div>
+          )}
         </td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
