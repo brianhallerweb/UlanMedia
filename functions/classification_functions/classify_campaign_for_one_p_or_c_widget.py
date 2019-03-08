@@ -40,11 +40,13 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                 return "not yet"
             else:
                 if p_or_c_widget_total_sales == 0:
-                    if cost >= (2.5 * mpl):
+                    if cost >= (4 * mpl):
+                        return "bad"
+                    elif cost >= (2.5 * mpl):
                         if clicks < 1000:
                             return "half bad"
                         else:
-                            return "not yet"
+                            return "bad"
                     elif cost >= (2 * mpl):
                         return "half bad"
                     else:

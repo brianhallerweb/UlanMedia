@@ -41,6 +41,7 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
 # from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 
 # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
-# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "527385")
+# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "511194")
+
 # print(data)
-# It just returns a list of string p widgets
+# It just returns a list of string widgets

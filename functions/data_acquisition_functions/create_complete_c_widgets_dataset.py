@@ -112,7 +112,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["sales"] += json_file["data"][widget]["sales"]
            else:
                 c_widgets_for_one_campaign[c_widget] = json_file["data"][widget]
-                if c_widget not in excluded_widgets:
+                if c_widget not in excluded_widgets and p_widget not in excluded_widgets:
                     c_widgets_for_one_campaign[c_widget]['status'] = "included"
                 else:
                     c_widgets_for_one_campaign[c_widget]['status'] = "excluded"
