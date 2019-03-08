@@ -10,7 +10,9 @@ class Record extends Component {
 
   render() {
     return (
-      <tr className={this.state.clicked && 'clicked'}>
+      <tr
+        className={this.state.clicked && 'clicked'}
+        onClick={() => this.setState({clicked: !this.state.clicked})}>
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
@@ -73,11 +75,7 @@ class Record extends Component {
             </div>
           ) : (
             <div>
-              <div
-                className="rowLink"
-                onClick={() => this.setState({clicked: true})}>
-                <span className="fakeLink">not yet</span>
-              </div>
+              <div>not yet</div>
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
@@ -134,9 +132,6 @@ class Record extends Component {
                 target="_blank">
                 black
               </Link>
-            </div>
-            <div className="rowLink">
-              <span className="fakeLink">not yet</span>
             </div>
           </div>
         </td>
