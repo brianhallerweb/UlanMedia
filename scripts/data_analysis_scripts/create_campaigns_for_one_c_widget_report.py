@@ -57,7 +57,7 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values("cost", ascending=False)
+final_result = final_result.sort_values("name", ascending=True)
 
 # add a summary row at the bottom
 if len(final_result.index) > 0:

@@ -38,8 +38,6 @@ def classify_c_widget_for_all_campaigns(c_widget):
         # black 
         elif (good_campaigns_count == 0) & (bad_campaigns_count > 2):
             return "black"
-        elif (good_campaigns_count == 0) & (bad_campaigns_count > 0) & (profit < -100):
-            return "black"
         elif (leads == 0) & (clicks > 1000) & (profit < -100):
             return "black"
         # not yet

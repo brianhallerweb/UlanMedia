@@ -27,7 +27,7 @@ pp=pprint.PrettyPrinter(indent=2)
 # the parent offer is country independent (eg Profit Formula)
 # the child offer is country dependent (eg Profit Formula DE)
 
-def create_offers_for_all_campaigns_dataset(date_range):
+def create_parent_offers_for_all_campaigns_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
         json_file = json.load(file)
@@ -44,17 +44,17 @@ def create_offers_for_all_campaigns_dataset(date_range):
     #                             }
     ################################################
 
-    offers_for_all_campaigns = {"metadata": metadata, "data": {}}   
+    child_offers_for_all_campaigns = {"metadata": metadata, "data": {}}   
     for campaign in data:
         for offer in data[campaign]:
-            if offer in offers_for_all_campaigns["data"]:
-                offers_for_all_campaigns["data"][offer]["clicks"] += data[campaign][offer]["clicks"] 
-                offers_for_all_campaigns["data"][offer]["cost"] += data[campaign][offer]["cost"] 
-                offers_for_all_campaigns["data"][offer]["profit"] += data[campaign][offer]["profit"] 
-                offers_for_all_campaigns["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
+            if offer in child_offers_for_all_campaigns["data"]:
+                child_offers_for_all_campaigns["data"][offer]["clicks"] += data[campaign][offer]["clicks"] 
+                child_offers_for_all_campaigns["data"][offer]["cost"] += data[campaign][offer]["cost"] 
+                child_offers_for_all_campaigns["data"][offer]["profit"] += data[campaign][offer]["profit"] 
+                child_offers_for_all_campaigns["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
 
             else:
-                offers_for_all_campaigns["data"][offer] = {
+                child_offers_for_all_campaigns["data"][offer] = {
                                                           "offerName": data[campaign][offer]["offerName"],
                                                           "offerID": data[campaign][offer]["offerID"],
                                                           "offerFlow": data[campaign][offer]["offerFlow"],
@@ -64,7 +64,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                            "conversions": data[campaign][offer]["conversions"]
                                                           }
     ################################################
-    # At this point offers_for_all_campaigns["data"] is structured like this:
+    # At this point child_offers_for_all_campaigns["data"] is structured like this:
     # child_offer_id1 {
     #                 offer data (clicks, cost, profit, conversions, offer flow, offer
     #                 id, offer name)
@@ -78,7 +78,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
     tier_list = ["tier1", "tier3"]
 
     parent_offers_for_all_campaigns = {}
-    for offer in offers_for_all_campaigns["data"].values():
+    for offer in child_offers_for_all_campaigns["data"].values():
         if offer["offerName"] == "404":
             continue
         else:
@@ -119,7 +119,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
     # }
     
     for parent_offer in parent_offers_for_all_campaigns.values():
-        parent_offer["gpr"] = (int(parent_offer["rank"]) ^ 7) / 100
+        parent_offer["gpr"] = round((parent_offer["rank"] ** 7) / (100000000))
 
     pp.pprint(parent_offers_for_all_campaigns)
  
@@ -140,6 +140,56 @@ def find_parent_offer_rank(parent_offers_for_all_campaigns):
     df = df.sort_values("profit")
     return list(df["parent_offer"])
 
+
+
+def create_child_offers_for_all_campaigns_dataset(date_range):
+
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
+        json_file = json.load(file)
+
+    metadata = json_file["metadata"]
+    data = json_file["data"]
+
+    ################################################
+    # the "data" dataset is structured like this:
+    # campaign_id: child_offer_id {
+    #                             offer data (campaign name, campaign id, clicks,
+    #                             cost, profit, conversions, offer flow, offer
+    #                             id, offer name)
+    #                             }
+    ################################################
+
+    child_offers_for_all_campaigns = {"metadata": metadata, "data": {}}   
+    for campaign in data:
+        for offer in data[campaign]:
+            if offer in child_offers_for_all_campaigns["data"]:
+                child_offers_for_all_campaigns["data"][offer]["clicks"] += data[campaign][offer]["clicks"] 
+                child_offers_for_all_campaigns["data"][offer]["cost"] += data[campaign][offer]["cost"] 
+                child_offers_for_all_campaigns["data"][offer]["profit"] += data[campaign][offer]["profit"] 
+                child_offers_for_all_campaigns["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
+
+            else:
+                child_offers_for_all_campaigns["data"][offer] = {
+                                                          "offerName": data[campaign][offer]["offerName"],
+                                                          "offerID": data[campaign][offer]["offerID"],
+                                                          "offerFlow": data[campaign][offer]["offerFlow"],
+                                                          "clicks": data[campaign][offer]["clicks"],
+                                                           "cost": data[campaign][offer]["cost"],
+                                                           "profit": data[campaign][offer]["profit"], 
+                                                           "conversions": data[campaign][offer]["conversions"]
+                                                          }
+    ################################################
+    # At this point child_offers_for_all_campaigns["data"] is structured like this:
+    # child_offer_id1 {
+    #                 offer data (clicks, cost, profit, conversions, offer flow, offer
+    #                 id, offer name)
+    #                 }, 
+    # child_offer_id2 {
+    #                 more offer data 
+    #                 } 
+    ################################################
+    pp.pprint(child_offers_for_all_campaigns)
+
+
 #################
-# call the function
-create_offers_for_all_campaigns_dataset("oneeighty")                
+create_child_offers_for_all_campaigns_dataset("oneeighty")                
