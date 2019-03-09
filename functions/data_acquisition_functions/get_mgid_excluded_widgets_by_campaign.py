@@ -1,7 +1,6 @@
 from functions.misc.send_email import send_email
 from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid_token
 from datetime import datetime
-import re
 import requests
 import sys
 
@@ -27,8 +26,13 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
             if (value == "[]") | (value == None):
                 excluded_widgets.append(key)
             else:
-                value = re.sub(r'[\[\]]', "", value)
-                excluded_widgets.append(f"{key}s{value}")
+                value = value.replace("[", "")
+                value = value.replace("]", "")
+                value = value.replace(",", "")
+                c_widgets = value.split(" ")
+                print(c_widgets)
+                for c_widget in c_widgets:
+                    excluded_widgets.append(f"{key}s{c_widget}")
         # excluded_widgets is a list of excluded widget ids
         return excluded_widgets
     except requests.exceptions.RequestException as e:
@@ -41,7 +45,6 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
 # from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
 
 # mgid_token = get_mgid_access_token(mgid_login, mgid_password)
-# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "511194")
-
+# data = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, "527385")
 # print(data)
-# It just returns a list of string widgets
+

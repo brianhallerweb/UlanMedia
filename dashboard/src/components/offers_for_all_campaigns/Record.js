@@ -24,6 +24,7 @@ class Record extends Component {
   render() {
     return (
       <tr>
+        <td>{this.offerName}</td>
         <td>
           {this.offerFlow}
           <div>
@@ -52,7 +53,6 @@ class Record extends Component {
             </div>
           </div>
         </td>
-        <td>{this.offerName}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
