@@ -18,7 +18,7 @@ class Record extends Component {
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
-            <div>
+            <div className="rowLink">
               <Link
                 onClick={e => e.stopPropagation()}
                 to={{
