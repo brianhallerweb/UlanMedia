@@ -10,12 +10,17 @@ class Record extends Component {
 
   render() {
     return (
-      <tr className={this.state.clicked && 'clicked'}>
+      <tr
+        className={this.state.clicked && 'clicked'}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/campaignsforonecwidget/${
                     this.props.widgetRecord.widget_id
@@ -28,6 +33,7 @@ class Record extends Component {
 
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/excludecwidgetconfirmation/${
                     this.props.widgetRecord.widget_id
@@ -43,6 +49,7 @@ class Record extends Component {
           {this.props.widgetRecord.classification !== 'not yet' ? (
             <div>
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listcwidgetconfirmation/${
                     this.props.widgetRecord.widget_id
@@ -59,11 +66,7 @@ class Record extends Component {
             </div>
           ) : (
             <div>
-              <div
-                className="rowLink"
-                onClick={() => this.setState({clicked: true})}>
-                <span className="fakeLink">not yet</span>
-              </div>
+              <div>not yet</div>
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
@@ -90,6 +93,7 @@ class Record extends Component {
           <div onClick={() => this.setState({clicked: true})}>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listcwidgetconfirmation/${
                     this.props.widgetRecord.widget_id
@@ -101,6 +105,7 @@ class Record extends Component {
             </div>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listcwidgetconfirmation/${
                     this.props.widgetRecord.widget_id
@@ -112,6 +117,7 @@ class Record extends Component {
             </div>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listcwidgetconfirmation/${
                     this.props.widgetRecord.widget_id
@@ -120,9 +126,6 @@ class Record extends Component {
                 target="_blank">
                 black
               </Link>
-            </div>
-            <div className="rowLink">
-              <span className="fakeLink">not yet</span>
             </div>
           </div>
         </td>

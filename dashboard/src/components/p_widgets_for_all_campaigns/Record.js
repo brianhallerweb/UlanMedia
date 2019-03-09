@@ -12,12 +12,15 @@ class Record extends Component {
     return (
       <tr
         className={this.state.clicked && 'clicked'}
-        onClick={() => this.setState({clicked: !this.state.clicked})}>
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
-            <div className="rowLink">
+            <div>
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
@@ -31,6 +34,7 @@ class Record extends Component {
             {this.props.widgetRecord.has_children && (
               <div className="rowLink">
                 <Link
+                  onClick={e => e.stopPropagation()}
                   to={{
                     pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
                       /^\d*/,
@@ -44,6 +48,7 @@ class Record extends Component {
 
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/excludepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
@@ -59,6 +64,7 @@ class Record extends Component {
           {this.props.widgetRecord.classification !== 'not yet' ? (
             <div>
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
@@ -102,6 +108,7 @@ class Record extends Component {
           <div onClick={() => this.setState({clicked: true})}>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
@@ -113,6 +120,7 @@ class Record extends Component {
             </div>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
@@ -124,6 +132,7 @@ class Record extends Component {
             </div>
             <div className="rowLink">
               <Link
+                onClick={e => e.stopPropagation()}
                 to={{
                   pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                     /^\d*/,
