@@ -59,7 +59,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Widget cost is more than $'}
+          {'Widget cost more than $'}
           <input
             type="number"
             name="c3Value"

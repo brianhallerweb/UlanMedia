@@ -11,6 +11,8 @@ from functions.misc.create_mgid_date_range import create_mgid_date_range
 from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.send_email import send_email
 from functions.misc.get_campaign_sets import get_campaign_sets 
+from functions.misc.send_email import send_email
+import sys
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 
@@ -25,7 +27,7 @@ mgid_end_date = mgid_dates[1]
 mgid_campaign_costs = get_mgid_campaign_costs(mgid_token, mgid_client_id,
                                               mgid_start_date, mgid_end_date)
 
-# get a new version of the campaign_sets text file that Mike regularly edits
+# get a new version of the campaign_sets text file 
 campaign_sets = get_campaign_sets() 
 
 # update voluum's records on cost per campaign
@@ -35,8 +37,24 @@ for row in campaign_sets:
     mgid_campaign_id = str(row["mgid_id"])
     vol_campaign_id = str(row["vol_id"])
     mgid_campaign_cost = mgid_campaign_costs["campaigns-stat"][mgid_campaign_id]["spent"]
-    set_vol_campaign_cost(vol_token, vol_campaign_id,
+
+    # 3/9/19 set_vol_campaign_cost() started to fail in what seemed to be a
+    # random way
+    attempt_number = 0
+    while attempt_number < 10:
+        status = set_vol_campaign_cost(vol_token, vol_campaign_id,
                           vol_start_date, vol_end_date, mgid_campaign_cost)
+        if status == 500:
+            attempt_number += 1
+        else:
+            break
+    if attempt_number == 10:
+        error_message = "Failed - set_vol_campaign_cost() failed 10 times in a row"
+        print(error_message)
+        send_email("brianshaller@gmail.com", error_message, error_message)
+        sys.exit()
+
+        
     total_campaign_cost += mgid_campaign_cost
 
 # get revenue by campaign from voluum 

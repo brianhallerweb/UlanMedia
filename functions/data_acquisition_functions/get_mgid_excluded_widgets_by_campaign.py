@@ -30,7 +30,6 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
                 value = value.replace("]", "")
                 value = value.replace(",", "")
                 c_widgets = value.split(" ")
-                print(c_widgets)
                 for c_widget in c_widgets:
                     excluded_widgets.append(f"{key}s{c_widget}")
         # excluded_widgets is a list of excluded widget ids

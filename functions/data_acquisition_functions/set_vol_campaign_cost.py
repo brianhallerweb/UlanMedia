@@ -16,6 +16,8 @@ def set_vol_campaign_cost(token, campaign_id, start_date, end_date, cost):
                 "timeZone": "America/Los_Angeles", 
                 "campaignId": campaign_id, 
                 "cost": cost}))
+        if res.status_code == 500:
+            return 500
         if res.status_code == 417:
             if res.json()["error"]["code"] == "NO_VISITS_PERIOD":
                 return print("no visits so didn't update")
@@ -24,4 +26,5 @@ def set_vol_campaign_cost(token, campaign_id, start_date, end_date, cost):
         send_email("brianshaller@gmail.com", "Failed - set_vol_campaign_cost() at " +
                 str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
+
 
