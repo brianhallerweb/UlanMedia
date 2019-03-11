@@ -79,9 +79,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
-        print("here1")
         excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
-        print("here2")
 
         mpc_pattern = re.compile(r'.*cpc_(.*)')
         p_widgets_for_one_campaign = {}
@@ -176,8 +174,9 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             p_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
             # print("not mismatched")
     
+    #############################################################
 
-    # 7. Save complete_p_widgets to a json file and return it as a
+    # 8. Save complete_p_widgets to a json file and return it as a
     # json file 
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_p_widgets/{output_name}.json", "w") as file:
