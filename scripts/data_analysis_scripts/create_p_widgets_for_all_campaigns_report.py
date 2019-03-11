@@ -43,27 +43,30 @@ result3 = df[c3]
 c4 = df["profit"] < -1 * float(sys.argv[5])
 result4 = df[c4]
 
-mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "p_blacklist") | (df["global_status"] ==
-        "not yet listed"))
+# mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "p_blacklist") | (df["global_status"] ==
+        # "not yet listed"))
 
-mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "p_blacklist") | (df["global_status"] ==
-        "not yet listed"))
+# mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "p_blacklist") | (df["global_status"] ==
+        # "not yet listed"))
 
-mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "not yet listed"))
+# mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "not yet listed"))
 
-mismatch4 = (df["classification"] == "not yet") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "p_blacklist"))
+# mismatch4 = (df["classification"] == "not yet") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "p_blacklist"))
 
-c5 = mismatch1 | mismatch2 | mismatch3 | mismatch4
+# c5 = mismatch1 | mismatch2 | mismatch3 | mismatch4
+# result5 = df[c5]
+
+c5 = df["has_mismatch_classification_and_global_status"] == True 
 result5 = df[c5]
 
 c6 = df["has_included_bad_campaigns"] == True 

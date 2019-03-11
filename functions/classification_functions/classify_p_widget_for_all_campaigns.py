@@ -30,7 +30,7 @@ def classify_p_widget_for_all_campaigns(p_widget):
             return "grey"
         elif (global_status == "p_greylist") & (bad_campaigns_count < 3):
             return "grey"
-        elif (good_campaigns_count > 2) & (bad_campaigns_count > 0):
+        elif (good_campaigns_count > 2) & (bad_campaigns_count >= 1):
             return "grey"
         # white
         elif (global_status == "p_whitelist") & (bad_campaigns_count < 1):
