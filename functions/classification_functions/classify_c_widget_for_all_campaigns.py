@@ -40,7 +40,7 @@ def classify_c_widget_for_all_campaigns(c_widget):
             elif (good_campaigns_count >= 3) & (bad_campaigns_count == 0):
                 return "white"
             # black
-            elif (global_status == "c_blacklist") | (global_status == "pc_blacklist"):
+            elif (global_status == "p_blacklist") | (global_status == "c_blacklist") | (global_status == "pc_blacklist"):
                 return "black"
             elif (leads == 0) & (clicks > 2000) & (profit < -100):
                 return "black"
