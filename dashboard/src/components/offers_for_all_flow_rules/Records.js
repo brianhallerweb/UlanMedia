@@ -14,7 +14,7 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Offer Name</th>
-            <th>Offer Flow</th>
+            <th>Flow Rule</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
@@ -29,7 +29,7 @@ class Records extends Component {
         </thead>
         <tbody>
           {this.props.offersRecords.map(offerRecord => (
-            <Record key={offerRecord.offerID} offer={offerRecord} />
+            <Record key={offerRecord.offer_id} offer={offerRecord} />
           ))}
         </tbody>
       </table>

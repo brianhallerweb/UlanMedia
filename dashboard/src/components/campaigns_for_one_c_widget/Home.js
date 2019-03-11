@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import checkForBadAndIncludedCampaigns from './checkForBadAndIncludedCampaigns';
 
 class Home extends Component {
@@ -176,7 +177,18 @@ class Home extends Component {
             </div>
             <div>
               c widget classification is{' '}
-              {this.state.cWidgetClassification.toUpperCase()}
+              {this.state.cWidgetClassification === 'not yet' ? (
+                'NOT YET'
+              ) : (
+                <Link
+                  to={{
+                    pathname: `/listcwidgetconfirmation/${
+                      this.state.widgetID
+                    }/${this.state.cWidgetClassification}`,
+                  }}>
+                  {this.state.cWidgetClassification.toUpperCase()}
+                </Link>
+              )}
             </div>
             <div>
               c widget global status is {this.state.cWidgetGlobalStatus}

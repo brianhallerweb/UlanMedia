@@ -6,7 +6,7 @@ import numpy as np
 
 date_range = sys.argv[1]
 
-with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_all_campaigns/{date_range}_offers_for_all_campaigns_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_all_flow_rules/{date_range}_offers_for_all_flow_rules_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
@@ -45,7 +45,7 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["offerID","offerName", "offerFlow", "clicks",
+        on=["offer_id","offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa"]
             )
@@ -55,10 +55,11 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values(["offerFlow", "clicks"],
+final_result = final_result.sort_values(["flow_rule", "clicks"],
         ascending=[True, False])
 # final_result = final_result.sort_values("clicks", ascending=False)
-json_final_result = json.dumps(final_result[["offerID","offerName", "offerFlow", "clicks",
+json_final_result = json.dumps(final_result[["offer_id","offer_name",
+    "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa"]].to_dict("records"))
 

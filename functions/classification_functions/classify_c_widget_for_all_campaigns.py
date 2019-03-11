@@ -28,6 +28,8 @@ def classify_c_widget_for_all_campaigns(c_widget):
         # grey
         if ((global_status == "c_greylist") | (global_status == "pc_greylist")) & (good_campaigns_count > 0):
             return "grey"
+        elif ((global_status == "c_greylist") | (global_status == "pc_greylist")) & (bad_campaigns_count < 0):
+            return "grey"
         elif (good_campaigns_count > 2) & (bad_campaigns_count > 0):
             return "grey"
         # white

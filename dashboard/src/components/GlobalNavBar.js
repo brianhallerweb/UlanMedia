@@ -23,7 +23,7 @@ const GlobalNavBar = () => (
     </li>
 
     <li className="globalNavItem">
-      <NavLink to={'/offersforallcampaigns'} activeClassName="is-active">
+      <NavLink to={'/offersforallflowrules'} activeClassName="is-active">
         offers
       </NavLink>
     </li>

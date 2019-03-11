@@ -10,6 +10,7 @@ from functions.misc.get_blacklist import get_blacklist
 import json
 import os
 import re
+import sys
 
 def create_complete_p_widgets_dataset(date_range, output_name):
 
@@ -150,7 +151,30 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     for p_widget in complete_p_widgets.values():
         p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
-    ############################################################
+
+    #############################################################
+    # 7. create hasMismatchClassificationAndGlobalStatus variable in
+    # "for_all_campaigns"
+
+    for p_widget in complete_p_widgets.values():
+        if (p_widget['for_all_campaigns']['classification'] == "not yet") & (p_widget["for_all_campaigns"]["global_status"] != f"{p_widget['for_all_campaigns']['classification']} listed"):
+            # print(f"{p_widget['for_all_campaigns']['classification']} listed")
+            # print(p_widget["for_all_campaigns"]["global_status"])
+            p_widget["for_all_campaigns"]["hasMismatchClassificationAndGlobalStatus"] = True
+            # print("mismatched")
+        
+        elif (p_widget['for_all_campaigns']['classification'] != "not yet") & (p_widget["for_all_campaigns"]["global_status"] != f"p_{p_widget['for_all_campaigns']['classification']}list"):
+            # print(f"p_{p_widget['for_all_campaigns']['classification']}list")
+            # print(p_widget["for_all_campaigns"]["global_status"])
+            p_widget["for_all_campaigns"]["hasMismatchClassificationAndGlobalStatus"] = True
+            # print("mismatched")
+        else:
+            # print(f"{p_widget['for_all_campaigns']['classification']}")
+            # print(p_widget["for_all_campaigns"]["global_status"])
+            p_widget["for_all_campaigns"]["hasMismatchClassificationAndGlobalStatus"] = False
+            # print("not mismatched")
+        # print("#######################")
+    
 
     # 7. Save complete_p_widgets to a json file and return it as a
     # json file 

@@ -1,7 +1,7 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createOffersForAllCampaignsReport(req, res) {
+function createOffersForAllFlowRulesReport(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -12,7 +12,7 @@ function createOffersForAllCampaignsReport(req, res) {
     pythonOptions.args.push(req.body[arg]);
   }
   PythonShell.run(
-    'create_offers_for_all_campaigns_report.py',
+    'create_offers_for_all_flow_rules_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -21,4 +21,4 @@ function createOffersForAllCampaignsReport(req, res) {
   );
 }
 
-module.exports = createOffersForAllCampaignsReport;
+module.exports = createOffersForAllFlowRulesReport;

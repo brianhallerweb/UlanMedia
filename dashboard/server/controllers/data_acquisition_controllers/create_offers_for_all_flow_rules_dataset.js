@@ -1,7 +1,7 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createOffersForAllCampaignsDataset(req, res) {
+function createOffersForAllFlowRulesDataset(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -9,7 +9,7 @@ function createOffersForAllCampaignsDataset(req, res) {
     args: [req.body.dateRange],
   };
   PythonShell.run(
-    'create_offers_for_all_campaigns_dataset.py',
+    'create_offers_for_all_flow_rules_dataset.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -18,4 +18,4 @@ function createOffersForAllCampaignsDataset(req, res) {
   );
 }
 
-module.exports = createOffersForAllCampaignsDataset;
+module.exports = createOffersForAllFlowRulesDataset;
