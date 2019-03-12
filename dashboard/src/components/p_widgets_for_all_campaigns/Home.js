@@ -141,7 +141,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.mismatchWidgetsCount);
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
