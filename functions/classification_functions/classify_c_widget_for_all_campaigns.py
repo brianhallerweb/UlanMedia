@@ -15,26 +15,26 @@ def classify_c_widget_for_all_campaigns(c_widget):
 
     ####################
 
-    if (global_status == "c_blacklist") | (global_status == "pc_blacklist"):
+    if (global_status == "p_blacklist") |  (global_status == "c_blacklist") | (global_status == "pc_blacklist"):
         return "black"
     else:
         if (cost < 10) | (clicks < 300):
-            if (global_status == "c_whitelist") | (global_status == "pc_whitelist"):
+            if (global_status == "p_whitelist") | (global_status == "c_whitelist") | (global_status == "pc_whitelist"):
                 return "white"
-            elif (global_status == "c_greylist") | (global_status == "pc_greylist"):
+            elif (global_status == "p_greylist") | (global_status == "c_greylist") | (global_status == "pc_greylist"):
                 return "grey"
             else:
                 return "not yet"
         else:
             # grey
-            if ((global_status == "c_greylist") | (global_status == "pc_greylist")) & (good_campaigns_count > 0):
+            if ((global_status == "p_greylist") | (global_status == "c_greylist") | (global_status == "pc_greylist")) & (good_campaigns_count > 0):
                 return "grey"
-            elif ((global_status == "c_greylist") | (global_status == "pc_greylist")) & (bad_campaigns_count < 3):
+            elif ((global_status == "p_greylist") | (global_status == "c_greylist") | (global_status == "pc_greylist")) & (bad_campaigns_count < 3):
                 return "grey"
             elif (good_campaigns_count >= 3) & (bad_campaigns_count >= 1):
                 return "grey"
             # white
-            elif ((global_status == "c_whitelist") | (global_status ==
+            elif ((global_status == "p_whitelist") | (global_status == "c_whitelist") | (global_status ==
                 "pc_whitelist")) & (bad_campaigns_count < 1):
                 return "white"
             elif (good_campaigns_count >= 3) & (bad_campaigns_count == 0):
