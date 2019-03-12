@@ -26,8 +26,15 @@ def classify_p_widget_for_all_campaigns(p_widget):
             else:
                 return "not yet"
         else:
+            # black 
+            if global_status == "p_blacklist":
+                return "black"
+            elif (leads == 0) & (clicks > 2000) & (profit < -100):
+                return "black"
+            elif (good_campaigns_count == 0) & (bad_campaigns_count >= 3):
+                return "black"
             # grey
-            if (global_status == "p_greylist") & (good_campaigns_count > 0):
+            elif (global_status == "p_greylist") & (good_campaigns_count > 0):
                 return "grey"
             elif (global_status == "p_greylist") & (bad_campaigns_count < 3):
                 return "grey"
@@ -38,13 +45,6 @@ def classify_p_widget_for_all_campaigns(p_widget):
                 return "white"
             elif (good_campaigns_count >= 3) & (bad_campaigns_count == 0):
                 return "white"
-            # black 
-            elif global_status == "p_blacklist":
-                return "black"
-            elif (leads == 0) & (clicks > 2000) & (profit < -100):
-                return "black"
-            elif (good_campaigns_count == 0) & (bad_campaigns_count >= 3):
-                return "black"
             # not yet
             elif ((good_campaigns_count > 0) & (good_campaigns_count < 2)) | ((bad_campaigns_count > 0) & (bad_campaigns_count < 2)):
                 return "not yet"
