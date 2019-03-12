@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForMismatchClassificationAndGlobalStatus from './checkForMismatchClassificationAndGlobalStatus';
 
 class Home extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
+      mismatchWidgetsCount: 0,
       c1: false,
       c1Value: 'not yet',
       c2: false,
@@ -123,9 +125,17 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        let mismatchWidgetsCount = checkForMismatchClassificationAndGlobalStatus(
+          records,
+        );
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({widgetRecords: records, error, loading: false});
+        this.setState({
+          widgetRecords: records,
+          mismatchWidgetsCount,
+          error,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -166,6 +176,13 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.mismatchWidgetsCount !== 0 && (
+          <div style={{color: 'red', marginTop: 10}}>
+            {this.state.mismatchWidgetsCount} widgets with mismatched
+            classification and global status
+          </div>
+        )}
+
         <Records
           error={this.state.error}
           loading={this.state.loading}

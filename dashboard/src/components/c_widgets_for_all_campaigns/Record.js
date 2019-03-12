@@ -11,6 +11,11 @@ class Record extends Component {
   render() {
     return (
       <tr
+        style={
+          this.props.widgetRecord.has_mismatch_classification_and_global_status
+            ? {backgroundColor: '#f7d9d9'}
+            : null
+        }
         className={this.state.clicked && 'clicked'}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
