@@ -158,21 +158,12 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     for p_widget in complete_p_widgets.values():
         if (p_widget['for_all_campaigns']['classification'] == "not yet") & (p_widget["for_all_campaigns"]["global_status"] != f"{p_widget['for_all_campaigns']['classification']} listed"):
-            # print(f"{p_widget['for_all_campaigns']['classification']} listed")
-            # print(p_widget["for_all_campaigns"]["global_status"])
-            p_widget["for_all_campaigns"]["hasMismatchClassificationAndGlobalStatus"] = True
-            # print("mismatched")
+            p_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
         
         elif (p_widget['for_all_campaigns']['classification'] != "not yet") & (p_widget["for_all_campaigns"]["global_status"] != f"p_{p_widget['for_all_campaigns']['classification']}list"):
-            # print(f"p_{p_widget['for_all_campaigns']['classification']}list")
-            # print(p_widget["for_all_campaigns"]["global_status"])
             p_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
-            # print("mismatched")
         else:
-            # print(f"{p_widget['for_all_campaigns']['classification']}")
-            # print(p_widget["for_all_campaigns"]["global_status"])
             p_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
-            # print("not mismatched")
     
     #############################################################
 
