@@ -172,9 +172,24 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     for c_widget in complete_c_widgets.values():
         c_widget["for_all_campaigns"]["classification"] = classify_c_widget_for_all_campaigns(c_widget)
 
+    #############################################################
+
+    # 7. create hasMismatchClassificationAndGlobalStatus variable in
+    # "for_all_campaigns"
+
+    for c_widget in complete_c_widgets.values():
+        if (c_widget['for_all_campaigns']['classification'] == "not yet") & (c_widget["for_all_campaigns"]["global_status"] != f"{c_widget['for_all_campaigns']['classification']} listed"):
+            c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
+        
+        elif (c_widget['for_all_campaigns']['classification'] != "not yet") & ((c_widget["for_all_campaigns"]["global_status"] != f"p_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"c_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"pc_{c_widget['for_all_campaigns']['classification']}list")):
+            c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
+
+        else:
+            c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
+
     ############################################################
 
-    # 7. Save complete_p_widgets to a json file and return it as a
+    # 8. Save complete_p_widgets to a json file and return it as a
     # json file 
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_c_widgets/{output_name}.json", "w") as file:

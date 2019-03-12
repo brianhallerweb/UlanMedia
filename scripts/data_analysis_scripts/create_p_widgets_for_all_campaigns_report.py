@@ -43,6 +43,14 @@ result3 = df[c3]
 c4 = df["profit"] < -1 * float(sys.argv[5])
 result4 = df[c4]
 
+#####################
+# 3/11
+# this is code for finding mismatches in classification and global status
+# I am going to keep it around because you know it works
+# I believe the current method that calculates the variable
+# "has_mismatch_classification_and_global_status" also works but this old
+# approach can be used to test the results that come from the current method
+
 # mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
         # "p_greylist") | (df["global_status"] ==
         # "p_blacklist") | (df["global_status"] ==

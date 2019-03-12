@@ -151,8 +151,8 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     for p_widget in complete_p_widgets.values():
         p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
-
     #############################################################
+
     # 7. create hasMismatchClassificationAndGlobalStatus variable in
     # "for_all_campaigns"
 

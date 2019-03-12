@@ -43,45 +43,56 @@ result3 = df[c3]
 c4 = df["profit"] < -1 * float(sys.argv[5])
 result4 = df[c4]
 
-mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "c_greylist") | (df["global_status"] ==
-        "pc_greylist") | (df["global_status"] ==
-        "p_blacklist") | (df["global_status"] ==
-        "c_blacklist") | (df["global_status"] ==
-        "pc_blacklist")| (df["global_status"] ==
-        "not yet listed"))
+#####################
+# 3/11
+# this is code for finding mismatches in classification and global status
+# I am going to keep it around because you know it works
+# I believe the current method that calculates the variable
+# "has_mismatch_classification_and_global_status" also works but this old
+# approach can be used to test the results that come from the current method
 
-mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "c_whitelist") | (df["global_status"] ==
-        "pc_whitelist") | (df["global_status"] ==
-        "p_blacklist") | (df["global_status"] ==
-        "c_blacklist") | (df["global_status"] ==
-        "pc_blacklist")| (df["global_status"] ==
-        "not yet listed"))
+# mismatch1 = (df["classification"] == "white") & ((df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "c_greylist") | (df["global_status"] ==
+        # "pc_greylist") | (df["global_status"] ==
+        # "p_blacklist") | (df["global_status"] ==
+        # "c_blacklist") | (df["global_status"] ==
+        # "pc_blacklist")| (df["global_status"] ==
+        # "not yet listed"))
 
-mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "c_whitelist") | (df["global_status"] ==
-        "pc_whitelist") | (df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "c_greylist") | (df["global_status"] ==
-        "pc_greylist") | (df["global_status"] ==
-        "not yet listed"))
+# mismatch2 = (df["classification"] == "grey") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "c_whitelist") | (df["global_status"] ==
+        # "pc_whitelist") | (df["global_status"] ==
+        # "p_blacklist") | (df["global_status"] ==
+        # "c_blacklist") | (df["global_status"] ==
+        # "pc_blacklist")| (df["global_status"] ==
+        # "not yet listed"))
 
-mismatch4 = (df["classification"] == "not yet") & ((df["global_status"] ==
-        "p_whitelist") | (df["global_status"] ==
-        "c_whitelist") | (df["global_status"] ==
-        "pc_whitelist") | (df["global_status"] ==
-        "p_greylist") | (df["global_status"] ==
-        "c_greylist") | (df["global_status"] ==
-        "pc_greylist") | (df["global_status"] ==
-        "p_blacklist") | (df["global_status"] ==
-        "c_blacklist") | (df["global_status"] ==
-        "pc_blacklist"))
+# mismatch3 = (df["classification"] == "black") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "c_whitelist") | (df["global_status"] ==
+        # "pc_whitelist") | (df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "c_greylist") | (df["global_status"] ==
+        # "pc_greylist") | (df["global_status"] ==
+        # "not yet listed"))
 
-c5 = mismatch1 | mismatch2 | mismatch3 | mismatch4
+# mismatch4 = (df["classification"] == "not yet") & ((df["global_status"] ==
+        # "p_whitelist") | (df["global_status"] ==
+        # "c_whitelist") | (df["global_status"] ==
+        # "pc_whitelist") | (df["global_status"] ==
+        # "p_greylist") | (df["global_status"] ==
+        # "c_greylist") | (df["global_status"] ==
+        # "pc_greylist") | (df["global_status"] ==
+        # "p_blacklist") | (df["global_status"] ==
+        # "c_blacklist") | (df["global_status"] ==
+        # "pc_blacklist"))
+
+# c5 = mismatch1 | mismatch2 | mismatch3 | mismatch4
+# result5 = df[c5]
+
+c5 = df["has_mismatch_classification_and_global_status"] == True
 result5 = df[c5]
 
 c6 = df["has_included_bad_campaigns"] == True 
@@ -98,7 +109,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
-            "global_status", "classification", "has_included_bad_campaigns",
+            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
             )
@@ -114,7 +125,7 @@ final_result = final_result.sort_values(["profit", "classification"],
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
-            "global_status", "classification", "has_included_bad_campaigns",
+            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_included_bad_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
 
