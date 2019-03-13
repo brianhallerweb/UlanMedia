@@ -78,9 +78,9 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                elif (c_widget in widget_blacklist) & (p_widget in widget_blacklist):
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_blacklist" 
 
-               if (c_widget not in widget_whitelist) | (p_widget not in
-                   widget_whitelist) | (c_widget not in widget_greylist) | (p_widget not in widget_greylist) | (c_widget not in widget_blacklist) | (p_widget not in widget_blacklist):
-                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet" 
+               if (c_widget not in widget_whitelist) & (p_widget not in
+                   widget_whitelist) & (c_widget not in widget_greylist) & (p_widget not in widget_greylist) & (c_widget not in widget_blacklist) & (p_widget not in widget_blacklist):
+                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
                # if (c_widget in widget_whitelist) & (p_widget in widget_whitelist):
                    # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_whitelist" 
