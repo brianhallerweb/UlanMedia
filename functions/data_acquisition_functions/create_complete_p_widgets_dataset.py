@@ -146,14 +146,26 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     #############################################################
 
-    # 6. create the classification of each p widget
+    # 6. create isBadAndIncluded variable for each campaign
+
+    for p_widget in complete_p_widgets:
+        for campaign in complete_p_widgets[p_widget]["for_each_campaign"]:
+            if (campaign["classification"] == "bad") & (campaign["status"] ==
+                    "included"):
+                campaign["isBadAndIncluded"] = True
+            else:
+                campaign["isBadAndIncluded"] = False
+
+    #############################################################
+
+    # 7. create the classification of each p widget
 
     for p_widget in complete_p_widgets.values():
         p_widget["for_all_campaigns"]["classification"] = classify_p_widget_for_all_campaigns(p_widget)
 
     #############################################################
 
-    # 7. create hasMismatchClassificationAndGlobalStatus variable in
+    # 8. create hasMismatchClassificationAndGlobalStatus variable in
     # "for_all_campaigns"
 
     for p_widget in complete_p_widgets.values():

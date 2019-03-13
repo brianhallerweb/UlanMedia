@@ -59,22 +59,22 @@ def create_complete_c_widgets_dataset(date_range, output_name):
 
                if (c_widget in widget_whitelist) & (p_widget in widget_whitelist):
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_whitelist" 
-               elif p_widget in widget_whitelist:
-                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_whitelist" 
                elif c_widget in widget_whitelist:
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_whitelist" 
+               elif p_widget in widget_whitelist:
+                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_whitelist" 
                elif (c_widget in widget_greylist) & (p_widget in widget_greylist):
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_greylist" 
-               elif p_widget in widget_greylist:
-                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_greylist" 
                elif c_widget in widget_greylist:
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_greylist" 
+               elif p_widget in widget_greylist:
+                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_greylist" 
                elif (c_widget in widget_blacklist) & (p_widget in widget_blacklist):
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_blacklist" 
-               elif p_widget in widget_blacklist:
-                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_blacklist" 
                elif c_widget in widget_blacklist:
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_blacklist" 
+               elif p_widget in widget_blacklist:
+                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_blacklist" 
                else:
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
@@ -166,15 +166,27 @@ def create_complete_c_widgets_dataset(date_range, output_name):
 
 
     #############################################################
+    
+    # 6. create isBadAndIncluded variable for each campaign
 
-    # 6. 
+    for c_widget in complete_c_widgets:
+        for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
+            if (campaign["classification"] == "bad") & (campaign["status"] ==
+                    "included"):
+                campaign["isBadAndIncluded"] = True
+            else:
+                campaign["isBadAndIncluded"] = False
+
+    #############################################################
+
+    # 7. Classify the c widget
 
     for c_widget in complete_c_widgets.values():
         c_widget["for_all_campaigns"]["classification"] = classify_c_widget_for_all_campaigns(c_widget)
 
     #############################################################
 
-    # 7. create hasMismatchClassificationAndGlobalStatus variable in
+    # 8. create hasMismatchClassificationAndGlobalStatus variable in
     # "for_all_campaigns"
 
     for c_widget in complete_c_widgets.values():
@@ -189,7 +201,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
 
     ############################################################
 
-    # 8. Save complete_p_widgets to a json file and return it as a
+    # 9. Save complete_p_widgets to a json file and return it as a
     # json file 
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_c_widgets/{output_name}.json", "w") as file:
