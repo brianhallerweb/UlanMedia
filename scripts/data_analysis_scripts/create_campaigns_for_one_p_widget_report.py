@@ -49,7 +49,6 @@ result4 = df[c4]
 conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
 conditions_dfs = [result1, result2, result3, result4]
 
-
 final_result = None 
 for i in range(len(conditions_args)):
     if conditions_args[i] == "true" and final_result is None:
@@ -60,7 +59,7 @@ for i in range(len(conditions_args)):
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cpa", "lead_cvr",
             "cps", "eps", "mps", "sale_cpa", "profit", "status",
-            "classification"]
+            "classification", "is_bad_and_included"]
             )
 
 if final_result is None:
@@ -78,6 +77,7 @@ if len(final_result.index) > 0:
     summary["mpc"] = ""
     summary["mpl"] = ""
     summary["mps"] = ""
+    summary["is_bad_and_included"] = False  
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
     else:
@@ -103,6 +103,6 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cpa", "lead_cvr",
             "cps", "eps", "mps", "sale_cpa", "profit", "status",
-            "classification"]].to_dict("records"))
+            "classification", "is_bad_and_included"]].to_dict("records"))
 
 print(json_final_result)

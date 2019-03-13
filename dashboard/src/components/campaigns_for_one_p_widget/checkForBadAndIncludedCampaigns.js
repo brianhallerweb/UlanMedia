@@ -3,9 +3,8 @@
 function checkForBadAndIncludedCampaigns(campaigns) {
   let badAndIncludedCampaignsCount = 0;
   for (let campaign of campaigns) {
-    if (campaign.classification === 'bad' && campaign.status == 'included') {
+    if (campaign.is_bad_and_included === true) {
       badAndIncludedCampaignsCount += 1;
-      campaign['badAndIncluded'] = true;
     }
   }
   return badAndIncludedCampaignsCount;

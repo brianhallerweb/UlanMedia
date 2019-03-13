@@ -12,7 +12,9 @@ class Record extends Component {
     return (
       <tr
         style={
-          this.props.widgetRecord.has_mismatch_classification_and_global_status
+          this.props.widgetRecord
+            .has_mismatch_classification_and_global_status ||
+          this.props.widgetRecord.has_bad_and_included_campaigns
             ? {backgroundColor: '#f7d9d9'}
             : null
         }

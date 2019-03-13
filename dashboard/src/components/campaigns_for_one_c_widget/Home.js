@@ -23,6 +23,7 @@ class Home extends Component {
       loading: false,
       cWidgetClassification: '',
       cWidgetGlobalStatus: '',
+      cWidgetHasMismatchClassificationAndGlobalStatus: '',
       goodCampaignsCount: '',
       badCampaignsCount: '',
       notYetCampaignsCount: '',
@@ -91,6 +92,9 @@ class Home extends Component {
           }`,
           cWidgetClassification: file.metadata.c_widget_classification,
           cWidgetGlobalStatus: file.metadata.c_widget_global_status,
+          cWidgetHasMismatchClassificationAndGlobalStatus:
+            file.metadata
+              .c_widget_has_mismatch_classification_and_global_status,
           goodCampaignsCount: file.metadata.good_campaigns_count,
           badCampaignsCount: file.metadata.bad_campaigns_count,
           notYetCampaignsCount: file.metadata.not_yet_campaigns_count,
@@ -117,11 +121,13 @@ class Home extends Component {
       )
       .then(res => res.json())
       .then(records => {
-        if (records.length) {
-          records[0][
-            'classification'
-          ] = this.state.cWidgetClassification.toUpperCase();
-        }
+        //3/13 I removed this because I think it is cleaner
+        //It gives the c widget classification in the summary row
+        //if (records.length) {
+        //records[0][
+        //'classification'
+        //] = this.state.cWidgetClassification.toUpperCase();
+        //}
         let badAndIncludedCampaignsCount = checkForBadAndIncludedCampaigns(
           records,
         );
@@ -203,12 +209,19 @@ class Home extends Component {
             </div>
           </div>
         )}
-        {this.state.badAndIncludedCampaignsCount !== 0 && (
-          <div style={{color: 'red'}}>
-            {this.state.badAndIncludedCampaignsCount} campaigns need to be
-            excluded from the c widget
-          </div>
-        )}
+        {this.state.cWidgetHasMismatchClassificationAndGlobalStatus &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              c widget has a mismatched classfication and global status
+            </div>
+          )}
+        {this.state.badAndIncludedCampaignsCount !== 0 &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              {this.state.badAndIncludedCampaignsCount} campaigns need to be
+              excluded from the c widget
+            </div>
+          )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

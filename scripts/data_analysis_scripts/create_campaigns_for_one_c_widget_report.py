@@ -49,7 +49,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr", "cps", "eps", "mps",
-            "profit", "status", "classification"]
+            "profit", "status", "classification", "is_bad_and_included"]
             )
 
 if final_result is None:
@@ -67,6 +67,7 @@ if len(final_result.index) > 0:
     summary["mpc"] = ""
     summary["mpl"] = ""
     summary["mps"] = ""
+    summary["is_bad_and_included"] = False  
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
@@ -86,6 +87,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr", "cps", "eps", "mps",
-            "profit", "status", "classification"]].to_dict("records"))
+            "profit", "status", "classification", "is_bad_and_included"]].to_dict("records"))
 
 print(json_final_result)

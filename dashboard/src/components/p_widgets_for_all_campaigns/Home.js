@@ -7,6 +7,7 @@ import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 import checkForMismatchClassificationAndGlobalStatus from './checkForMismatchClassificationAndGlobalStatus';
+import checkForBadAndIncludedCampaigns from './checkForBadAndIncludedCampaigns';
 
 class Home extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      mismatchWidgetsCount: 0,
+      mismatchClassificationAndGlobalStatusCount: 0,
+      hasBadAndIncludedCampaignsCount: 0,
       c1: false,
       c1Value: 'not yet',
       c2: false,
@@ -125,14 +127,18 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
-        let mismatchWidgetsCount = checkForMismatchClassificationAndGlobalStatus(
+        let mismatchClassificationAndGlobalStatusCount = checkForMismatchClassificationAndGlobalStatus(
+          records,
+        );
+        let hasBadAndIncludedCampaignsCount = checkForBadAndIncludedCampaigns(
           records,
         );
         let error;
         records.length ? (error = false) : (error = true);
         this.setState({
           widgetRecords: records,
-          mismatchWidgetsCount,
+          mismatchClassificationAndGlobalStatusCount,
+          hasBadAndIncludedCampaignsCount,
           error,
           loading: false,
         });
@@ -176,13 +182,20 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
-        {this.state.mismatchWidgetsCount !== 0 && (
-          <div style={{color: 'red', marginTop: 10}}>
-            {this.state.mismatchWidgetsCount} widgets with mismatched
-            classification and global status
-          </div>
-        )}
-
+        {this.state.mismatchClassificationAndGlobalStatusCount !== 0 &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              {this.state.mismatchClassificationAndGlobalStatusCount} widgets
+              with mismatched classification and global status
+            </div>
+          )}
+        {this.state.hasBadAndIncludedCampaignsCount !== 0 &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              {this.state.hasBadAndIncludedCampaignsCount} widgets have bad and
+              included campaigns
+            </div>
+          )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

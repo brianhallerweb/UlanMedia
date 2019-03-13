@@ -124,7 +124,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     for p_widget in complete_p_widgets:
         total_sales = complete_p_widgets[p_widget]["for_all_campaigns"]["sales"]
-        complete_p_widgets[p_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = False
+        complete_p_widgets[p_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = False
         for campaign in complete_p_widgets[p_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/not
             # yet
@@ -138,7 +138,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             elif classification == "bad": 
                complete_p_widgets[p_widget]["bad_campaigns_count"] += 1 
                if campaign["status"] == "included":
-                   complete_p_widgets[p_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = True
+                   complete_p_widgets[p_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = True
             elif classification == "half bad": 
                complete_p_widgets[p_widget]["bad_campaigns_count"] += .5 
             elif classification == "not yet": 
@@ -146,15 +146,15 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     #############################################################
 
-    # 6. create isBadAndIncluded variable for each campaign
+    # 6. create is_bad_and_included variable for each campaign
 
     for p_widget in complete_p_widgets:
         for campaign in complete_p_widgets[p_widget]["for_each_campaign"]:
             if (campaign["classification"] == "bad") & (campaign["status"] ==
                     "included"):
-                campaign["isBadAndIncluded"] = True
+                campaign["is_bad_and_included"] = True
             else:
-                campaign["isBadAndIncluded"] = False
+                campaign["is_bad_and_included"] = False
 
     #############################################################
 
@@ -165,7 +165,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     #############################################################
 
-    # 8. create hasMismatchClassificationAndGlobalStatus variable in
+    # 8. create has_mismatch_classification_and_global_status variable in
     # "for_all_campaigns"
 
     for p_widget in complete_p_widgets.values():
@@ -179,7 +179,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     
     #############################################################
 
-    # 8. Save complete_p_widgets to a json file and return it as a
+    # 9. Save complete_p_widgets to a json file and return it as a
     # json file 
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_p_widgets/{output_name}.json", "w") as file:

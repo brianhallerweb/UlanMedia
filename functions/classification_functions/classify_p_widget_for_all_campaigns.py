@@ -27,9 +27,7 @@ def classify_p_widget_for_all_campaigns(p_widget):
                 return "not yet"
         else:
             # black 
-            if global_status == "p_blacklist":
-                return "black"
-            elif (leads == 0) & (clicks > 2000) & (profit < -100):
+            if (leads == 0) & (clicks > 2000) & (profit < -100):
                 return "black"
             elif (good_campaigns_count == 0) & (bad_campaigns_count >= 3):
                 return "black"

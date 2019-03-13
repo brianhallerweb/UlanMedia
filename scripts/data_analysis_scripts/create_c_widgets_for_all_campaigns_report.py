@@ -95,7 +95,7 @@ result4 = df[c4]
 c5 = df["has_mismatch_classification_and_global_status"] == True
 result5 = df[c5]
 
-c6 = df["has_included_bad_campaigns"] == True 
+c6 = df["has_bad_and_included_campaigns"] == True 
 result6 = df[c6]
 
 conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11]]
@@ -109,7 +109,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
-            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_included_bad_campaigns",
+            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_bad_and_included_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
             )
@@ -122,10 +122,9 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values(["profit", "classification"],
         ascending=[True, True])
 
-
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
-            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_included_bad_campaigns",
+            "global_status", "classification", "has_mismatch_classification_and_global_status", "has_bad_and_included_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
             "not_yet_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
 

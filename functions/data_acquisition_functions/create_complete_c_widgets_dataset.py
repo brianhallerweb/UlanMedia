@@ -144,7 +144,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
 
     for c_widget in complete_c_widgets:
         total_sales = complete_c_widgets[c_widget]["for_all_campaigns"]["sales"]
-        complete_c_widgets[c_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = False
+        complete_c_widgets[c_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = False
         for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
             # This is where each campaign is classified and the good/bad/not
             # yet
@@ -158,7 +158,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
             elif classification == "bad": 
                complete_c_widgets[c_widget]["bad_campaigns_count"] += 1 
                if campaign["status"] == "included":
-                   complete_c_widgets[c_widget]["for_all_campaigns"]["has_included_bad_campaigns"] = True
+                   complete_c_widgets[c_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = True
             elif classification == "half bad": 
                complete_c_widgets[c_widget]["bad_campaigns_count"] += .5 
             elif classification == "not yet": 
@@ -173,9 +173,9 @@ def create_complete_c_widgets_dataset(date_range, output_name):
         for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
             if (campaign["classification"] == "bad") & (campaign["status"] ==
                     "included"):
-                campaign["isBadAndIncluded"] = True
+                campaign["is_bad_and_included"] = True
             else:
-                campaign["isBadAndIncluded"] = False
+                campaign["is_bad_and_included"] = False
 
     #############################################################
 

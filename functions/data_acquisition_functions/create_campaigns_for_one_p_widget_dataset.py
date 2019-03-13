@@ -43,6 +43,7 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     campaigns_for_one_p_widget["metadata"]["vol_end_date"] = json_file["metadata"]["vol_end_date"]
     campaigns_for_one_p_widget["metadata"]["p_widget_classification"] = complete_p_widget["for_all_campaigns"]["classification"]
     campaigns_for_one_p_widget["metadata"]["p_widget_global_status"] = complete_p_widget["for_all_campaigns"]["global_status"]
+    campaigns_for_one_p_widget["metadata"]["p_widget_has_mismatch_classification_and_global_status"] = complete_p_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"]
     campaigns_for_one_p_widget["metadata"]["good_campaigns_count"] = complete_p_widget["good_campaigns_count"]
     campaigns_for_one_p_widget["metadata"]["bad_campaigns_count"] = complete_p_widget["bad_campaigns_count"]
     campaigns_for_one_p_widget["metadata"]["not_yet_campaigns_count"] = complete_p_widget["not_yet_campaigns_count"]
