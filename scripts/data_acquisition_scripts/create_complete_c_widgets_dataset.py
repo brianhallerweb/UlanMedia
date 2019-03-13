@@ -6,35 +6,35 @@ from functions.data_acquisition_functions.create_complete_c_widgets_dataset impo
 
 #################################
 
-# date_range = "yesterday"
+date_range = "yesterday"
 
-# create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
+create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
 
-# print(f"{date_range} complete c widgets dataset created")
+print(f"{date_range} complete c widgets dataset created")
 
-# #################################
+#################################
 
-# date_range = "seven"
+date_range = "seven"
 
-# create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
+create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
 
-# print(f"{date_range} complete c widgets dataset created")
+print(f"{date_range} complete c widgets dataset created")
 
-# #################################
+#################################
 
-# date_range = "thirty"
+date_range = "thirty"
 
-# create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
+create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
 
-# print(f"{date_range} complete c widgets dataset created")
+print(f"{date_range} complete c widgets dataset created")
 
-# #################################
+#################################
 
-# date_range = "ninety"
+date_range = "ninety"
 
-# create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
+create_complete_c_widgets_dataset(date_range, f"{date_range}_complete_c_widgets_dataset")
 
-# print(f"{date_range} complete c widgets dataset created")
+print(f"{date_range} complete c widgets dataset created")
 
 #################################
 
