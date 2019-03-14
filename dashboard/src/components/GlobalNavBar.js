@@ -57,6 +57,15 @@ const GlobalNavBar = () => (
         update all data
       </NavLink>
     </li>
+
+    <li className="globalNavItem">
+      <NavLink
+        to={'/updateoneeightydata'}
+        activeClassName="is-active"
+        target="_blank">
+        update one eighty data
+      </NavLink>
+    </li>
   </div>
 );
 
