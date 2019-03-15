@@ -2,8 +2,8 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 
-const Title = ({offerFlow, volRequestDates}) => {
-  const title = `offers for one flow (${offerFlow})`;
+const Title = ({flowRule, volRequestDates}) => {
+  const title = `offers for one flow rule ${flowRule}`;
   return (
     <div className="title">
       <Helmet>

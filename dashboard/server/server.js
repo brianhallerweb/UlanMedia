@@ -26,7 +26,7 @@ const createCWidgetsForOnePWidgetDataset = require('./controllers/data_acquisiti
 const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createOffersForAllFlowRulesDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_flow_rules_dataset');
 const createOffersForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_campaign_dataset');
-const createOffersForOneFlowDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_flow_dataset');
+const createOffersForOneFlowRuleDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_flow_rule_dataset');
 const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
 const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
 const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
@@ -40,7 +40,7 @@ const createCampaignsForAllCampaignsReport = require('./controllers/data_analysi
 const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
 const createOffersForAllFlowRulesReport = require('./controllers/data_analysis_controllers/create_offers_for_all_flow_rules_report');
 const createOffersForOneCampaignReport = require('./controllers/data_analysis_controllers/create_offers_for_one_campaign_report');
-const createOffersForOneFlowReport = require('./controllers/data_analysis_controllers/create_offers_for_one_flow_report');
+const createOffersForOneFlowRuleReport = require('./controllers/data_analysis_controllers/create_offers_for_one_flow_rule_report');
 const createCampaignsForOneAdReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_ad_report');
 
 const authenticate = require('./middleware/authenticate');
@@ -154,9 +154,9 @@ app.post(
 );
 
 app.post(
-  '/api/createOffersForOneFlowDataset',
+  '/api/createOffersForOneFlowRuleDataset',
   authenticate,
-  createOffersForOneFlowDataset,
+  createOffersForOneFlowRuleDataset,
 );
 
 app.post(
@@ -295,9 +295,9 @@ app.post(
 );
 
 app.post(
-  '/api/createOffersForOneFlowReport',
+  '/api/createOffersForOneFlowRuleReport',
   authenticate,
-  createOffersForOneFlowReport,
+  createOffersForOneFlowRuleReport,
 );
 
 app.post(

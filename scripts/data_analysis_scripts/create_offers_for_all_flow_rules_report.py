@@ -55,9 +55,9 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values(["flow_rule", "clicks"],
-        ascending=[True, False])
-# final_result = final_result.sort_values("clicks", ascending=False)
+# final_result = final_result.sort_values(["flow_rule", "clicks"],
+        # ascending=[True, False])
+final_result = final_result.sort_values("flow_rule", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name",
     "flow_rule", "clicks", "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa"]].to_dict("records"))

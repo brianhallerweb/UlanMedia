@@ -1,7 +1,7 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createOffersForOneFlowReport(req, res) {
+function createOffersForOneFlowRuleReport(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
@@ -12,7 +12,7 @@ function createOffersForOneFlowReport(req, res) {
     pythonOptions.args.push(req.body[arg]);
   }
   PythonShell.run(
-    'create_offers_for_one_flow_report.py',
+    'create_offers_for_one_flow_rule_report.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -21,4 +21,4 @@ function createOffersForOneFlowReport(req, res) {
   );
 }
 
-module.exports = createOffersForOneFlowReport;
+module.exports = createOffersForOneFlowRuleReport;

@@ -1,15 +1,15 @@
 //@format
 const {PythonShell} = require('python-shell');
 
-function createOffersForOneFlowDataset(req, res) {
+function createOffersForOneFlowRuleDataset(req, res) {
   const pythonOptions = {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.dateRange, req.body.offerFlow],
+    args: [req.body.dateRange, req.body.flowRule],
   };
   PythonShell.run(
-    'create_offers_for_one_flow_dataset.py',
+    'create_offers_for_one_flow_rule_dataset.py',
     pythonOptions,
     (err, results) => {
       if (err) throw err;
@@ -18,4 +18,4 @@ function createOffersForOneFlowDataset(req, res) {
   );
 }
 
-module.exports = createOffersForOneFlowDataset;
+module.exports = createOffersForOneFlowRuleDataset;

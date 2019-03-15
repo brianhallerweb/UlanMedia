@@ -6,6 +6,7 @@ class Record extends Component {
   constructor(props) {
     super(props);
     this.offerID = this.props.offer.offer_id;
+    this.flowRule = this.props.offer.flow_rule;
     this.offerName = this.props.offer.offer_name;
     this.clicks = this.props.offer.clicks;
     this.cost = this.props.offer.cost;
@@ -42,7 +43,7 @@ class Record extends Component {
             <div className="rowLink">
               <Link
                 to={{
-                  pathname: `/offersforoneflow/${this.offerFlow}/
+                  pathname: `/offersforoneflowrule/${this.flowRule}/
                   `,
                 }}
                 target="_blank">
@@ -55,7 +56,7 @@ class Record extends Component {
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
         <td>{this.clicks}</td>
-        <td>{this.cpc}</td>
+        <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.conversions}</td>
         <td>${this.cpa}</td>

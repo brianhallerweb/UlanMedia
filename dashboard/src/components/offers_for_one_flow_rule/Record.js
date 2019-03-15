@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.offerID = this.props.offer.offerID;
-    this.offerFlow = this.props.offer.offerFlow;
-    this.offerName = this.props.offer.offerName;
+    this.offerID = this.props.offer.offer_id;
+    this.flowRule = this.props.offer.flow_rule;
+    this.offerName = this.props.offer.offer_name;
     this.cost = this.props.offer.cost;
     this.revenue = this.props.offer.revenue;
     this.profit = this.props.offer.profit;
@@ -34,7 +34,7 @@ class Record extends Component {
                     pathname: `/campaignsforoneoffer/${this.offerID}/${this
                       .offerName +
                       ' ' +
-                      this.offerFlow}`,
+                      this.flowRule}`,
                   }}
                   target="_blank">
                   campaigns
@@ -47,7 +47,7 @@ class Record extends Component {
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
         <td>{this.clicks}</td>
-        <td>{this.cpc}</td>
+        <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.conversions}</td>
         <td>${this.cpa}</td>

@@ -11,10 +11,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      offerFlow: this.props.match.params.offerFlow,
+      flowRule: this.props.match.params.flowRule,
       dateRange: 'oneeighty',
       volRequestDates: '',
-      c1: true,
+      c1: false,
       c1Value: 20,
       c2: false,
       c2Value: 50,
@@ -46,7 +46,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createOffersForOneFlowDataset`, {
+    fetch(`/api/createOffersForOneFlowRuleDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        offerFlow: this.state.offerFlow,
+        flowRule: this.state.flowRule,
       }),
     })
       .then(res => {
@@ -80,7 +80,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createOffersForOneFlowReport', {
+        fetch('/api/createOffersForOneFlowRuleReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
-            offerFlow: this.state.offerFlow,
+            flowRule: this.state.flowRule,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
@@ -127,7 +127,7 @@ class Home extends Component {
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
         <Title
-          offerFlow={this.state.offerFlow}
+          flowRule={this.state.flowRule}
           volRequestDates={this.state.volRequestDates}
         />
         <GlobalNavBar />
