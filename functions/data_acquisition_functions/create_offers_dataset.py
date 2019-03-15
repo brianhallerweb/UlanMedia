@@ -17,7 +17,6 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
             print("problem")
             sys.exit()
 
-
         offers = {"metadata":{"vol_start_date": vol_start_date,
                               "vol_end_date": vol_end_date
                              },
@@ -34,16 +33,37 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
                 pattern = re.compile(r'(^\w* - \w* - {1})(.[^(]*) (.*)')
                 res = pattern.findall(row["offerName"])
                 offer_string_parts = list(res[0])
-                offer_name = offer_string_parts[1]
+                c_offer_name = offer_string_parts[1]
                 flow_rule = offer_string_parts[2]
+
+                ##############################
+                # find parent_offer_name
+                country_list = ["spain", "latam", "brazil", "portugal"]
+                tier_list = ["tier1", "tier3"]
+                offer_words = c_offer_name.split(" ")
+                # remove the country code at the end (eg. DE)
+                offer_words.pop()
+                # remove the country name if there is one (eg. spain)
+                if offer_words[len(offer_words) - 1] in country_list:
+                    offer_words.pop()
+                # remove the tier if there is one (eg. tier1)
+                if offer_words[len(offer_words) - 1] in tier_list:
+                    offer_words.pop()
+                p_offer_name = " ".join(offer_words)
+                ################################
 
             if offer_id not in offers["data"]:
                 offers["data"][offer_id] = {"clicks": row["visits"],
                                                "cost": row["cost"],
                                                "offer_id": offer_id,
                                                "profit": row["profit"],
+                                               "revenue": row["profit"] + row["cost"],
                                                "conversions": row["conversions"],
-                                               "offer_name": offer_name,
+                                               "offer_id": offer_id,
+                                               "vol_offer_name": row["offerName"],
+                                               "offer_name": f"{c_offer_name} {flow_rule}",
+                                               "p_offer_name": p_offer_name,
+                                               "c_offer_name": c_offer_name,
                                                "flow_rule": flow_rule,
                                                }
 

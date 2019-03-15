@@ -6,7 +6,6 @@ class Record extends Component {
   constructor(props) {
     super(props);
     this.offerID = this.props.offer.offer_id;
-    this.flowRule = this.props.offer.flow_rule;
     this.offerName = this.props.offer.offer_name;
     this.clicks = this.props.offer.clicks;
     this.cost = this.props.offer.cost;
@@ -24,9 +23,8 @@ class Record extends Component {
   render() {
     return (
       <tr>
-        <td>{this.offerName}</td>
         <td>
-          {this.flowRule}
+          {this.offerName}
           <div>
             <div className="rowLink">
               <Link

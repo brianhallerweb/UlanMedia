@@ -17,7 +17,7 @@ for offer in data.values():
 
 df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)
-df["revenue"] = round(df["profit"] + df["cost"], 2)
+df["revenue"] = round(df["revenue"], 2)
 df["profit"] = round(df["profit"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
@@ -45,7 +45,7 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["offer_id","offer_name", "flow_rule", "clicks",
+        on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa"]
             )
@@ -58,9 +58,8 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values(["flow_rule", "clicks"],
         ascending=[True, False])
 # final_result = final_result.sort_values("clicks", ascending=False)
-json_final_result = json.dumps(final_result[["offer_id","offer_name",
-    "flow_rule", "clicks",
-    "cost", "revenue", "profit","conversions", "cvr",
+json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name",
+    "flow_rule", "clicks", "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa"]].to_dict("records"))
 
 print(json_final_result)
