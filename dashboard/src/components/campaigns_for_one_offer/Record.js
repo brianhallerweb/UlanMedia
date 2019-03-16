@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.campaignName = this.props.campaign.campaignName;
-    this.volID = this.props.campaign.campaignID;
+    this.campaignName = this.props.campaign.campaign_name;
+    this.volID = this.props.campaign.campaign_id;
     this.clicks = this.props.campaign.clicks;
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;

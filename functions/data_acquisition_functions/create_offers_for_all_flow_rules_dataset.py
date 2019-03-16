@@ -13,27 +13,28 @@ def create_offers_for_all_flow_rules_dataset(date_range):
 
     offers_for_all_flow_rules = {"metadata": metadata, "data": {}}   
 
-    for offer in data:
-        if offer in offers_for_all_flow_rules["data"]:
-            offers_for_all_flow_rules["data"][offer]["clicks"] += data[offer]["clicks"] 
-            offers_for_all_flow_rules["data"][offer]["cost"] += data[offer]["cost"] 
-            offers_for_all_flow_rules["data"][offer]["profit"] += data[offer]["profit"] 
-            offers_for_all_flow_rules["data"][offer]["conversions"] += data[offer]["conversions"] 
-            offers_for_all_flow_rules["data"][offer]["revenue"] += data[offer]["revenue"] 
-        else:
-            offers_for_all_flow_rules["data"][offer] = {
-                                                      "offer_id": data[offer]["offer_id"],
-                                                      "vol_offer_name": data[offer]["vol_offer_name"],
-                                                      "offer_name": data[offer]["offer_name"],
-                                                      "p_offer_name": data[offer]["p_offer_name"],
-                                                      "c_offer_name": data[offer]["c_offer_name"],
-                                                      "flow_rule": data[offer]["flow_rule"],
-                                                      "clicks": data[offer]["clicks"],
-                                                      "cost": data[offer]["cost"],
-                                                      "profit": data[offer]["profit"], 
-                                                      "revenue": data[offer]["revenue"], 
-                                                      "conversions": data[offer]["conversions"]
-                                                      }
+    for campaign in data:
+        for offer in data[campaign]:
+            if offer in offers_for_all_flow_rules["data"]:
+                offers_for_all_flow_rules["data"][offer]["clicks"] += data[campaign][offer]["clicks"] 
+                offers_for_all_flow_rules["data"][offer]["cost"] += data[campaign][offer]["cost"] 
+                offers_for_all_flow_rules["data"][offer]["profit"] += data[campaign][offer]["profit"] 
+                offers_for_all_flow_rules["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
+                offers_for_all_flow_rules["data"][offer]["revenue"] += data[campaign][offer]["revenue"] 
+            else:
+                offers_for_all_flow_rules["data"][offer] = {
+                                                          "offer_id": data[campaign][offer]["offer_id"],
+                                                          "vol_offer_name": data[campaign][offer]["vol_offer_name"],
+                                                          "offer_name": data[campaign][offer]["offer_name"],
+                                                          "p_offer_name": data[campaign][offer]["p_offer_name"],
+                                                          "c_offer_name": data[campaign][offer]["c_offer_name"],
+                                                          "flow_rule": data[campaign][offer]["flow_rule"],
+                                                          "clicks": data[campaign][offer]["clicks"],
+                                                          "cost": data[campaign][offer]["cost"],
+                                                          "profit": data[campaign][offer]["profit"], 
+                                                          "revenue": data[campaign][offer]["revenue"], 
+                                                          "conversions": data[campaign][offer]["conversions"]
+                                                          }
     
 
     with open(f"../../data/offers_for_all_flow_rules/{date_range}_offers_for_all_flow_rules_dataset.json", "w") as file:

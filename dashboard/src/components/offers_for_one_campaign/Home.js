@@ -15,7 +15,7 @@ class Home extends Component {
       campaignName: this.props.match.params.campaignName,
       dateRange: 'oneeighty',
       volRequestDates: '',
-      c1: true,
+      c1: false,
       c1Value: 20,
       c2: false,
       c2Value: 50,

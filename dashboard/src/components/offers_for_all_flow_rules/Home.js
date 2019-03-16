@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       dateRange: 'oneeighty',
       volRequestDates: '',
-      c1: true,
+      c1: false,
       c1Value: 20,
       c2: false,
       c2Value: 50,

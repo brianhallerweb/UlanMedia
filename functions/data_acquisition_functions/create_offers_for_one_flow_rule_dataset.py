@@ -13,16 +13,17 @@ def create_offers_for_one_flow_rule_dataset(date_range, flow_rule):
 
     offers_for_one_flow_rule = {"metadata": metadata, "data": {} }   
 
-    for offer in data:
-        if data[offer]["flow_rule"] == flow_rule:
-            if offer in offers_for_one_flow_rule["data"]:
-                offers_for_one_flow_rule["data"][offer]["clicks"] += data[offer]["clicks"] 
-                offers_for_one_flow_rule["data"][offer]["cost"] += data[offer]["cost"] 
-                offers_for_one_flow_rule["data"][offer]["profit"] += data[offer]["profit"] 
-                offers_for_one_flow_rule["data"][offer]["revenue"] += data[offer]["revenue"] 
-                offers_for_one_flow_rule["data"][offer]["conversions"] += data[offer]["conversions"] 
-            else:
-                offers_for_one_flow_rule["data"][offer] = data[offer]
+    for campaign in data:
+        for offer in data[campaign]:
+            if data[campaign][offer]["flow_rule"] == flow_rule:
+                if offer in offers_for_one_flow_rule["data"]:
+                    offers_for_one_flow_rule["data"][offer]["clicks"] += data[campaign][offer]["clicks"] 
+                    offers_for_one_flow_rule["data"][offer]["cost"] += data[campaign][offer]["cost"] 
+                    offers_for_one_flow_rule["data"][offer]["profit"] += data[campaign][offer]["profit"] 
+                    offers_for_one_flow_rule["data"][offer]["revenue"] += data[campaign][offer]["revenue"] 
+                    offers_for_one_flow_rule["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
+                else:
+                    offers_for_one_flow_rule["data"][offer] = data[campaign][offer]
 
     with open(f"../../data/offers_for_one_flow_rule/{flow_rule}_{date_range}_offers_for_one_flow_rule_dataset.json", "w") as file:
         json.dump(offers_for_one_flow_rule, file)

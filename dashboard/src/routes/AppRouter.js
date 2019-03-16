@@ -68,7 +68,7 @@ const AppRouter = () => (
           Component={campaigns_for_one_p_widgetHome}
         />
         <PrivateRoute
-          path="/campaignsforoneoffer/:offerID/:fullOfferName"
+          path="/campaignsforoneoffer/:offerID/:offerName"
           Component={campaigns_for_one_offerHome}
         />
         <PrivateRoute
