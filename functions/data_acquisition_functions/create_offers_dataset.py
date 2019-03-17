@@ -1,5 +1,6 @@
 from config.config import *
 from functions.misc.send_email import send_email
+from functions.misc.get_campaign_sets import get_campaign_sets
 from datetime import datetime
 import requests
 import json
@@ -27,11 +28,18 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
             if campaign_id not in offers["data"]:
                 offers["data"][campaign_id] = {}
 
+        campaigns = get_campaign_sets()
+        campaign_ids = []
+        for campaign in campaigns:
+            campaign_ids.append(campaign["vol_id"])
+
         for row in res.json()["rows"]:
             campaign_id = row["campaignId"] 
             offer_id = row["offerId"]
 
-            if row["offerName"].startswith("Global - 404"):
+            if campaign_id not in campaign_ids:
+                continue
+            elif row["offerName"].startswith("Global - 404"):
                 continue
             else:    
                 pattern = re.compile(r'(^\w* - \w* - {1})(.[^(]*) (.*)')
