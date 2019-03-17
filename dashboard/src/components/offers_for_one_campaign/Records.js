@@ -13,8 +13,8 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Offer Flow</th>
             <th>Offer Name</th>
+            <th>Flow Rule</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>

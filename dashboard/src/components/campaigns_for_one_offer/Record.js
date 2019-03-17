@@ -45,7 +45,7 @@ class Record extends Component {
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
         <td>{this.clicks}</td>
-        <td>{this.cpc}</td>
+        <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.conversions}</td>
         <td>${this.cpa}</td>

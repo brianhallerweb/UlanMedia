@@ -52,14 +52,14 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values(["flow_rule", "clicks"],
+final_result = final_result.sort_values(["offer_name", "clicks"],
         ascending=[True, False])
 
 # add a summary row at the top
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
-    summary["flow_rule"] = "summary"
+    summary["offer_name"] = "summary"
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0

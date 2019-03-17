@@ -25,8 +25,8 @@ class Record extends Component {
     return (
       <tr>
         <td>
-          {this.flowRule}
-          {this.flowRule != 'summary' && (
+          {this.offerName}
+          {this.offerName != 'summary' && (
             <div>
               <div className="rowLink">
                 <Link
@@ -42,7 +42,23 @@ class Record extends Component {
             </div>
           )}
         </td>
-        <td>{this.offerName}</td>
+        <td>
+          {this.flowRule}
+          {this.offerName != 'summary' && (
+            <div>
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/offersforoneflowrule/${this.flowRule}/
+                  `,
+                  }}
+                  target="_blank">
+                  offers
+                </Link>
+              </div>
+            </div>
+          )}
+        </td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
