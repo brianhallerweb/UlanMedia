@@ -7,6 +7,7 @@ class Record extends Component {
     super(props);
     this.offerID = this.props.offer.offer_id;
     this.flowRule = this.props.offer.flow_rule;
+    this.weight = this.props.offer.weight;
     this.offerName = this.props.offer.offer_name;
     this.clicks = this.props.offer.clicks;
     this.cost = this.props.offer.cost;
@@ -55,6 +56,7 @@ class Record extends Component {
             </div>
           </div>
         </td>
+        <td>{this.weight}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>

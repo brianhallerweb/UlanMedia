@@ -15,6 +15,7 @@ class Records extends Component {
           <tr>
             <th>Offer Name</th>
             <th>Flow Rule</th>
+            <th>Weight</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>

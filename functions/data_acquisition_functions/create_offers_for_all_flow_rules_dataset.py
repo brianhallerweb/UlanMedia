@@ -3,6 +3,8 @@ import json
 import sys
 import os
 
+from functions.classification_functions.get_offer_weight import get_offer_weight
+
 def create_offers_for_all_flow_rules_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
@@ -33,7 +35,8 @@ def create_offers_for_all_flow_rules_dataset(date_range):
                                                           "cost": data[campaign][offer]["cost"],
                                                           "profit": data[campaign][offer]["profit"], 
                                                           "revenue": data[campaign][offer]["revenue"], 
-                                                          "conversions": data[campaign][offer]["conversions"]
+                                                          "conversions": data[campaign][offer]["conversions"],
+                                                          "weight": get_offer_weight(data[campaign][offer]["flow_rule"],data[campaign][offer]["offer_id"])
                                                           }
     
 
