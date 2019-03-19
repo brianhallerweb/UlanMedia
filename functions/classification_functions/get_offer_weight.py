@@ -7,6 +7,8 @@ import pandas as pd
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
+# you are making this obsolete on 3/19 so you will probably be able to delete
+# it soon
 
 # how offers work
 # each campaign has a flow with offers

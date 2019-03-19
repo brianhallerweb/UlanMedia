@@ -6,7 +6,7 @@ import numpy as np
 
 date_range = sys.argv[1]
 
-with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_all_flow_rules/{date_range}_offers_for_all_flow_rules_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_all_campaigns/{date_range}_offers_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
@@ -18,7 +18,7 @@ for offer in data.values():
 df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)
 df["revenue"] = round(df["revenue"], 2)
-df["weight"] = round(df["weight"], 2)
+df["weight"] = round(df["weight"], 0)
 df["profit"] = round(df["profit"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)

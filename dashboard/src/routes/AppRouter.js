@@ -9,7 +9,7 @@ import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_cam
 import c_widgets_for_all_campaignsHome from '../components/c_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
-import offers_for_all_flow_rulesHome from '../components/offers_for_all_flow_rules/Home';
+import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
 import offers_for_one_flow_ruleHome from '../components/offers_for_one_flow_rule/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
@@ -72,8 +72,8 @@ const AppRouter = () => (
           Component={campaigns_for_one_offerHome}
         />
         <PrivateRoute
-          path="/offersforallflowrules"
-          Component={offers_for_all_flow_rulesHome}
+          path="/offersforallcampaigns"
+          Component={offers_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/offersforonecampaign/:volID/:campaignName"

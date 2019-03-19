@@ -11,7 +11,7 @@ def create_campaigns_for_one_offer_dataset(date_range, offer_id):
     for campaign in campaigns_sets:
         campaigns_lookup[campaign["vol_id"]] = campaign["name"]
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     metadata = json_file["metadata"]

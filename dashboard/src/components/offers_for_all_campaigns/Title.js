@@ -3,7 +3,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 
 const Title = ({volRequestDates}) => {
-  const title = `offers for all flow rules`;
+  const title = `offers for all campaigns`;
   return (
     <div className="title">
       <Helmet>

@@ -5,7 +5,7 @@ import os
 
 def create_offers_for_one_flow_rule_dataset(date_range, flow_rule):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers/{date_range}_offers_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     metadata = json_file["metadata"]

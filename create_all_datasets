@@ -5,5 +5,5 @@ cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_p_and_c_widg
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_p_widgets_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_c_widgets_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_datasets.py
+cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_for_each_campaign_datasets.py
 

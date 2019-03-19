@@ -8,7 +8,7 @@ import sys
 import re
 import os
 
-def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
+def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, vol_end_date):
     try:
         url = f"https://api.voluum.com/report?from={vol_start_date}T00%3A00%3A00Z&to={vol_end_date}T00%3A00%3A00Z&tz=America%2FLos_Angeles&conversionTimeMode=VISIT&sort=offerName&direction=desc&columns=offerName&columns=campaignName&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&columns=campaignId&columns=cpa&groupBy=offer&groupBy=campaign&offset=0&limit=100000&include=ACTIVE&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc"
         res = requests.get(url, headers = {"cwauth-token": token})
@@ -37,9 +37,7 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
             campaign_id = row["campaignId"] 
             offer_id = row["offerId"]
 
-            if campaign_id not in campaign_ids:
-                continue
-            elif row["offerName"].startswith("Global - 404"):
+            if (campaign_id not in campaign_ids) | (row["offerName"].startswith("Global - 404")):
                 continue
             else:    
                 pattern = re.compile(r'(^\w* - \w* - {1})(.[^(]*) (.*)')
@@ -79,12 +77,12 @@ def create_offers_dataset(token, date_range, vol_start_date, vol_end_date):
                                                "flow_rule": flow_rule,
                                                }
 
-        with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers/{date_range}_offers_dataset.json", "w") as file:
+        with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json", "w") as file:
             json.dump(offers, file)
 
     except requests.exceptions.RequestException as e:
-        print("Failed - create_offers_dataset()") 
-        send_email("brianshaller@gmail.com", "Failed - create_offers_dataset() at " +
+        print("Failed - create_offers_for_each_campaign_dataset()") 
+        send_email("brianshaller@gmail.com", "Failed - create_offers_for_each_campaign_dataset() at " +
                 str(datetime.now().strftime("%Y-%m-%d %H:%M")), e)
         sys.exit()
 
