@@ -4,6 +4,7 @@ import json
 import sys
 import re
 import os
+from functions.classification_functions.classify_offer_for_all_campaigns import classify_offer_for_all_campaigns
 
 def create_offers_for_all_campaigns_dataset(date_range):
 
@@ -165,15 +166,38 @@ def create_offers_for_all_campaigns_dataset(date_range):
     # 5. Calculate the weight of each offer
 
     for flow_rule in offers_for_each_flow_rule:
+        number_of_offers_in_flow_rule = 0
         total_flow_rule_score = 0
         for offer in offers_for_each_flow_rule[flow_rule]:
+            number_of_offers_in_flow_rule += 1
             total_flow_rule_score += offers_for_each_flow_rule[flow_rule][offer]["total_score"]
         for offer in offers_for_each_flow_rule[flow_rule]:
             total_score = offers_for_each_flow_rule[flow_rule][offer]["total_score"] 
             if total_flow_rule_score == 0:
-                offers_for_each_flow_rule[flow_rule][offer]["weight"] = 0
+                offers_for_each_flow_rule[flow_rule][offer]["weight"] = 100 / number_of_offers_in_flow_rule
             else:
                 offers_for_each_flow_rule[flow_rule][offer]["weight"] = total_score / total_flow_rule_score * 100
+
+        # 3/20 below handles the  sitation where one offer is 100 and others are 0
+        # it should reduce the top offer to 90 and give 10 to the second best
+        # offer
+        # I'm not sure how to evaluate the second best offer so I'm not doing
+        # that.
+        # You made this quick and dirty so you should come back and improve this later.
+        best_offer_weight = 0
+        best_offer_id = "" 
+        for offer in offers_for_each_flow_rule[flow_rule]:
+            if offers_for_each_flow_rule[flow_rule][offer]["weight"] > best_offer_weight:
+                best_offer_weight = offers_for_each_flow_rule[flow_rule][offer]["weight"]
+                best_offer_id = offers_for_each_flow_rule[flow_rule][offer]["offer_id"]
+        if (number_of_offers_in_flow_rule > 1) & (best_offer_weight == 100):
+            for offer in offers_for_each_flow_rule[flow_rule]:
+                if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] == best_offer_id:
+                    offers_for_each_flow_rule[flow_rule][offer]["weight"] = 90
+            for offer in offers_for_each_flow_rule[flow_rule]:
+                if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] != best_offer_id:
+                    offers_for_each_flow_rule[flow_rule][offer]["weight"] = 10
+                    break
 
 
     # At thie point, offers_for_each_flow_rule is a lookup dictionary to find
@@ -206,9 +230,17 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "profit": data[campaign][offer]["profit"], 
                                                           "revenue": data[campaign][offer]["revenue"], 
                                                           "conversions": data[campaign][offer]["conversions"],
-                                                          "weight": get_offer_weight(offers_for_each_flow_rule, data[campaign][offer]["flow_rule"],data[campaign][offer]["offer_id"])
+                                                          "weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["weight"],
+                                                          "vol_weight": data[campaign][offer]["vol_weight"],
                                                           }
-    
+
+    #######################################################
+    # 7. Add classifcation to each offer
+    for offer in offers_for_all_campaigns["data"]:
+        offers_for_all_campaigns["data"][offer]["classification"] = classify_offer_for_all_campaigns(offers_for_all_campaigns["data"][offer])
+
+    ###############################################
+    # 8. Save file and return 
 
     with open(f"../../data/offers_for_all_campaigns/{date_range}_offers_for_all_campaigns_dataset.json", "w") as file:
         json.dump(offers_for_all_campaigns, file)
@@ -253,7 +285,4 @@ def get_cvr_score(cvr):
         return 1 
     else:
         return 0 
-
-def get_offer_weight(offers_for_each_flow_rule, flow_rule, offer_id):
-    return offers_for_each_flow_rule[flow_rule][offer_id]["weight"]
 

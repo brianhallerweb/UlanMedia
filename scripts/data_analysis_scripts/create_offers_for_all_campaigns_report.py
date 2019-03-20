@@ -37,8 +37,15 @@ result2 = df[c2]
 c3 = df["cvr"] <= float(sys.argv[4])
 result3 = df[c3]
 
-conditions_args = [sys.argv[5], sys.argv[6], sys.argv[7]]
-conditions_dfs = [result1, result2, result3]
+c4 = df["classification"] == sys.argv[5]
+result4 = df[c4]
+
+c5 = df["vol_weight"] != df["weight"] 
+result5 = df[c5]
+
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9],
+        sys.argv[10]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -48,7 +55,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa", "weight"]
+    "epc", "cpa", "cpc", "epa", "weight", "vol_weight", "classification"]
             )
 
 if final_result is None:
@@ -61,7 +68,7 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("flow_rule", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name",
     "flow_rule", "clicks", "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa","weight"]].to_dict("records"))
+    "epc", "cpa", "cpc", "epa","weight", "vol_weight", "classification"]].to_dict("records"))
 
 print(json_final_result)
 

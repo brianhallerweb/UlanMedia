@@ -11,6 +11,9 @@ const ConditionCheckboxes = ({
   c2Value,
   c3,
   c3Value,
+  c4,
+  c4Value,
+  c5,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -75,6 +78,33 @@ const ConditionCheckboxes = ({
           />
           {'%'}
         </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c4"
+          checked={c4}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>Offer classification is </span>
+        <select
+          onChange={e => setConditionValue('c4Value', e.target.value)}
+          defaultValue={c4Value}>
+          <option value="good">good</option>
+          <option value="bad">bad</option>
+          <option value="wait">wait</option>
+        </select>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c5"
+          checked={c5}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        Voluum weight doesn't match weight
       </div>
     </div>
   );
