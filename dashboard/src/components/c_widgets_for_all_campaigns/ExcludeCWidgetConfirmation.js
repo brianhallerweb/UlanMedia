@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class ExcludeCWidgetConfirmation extends Component {
   constructor(props) {
@@ -121,6 +122,20 @@ class ExcludeCWidgetConfirmation extends Component {
           Are you sure you want to exclude all campaigns from c widget{' '}
           {this.state.cWidgetID}?
         </p>
+
+        <div style={{marginTop: 10, marginBottom: 15}}>
+          {'Remember to add the widget to the '}
+          <Link
+            to={{
+              pathname: `/listcwidgetconfirmation/${
+                this.state.cWidgetID
+              }/black`,
+            }}
+            target="_blank">
+            blacklist
+          </Link>
+        </div>
+
         <div>
           <button
             disabled={!this.state.campaigns.length > 0}

@@ -30,8 +30,8 @@ class Home extends Component {
       c3Value: 10,
       c4: false,
       c4Value: 10,
-      c5: false,
-      c6: true,
+      c5: true,
+      c6: false,
     };
   }
 

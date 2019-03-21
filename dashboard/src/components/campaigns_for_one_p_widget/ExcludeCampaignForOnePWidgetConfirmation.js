@@ -4,7 +4,7 @@ import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-class ExcludeCampaignConfirmation extends Component {
+class ExcludeCampaignForOnePWidgetConfirmation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -105,4 +105,4 @@ class ExcludeCampaignConfirmation extends Component {
   }
 }
 
-export default ExcludeCampaignConfirmation;
+export default ExcludeCampaignForOnePWidgetConfirmation;

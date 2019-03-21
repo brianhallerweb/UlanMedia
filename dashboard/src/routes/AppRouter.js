@@ -21,11 +21,11 @@ import campaigns_for_one_adHome from '../components/campaigns_for_one_ad/Home';
 import campaigns_for_one_offerHome from '../components/campaigns_for_one_offer/Home';
 import p_widgets_for_all_campaignsListPWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ListPWidgetConfirmation';
 import c_widgets_for_all_campaignsListCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ListCWidgetConfirmation';
-import campaigns_for_one_p_widgetExcludeCampaignConfirmation from '../components/campaigns_for_one_p_widget/ExcludeCampaignConfirmation';
+import campaigns_for_one_p_widgetExcludeCampaignForOnePWidgetConfirmation from '../components/campaigns_for_one_p_widget/ExcludeCampaignForOnePWidgetConfirmation';
 import campaigns_for_one_c_widgetExcludeCampaignForOneCWidgetConfirmation from '../components/campaigns_for_one_c_widget/ExcludeCampaignForOneCWidgetConfirmation';
 import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
 import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
-import ExcludeOneCampaignForAllBlacklistedPWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPWidgets';
+import ExcludeOneCampaignForAllBlacklistedPAndCWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPAndCWidgets';
 import UpdateAllData from '../components/UpdateAllData';
 import UpdateOneEightyData from '../components/UpdateOneEightyData';
 import RedirectToHome from '../components/RedirectToHome';
@@ -108,8 +108,10 @@ const AppRouter = () => (
           Component={c_widgets_for_all_campaignsListCWidgetConfirmation}
         />
         <PrivateRoute
-          path="/excludecampaignconfirmation/:pWidgetID/:mgidCampaignID"
-          Component={campaigns_for_one_p_widgetExcludeCampaignConfirmation}
+          path="/excludecampaignforonepwidgetconfirmation/:pWidgetID/:mgidCampaignID"
+          Component={
+            campaigns_for_one_p_widgetExcludeCampaignForOnePWidgetConfirmation
+          }
         />
         <PrivateRoute
           path="/excludecampaignforonecwidgetconfirmation/:cWidgetID/:mgidCampaignID"
@@ -126,8 +128,8 @@ const AppRouter = () => (
           Component={c_widgets_for_all_campaignsExcludeCWidgetConfirmation}
         />
         <PrivateRoute
-          path="/excludeonecampaignforallblacklistedpwidgets"
-          Component={ExcludeOneCampaignForAllBlacklistedPWidgets}
+          path="/excludeonecampaignforallblacklistedpandcwidgets"
+          Component={ExcludeOneCampaignForAllBlacklistedPAndCWidgets}
         />
         <PrivateRoute path="/updatealldata" Component={UpdateAllData} />
         <PrivateRoute

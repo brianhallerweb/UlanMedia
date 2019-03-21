@@ -111,7 +111,7 @@ const ConditionCheckboxes = ({
           checked={c5}
           onChange={e => toggleCondition(e.target.name)}
         />
-        Widget classification doesn't match global status
+        Widget has included bad campaigns
       </div>
 
       <div>
@@ -121,7 +121,7 @@ const ConditionCheckboxes = ({
           checked={c6}
           onChange={e => toggleCondition(e.target.name)}
         />
-        Widget has included bad campaigns
+        Widget classification doesn't match global status
       </div>
     </div>
   );

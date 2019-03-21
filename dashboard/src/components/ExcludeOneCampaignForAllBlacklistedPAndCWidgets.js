@@ -3,22 +3,22 @@ import React, {Component} from 'react';
 import Logout from './Logout';
 import {Redirect} from 'react-router-dom';
 
-class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
+class ExcludeOneCampaignForAllBlacklistedPAndCWidgets extends Component {
   constructor(props) {
     super(props);
     this.state = {
       authenticated: true,
       loading: false,
-      blacklistedPWidgets: [],
+      blacklistedPAndCWidgets: [],
       mgidCampaignID: '',
     };
   }
 
   componentDidMount() {
-    this.getBlacklistedPWidgets();
+    this.getBlacklistedPAndCWidgets();
   }
 
-  getBlacklistedPWidgets() {
+  getBlacklistedPAndCWidgets() {
     fetch('/api/readblacklist')
       .then(res => {
         if (!res.ok) {
@@ -26,11 +26,11 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         }
         return res.json();
       })
-      .then(blacklistedPWidgets => this.setState({blacklistedPWidgets}))
+      .then(blacklistedPAndCWidgets => this.setState({blacklistedPAndCWidgets}))
       .catch(err => console.log(err));
   }
 
-  excludeOneCampaign(pWidgetID, mgidCampaignID) {
+  excludeOneCampaign(widgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
       fetch(`/api/excludecampaign`, {
         method: 'POST',
@@ -39,7 +39,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
           'x-auth': localStorage.getItem('token'),
         },
         body: JSON.stringify({
-          pWidgetID,
+          widgetID,
           mgidCampaignID,
         }),
       })
@@ -66,9 +66,9 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
 
   async excludeCampaign() {
     this.setState({loading: true});
-    for (let pWidgetID of this.state.blacklistedPWidgets) {
+    for (let widgetID of this.state.blacklistedPWidgets) {
       const result = await this.excludeOneCampaign(
-        pWidgetID,
+        widgetID,
         this.state.mgidCampaignID,
       );
       if (!result.id) {
@@ -81,13 +81,13 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         console.log(
           `campaign ${
             this.state.mgidCampaignID
-          } excluded from p widget ${pWidgetID}`,
+          } excluded from widget ${widgetID}`,
         );
       } else {
         console.log(
           `ERROR: campaign ${
             this.state.mgidCampaignID
-          } failed to be excluded from p widget ${pWidgetID}. The next line will show the error`,
+          } failed to be excluded from widget ${widgetID}. The next line will show the error`,
         );
         console.log(result);
       }
@@ -101,8 +101,8 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <h3>Exclude one campaign from all blacklisted p widgets</h3>
-        <div>Enter mgid campain id to exclude:</div>
+        <h3>Exclude one campaign from all blacklisted p and c widgets</h3>
+        <div>Enter mgid campaign id to exclude:</div>
         <input
           style={{marginTop: 4, marginBottom: 6}}
           type="text"
@@ -112,7 +112,7 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
         <div>
           <button
             disabled={
-              !this.state.blacklistedPWidgets.length > 0 ||
+              !this.state.blacklistedPAndCWidgets.length > 0 ||
               !this.state.mgidCampaignID
             }
             onClick={() => this.excludeCampaign()}>
@@ -130,4 +130,4 @@ class ExcludeOneCampaignForAllBlacklistedPWidgets extends Component {
   }
 }
 
-export default ExcludeOneCampaignForAllBlacklistedPWidgets;
+export default ExcludeOneCampaignForAllBlacklistedPAndCWidgets;

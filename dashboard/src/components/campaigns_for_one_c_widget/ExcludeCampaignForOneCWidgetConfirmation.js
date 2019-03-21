@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class ExcludeCampaignForOneCWidgetConfirmation extends Component {
   constructor(props) {
@@ -78,6 +79,18 @@ class ExcludeCampaignForOneCWidgetConfirmation extends Component {
           Are you sure you want to exclude campaign {this.state.mgidCampaignID}{' '}
           from c widget {this.state.cWidgetID}?
         </p>
+
+        <div style={{marginTop: 10, marginBottom: 15}}>
+          {'Remember to add the widget to the '}
+          <Link
+            to={{
+              pathname: `/listcwidgetconfirmation/${this.state.cWidgetID}/grey`,
+            }}
+            target="_blank">
+            greylist
+          </Link>
+        </div>
+
         <div>
           <button onClick={() => this.confirmExcludeCampaignForOneCWidget()}>
             Yes, confirm exclution
