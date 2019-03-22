@@ -8,7 +8,7 @@ class Record extends Component {
     this.offerID = this.props.offer.offer_id;
     this.flowRule = this.props.offer.flow_rule;
     this.volWeight = this.props.offer.vol_weight;
-    this.weight = this.props.offer.weight;
+    this.recWeight = this.props.offer.rec_weight;
     this.classification = this.props.offer.classification;
     this.offerName = this.props.offer.offer_name;
     this.clicks = this.props.offer.clicks;
@@ -21,12 +21,18 @@ class Record extends Component {
     this.cpa = this.props.offer.cpa;
     this.epa = this.props.offer.epa;
     this.cpc = this.props.offer.cpc;
+    this.hasMismatchVolWeightAndRecWeight = this.props.offer.has_mismatch_vol_weight_and_rec_weight;
     this.state = {};
   }
 
   render() {
     return (
-      <tr>
+      <tr
+        style={
+          this.hasMismatchVolWeightAndRecWeight || this.classification === 'bad'
+            ? {backgroundColor: '#f7d9d9'}
+            : null
+        }>
         <td>
           {this.offerName}
           <div>
@@ -60,7 +66,7 @@ class Record extends Component {
         </td>
         <td>{this.classification}</td>
         <td>{this.volWeight}</td>
-        <td>{this.weight}</td>
+        <td>{this.recWeight}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>

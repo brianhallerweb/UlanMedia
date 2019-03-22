@@ -18,7 +18,7 @@ for offer in data.values():
 df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)
 df["revenue"] = round(df["revenue"], 2)
-df["weight"] = round(df["weight"], 0)
+df["rec_weight"] = round(df["rec_weight"], 0)
 df["profit"] = round(df["profit"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
@@ -28,19 +28,19 @@ df["cpc"] = round(df["clicks"] / df["cost"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 
 
-c1 = df["cost"] > float(sys.argv[2])
+c1 = df["classification"] == sys.argv[2]
 result1 = df[c1]
 
-c2 = df["profit"] < -1 * float(sys.argv[3])
+c2 = df["cost"] > float(sys.argv[3])
 result2 = df[c2]
 
-c3 = df["cvr"] <= float(sys.argv[4])
+c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
 
-c4 = df["classification"] == sys.argv[5]
+c4 = df["cvr"] <= float(sys.argv[5])
 result4 = df[c4]
 
-c5 = df["vol_weight"] != df["weight"] 
+c5 = df["has_mismatch_vol_weight_and_rec_weight"] == True
 result5 = df[c5]
 
 conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9],
@@ -55,7 +55,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa", "weight", "vol_weight", "classification"]
+    "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification", "has_mismatch_vol_weight_and_rec_weight"]
             )
 
 if final_result is None:
@@ -68,7 +68,7 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("flow_rule", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name",
     "flow_rule", "clicks", "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa","weight", "vol_weight", "classification"]].to_dict("records"))
+    "epc", "cpa", "cpc", "epa","rec_weight", "vol_weight", "classification", "has_mismatch_vol_weight_and_rec_weight"]].to_dict("records"))
 
 print(json_final_result)
 

@@ -6,6 +6,8 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForMismatchVolWeightAndRecWeight from './checkForMismatchVolWeightAndRecWeight';
+import checkForBadOffers from './checkForBadOffers';
 
 class Home extends Component {
   constructor(props) {
@@ -13,14 +15,16 @@ class Home extends Component {
     this.state = {
       dateRange: 'oneeighty',
       volRequestDates: '',
+      mismatchVolWeightAndRecWeightCount: 0,
+      badOffersCount: 0,
       c1: false,
-      c1Value: 20,
+      c1Value: 'good',
       c2: false,
-      c2Value: 50,
+      c2Value: 20,
       c3: false,
-      c3Value: 0,
+      c3Value: 50,
       c4: false,
-      c4Value: 'good',
+      c4Value: 0,
       c5: false,
       error: false,
       authenticated: true,
@@ -117,9 +121,20 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        let mismatchVolWeightAndRecWeightCount = checkForMismatchVolWeightAndRecWeight(
+          records,
+        );
+        let badOffersCount = checkForBadOffers(records);
+
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({offersRecords: records, error, loading: false});
+        this.setState({
+          offersRecords: records,
+          mismatchVolWeightAndRecWeightCount,
+          badOffersCount,
+          error,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -139,7 +154,6 @@ class Home extends Component {
             flowchart
           </a>
         </div>
-
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
@@ -157,6 +171,19 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.mismatchVolWeightAndRecWeightCount !== 0 &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              {this.state.mismatchVolWeightAndRecWeightCount} offers with
+              mismatched voluum weight and recommended weight
+            </div>
+          )}
+        {this.state.badOffersCount !== 0 && !this.state.loading && (
+          <div style={{color: 'red', marginTop: 10}}>
+            {this.state.badOffersCount} bad offers
+          </div>
+        )}
+
         <Records
           error={this.state.error}
           loading={this.state.loading}

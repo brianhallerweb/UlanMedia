@@ -19,7 +19,7 @@ class Records extends Component {
             <th>Profit</th>
             <th>Clicks</th>
             <th>CPC</th>
-            <th>CPC</th>
+            <th>EPC</th>
             <th>MPC</th>
             <th>Leads</th>
             <th>CPL</th>

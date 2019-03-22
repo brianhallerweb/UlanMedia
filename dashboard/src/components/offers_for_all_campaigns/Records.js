@@ -17,7 +17,7 @@ class Records extends Component {
             <th>Flow Rule</th>
             <th>Classificaiton</th>
             <th>Vol Weight</th>
-            <th>Weight</th>
+            <th>Rec Weight</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>

@@ -26,16 +26,22 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
         
         ############################3
         # create an offer weight lookup dictionary
-        weight_url = f"https://api.voluum.com/flow/{vol_flow_id}"
-        weight_res = requests.get(weight_url, headers = {"cwauth-token": token})
-        weight_res.raise_for_status()
-        weight_res = weight_res.json()
-        weight_lookup = {}
-        for path_group in weight_res["conditionalPathsGroups"]:
+        vol_weight_url = f"https://api.voluum.com/flow/{vol_flow_id}"
+        vol_weight_res = requests.get(vol_weight_url, headers = {"cwauth-token": token})
+        vol_weight_res.raise_for_status()
+        vol_weight_res = vol_weight_res.json()
+        vol_weight_lookup = {}
+        for offer in vol_weight_res["defaultPaths"][0]["offers"]:
+            offer_id = offer["offer"]["id"]
+            if offer_id not in vol_weight_lookup:
+                vol_weight_lookup[offer_id] = offer["weight"]
+            else:
+                print("there shouldn't be any repeats")
+        for path_group in vol_weight_res["conditionalPathsGroups"]:
             for offer in path_group["paths"][0]["offers"]:
                 offer_id = offer["offer"]["id"]
-                if offer_id not in weight_lookup:
-                    weight_lookup[offer_id] = offer["weight"]
+                if offer_id not in vol_weight_lookup:
+                    vol_weight_lookup[offer_id] = offer["weight"]
                 else:
                     print("there shouldn't be any repeats")
         #########################
@@ -84,13 +90,10 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
                     offer_words.pop()
                 p_offer_name = " ".join(offer_words)
 
-                # why is this happening
-                # maybe some offers are taking the default weighting?
-                # they don't seem to have a weighting 
-                if offer_id not in weight_lookup:
+                if offer_id not in vol_weight_lookup:
                     vol_weight = "NA"
                 else:
-                    vol_weight = weight_lookup[offer_id]
+                    vol_weight = vol_weight_lookup[offer_id]
 
 
             if offer_id not in offers["data"][campaign_id]:

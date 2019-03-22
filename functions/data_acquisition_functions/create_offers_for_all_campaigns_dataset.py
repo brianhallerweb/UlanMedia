@@ -174,9 +174,9 @@ def create_offers_for_all_campaigns_dataset(date_range):
         for offer in offers_for_each_flow_rule[flow_rule]:
             total_score = offers_for_each_flow_rule[flow_rule][offer]["total_score"] 
             if total_flow_rule_score == 0:
-                offers_for_each_flow_rule[flow_rule][offer]["weight"] = 100 / number_of_offers_in_flow_rule
+                offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 100 / number_of_offers_in_flow_rule
             else:
-                offers_for_each_flow_rule[flow_rule][offer]["weight"] = total_score / total_flow_rule_score * 100
+                offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = total_score / total_flow_rule_score * 100
 
         # 3/20 below handles the  sitation where one offer is 100 and others are 0
         # it should reduce the top offer to 90 and give 10 to the second best
@@ -187,16 +187,16 @@ def create_offers_for_all_campaigns_dataset(date_range):
         best_offer_weight = 0
         best_offer_id = "" 
         for offer in offers_for_each_flow_rule[flow_rule]:
-            if offers_for_each_flow_rule[flow_rule][offer]["weight"] > best_offer_weight:
-                best_offer_weight = offers_for_each_flow_rule[flow_rule][offer]["weight"]
+            if offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] > best_offer_weight:
+                best_offer_weight = offers_for_each_flow_rule[flow_rule][offer]["rec_weight"]
                 best_offer_id = offers_for_each_flow_rule[flow_rule][offer]["offer_id"]
         if (number_of_offers_in_flow_rule > 1) & (best_offer_weight == 100):
             for offer in offers_for_each_flow_rule[flow_rule]:
                 if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] == best_offer_id:
-                    offers_for_each_flow_rule[flow_rule][offer]["weight"] = 90
+                    offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 90
             for offer in offers_for_each_flow_rule[flow_rule]:
                 if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] != best_offer_id:
-                    offers_for_each_flow_rule[flow_rule][offer]["weight"] = 10
+                    offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 10
                     break
 
 
@@ -230,7 +230,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "profit": data[campaign][offer]["profit"], 
                                                           "revenue": data[campaign][offer]["revenue"], 
                                                           "conversions": data[campaign][offer]["conversions"],
-                                                          "weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["weight"],
+                                                          "rec_weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["rec_weight"],
                                                           "vol_weight": data[campaign][offer]["vol_weight"],
                                                           }
 
@@ -239,8 +239,18 @@ def create_offers_for_all_campaigns_dataset(date_range):
     for offer in offers_for_all_campaigns["data"]:
         offers_for_all_campaigns["data"][offer]["classification"] = classify_offer_for_all_campaigns(offers_for_all_campaigns["data"][offer])
 
+    #######################################################
+    # 8. Add has_mismatch_vol_weight_and_rec_weight to each offer
+    for offer in offers_for_all_campaigns["data"]:
+        vol_weight = offers_for_all_campaigns["data"][offer]["vol_weight"]
+        rec_weight = offers_for_all_campaigns["data"][offer]["rec_weight"]
+        if (vol_weight != rec_weight) & (vol_weight != "NA"):
+            offers_for_all_campaigns["data"][offer]["has_mismatch_vol_weight_and_rec_weight"] = True 
+        else:
+            offers_for_all_campaigns["data"][offer]["has_mismatch_vol_weight_and_rec_weight"]  = False
+
     ###############################################
-    # 8. Save file and return 
+    # 9. Save file and return 
 
     with open(f"../../data/offers_for_all_campaigns/{date_range}_offers_for_all_campaigns_dataset.json", "w") as file:
         json.dump(offers_for_all_campaigns, file)
