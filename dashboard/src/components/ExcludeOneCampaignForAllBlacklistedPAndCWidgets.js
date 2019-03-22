@@ -32,7 +32,7 @@ class ExcludeOneCampaignForAllBlacklistedPAndCWidgets extends Component {
 
   excludeOneCampaign(widgetID, mgidCampaignID) {
     return new Promise((resolve, reject) => {
-      fetch(`/api/excludecampaign`, {
+      fetch(`/api/excludecampaignforoneporcwidget`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ class ExcludeOneCampaignForAllBlacklistedPAndCWidgets extends Component {
 
   async excludeCampaign() {
     this.setState({loading: true});
-    for (let widgetID of this.state.blacklistedPWidgets) {
+    for (let widgetID of this.state.blacklistedPAndCWidgets) {
       const result = await this.excludeOneCampaign(
         widgetID,
         this.state.mgidCampaignID,
