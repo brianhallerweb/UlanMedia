@@ -33,7 +33,6 @@ class Record extends Component {
             p widgets
           </Link>
         </div>
-
         <div className="rowLink">
           <Link
             to={{
@@ -45,7 +44,6 @@ class Record extends Component {
             exclude
           </Link>
         </div>
-
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
@@ -53,6 +51,38 @@ class Record extends Component {
             }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
             target="_blank">
             mgid
+          </a>
+        </div>
+
+        <div className="rowLink">
+          <a
+            href={`https://panel-api.voluum.com/report?from=${
+              this.props.volRequestStartDate
+            }T00:00:00Z&to=${
+              this.props.volRequestEndDate
+            }T00:00:00Z&tz=America%2FLos_Angeles&filter=${
+              this.props.campaignRecord.widget_id
+            }&conversionTimeMode=VISIT&sort=month&direction=desc&columns=month&columns=customVariable1&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&groupBy=month&groupBy=custom-variable-1&offset=0&limit=1000&include=ACTIVE&filter1=campaign&filter1Value=${
+              this.props.campaignRecord.vol_id
+            }`}
+            target="_blank">
+            months
+          </a>
+        </div>
+
+        <div className="rowLink">
+          <a
+            href={`https://panel-api.voluum.com/report?from=${
+              this.props.volRequestStartDate
+            }T00:00:00Z&to=${
+              this.props.volRequestEndDate
+            }T00:00:00Z&tz=America%2FLos_Angeles&filter=${
+              this.props.campaignRecord.widget_id
+            }&conversionTimeMode=VISIT&sort=month&direction=desc&columns=month&columns=customVariable1&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&groupBy=month&groupBy=custom-variable-1&offset=0&limit=1000&include=ACTIVE&filter1=campaign&filter1Value=${
+              this.props.campaignRecord.vol_id
+            }`}
+            target="_blank">
+            days
           </a>
         </div>
       </div>

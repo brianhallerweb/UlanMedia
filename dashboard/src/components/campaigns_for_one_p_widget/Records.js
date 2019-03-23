@@ -37,6 +37,8 @@ class Records extends Component {
             <Record
               key={campaignRecord.mgid_id}
               campaignRecord={campaignRecord}
+              volRequestStartDate={this.props.volRequestStartDate}
+              volRequestEndDate={this.props.volRequestEndDate}
             />
           ))}
         </tbody>

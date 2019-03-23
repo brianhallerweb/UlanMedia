@@ -19,6 +19,8 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
+      volRequestStartDate: '',
+      volRequestEndDate: '',
       volRequestDates: '',
       mgidRequestDates: '',
       pWidgetClassification: '',
@@ -91,6 +93,8 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
+          volRequestStartDate: file.metadata.vol_start_date,
+          volRequestEndDate: file.metadata.vol_end_date,
           volRequestDates: `${file.metadata.vol_start_date} to ${
             file.metadata.vol_end_date
           }`,
@@ -236,6 +240,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           campaignRecords={this.state.campaignRecords}
+          volRequestStartDate={this.state.volRequestStartDate}
+          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );

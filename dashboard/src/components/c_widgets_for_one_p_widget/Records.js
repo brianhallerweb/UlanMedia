@@ -26,6 +26,7 @@ class Records extends Component {
             <th>Sales</th>
             <th>CPS</th>
             <th>EPS</th>
+            <th>Global Status</th>
           </tr>
         </thead>
         <tbody>

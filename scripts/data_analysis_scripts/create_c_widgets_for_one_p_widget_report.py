@@ -58,7 +58,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr",
             "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-            "eps", "mps"]
+            "eps", "mps", "global_status"]
             )                                                                             
 if final_result is None:                                                                  
     final_result = df                                                                     
@@ -91,6 +91,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr",
             "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-            "eps", "mps"]].to_dict("records"))
+            "eps", "mps", "global_status"]].to_dict("records"))
 
 print(json_final_result)

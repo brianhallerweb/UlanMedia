@@ -8,8 +8,8 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 # This is the "step 1" offers dataset that all other offers datasets are
 # derived from. 

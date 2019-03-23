@@ -26,6 +26,18 @@ class Record extends Component {
                   campaigns
                 </Link>
               </div>
+
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/excludecwidgetconfirmation/${
+                      this.props.widgetRecord.widget_id
+                    }`,
+                  }}
+                  target="_blank">
+                  exclude
+                </Link>
+              </div>
             </div>
           )}
         </td>
@@ -42,6 +54,7 @@ class Record extends Component {
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.cps}</td>
         <td>${this.props.widgetRecord.eps}</td>
+        <td>{this.props.widgetRecord.global_status}</td>
       </tr>
     );
   }

@@ -6,6 +6,10 @@ import re
 import os
 from functions.classification_functions.classify_offer_for_all_campaigns import classify_offer_for_all_campaigns
 
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
+
+
 def create_offers_for_all_campaigns_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json', 'r') as file:
@@ -51,16 +55,6 @@ def create_offers_for_all_campaigns_dataset(date_range):
     
     # 2. create_p_offers_gpr_lookup
 
-    # def find_p_offer_rank(p_offers_gpr_lookup):
-    # unordered_p_offers = []
-    # for p_offer in p_offers_gpr_lookup:
-        # unordered_p_offers.append({"p_offer_name": p_offer, "profit":
-            # p_offers_gpr_lookup[p_offer]["profit"]})
-
-    # df = pd.DataFrame(unordered_p_offers)
-    # df = df.sort_values("profit")
-    # return list(df["p_offer_name"])
-
     c_offers_for_all_campaigns = {}
 
     for campaign in data:
@@ -101,7 +95,8 @@ def create_offers_for_all_campaigns_dataset(date_range):
 
     df = pd.DataFrame(unordered_p_offers)
     df = df.sort_values("profit")
-    list(df["p_offer_name"])
+    # 3/22/19 why is this here?
+    # list(df["p_offer_name"])
     ordered_p_offers = list(df["p_offer_name"])
 
 
@@ -160,11 +155,25 @@ def create_offers_for_all_campaigns_dataset(date_range):
             offers_for_each_flow_rule[flow_rule][offer]["roi_score"] = roi_score
             offers_for_each_flow_rule[flow_rule][offer]["cvr_score"] = cvr_score
             offers_for_each_flow_rule[flow_rule][offer]["total_score"] = total_score
+        ###############
+        # this part ranks the offers by total_score
+        # the rank is used later when assigning a weight
+        offers_in_one_flow_rule = []
+        for offer in offers_for_each_flow_rule[flow_rule]:
+            offers_in_one_flow_rule.append(offers_for_each_flow_rule[flow_rule][offer])
+        df = pd.DataFrame(offers_in_one_flow_rule)
+        df = df.sort_values("total_score", ascending=False)
+        ordered_offers_in_one_flow_rule = df[["offer_id", "total_score"]].to_dict("records")
+        count = 1
+        for offer in ordered_offers_in_one_flow_rule:
+            offers_for_each_flow_rule[flow_rule][offer["offer_id"]]["total_score_rank"] = count
+            count += 1
 
+            
     ####################################
 
     # 5. Calculate the weight of each offer
-
+    
     for flow_rule in offers_for_each_flow_rule:
         number_of_offers_in_flow_rule = 0
         total_flow_rule_score = 0
@@ -178,12 +187,12 @@ def create_offers_for_all_campaigns_dataset(date_range):
             else:
                 offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = total_score / total_flow_rule_score * 100
 
-        # 3/20 below handles the  sitation where one offer is 100 and others are 0
+        # The linesx below handles the sitation where one offer is 100 and others are 0
         # it should reduce the top offer to 90 and give 10 to the second best
         # offer
-        # I'm not sure how to evaluate the second best offer so I'm not doing
-        # that.
-        # You made this quick and dirty so you should come back and improve this later.
+        # Every offer was given a total_score_rank so if one offer is 100 and
+        # the others are 0, the 100 should be reduced to 90 and the offer with
+        # total_score_rank of 2 should be increased to 10. 
         best_offer_weight = 0
         best_offer_id = "" 
         for offer in offers_for_each_flow_rule[flow_rule]:
@@ -195,10 +204,9 @@ def create_offers_for_all_campaigns_dataset(date_range):
                 if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] == best_offer_id:
                     offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 90
             for offer in offers_for_each_flow_rule[flow_rule]:
-                if offers_for_each_flow_rule[flow_rule][offer]["offer_id"] != best_offer_id:
+                if offers_for_each_flow_rule[flow_rule][offer]["total_score_rank"] == 2: 
                     offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 10
                     break
-
 
     # At thie point, offers_for_each_flow_rule is a lookup dictionary to find
     # the weight of each offer. In the next step you will add that weight to

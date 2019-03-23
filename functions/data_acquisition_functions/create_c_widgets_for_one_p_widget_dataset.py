@@ -1,5 +1,8 @@
 from config.config import *
 from functions.misc.get_campaign_sets import get_campaign_sets 
+from functions.misc.get_whitelist import get_whitelist
+from functions.misc.get_greylist import get_greylist
+from functions.misc.get_blacklist import get_blacklist
 import json
 import re
 import os
@@ -34,6 +37,11 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
     # 1. get some prerequisite data
 
     campaigns = get_campaign_sets()
+    widget_whitelist = get_whitelist()
+    widget_greylist = get_greylist()
+    widget_blacklist = get_blacklist()
+
+
 
     ########################################################
 
@@ -102,11 +110,34 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                c_widgets_for_one_p_widget["data"][widget]["mps"] = campaign["max_sale_cpa"]
                res = mpc_pattern.findall(campaign["name"])
                c_widgets_for_one_p_widget["data"][widget]["mpc"] = list(res)[0]
+               if p_widget in widget_whitelist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "p_whitelist" 
+               elif p_widget in widget_greylist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "p_greylist" 
+               elif p_widget in widget_blacklist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "p_blacklist" 
+                   
+               if widget in widget_whitelist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "c_whitelist" 
+               elif widget in widget_greylist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "c_greylist" 
+               elif widget in widget_blacklist:
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "c_blacklist" 
+
+               if (widget in widget_whitelist) & (p_widget in widget_whitelist):
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "pc_whitelist" 
+               elif (widget in widget_greylist) & (p_widget in widget_greylist):
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "pc_greylist" 
+               elif (widget in widget_blacklist) & (p_widget in widget_blacklist):
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "pc_blacklist" 
+
+               if (widget not in widget_whitelist) & (p_widget not in
+                   widget_whitelist) & (widget not in widget_greylist) & (p_widget not in widget_greylist) & (widget not in widget_blacklist) & (p_widget not in widget_blacklist):
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "not yet listed" 
 
     ############################################################
     # 5. Save c_widgets_for_one_p_widget to a json file and return it as a
     # json file 
-
 
     with open(f"../../data/c_widgets_for_one_p_widget/{p_widget}_{date_range}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
         json.dump(c_widgets_for_one_p_widget, file)

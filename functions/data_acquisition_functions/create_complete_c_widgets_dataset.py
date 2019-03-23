@@ -82,27 +82,6 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                    widget_whitelist) & (c_widget not in widget_greylist) & (p_widget not in widget_greylist) & (c_widget not in widget_blacklist) & (p_widget not in widget_blacklist):
                    complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
 
-               # if (c_widget in widget_whitelist) & (p_widget in widget_whitelist):
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_whitelist" 
-               # elif c_widget in widget_whitelist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_whitelist" 
-               # elif p_widget in widget_whitelist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_whitelist" 
-               # elif (c_widget in widget_greylist) & (p_widget in widget_greylist):
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_greylist" 
-               # elif c_widget in widget_greylist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_greylist" 
-               # elif p_widget in widget_greylist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_greylist" 
-               # elif (c_widget in widget_blacklist) & (p_widget in widget_blacklist):
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "pc_blacklist" 
-               # elif c_widget in widget_blacklist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "c_blacklist" 
-               # elif p_widget in widget_blacklist:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "p_blacklist" 
-               # else:
-                   # complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
-
 
     #########################################################
 
