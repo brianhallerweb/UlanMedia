@@ -26,6 +26,7 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token, date_range,vol_start_date,
                                  },
                     "data": {}
                    }
+
     for ad in mgid_data.values():
         ad_id = ad["ad_id"]  
         mgid_id = ad["mgid_id"]
