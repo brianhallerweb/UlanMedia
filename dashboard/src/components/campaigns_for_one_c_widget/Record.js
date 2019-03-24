@@ -33,7 +33,6 @@ class Record extends Component {
             p widgets
           </Link>
         </div>
-
         <div className="rowLink">
           <Link
             to={{
@@ -45,7 +44,6 @@ class Record extends Component {
             exclude
           </Link>
         </div>
-
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
@@ -55,33 +53,31 @@ class Record extends Component {
             mgid
           </a>
         </div>
-
         <div className="rowLink">
           <a
-            href={`https://panel-api.voluum.com/report?from=${
+            href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month?dateRange=custom-date&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
               this.props.volRequestStartDate
             }T00:00:00Z&to=${
               this.props.volRequestEndDate
-            }T00:00:00Z&tz=America%2FLos_Angeles&filter=${
-              this.props.campaignRecord.widget_id
-            }&conversionTimeMode=VISIT&sort=month&direction=desc&columns=month&columns=customVariable1&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&groupBy=month&groupBy=custom-variable-1&offset=0&limit=1000&include=ACTIVE&filter1=campaign&filter1Value=${
+            }T00:00:00Z&filter1=campaign&filter1Value=${
               this.props.campaignRecord.vol_id
+            }&filter2=custom-variable-1&filter2Value=${
+              this.props.campaignRecord.widget_id
             }`}
             target="_blank">
             months
           </a>
         </div>
-
         <div className="rowLink">
           <a
-            href={`https://panel-api.voluum.com/report?from=${
+            href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
               this.props.volRequestStartDate
             }T00:00:00Z&to=${
               this.props.volRequestEndDate
-            }T00:00:00Z&tz=America%2FLos_Angeles&filter=${
-              this.props.campaignRecord.widget_id
-            }&conversionTimeMode=VISIT&sort=month&direction=desc&columns=month&columns=customVariable1&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&groupBy=month&groupBy=custom-variable-1&offset=0&limit=1000&include=ACTIVE&filter1=campaign&filter1Value=${
+            }T00:00:00Z&filter1=campaign&filter1Value=${
               this.props.campaignRecord.vol_id
+            }&filter2=custom-variable-1&filter2Value=${
+              this.props.campaignRecord.widget_id
             }`}
             target="_blank">
             days

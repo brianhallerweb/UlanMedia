@@ -37,7 +37,6 @@ class Record extends Component {
                 campaigns
               </Link>
             </div>
-
             {this.props.widgetRecord.has_children && (
               <div className="rowLink">
                 <Link
@@ -53,6 +52,32 @@ class Record extends Component {
               </div>
             )}
 
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month?dateRange=custom-date&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+                  this.props.widgetRecord.widget_id
+                }`}
+                target="_blank">
+                months
+              </a>
+            </div>
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+                  this.props.widgetRecord.widget_id
+                }`}
+                target="_blank">
+                days
+              </a>
+            </div>
             <div className="rowLink">
               <Link
                 onClick={e => e.stopPropagation()}

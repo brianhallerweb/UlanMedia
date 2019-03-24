@@ -32,7 +32,12 @@ class Records extends Component {
         </thead>
         <tbody>
           {this.props.widgetRecords.map(widgetRecord => (
-            <Record key={widgetRecord.widget_id} widgetRecord={widgetRecord} />
+            <Record
+              key={widgetRecord.widget_id}
+              widgetRecord={widgetRecord}
+              volRequestStartDate={this.props.volRequestStartDate}
+              volRequestEndDate={this.props.volRequestEndDate}
+            />
           ))}
         </tbody>
       </table>

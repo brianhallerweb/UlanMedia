@@ -15,6 +15,8 @@ class Home extends Component {
     this.state = {
       widgetRecords: [],
       dateRange: 'oneeighty',
+      volRequestStartDate: '',
+      volRequestEndDate: '',
       mgidRequestDates: '',
       volRequestDates: '',
       error: false,
@@ -81,6 +83,8 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
+          volRequestStartDate: file.metadata.vol_start_date,
+          volRequestEndDate: file.metadata.vol_end_date,
           mgidRequestDates: `${file.metadata.mgid_start_date} to ${
             file.metadata.mgid_end_date
           }`,
@@ -200,6 +204,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           widgetRecords={this.state.widgetRecords}
+          volRequestStartDate={this.state.volRequestStartDate}
+          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );
