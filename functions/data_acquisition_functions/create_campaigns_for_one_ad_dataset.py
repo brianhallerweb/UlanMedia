@@ -11,12 +11,7 @@ def create_campaigns_for_one_ad_dataset(ad_image, date_range):
     metadata = json_file["metadata"]
     data = json_file["data"]
 
-    campaigns_for_one_ad = {"metadata": metadata, "data": []}   
-
-    for ad in data.values():
-        image = ad["image"]
-        if image == ad_image:
-            campaigns_for_one_ad["data"].append(ad)
+    campaigns_for_one_ad = {"metadata": metadata, "data": data[ad_image]["for_each_campaign"]}   
 
     with open(f"../../data/campaigns_for_one_ad/{ad_image}_{date_range}_campaigns_for_one_ad_dataset.json", "w") as file:
         json.dump(campaigns_for_one_ad, file)

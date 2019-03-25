@@ -6,6 +6,7 @@ class Record extends Component {
   constructor(props) {
     super(props);
     this.image = this.props.ad.image;
+    this.classification = this.props.ad.classification;
     this.clicks = this.props.ad.clicks;
     this.cost = this.props.ad.cost;
     this.revenue = this.props.ad.revenue;
@@ -16,6 +17,7 @@ class Record extends Component {
     this.cpa = this.props.ad.cpa;
     this.cpc = this.props.ad.cpc;
     this.epa = this.props.ad.epa;
+    this.globalRank = this.props.ad.global_rank;
     this.state = {};
   }
 
@@ -36,6 +38,7 @@ class Record extends Component {
             </div>
           </div>
         </td>
+        <td>{this.classification}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
@@ -46,6 +49,7 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
+        <td>{this.globalRank}</td>
       </tr>
     );
   }
