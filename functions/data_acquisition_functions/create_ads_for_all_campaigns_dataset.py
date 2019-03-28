@@ -2,8 +2,6 @@ from config.config import *
 import json
 import os
 import sys
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
 
 def create_ads_for_all_campaigns_dataset(date_range):
 

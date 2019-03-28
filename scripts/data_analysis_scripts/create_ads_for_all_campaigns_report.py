@@ -11,9 +11,6 @@ with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads_for_all_campaigns/{date_ra
 
 data = json_file["data"]
 
-# The json data is a dictionary with each ad_image name as a key and the
-# summaries of each ad stats as a value
-# The loop below simple takes the values and puts them into a list. 
 ads = []
 for ad in data.values():
     ads.append(ad)
@@ -29,20 +26,20 @@ df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["global_rank"] = round(df["global_rank"], 0)
 
-# ad cost is more than xxx
-c1 = df["cost"] > float(sys.argv[2])
+c1 = df["classification"] == sys.argv[2]
 result1 = df[c1]
 
-# ad lost more than xxx
-c2 = df["profit"] < -1 * float(sys.argv[3])
+c2 = df["cost"] > float(sys.argv[3])
 result2 = df[c2]
 
-# ad cvr is less than or equal to xxx
-c3 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[4]))
+c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
 
-conditions_args = [sys.argv[5], sys.argv[6], sys.argv[7]]
-conditions_dfs = [result1, result2, result3]
+c4 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[5]))
+result4 = df[c4]
+
+conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9]]
+conditions_dfs = [result1, result2, result3, result4]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -60,7 +57,7 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result["sort"] = final_result["cost"]
+final_result["sort"] = final_result["global_rank"]
 final_result = final_result.sort_values("sort", ascending=False)
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",

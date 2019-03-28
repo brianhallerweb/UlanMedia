@@ -38,6 +38,7 @@ class Record extends Component {
             </div>
           </div>
         </td>
+        <td>{this.globalRank}</td>
         <td>{this.classification}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
@@ -49,7 +50,6 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
-        <td>{this.globalRank}</td>
       </tr>
     );
   }
