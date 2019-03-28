@@ -5,7 +5,7 @@ import os
 
 def create_campaigns_for_one_ad_dataset(ad_image, date_range):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads/{date_range}_ads_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_ads/{date_range}_complete_ads_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     metadata = json_file["metadata"]

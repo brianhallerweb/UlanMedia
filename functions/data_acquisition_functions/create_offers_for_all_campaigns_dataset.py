@@ -95,8 +95,6 @@ def create_offers_for_all_campaigns_dataset(date_range):
 
     df = pd.DataFrame(unordered_p_offers)
     df = df.sort_values("profit")
-    # 3/22/19 why is this here?
-    # list(df["p_offer_name"])
     ordered_p_offers = list(df["p_offer_name"])
 
 

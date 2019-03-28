@@ -50,6 +50,7 @@ for i in range(len(conditions_args)):
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "global_rank",
+"global_rank_order",
 "classification"] )
 
 if final_result is None:
@@ -62,6 +63,7 @@ final_result = final_result.sort_values("sort", ascending=False)
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "global_rank",
+"global_rank_order",
 "classification"]].to_dict("records"))
 
 print(json_final_result)

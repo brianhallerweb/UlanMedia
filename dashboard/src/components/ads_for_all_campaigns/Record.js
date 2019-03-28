@@ -18,6 +18,7 @@ class Record extends Component {
     this.cpc = this.props.ad.cpc;
     this.epa = this.props.ad.epa;
     this.globalRank = this.props.ad.global_rank;
+    this.globalRankOrder = this.props.ad.global_rank_order;
     this.state = {};
   }
 
@@ -38,7 +39,9 @@ class Record extends Component {
             </div>
           </div>
         </td>
-        <td>{this.globalRank}</td>
+        <td>
+          {this.globalRankOrder}, {this.globalRank}
+        </td>
         <td>{this.classification}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>

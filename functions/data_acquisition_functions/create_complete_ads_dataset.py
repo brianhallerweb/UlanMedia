@@ -8,8 +8,8 @@ import sys
 import json
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_complete_ads_dataset(date_range):
 
@@ -22,6 +22,10 @@ def create_complete_ads_dataset(date_range):
                                  },
                     "data": {}
                    }
+    # 3/28 When you read this in the future, you might think the design is a
+    # little weird. Remember that there were problems with the ads dataset
+    # getting mutated. I'm not sure why that happened but the code below seems
+    # to work. 
 
     for ad in json_file["data"].values():
         image = ad["image"]
@@ -82,10 +86,24 @@ def create_complete_ads_dataset(date_range):
             ad_image["for_all_campaigns"]["global_rank"] = clicks * profit * epc * roi
         else:
             if cvr == 0:
+                # is this right? should it be 0?
                 ad_image["for_all_campaigns"]["global_rank"] = 0
             else:
                 ad_image["for_all_campaigns"]["global_rank"] = clicks * profit / cvr
 
+    unordered_ad_images = []
+    for ad_image in complete_ads["data"].values():
+        unordered_ad_images.append({"ad_image": ad_image["for_all_campaigns"]["image"],
+            "global_rank": ad_image["for_all_campaigns"]["global_rank"]})
+
+    # 3/28/19 pandas isn't imported at the top of this file. Yet it still works?
+    df = pd.DataFrame(unordered_ad_images)
+    df = df.sort_values("global_rank", ascending=False)
+    ordered_ad_images = list(df["ad_image"])
+
+    for i in range(0, len(ordered_ad_images)):
+        ad_image_name = ordered_ad_images[i]
+        complete_ads["data"][ad_image_name]["for_all_campaigns"]["global_rank_order"] = i + 1
 
     for ad_image in complete_ads["data"].values():
         ad_image["for_all_campaigns"]["classification"] = classify_p_and_c_ads(ad_image["for_all_campaigns"]) 
@@ -144,7 +162,7 @@ def create_complete_ads_dataset(date_range):
             ad["classification"] = classify_p_and_c_ads(ad)
 
 
-    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/ads/{date_range}_ads_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_ads/{date_range}_complete_ads_dataset.json", "w") as file:
         json.dump(complete_ads, file)
 
 
