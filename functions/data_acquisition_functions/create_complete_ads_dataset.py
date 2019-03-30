@@ -223,7 +223,7 @@ def create_complete_ads_dataset(date_range):
         final_rank_order_number = 1
         for ad in ads_for_each_campaign[campaign_id]:
             ad["final_rank_order"] = final_rank_order_number
-            local_rank_order_number += 1
+            final_rank_order_number += 1
 
     for campaign_id in ads_for_each_campaign:
         for ad_for_one_campaign in ads_for_each_campaign[campaign_id]:
