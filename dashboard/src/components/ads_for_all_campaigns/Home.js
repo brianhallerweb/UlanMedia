@@ -15,7 +15,7 @@ class Home extends Component {
       volRequestDates: '',
       c1: false,
       c1Value: 'good',
-      c2: true,
+      c2: false,
       c2Value: 20,
       c3: false,
       c3Value: 50,

@@ -21,24 +21,26 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
+df["roi"] = round(df["roi"], 2)
 df["local_rank"] = round(df["local_rank"], 0)
 df["final_rank"] = round(df["final_rank"], 0)
 df["global_rank"] = round(df["global_rank"], 0)
 
-# ad cost is more than xxx
-c1 = df["cost"] > float(sys.argv[3])
+c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
 
-# ad lost more than xxx
-c2 = df["profit"] < -1 * float(sys.argv[4])
+c2 = df["cost"] > float(sys.argv[4])
 result2 = df[c2]
 
-# ad cvr is less than or equal to xxx
-c3 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[5]))
+c3 = df["profit"] < -1 * float(sys.argv[5])
 result3 = df[c3]
 
-conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]]
-conditions_dfs = [result1, result2, result3]
+c4 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[6]))
+result4 = df[c4]
+
+conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
+conditions_dfs = [result1, result2, result3, result4]
+
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -48,7 +50,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc","epa", "classification", "local_rank",
+    "epc", "cpa", "cpc","epa", "roi", "classification", "local_rank",
     "local_rank_order", "final_rank", "final_rank_order",
     "global_rank", "global_rank_order" ] )
 
@@ -57,7 +59,7 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result["sort"] = final_result["cost"]
+final_result["sort"] = final_result["final_rank"]
 final_result = final_result.sort_values("sort", ascending=False)
 
 # add a summary row at the top
@@ -90,7 +92,7 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc","epa", "classification",
+    "epc", "cpa", "cpc","epa", "roi", "classification",
     "local_rank", "local_rank_order", "final_rank", "final_rank_order", "global_rank", "global_rank_order"]].to_dict("records"))
 
 print(json_final_result)

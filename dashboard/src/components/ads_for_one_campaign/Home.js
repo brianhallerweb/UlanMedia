@@ -15,12 +15,14 @@ class Home extends Component {
       name: this.props.match.params.name,
       dateRange: 'oneeighty',
       volRequestDates: '',
-      c1: true,
-      c1Value: 20,
+      c1: false,
+      c1Value: 'good',
       c2: false,
-      c2Value: 50,
+      c2Value: 20,
       c3: false,
-      c3Value: 0,
+      c3Value: 50,
+      c4: false,
+      c4Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -93,9 +95,11 @@ class Home extends Component {
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
+            c4Value: this.state.c4Value,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
+            c4: this.state.c4,
           }),
         }),
       )
@@ -132,6 +136,14 @@ class Home extends Component {
           volRequestDates={this.state.volRequestDates}
         />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          <a
+            style={{fontSize: 12}}
+            href="https://drive.google.com/file/d/11vrRshcg1rzJCEGfW9Ux1lu6LbrX0c9b/view?usp=sharing"
+            target="_blank">
+            flowchart
+          </a>
+        </div>
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
@@ -143,6 +155,8 @@ class Home extends Component {
           c2Value={this.state.c2Value}
           c3={this.state.c3}
           c3Value={this.state.c3Value}
+          c4={this.state.c4}
+          c4Value={this.state.c4Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

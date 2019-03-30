@@ -17,6 +17,7 @@ class Record extends Component {
     this.cpa = this.props.ad.cpa;
     this.cpc = this.props.ad.cpc;
     this.epa = this.props.ad.epa;
+    this.roi = this.props.ad.roi;
     this.localRank = this.props.ad.local_rank;
     this.localRankOrder = this.props.ad.local_rank_order;
     this.finalRank = this.props.ad.final_rank;
@@ -48,6 +49,15 @@ class Record extends Component {
           {this.image}
           {this.image !== 'summary' && this.addRowLinks()}
         </td>
+        <td>
+          {this.globalRankOrder} ({this.globalRank})
+        </td>
+        <td>
+          {this.localRankOrder} ({this.localRank})
+        </td>
+        <td>
+          {this.finalRankOrder} ({this.finalRank})
+        </td>
         <td>{this.classification}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
@@ -59,15 +69,7 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
-        <td>
-          {this.localRankOrder} ({this.localRank})
-        </td>
-        <td>
-          {this.finalRankOrder} ({this.finalRank})
-        </td>
-        <td>
-          {this.globalRankOrder} ({this.globalRank})
-        </td>
+        <td>{this.roi}</td>
       </tr>
     );
   }

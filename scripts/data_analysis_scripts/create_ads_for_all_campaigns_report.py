@@ -24,6 +24,7 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
+df["roi"] = round(df["roi"], 2)
 df["global_rank"] = round(df["global_rank"], 0)
 
 c1 = df["classification"] == sys.argv[2]
@@ -49,7 +50,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "global_rank",
+"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
 "classification"] )
 
@@ -62,7 +63,7 @@ final_result["sort"] = final_result["global_rank"]
 final_result = final_result.sort_values("sort", ascending=False)
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "global_rank",
+"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
 "classification"]].to_dict("records"))
 

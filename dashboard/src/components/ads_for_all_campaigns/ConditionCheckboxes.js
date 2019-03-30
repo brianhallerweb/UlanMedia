@@ -23,7 +23,7 @@ const ConditionCheckboxes = ({
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Offer classification is </span>
+        <span>Ad classification is </span>
         <select
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>

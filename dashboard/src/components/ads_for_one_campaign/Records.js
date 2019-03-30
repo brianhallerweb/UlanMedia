@@ -14,6 +14,9 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Image</th>
+            <th>Global Rank</th>
+            <th>Local Rank</th>
+            <th>Final Rank</th>
             <th>Classification</th>
             <th>Cost</th>
             <th>Revenue</th>
@@ -25,9 +28,7 @@ class Records extends Component {
             <th>CPA</th>
             <th>EPA</th>
             <th>CVR</th>
-            <th>Local Rank</th>
-            <th>Final Rank</th>
-            <th>Global Rank</th>
+            <th>ROI</th>
           </tr>
         </thead>
         <tbody>
