@@ -28,7 +28,7 @@ class Home extends Component {
       c1Value: 'not yet',
       c2: false,
       c2Value: 'not yet listed',
-      c3: false,
+      c3: true,
       c3Value: 10,
       c4: false,
       c4Value: 10,

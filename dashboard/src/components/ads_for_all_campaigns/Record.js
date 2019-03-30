@@ -25,7 +25,10 @@ class Record extends Component {
 
   render() {
     return (
-      <tr>
+      <tr
+        style={
+          this.classification === 'bad' ? {backgroundColor: '#f7d9d9'} : null
+        }>
         <td>
           {this.image}
           <div>
@@ -54,7 +57,7 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
-        <td>{this.roi}</td>
+        <td>{this.roi}%</td>
       </tr>
     );
   }

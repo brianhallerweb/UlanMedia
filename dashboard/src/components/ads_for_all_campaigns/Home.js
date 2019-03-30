@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForBadAds from './checkForBadAds';
 
 class Home extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Home extends Component {
     this.state = {
       dateRange: 'oneeighty',
       volRequestDates: '',
+      badAdsCount: 0,
       c1: false,
       c1Value: 'good',
       c2: false,
@@ -115,9 +117,15 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        let badAdsCount = checkForBadAds(records);
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({adsRecords: records, error, loading: false});
+        this.setState({
+          adsRecords: records,
+          badAdsCount,
+          error,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -137,7 +145,6 @@ class Home extends Component {
             flowchart
           </a>
         </div>
-
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
@@ -154,6 +161,11 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.badAdsCount !== 0 && !this.state.loading && (
+          <div style={{color: 'red', marginTop: 10}}>
+            {this.state.badAdsCount} ads are bad
+          </div>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

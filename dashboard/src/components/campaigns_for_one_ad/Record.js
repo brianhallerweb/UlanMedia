@@ -17,6 +17,7 @@ class Record extends Component {
     this.cpa = this.props.campaign.cpa;
     this.epa = this.props.campaign.epa;
     this.cvr = this.props.campaign.cvr;
+    this.roi = this.props.campaign.roi;
     this.state = {};
   }
 
@@ -53,6 +54,7 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
+        <td>{this.roi}%</td>
       </tr>
     );
   }
