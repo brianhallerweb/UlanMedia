@@ -23,6 +23,7 @@ def create_ads_for_one_campaign_dataset(vol_id, date_range):
     for ad in ads_for_one_campaign["data"]:
         ad_image = ad["image"]
         ad["global_rank"] = data[ad_image]["for_all_campaigns"]["global_rank"]
+        ad["global_rank_order"] = data[ad_image]["for_all_campaigns"]["global_rank_order"]
 
     with open(f"../../data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json", "w") as file:
         json.dump(ads_for_one_campaign, file)

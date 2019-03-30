@@ -82,14 +82,12 @@ def create_complete_ads_dataset(date_range):
         roi = ad_image["for_all_campaigns"]["roi"]
         cvr = ad_image["for_all_campaigns"]["cvr"]
         conversions = ad_image["for_all_campaigns"]["conversions"]
-        if revenue > 0:
+        if profit > 0:
             ad_image["for_all_campaigns"]["global_rank"] = clicks * profit * epc * roi
+        elif conversions > 0:
+            ad_image["for_all_campaigns"]["global_rank"] = clicks * profit / cvr
         else:
-            if cvr == 0:
-                # is this right? should it be 0?
-                ad_image["for_all_campaigns"]["global_rank"] = 0
-            else:
-                ad_image["for_all_campaigns"]["global_rank"] = clicks * profit / cvr
+            ad_image["for_all_campaigns"]["global_rank"] = clicks * profit
 
     unordered_ad_images = []
     for ad_image in complete_ads["data"].values():
@@ -142,25 +140,106 @@ def create_complete_ads_dataset(date_range):
             roi = ad["roi"]
             cvr = ad["cvr"]
             conversions = ad["conversions"]
-            if revenue > 0:
-                ad["rank"] = clicks * profit * epc * roi
+            if profit > 0:
+                ad["local_rank"] = clicks * profit * epc * roi
+            elif conversions > 0:
+                ad["local_rank"] = clicks * profit / cvr
             else:
-                if cvr == 0:
-                    ad["rank"] = 0
-                else:
-                    ad["rank"] = clicks * profit / cvr
-
+                ad["local_rank"] = clicks * profit
 
     for ad_image in complete_ads["data"].values():
         global_rank = ad_image["for_all_campaigns"]["global_rank"]
         for ad in ad_image["for_each_campaign"]:
-            rank = ad["rank"]
-            ad["final_rank"] = (global_rank + rank + rank) / 3
+            local_rank = ad["local_rank"]
+            ad["final_rank"] = (global_rank + local_rank + local_rank) / 3
+
+    #############
+    # get the local rank order for each ad in one campaign
+    
+    # create an ads_for_each_campaign data structure and then calculate the
+    # local rank order number for each ad within one campaign
+    ads_for_each_campaign = {}
+    for ad_image in complete_ads["data"].values():
+        for ad in ad_image["for_each_campaign"]:
+            mgid_id = ad["mgid_id"]
+            if mgid_id in ads_for_each_campaign:
+                ads_for_each_campaign[mgid_id].append(ad)
+            else:
+                ads_for_each_campaign[mgid_id] = [ad]
+
+    for campaign_id in ads_for_each_campaign:
+        unordered_ads = []
+        for ad in ads_for_each_campaign[campaign_id]:
+            unordered_ads.append(ad)
+
+        df = pd.DataFrame(unordered_ads)
+        df = df.sort_values("local_rank", ascending=False)
+        ordered_ads = df[["ad_id","clicks", "conversions", "cost", "cvr",
+            "epc", "final_rank", "image", "local_rank", "mgid_id", "name",
+            "profit", "revenue", "roi", "status", "url", "vol_id"]].to_dict("records")
+        ads_for_each_campaign[campaign_id] = ordered_ads
+        local_rank_order_number = 1
+        for ad in ads_for_each_campaign[campaign_id]:
+            ad["local_rank_order"] = local_rank_order_number
+            local_rank_order_number += 1
+
+    for campaign_id in ads_for_each_campaign:
+        for ad_for_one_campaign in ads_for_each_campaign[campaign_id]:
+            mgid_id = ad_for_one_campaign["mgid_id"]
+            ad_image = ad_for_one_campaign["image"]
+            local_rank_order = ad_for_one_campaign["local_rank_order"]
+            for ad in complete_ads["data"][ad_image]["for_each_campaign"]:
+                if ad["mgid_id"] == mgid_id:
+                    ad["local_rank_order"] = local_rank_order
+
+    # end of the complex code to get the local rank order for each ad in one campaign
+    ###########################    
+
+    #############
+    # get the final rank order for each ad in one campaign
+    
+    # create an ads_for_each_campaign data structure and then calculate the
+    # final rank order number for each ad within one campaign
+    ads_for_each_campaign = {}
+    for ad_image in complete_ads["data"].values():
+        for ad in ad_image["for_each_campaign"]:
+            mgid_id = ad["mgid_id"]
+            if mgid_id in ads_for_each_campaign:
+                ads_for_each_campaign[mgid_id].append(ad)
+            else:
+                ads_for_each_campaign[mgid_id] = [ad]
+
+    for campaign_id in ads_for_each_campaign:
+        unordered_ads = []
+        for ad in ads_for_each_campaign[campaign_id]:
+            unordered_ads.append(ad)
+
+        df = pd.DataFrame(unordered_ads)
+        df = df.sort_values("final_rank", ascending=False)
+        ordered_ads = df[["ad_id","clicks", "conversions", "cost", "cvr",
+            "epc", "final_rank", "image", "local_rank", "mgid_id", "name",
+            "profit", "revenue", "roi", "status", "url", "vol_id"]].to_dict("records")
+        ads_for_each_campaign[campaign_id] = ordered_ads
+        final_rank_order_number = 1
+        for ad in ads_for_each_campaign[campaign_id]:
+            ad["final_rank_order"] = local_rank_order_number
+            local_rank_order_number += 1
+
+    for campaign_id in ads_for_each_campaign:
+        for ad_for_one_campaign in ads_for_each_campaign[campaign_id]:
+            mgid_id = ad_for_one_campaign["mgid_id"]
+            ad_image = ad_for_one_campaign["image"]
+            final_rank_order = ad_for_one_campaign["final_rank_order"]
+            for ad in complete_ads["data"][ad_image]["for_each_campaign"]:
+                if ad["mgid_id"] == mgid_id:
+                    ad["final_rank_order"] = final_rank_order
+
+    # end of the complex code to get the final rank order for each ad in one campaign
+    ###########################    
 
     for ad_image in complete_ads["data"].values():
         for ad in ad_image["for_each_campaign"]:
             ad["classification"] = classify_p_and_c_ads(ad)
-
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_ads/{date_range}_complete_ads_dataset.json", "w") as file:
         json.dump(complete_ads, file)

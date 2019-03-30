@@ -25,7 +25,7 @@ class Records extends Component {
             <th>CPA</th>
             <th>EPA</th>
             <th>CVR</th>
-            <th>Rank</th>
+            <th>Local Rank</th>
             <th>Final Rank</th>
             <th>Global Rank</th>
           </tr>

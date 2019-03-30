@@ -40,7 +40,7 @@ class Record extends Component {
           </div>
         </td>
         <td>
-          {this.globalRankOrder}, {this.globalRank}
+          {this.globalRankOrder} ({this.globalRank})
         </td>
         <td>{this.classification}</td>
         <td>${this.cost}</td>

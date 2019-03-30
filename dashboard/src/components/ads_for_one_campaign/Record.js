@@ -17,9 +17,12 @@ class Record extends Component {
     this.cpa = this.props.ad.cpa;
     this.cpc = this.props.ad.cpc;
     this.epa = this.props.ad.epa;
-    this.rank = this.props.ad.rank;
+    this.localRank = this.props.ad.local_rank;
+    this.localRankOrder = this.props.ad.local_rank_order;
     this.finalRank = this.props.ad.final_rank;
+    this.finalRankOrder = this.props.ad.final_rank_order;
     this.globalRank = this.props.ad.global_rank;
+    this.globalRankOrder = this.props.ad.global_rank_order;
     this.state = {};
   }
   addRowLinks() {
@@ -56,9 +59,15 @@ class Record extends Component {
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>
-        <td>{this.rank}</td>
-        <td>{this.finalRank}</td>
-        <td>{this.globalRank}</td>
+        <td>
+          {this.localRankOrder} ({this.localRank})
+        </td>
+        <td>
+          {this.finalRankOrder} ({this.finalRank})
+        </td>
+        <td>
+          {this.globalRankOrder} ({this.globalRank})
+        </td>
       </tr>
     );
   }
