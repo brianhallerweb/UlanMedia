@@ -13,6 +13,8 @@ const ConditionCheckboxes = ({
   c3Value,
   c4,
   c4Value,
+  c5,
+  c5Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -83,14 +85,36 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Ad CVR is less than or equal to '}
+          {'Ad CTR is less than or equal to '}
           <input
             type="number"
             name="c4Value"
             min="0"
             max=".50"
-            step=".25"
+            step=".01"
             value={c4Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'%'}
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c5"
+          checked={c5}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Ad CVR is less than or equal to '}
+          <input
+            type="number"
+            name="c5Value"
+            min="0"
+            max=".50"
+            step=".25"
+            value={c5Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'%'}

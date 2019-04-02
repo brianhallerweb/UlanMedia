@@ -18,6 +18,8 @@ class Record extends Component {
     this.cpc = this.props.ad.cpc;
     this.epa = this.props.ad.epa;
     this.roi = this.props.ad.roi;
+    this.imps = this.props.ad.imps;
+    this.ctr = this.props.ad.ctr;
     this.globalRank = this.props.ad.global_rank;
     this.globalRankOrder = this.props.ad.global_rank_order;
     this.state = {};
@@ -50,7 +52,9 @@ class Record extends Component {
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
+        <td>{this.imps}</td>
         <td>{this.clicks}</td>
+        <td>{this.ctr}%</td>
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.conversions}</td>

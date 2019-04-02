@@ -6,6 +6,10 @@ import requests
 import re
 import sys
 
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
+
+
 def get_mgid_ads_data(token, mgid_client_id):
     try:
         # ads_data is a dictionary of ad ids. Each ad id is unique. The value of
@@ -43,6 +47,13 @@ def get_mgid_ads_data(token, mgid_client_id):
                 # extract data and put into variables
                 ad_id = str(ad["id"])
                 campaign_id = str(ad["campaignId"])
+                clicks = ad["statistics"]["clicks"]
+                cost = ad["statistics"]["spent"]
+                imps = ad["statistics"]["hits"]
+                if imps == 0:
+                    ctr = 0
+                else:
+                    ctr = clicks/imps
                 url = ad["url"]
                 status = ad["status"]["code"]
                 # extract image name from the url using regex
@@ -56,6 +67,10 @@ def get_mgid_ads_data(token, mgid_client_id):
                 # fill in the data for a particular ad.  
                 ads_data[ad_id]["ad_id"] = ad_id
                 ads_data[ad_id]["mgid_id"] = campaign_id
+                ads_data[ad_id]["clicks"] = clicks
+                ads_data[ad_id]["cost"] = cost
+                ads_data[ad_id]["imps"] = imps
+                ads_data[ad_id]["ctr"] = ctr
                 ads_data[ad_id]["url"] = url
                 ads_data[ad_id]["image"] = image
                 if status == "goodPerformance":

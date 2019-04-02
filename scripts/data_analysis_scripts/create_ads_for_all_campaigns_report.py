@@ -25,6 +25,7 @@ df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round(df["roi"], 2)
+df["ctr"] = round(df["ctr"] * 100, 2) 
 df["global_rank"] = round(df["global_rank"], 0)
 
 c1 = df["classification"] == sys.argv[2]
@@ -36,11 +37,15 @@ result2 = df[c2]
 c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
 
-c4 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[5]))
+c4 = df["ctr"] <= float(sys.argv[5])
 result4 = df[c4]
 
-conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9]]
-conditions_dfs = [result1, result2, result3, result4]
+c5 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[6]))
+result5 = df[c5]
+
+conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10],
+        sys.argv[11]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -52,7 +57,7 @@ for i in range(len(conditions_args)):
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
-"classification"] )
+"classification", "imps", "ctr"] )
 
 if final_result is None:
     final_result = df
@@ -65,7 +70,7 @@ json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
-"classification"]].to_dict("records"))
+"classification", "imps", "ctr"]].to_dict("records"))
 
 print(json_final_result)
 

@@ -31,8 +31,10 @@ def get_vol_ads_data(token, start_date, end_date, timezone):
                 ads_data[ad_id]["ad_id"] = ad_id
                 ads_data[ad_id]["vol_id"] = vol_id
                 ads_data[ad_id]["name"] = name 
-                ads_data[ad_id]["clicks"] = ad["visits"]
-                ads_data[ad_id]["cost"] = ad["cost"]
+                # 4/1/19 clicks and cost data was changed to come from mgid,
+                # not voluum
+                # ads_data[ad_id]["clicks"] = ad["visits"]
+                # ads_data[ad_id]["cost"] = ad["cost"]
                 ads_data[ad_id]["conversions"] = ad["conversions"]
                 ads_data[ad_id]["revenue"] = ad["revenue"]
         return ads_data

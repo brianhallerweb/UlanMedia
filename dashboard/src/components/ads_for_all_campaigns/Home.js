@@ -23,6 +23,8 @@ class Home extends Component {
       c3Value: 50,
       c4: false,
       c4Value: 0,
+      c5: false,
+      c5Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -94,10 +96,12 @@ class Home extends Component {
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
             c4Value: this.state.c4Value,
+            c5Value: this.state.c5Value,
             c1: this.state.c1,
             c2: this.state.c2,
             c3: this.state.c3,
             c4: this.state.c4,
+            c5: this.state.c5,
           }),
         }),
       )
@@ -158,6 +162,8 @@ class Home extends Component {
           c3Value={this.state.c3Value}
           c4={this.state.c4}
           c4Value={this.state.c4Value}
+          c5={this.state.c5}
+          c5Value={this.state.c5Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

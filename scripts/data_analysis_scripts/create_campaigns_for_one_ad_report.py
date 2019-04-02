@@ -22,6 +22,7 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round(df["roi"], 2)
+df["ctr"] = round(df["ctr"] * 100, 2)
 
 c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]
@@ -29,11 +30,14 @@ result1 = df[c1]
 c2 = df["profit"] < -1 * float(sys.argv[4])
 result2 = df[c2]
 
-c3 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[5]))
+c3 = df["ctr"] <= float(sys.argv[5])
 result3 = df[c3]
 
-conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]]
-conditions_dfs = [result1, result2, result3]
+c4 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[6]))
+result4 = df[c4]
+
+conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
+conditions_dfs = [result1, result2, result3, result4]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -43,7 +47,8 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id"] )
+    "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id", "ctr",
+    "imps"] )
 
 if final_result is None:
     final_result = df
@@ -59,6 +64,8 @@ if len(final_result.index) > 0:
     summary = summary.round(2)
     summary["name"] = "summary"
     summary["roi"] = ""
+    summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
+        2)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
@@ -77,7 +84,8 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id"]].to_dict("records"))
+    "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id", "ctr",
+    "imps"]].to_dict("records"))
 
 print(json_final_result)
 
