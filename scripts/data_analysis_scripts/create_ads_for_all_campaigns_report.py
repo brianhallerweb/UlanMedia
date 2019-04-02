@@ -24,8 +24,9 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
-df["roi"] = round(df["roi"], 2)
+df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2) 
+df["ppi"] = round(df["profit"] / df["imps"], 7) 
 df["global_rank"] = round(df["global_rank"], 0)
 
 c1 = df["classification"] == sys.argv[2]
@@ -57,7 +58,7 @@ for i in range(len(conditions_args)):
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
-"classification", "imps", "ctr"] )
+"classification", "imps", "ctr", "ppi"] )
 
 if final_result is None:
     final_result = df
@@ -70,7 +71,7 @@ json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
 "epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
 "global_rank_order",
-"classification", "imps", "ctr"]].to_dict("records"))
+"classification", "imps", "ctr", "ppi"]].to_dict("records"))
 
 print(json_final_result)
 

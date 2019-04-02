@@ -21,8 +21,9 @@ df["cpc"] = (df["cost"] / df["clicks"]).round(3)
 df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
-df["roi"] = round(df["roi"], 2)
+df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2)
+df["ppi"] = round(df["profit"] / df["imps"], 7) 
 
 c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]
@@ -48,7 +49,7 @@ for i in range(len(conditions_args)):
         on=["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id", "ctr",
-    "imps"] )
+    "imps", "ppi"] )
 
 if final_result is None:
     final_result = df
@@ -66,6 +67,8 @@ if len(final_result.index) > 0:
     summary["roi"] = ""
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
+    summary["ppi"] = round((summary["profit"] / summary["imps"]),
+        7)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
@@ -85,7 +88,7 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "cpc", "epc", "cpa", "epa", "roi", "name", "mgid_id", "vol_id", "ctr",
-    "imps"]].to_dict("records"))
+    "imps", "ppi"]].to_dict("records"))
 
 print(json_final_result)
 

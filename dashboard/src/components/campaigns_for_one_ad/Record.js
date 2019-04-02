@@ -20,6 +20,7 @@ class Record extends Component {
     this.roi = this.props.campaign.roi;
     this.imps = this.props.campaign.imps;
     this.ctr = this.props.campaign.ctr;
+    this.ppi = this.props.campaign.ppi;
     this.state = {};
   }
 
@@ -50,6 +51,7 @@ class Record extends Component {
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
         <td>{this.imps}</td>
+        <td>{this.ppi}</td>
         <td>{this.clicks}</td>
         <td>{this.ctr}%</td>
         <td>${this.cpc}</td>

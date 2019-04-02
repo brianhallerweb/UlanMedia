@@ -20,6 +20,7 @@ class Record extends Component {
     this.roi = this.props.ad.roi;
     this.imps = this.props.ad.imps;
     this.ctr = this.props.ad.ctr;
+    this.ppi = this.props.ad.ppi;
     this.localRank = this.props.ad.local_rank;
     this.localRankOrder = this.props.ad.local_rank_order;
     this.finalRank = this.props.ad.final_rank;
@@ -68,6 +69,7 @@ class Record extends Component {
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
         <td>{this.imps}</td>
+        <td>{this.ppi}</td>
         <td>{this.clicks}</td>
         <td>{this.ctr}%</td>
         <td>${this.cpc}</td>

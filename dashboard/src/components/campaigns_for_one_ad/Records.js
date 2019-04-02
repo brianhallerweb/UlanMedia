@@ -18,6 +18,7 @@ class Records extends Component {
             <th>Revenue</th>
             <th>Profit</th>
             <th>Impressions</th>
+            <th>PPI</th>
             <th>Clicks</th>
             <th>CTR</th>
             <th>CPC</th>

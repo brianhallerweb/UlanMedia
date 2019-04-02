@@ -21,8 +21,9 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
-df["roi"] = round(df["roi"], 2)
+df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2)
+df["ppi"] = round(df["profit"] / df["imps"], 7)
 df["local_rank"] = round(df["local_rank"], 0)
 df["final_rank"] = round(df["final_rank"], 0)
 df["global_rank"] = round(df["global_rank"], 0)
@@ -57,7 +58,7 @@ for i in range(len(conditions_args)):
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc","epa", "roi", "classification", "local_rank",
     "local_rank_order", "final_rank", "final_rank_order",
-    "global_rank", "global_rank_order", "imps", "ctr" ] )
+    "global_rank", "global_rank_order", "imps", "ctr", "ppi" ] )
 
 if final_result is None:
     final_result = df
@@ -80,6 +81,8 @@ if len(final_result.index) > 0:
     summary["global_rank_order"] = ""
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
+    summary["ppi"] = round((summary["profit"] / summary["imps"]),
+        7)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
@@ -100,7 +103,8 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc","epa", "roi", "classification",
-    "local_rank", "local_rank_order", "final_rank", "final_rank_order", "global_rank", "global_rank_order", "imps", "ctr"]].to_dict("records"))
+    "local_rank", "local_rank_order", "final_rank", "final_rank_order",
+    "global_rank", "global_rank_order", "imps", "ctr", "ppi"]].to_dict("records"))
 
 print(json_final_result)
 
