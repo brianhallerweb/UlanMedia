@@ -30,20 +30,10 @@ class Record extends Component {
               `,
             }}
             target="_blank">
-            p widgets
+            p_widgets
           </Link>
         </div>
-        <div className="rowLink">
-          <Link
-            to={{
-              pathname: `/excludecampaignforonecwidgetconfirmation/${
-                this.props.campaignRecord.widget_id
-              }/${this.props.campaignRecord.mgid_id}`,
-            }}
-            target="_blank">
-            exclude
-          </Link>
-        </div>
+
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
@@ -53,6 +43,7 @@ class Record extends Component {
             mgid
           </a>
         </div>
+
         <div className="rowLink">
           <a
             href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month?dateRange=custom-date&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
@@ -68,6 +59,7 @@ class Record extends Component {
             months
           </a>
         </div>
+
         <div className="rowLink">
           <a
             href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
@@ -82,6 +74,18 @@ class Record extends Component {
             target="_blank">
             days
           </a>
+        </div>
+
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/excludecampaignforonecwidgetconfirmation/${
+                this.props.campaignRecord.widget_id
+              }/${this.props.campaignRecord.mgid_id}`,
+            }}
+            target="_blank">
+            exclude
+          </Link>
         </div>
       </div>
     );

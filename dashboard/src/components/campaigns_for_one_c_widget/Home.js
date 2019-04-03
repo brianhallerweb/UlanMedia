@@ -31,7 +31,7 @@ class Home extends Component {
       notYetCampaignsCount: '',
       badAndIncludedCampaignsCount: 0,
       c1: false,
-      c1Value: 'all',
+      c1Value: 'included',
       c2: false,
       c2Value: 10,
       c3: false,

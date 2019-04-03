@@ -33,7 +33,7 @@ class Home extends Component {
       c1: false,
       c1Value: 'not yet',
       c2: false,
-      c2Value: 'all',
+      c2Value: 'included',
       c3: false,
       c3Value: 10,
       c4: false,

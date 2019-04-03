@@ -20,7 +20,7 @@ class Home extends Component {
       authenticated: true,
       loading: false,
       c1: false,
-      c1Value: 'all',
+      c1Value: 'included',
       c2: false,
       c2Value: 'not yet listed',
       c3: false,

@@ -23,7 +23,7 @@ df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2)
-df["ppi"] = round(df["profit"] / df["imps"], 7) 
+df["ppi"] = round(df["profit"] / df["imps"], 6) 
 
 c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]

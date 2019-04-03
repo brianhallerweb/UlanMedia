@@ -47,7 +47,7 @@ class Record extends Component {
                     )}`,
                   }}
                   target="_blank">
-                  c widgets
+                  c_widgets
                 </Link>
               </div>
             )}

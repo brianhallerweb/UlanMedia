@@ -30,20 +30,10 @@ class Record extends Component {
               `,
             }}
             target="_blank">
-            p widgets
+            p_widgets
           </Link>
         </div>
-        <div className="rowLink">
-          <Link
-            to={{
-              pathname: `/excludecampaignforonepwidgetconfirmation/${this.props.campaignRecord.widget_id.match(
-                /^\d*/,
-              )}/${this.props.campaignRecord.mgid_id}`,
-            }}
-            target="_blank">
-            exclude
-          </Link>
-        </div>
+
         <div className="rowLink">
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
@@ -84,6 +74,18 @@ class Record extends Component {
             target="_blank">
             days
           </a>
+        </div>
+
+        <div className="rowLink">
+          <Link
+            to={{
+              pathname: `/excludecampaignforonepwidgetconfirmation/${this.props.campaignRecord.widget_id.match(
+                /^\d*/,
+              )}/${this.props.campaignRecord.mgid_id}`,
+            }}
+            target="_blank">
+            exclude
+          </Link>
         </div>
       </div>
     );

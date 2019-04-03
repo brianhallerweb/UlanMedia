@@ -27,7 +27,6 @@ const ConditionCheckboxes = ({
         <select
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
-          <option value="all">all</option>
           <option value="included">included</option>
           <option value="excluded">excluded</option>
         </select>

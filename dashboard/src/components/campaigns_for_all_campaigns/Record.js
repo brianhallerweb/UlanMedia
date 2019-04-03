@@ -101,27 +101,6 @@ class Record extends Component {
 	   */}
           <div>
             <div className="rowLink">
-              <a
-                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
-                  this.props.volRequestStartDate
-                }T00:00:00Z&to=${
-                  this.props.volRequestEndDate
-                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}`}
-                target="_blank">
-                months
-              </a>
-            </div>
-
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/daysforonecampaign/${this.vol_id}/`,
-                }}
-                target="_blank">
-                days
-              </Link>
-            </div>
-            <div className="rowLink">
               <Link
                 to={{
                   pathname: `/pwidgetsforonecampaign/${this.vol_id}/${
@@ -129,9 +108,10 @@ class Record extends Component {
                   }/`,
                 }}
                 target="_blank">
-                p widgets
+                p_widgets
               </Link>
             </div>
+
             <div className="rowLink">
               <Link
                 to={{
@@ -143,6 +123,7 @@ class Record extends Component {
                 offers
               </Link>
             </div>
+
             <div className="rowLink">
               <Link
                 to={{
@@ -207,6 +188,28 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
                 target="_blank">
                 isp
               </a>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
+                  this.props.volRequestStartDate
+                }T00:00:00Z&to=${
+                  this.props.volRequestEndDate
+                }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}`}
+                target="_blank">
+                months
+              </a>
+            </div>
+
+            <div className="rowLink">
+              <Link
+                to={{
+                  pathname: `/daysforonecampaign/${this.vol_id}/`,
+                }}
+                target="_blank">
+                days
+              </Link>
             </div>
           </div>
         </td>

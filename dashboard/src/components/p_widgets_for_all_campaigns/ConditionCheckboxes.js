@@ -73,6 +73,7 @@ const ConditionCheckboxes = ({
             value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
+          {' (warning, unchecking may cause browser to crash)'}
         </span>
       </div>
 
