@@ -68,7 +68,7 @@ if len(final_result.index) > 0:
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
     summary["ppi"] = round((summary["profit"] / summary["imps"]),
-        7)
+        6)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
