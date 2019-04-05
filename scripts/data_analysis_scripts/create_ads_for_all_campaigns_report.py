@@ -26,7 +26,7 @@ df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2) 
-df["ppi"] = round(df["profit"] / df["imps"], 6) 
+df["ppi"] = round(df["profit"] / df["imps"], 5) 
 df["global_rank"] = round(df["global_rank"], 0)
 
 c1 = df["classification"] == sys.argv[2]

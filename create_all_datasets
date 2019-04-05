@@ -1,10 +1,12 @@
 #!/bin/sh 
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_campaigns_for_all_campaigns_datasets.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 add_yesterday_in_days_for_one_campaign_dataset.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_p_and_c_widgets_for_one_campaign_datasets.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_p_widgets_dataset.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_c_widgets_dataset.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_ads_datasets.py
-cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_for_each_campaign_datasets.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_campaigns_for_all_campaigns_datasets.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 add_yesterday_in_days_for_one_campaign_dataset.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_p_and_c_widgets_for_one_campaign_datasets.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_p_widgets_dataset.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_c_widgets_dataset.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_ads_datasets.py
+#cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_for_each_campaign_datasets.py
+cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_countries_dataset.py
+cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_countries_dataset.py
 
