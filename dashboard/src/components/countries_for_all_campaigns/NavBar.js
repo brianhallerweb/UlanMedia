@@ -1,6 +1,5 @@
 //@format
 import React, {Component} from 'react';
-import DatesDropdown from './DatesDropdown';
 import ConditionCheckboxes from './ConditionCheckboxes';
 
 class NavBar extends Component {
@@ -17,10 +16,6 @@ class NavBar extends Component {
             e.preventDefault();
             this.props.submitForm();
           }}>
-          <DatesDropdown
-            selectDateRange={this.props.selectDateRange}
-            dateRange={this.props.dateRange}
-          />
           <ConditionCheckboxes
             toggleCondition={this.props.toggleCondition}
             setConditionValue={this.props.setConditionValue}
@@ -30,8 +25,6 @@ class NavBar extends Component {
             c2Value={this.props.c2Value}
             c3={this.props.c3}
             c3Value={this.props.c3Value}
-            c4={this.props.c4}
-            c4Value={this.props.c4Value}
           />
           <input type="submit" value="Submit" />
         </form>

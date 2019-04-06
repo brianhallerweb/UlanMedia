@@ -25,18 +25,14 @@ const ConditionCheckboxes = ({
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>
-          {'Campaign cost is more than $'}
-          <input
-            type="number"
-            name="c1Value"
-            min="0"
-            max="1000"
-            step="50"
-            value={c1Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
+        <span>Country classification is </span>
+        <select
+          onChange={e => setConditionValue('c1Value', e.target.value)}
+          defaultValue={c1Value}>
+          <option value="good">good</option>
+          <option value="bad">bad</option>
+          <option value="wait">wait</option>
+        </select>
       </div>
 
       <div>
@@ -47,13 +43,13 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign lost more than $'}
+          {'Country cost is more than $'}
           <input
             type="number"
             name="c2Value"
-            min="100"
+            min="0"
             max="1000"
-            step="100"
+            step="20"
             value={c2Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
@@ -68,36 +64,14 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign leadCVR is less than or equal to '}
+          {'Country lost more than $'}
           <input
             type="number"
             name="c3Value"
-            min="0"
-            max=".50"
-            step=".25"
+            min="50"
+            max="500"
+            step="50"
             value={c3Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'%'}
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          checked={c4}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign EPC is more than $'}
-          <input
-            type="number"
-            name="c4Value"
-            min="0"
-            max=".20"
-            step=".005"
-            value={c4Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>

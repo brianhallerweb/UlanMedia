@@ -2,7 +2,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 
-const Title = ({volRequestDates, mgidRequestDates}) => {
+const Title = ({volRequestDates}) => {
   const title = 'countries for all campaigns';
   return (
     <div className="title">
@@ -10,9 +10,11 @@ const Title = ({volRequestDates, mgidRequestDates}) => {
         <meta charSet="utf-8" />
         <title>{title}</title>
       </Helmet>
-      <h3>{title}</h3>
-      {volRequestDates && <p>(vol: {volRequestDates})</p>}
-      {mgidRequestDates && <p>(mgid: {mgidRequestDates})</p>}
+
+      <div className="title">
+        <h3>{title}</h3>
+        {volRequestDates && <p>(vol: {volRequestDates})</p>}
+      </div>
     </div>
   );
 };

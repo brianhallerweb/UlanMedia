@@ -22,16 +22,17 @@ def create_complete_countries_dataset():
         for campaign_id in json_file["data"][country_name]:
             if country_name not in complete_countries["data"]:
                 complete_countries["data"][country_name] = {
+                        # 4/5/19 "for_all_campaigns" has the first campaign_id in it
+                        # and it shouldn't have a campaign_id because its for
+                        # all campaigns. Fix this later. 
                         "for_all_campaigns": json_file["data"][country_name][campaign_id],
                         "for_each_campaign": {}}
             else:
                 complete_countries["data"][country_name]["for_all_campaigns"]["clicks"] += json_file["data"][country_name][campaign_id]["clicks"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["conversions"] += json_file["data"][country_name][campaign_id]["conversions"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["profit"] += json_file["data"][country_name][campaign_id]["profit"]
-                complete_countries["data"][country_name]["for_all_campaigns"]["impressions"] += json_file["data"][country_name][campaign_id]["impressions"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["profit"] += json_file["data"][country_name][campaign_id]["profit"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["revenue"] += json_file["data"][country_name][campaign_id]["revenue"]
-                complete_countries["data"][country_name]["for_all_campaigns"]["visits"] += json_file["data"][country_name][campaign_id]["visits"]
 
     for country_name in json_file["data"]:
         for campaign_id in json_file["data"][country_name]:

@@ -23,7 +23,7 @@ df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2)
-df["ppi"] = round(df["profit"] / df["imps"], 5) 
+df["ppi"] = round(df["profit"] / df["imps"], 6) 
 
 c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]
@@ -68,7 +68,7 @@ if len(final_result.index) > 0:
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
     summary["ppi"] = round((summary["profit"] / summary["imps"]),
-        5)
+        6)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0

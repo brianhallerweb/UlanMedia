@@ -27,13 +27,9 @@ def create_countries_dataset(token, start_date, end_date):
                 countries["data"][country_name] = {campaign_id: {
                     "campaign_id": campaign_id,
                     "country_name": country_name,
-                    "clicks": row["clicks"],
+                    "clicks": row["visits"],
                     "conversions": row["conversions"],
                     "cost": row["cost"],
-                    # what is the difference between clicks, impressions,
-                    # visits?
-                    "impressions": row["impressions"],
-                    "visits": row["visits"],
                     "profit": row["profit"],
                     "revenue": row["revenue"]
                     }}
@@ -41,11 +37,9 @@ def create_countries_dataset(token, start_date, end_date):
                 countries["data"][country_name][campaign_id] = {
                     "campaign_id": campaign_id,
                     "country_name": country_name,
-                    "clicks": row["clicks"],
+                    "clicks": row["visits"],
                     "conversions": row["conversions"],
                     "cost": row["cost"],
-                    "impressions": row["impressions"],
-                    "visits": row["visits"],
                     "profit": row["profit"],
                     "revenue": row["revenue"]
                     }
