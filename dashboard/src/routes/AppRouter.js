@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
+import campaigns_for_one_countryHome from '../components/campaigns_for_one_country/Home';
 import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_campaigns/Home';
 import c_widgets_for_all_campaignsHome from '../components/c_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
@@ -42,6 +43,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/countriesforallcampaigns"
           Component={countries_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/campaignsforonecountry/:countryName"
+          Component={campaigns_for_one_countryHome}
         />
         <PrivateRoute
           path="/daysforonecampaign/:volid"

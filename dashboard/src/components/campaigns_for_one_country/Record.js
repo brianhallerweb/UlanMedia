@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.countryName = this.props.country.country_name;
-    this.classification = this.props.country.classification;
+    this.campaignID = this.props.country.campaign_id;
+    this.campaignName = this.props.country.campaign_name;
     this.clicks = this.props.country.clicks;
     this.cost = this.props.country.cost;
     this.revenue = this.props.country.revenue;
@@ -28,20 +28,21 @@ class Record extends Component {
           this.classification === 'bad' ? {backgroundColor: '#f7d9d9'} : null
         }>
         <td>
-          {this.countryName}
-          <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforonecountry/${this.countryName}/`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
+          {this.campaignName}
+          {this.campaignName !== 'summary' && (
+            <div>
+              <div className="rowLink">
+                <Link
+                  to={{
+                    pathname: `/countriesforonecampaign/${this.campaignID}/`,
+                  }}
+                  target="_blank">
+                  countries
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </td>
-        <td>{this.classification}</td>
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>

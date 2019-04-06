@@ -11,13 +11,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      countryName: this.props.match.params.countryName,
       volRequestDates: '',
       c1: false,
-      c1Value: 'good',
+      c1Value: 20,
       c2: false,
-      c2Value: 20,
-      c3: false,
-      c3Value: 50,
+      c2Value: 50,
       error: false,
       authenticated: true,
       loading: false,
@@ -40,13 +39,13 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createCountriesForAllCampaignsDataset`, {
+    fetch(`/api/createCampaignsForOneCountryDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-auth': localStorage.getItem('token'),
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({countryName: this.state.countryName}),
     })
       .then(res => {
         if (!res.ok) {
@@ -71,19 +70,18 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createCountriesForAllCampaignsReport', {
+        fetch('/api/createCampaignsForOneCountryReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'x-auth': localStorage.getItem('token'),
           },
           body: JSON.stringify({
+            countryName: this.state.countryName,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
-            c3Value: this.state.c3Value,
             c1: this.state.c1,
             c2: this.state.c2,
-            c3: this.state.c3,
           }),
         }),
       )
@@ -119,7 +117,10 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title volRequestDates={this.state.volRequestDates} />
+        <Title
+          volRequestDates={this.state.volRequestDates}
+          countryName={this.state.countryName}
+        />
         <GlobalNavBar />
         <NavBar
           toggleCondition={this.toggleCondition.bind(this)}
@@ -128,8 +129,6 @@ class Home extends Component {
           c1Value={this.state.c1Value}
           c2={this.state.c2}
           c2Value={this.state.c2Value}
-          c3={this.state.c3}
-          c3Value={this.state.c3Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

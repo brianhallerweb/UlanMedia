@@ -16,6 +16,7 @@ const logout = require('./controllers/user_controllers/logout');
 
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
+const createCampaignsForOneCountryDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_country_dataset');
 const createCampaignsForOneOfferDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_offer_dataset');
 const createCampaignsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_p_widget_dataset');
 const createCampaignsForOneCWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_c_widget_dataset');
@@ -44,6 +45,7 @@ const createOffersForAllCampaignsReport = require('./controllers/data_analysis_c
 const createOffersForOneCampaignReport = require('./controllers/data_analysis_controllers/create_offers_for_one_campaign_report');
 const createOffersForOneFlowRuleReport = require('./controllers/data_analysis_controllers/create_offers_for_one_flow_rule_report');
 const createCampaignsForOneAdReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_ad_report');
+const createCampaignsForOneCountryReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_country_report');
 
 const authenticate = require('./middleware/authenticate');
 const User = require('./models/user');
@@ -204,6 +206,12 @@ app.post(
 );
 
 app.post(
+  '/api/createCampaignsForOneCountryDataset',
+  authenticate,
+  createCampaignsForOneCountryDataset,
+);
+
+app.post(
   '/api/createCampaignsForOneOfferDataset',
   authenticate,
   createCampaignsForOneOfferDataset,
@@ -282,6 +290,12 @@ app.post(
   '/api/createCampaignsForOneOfferReport',
   authenticate,
   createCampaignsForOneOfferReport,
+);
+
+app.post(
+  '/api/createCampaignsForOneCountryReport',
+  authenticate,
+  createCampaignsForOneCountryReport,
 );
 
 app.post(

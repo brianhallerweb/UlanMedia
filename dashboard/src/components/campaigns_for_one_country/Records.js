@@ -13,8 +13,7 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Country</th>
-            <th>Classification</th>
+            <th>Campaign</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
@@ -31,7 +30,7 @@ class Records extends Component {
         <tbody>
           {this.props.countriesRecords.map(countriesRecord => (
             <Record
-              key={countriesRecord.country_name}
+              key={countriesRecord.campaign_id}
               country={countriesRecord}
             />
           ))}
@@ -44,7 +43,7 @@ class Records extends Component {
     return (
       <div>
         {this.props.loading && <div className="loader" />}
-        {this.props.error && !this.props.loading && <p>no countries found</p>}
+        {this.props.error && !this.props.loading && <p>no campaigns found</p>}
         {this.props.countriesRecords.length > 0 &&
           !this.props.loading &&
           this.createTable()}

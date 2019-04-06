@@ -38,6 +38,8 @@ def create_complete_countries_dataset():
         for campaign_id in json_file["data"][country_name]:
             complete_countries["data"][country_name]["for_each_campaign"][campaign_id] = json_file["data"][country_name][campaign_id]
 
+    for country_name in complete_countries["data"]:
+        complete_countries["data"][country_name]["for_all_campaigns"]["classification"] = "wait"
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_countries/oneeighty_complete_countries_dataset.json", "w") as file:
         json.dump(complete_countries, file)
