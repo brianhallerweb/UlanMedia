@@ -1,13 +1,14 @@
 from config.config import *
 from functions.misc.send_email import send_email
+from functions.misc.get_campaign_sets import get_campaign_sets
 from datetime import datetime
 import requests
 import sys
 import json
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_countries_dataset(token, start_date, end_date):
     try:
@@ -20,9 +21,17 @@ def create_countries_dataset(token, start_date, end_date):
                                  "vol_end_date": end_date
                                  },
                     "data": {}}
+
+        campaigns = get_campaign_sets()
+        vol_ids = [] 
+        for campaign in campaigns:
+            vol_ids.append(campaign["vol_id"])
+
         for row in res["rows"]:
             country_name = row["countryName"]
             campaign_id = row["campaignId"]
+            if campaign_id not in vol_ids:
+                continue
             if country_name not in countries["data"]:
                 countries["data"][country_name] = {campaign_id: {
                     "campaign_id": campaign_id,

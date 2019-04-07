@@ -3,7 +3,6 @@ import json
 import sys
 import os
 
-
 def create_countries_for_one_campaign_dataset(vol_id):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_countries/oneeighty_complete_countries_dataset.json', 'r') as file:
@@ -14,22 +13,15 @@ def create_countries_for_one_campaign_dataset(vol_id):
 
     countries_for_one_campaign = {"metadata": metadata, "data": []}   
 
-    for ad_image in data.values():
-        for ad in ad_image["for_each_campaign"]:
-            if vol_id == ad["vol_id"]:
-                ads_for_one_campaign["data"].append(ad)
+    for country in data:
+        for campaign in data[country]["for_each_campaign"]:
+            if data[country]["for_each_campaign"][campaign]["campaign_id"] == vol_id:
+                countries_for_one_campaign["data"].append(data[country]["for_each_campaign"][campaign])
         
-    # add the parent ad global rank
-    for ad in ads_for_one_campaign["data"]:
-        ad_image = ad["image"]
-        ad["global_rank"] = data[ad_image]["for_all_campaigns"]["global_rank"]
-        ad["global_rank_order"] = data[ad_image]["for_all_campaigns"]["global_rank_order"]
+    with open(f"../../data/countries_for_one_campaign/{vol_id}_countries_for_one_campaign_dataset.json", "w") as file:
+        json.dump(countries_for_one_campaign, file)
 
-    with open(f"../../data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json", "w") as file:
-        json.dump(ads_for_one_campaign, file)
-
-    return json.dumps(ads_for_one_campaign)
-
+    return json.dumps(countries_for_one_campaign) 
 
     
 

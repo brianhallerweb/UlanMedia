@@ -122,6 +122,14 @@ class Home extends Component {
           countryName={this.state.countryName}
         />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          <a
+            style={{fontSize: 12}}
+            href="https://drive.google.com/file/d/1vFmrY0MUj5icKWEoutheTe-n33GUmY4d/view?usp=sharing"
+            target="_blank">
+            flowchart
+          </a>
+        </div>
         <NavBar
           toggleCondition={this.toggleCondition.bind(this)}
           setConditionValue={this.setConditionValue.bind(this)}

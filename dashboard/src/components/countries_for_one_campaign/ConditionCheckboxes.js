@@ -9,6 +9,8 @@ const ConditionCheckboxes = ({
   c1Value,
   c2,
   c2Value,
+  c3,
+  c3Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -19,18 +21,14 @@ const ConditionCheckboxes = ({
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>
-          {'Campaign cost is more than $'}
-          <input
-            type="number"
-            name="c1Value"
-            min="0"
-            max="1000"
-            step="20"
-            value={c1Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
+        <span>Country classification is </span>
+        <select
+          onChange={e => setConditionValue('c1Value', e.target.value)}
+          defaultValue={c1Value}>
+          <option value="good">good</option>
+          <option value="bad">bad</option>
+          <option value="wait">wait</option>
+        </select>
       </div>
 
       <div>
@@ -41,14 +39,35 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign lost more than $'}
+          {'Country cost is more than $'}
           <input
             type="number"
             name="c2Value"
             min="0"
-            max="500"
-            step="10"
+            max="1000"
+            step="20"
             value={c2Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c3"
+          checked={c3}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Country lost more than $'}
+          <input
+            type="number"
+            name="c3Value"
+            min="50"
+            max="500"
+            step="50"
+            value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>

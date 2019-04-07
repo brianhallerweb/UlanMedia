@@ -1,4 +1,5 @@
 from config.config import *
+from functions.classification_functions.classify_country import classify_country
 import sys
 import json
 import os
@@ -34,12 +35,21 @@ def create_complete_countries_dataset():
                 complete_countries["data"][country_name]["for_all_campaigns"]["cost"] += json_file["data"][country_name][campaign_id]["cost"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["revenue"] += json_file["data"][country_name][campaign_id]["revenue"]
 
+    # the json_file needs to be loaded again because it mutates during the
+    # previous accumulation step
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries/oneeighty_countries_dataset.json', 'r') as file:
+        json_file = json.load(file)
+
     for country_name in json_file["data"]:
         for campaign_id in json_file["data"][country_name]:
             complete_countries["data"][country_name]["for_each_campaign"][campaign_id] = json_file["data"][country_name][campaign_id]
 
     for country_name in complete_countries["data"]:
-        complete_countries["data"][country_name]["for_all_campaigns"]["classification"] = "wait"
+        complete_countries["data"][country_name]["for_all_campaigns"]["classification"] = classify_country(complete_countries["data"][country_name]["for_all_campaigns"])
+
+    for country_name in complete_countries["data"]:
+        for campaign in complete_countries["data"][country_name]["for_each_campaign"]:
+            complete_countries["data"][country_name]["for_each_campaign"][campaign]["classification"] = classify_country(complete_countries["data"][country_name]["for_each_campaign"][campaign])
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_countries/oneeighty_complete_countries_dataset.json", "w") as file:
         json.dump(complete_countries, file)

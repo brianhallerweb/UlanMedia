@@ -13,7 +13,8 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>Campaign</th>
+            <th>Country</th>
+            <th>Classification</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>
@@ -30,7 +31,7 @@ class Records extends Component {
         <tbody>
           {this.props.countriesRecords.map(countriesRecord => (
             <Record
-              key={countriesRecord.campaign_id}
+              key={countriesRecord.country_name}
               country={countriesRecord}
             />
           ))}

@@ -11,10 +11,6 @@ const ConditionCheckboxes = ({
   c2Value,
   c3,
   c3Value,
-  c4,
-  c4Value,
-  c5,
-  c5Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>

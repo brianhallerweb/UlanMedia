@@ -11,13 +11,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      campaignID: this.props.match.params.volID,
+      campaignID: this.props.match.params.volid,
       campaignName: this.props.match.params.name,
       volRequestDates: '',
       c1: false,
-      c1Value: 20,
+      c1Value: 'good',
       c2: false,
-      c2Value: 50,
+      c2Value: 20,
+      c3: false,
+      c3Value: 50,
       error: false,
       authenticated: true,
       loading: false,
@@ -81,8 +83,10 @@ class Home extends Component {
             campaignID: this.state.campaignID,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
+            c3Value: this.state.c3Value,
             c1: this.state.c1,
             c2: this.state.c2,
+            c3: this.state.c3,
           }),
         }),
       )
@@ -123,6 +127,14 @@ class Home extends Component {
           campaignName={this.state.campaignName}
         />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          <a
+            style={{fontSize: 12}}
+            href="https://drive.google.com/file/d/1vFmrY0MUj5icKWEoutheTe-n33GUmY4d/view?usp=sharing"
+            target="_blank">
+            flowchart
+          </a>
+        </div>
         <NavBar
           toggleCondition={this.toggleCondition.bind(this)}
           setConditionValue={this.setConditionValue.bind(this)}
@@ -130,6 +142,8 @@ class Home extends Component {
           c1Value={this.state.c1Value}
           c2={this.state.c2}
           c2Value={this.state.c2Value}
+          c3={this.state.c3}
+          c3Value={this.state.c3Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

@@ -23,6 +23,8 @@ class NavBar extends Component {
             c1Value={this.props.c1Value}
             c2={this.props.c2}
             c2Value={this.props.c2Value}
+            c3={this.props.c3}
+            c3Value={this.props.c3Value}
           />
           <input type="submit" value="Submit" />
         </form>
