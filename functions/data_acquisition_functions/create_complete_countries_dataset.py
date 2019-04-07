@@ -31,7 +31,7 @@ def create_complete_countries_dataset():
                 complete_countries["data"][country_name]["for_all_campaigns"]["clicks"] += json_file["data"][country_name][campaign_id]["clicks"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["conversions"] += json_file["data"][country_name][campaign_id]["conversions"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["profit"] += json_file["data"][country_name][campaign_id]["profit"]
-                complete_countries["data"][country_name]["for_all_campaigns"]["profit"] += json_file["data"][country_name][campaign_id]["profit"]
+                complete_countries["data"][country_name]["for_all_campaigns"]["cost"] += json_file["data"][country_name][campaign_id]["cost"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["revenue"] += json_file["data"][country_name][campaign_id]["revenue"]
 
     for country_name in json_file["data"]:
