@@ -27,9 +27,9 @@ class Home extends Component {
     };
   }
 
-  //componentDidMount() {
-  //this.submitForm();
-  //}
+  componentDidMount() {
+    this.submitForm();
+  }
 
   toggleCondition(condition) {
     this.setState({[condition]: !this.state[condition]});
