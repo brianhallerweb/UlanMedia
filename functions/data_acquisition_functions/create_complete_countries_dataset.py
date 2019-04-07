@@ -13,7 +13,7 @@ def create_complete_countries_dataset():
 
 
     complete_countries = {"metadata": {"vol_start_date": json_file["metadata"]["vol_start_date"],
-                                 "vol_end_date": json_file["metadata"]["vol_start_date"],
+                                 "vol_end_date": json_file["metadata"]["vol_end_date"],
                                  },
                     "data": {}
                    }
