@@ -20,28 +20,28 @@ def classify_country(country):
     
     if roi > 0:
         return "good"
-    elif cost > 6:
+    elif cost > 600:
         if cvr > .005:
             return "bad"
         elif cvr > .002:
             return "bad"
         else:
             return "bad"
-    elif cost > 3:
+    elif cost > 300:
         if cvr > .005:
             return "wait"
         elif cvr > .002:
             return "bad"
         else:
             return "bad"
-    elif cost > 1:
+    elif cost > 100:
         if cvr > .005:
             return "wait"
         elif cvr > .002:
             return "wait"
         else:
             return "bad"
-    elif cost > .5:
+    elif cost > 50:
         if cvr > .005:
             return "wait"
         elif cvr > .002:
