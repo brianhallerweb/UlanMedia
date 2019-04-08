@@ -77,6 +77,22 @@ class Record extends Component {
         </div>
 
         <div className="rowLink">
+          <a
+            href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_9a96a80f-83fd-4721-b245-5d2d82077632/report/country-code?dateRange=custom-date&chart=0&columns=offerName&columns=offerId&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=100&reportType=&include=ALL&reportDataType=0&tagsGrouping=offer&valueFiltersGrouping=offer&from=${
+              this.props.volRequestStartDate
+            }T00:00:00Z&to=${
+              this.props.volRequestEndDate
+            }T00:00:00Z&filter1=campaign&filter1Value=${
+              this.props.campaignRecord.vol_id
+            }&filter2=custom-variable-1&filter2Value=${
+              this.props.campaignRecord.widget_id
+            }`}
+            target="_blank">
+            countries
+          </a>
+        </div>
+
+        <div className="rowLink">
           <Link
             to={{
               pathname: `/excludecampaignforonecwidgetconfirmation/${

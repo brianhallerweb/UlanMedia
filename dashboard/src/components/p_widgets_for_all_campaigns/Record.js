@@ -60,6 +60,7 @@ class Record extends Component {
                 months
               </a>
             </div>
+
             <div className="rowLink">
               <a
                 href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day,custom-variable-1?dateRange=last-30-days&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
@@ -67,6 +68,17 @@ class Record extends Component {
                 }&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`}
                 target="_blank">
                 days
+              </a>
+            </div>
+
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_7f6f8173-3293-4891-a078-da864a6da65b/report/custom-variable-1,country-code?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
+                  this.props.widgetRecord.widget_id
+                }&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc
+`}
+                target="_blank">
+                countries
               </a>
             </div>
             <div className="rowLink">

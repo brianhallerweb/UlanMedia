@@ -6,12 +6,14 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForBadCountries from './checkForBadCountries';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       volRequestDates: '',
+      badCountriesCount: 0,
       c1: false,
       c1Value: 'good',
       c2: false,
@@ -103,10 +105,12 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        let badCountriesCount = checkForBadCountries(records);
         let error;
         records.length ? (error = false) : (error = true);
         this.setState({
           countriesRecords: records,
+          badCountriesCount,
           error,
           loading: false,
         });
@@ -141,6 +145,11 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+        {this.state.badCountriesCount !== 0 && !this.state.loading && (
+          <div style={{color: 'red', marginTop: 10}}>
+            {this.state.badCountriesCount} countries are bad
+          </div>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}
