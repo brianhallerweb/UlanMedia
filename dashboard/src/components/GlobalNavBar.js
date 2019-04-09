@@ -41,6 +41,12 @@ const GlobalNavBar = () => (
     </li>
 
     <li className="globalNavItem">
+      <NavLink to={'/languagesforallcampaigns'} activeClassName="is-active">
+        languages
+      </NavLink>
+    </li>
+
+    <li className="globalNavItem">
       <NavLink
         to={'/excludeonecampaignforallblacklistedpandcwidgets'}
         activeClassName="is-active"

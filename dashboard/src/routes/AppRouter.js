@@ -5,12 +5,15 @@ import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
+import languages_for_all_campaignsHome from '../components/languages_for_all_campaigns/Home';
 import campaigns_for_one_countryHome from '../components/campaigns_for_one_country/Home';
+import campaigns_for_one_languageHome from '../components/campaigns_for_one_language/Home';
 import p_widgets_for_all_campaignsHome from '../components/p_widgets_for_all_campaigns/Home';
 import c_widgets_for_all_campaignsHome from '../components/c_widgets_for_all_campaigns/Home';
 import ads_for_all_campaignsHome from '../components/ads_for_all_campaigns/Home';
 import ads_for_one_campaignHome from '../components/ads_for_one_campaign/Home';
 import countries_for_one_campaignHome from '../components/countries_for_one_campaign/Home';
+import languages_for_one_campaignHome from '../components/languages_for_one_campaign/Home';
 import offers_for_all_campaignsHome from '../components/offers_for_all_campaigns/Home';
 import offers_for_one_campaignHome from '../components/offers_for_one_campaign/Home';
 import offers_for_one_flow_ruleHome from '../components/offers_for_one_flow_rule/Home';
@@ -46,8 +49,16 @@ const AppRouter = () => (
           Component={countries_for_all_campaignsHome}
         />
         <PrivateRoute
+          path="/languagesforallcampaigns"
+          Component={languages_for_all_campaignsHome}
+        />
+        <PrivateRoute
           path="/campaignsforonecountry/:countryName"
           Component={campaigns_for_one_countryHome}
+        />
+        <PrivateRoute
+          path="/campaignsforonelanguage/:languageName"
+          Component={campaigns_for_one_languageHome}
         />
         <PrivateRoute
           path="/daysforonecampaign/:volid"
@@ -100,6 +111,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/countriesforonecampaign/:volid/:name"
           Component={countries_for_one_campaignHome}
+        />
+        <PrivateRoute
+          path="/languagesforonecampaign/:volid/:name"
+          Component={languages_for_one_campaignHome}
         />
         <PrivateRoute
           path="/adsforallcampaigns"
