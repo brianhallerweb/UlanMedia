@@ -51,6 +51,18 @@ class Record extends Component {
                 </Link>
               </div>
             )}
+
+            <div className="rowLink">
+              <a
+                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_7f6f8173-3293-4891-a078-da864a6da65b/report/custom-variable-1,country-code?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
+                  this.props.widgetRecord.widget_id
+                }&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc
+`}
+                target="_blank">
+                countries
+              </a>
+            </div>
+
             <div className="rowLink">
               <a
                 href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_27e1fe2c-3a24-4946-b334-8e7df1b50e2d/report/month,custom-variable-1?dateRange=last-30-days&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
@@ -71,16 +83,6 @@ class Record extends Component {
               </a>
             </div>
 
-            <div className="rowLink">
-              <a
-                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_7f6f8173-3293-4891-a078-da864a6da65b/report/custom-variable-1,country-code?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
-                  this.props.widgetRecord.widget_id
-                }&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc
-`}
-                target="_blank">
-                countries
-              </a>
-            </div>
             <div className="rowLink">
               <Link
                 onClick={e => e.stopPropagation()}

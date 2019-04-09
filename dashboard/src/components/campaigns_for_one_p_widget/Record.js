@@ -42,6 +42,23 @@ class Record extends Component {
             mgid
           </a>
         </div>
+
+        <div className="rowLink">
+          <a
+            href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_bb64816c-68a9-4d9d-9612-3ef60a6f4a0a/report/custom-variable-1,country-code?dateRange=custom-date&sortKey=cost&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
+              this.props.campaignRecord.widget_id
+            }&limit=100&reportType=&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&from=${
+              this.props.volRequestStartDate
+            }T00:00:00Z&to=${
+              this.props.volRequestEndDate
+            }T00:00:00Z&filter1=campaign&filter1Value=${
+              this.props.campaignRecord.vol_id
+            }`}
+            target="_blank">
+            countries
+          </a>
+        </div>
+
         <div className="rowLink">
           <a
             href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month,custom-variable-1?dateRange=custom-date&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
@@ -57,6 +74,7 @@ class Record extends Component {
             months
           </a>
         </div>
+
         <div className="rowLink">
           <a
             href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day,custom-variable-1?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
@@ -70,22 +88,6 @@ class Record extends Component {
             }`}
             target="_blank">
             days
-          </a>
-        </div>
-
-        <div className="rowLink">
-          <a
-            href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_9a96a80f-83fd-4721-b245-5d2d82077632/report/country-code?dateRange=custom-date&chart=0&columns=offerName&columns=offerId&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=100&reportType=&include=ALL&reportDataType=0&tagsGrouping=offer&valueFiltersGrouping=offer&from=${
-              this.props.volRequestStartDate
-            }T00:00:00Z&to=${
-              this.props.volRequestEndDate
-            }T00:00:00Z&filter1=campaign&filter1Value=${
-              this.props.campaignRecord.vol_id
-            }&filter2=custom-variable-1&filter2Value=${
-              this.props.campaignRecord.widget_id
-            }`}
-            target="_blank">
-            countries
           </a>
         </div>
 
