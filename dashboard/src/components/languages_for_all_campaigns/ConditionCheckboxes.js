@@ -21,7 +21,7 @@ const ConditionCheckboxes = ({
           checked={c1}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Country classification is </span>
+        <span>Language classification is </span>
         <select
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
