@@ -38,7 +38,7 @@ class Record extends Component {
         <div className="rowLink">
           <Link
             to={{
-              pathname: `/excludecampaignconfirmation/${this.props.widgetRecord.widget_id.match(
+              pathname: `/excludecampaignforonepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                 /^\d*/,
               )}/${this.props.widgetRecord.mgid_id}`,
             }}

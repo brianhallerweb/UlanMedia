@@ -85,6 +85,12 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["widget_id"] = "summary"
+    summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
+    summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
+    summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
+    summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
+    summary["cps"] = round(summary["cost"] / summary["sales"], 2)
+    summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
     summary["mpc"] = ""
     summary["mpl"] = ""
     summary["mps"] = ""

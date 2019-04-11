@@ -20,7 +20,7 @@ class Record extends Component {
         <td>{this.props.dayRecord.conversions}</td>
         <td>${this.props.dayRecord.cpa}</td>
         <td>${this.props.dayRecord.epa}</td>
-        <td>${this.props.dayRecord.cvr}</td>
+        <td>{this.props.dayRecord.cvr}%</td>
       </tr>
     );
   }
