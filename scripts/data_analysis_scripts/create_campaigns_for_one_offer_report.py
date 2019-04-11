@@ -68,8 +68,10 @@ if len(final_result.index) > 0:
         summary["epc"] = round(summary["revenue"] / summary["clicks"], 3)
     if summary["conversions"] == 0:
         summary["cpa"] = 0
+        summary["epa"] = 0
     else:
         summary["cpa"] = round(summary["cost"] / summary["conversions"], 2)
+        summary["epa"] = round(summary["revenue"] / summary["conversions"], 2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 

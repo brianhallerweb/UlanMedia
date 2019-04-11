@@ -66,13 +66,13 @@ if len(final_result.index) > 0:
     summary["name"] = "summary"
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
-    summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
     summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
-    summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
-    summary["mpc"] = ""
-    summary["mpl"] = ""
-    summary["mps"] = ""
+    summary["mpc"] = "NA"
+    summary["mpl"] = "NA"
+    summary["mps"] = "NA"
+    summary["classification"] = "NA"
+    summary["status"] = "NA"
     summary["is_bad_and_included"] = False  
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)

@@ -13,7 +13,6 @@ with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_widgets_for_one_campaign/{vo
 metadata = json_file["metadata"]
 data = json_file["data"]
 
-
 # The json data is a dictionary with each widget id as a key and each widget as
 # a value. The loop below simple takes the values and puts them into a list. 
 widgets = []
@@ -91,9 +90,11 @@ if len(final_result.index) > 0:
     summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
     summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
-    summary["mpc"] = ""
-    summary["mpl"] = ""
-    summary["mps"] = ""
+    summary["mpl"] = metadata["mpl"]
+    summary["mpc"] = metadata["mpc"]
+    summary["mps"] = metadata["mps"]
+    summary["status"] = "NA"
+    summary["global_status"] = "NA"
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
     else:

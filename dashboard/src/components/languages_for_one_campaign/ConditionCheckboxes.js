@@ -39,7 +39,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Country cost is more than $'}
+          {'Language cost is more than $'}
           <input
             type="number"
             name="c2Value"
@@ -60,7 +60,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Country lost more than $'}
+          {'Language lost more than $'}
           <input
             type="number"
             name="c3Value"

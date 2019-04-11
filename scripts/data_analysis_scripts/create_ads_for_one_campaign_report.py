@@ -73,12 +73,14 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["image"] = "summary"
-    summary["local_rank"] = ""
-    summary["local_rank_order"] = ""
-    summary["final_rank"] = ""
-    summary["final_rank_order"] = ""
-    summary["global_rank"] = ""
-    summary["global_rank_order"] = ""
+    summary["local_rank"] = "NA"
+    summary["local_rank_order"] = "NA"
+    summary["final_rank"] = "NA"
+    summary["final_rank_order"] = "NA"
+    summary["global_rank"] = "NA"
+    summary["global_rank_order"] = "NA"
+    summary["classification"] = "NA"
+    summary["roi"] = round(summary["profit"] / summary["cost"], 2)
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
     summary["ppi"] = round((summary["profit"] / summary["imps"]),
@@ -93,8 +95,11 @@ if len(final_result.index) > 0:
         2)
     if summary["conversions"] == 0:
         summary["cpa"] = 0
+        summary["epa"] = 0
     else:
         summary["cpa"] = round((summary["cost"] / summary["conversions"]),
+        2)
+        summary["epa"] = round((summary["revenue"] / summary["conversions"]),
         2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")

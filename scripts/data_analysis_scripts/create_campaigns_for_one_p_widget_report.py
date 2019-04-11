@@ -22,8 +22,6 @@ if len(df.index) == 0:
     print(json.dumps(campaigns))
     sys.exit()
 
-df["lead_cpa"] = round(df["cost"] / df["leads"], 2)
-df["sale_cpa"] = round(df["cost"] / df["sales"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cost"] = round(df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
@@ -57,7 +55,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cpa", "lead_cvr",
+            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
             "cps", "eps", "mps", "sale_cpa", "profit", "status",
             "classification", "is_bad_and_included"]
             )
@@ -74,9 +72,17 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["name"] = "summary"
-    summary["mpc"] = ""
-    summary["mpl"] = ""
-    summary["mps"] = ""
+    summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
+    summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
+    summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
+    summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
+    summary["cps"] = round(summary["cost"] / summary["sales"], 2)
+    summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
+    summary["mpc"] = "NA" 
+    summary["mpl"] = "NA"
+    summary["mps"] = "NA" 
+    summary["classification"] = "NA"  
+    summary["status"] = "NA"  
     summary["is_bad_and_included"] = False  
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
@@ -101,8 +107,8 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cpa", "lead_cvr",
-            "cps", "eps", "mps", "sale_cpa", "profit", "status",
+            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
+            "cps", "eps", "mps", "profit", "status",
             "classification", "is_bad_and_included"]].to_dict("records"))
 
 print(json_final_result)

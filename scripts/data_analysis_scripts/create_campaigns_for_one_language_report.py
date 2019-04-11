@@ -56,7 +56,7 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["campaign_name"] = "summary"
-    summary["roi"] = ""
+    summary["roi"] = round((summary["profit"] / summary["cost"])*100, 2)
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
@@ -67,8 +67,11 @@ if len(final_result.index) > 0:
         2)
     if summary["conversions"] == 0:
         summary["cpa"] = 0
+        summary["epa"] = 0
     else:
         summary["cpa"] = round((summary["cost"] / summary["conversions"]),
+        2)
+        summary["epa"] = round((summary["revenue"] / summary["conversions"]),
         2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
