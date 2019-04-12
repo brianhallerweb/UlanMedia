@@ -68,6 +68,7 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
+        <td>{this.props.widgetRecord.classification}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

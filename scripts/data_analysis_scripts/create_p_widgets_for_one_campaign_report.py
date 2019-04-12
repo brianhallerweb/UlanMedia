@@ -13,23 +13,7 @@ with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_widgets_for_one_campaign/{vo
 metadata = json_file["metadata"]
 data = json_file["data"]
 
-# The json data is a dictionary with each widget id as a key and each widget as
-# a value. The loop below simple takes the values and puts them into a list. 
-widgets = []
-for widget in data.values():
-    widgets.append(widget)
-    # the referrer column of each widget is a list of refferers. I am not sure
-    # how to best handle lists inside of data frames so, for now, I am just 
-    # going to concatenate them into a space separated string. 
-    referrers = ""
-    for referrer in widget["referrer"]:
-        if referrers == "":
-            referrers = referrer
-        else:
-            referrers = f"{referrers} {referrer}"
-    widget["referrer"] = referrers
-
-df = pd.DataFrame(widgets)
+df = pd.DataFrame(data)
 
 df["cost"] = round(df["cost"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
@@ -41,24 +25,23 @@ df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
 
-# status conditions (all, included, excluded)
-c1 = df["status"] == sys.argv[3]
+c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
 
-# global status conditions (not yet listed, whitelist, greylist, blacklist)
-c2 = df["global_status"] == sys.argv[4]
+c2 = df["status"] == sys.argv[4]
 result2 = df[c2]
 
-# widget cost is more than xxx
-c3 = df["cost"] > float(sys.argv[5])
+c3 = df["global_status"] == sys.argv[5]
 result3 = df[c3]
 
-# widget lost more than xxx
-c4 = df["profit"] < -1 * float(sys.argv[6])
+c4 = df["cost"] > float(sys.argv[6])
 result4 = df[c4]
 
-conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10]]
-conditions_dfs = [result1, result2, result3, result4]
+c5 = df["profit"] < -1 * float(sys.argv[7])
+result5 = df[c5]
+
+conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12]]
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -69,7 +52,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", "referrer",
             "revenue", "sales", "vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
             "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
-            "status", "global_status"]
+            "status", "global_status", "classification"]
             )
 
 if final_result is None:
@@ -90,9 +73,7 @@ if len(final_result.index) > 0:
     summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
     summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
-    summary["mpl"] = metadata["mpl"]
-    summary["mpc"] = metadata["mpc"]
-    summary["mps"] = metadata["mps"]
+    summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
     if summary["clicks"] == 0:
@@ -120,6 +101,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
             "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
             "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
-            "status", "global_status"]].to_dict("records"))
+            "status", "global_status", "classification"]].to_dict("records"))
 
 print(json_final_result)
