@@ -69,10 +69,12 @@ if len(final_result.index) > 0:
     summary["widget_id"] = "summary"
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
-    summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
     summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
-    summary["cps"] = round(summary["cost"] / summary["sales"], 2)
     summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
+    number_of_rows = len(final_result.index)
+    summary["mpc"] = summary["mpc"] / number_of_rows
+    summary["mpl"] = summary["mpl"] / number_of_rows
+    summary["mps"] = summary["mps"] / number_of_rows
     summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
