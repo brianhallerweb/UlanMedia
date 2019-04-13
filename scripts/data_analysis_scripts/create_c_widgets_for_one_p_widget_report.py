@@ -74,21 +74,23 @@ if len(final_result.index) > 0:
     summary["widget_id"] = "summary"
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
-    summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
-    summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
     summary["global_status"] = "NA"
     rows_with_leads = final_result[final_result["leads"] >= 1]
     number_of_rows_with_leads = len(rows_with_leads.index)
     if number_of_rows_with_leads > 0:
         summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
+        summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
     else:
         summary["cpl"] = 0 
+        summary["epl"] = 0 
     rows_with_sales = final_result[final_result["sales"] >= 1]
     number_of_rows_with_sales = len(rows_with_sales.index)
     if number_of_rows_with_sales > 0:
         summary["cps"] = round(summary["cost"] / summary["sales"], 2)
+        summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
     else:
         summary["cps"] = 0
+        summary["eps"] = 0
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
