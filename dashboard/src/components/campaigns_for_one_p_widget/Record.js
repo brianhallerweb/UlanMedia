@@ -123,7 +123,6 @@ class Record extends Component {
   }
 
   render() {
-    console.log(this.props.campaignRecord.classification);
     return (
       <tr
         style={

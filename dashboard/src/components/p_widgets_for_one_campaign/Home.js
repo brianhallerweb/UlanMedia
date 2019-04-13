@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
+import checkForBadAndIncludedPWidgets from './checkForBadAndIncludedPWidgets';
 
 class Home extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
+      badAndIncludedPWidgetsCount: 0,
       c1: false,
       c1Value: 'not yet',
       c2: false,
@@ -126,9 +128,18 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        let badAndIncludedPWidgetsCount = checkForBadAndIncludedPWidgets(
+          records,
+        );
+
         let error;
         records.length ? (error = false) : (error = true);
-        this.setState({widgetRecords: records, error, loading: false});
+        this.setState({
+          widgetRecords: records,
+          badAndIncludedPWidgetsCount,
+          error,
+          loading: false,
+        });
       })
       .catch(err => console.log(err));
   }
@@ -172,6 +183,14 @@ class Home extends Component {
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}
         />
+        {this.state.badAndIncludedPWidgetsCount !== 0 &&
+          !this.state.loading && (
+            <div style={{color: 'red', marginTop: 10}}>
+              {this.state.badAndIncludedPWidgetsCount} p widgets need to be
+              excluded from the campaign
+            </div>
+          )}
+
         <Records
           loading={this.state.loading}
           error={this.state.error}

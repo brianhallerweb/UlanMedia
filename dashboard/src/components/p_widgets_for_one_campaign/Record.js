@@ -8,6 +8,16 @@ class Record extends Component {
     this.state = {};
   }
 
+  stylizeClassification(row) {
+    if ((row === 'bad') | (row === 'half bad')) {
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
+    } else if ((row === 'good') | (row === 'half good')) {
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
+    } else {
+      return <td>{row}</td>;
+    }
+  }
+
   addRowLinks() {
     return (
       <div>
@@ -62,13 +72,20 @@ class Record extends Component {
 
   render() {
     return (
-      <tr>
+      <tr
+        style={
+          this.props.widgetRecord.is_bad_and_included
+            ? {backgroundColor: '#f7d9d9'}
+            : null
+        }>
         <td>
           {this.props.widgetRecord.widget_id}
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
-        <td>{this.props.widgetRecord.classification}</td>
+
+        {this.stylizeClassification(this.props.widgetRecord.classification)}
+
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>
