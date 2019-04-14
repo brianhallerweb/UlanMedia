@@ -70,9 +70,9 @@ if len(final_result.index) > 0:
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
     number_of_rows = len(final_result.index)
-    summary["mpc"] = summary["mpc"] / number_of_rows
-    summary["mpl"] = summary["mpl"] / number_of_rows
-    summary["mps"] = summary["mps"] / number_of_rows
+    summary["mpc"] = round(summary["mpc"] / number_of_rows, 2)
+    summary["mpl"] = round(summary["mpl"] / number_of_rows, 2)
+    summary["mps"] = round(summary["mps"] / number_of_rows, 2)
     summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
