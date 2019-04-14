@@ -71,11 +71,32 @@ result13 = df[c13]
 c14 = ((df["mps"] + float(sys.argv[9])/100*df["mps"]) <= df["eps"])
 result14 = df[c14]
 
+c15 = ((df["cpc"] + float(sys.argv[10])/100*df["cpc"]) >= df["mpc"])
+result15 = df[c15]
 
-conditions_args = [sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13], sys.argv[14], sys.argv[15], sys.argv[16], sys.argv[17], sys.argv[18], sys.argv[19], sys.argv[20], sys.argv[21], sys.argv[22], sys.argv[23]]
+c16 = ((df["cpl"] + float(sys.argv[11])/100*df["cpl"]) >= df["mpl"])
+result16 = df[c16]
+
+c17 = ((df["cps"] + float(sys.argv[12])/100*df["cps"]) >= df["mps"])
+result17 = df[c17]
+
+c18 = ((df["cpc"] + float(sys.argv[13])/100*df["cpc"]) <= df["mpc"])
+result18 = df[c18]
+
+c19 = ((df["cpl"] + float(sys.argv[14])/100*df["cpl"]) <= df["mpl"])
+result19 = df[c19]
+
+c20 = ((df["cps"] + float(sys.argv[15])/100*df["cps"]) <= df["mps"])
+result20 = df[c20]
+
+conditions_args = [ sys.argv[16], sys.argv[17], sys.argv[18],
+        sys.argv[19], sys.argv[20], sys.argv[21], sys.argv[22],
+        sys.argv[23], sys.argv[24], sys.argv[25], sys.argv[26], sys.argv[27],
+        sys.argv[28], sys.argv[29], sys.argv[30],
+        sys.argv[31], sys.argv[32], sys.argv[33], sys.argv[34], sys.argv[35]]
 conditions_dfs = [result1, result2, result3, result4, result5, result6,
         result7, result8, result9, result10, result11, result12, result13,
-        result14]
+        result14, result15, result16, result17, result18, result19, result20]
 
 final_result = None 
 for i in range(len(conditions_args)):

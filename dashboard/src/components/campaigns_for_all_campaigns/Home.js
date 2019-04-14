@@ -38,6 +38,18 @@ class Home extends Component {
       c13Value: 30,
       c14: false,
       c14Value: 30,
+      c15: false,
+      c15Value: 30,
+      c16: false,
+      c16Value: 30,
+      c17: false,
+      c17Value: 30,
+      c18: false,
+      c18Value: 30,
+      c19: false,
+      c19Value: 30,
+      c20: false,
+      c20Value: 30,
       error: false,
       authenticated: true,
       loading: false,
@@ -91,6 +103,12 @@ class Home extends Component {
         c12Value: this.state.c12Value,
         c13Value: this.state.c13Value,
         c14Value: this.state.c14Value,
+        c15Value: this.state.c15Value,
+        c16Value: this.state.c16Value,
+        c17Value: this.state.c17Value,
+        c18Value: this.state.c18Value,
+        c19Value: this.state.c19Value,
+        c20Value: this.state.c20Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
@@ -105,6 +123,12 @@ class Home extends Component {
         c12: this.state.c12,
         c13: this.state.c13,
         c14: this.state.c14,
+        c15: this.state.c15,
+        c16: this.state.c16,
+        c17: this.state.c17,
+        c18: this.state.c18,
+        c19: this.state.c19,
+        c20: this.state.c20,
       }),
     })
       .then(res => {
@@ -185,6 +209,12 @@ class Home extends Component {
           c12={this.state.c12}
           c13={this.state.c13}
           c14={this.state.c14}
+          c15={this.state.c15}
+          c16={this.state.c16}
+          c17={this.state.c17}
+          c18={this.state.c18}
+          c19={this.state.c19}
+          c20={this.state.c20}
           c1Value={this.state.c1Value}
           c2Value={this.state.c2Value}
           c9Value={this.state.c9Value}
@@ -193,6 +223,12 @@ class Home extends Component {
           c12Value={this.state.c12Value}
           c13Value={this.state.c13Value}
           c14Value={this.state.c14Value}
+          c15Value={this.state.c15Value}
+          c16Value={this.state.c16Value}
+          c17Value={this.state.c17Value}
+          c18Value={this.state.c18Value}
+          c19Value={this.state.c19Value}
+          c20Value={this.state.c20Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
