@@ -131,7 +131,6 @@ class Home extends Component {
         let badAndIncludedPWidgetsCount = checkForBadAndIncludedPWidgets(
           records,
         );
-
         let error;
         records.length ? (error = false) : (error = true);
         this.setState({

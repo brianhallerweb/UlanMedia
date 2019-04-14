@@ -49,10 +49,10 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["clicks", "cost", "leads", "referrer",
-            "revenue", "sales", "vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
-            "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
-            "status", "global_status", "classification"]
+        on=["clicks", "cost", "leads", "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
+    "epc", "mpc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
+    "profit", "status", "global_status", "classification",
+    "is_bad_and_included"]
             )
 
 if final_result is None:
@@ -102,9 +102,10 @@ if len(final_result.index) > 0:
     final_result = final_result.replace(np.nan, "")
 
 
-json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "referrer",
-            "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc", "epc", "mpc", "cpl", "epl",
-            "mpl", "cps", "eps", "mps" ,"lead_cvr", "profit",
-            "status", "global_status", "classification"]].to_dict("records"))
+json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
+    "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
+    "epc", "mpc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
+    "profit", "status", "global_status", "classification",
+    "is_bad_and_included"]].to_dict("records"))
 
 print(json_final_result)

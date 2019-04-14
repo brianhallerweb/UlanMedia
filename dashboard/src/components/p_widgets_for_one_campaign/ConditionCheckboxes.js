@@ -46,7 +46,7 @@ const ConditionCheckboxes = ({
         />
         <span>Widget status is </span>
         <select
-          onChange={e => setConditionValue('c1Value', e.target.value)}
+          onChange={e => setConditionValue('c2Value', e.target.value)}
           defaultValue={c2Value}>
           <option value="included">included</option>
           <option value="excluded">excluded</option>
