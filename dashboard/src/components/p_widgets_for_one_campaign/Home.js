@@ -31,6 +31,7 @@ class Home extends Component {
       c4Value: 10,
       c5: false,
       c5Value: 10,
+      c6: false,
     };
   }
 
@@ -109,6 +110,7 @@ class Home extends Component {
             c3: this.state.c3,
             c4: this.state.c4,
             c5: this.state.c5,
+            c6: this.state.c6,
           }),
         }),
       )
@@ -178,6 +180,7 @@ class Home extends Component {
           c4Value={this.state.c4Value}
           c5={this.state.c5}
           c5Value={this.state.c5Value}
+          c6={this.state.c6}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}

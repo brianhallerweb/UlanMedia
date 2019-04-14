@@ -8,6 +8,7 @@ class Record extends Component {
     this.mgid_id = this.props.campaign.mgid_id;
     this.vol_id = this.props.campaign.vol_id;
     this.name = this.props.campaign.name;
+    this.classification = this.props.campaign.classification;
     this.clicks = this.props.campaign.clicks;
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;
@@ -23,7 +24,7 @@ class Record extends Component {
     this.epl = this.props.campaign.epl;
     this.eps = this.props.campaign.eps;
     this.mpc = this.props.campaign.mpc;
-    this.state = {};
+    this.state = {clicked: false};
   }
 
   // 2/10/19 I disabled the tool tips because they are totally out of date and
@@ -72,6 +73,15 @@ class Record extends Component {
   //}
   //return toolTipText;
   //}
+  stylizeClassification(row) {
+    if ((row === 'bad') | (row === 'half bad')) {
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
+    } else if ((row === 'good') | (row === 'half good')) {
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
+    } else {
+      return <td>{row}</td>;
+    }
+  }
 
   render() {
     return (
@@ -80,7 +90,11 @@ class Record extends Component {
           this.profit > 0
             ? {backgroundColor: '#eafcea'}
             : {backgroundColor: '#f7d9d9'}
-        }>
+        }
+        className={this.state.clicked && 'clicked'}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {/*<td className="tooltip">*/}
           {this.name}
@@ -213,6 +227,7 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
             </div>
           </div>
         </td>
+        {this.stylizeClassification(this.classification)}
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>

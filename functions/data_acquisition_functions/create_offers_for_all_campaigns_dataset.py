@@ -108,7 +108,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
 
 
     # At this point, offers_for_each_flow_rule exists and you have a
-    # p_offers_gpr_lookup dictionary which tells you the gpr  of each parent
+    # p_offers_gpr_lookup dictionary which tells you the gpr of each parent
     # offer
 
     ##################################
@@ -185,7 +185,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
             else:
                 offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = total_score / total_flow_rule_score * 100
 
-        # The linesx below handles the sitation where one offer is 100 and others are 0
+        # The lines below handles the sitation where one offer is 100 and others are 0
         # it should reduce the top offer to 90 and give 10 to the second best
         # offer
         # Every offer was given a total_score_rank so if one offer is 100 and
@@ -206,7 +206,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                     offers_for_each_flow_rule[flow_rule][offer]["rec_weight"] = 10
                     break
 
-    # At thie point, offers_for_each_flow_rule is a lookup dictionary to find
+    # At this point, offers_for_each_flow_rule is a lookup dictionary to find
     # the weight of each offer. In the next step you will add that weight to
     # the offers_for_all_campaigns dataset
     ########################################
@@ -238,6 +238,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "conversions": data[campaign][offer]["conversions"],
                                                           "rec_weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["rec_weight"],
                                                           "vol_weight": data[campaign][offer]["vol_weight"],
+                                                          "total_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["total_score"],
                                                           }
 
     #######################################################

@@ -1,6 +1,7 @@
 from config.config import *
 from functions.data_acquisition_functions.get_all_campaign_conversions_by_traffic_source import get_all_campaign_conversions_by_traffic_source
 from functions.data_acquisition_functions.get_mgid_campaign_costs import get_mgid_campaign_costs
+from functions.classification_functions.classify_campaign_for_all_campaigns import classify_campaign_for_all_campaigns
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.create_vol_date_range import create_vol_date_range
 from functions.misc.create_mgid_date_range import create_mgid_date_range
@@ -9,6 +10,8 @@ import sys
 import re
 import os
 
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, output_name):
     vol_dates = create_vol_date_range(days_ago, mgid_timezone)
@@ -80,9 +83,14 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
             campaign_data["revenue"] = 0
         campaigns_data["data"].append(campaign_data)
 
+    for campaign in campaigns_data["data"]:
+        campaign["classification"] = classify_campaign_for_all_campaigns(campaign)
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/campaigns_for_all_campaigns/{output_name}.json", "w") as file:
         json.dump(campaigns_data, file)
 
     print(f"{output_name} created")
+
+
+
 

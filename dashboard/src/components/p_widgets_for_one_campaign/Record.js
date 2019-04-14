@@ -5,7 +5,13 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {clicked: false};
+  }
+
+  componentDidMount() {
+    if (this.props.widgetRecord.status === 'excluded') {
+      this.setState({clicked: true});
+    }
   }
 
   stylizeClassification(row) {
@@ -77,7 +83,11 @@ class Record extends Component {
           this.props.widgetRecord.is_bad_and_included
             ? {backgroundColor: '#f7d9d9'}
             : null
-        }>
+        }
+        className={this.state.clicked && 'clicked'}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.props.widgetRecord.widget_id}
           {this.props.widgetRecord.widget_id !== 'summary' &&

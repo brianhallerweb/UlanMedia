@@ -87,7 +87,7 @@ for i in range(len(conditions_args)):
             "cost", "imps", "leads", "mpl", "mps", "cpc",
             "epc", "epl",
             "mgid_id", "revenue", "sales","vol_id", "cpl", "eps", "cps", "mpc",
-            "profit"] )
+            "profit", "classification"] )
 
 if final_result is None:
     final_result = df
@@ -99,7 +99,7 @@ final_result = final_result.sort_values("sort")
 json_final_result = json.dumps(final_result[["mgid_start_date",
     "mgid_end_date","vol_start_date", "vol_end_date", "mgid_id", "vol_id", "name",
     "clicks", "cost", "revenue", "profit", "leads","mpc",
-    "mpl","cpl", "epl", "sales", "cps","mps","cpc","eps", "epc"]].to_dict("records"))
+    "mpl","cpl", "epl", "sales", "cps","mps","cpc","eps", "epc", "classification"]].to_dict("records"))
 
 print(json_final_result)
 

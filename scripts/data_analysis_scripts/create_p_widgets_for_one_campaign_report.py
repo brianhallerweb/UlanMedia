@@ -40,8 +40,11 @@ result4 = df[c4]
 c5 = df["profit"] < -1 * float(sys.argv[7])
 result5 = df[c5]
 
-conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12]]
-conditions_dfs = [result1, result2, result3, result4, result5]
+c6 = df["is_bad_and_included"] == True 
+result6 = df[c6]
+
+conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -76,6 +79,7 @@ if len(final_result.index) > 0:
     summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
+    summary["is_bad_and_included"] = False 
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
     else:

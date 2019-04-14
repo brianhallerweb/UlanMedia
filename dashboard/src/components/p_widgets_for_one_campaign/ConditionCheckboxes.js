@@ -15,6 +15,7 @@ const ConditionCheckboxes = ({
   c4Value,
   c5,
   c5Value,
+  c6,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -111,6 +112,16 @@ const ConditionCheckboxes = ({
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c6"
+          checked={c6}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        Widget has included bad campaigns
       </div>
     </div>
   );

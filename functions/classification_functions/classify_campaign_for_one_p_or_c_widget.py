@@ -1,3 +1,6 @@
+# this function is used for classification on campaigns for one p/c widget and
+# p widgets for one campaign. 
+
 def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales):
     #################
     # define variables
