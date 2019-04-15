@@ -238,6 +238,9 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "conversions": data[campaign][offer]["conversions"],
                                                           "rec_weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["rec_weight"],
                                                           "vol_weight": data[campaign][offer]["vol_weight"],
+                                                          "roi_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["roi_score"],
+                                                          "cvr_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["cvr_score"],
+                                                          "gpr": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["gpr"],
                                                           "total_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["total_score"],
                                                           }
 

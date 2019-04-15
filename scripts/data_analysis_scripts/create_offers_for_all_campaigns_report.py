@@ -56,7 +56,7 @@ for i in range(len(conditions_args)):
         on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification",
-    "has_mismatch_vol_weight_and_rec_weight", "total_score"]
+    "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr", "total_score"]
             )
 
 if final_result is None:
@@ -67,7 +67,8 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("flow_rule", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name",
     "flow_rule", "clicks", "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa","rec_weight", "vol_weight", "classification", "has_mismatch_vol_weight_and_rec_weight", "total_score"]].to_dict("records"))
+    "epc", "cpa", "cpc", "epa","rec_weight", "vol_weight", "classification",
+    "has_mismatch_vol_weight_and_rec_weight", "roi_score", "cvr_score", "gpr", "total_score"]].to_dict("records"))
 
 print(json_final_result)
 

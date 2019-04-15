@@ -71,13 +71,13 @@ result13 = df[c13]
 c14 = ((df["mps"] + float(sys.argv[9])/100*df["mps"]) <= df["eps"])
 result14 = df[c14]
 
-c15 = ((df["cpc"] + float(sys.argv[10])/100*df["cpc"]) >= df["mpc"])
+c15 = ((df["cpc"] - float(sys.argv[10])/100*df["cpc"]) >= df["mpc"])
 result15 = df[c15]
 
-c16 = ((df["cpl"] + float(sys.argv[11])/100*df["cpl"]) >= df["mpl"])
+c16 = ((df["cpl"] - float(sys.argv[11])/100*df["cpl"]) >= df["mpl"])
 result16 = df[c16]
 
-c17 = ((df["cps"] + float(sys.argv[12])/100*df["cps"]) >= df["mps"])
+c17 = ((df["cps"] - float(sys.argv[12])/100*df["cps"]) >= df["mps"])
 result17 = df[c17]
 
 c18 = ((df["cpc"] + float(sys.argv[13])/100*df["cpc"]) <= df["mpc"])

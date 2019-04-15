@@ -10,6 +10,9 @@ class Record extends Component {
     this.volWeight = this.props.offer.vol_weight;
     this.recWeight = this.props.offer.rec_weight;
     this.classification = this.props.offer.classification;
+    this.roiScore = this.props.offer.roi_score;
+    this.cvrScore = this.props.offer.cvr_score;
+    this.gpr = this.props.offer.gpr;
     this.totalScore = this.props.offer.total_score;
     this.offerName = this.props.offer.offer_name;
     this.clicks = this.props.offer.clicks;
@@ -66,7 +69,9 @@ class Record extends Component {
           </div>
         </td>
         <td>{this.classification}</td>
-        <td>{this.totalScore}</td>
+        <td>
+          {this.roiScore} + {this.cvrScore} + {this.gpr} = {this.totalScore}
+        </td>
         <td>{this.volWeight}</td>
         <td>{this.recWeight}</td>
         <td>${this.cost}</td>

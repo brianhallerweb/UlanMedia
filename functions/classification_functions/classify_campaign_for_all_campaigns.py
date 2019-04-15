@@ -10,15 +10,13 @@ def classify_campaign_for_all_campaigns(campaign):
         cps = cost / sales
         eps = profit / sales
     else:
-        # this isn't right
-        cps = 0
+        cps = None 
         eps = 0
     if leads > 0:
         cpl = cost / leads
         epl = profit / leads
     else:
-        # this isn't right
-        cpl = 0
+        cpl = None 
         epl = 0
     if profit > 0:
         return "good"
