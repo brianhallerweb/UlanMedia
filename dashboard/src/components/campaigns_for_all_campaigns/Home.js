@@ -11,15 +11,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dateRange: 'oneeighty',
+      dateRange: 'yesterday',
       volRequestStartDate: '',
       volRequestEndDate: '',
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
       c1Value: 'not yet',
-      c2: false,
-      c2Value: 10,
+      c2: true,
+      c2Value: 20,
       c3: false,
       c3Value: 100,
       c4: false,
@@ -44,7 +44,7 @@ class Home extends Component {
       c16Value: 30,
       c17: false,
       c17Value: 30,
-      c18: false,
+      c18: true,
       c18Value: 30,
       c19: false,
       c19Value: 30,
