@@ -17,19 +17,19 @@ class Home extends Component {
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
-      c1Value: 10,
+      c1Value: 'not yet',
       c2: false,
-      c2Value: 100,
+      c2Value: 10,
       c3: false,
+      c3Value: 100,
       c4: false,
+      c4Value: 0,
       c5: false,
       c6: false,
       c7: false,
       c8: false,
       c9: false,
-      c9Value: 30,
       c10: false,
-      c10Value: 30,
       c11: false,
       c11Value: 30,
       c12: false,
@@ -50,6 +50,10 @@ class Home extends Component {
       c19Value: 30,
       c20: false,
       c20Value: 30,
+      c21: false,
+      c21Value: 30,
+      c22: false,
+      c22Value: 30,
       error: false,
       authenticated: true,
       loading: false,
@@ -97,8 +101,8 @@ class Home extends Component {
         dateRange: this.state.dateRange,
         c1Value: this.state.c1Value,
         c2Value: this.state.c2Value,
-        c9Value: this.state.c9Value,
-        c10Value: this.state.c10Value,
+        c3Value: this.state.c3Value,
+        c4Value: this.state.c4Value,
         c11Value: this.state.c11Value,
         c12Value: this.state.c12Value,
         c13Value: this.state.c13Value,
@@ -109,6 +113,8 @@ class Home extends Component {
         c18Value: this.state.c18Value,
         c19Value: this.state.c19Value,
         c20Value: this.state.c20Value,
+        c21Value: this.state.c21Value,
+        c22Value: this.state.c22Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
@@ -129,6 +135,8 @@ class Home extends Component {
         c18: this.state.c18,
         c19: this.state.c19,
         c20: this.state.c20,
+        c21: this.state.c21,
+        c22: this.state.c22,
       }),
     })
       .then(res => {
@@ -215,10 +223,12 @@ class Home extends Component {
           c18={this.state.c18}
           c19={this.state.c19}
           c20={this.state.c20}
+          c21={this.state.c21}
+          c22={this.state.c22}
           c1Value={this.state.c1Value}
           c2Value={this.state.c2Value}
-          c9Value={this.state.c9Value}
-          c10Value={this.state.c10Value}
+          c3Value={this.state.c3Value}
+          c4Value={this.state.c4Value}
           c11Value={this.state.c11Value}
           c12Value={this.state.c12Value}
           c13Value={this.state.c13Value}
@@ -229,6 +239,8 @@ class Home extends Component {
           c18Value={this.state.c18Value}
           c19Value={this.state.c19Value}
           c20Value={this.state.c20Value}
+          c21Value={this.state.c21Value}
+          c22Value={this.state.c22Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

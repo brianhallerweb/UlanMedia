@@ -56,7 +56,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
-            "cps", "eps", "mps", "sale_cpa", "profit", "status",
+            "cps", "eps", "mps", "profit", "status",
             "classification", "is_bad_and_included"]
             )
 

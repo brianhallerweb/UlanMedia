@@ -44,10 +44,12 @@ class NavBar extends Component {
             c18={this.props.c18}
             c19={this.props.c19}
             c20={this.props.c20}
+            c21={this.props.c21}
+            c22={this.props.c22}
             c1Value={this.props.c1Value}
             c2Value={this.props.c2Value}
-            c9Value={this.props.c9Value}
-            c10Value={this.props.c10Value}
+            c3Value={this.props.c3Value}
+            c4Value={this.props.c4Value}
             c11Value={this.props.c11Value}
             c12Value={this.props.c12Value}
             c13Value={this.props.c13Value}
@@ -58,6 +60,8 @@ class NavBar extends Component {
             c18Value={this.props.c18Value}
             c19Value={this.props.c19Value}
             c20Value={this.props.c20Value}
+            c21Value={this.props.c21Value}
+            c22Value={this.props.c22Value}
           />
           <input type="submit" value="Submit" />
         </form>
