@@ -24,7 +24,7 @@ class Record extends Component {
     this.epl = this.props.campaign.epl;
     this.eps = this.props.campaign.eps;
     this.mpc = this.props.campaign.mpc;
-    this.state = {clicked: false};
+    this.state = {clicked: false, hovered: false};
   }
 
   // 2/10/19 I disabled the tool tips because they are totally out of date and
@@ -82,16 +82,35 @@ class Record extends Component {
       return <td>{row}</td>;
     }
   }
+  colorizeRow(profit, hovered) {
+    if (profit >= 0 && hovered) {
+      //dark green
+      return '#bdf6bd';
+    } else if (profit < 0 && hovered) {
+      //dark red
+      return '#eeafaf';
+    } else if (profit >= 0) {
+      //light green
+      return '#eafcea';
+    } else {
+      //light red
+      return '#f7d9d9';
+    }
+  }
 
   render() {
     return (
       <tr
-        style={
-          this.profit > 0
-            ? {backgroundColor: '#eafcea'}
-            : {backgroundColor: '#f7d9d9'}
-        }
+        style={{
+          backgroundColor: this.colorizeRow(this.profit, this.state.hovered),
+        }}
         className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>

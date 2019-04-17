@@ -5,20 +5,60 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false};
+    this.state = {clicked: false, hovered: false};
+  }
+
+  colorizeRow(classification, hovered) {
+    //old conditions
+    //if (
+    //hasMismatchClassificationAndGlobalStatus ||
+    //hasBadAndIncludedCampaigns
+    //) {
+    //return '#f7d9d9';
+    //}
+    if (classification === 'white' && hovered) {
+      //dark green
+      return '#bdf6bd';
+    } else if (classification === 'white') {
+      //light green
+      return '#eafcea';
+    } else if (classification === 'black' && hovered) {
+      //dark red
+      return '#eeafaf';
+    } else if (classification === 'black') {
+      //light red
+      return '#f7d9d9';
+    } else if (classification === 'grey' && hovered) {
+      //dark grey
+      return '#d3d3d3';
+    } else if (classification === 'grey') {
+      // light grey
+      return '#e0e0e0';
+    } else if (classification === 'not yet' && hovered) {
+      //dark blue
+      return '#add8e6';
+    } else if (classification === 'not yet') {
+      //light blue
+      return '#d4ebf2';
+    }
   }
 
   render() {
     return (
       <tr
-        style={
-          this.props.widgetRecord
-            .has_mismatch_classification_and_global_status ||
-          this.props.widgetRecord.has_bad_and_included_campaigns
-            ? {backgroundColor: '#f7d9d9'}
-            : null
-        }
+        style={{
+          backgroundColor: this.colorizeRow(
+            this.props.widgetRecord.classification,
+            this.state.hovered,
+          ),
+        }}
         className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>
