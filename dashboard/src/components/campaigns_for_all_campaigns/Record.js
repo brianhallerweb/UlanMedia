@@ -83,13 +83,13 @@ class Record extends Component {
     }
   }
   colorizeRow(profit, hovered) {
-    if (profit >= 0 && hovered) {
+    if (profit > 0 && hovered) {
       //dark green
       return '#bdf6bd';
-    } else if (profit < 0 && hovered) {
+    } else if (profit <= 0 && hovered) {
       //dark red
       return '#eeafaf';
-    } else if (profit >= 0) {
+    } else if (profit > 0) {
       //light green
       return '#eafcea';
     } else {
