@@ -25,11 +25,17 @@ class Home extends Component {
       c4: false,
       c4Value: 0,
       c5: false,
+      c5Value: 30,
       c6: false,
+      c6Value: 30,
       c7: false,
+      c7Value: 30,
       c8: false,
+      c8Value: 30,
       c9: false,
+      c9Value: 30,
       c10: false,
+      c10Value: 30,
       c11: false,
       c11Value: 30,
       c12: false,
@@ -103,6 +109,12 @@ class Home extends Component {
         c2Value: this.state.c2Value,
         c3Value: this.state.c3Value,
         c4Value: this.state.c4Value,
+        c5Value: this.state.c5Value,
+        c6Value: this.state.c6Value,
+        c7Value: this.state.c7Value,
+        c8Value: this.state.c8Value,
+        c9Value: this.state.c9Value,
+        c10Value: this.state.c10Value,
         c11Value: this.state.c11Value,
         c12Value: this.state.c12Value,
         c13Value: this.state.c13Value,
@@ -229,6 +241,12 @@ class Home extends Component {
           c2Value={this.state.c2Value}
           c3Value={this.state.c3Value}
           c4Value={this.state.c4Value}
+          c5Value={this.state.c5Value}
+          c6Value={this.state.c6Value}
+          c7Value={this.state.c7Value}
+          c8Value={this.state.c8Value}
+          c9Value={this.state.c9Value}
+          c10Value={this.state.c10Value}
           c11Value={this.state.c11Value}
           c12Value={this.state.c12Value}
           c13Value={this.state.c13Value}

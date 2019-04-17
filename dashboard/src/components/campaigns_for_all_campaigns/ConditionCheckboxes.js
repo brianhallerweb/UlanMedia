@@ -14,11 +14,17 @@ const ConditionCheckboxes = ({
   c4,
   c4Value,
   c5,
+  c5Value,
   c6,
+  c6Value,
   c7,
+  c7Value,
   c8,
+  c8Value,
   c9,
+  c9Value,
   c10,
+  c10Value,
   c11,
   c11Value,
   c12,
@@ -134,6 +140,7 @@ const ConditionCheckboxes = ({
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         need to lower cost or tighten targeting:
       </p>
+
       <div>
         <input
           type="checkbox"
@@ -141,7 +148,20 @@ const ConditionCheckboxes = ({
           checked={c5}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign CPC is more than EPC</span>
+        <span>
+          {'Campaign CPC is equal to or greater than EPC plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c5Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c5Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPC >= EPC+(EPC*0.30)]'}
+        </span>
       </div>
 
       <div>
@@ -151,7 +171,20 @@ const ConditionCheckboxes = ({
           checked={c6}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign CPL is more than EPL</span>
+        <span>
+          {'Campaign CPL is equal to or greater than EPL plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c6Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c6Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPL >= EPL+(EPL*0.30)]'}
+        </span>
       </div>
 
       <div>
@@ -161,7 +194,20 @@ const ConditionCheckboxes = ({
           checked={c7}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign CPS is more than EPS</span>
+        <span>
+          {'Campaign CPS is equal to or greater than EPS plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c7Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c7Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPS >= EPS+(EPS*0.30)]'}
+        </span>
       </div>
 
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
@@ -174,7 +220,20 @@ const ConditionCheckboxes = ({
           checked={c8}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign EPC is more than CPC</span>
+        <span>
+          {'Campaign CPC is equal to or less than EPC minus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c8Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c8Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPC <= EPC-(EPC*0.30)]'}
+        </span>
       </div>
 
       <div>
@@ -184,7 +243,20 @@ const ConditionCheckboxes = ({
           checked={c9}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign EPL is more than CPL</span>
+        <span>
+          {'Campaign CPL is equal to or less than EPL minus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c9Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c9Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPL <= EPL-(EPL*0.30)]'}
+        </span>
       </div>
 
       <div>
@@ -194,7 +266,20 @@ const ConditionCheckboxes = ({
           checked={c10}
           onChange={e => toggleCondition(e.target.name)}
         />
-        <span>Campaign EPS is more than CPS</span>
+        <span>
+          {'Campaign CPS is equal to or less than EPS minus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c10Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c10Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPS <= EPS-(EPS*0.30)]'}
+        </span>
       </div>
 
       <p>-----------------------------------------------------</p>
@@ -210,7 +295,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPC is equal to or greater than EPC + '}
+          {'Campaign MPC is equal to or greater than EPC plus '}
           <input
             className="inputBox"
             type="number"
@@ -233,7 +318,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPL is equal to or greater than EPL + '}
+          {'Campaign MPL is equal to or greater than EPL plus '}
           <input
             className="inputBox"
             type="number"
@@ -256,7 +341,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPS is equal to or greater than EPS + '}
+          {'Campaign MPS is equal to or greater than EPS plus '}
           <input
             className="inputBox"
             type="number"
@@ -282,7 +367,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPC is equal to or less than EPC - '}
+          {'Campaign MPC is equal to or less than EPC minus '}
           <input
             className="inputBox"
             type="number"
@@ -305,7 +390,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPL is equal to or less than EPL - '}
+          {'Campaign MPL is equal to or less than EPL minus '}
           <input
             className="inputBox"
             type="number"
@@ -328,7 +413,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPS is equal to or less than EPS - '}
+          {'Campaign MPS is equal to or less than EPS minus '}
           <input
             className="inputBox"
             type="number"
@@ -357,7 +442,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPC is equal to or greater than MPC + '}
+          {'Campaign CPC is equal to or greater than MPC plus '}
           <input
             className="inputBox"
             type="number"
@@ -380,7 +465,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPL is equal to or greater than MPL + '}
+          {'Campaign CPL is equal to or greater than MPL plus '}
           <input
             className="inputBox"
             type="number"
@@ -403,7 +488,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPS is equal to or greater than MPS + '}
+          {'Campaign CPS is equal to or greater than MPS plus '}
           <input
             className="inputBox"
             type="number"
@@ -429,7 +514,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPC is equal to or less than MPC - '}
+          {'Campaign CPC is equal to or less than MPC minus '}
           <input
             className="inputBox"
             type="number"
@@ -452,7 +537,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPL is equal to or less than MPL - '}
+          {'Campaign CPL is equal to or less than MPL minus '}
           <input
             className="inputBox"
             type="number"
@@ -475,7 +560,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPS is equal to or less than MPS - '}
+          {'Campaign CPS is equal to or less than MPS minus '}
           <input
             className="inputBox"
             type="number"

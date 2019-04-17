@@ -50,6 +50,12 @@ class NavBar extends Component {
             c2Value={this.props.c2Value}
             c3Value={this.props.c3Value}
             c4Value={this.props.c4Value}
+            c5Value={this.props.c5Value}
+            c6Value={this.props.c6Value}
+            c7Value={this.props.c7Value}
+            c8Value={this.props.c8Value}
+            c9Value={this.props.c9Value}
+            c10Value={this.props.c10Value}
             c11Value={this.props.c11Value}
             c12Value={this.props.c12Value}
             c13Value={this.props.c13Value}
