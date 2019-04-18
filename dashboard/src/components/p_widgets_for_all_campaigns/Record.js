@@ -36,7 +36,10 @@ class Record extends Component {
     hasMismatchClassificationAndGlobalStatus,
     hasBadAndIncludedCampaigns,
   ) {
-    if (hasMismatchClassificationAndGlobalStatus) {
+    if (
+      hasMismatchClassificationAndGlobalStatus ||
+      hasBadAndIncludedCampaigns
+    ) {
       return 'solid';
     } else if (hovered) {
       return 'solid';
