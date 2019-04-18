@@ -36,10 +36,7 @@ class Record extends Component {
     hasMismatchClassificationAndGlobalStatus,
     hasBadAndIncludedCampaigns,
   ) {
-    if (
-      hasMismatchClassificationAndGlobalStatus ||
-      hasBadAndIncludedCampaigns
-    ) {
+    if (hasMismatchClassificationAndGlobalStatus) {
       return 'solid';
     } else if (hovered) {
       return 'solid';
@@ -57,8 +54,9 @@ class Record extends Component {
           ),
           outlineStyle: this.outlineRow(
             this.state.hovered,
-            this.props.widgetRecord.hasMismatchClassificationAndGlobalStatus,
-            this.props.widgetRecord.hasBadAndIncludedCampaigns,
+            this.props.widgetRecord
+              .has_mismatch_classification_and_global_status,
+            this.props.widgetRecord.has_bad_and_included_campaigns,
           ),
         }}
         className={this.state.clicked && 'clicked'}
