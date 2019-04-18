@@ -55,7 +55,11 @@ class Record extends Component {
           backgroundColor: this.colorizeRow(
             this.props.widgetRecord.classification,
           ),
-          outlineStyle: this.outlineRow(this.state.hovered),
+          outlineStyle: this.outlineRow(
+            this.state.hovered,
+            this.props.widgetRecord.hasMismatchClassificationAndGlobalStatus,
+            this.props.widgetRecord.hasBadAndIncludedCampaigns,
+          ),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
