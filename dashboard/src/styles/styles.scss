@@ -68,16 +68,12 @@ table th {
     text-align: left;
     background-color: #6495ED;
     color: white;
-    margin: 10px;
-    z-index: -1;
+    position: sticky;
+    top: 0;
 }
 table td {
     border: 1px solid #d3d3d3;
     padding: 8px;
-}
-th {
-    position: sticky;
-    top: 0;
 }
 
 // this changes the opacity of a single row in a report when it is clicked. 

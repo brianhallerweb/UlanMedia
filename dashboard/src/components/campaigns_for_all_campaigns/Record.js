@@ -73,7 +73,7 @@ class Record extends Component {
   //}
   //return toolTipText;
   //}
-  stylizeClassification(row) {
+  stylizeClassificationText(row) {
     if ((row === 'bad') | (row === 'half bad')) {
       return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
     } else if ((row === 'good') | (row === 'half good')) {
@@ -93,11 +93,11 @@ class Record extends Component {
     }
   }
 
-  borderColor(hovered) {
+  createOutline(hovered) {
     if (hovered) {
-      return '#3f3f3f';
+      return 'solid';
     } else {
-      return 'transparent';
+      return 'none';
     }
   }
 
@@ -106,8 +106,7 @@ class Record extends Component {
       <tr
         style={{
           backgroundColor: this.colorizeRow(this.profit),
-          outlineStyle: 'solid',
-          outlineColor: this.borderColor(this.state.hovered),
+          outlineStyle: this.createOutline(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
@@ -251,7 +250,7 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
             </div>
           </div>
         </td>
-        {this.stylizeClassification(this.classification)}
+        {this.stylizeClassificationText(this.classification)}
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
