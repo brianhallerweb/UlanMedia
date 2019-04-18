@@ -8,7 +8,7 @@ class Record extends Component {
     this.state = {clicked: false, hovered: false};
   }
 
-  colorizeRow(classification, hovered) {
+  colorizeRow(classification) {
     //old conditions
     //if (
     //hasMismatchClassificationAndGlobalStatus ||
@@ -16,30 +16,35 @@ class Record extends Component {
     //) {
     //return '#f7d9d9';
     //}
-    if (classification === 'white' && hovered) {
-      //dark green
-      return '#bdf6bd';
-    } else if (classification === 'white') {
-      //light green
+    if (classification === 'white') {
+      //green
       return '#eafcea';
-    } else if (classification === 'black' && hovered) {
-      //dark red
-      return '#eeafaf';
     } else if (classification === 'black') {
-      //light red
+      //red
       return '#f7d9d9';
-    } else if (classification === 'grey' && hovered) {
-      //dark grey
-      return '#d3d3d3';
     } else if (classification === 'grey') {
-      // light grey
-      return '#e0e0e0';
-    } else if (classification === 'not yet' && hovered) {
-      //dark blue
-      return '#add8e6';
+      //grey
+      return '#ededed';
     } else if (classification === 'not yet') {
-      //light blue
-      return '#d4ebf2';
+      //light grey
+      return '#fafafa';
+    }
+  }
+
+  outlineRow(
+    hovered,
+    hasMismatchClassificationAndGlobalStatus,
+    hasBadAndIncludedCampaigns,
+  ) {
+    if (
+      hasMismatchClassificationAndGlobalStatus ||
+      hasBadAndIncludedCampaigns
+    ) {
+      return 'solid red';
+    } else if (hovered) {
+      return 'solid';
+    } else {
+      return 'none';
     }
   }
 
@@ -49,8 +54,8 @@ class Record extends Component {
         style={{
           backgroundColor: this.colorizeRow(
             this.props.widgetRecord.classification,
-            this.state.hovered,
           ),
+          outlineStyle: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {

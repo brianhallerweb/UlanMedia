@@ -5,22 +5,12 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false};
+    this.state = {clicked: false, hovered: false};
   }
 
   componentDidMount() {
     if (this.props.campaignRecord.status === 'excluded') {
       this.setState({clicked: true});
-    }
-  }
-
-  stylizeClassification(row) {
-    if ((row === 'bad') | (row === 'half bad')) {
-      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
-    } else if ((row === 'good') | (row === 'half good')) {
-      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
-    } else {
-      return <td>{row}</td>;
     }
   }
 
@@ -128,15 +118,60 @@ class Record extends Component {
     );
   }
 
+  stylizeClassificationText(row) {
+    if ((row === 'bad') | (row === 'half bad')) {
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
+    } else if ((row === 'good') | (row === 'half good')) {
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
+    } else {
+      return <td>{row}</td>;
+    }
+  }
+
+  colorizeRow(classification) {
+    //old condition was to highlight for is_bad_and_included
+    if (classification === 'good') {
+      //green
+      return '#eafcea';
+    } else if (classification === 'half good') {
+      //light green
+      return '#edfcea';
+    } else if (classification === 'bad') {
+      //red
+      return '#f7d9d9';
+    } else if (classification === 'half bad') {
+      //light red
+      return '#f7d9e1';
+    } else if (classification === 'not yet') {
+      //light grey
+      return '#fafafa';
+    }
+  }
+
+  outlineRow(hovered) {
+    if (hovered) {
+      return 'solid';
+    } else {
+      return 'none';
+    }
+  }
+
   render() {
     return (
       <tr
-        style={
-          this.props.campaignRecord.is_bad_and_included
-            ? {backgroundColor: '#f7d9d9'}
-            : null
-        }
+        style={{
+          backgroundColor: this.colorizeRow(
+            this.props.campaignRecord.classification,
+          ),
+          outlineStyle: this.outlineRow(this.state.hovered),
+        }}
         className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>
@@ -144,7 +179,9 @@ class Record extends Component {
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
-        {this.stylizeClassification(this.props.campaignRecord.classification)}
+        {this.stylizeClassificationText(
+          this.props.campaignRecord.classification,
+        )}
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>

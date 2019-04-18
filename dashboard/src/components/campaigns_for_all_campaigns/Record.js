@@ -93,7 +93,7 @@ class Record extends Component {
     }
   }
 
-  createOutline(hovered) {
+  outlineRow(hovered) {
     if (hovered) {
       return 'solid';
     } else {
@@ -106,7 +106,7 @@ class Record extends Component {
       <tr
         style={{
           backgroundColor: this.colorizeRow(this.profit),
-          outlineStyle: this.createOutline(this.state.hovered),
+          outlineStyle: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
