@@ -64,17 +64,17 @@ table {
 }
 table th {
     border: 1px solid #d3d3d3;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
     background-color: #6495ED;
     color: white;
+    margin: 10px;
+    z-index: -1;
 }
 table td {
     border: 1px solid #d3d3d3;
     padding: 8px;
 }
-table tr:nth-child(even){background-color: #f2f2f2;}
-table tr:hover {background-color: #ddd;}
 th {
     position: sticky;
     top: 0;

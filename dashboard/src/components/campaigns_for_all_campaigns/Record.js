@@ -83,28 +83,21 @@ class Record extends Component {
     }
   }
 
-  colorizeRow(profit, hovered) {
-    hovered = false;
-    if (profit > 0 && hovered) {
-      //dark green
-      return '#bdf6bd';
-    } else if (profit <= 0 && hovered) {
-      //dark red
-      return '#eeafaf';
-    } else if (profit > 0) {
-      //light green
+  colorizeRow(profit) {
+    if (profit > 0) {
+      // green
       return '#eafcea';
     } else {
-      //light red
+      // red
       return '#f7d9d9';
     }
   }
 
-  highlightRow(hovered) {
+  borderColor(hovered) {
     if (hovered) {
-      return 'solid';
+      return '#3f3f3f';
     } else {
-      return 'none';
+      return 'transparent';
     }
   }
 
@@ -113,7 +106,8 @@ class Record extends Component {
       <tr
         style={{
           backgroundColor: this.colorizeRow(this.profit),
-          border: this.highlightRow(this.state.hovered),
+          outlineStyle: 'solid',
+          outlineColor: this.borderColor(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
