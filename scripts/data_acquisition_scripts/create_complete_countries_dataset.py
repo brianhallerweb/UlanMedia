@@ -2,8 +2,39 @@ from config.config import *
 from functions.data_acquisition_functions.create_complete_countries_dataset import create_complete_countries_dataset
 import sys
 
-# 4/5/19 remember that countries only works with the oneeighty days date range
+#############################################
+date_range = "yesterday"
 
-create_complete_countries_dataset()
+create_complete_countries_dataset(date_range)
 
-print(f"one eighty countries complete dataset created")
+print(f"{date_range} countries dataset created")
+
+###########################################
+date_range = "seven"
+
+create_complete_countries_dataset(date_range)
+
+print(f"{date_range} countries dataset created")
+
+#############################################
+date_range = "thirty"
+
+create_complete_countries_dataset(date_range)
+
+print(f"{date_range} countries dataset created")
+
+#############################################
+date_range = "ninety"
+
+create_complete_countries_dataset(date_range)
+
+print(f"{date_range} countries dataset created")
+
+#############################################
+date_range = "oneeighty"
+
+create_complete_countries_dataset(date_range)
+
+print(f"{date_range} countries dataset created")
+#############################################
+

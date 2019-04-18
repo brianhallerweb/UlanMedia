@@ -82,7 +82,9 @@ class Record extends Component {
       return <td>{row}</td>;
     }
   }
+
   colorizeRow(profit, hovered) {
+    hovered = false;
     if (profit > 0 && hovered) {
       //dark green
       return '#bdf6bd';
@@ -98,11 +100,20 @@ class Record extends Component {
     }
   }
 
+  highlightRow(hovered) {
+    if (hovered) {
+      return 'solid';
+    } else {
+      return 'none';
+    }
+  }
+
   render() {
     return (
       <tr
         style={{
-          backgroundColor: this.colorizeRow(this.profit, this.state.hovered),
+          backgroundColor: this.colorizeRow(this.profit),
+          border: this.highlightRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {

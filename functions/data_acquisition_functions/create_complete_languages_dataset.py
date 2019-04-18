@@ -4,12 +4,9 @@ import sys
 import json
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+def create_complete_languages_dataset(date_range):
 
-def create_complete_languages_dataset():
-
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/languages/oneeighty_languages_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/languages/{date_range}_languages_dataset.json', 'r') as file:
         json_file = json.load(file)
 
 
@@ -34,7 +31,7 @@ def create_complete_languages_dataset():
 
     # the json_file needs to be loaded again because it mutates during the
     # previous accumulation step
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/languages/oneeighty_languages_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/languages/{date_range}_languages_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     for language_name in json_file["data"]:
@@ -48,7 +45,7 @@ def create_complete_languages_dataset():
         for campaign in complete_languages["data"][language_name]["for_each_campaign"]:
             complete_languages["data"][language_name]["for_each_campaign"][campaign]["classification"] = classify_language(complete_languages["data"][language_name]["for_each_campaign"][campaign])
 
-    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_languages/oneeighty_complete_languages_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_languages/{date_range}_complete_languages_dataset.json", "w") as file:
         json.dump(complete_languages, file)
 
 

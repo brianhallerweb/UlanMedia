@@ -7,10 +7,7 @@ import sys
 import json
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
-def create_languages_dataset(token, start_date, end_date):
+def create_languages_dataset(token, start_date, end_date, date_range):
     try:
         url = f"https://api.voluum.com/report?from={start_date}T00:00:00Z&to={end_date}T00:00:00Z&tz=America%2FLos_Angeles&conversionTimeMode=VISIT&sort=campaignName&direction=asc&columns=campaignName&columns=languageName&columns=campaignId&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&columns=cpa&groupBy=campaign&groupBy=language&offset=0&limit=100000&include=ACTIVE&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc"
         res = requests.get(url, headers = {"cwauth-token":
@@ -54,7 +51,7 @@ def create_languages_dataset(token, start_date, end_date):
                     "revenue": row["revenue"]
                     }
 
-        with open(f"{os.environ.get('ULANMEDIAAPP')}/data/languages/oneeighty_languages_dataset.json", "w") as file:
+        with open(f"{os.environ.get('ULANMEDIAAPP')}/data/languages/{date_range}_languages_dataset.json", "w") as file:
             json.dump(languages, file)
 
     except requests.exceptions.RequestException as e:

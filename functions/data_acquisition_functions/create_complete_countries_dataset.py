@@ -4,12 +4,9 @@ import sys
 import json
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+def create_complete_countries_dataset(date_range):
 
-def create_complete_countries_dataset():
-
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries/oneeighty_countries_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries/{date_range}_countries_dataset.json', 'r') as file:
         json_file = json.load(file)
 
 
@@ -37,7 +34,7 @@ def create_complete_countries_dataset():
 
     # the json_file needs to be loaded again because it mutates during the
     # previous accumulation step
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries/oneeighty_countries_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries/{date_range}_countries_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     for country_name in json_file["data"]:
@@ -51,7 +48,7 @@ def create_complete_countries_dataset():
         for campaign in complete_countries["data"][country_name]["for_each_campaign"]:
             complete_countries["data"][country_name]["for_each_campaign"][campaign]["classification"] = classify_country(complete_countries["data"][country_name]["for_each_campaign"][campaign])
 
-    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_countries/oneeighty_complete_countries_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/complete_countries/{date_range}_complete_countries_dataset.json", "w") as file:
         json.dump(complete_countries, file)
 
 
