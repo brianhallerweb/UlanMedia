@@ -40,11 +40,11 @@ class Record extends Component {
       hasMismatchClassificationAndGlobalStatus ||
       hasBadAndIncludedCampaigns
     ) {
-      return 'solid';
+      return 'red';
     } else if (hovered) {
-      return 'solid';
+      return 'black';
     } else {
-      return 'none';
+      return 'transparent';
     }
   }
 
@@ -55,7 +55,8 @@ class Record extends Component {
           backgroundColor: this.colorizeRow(
             this.props.widgetRecord.classification,
           ),
-          outlineStyle: this.outlineRow(
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(
             this.state.hovered,
             this.props.widgetRecord
               .has_mismatch_classification_and_global_status,

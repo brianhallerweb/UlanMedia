@@ -83,21 +83,30 @@ class Record extends Component {
     }
   }
 
-  colorizeRow(profit) {
-    if (profit > 0) {
-      // green
+  colorizeRow(classification) {
+    if (classification === 'good') {
+      //green
       return '#eafcea';
-    } else {
-      // red
+    } else if (classification === 'half good') {
+      //light green
+      return '#edfcea';
+    } else if (classification === 'bad') {
+      //red
       return '#f7d9d9';
+    } else if (classification === 'half bad') {
+      //light red
+      return '#f7d9e1';
+    } else if (classification === 'not yet') {
+      //light grey
+      return '#fafafa';
     }
   }
 
   outlineRow(hovered) {
     if (hovered) {
-      return 'solid';
+      return 'black';
     } else {
-      return 'none';
+      return 'transparent';
     }
   }
 
@@ -105,8 +114,9 @@ class Record extends Component {
     return (
       <tr
         style={{
-          backgroundColor: this.colorizeRow(this.profit),
-          outlineStyle: this.outlineRow(this.state.hovered),
+          backgroundColor: this.colorizeRow(this.classification),
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {

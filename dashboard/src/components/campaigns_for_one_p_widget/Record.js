@@ -150,9 +150,9 @@ class Record extends Component {
 
   outlineRow(hovered) {
     if (hovered) {
-      return 'solid';
+      return 'black';
     } else {
-      return 'none';
+      return 'transparent';
     }
   }
 
@@ -163,7 +163,8 @@ class Record extends Component {
           backgroundColor: this.colorizeRow(
             this.props.campaignRecord.classification,
           ),
-          outlineStyle: this.outlineRow(this.state.hovered),
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
