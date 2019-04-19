@@ -23,15 +23,69 @@ class Record extends Component {
     this.ppi = this.props.ad.ppi;
     this.globalRank = this.props.ad.global_rank;
     this.globalRankOrder = this.props.ad.global_rank_order;
-    this.state = {};
+    this.state = {clicked: false, hovered: false};
+  }
+
+  stylizeClassificationText(row) {
+    if ((row === 'bad') | (row === 'half bad')) {
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
+    } else if ((row === 'good') | (row === 'half good')) {
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
+    } else {
+      return <td>{row}</td>;
+    }
+  }
+
+  colorizeRow(classification) {
+    if (classification === 'good') {
+      //green
+      return '#eafcea';
+    } else if (classification === 'half good') {
+      //light green
+      return '#edfcea';
+    } else if (classification === 'bad') {
+      //red
+      return '#f7d9d9';
+    } else if (classification === 'half bad') {
+      //light red
+      return '#f7d9e1';
+    } else if (classification === 'not yet') {
+      //light grey
+      return '#fafafa';
+    }
+  }
+
+  outlineRow(hovered, classification) {
+    if (classification == 'bad') {
+      return 'red';
+    } else if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
   }
 
   render() {
     return (
       <tr
-        style={
-          this.classification === 'bad' ? {backgroundColor: '#f7d9d9'} : null
-        }>
+        style={{
+          backgroundColor: this.colorizeRow(this.classification),
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(
+            this.state.hovered,
+            this.classification,
+          ),
+        }}
+        className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.image}
           <div>
@@ -49,7 +103,7 @@ class Record extends Component {
         <td>
           {this.globalRankOrder} ({this.globalRank})
         </td>
-        <td>{this.classification}</td>
+        {this.stylizeClassificationText(this.classification)}
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>

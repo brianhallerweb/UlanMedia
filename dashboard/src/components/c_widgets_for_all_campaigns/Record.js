@@ -5,20 +5,64 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false};
+    this.state = {clicked: false, hovered: false};
+  }
+
+  colorizeRow(classification) {
+    if (classification === 'white') {
+      //green
+      return '#eafcea';
+    } else if (classification === 'black') {
+      //red
+      return '#f7d9d9';
+    } else if (classification === 'grey') {
+      //grey
+      return '#ededed';
+    } else if (classification === 'not yet') {
+      //light grey
+      return '#fafafa';
+    }
+  }
+
+  outlineRow(
+    hovered,
+    hasMismatchClassificationAndGlobalStatus,
+    hasBadAndIncludedCampaigns,
+  ) {
+    if (
+      hasMismatchClassificationAndGlobalStatus ||
+      hasBadAndIncludedCampaigns
+    ) {
+      return 'red';
+    } else if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
   }
 
   render() {
     return (
       <tr
-        style={
-          this.props.widgetRecord
-            .has_mismatch_classification_and_global_status ||
-          this.props.widgetRecord.has_bad_and_included_campaigns
-            ? {backgroundColor: '#f7d9d9'}
-            : null
-        }
+        style={{
+          backgroundColor: this.colorizeRow(
+            this.props.widgetRecord.classification,
+          ),
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(
+            this.state.hovered,
+            this.props.widgetRecord
+              .has_mismatch_classification_and_global_status,
+            this.props.widgetRecord.has_bad_and_included_campaigns,
+          ),
+        }}
         className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>

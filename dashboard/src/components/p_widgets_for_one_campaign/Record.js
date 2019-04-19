@@ -5,22 +5,12 @@ import {Link} from 'react-router-dom';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false};
+    this.state = {clicked: false, hovered: false};
   }
 
   componentDidMount() {
     if (this.props.widgetRecord.status === 'excluded') {
       this.setState({clicked: true});
-    }
-  }
-
-  stylizeClassification(row) {
-    if ((row === 'bad') | (row === 'half bad')) {
-      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
-    } else if ((row === 'good') | (row === 'half good')) {
-      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
-    } else {
-      return <td>{row}</td>;
     }
   }
 
@@ -76,15 +66,65 @@ class Record extends Component {
     );
   }
 
+  stylizeClassificationText(row) {
+    if ((row === 'bad') | (row === 'half bad')) {
+      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
+    } else if ((row === 'good') | (row === 'half good')) {
+      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
+    } else {
+      return <td>{row}</td>;
+    }
+  }
+
+  colorizeRow(classification) {
+    if (classification === 'good') {
+      //green
+      return '#eafcea';
+    } else if (classification === 'half good') {
+      //light green
+      return '#edfcea';
+    } else if (classification === 'bad') {
+      //red
+      return '#f7d9d9';
+    } else if (classification === 'half bad') {
+      //light red
+      return '#f7d9e1';
+    } else if (classification === 'not yet') {
+      //light grey
+      return '#fafafa';
+    }
+  }
+
+  outlineRow(hovered, isBadAndIncluded) {
+    if (isBadAndIncluded) {
+      return 'red';
+    } else if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
+  }
+
   render() {
     return (
       <tr
-        style={
-          this.props.widgetRecord.is_bad_and_included
-            ? {backgroundColor: '#f7d9d9'}
-            : null
-        }
+        style={{
+          backgroundColor: this.colorizeRow(
+            this.props.widgetRecord.classification,
+          ),
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(
+            this.state.hovered,
+            this.props.widgetRecord.is_bad_and_included,
+          ),
+        }}
         className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>
@@ -94,7 +134,7 @@ class Record extends Component {
             this.addRowLinks()}
         </td>
 
-        {this.stylizeClassification(this.props.widgetRecord.classification)}
+        {this.stylizeClassificationText(this.props.widgetRecord.classification)}
 
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>

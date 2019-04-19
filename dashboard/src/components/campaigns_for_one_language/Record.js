@@ -18,15 +18,34 @@ class Record extends Component {
     this.cpc = this.props.language.cpc;
     this.epa = this.props.language.epa;
     this.roi = this.props.language.roi;
-    this.state = {};
+    this.state = {clicked: false, hovered: false};
+  }
+
+  outlineRow(hovered, classification) {
+    if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
   }
 
   render() {
     return (
       <tr
-        style={
-          this.classification === 'bad' ? {backgroundColor: '#f7d9d9'} : null
-        }>
+        style={{
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
+        }}
+        className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.campaignName}
           {this.campaignName !== 'summary' && (

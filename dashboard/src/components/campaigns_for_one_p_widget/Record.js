@@ -129,7 +129,6 @@ class Record extends Component {
   }
 
   colorizeRow(classification) {
-    //old condition was to highlight for is_bad_and_included
     if (classification === 'good') {
       //green
       return '#eafcea';
@@ -148,8 +147,10 @@ class Record extends Component {
     }
   }
 
-  outlineRow(hovered) {
-    if (hovered) {
+  outlineRow(hovered, isBadAndIncluded) {
+    if (isBadAndIncluded) {
+      return 'red';
+    } else if (hovered) {
       return 'black';
     } else {
       return 'transparent';
@@ -164,7 +165,10 @@ class Record extends Component {
             this.props.campaignRecord.classification,
           ),
           outlineStyle: 'solid',
-          outlineColor: this.outlineRow(this.state.hovered),
+          outlineColor: this.outlineRow(
+            this.state.hovered,
+            this.props.campaignRecord.is_bad_and_included,
+          ),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {

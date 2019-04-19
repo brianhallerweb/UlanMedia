@@ -73,6 +73,7 @@ class Record extends Component {
   //}
   //return toolTipText;
   //}
+
   stylizeClassificationText(row) {
     if ((row === 'bad') | (row === 'half bad')) {
       return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;

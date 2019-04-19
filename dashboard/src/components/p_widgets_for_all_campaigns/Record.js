@@ -9,13 +9,6 @@ class Record extends Component {
   }
 
   colorizeRow(classification) {
-    //old conditions
-    //if (
-    //hasMismatchClassificationAndGlobalStatus ||
-    //hasBadAndIncludedCampaigns
-    //) {
-    //return '#f7d9d9';
-    //}
     if (classification === 'white') {
       //green
       return '#eafcea';
