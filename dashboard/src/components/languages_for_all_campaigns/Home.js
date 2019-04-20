@@ -12,6 +12,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dateRange: 'oneeighty',
       volRequestDates: '',
       badLanguagesCount: 0,
       c1: false,
@@ -31,6 +32,10 @@ class Home extends Component {
     this.submitForm();
   }
 
+  selectDateRange(dateRange) {
+    this.setState({dateRange: dateRange});
+  }
+
   toggleCondition(condition) {
     this.setState({[condition]: !this.state[condition]});
   }
@@ -48,7 +53,7 @@ class Home extends Component {
         'Content-Type': 'application/json',
         'x-auth': localStorage.getItem('token'),
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({dateRange: this.state.dateRange}),
     })
       .then(res => {
         if (!res.ok) {
@@ -80,6 +85,7 @@ class Home extends Component {
             'x-auth': localStorage.getItem('token'),
           },
           body: JSON.stringify({
+            dateRange: this.state.dateRange,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
@@ -134,6 +140,8 @@ class Home extends Component {
           </a>
         </div>
         <NavBar
+          dateRange={this.state.dateRange}
+          selectDateRange={this.selectDateRange.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
           setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}

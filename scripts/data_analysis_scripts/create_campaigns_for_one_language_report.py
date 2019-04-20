@@ -4,9 +4,10 @@ import json
 import pandas as pd
 import numpy as np
 
-language_name = sys.argv[1]
+date_range = sys.argv[1]
+language_name = sys.argv[2]
 
-with open(f'{os.environ.get("ULANMEDIAAPP")}/data/campaigns_for_one_language/{language_name}_campaigns_for_one_language_dataset.json', 'r') as file:
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/campaigns_for_one_language/{date_range}_{language_name}_campaigns_for_one_language_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
@@ -26,13 +27,13 @@ df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round((df["profit"] / df["cost"])*100, 2)
 
-c1 = df["cost"] > float(sys.argv[2])
+c1 = df["cost"] > float(sys.argv[3])
 result1 = df[c1]
 
-c2 = df["profit"] < -1 * float(sys.argv[3])
+c2 = df["profit"] < -1 * float(sys.argv[4])
 result2 = df[c2]
 
-conditions_args = [sys.argv[4], sys.argv[5]]
+conditions_args = [sys.argv[5], sys.argv[6]]
 conditions_dfs = [result1, result2]
 
 final_result = None 

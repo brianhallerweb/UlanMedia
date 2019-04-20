@@ -6,7 +6,7 @@ function createCampaignsForOneCountryDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.countryName],
+    args: [req.body.dateRange, req.body.countryName],
   };
   PythonShell.run(
     'create_campaigns_for_one_country_dataset.py',

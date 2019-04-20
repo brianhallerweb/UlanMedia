@@ -4,7 +4,9 @@ import json
 import pandas as pd
 import numpy as np
 
-with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries_for_all_campaigns/oneeighty_countries_for_all_campaigns_dataset.json', 'r') as file:
+date_range = sys.argv[1]
+
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/countries_for_all_campaigns/{date_range}_countries_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
 
 data = json_file["data"]
@@ -20,17 +22,16 @@ df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 df["roi"] = round((df["profit"] / df["cost"])*100, 2)
 
-
-c1 = df["classification"] == sys.argv[1]
+c1 = df["classification"] == sys.argv[2]
 result1 = df[c1]
 
-c2 = df["cost"] > float(sys.argv[2])
+c2 = df["cost"] > float(sys.argv[3])
 result2 = df[c2]
 
-c3 = df["profit"] < -1 * float(sys.argv[3])
+c3 = df["profit"] < -1 * float(sys.argv[4])
 result3 = df[c3]
 
-conditions_args = [sys.argv[4], sys.argv[5], sys.argv[6]]
+conditions_args = [sys.argv[5], sys.argv[6], sys.argv[7]]
 conditions_dfs = [result1, result2, result3]
 
 final_result = None 

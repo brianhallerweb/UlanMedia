@@ -6,7 +6,7 @@ function createCampaignsForOneLanguageDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.languageName],
+    args: [req.body.dateRange, req.body.languageName],
   };
   PythonShell.run(
     'create_campaigns_for_one_language_dataset.py',

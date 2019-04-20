@@ -4,9 +4,9 @@ import json
 import sys
 import os
 
-def create_campaigns_for_one_language_dataset(language_name):
+def create_campaigns_for_one_language_dataset(date_range, language_name):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_languages/oneeighty_complete_languages_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_languages/{date_range}_complete_languages_dataset.json', 'r') as file:
         json_file = json.load(file)
 
     metadata = json_file["metadata"]
@@ -22,7 +22,7 @@ def create_campaigns_for_one_language_dataset(language_name):
     for campaign_id in campaigns_for_one_language["data"]:
         campaigns_for_one_language["data"][campaign_id]["campaign_name"] = campaigns_lookup[campaign_id]
 
-    with open(f"../../data/campaigns_for_one_language/{language_name}_campaigns_for_one_language_dataset.json", "w") as file:
+    with open(f"../../data/campaigns_for_one_language/{date_range}_{language_name}_campaigns_for_one_language_dataset.json", "w") as file:
         json.dump(campaigns_for_one_language, file)
 
     return json.dumps(campaigns_for_one_language)

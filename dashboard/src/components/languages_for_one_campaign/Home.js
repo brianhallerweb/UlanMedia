@@ -12,6 +12,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dateRange: 'oneeighty',
       campaignID: this.props.match.params.volid,
       campaignName: this.props.match.params.name,
       volRequestDates: '',
@@ -33,6 +34,10 @@ class Home extends Component {
     this.submitForm();
   }
 
+  selectDateRange(dateRange) {
+    this.setState({dateRange: dateRange});
+  }
+
   toggleCondition(condition) {
     this.setState({[condition]: !this.state[condition]});
   }
@@ -50,7 +55,10 @@ class Home extends Component {
         'Content-Type': 'application/json',
         'x-auth': localStorage.getItem('token'),
       },
-      body: JSON.stringify({campaignID: this.state.campaignID}),
+      body: JSON.stringify({
+        dateRange: this.state.dateRange,
+        campaignID: this.state.campaignID,
+      }),
     })
       .then(res => {
         if (!res.ok) {
@@ -82,6 +90,7 @@ class Home extends Component {
             'x-auth': localStorage.getItem('token'),
           },
           body: JSON.stringify({
+            dateRange: this.state.dateRange,
             campaignID: this.state.campaignID,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
@@ -141,6 +150,8 @@ class Home extends Component {
           </a>
         </div>
         <NavBar
+          dateRange={this.state.dateRange}
+          selectDateRange={this.selectDateRange.bind(this)}
           toggleCondition={this.toggleCondition.bind(this)}
           setConditionValue={this.setConditionValue.bind(this)}
           c1={this.state.c1}
