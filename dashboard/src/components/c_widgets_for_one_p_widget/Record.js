@@ -8,6 +8,16 @@ class Record extends Component {
     this.state = {clicked: false, hovered: false};
   }
 
+  componentDidMount() {
+    if (
+      this.props.widgetRecord.global_status === 'p_blacklist' ||
+      this.props.widgetRecord.global_status === 'c_blacklist' ||
+      this.props.widgetRecord.global_status === 'pc_blacklist'
+    ) {
+      this.setState({clicked: true});
+    }
+  }
+
   outlineRow(hovered) {
     if (hovered) {
       return 'black';
