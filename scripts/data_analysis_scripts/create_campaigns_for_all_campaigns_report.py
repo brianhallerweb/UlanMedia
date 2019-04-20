@@ -50,56 +50,73 @@ result6 = df[c6]
 c7 = df["cps"] >= (df["eps"] + (df["eps"]*float(sys.argv[8])/100))
 result7 = df[c7]
 
-c8 = df["cpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[9])/100))
+c8 = df["bid"] >= (df["epc"] + (df["epc"]*float(sys.argv[9])/100))
 result8 = df[c8]
 
-c9 = df["cpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[10])/100))
+c9 = df["bid"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[10])/100))
 result9 = df[c9]
 
-c10 = df["cps"] >= (df["eps"] - (df["eps"]*float(sys.argv[11])/100))
+c10 = df["cpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[11])/100))
 result10 = df[c10]
 
-c11 = df["mpc"] >= (df["epc"] + (df["epc"]*float(sys.argv[12])/100))
+c11 = df["cpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[12])/100))
 result11 = df[c11]
 
-c12 = df["mpl"] >= (df["epl"] + (df["epl"]*float(sys.argv[13])/100))
+c12 = df["cps"] >= (df["eps"] - (df["eps"]*float(sys.argv[13])/100))
 result12 = df[c12]
 
-c13 = df["mps"] >= (df["eps"] + (df["eps"]*float(sys.argv[14])/100))
+c13 = df["bid"] >= (df["epc"] - (df["epc"]*float(sys.argv[14])/100))
 result13 = df[c13]
 
-c14 = df["mpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[15])/100))
+c14 = df["bid"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[15])/100))
 result14 = df[c14]
 
-c15 = df["mpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[16])/100))
+c15 = df["mpc"] >= (df["epc"] + (df["epc"]*float(sys.argv[16])/100))
 result15 = df[c15]
 
-c16 = df["mps"] >= (df["eps"] - (df["eps"]*float(sys.argv[17])/100))
+c16 = df["mpl"] >= (df["epl"] + (df["epl"]*float(sys.argv[17])/100))
 result16 = df[c16]
 
-c17 = df["cpc"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[18])/100))
+c17 = df["mps"] >= (df["eps"] + (df["eps"]*float(sys.argv[18])/100))
 result17 = df[c17]
 
-c18 = df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[19])/100))
+c18 = df["mpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[19])/100))
 result18 = df[c18]
 
-c19 = df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[20])/100))
+c19 = df["mpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[20])/100))
 result19 = df[c19]
 
-c20 = df["cpc"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[21])/100))
+c20 = df["mps"] >= (df["eps"] - (df["eps"]*float(sys.argv[21])/100))
 result20 = df[c20]
 
-c21 = df["cpl"] >= (df["mpl"] - (df["mpl"]*float(sys.argv[22])/100))
+c21 = df["cpc"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[22])/100))
 result21 = df[c21]
 
-c22 = df["cps"] >= (df["mps"] - (df["mps"]*float(sys.argv[23])/100))
+c22 = df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[23])/100))
 result22 = df[c22]
 
-conditions_args = [sys.argv[24], sys.argv[25], sys.argv[26], sys.argv[27], sys.argv[28], sys.argv[29], sys.argv[30], sys.argv[31], sys.argv[32], sys.argv[33], sys.argv[34], sys.argv[35], sys.argv[36], sys.argv[37], sys.argv[38], sys.argv[39], sys.argv[40], sys.argv[41], sys.argv[42], sys.argv[43], sys.argv[44], sys.argv[45]]
+c23 = df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[24])/100))
+result23 = df[c23]
+
+c24 = df["cpc"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[25])/100))
+result24 = df[c24]
+
+c25 = df["cpl"] >= (df["mpl"] - (df["mpl"]*float(sys.argv[26])/100))
+result25 = df[c25]
+
+c26 = df["cps"] >= (df["mps"] - (df["mps"]*float(sys.argv[27])/100))
+result26 = df[c26]
+
+conditions_args = [sys.argv[28], sys.argv[29], sys.argv[30], sys.argv[31],
+        sys.argv[32], sys.argv[33], sys.argv[34], sys.argv[35], sys.argv[36],
+        sys.argv[37], sys.argv[38], sys.argv[39], sys.argv[40], sys.argv[41],
+        sys.argv[42], sys.argv[43], sys.argv[44], sys.argv[45], sys.argv[46],
+        sys.argv[47], sys.argv[48], sys.argv[49], sys.argv[50], sys.argv[51],
+        sys.argv[52], sys.argv[53]]
 
 conditions_dfs = [result1, result2, result3, result4, result5, result6,
         result7, result8, result9, result10, result11, result12, result13,
-        result14, result15, result16, result17, result18, result19, result20, result21, result22]
+        result14, result15, result16, result17, result18, result19, result20, result21, result22, result23, result24, result25, result26]
 
 final_result = None 
 for i in range(len(conditions_args)):

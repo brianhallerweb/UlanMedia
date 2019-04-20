@@ -49,6 +49,14 @@ const ConditionCheckboxes = ({
   c21Value,
   c22,
   c22Value,
+  c23,
+  c23Value,
+  c24,
+  c24Value,
+  c25,
+  c25Value,
+  c26,
+  c26Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -210,9 +218,6 @@ const ConditionCheckboxes = ({
         </span>
       </div>
 
-      <p style={{marginBottom: 0, fontWeight: 'bold'}}>
-        can raise cost or loosen targeting:
-      </p>
       <div>
         <input
           type="checkbox"
@@ -221,7 +226,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPC is equal to or less than EPC minus '}
+          {'Campaign bid is equal to or greater than EPC plus '}
           <input
             className="inputBox"
             type="number"
@@ -232,7 +237,7 @@ const ConditionCheckboxes = ({
             value={c8Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [CPC <= EPC-(EPC*0.30)]'}
+          {'% [bid >= EPC+(EPC*0.30)]'}
         </span>
       </div>
 
@@ -244,7 +249,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPL is equal to or less than EPL minus '}
+          {'Campaign bid is equal to or greater than MPC plus '}
           <input
             className="inputBox"
             type="number"
@@ -255,10 +260,13 @@ const ConditionCheckboxes = ({
             value={c9Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [CPL <= EPL-(EPL*0.30)]'}
+          {'% [bid >= MPC+(MPC*0.30)]'}
         </span>
       </div>
 
+      <p style={{marginBottom: 0, fontWeight: 'bold'}}>
+        can raise cost or loosen targeting:
+      </p>
       <div>
         <input
           type="checkbox"
@@ -267,7 +275,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign CPS is equal to or less than EPS minus '}
+          {'Campaign CPC is equal to or less than EPC minus '}
           <input
             className="inputBox"
             type="number"
@@ -278,15 +286,10 @@ const ConditionCheckboxes = ({
             value={c10Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [CPS <= EPS-(EPS*0.30)]'}
+          {'% [CPC <= EPC-(EPC*0.30)]'}
         </span>
       </div>
 
-      <p>-----------------------------------------------------</p>
-
-      <p style={{marginBottom: 0, fontWeight: 'bold'}}>
-        need to lower max per click/lead/sale:
-      </p>
       <div>
         <input
           type="checkbox"
@@ -295,7 +298,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPC is equal to or greater than EPC plus '}
+          {'Campaign CPL is equal to or less than EPL minus '}
           <input
             className="inputBox"
             type="number"
@@ -306,7 +309,7 @@ const ConditionCheckboxes = ({
             value={c11Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [MPC >= EPC+(EPC*0.30)]'}
+          {'% [CPL <= EPL-(EPL*0.30)]'}
         </span>
       </div>
 
@@ -318,7 +321,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPL is equal to or greater than EPL plus '}
+          {'Campaign CPS is equal to or less than EPS minus '}
           <input
             className="inputBox"
             type="number"
@@ -329,7 +332,7 @@ const ConditionCheckboxes = ({
             value={c12Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [MPL >= EPL+(EPL*0.30)]'}
+          {'% [CPS <= EPS-(EPS*0.30)]'}
         </span>
       </div>
 
@@ -341,7 +344,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign MPS is equal to or greater than EPS plus '}
+          {'Campaign bid is equal to or less than EPC minus '}
           <input
             className="inputBox"
             type="number"
@@ -350,6 +353,103 @@ const ConditionCheckboxes = ({
             max="l000"
             step="1"
             value={c13Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [bid <= EPC-(EPC*0.30)]'}
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c14"
+          checked={c14}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Campaign bid is equal to or less than MPC minus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c14Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c14Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [bid <= MPC-(MPC*0.30)]'}
+        </span>
+      </div>
+
+      <p>-----------------------------------------------------</p>
+
+      <p style={{marginBottom: 0, fontWeight: 'bold'}}>
+        need to lower max per click/lead/sale:
+      </p>
+      <div>
+        <input
+          type="checkbox"
+          name="c15"
+          checked={c15}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Campaign MPC is equal to or greater than EPC plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c15Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c15Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [MPC >= EPC+(EPC*0.30)]'}
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c16"
+          checked={c16}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Campaign MPL is equal to or greater than EPL plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c16Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c16Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [MPL >= EPL+(EPL*0.30)]'}
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c17"
+          checked={c17}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Campaign MPS is equal to or greater than EPS plus '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c17Value"
+            min="0"
+            max="l000"
+            step="1"
+            value={c17Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [MPS >= EPS+(EPS*0.30)]'}
@@ -362,8 +462,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c14"
-          checked={c14}
+          name="c18"
+          checked={c18}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -371,11 +471,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c14Value"
+            name="c18Value"
             min="0"
             max="l000"
             step="1"
-            value={c14Value}
+            value={c18Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [MPC <= EPC-(EPC*0.30)]'}
@@ -385,8 +485,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c15"
-          checked={c15}
+          name="c19"
+          checked={c19}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -394,11 +494,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c15Value"
+            name="c19Value"
             min="0"
             max="l000"
             step="1"
-            value={c15Value}
+            value={c19Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [MPL <= EPL-(EPL*0.30)]'}
@@ -408,8 +508,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c16"
-          checked={c16}
+          name="c20"
+          checked={c20}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -417,11 +517,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c16Value"
+            name="c20Value"
             min="0"
             max="l000"
             step="1"
-            value={c16Value}
+            value={c20Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [MPS <= EPS-(EPS*0.30)]'}
@@ -437,8 +537,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c17"
-          checked={c17}
+          name="c21"
+          checked={c21}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -446,11 +546,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c17Value"
+            name="c21Value"
             min="0"
             max="l000"
             step="1"
-            value={c17Value}
+            value={c21Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPC >= MPC+(MPC*0.30)]'}
@@ -460,8 +560,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c18"
-          checked={c18}
+          name="c22"
+          checked={c22}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -469,11 +569,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c18Value"
+            name="c22Value"
             min="0"
             max="l000"
             step="1"
-            value={c18Value}
+            value={c22Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPL >= MPL+(MPL*0.30)]'}
@@ -483,8 +583,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c19"
-          checked={c19}
+          name="c23"
+          checked={c23}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -492,11 +592,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c19Value"
+            name="c23Value"
             min="0"
             max="l000"
             step="1"
-            value={c19Value}
+            value={c23Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPS >= MPS+(MPS*0.30)]'}
@@ -509,8 +609,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c20"
-          checked={c20}
+          name="c24"
+          checked={c24}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -518,11 +618,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c20Value"
+            name="c24Value"
             min="0"
             max="l000"
             step="1"
-            value={c20Value}
+            value={c24Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPC <= MPC-(MPC*0.30)]'}
@@ -532,8 +632,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c21"
-          checked={c21}
+          name="c25"
+          checked={c25}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -541,11 +641,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c21Value"
+            name="c25Value"
             min="0"
             max="l000"
             step="1"
-            value={c21Value}
+            value={c25Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPL <= MPL-(MPL*0.30)]'}
@@ -555,8 +655,8 @@ const ConditionCheckboxes = ({
       <div>
         <input
           type="checkbox"
-          name="c22"
-          checked={c22}
+          name="c26"
+          checked={c26}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
@@ -564,11 +664,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c22Value"
+            name="c26Value"
             min="0"
             max="l000"
             step="1"
-            value={c22Value}
+            value={c26Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
           {'% [CPS <= MPS-(MPS*0.30)]'}

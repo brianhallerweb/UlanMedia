@@ -60,6 +60,14 @@ class Home extends Component {
       c21Value: 30,
       c22: false,
       c22Value: 30,
+      c23: false,
+      c23Value: 30,
+      c24: false,
+      c24Value: 30,
+      c25: false,
+      c25Value: 30,
+      c26: false,
+      c26Value: 30,
       error: false,
       authenticated: true,
       loading: false,
@@ -127,6 +135,10 @@ class Home extends Component {
         c20Value: this.state.c20Value,
         c21Value: this.state.c21Value,
         c22Value: this.state.c22Value,
+        c23Value: this.state.c23Value,
+        c24Value: this.state.c24Value,
+        c25Value: this.state.c25Value,
+        c26Value: this.state.c26Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
@@ -149,6 +161,10 @@ class Home extends Component {
         c20: this.state.c20,
         c21: this.state.c21,
         c22: this.state.c22,
+        c23: this.state.c23,
+        c24: this.state.c24,
+        c25: this.state.c25,
+        c26: this.state.c26,
       }),
     })
       .then(res => {
@@ -237,6 +253,10 @@ class Home extends Component {
           c20={this.state.c20}
           c21={this.state.c21}
           c22={this.state.c22}
+          c23={this.state.c23}
+          c24={this.state.c24}
+          c25={this.state.c25}
+          c26={this.state.c26}
           c1Value={this.state.c1Value}
           c2Value={this.state.c2Value}
           c3Value={this.state.c3Value}
@@ -259,6 +279,10 @@ class Home extends Component {
           c20Value={this.state.c20Value}
           c21Value={this.state.c21Value}
           c22Value={this.state.c22Value}
+          c23Value={this.state.c23Value}
+          c24Value={this.state.c24Value}
+          c25Value={this.state.c25Value}
+          c26Value={this.state.c26Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

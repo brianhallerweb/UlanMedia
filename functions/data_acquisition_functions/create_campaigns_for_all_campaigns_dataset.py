@@ -52,6 +52,9 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         mgid_campaign_id = row["mgid_id"]
         vol_campaign_id = row["vol_id"]
         campaign_name = row["name"]
+        pattern = re.compile(r'\d+.\d+')
+        res = pattern.findall(campaign_name)
+        bid = float(list(res)[0])
         max_lead_cpa = row["max_lead_cpa"]
         max_sale_cpa = row["max_sale_cpa"]
         res = pattern.findall(campaign_name)
@@ -67,6 +70,7 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
         campaign_data["mgid_id"] = mgid_campaign_id
         campaign_data["vol_id"] = vol_campaign_id
         campaign_data["name"] = campaign_name
+        campaign_data["bid"] = bid
         campaign_data["max_lead_cpa"] = max_lead_cpa
         campaign_data["max_sale_cpa"] = max_sale_cpa
         campaign_data["max_cpc"] = max_cpc

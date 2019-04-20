@@ -8,8 +8,8 @@ import sys
 import json
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_complete_ads_dataset(date_range):
 

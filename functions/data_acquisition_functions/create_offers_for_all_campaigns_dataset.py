@@ -6,8 +6,8 @@ import re
 import os
 from functions.classification_functions.classify_offer_for_all_campaigns import classify_offer_for_all_campaigns
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 
 def create_offers_for_all_campaigns_dataset(date_range):
