@@ -4,12 +4,34 @@ import React, {Component} from 'react';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {clicked: false, hovered: false};
+  }
+
+  outlineRow(hovered) {
+    if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
   }
 
   render() {
     return (
-      <tr>
+      <tr
+        style={{
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
+        }}
+        className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>{this.props.dayRecord.day}</td>
         <td>${this.props.dayRecord.cost}</td>
         <td>${this.props.dayRecord.revenue}</td>

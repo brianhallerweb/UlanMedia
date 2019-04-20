@@ -50,10 +50,8 @@ class Record extends Component {
     }
   }
 
-  outlineRow(hovered, classification) {
-    if (classification == 'bad') {
-      return 'red';
-    } else if (hovered) {
+  outlineRow(hovered) {
+    if (hovered) {
       return 'black';
     } else {
       return 'transparent';
@@ -66,10 +64,7 @@ class Record extends Component {
         style={{
           backgroundColor: this.colorizeRow(this.classification),
           outlineStyle: 'solid',
-          outlineColor: this.outlineRow(
-            this.state.hovered,
-            this.classification,
-          ),
+          outlineColor: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {

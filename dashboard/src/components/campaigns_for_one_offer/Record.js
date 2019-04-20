@@ -20,9 +20,31 @@ class Record extends Component {
     this.state = {};
   }
 
+  outlineRow(hovered) {
+    if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
+  }
+
   render() {
     return (
-      <tr>
+      <tr
+        style={{
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
+        }}
+        className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.campaignName}
           {this.campaignName != 'summary' && (

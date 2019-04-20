@@ -21,7 +21,7 @@ class Record extends Component {
     this.imps = this.props.campaign.imps;
     this.ctr = this.props.campaign.ctr;
     this.ppi = this.props.campaign.ppi;
-    this.state = {};
+    this.state = {clicked: false, hovered: false};
   }
 
   addRowLinks() {
@@ -39,10 +39,31 @@ class Record extends Component {
       </div>
     );
   }
+  outlineRow(hovered) {
+    if (hovered) {
+      return 'black';
+    } else {
+      return 'transparent';
+    }
+  }
 
   render() {
     return (
-      <tr>
+      <tr
+        style={{
+          outlineStyle: 'solid',
+          outlineColor: this.outlineRow(this.state.hovered),
+        }}
+        className={this.state.clicked && 'clicked'}
+        onMouseEnter={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onMouseLeave={e => {
+          this.setState({hovered: !this.state.hovered});
+        }}
+        onClick={e => {
+          this.setState({clicked: !this.state.clicked});
+        }}>
         <td>
           {this.name}
           {this.name !== 'summary' && this.addRowLinks()}
