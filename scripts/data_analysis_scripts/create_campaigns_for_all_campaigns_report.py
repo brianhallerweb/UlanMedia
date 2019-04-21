@@ -32,14 +32,17 @@ df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
 c1 = df["classification"] == sys.argv[2]
 result1 = df[c1]
 
-c2 = df["cost"] > float(sys.argv[3])
+c2 = df["cost"] >= float(sys.argv[3])
 result2 = df[c2]
 
-c3 = df["profit"] < -1 * float(sys.argv[4])
+c3 = df["profit"] <= -1 * float(sys.argv[4])
 result3 = df[c3]
 
-c4 = df["sales"] > float(sys.argv[5])
+c4 = df["sales"] >= float(sys.argv[5])
 result4 = df[c4]
+
+####################
+#need to lower cost or tighten targeting
 
 c5 = df["cpc"] >= (df["epc"] + (df["epc"]*float(sys.argv[6])/100))
 result5 = df[c5]
@@ -53,59 +56,75 @@ result7 = df[c7]
 c8 = df["bid"] >= (df["epc"] + (df["epc"]*float(sys.argv[9])/100))
 result8 = df[c8]
 
-c9 = df["bid"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[10])/100))
+########################
+# can raise cost or loosen targeting
+
+c9 = df["cpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[10])/100))
 result9 = df[c9]
 
-c10 = df["cpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[11])/100))
+c10 = df["cpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[11])/100))
 result10 = df[c10]
 
-c11 = df["cpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[12])/100))
+c11 = df["cps"] >= (df["eps"] - (df["eps"]*float(sys.argv[12])/100))
 result11 = df[c11]
 
-c12 = df["cps"] >= (df["eps"] - (df["eps"]*float(sys.argv[13])/100))
+c12 = df["bid"] >= (df["epc"] - (df["epc"]*float(sys.argv[13])/100))
 result12 = df[c12]
 
-c13 = df["bid"] >= (df["epc"] - (df["epc"]*float(sys.argv[14])/100))
+####################
+# need to lower cost or tighten targeting or raise max per click/lead/sale:
+
+c13 = df["cpc"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[14])/100))
 result13 = df[c13]
 
-c14 = df["bid"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[15])/100))
+c14 = df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100))
 result14 = df[c14]
 
-c15 = df["mpc"] >= (df["epc"] + (df["epc"]*float(sys.argv[16])/100))
+c15 = df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100))
 result15 = df[c15]
 
-c16 = df["mpl"] >= (df["epl"] + (df["epl"]*float(sys.argv[17])/100))
+c16 = df["bid"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[17])/100))
 result16 = df[c16]
 
-c17 = df["mps"] >= (df["eps"] + (df["eps"]*float(sys.argv[18])/100))
+####################
+# can raise cost or loosen targeting or lower max per click/lead/sale
+
+c17 = df["cpc"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[18])/100))
 result17 = df[c17]
 
-c18 = df["mpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[19])/100))
+c18 = df["cpl"] >= (df["mpl"] - (df["mpl"]*float(sys.argv[19])/100))
 result18 = df[c18]
 
-c19 = df["mpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[20])/100))
+c19 = df["cps"] >= (df["mps"] - (df["mps"]*float(sys.argv[20])/100))
 result19 = df[c19]
 
-c20 = df["mps"] >= (df["eps"] - (df["eps"]*float(sys.argv[21])/100))
+c20 = df["bid"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[21])/100))
 result20 = df[c20]
 
-c21 = df["cpc"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[22])/100))
+###################
+# need to lower max per click/lead/sale:
+
+c21 = df["mpc"] >= (df["epc"] + (df["epc"]*float(sys.argv[22])/100))
 result21 = df[c21]
 
-c22 = df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[23])/100))
+c22 = df["mpl"] >= (df["epl"] + (df["epl"]*float(sys.argv[23])/100))
 result22 = df[c22]
 
-c23 = df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[24])/100))
+c23 = df["mps"] >= (df["eps"] + (df["eps"]*float(sys.argv[24])/100))
 result23 = df[c23]
 
-c24 = df["cpc"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[25])/100))
+#################
+# can raise max per click/lead/sale:
+
+c24 = df["mpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[25])/100))
 result24 = df[c24]
 
-c25 = df["cpl"] >= (df["mpl"] - (df["mpl"]*float(sys.argv[26])/100))
+c25 = df["mpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[26])/100))
 result25 = df[c25]
 
-c26 = df["cps"] >= (df["mps"] - (df["mps"]*float(sys.argv[27])/100))
+c26 = df["mps"] >= (df["eps"] - (df["eps"]*float(sys.argv[27])/100))
 result26 = df[c26]
+
 
 conditions_args = [sys.argv[28], sys.argv[29], sys.argv[30], sys.argv[31],
         sys.argv[32], sys.argv[33], sys.argv[34], sys.argv[35], sys.argv[36],

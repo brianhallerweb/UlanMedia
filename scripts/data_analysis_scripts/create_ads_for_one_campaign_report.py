@@ -31,10 +31,10 @@ df["global_rank"] = round(df["global_rank"], 0)
 c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
 
-c2 = df["cost"] > float(sys.argv[4])
+c2 = df["cost"] >= float(sys.argv[4])
 result2 = df[c2]
 
-c3 = df["profit"] < -1 * float(sys.argv[5])
+c3 = df["profit"] <= -1 * float(sys.argv[5])
 result3 = df[c3]
 
 c4 = df["ctr"] <= float(sys.argv[6])

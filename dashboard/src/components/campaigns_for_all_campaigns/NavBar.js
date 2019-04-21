@@ -24,6 +24,7 @@ class NavBar extends Component {
           <ConditionCheckboxes
             toggleCondition={this.props.toggleCondition}
             setConditionValue={this.props.setConditionValue}
+            loading={this.props.loading}
             c1={this.props.c1}
             c2={this.props.c2}
             c3={this.props.c3}
@@ -77,7 +78,7 @@ class NavBar extends Component {
             c25Value={this.props.c25Value}
             c26Value={this.props.c26Value}
           />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" disabled={this.props.loading} />
         </form>
       </div>
     );

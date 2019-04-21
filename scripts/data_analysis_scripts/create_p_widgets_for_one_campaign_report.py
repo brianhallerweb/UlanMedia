@@ -34,10 +34,10 @@ result2 = df[c2]
 c3 = df["global_status"] == sys.argv[5]
 result3 = df[c3]
 
-c4 = df["cost"] > float(sys.argv[6])
+c4 = df["cost"] >= float(sys.argv[6])
 result4 = df[c4]
 
-c5 = df["profit"] < -1 * float(sys.argv[7])
+c5 = df["profit"] <= -1 * float(sys.argv[7])
 result5 = df[c5]
 
 c6 = df["is_bad_and_included"] == True 

@@ -25,10 +25,10 @@ df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2)
 df["ppi"] = round(df["profit"] / df["imps"], 6) 
 
-c1 = df["cost"] > float(sys.argv[3])
+c1 = df["cost"] >= float(sys.argv[3])
 result1 = df[c1]
 
-c2 = df["profit"] < -1 * float(sys.argv[4])
+c2 = df["profit"] <= -1 * float(sys.argv[4])
 result2 = df[c2]
 
 c3 = df["ctr"] <= float(sys.argv[5])

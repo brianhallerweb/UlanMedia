@@ -37,10 +37,10 @@ result1 = df[c1]
 c2 = df["global_status"] == sys.argv[3]
 result2 = df[c2]
 
-c3 = df["cost"] > float(sys.argv[4])
+c3 = df["cost"] >= float(sys.argv[4])
 result3 = df[c3]
 
-c4 = df["profit"] < -1 * float(sys.argv[5])
+c4 = df["profit"] <= -1 * float(sys.argv[5])
 result4 = df[c4]
 
 c5 = df["has_bad_and_included_campaigns"] == True 

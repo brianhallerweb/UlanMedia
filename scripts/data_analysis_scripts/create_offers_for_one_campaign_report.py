@@ -24,10 +24,10 @@ df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
 
 
-c1 = df["cost"] > float(sys.argv[3])
+c1 = df["cost"] >= float(sys.argv[3])
 result1 = df[c1]
 
-c2 = df["profit"] < -1 * float(sys.argv[4])
+c2 = df["profit"] <= -1 * float(sys.argv[4])
 result2 = df[c2]
 
 c3 = df["cvr"] <= float(sys.argv[5])

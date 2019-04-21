@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom';
 const ConditionCheckboxes = ({
   toggleCondition,
   setConditionValue,
+  loading,
   c1,
   c1Value,
   c2,
@@ -17,10 +18,11 @@ const ConditionCheckboxes = ({
           type="checkbox"
           name="c1"
           checked={c1}
+          disabled={loading}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign cost is more than $'}
+          {'Campaign cost is greater than or equal to $'}
           <input
             type="number"
             name="c1Value"
@@ -38,10 +40,11 @@ const ConditionCheckboxes = ({
           type="checkbox"
           name="c2"
           checked={c2}
+          disabled={loading}
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Campaign lost more than $'}
+          {'Campaign loss is greater than or equal to $'}
           <input
             type="number"
             name="c2Value"

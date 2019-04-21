@@ -35,11 +35,11 @@ df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
 
 # widget cost is more than xxx
-c1 = df["cost"] > float(sys.argv[3])
+c1 = df["cost"] >= float(sys.argv[3])
 result1 = df[c1]
 
 # widget lost more than xxx
-c2 = df["profit"] < -1 * float(sys.argv[4])
+c2 = df["profit"] <= -1 * float(sys.argv[4])
 result2 = df[c2]
 
 # widget leadCVR is less than or equal to xxx
