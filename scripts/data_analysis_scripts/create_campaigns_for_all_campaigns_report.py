@@ -63,16 +63,16 @@ result9 = df[c9]
 ########################
 # can raise cost or loosen targeting
 
-c10 = df["bid"] >= (df["epc"] - (df["epc"]*float(sys.argv[9])/100))
+c10 = df["bid"] <= (df["epc"] - (df["epc"]*float(sys.argv[9])/100))
 result10 = df[c10]
 
-c11 = df["cpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[10])/100))
+c11 = df["cpc"] <= (df["epc"] - (df["epc"]*float(sys.argv[10])/100))
 result11 = df[c11]
 
-c12 = df["cpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[11])/100))
+c12 = df["cpl"] <= (df["epl"] - (df["epl"]*float(sys.argv[11])/100))
 result12 = df[c12]
 
-c13 = df["cps"] >= (df["eps"] - (df["eps"]*float(sys.argv[12])/100))
+c13 = df["cps"] <= (df["eps"] - (df["eps"]*float(sys.argv[12])/100))
 result13 = df[c13]
 
 
@@ -94,16 +94,16 @@ result17 = df[c17]
 ####################
 # can raise cost or loosen targeting or lower max per click/lead/sale
 
-c18 = df["bid"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[17])/100))
+c18 = df["bid"] <= (df["mpc"] - (df["mpc"]*float(sys.argv[17])/100))
 result18 = df[c18]
 
-c19 = df["cpc"] >= (df["mpc"] - (df["mpc"]*float(sys.argv[18])/100))
+c19 = df["cpc"] <= (df["mpc"] - (df["mpc"]*float(sys.argv[18])/100))
 result19 = df[c19]
 
-c20 = df["cpl"] >= (df["mpl"] - (df["mpl"]*float(sys.argv[19])/100))
+c20 = df["cpl"] <= (df["mpl"] - (df["mpl"]*float(sys.argv[19])/100))
 result20 = df[c20]
 
-c21 = df["cps"] >= (df["mps"] - (df["mps"]*float(sys.argv[20])/100))
+c21 = df["cps"] <= (df["mps"] - (df["mps"]*float(sys.argv[20])/100))
 result21 = df[c21]
 
 ###################
@@ -121,13 +121,13 @@ result24 = df[c24]
 #################
 # can raise max per click/lead/sale:
 
-c25 = df["mpc"] >= (df["epc"] - (df["epc"]*float(sys.argv[24])/100))
+c25 = df["mpc"] <= (df["epc"] - (df["epc"]*float(sys.argv[24])/100))
 result25 = df[c25]
 
-c26 = df["mpl"] >= (df["epl"] - (df["epl"]*float(sys.argv[25])/100))
+c26 = df["mpl"] <= (df["epl"] - (df["epl"]*float(sys.argv[25])/100))
 result26 = df[c26]
 
-c27 = df["mps"] >= (df["eps"] - (df["eps"]*float(sys.argv[26])/100))
+c27 = df["mps"] <= (df["eps"] - (df["eps"]*float(sys.argv[26])/100))
 result27 = df[c27]
 
 
