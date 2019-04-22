@@ -23,9 +23,7 @@ class Home extends Component {
       c3: false,
       c3Value: 100,
       c4: false,
-      c4Value: 1,
       c5: false,
-      c5Value: 30,
       c6: false,
       c6Value: 30,
       c7: false,
@@ -68,6 +66,8 @@ class Home extends Component {
       c25Value: 30,
       c26: false,
       c26Value: 30,
+      c27: false,
+      c27Value: 30,
       error: false,
       authenticated: true,
       loading: false,
@@ -116,8 +116,6 @@ class Home extends Component {
         c1Value: this.state.c1Value,
         c2Value: this.state.c2Value,
         c3Value: this.state.c3Value,
-        c4Value: this.state.c4Value,
-        c5Value: this.state.c5Value,
         c6Value: this.state.c6Value,
         c7Value: this.state.c7Value,
         c8Value: this.state.c8Value,
@@ -139,6 +137,7 @@ class Home extends Component {
         c24Value: this.state.c24Value,
         c25Value: this.state.c25Value,
         c26Value: this.state.c26Value,
+        c27Value: this.state.c27Value,
         c1: this.state.c1,
         c2: this.state.c2,
         c3: this.state.c3,
@@ -165,6 +164,7 @@ class Home extends Component {
         c24: this.state.c24,
         c25: this.state.c25,
         c26: this.state.c26,
+        c27: this.state.c27,
       }),
     })
       .then(res => {
@@ -257,11 +257,10 @@ class Home extends Component {
           c24={this.state.c24}
           c25={this.state.c25}
           c26={this.state.c26}
+          c27={this.state.c27}
           c1Value={this.state.c1Value}
           c2Value={this.state.c2Value}
           c3Value={this.state.c3Value}
-          c4Value={this.state.c4Value}
-          c5Value={this.state.c5Value}
           c6Value={this.state.c6Value}
           c7Value={this.state.c7Value}
           c8Value={this.state.c8Value}
@@ -283,6 +282,7 @@ class Home extends Component {
           c24Value={this.state.c24Value}
           c25Value={this.state.c25Value}
           c26Value={this.state.c26Value}
+          c27Value={this.state.c27Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />

@@ -1,6 +1,8 @@
 //@format
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import VariableValueCheckbox from '../utilities/VariableValueCheckbox';
+import FixedValueCheckbox from '../utilities/FixedValueCheckbox';
 
 const ConditionCheckboxes = ({
   toggleCondition,
@@ -13,9 +15,7 @@ const ConditionCheckboxes = ({
   c3,
   c3Value,
   c4,
-  c4Value,
   c5,
-  c5Value,
   c6,
   c6Value,
   c7,
@@ -58,6 +58,8 @@ const ConditionCheckboxes = ({
   c25Value,
   c26,
   c26Value,
+  c27,
+  c27Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -79,74 +81,51 @@ const ConditionCheckboxes = ({
         </select>
       </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c2"
-          checked={c2}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign cost is greater than or equal to $'}
-          <input
-            className="inputBox"
-            type="number"
-            name="c2Value"
-            min="0"
-            max="1000"
-            step="1"
-            value={c2Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c2'}
+        condition={c2}
+        conditionValueName={'c2Value'}
+        conditionValue={c2Value}
+        label1={'Campaign cost is greater than or equal to $'}
+        label2={''}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c3"
-          checked={c3}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign loss is greater than or equal to $'}
-          <input
-            className="inputBox"
-            type="number"
-            name="c3Value"
-            min="0"
-            max="1000"
-            step="1"
-            value={c3Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c3'}
+        condition={c3}
+        conditionValueName={'c3Value'}
+        conditionValue={c3Value}
+        label1={'Campaign loss is greater than or equal to $'}
+        label2={''}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c4"
-          checked={c4}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign sales is greater than or equal to '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c4Value"
-            min="0"
-            max="100"
-            step="1"
-            value={c4Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
+      <FixedValueCheckbox
+        conditionName={'c4'}
+        condition={c4}
+        label={'Campaign has sales'}
+        toggleCondition={toggleCondition}
+        disabled={loading}
+      />
+
+      <FixedValueCheckbox
+        conditionName={'c5'}
+        condition={c5}
+        label={"Campaign doesn't have sales"}
+        toggleCondition={toggleCondition}
+        disabled={loading}
+      />
 
       <p>-----------------------------------------------------</p>
 
@@ -154,200 +133,129 @@ const ConditionCheckboxes = ({
         need to lower cost or tighten targeting:
       </p>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c5"
-          checked={c5}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPC is equal to or greater than EPC plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c5Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c5Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPC >= EPC+(EPC*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c6'}
+        condition={c6}
+        conditionValueName={'c6value'}
+        conditionValue={c6Value}
+        label1={'Campaign bid is equal to or greater than EPC plus '}
+        label2={'% [bid >= EPC+(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPL is equal to or greater than EPL plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c6Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c6Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPL >= EPL+(EPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c7'}
+        condition={c7}
+        conditionValueName={'c7value'}
+        conditionValue={c7Value}
+        label1={'Campaign CPC is equal to or greater than EPC plus '}
+        label2={'% [CPC >= EPC+(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c7"
-          checked={c7}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPS is equal to or greater than EPS plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c7Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c7Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPS >= EPS+(EPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c8'}
+        condition={c8}
+        conditionValueName={'c8value'}
+        conditionValue={c8Value}
+        label1={'Campaign CPL is equal to or greater than EPL plus '}
+        label2={'% [CPL >= EPL+(EPL*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c8"
-          checked={c8}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign bid is equal to or greater than EPC plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c8Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c8Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [bid >= EPC+(EPC*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c9'}
+        condition={c9}
+        conditionValueName={'c9value'}
+        conditionValue={c9Value}
+        label1={'Campaign CPS is equal to or greater than EPS plus '}
+        label2={'% [CPS >= EPS+(EPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise cost or loosen targeting:
       </p>
-      <div>
-        <input
-          type="checkbox"
-          name="c9"
-          checked={c9}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPC is equal to or less than EPC minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c9Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c9Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPC <= EPC-(EPC*0.30)]'}
-        </span>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c10"
-          checked={c10}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPL is equal to or less than EPL minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c10Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c10Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPL <= EPL-(EPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c10'}
+        condition={c10}
+        conditionValueName={'c10value'}
+        conditionValue={c10Value}
+        label1={'Campaign bid is equal to or less than EPC minus '}
+        label2={'% [bid <= EPC-(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c11"
-          checked={c11}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPS is equal to or less than EPS minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c11Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c11Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPS <= EPS-(EPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c11'}
+        condition={c11}
+        conditionValueName={'c11value'}
+        conditionValue={c11Value}
+        label1={'Campaign CPC is equal to or less than EPC minus '}
+        label2={'% [CPC <= EPC-(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c12"
-          checked={c12}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign bid is equal to or less than EPC minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c12Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c12Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [bid <= EPC-(EPC*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c12'}
+        condition={c12}
+        conditionValueName={'c12value'}
+        conditionValue={c12Value}
+        label1={'Campaign CPL is equal to or less than EPL minus '}
+        label2={'% [CPL <= EPL-(EPL*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
+
+      <VariableValueCheckbox
+        conditionName={'c13'}
+        condition={c13}
+        conditionValueName={'c13value'}
+        conditionValue={c13Value}
+        label1={'Campaign CPS is equal to or less than EPS minus '}
+        label2={'% [CPS <= EPS-(EPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p>-----------------------------------------------------</p>
 
@@ -355,352 +263,230 @@ const ConditionCheckboxes = ({
         need to lower cost or tighten targeting or raise max per
         click/lead/sale:
       </p>
-      <div>
-        <input
-          type="checkbox"
-          name="c13"
-          checked={c13}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPC is equal to or greater than MPC plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c13Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c13Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPC >= MPC+(MPC*0.30)]'}
-        </span>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c14"
-          checked={c14}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPL is equal to or greater than MPL plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c14Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c14Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPL >= MPL+(MPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c14'}
+        condition={c14}
+        conditionValueName={'c14value'}
+        conditionValue={c14Value}
+        label1={'Campaign bid is equal to or greater than MPC plus '}
+        label2={'% [bid >= MPC+(MPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c15"
-          checked={c15}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPS is equal to or greater than MPS plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c15Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c15Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPS >= MPS+(MPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c15'}
+        condition={c15}
+        conditionValueName={'c15value'}
+        conditionValue={c15Value}
+        label1={'Campaign CPC is equal to or greater than MPC plus '}
+        label2={'% [CPC >= MPC+(MPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c16"
-          checked={c16}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign bid is equal to or greater than MPC plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c16Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c16Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [bid >= MPC+(MPC*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c16'}
+        condition={c16}
+        conditionValueName={'c16value'}
+        conditionValue={c16Value}
+        label1={'Campaign CPL is equal to or greater than MPL plus '}
+        label2={'% [CPL >= MPL+(MPL*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
+
+      <VariableValueCheckbox
+        conditionName={'c17'}
+        condition={c17}
+        conditionValueName={'c17value'}
+        conditionValue={c17Value}
+        label1={'Campaign CPS is equal to or greater than MPS plus '}
+        label2={'% [CPS >= MPS+(MPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise cost or loosen targeting or lower max per click/lead/sale:
       </p>
-      <div>
-        <input
-          type="checkbox"
-          name="c17"
-          checked={c17}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPC is equal to or less than MPC minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c17Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c17Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPC <= MPC-(MPC*0.30)]'}
-        </span>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c18"
-          checked={c18}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPL is equal to or less than MPL minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c18Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c18Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPL <= MPL-(MPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c18'}
+        condition={c18}
+        conditionValueName={'c18value'}
+        conditionValue={c18Value}
+        label1={'Campaign bid is equal to or less than MPC minus '}
+        label2={'% [bid <= MPC-(MPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c19"
-          checked={c19}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign CPS is equal to or less than MPS minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c19Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c19Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [CPS <= MPS-(MPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c19'}
+        condition={c19}
+        conditionValueName={'c19value'}
+        conditionValue={c19Value}
+        label1={'Campaign CPC is equal to or less than MPC minus '}
+        label2={'% [CPC <= MPC-(MPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c20"
-          checked={c20}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign bid is equal to or less than MPC minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c20Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c20Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [bid <= MPC-(MPC*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c20'}
+        condition={c20}
+        conditionValueName={'c20value'}
+        conditionValue={c20Value}
+        label1={'Campaign CPL is equal to or less than MPL minus '}
+        label2={'% [CPL <= MPL-(MPL*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
+
+      <VariableValueCheckbox
+        conditionName={'c21'}
+        condition={c21}
+        conditionValueName={'c21value'}
+        conditionValue={c21Value}
+        label1={'Campaign CPS is equal to or less than MPS minus '}
+        label2={'% [CPS <= MPS-(MPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p>-----------------------------------------------------</p>
 
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         need to lower max per click/lead/sale:
       </p>
-      <div>
-        <input
-          type="checkbox"
-          name="c21"
-          checked={c21}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPC is equal to or greater than EPC plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c21Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c21Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPC >= EPC+(EPC*0.30)]'}
-        </span>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c22"
-          checked={c22}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPL is equal to or greater than EPL plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c22Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c22Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPL >= EPL+(EPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c22'}
+        condition={c22}
+        conditionValueName={'c22value'}
+        conditionValue={c22Value}
+        label1={'Campaign MPC is equal to or greater than EPC plus '}
+        label2={'% [MPC >= EPC+(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c23"
-          checked={c23}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPS is equal to or greater than EPS plus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c23Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c23Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPS >= EPS+(EPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c23'}
+        condition={c23}
+        conditionValueName={'c23value'}
+        conditionValue={c23Value}
+        label1={'Campaign MPL is equal to or greater than EPL plus '}
+        label2={'% [MPL >= EPL+(EPL*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
+
+      <VariableValueCheckbox
+        conditionName={'c24'}
+        condition={c24}
+        conditionValueName={'c24value'}
+        conditionValue={c24Value}
+        label1={'Campaign MPS is equal to or greater than EPS plus '}
+        label2={'% [MPS >= EPS+(EPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise max per click/lead/sale:
       </p>
-      <div>
-        <input
-          type="checkbox"
-          name="c24"
-          checked={c24}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPC is equal to or less than EPC minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c24Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c24Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPC <= EPC-(EPC*0.30)]'}
-        </span>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          name="c25"
-          checked={c25}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPL is equal to or less than EPL minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c25Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c25Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPL <= EPL-(EPL*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c25'}
+        condition={c25}
+        conditionValueName={'c25value'}
+        conditionValue={c25Value}
+        label1={'Campaign MPC is equal to or less than EPC minus '}
+        label2={'% [MPC <= EPC-(EPC*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
-      <div>
-        <input
-          type="checkbox"
-          name="c26"
-          checked={c26}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Campaign MPS is equal to or less than EPS minus '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c26Value"
-            min="0"
-            max="l000"
-            step="1"
-            value={c26Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-          {'% [MPS <= EPS-(EPS*0.30)]'}
-        </span>
-      </div>
+      <VariableValueCheckbox
+        conditionName={'c26'}
+        condition={c26}
+        conditionValueName={'c26value'}
+        conditionValue={c26Value}
+        label1={'Campaign MPL is equal to or less than EPL minus '}
+        label2={'Campaign MPC is equal to or less than EPC minus '}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
+
+      <VariableValueCheckbox
+        conditionName={'c27'}
+        condition={c27}
+        conditionValueName={'c27value'}
+        conditionValue={c27Value}
+        label1={'Campaign MPS is equal to or less than EPS minus '}
+        label2={'% [MPS <= EPS-(EPS*0.30)]'}
+        toggleCondition={toggleCondition}
+        setConditionValue={setConditionValue}
+        disabled={loading}
+        min={'0'}
+        max={'1000'}
+        step={'1'}
+      />
 
       <p>-----------------------------------------------------</p>
     </div>
