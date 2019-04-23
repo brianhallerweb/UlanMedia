@@ -28,7 +28,7 @@ def create_languages_dataset(token, start_date, end_date, date_range):
         for row in res["rows"]:
             language_name = row["languageName"]
             if language_name == "Spanish/Castilian":
-                language_name = language_name.replace("/", ",")
+                language_name = language_name.replace("/", ", ")
             campaign_id = row["campaignId"]
             if campaign_id not in vol_ids:
                 continue
