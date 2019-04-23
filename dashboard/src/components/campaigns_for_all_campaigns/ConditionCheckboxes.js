@@ -136,7 +136,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c6'}
         condition={c6}
-        conditionValueName={'c6value'}
+        conditionValueName={'c6Value'}
         conditionValue={c6Value}
         label1={'Campaign bid is greater than or equal to EPC plus '}
         label2={'% [bid >= EPC+(EPC*0.30)]'}
@@ -151,7 +151,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c7'}
         condition={c7}
-        conditionValueName={'c7value'}
+        conditionValueName={'c7Value'}
         conditionValue={c7Value}
         label1={'Campaign CPC is greater than or equal to EPC plus '}
         label2={'% [CPC >= EPC+(EPC*0.30)]'}
@@ -166,7 +166,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c8'}
         condition={c8}
-        conditionValueName={'c8value'}
+        conditionValueName={'c8Value'}
         conditionValue={c8Value}
         label1={'Campaign CPL is greater than or equal to EPL plus '}
         label2={'% [CPL >= EPL+(EPL*0.30)]'}
@@ -181,7 +181,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c9'}
         condition={c9}
-        conditionValueName={'c9value'}
+        conditionValueName={'c9Value'}
         conditionValue={c9Value}
         label1={'Campaign CPS is greater than or equal to EPS plus '}
         label2={'% [CPS >= EPS+(EPS*0.30)]'}
@@ -200,7 +200,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c10'}
         condition={c10}
-        conditionValueName={'c10value'}
+        conditionValueName={'c10Value'}
         conditionValue={c10Value}
         label1={'Campaign bid is less than or equal to EPC minus '}
         label2={'% [bid <= EPC-(EPC*0.30)]'}
@@ -215,7 +215,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c11'}
         condition={c11}
-        conditionValueName={'c11value'}
+        conditionValueName={'c11Value'}
         conditionValue={c11Value}
         label1={'Campaign CPC is less than or equal to EPC minus '}
         label2={'% [CPC <= EPC-(EPC*0.30)]'}
@@ -230,7 +230,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c12'}
         condition={c12}
-        conditionValueName={'c12value'}
+        conditionValueName={'c12Value'}
         conditionValue={c12Value}
         label1={'Campaign CPL is less than or equal to EPL minus '}
         label2={'% [CPL <= EPL-(EPL*0.30)]'}
@@ -245,7 +245,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c13'}
         condition={c13}
-        conditionValueName={'c13value'}
+        conditionValueName={'c13Value'}
         conditionValue={c13Value}
         label1={'Campaign CPS is less than or equal to EPS minus '}
         label2={'% [CPS <= EPS-(EPS*0.30)]'}
@@ -267,10 +267,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c14'}
         condition={c14}
-        conditionValueName={'c14value'}
+        conditionValueName={'c14Value'}
         conditionValue={c14Value}
         label1={'Campaign bid is greater than or equal to MPC plus '}
-        label2={'% [bid >= MPC+(MPC*0.30)]'}
+        label2={'% [bid >= MPC+(MPC*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -282,10 +282,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c15'}
         condition={c15}
-        conditionValueName={'c15value'}
+        conditionValueName={'c15Value'}
         conditionValue={c15Value}
         label1={'Campaign CPC is greater than or equal to MPC plus '}
-        label2={'% [CPC >= MPC+(MPC*0.30)]'}
+        label2={'% [CPC >= MPC+(MPC*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -297,10 +297,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c16'}
         condition={c16}
-        conditionValueName={'c16value'}
+        conditionValueName={'c16Value'}
         conditionValue={c16Value}
         label1={'Campaign CPL is greater than or equal to MPL plus '}
-        label2={'% [CPL >= MPL+(MPL*0.30)]'}
+        label2={'% [CPL >= MPL+(MPL*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -312,10 +312,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c17'}
         condition={c17}
-        conditionValueName={'c17value'}
+        conditionValueName={'c17Value'}
         conditionValue={c17Value}
         label1={'Campaign CPS is greater than or equal to MPS plus '}
-        label2={'% [CPS >= MPS+(MPS*0.30)]'}
+        label2={'% [CPS >= MPS+(MPS*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -331,10 +331,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c18'}
         condition={c18}
-        conditionValueName={'c18value'}
+        conditionValueName={'c18Value'}
         conditionValue={c18Value}
         label1={'Campaign bid is less than or equal to MPC minus '}
-        label2={'% [bid <= MPC-(MPC*0.30)]'}
+        label2={'% [bid <= MPC-(MPC*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -346,10 +346,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c19'}
         condition={c19}
-        conditionValueName={'c19value'}
+        conditionValueName={'c19Value'}
         conditionValue={c19Value}
         label1={'Campaign CPC is less than or equal to MPC minus '}
-        label2={'% [CPC <= MPC-(MPC*0.30)]'}
+        label2={'% [CPC <= MPC-(MPC*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -361,10 +361,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c20'}
         condition={c20}
-        conditionValueName={'c20value'}
+        conditionValueName={'c20Value'}
         conditionValue={c20Value}
         label1={'Campaign CPL is less than or equal to MPL minus '}
-        label2={'% [CPL <= MPL-(MPL*0.30)]'}
+        label2={'% [CPL <= MPL-(MPL*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -376,10 +376,10 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c21'}
         condition={c21}
-        conditionValueName={'c21value'}
+        conditionValueName={'c21Value'}
         conditionValue={c21Value}
         label1={'Campaign CPS is less than or equal to MPS minus '}
-        label2={'% [CPS <= MPS-(MPS*0.30)]'}
+        label2={'% [CPS <= MPS-(MPS*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -397,7 +397,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c22'}
         condition={c22}
-        conditionValueName={'c22value'}
+        conditionValueName={'c22Value'}
         conditionValue={c22Value}
         label1={'Campaign MPC is greater than or equal to EPC plus '}
         label2={'% [MPC >= EPC+(EPC*0.30)]'}
@@ -412,7 +412,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c23'}
         condition={c23}
-        conditionValueName={'c23value'}
+        conditionValueName={'c23Value'}
         conditionValue={c23Value}
         label1={'Campaign MPL is greater than or equal to EPL plus '}
         label2={'% [MPL >= EPL+(EPL*0.30)]'}
@@ -427,7 +427,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c24'}
         condition={c24}
-        conditionValueName={'c24value'}
+        conditionValueName={'c24Value'}
         conditionValue={c24Value}
         label1={'Campaign MPS is greater than or equal to EPS plus '}
         label2={'% [MPS >= EPS+(EPS*0.30)]'}
@@ -446,7 +446,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c25'}
         condition={c25}
-        conditionValueName={'c25value'}
+        conditionValueName={'c25Value'}
         conditionValue={c25Value}
         label1={'Campaign MPC is less than or equal to EPC minus '}
         label2={'% [MPC <= EPC-(EPC*0.30)]'}
@@ -461,7 +461,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c26'}
         condition={c26}
-        conditionValueName={'c26value'}
+        conditionValueName={'c26Value'}
         conditionValue={c26Value}
         label1={'Campaign MPL is less than or equal to EPL minus '}
         label2={'% [MPL <= EPL-(EPS*0.30)]'}
@@ -476,7 +476,7 @@ const ConditionCheckboxes = ({
       <VariableValueCheckbox
         conditionName={'c27'}
         condition={c27}
-        conditionValueName={'c27value'}
+        conditionValueName={'c27Value'}
         conditionValue={c27Value}
         label1={'Campaign MPS is less than or equal to EPS minus '}
         label2={'% [MPS <= EPS-(EPS*0.30)]'}
