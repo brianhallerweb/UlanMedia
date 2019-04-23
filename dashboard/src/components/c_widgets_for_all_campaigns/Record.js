@@ -1,10 +1,34 @@
 //@format
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import InternalLink from '../utilities/InternalLink';
+import ExternalLink from '../utilities/ExternalLink';
 
 class Record extends Component {
   constructor(props) {
     super(props);
+
+    this.countriesURL = `h
+ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_9a96a80f-83fd-4721-b245-5d2d82077632/report/country-code?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+      this.props.widgetRecord.widget_id
+    }`;
+
+    this.languagesURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_b311a56b-7d18-4d38-bde7-9d27d1a3eb1f/report/language?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=language&valueFiltersGrouping=language&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+      this.props.widgetRecord.widget_id
+    }`;
+
+    this.ISPURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_2bcf039b-b777-4d24-ad0d-2dd9fa978470/report/custom-variable-1,isp?dateRange=last-30-days&sortKey=profit&sortDirection=asc&page=1&chart=0&columns=customVariable1&columns=isp&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
+      this.props.widgetRecord.widget_id
+    }&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
+
+    this.monthsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month?dateRange=last-30-days&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+      this.props.widgetRecord.widget_id
+    }`;
+
+    this.daysURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=last-30-days&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
+      this.props.widgetRecord.widget_id
+    }`;
+
     this.state = {clicked: false, hovered: false};
   }
 
@@ -79,93 +103,76 @@ class Record extends Component {
         <td>
           {this.props.widgetRecord.widget_id}
           <div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/campaignsforonecwidget/${
-                    this.props.widgetRecord.widget_id
-                  }`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
-            </div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                p_widgets
-              </Link>
-            </div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
-                    /^\d*/,
-                  )}`,
-                }}
-                target="_blank">
-                c_widgets
-              </Link>
-            </div>
-            <div className="rowLink">
-              <a
-                href={`h
-ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_9a96a80f-83fd-4721-b245-5d2d82077632/report/country-code?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
-                  this.props.widgetRecord.widget_id
-                }`}
-                target="_blank">
-                countries
-              </a>
-            </div>
+            <InternalLink
+              className={'rowLink'}
+              to={`/campaignsforonecwidget/${
+                this.props.widgetRecord.widget_id
+              }`}
+              target={'_blank'}
+              label={'campaigns'}
+            />
 
-            <div className="rowLink">
-              <a
-                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_b311a56b-7d18-4d38-bde7-9d27d1a3eb1f/report/language?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=language&valueFiltersGrouping=language&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
-                  this.props.widgetRecord.widget_id
-                }`}
-                target="_blank">
-                languages
-              </a>
-            </div>
+            <InternalLink
+              className={'rowLink'}
+              to={`/campaignsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`}
+              target={'_blank'}
+              label={'p_widgets'}
+            />
 
-            <div className="rowLink">
-              <a
-                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/month?dateRange=last-30-days&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
-                  this.props.widgetRecord.widget_id
-                }`}
-                target="_blank">
-                months
-              </a>
-            </div>
-            <div className="rowLink">
-              <a
-                href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=last-30-days&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=custom-variable-1&filter2Value=${
-                  this.props.widgetRecord.widget_id
-                }`}
-                target="_blank">
-                days
-              </a>
-            </div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/excludecwidgetconfirmation/${
-                    this.props.widgetRecord.widget_id
-                  }`,
-                }}
-                target="_blank">
-                exclude
-              </Link>
-            </div>
+            <InternalLink
+              className={'rowLink'}
+              to={`/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`}
+              target={'_blank'}
+              label={'c_widgets'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.countriesURL}
+              target={'_blank'}
+              label={'countries'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.languagesURL}
+              target={'_blank'}
+              label={'languages'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.ISPURL}
+              target={'_blank'}
+              label={'isp'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.monthsURL}
+              target={'_blank'}
+              label={'months'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.daysURL}
+              target={'_blank'}
+              label={'days'}
+            />
+
+            <InternalLink
+              className={'rowLink'}
+              to={`/excludecwidgetconfirmation/${
+                this.props.widgetRecord.widget_id
+              }`}
+              target={'_blank'}
+              label={'exclude'}
+            />
           </div>
         </td>
         <td>
@@ -214,42 +221,30 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
         <td>
           {this.props.widgetRecord.global_status}
           <div onClick={() => this.setState({clicked: true})}>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/listcwidgetconfirmation/${
-                    this.props.widgetRecord.widget_id
-                  }/white`,
-                }}
-                target="_blank">
-                white
-              </Link>
-            </div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/listcwidgetconfirmation/${
-                    this.props.widgetRecord.widget_id
-                  }/grey`,
-                }}
-                target="_blank">
-                grey
-              </Link>
-            </div>
-            <div className="rowLink">
-              <Link
-                onClick={e => e.stopPropagation()}
-                to={{
-                  pathname: `/listcwidgetconfirmation/${
-                    this.props.widgetRecord.widget_id
-                  }/black`,
-                }}
-                target="_blank">
-                black
-              </Link>
-            </div>
+            <InternalLink
+              className={'rowLink'}
+              to={`/listcwidgetconfirmation/${
+                this.props.widgetRecord.widget_id
+              }/white`}
+              target={'_blank'}
+              label={'white'}
+            />
+            <InternalLink
+              className={'rowLink'}
+              to={`/listcwidgetconfirmation/${
+                this.props.widgetRecord.widget_id
+              }/grey`}
+              target={'_blank'}
+              label={'grey'}
+            />
+            <InternalLink
+              className={'rowLink'}
+              to={`/listcwidgetconfirmation/${
+                this.props.widgetRecord.widget_id
+              }/black`}
+              target={'_blank'}
+              label={'black'}
+            />
           </div>
         </td>
       </tr>
