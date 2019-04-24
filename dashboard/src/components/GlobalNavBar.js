@@ -5,14 +5,16 @@ import InternalLink from './utilities/InternalLink';
 import ExternalLink from './utilities/ExternalLink';
 
 const GlobalNavBar = () => {
-  const deviceOSBrowserURL =
-    'https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_3e70ca4d-5ccb-49c3-ab23-e2bc652fbbc9/report/device,os,browser?dateRange=custom-date&sortKey=profit&sortDirection=desc&page=1&chart=0&columns=deviceName&columns=os&columns=browser&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=2018-10-11T00:00:00Z&to=2019-04-10T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc';
+  const dates = calculateOneEightyDateRange();
+  const startDate = dates[0];
+  const endDate = dates[1];
+
+  const deviceOSBrowserURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_3e70ca4d-5ccb-49c3-ab23-e2bc652fbbc9/report/device,os,browser?dateRange=custom-date&sortKey=profit&sortDirection=desc&page=1&chart=0&columns=deviceName&columns=os&columns=browser&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${startDate}T00:00:00Z&to=${endDate}T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
 
   const ISPURL =
     'https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_3e70ca4d-5ccb-49c3-ab23-e2bc652fbbc9/report/isp,custom-variable-1?dateRange=last-30-days&sortKey=profit&sortDirection=asc&page=1&chart=0&columns=isp&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=isp&valueFiltersGrouping=isp&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc';
 
-  const monthsURL =
-    'https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_e9930901-c292-4dcf-b73a-d5eb6c44bac1/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=2018-10-01T00:00:00Z&to=2019-04-10T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc';
+  const monthsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_e9930901-c292-4dcf-b73a-d5eb6c44bac1/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${startDate}T00:00:00Z&to=${endDate}T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
 
   const daysURL =
     'https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_e9930901-c292-4dcf-b73a-d5eb6c44bac1/report/day?dateRange=last-30-days&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=100&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=2018-05-28T00:00:00Z&to=2018-06-27T00:00:00Z&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc';
@@ -122,5 +124,33 @@ const GlobalNavBar = () => {
     </div>
   );
 };
+
+function calculateOneEightyDateRange() {
+  const d = new Date();
+  let todayMonth = d.getUTCMonth() + 1;
+  if (todayMonth < 10) {
+    todayMonth = `0${todayMonth}`;
+  }
+  let todayDay = d.getUTCDate();
+  if (todayDay < 10) {
+    todayDay = `0${todayDay}`;
+  }
+  const todayYear = d.getUTCFullYear();
+  const today = `${todayYear}-${todayMonth}-${todayDay}`;
+
+  d.setDate(d.getDate() - 180);
+  let oneEightyMonth = d.getUTCMonth() + 1;
+  if (oneEightyMonth < 10) {
+    oneEightyMonth = `0${oneEightyMonth}`;
+  }
+  let oneEightyDay = d.getUTCDate();
+  if (oneEightyDay < 10) {
+    oneEightyDay = `0${oneEightyDay}`;
+  }
+  const oneEightyYear = d.getUTCFullYear();
+  const oneEightyDaysAgo = `${oneEightyYear}-${oneEightyMonth}-${oneEightyDay}`;
+
+  return [oneEightyDaysAgo, today];
+}
 
 export default GlobalNavBar;
