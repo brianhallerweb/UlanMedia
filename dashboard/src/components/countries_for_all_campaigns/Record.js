@@ -1,6 +1,7 @@
 //@format
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import InternalLink from '../utilities/InternalLink';
 
 class Record extends Component {
   constructor(props) {
@@ -79,15 +80,12 @@ class Record extends Component {
         <td>
           {this.countryName}
           <div>
-            <div className="rowLink">
-              <Link
-                to={{
-                  pathname: `/campaignsforonecountry/${this.countryName}/`,
-                }}
-                target="_blank">
-                campaigns
-              </Link>
-            </div>
+            <InternalLink
+              className={'rowLink'}
+              to={`/campaignsforonecountry/${this.countryName}/`}
+              target={'_blank'}
+              label={'campaigns'}
+            />
           </div>
         </td>
         {this.stylizeClassificationText(this.classification)}

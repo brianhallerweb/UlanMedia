@@ -1,6 +1,7 @@
 //@format
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import InternalLink from '../utilities/InternalLink';
 
 class Record extends Component {
   constructor(props) {
@@ -47,29 +48,23 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id}
           {this.props.widgetRecord.widget_id !== 'summary' && (
             <div>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/campaignsforonecwidget/${
-                      this.props.widgetRecord.widget_id
-                    }/`,
-                  }}
-                  target="_blank">
-                  campaigns
-                </Link>
-              </div>
+              <InternalLink
+                className={'rowLink'}
+                to={`/campaignsforonecwidget/${
+                  this.props.widgetRecord.widget_id
+                }/`}
+                target={'_blank'}
+                label={'campaigns'}
+              />
 
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/excludecwidgetconfirmation/${
-                      this.props.widgetRecord.widget_id
-                    }`,
-                  }}
-                  target="_blank">
-                  exclude
-                </Link>
-              </div>
+              <InternalLink
+                className={'rowLink'}
+                to={`/excludecwidgetconfirmation/${
+                  this.props.widgetRecord.widget_id
+                }`}
+                target={'_blank'}
+                label={'exclude'}
+              />
             </div>
           )}
         </td>
