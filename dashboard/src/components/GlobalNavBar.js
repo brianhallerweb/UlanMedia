@@ -125,31 +125,16 @@ const GlobalNavBar = () => {
   );
 };
 
+const moment = require('moment-timezone');
+
 function calculateOneEightyDateRange() {
-  const d = new Date();
-  let todayMonth = d.getUTCMonth() + 1;
-  if (todayMonth < 10) {
-    todayMonth = `0${todayMonth}`;
-  }
-  let todayDay = d.getUTCDate();
-  if (todayDay < 10) {
-    todayDay = `0${todayDay}`;
-  }
-  const todayYear = d.getUTCFullYear();
-  const today = `${todayYear}-${todayMonth}-${todayDay}`;
-
-  d.setDate(d.getDate() - 180);
-  let oneEightyMonth = d.getUTCMonth() + 1;
-  if (oneEightyMonth < 10) {
-    oneEightyMonth = `0${oneEightyMonth}`;
-  }
-  let oneEightyDay = d.getUTCDate();
-  if (oneEightyDay < 10) {
-    oneEightyDay = `0${oneEightyDay}`;
-  }
-  const oneEightyYear = d.getUTCFullYear();
-  const oneEightyDaysAgo = `${oneEightyYear}-${oneEightyMonth}-${oneEightyDay}`;
-
+  const today = moment()
+    .tz('America/Los_Angeles')
+    .format('YYYY-MM-DD');
+  const oneEightyDaysAgo = moment()
+    .tz('America/Los_Angeles')
+    .subtract(180, 'day')
+    .format('YYYY-MM-DD');
   return [oneEightyDaysAgo, today];
 }
 
