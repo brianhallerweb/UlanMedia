@@ -87,6 +87,7 @@ class Record extends Component {
           <div>
             <InternalLink
               className={'rowLink'}
+              stopPropagation={true}
               to={`/campaignsforonead/${this.image}/`}
               target={'_blank'}
               label={'campaigns'}

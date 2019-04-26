@@ -30,6 +30,8 @@ class Record extends Component {
       <div>
         <InternalLink
           className={'rowLink'}
+	                  stopPropagation={true}
+
           to={`/adsforonecampaign/${this.volID}/${this.name}/`}
           target={'_blank'}
           label={'ads'}

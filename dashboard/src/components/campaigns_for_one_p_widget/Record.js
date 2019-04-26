@@ -21,6 +21,7 @@ class Record extends Component {
       <div>
         <InternalLink
           className={'rowLink'}
+          stopPropagation={true}
           to={`/pwidgetsforonecampaign/${this.props.campaignRecord.vol_id}/${
             this.props.campaignRecord.name
           }/

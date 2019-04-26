@@ -82,6 +82,7 @@ class Record extends Component {
             <div>
               <InternalLink
                 className={'rowLink'}
+                stopPropagation={true}
                 to={`/campaignsforonecountry/${this.countryName}/`}
                 target={'_blank'}
                 label={'campaigns'}

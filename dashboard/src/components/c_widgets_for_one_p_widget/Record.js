@@ -50,6 +50,7 @@ class Record extends Component {
             <div>
               <InternalLink
                 className={'rowLink'}
+                stopPropagation={true}
                 to={`/campaignsforonecwidget/${
                   this.props.widgetRecord.widget_id
                 }/`}

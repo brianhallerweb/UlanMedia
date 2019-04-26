@@ -1,6 +1,7 @@
 //@format
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import InternalLink from '../utilities/InternalLink';
 
 class Record extends Component {
   constructor(props) {
@@ -49,17 +50,13 @@ class Record extends Component {
           {this.campaignName}
           {this.campaignName != 'summary' && (
             <div>
-              <div className="rowLink">
-                <Link
-                  to={{
-                    pathname: `/offersforonecampaign/${this.volID}/${
-                      this.campaignName
-                    }/`,
-                  }}
-                  target="_blank">
-                  offers
-                </Link>
-              </div>
+              <InternalLink
+                className={'rowLink'}
+                stopPropagation={true}
+                to={`/offersforonecampaign/${this.volID}/${this.campaignName}/`}
+                target={'_blank'}
+                label={'offers'}
+              />
             </div>
           )}
         </td>

@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import InternalLink from '../utilities/InternalLink';
 
-
 class Record extends Component {
   constructor(props) {
     super(props);
@@ -83,6 +82,7 @@ class Record extends Component {
           <div>
             <InternalLink
               className={'rowLink'}
+              stopPropagation={true}
               to={`/campaignsforonelanguage/${this.languageName}/`}
               target={'_blank'}
               label={'campaigns'}

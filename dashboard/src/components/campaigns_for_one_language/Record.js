@@ -53,6 +53,7 @@ class Record extends Component {
             <div>
               <InternalLink
                 className={'rowLink'}
+                stopPropagation={true}
                 to={`/languagesforonecampaign/${this.campaignID}/${
                   this.campaignName
                 }/`}
