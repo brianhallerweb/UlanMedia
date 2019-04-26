@@ -14,6 +14,8 @@ class Home extends Component {
     super(props);
     this.state = {
       dateRange: 'oneeighty',
+      volRequestStartDate: '',
+      volRequestEndDate: '',
       volRequestDates: '',
       mismatchVolWeightAndRecWeightCount: 0,
       badOffersCount: 0,
@@ -79,6 +81,8 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
+          volRequestStartDate: file.metadata.vol_start_date,
+          volRequestEndDate: file.metadata.vol_end_date,
           volRequestDates: `${file.metadata.vol_start_date} to ${
             file.metadata.vol_end_date
           }`,
@@ -188,6 +192,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           offersRecords={this.state.offersRecords}
+          volRequestStartDate={this.state.volRequestStartDate}
+          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );

@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import InternalLink from '../utilities/InternalLink';
+import ExternalLink from '../utilities/ExternalLink';
 
 class Record extends Component {
   constructor(props) {
@@ -19,6 +20,51 @@ class Record extends Component {
     this.cpa = this.props.offer.cpa;
     this.cpc = this.props.offer.epc;
     this.epa = this.props.offer.cpa;
+    // link urls
+    this.widgetsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/custom-variable-1?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=offer&filter2Value=${
+      this.offerID
+    }`;
+    this.adsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/custom-variable-5?dateRange=last-30-days&chart=0&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=offer&filter2Value=${
+      this.offerID
+    }`;
+    this.countriesURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/country-code?dateRange=custom-date&sortKey=visits&sortDirection=asc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    this.languagesURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/language?dateRange=custom-date&sortKey=visits&sortDirection=asc&page=1&chart=0&columns=languageName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=language&valueFiltersGrouping=language&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    this.deviceOSBrowserURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/device,os,browser?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=deviceName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ALL&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    this.ISPURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/isp?dateRange=custom-date&chart=0&columns=deviceName&columns=os&columns=browser&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    this.monthsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    this.daysURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
+      this.props.volRequestStartDate
+    }T00:00:00Z&to=${
+      this.props.volRequestEndDate
+    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
+
+    /////////////////
+
     this.state = {clicked: false, hovered: false};
   }
 
@@ -57,6 +103,54 @@ class Record extends Component {
                 to={`/campaignsforoneoffer/${this.offerID}/${this.offerName}`}
                 target={'_blank'}
                 label={'campaigns'}
+              />
+              <ExternalLink
+                className={'rowLink'}
+                href={this.widgetsURL}
+                target={'_blank'}
+                label={'widgets'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.countriesURL}
+                target={'_blank'}
+                label={'countries'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.languagesURL}
+                target={'_blank'}
+                label={'languages'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.deviceOSBrowserURL}
+                target={'_blank'}
+                label={'device/os/browser'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.ISPURL}
+                target={'_blank'}
+                label={'isp'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.monthsURL}
+                target={'_blank'}
+                label={'months'}
+              />
+
+              <ExternalLink
+                className={'rowLink'}
+                href={this.daysURL}
+                target={'_blank'}
+                label={'days'}
               />
             </div>
           )}

@@ -13,6 +13,8 @@ class Home extends Component {
     this.state = {
       flowRule: this.props.match.params.flowRule,
       dateRange: 'oneeighty',
+      volRequestStartDate: '',
+      volRequestEndDate: '',
       volRequestDates: '',
       c1: false,
       c1Value: 20,
@@ -74,6 +76,8 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {
         this.setState({
+          volRequestStartDate: file.metadata.vol_start_date,
+          volRequestEndDate: file.metadata.vol_end_date,
           volRequestDates: `${file.metadata.vol_start_date} to ${
             file.metadata.vol_end_date
           }`,
@@ -149,6 +153,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           offersRecords={this.state.offersRecords}
+          volRequestStartDate={this.state.volRequestStartDate}
+          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );

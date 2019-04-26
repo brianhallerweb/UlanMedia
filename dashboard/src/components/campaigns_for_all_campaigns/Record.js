@@ -251,13 +251,6 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
 
             <ExternalLink
               className={'rowLink'}
-              href={this.deviceOSBrowserURL}
-              target={'_blank'}
-              label={'device/os/browser'}
-            />
-
-            <ExternalLink
-              className={'rowLink'}
               href={this.ISPURL}
               target={'_blank'}
               label={'isp'}
