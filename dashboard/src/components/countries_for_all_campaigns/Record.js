@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import InternalLink from '../utilities/InternalLink';
+import ExternalLink from '../utilities/ExternalLink';
 
 class Record extends Component {
   constructor(props) {
@@ -85,6 +86,15 @@ class Record extends Component {
               to={`/campaignsforonecountry/${this.countryName}/`}
               target={'_blank'}
               label={'campaigns'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_58c65a87-77bb-4959-908d-b402a3f4407a/report/country-code,custom-variable-1,campaign?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=customVariable1&columns=campaignName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&columns=campaignId&columns=cpa&filter=${
+                this.countryName
+              }&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`}
+              target={'_blank'}
+              label={'widgets'}
             />
           </div>
         </td>

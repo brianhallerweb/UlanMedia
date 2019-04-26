@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
 const ExternalLink = ({className, href, target, label}) => (
   <div className={className}>
-    <a href={href} target={target}>
+    <a onClick={e => e.stopPropagation()} href={href} target={target}>
       {label}
     </a>
   </div>

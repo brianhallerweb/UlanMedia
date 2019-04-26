@@ -22,6 +22,10 @@ class Record extends Component {
       this.props.widgetRecord.widget_id
     }&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
 
+    this.deviceISPURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_5a5a89b9-b146-4fb6-9ea4-128f8e675251/report/custom-variable-1,device,os?dateRange=last-30-days&sortKey=profit&sortDirection=asc&page=1&chart=0&columns=customVariable1&columns=isp&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
+      this.props.widgetRecord.widget_id
+    }&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
+
     this.monthsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_27e1fe2c-3a24-4946-b334-8e7df1b50e2d/report/month,custom-variable-1?dateRange=last-30-days&sortKey=month&sortDirection=desc&page=1&chart=0&columns=month&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=${
       this.props.widgetRecord.widget_id
     }&limit=1000&reportType=table&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
@@ -137,6 +141,13 @@ class Record extends Component {
               href={this.languagesURL}
               target={'_blank'}
               label={'languages'}
+            />
+
+            <ExternalLink
+              className={'rowLink'}
+              href={this.deviceISPURL}
+              target={'_blank'}
+              label={'device/isp'}
             />
 
             <ExternalLink
