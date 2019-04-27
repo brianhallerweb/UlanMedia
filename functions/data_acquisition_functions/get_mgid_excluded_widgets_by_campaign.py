@@ -3,6 +3,8 @@ from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid
 from datetime import datetime
 import requests
 import sys
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 
 def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campaign_id):
