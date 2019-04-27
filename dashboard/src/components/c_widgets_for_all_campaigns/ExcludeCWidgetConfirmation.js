@@ -140,7 +140,7 @@ class ExcludeCWidgetConfirmation extends Component {
           <button
             disabled={!this.state.campaigns.length > 0}
             onClick={() => this.excludeAllCampaignsForOneCWidget()}>
-            Yes, confirm exclution
+            Yes, confirm exclusion
           </button>
         </div>
         <p style={{fontSize: 12}}>

@@ -5,12 +5,16 @@ from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
+from functions.data_acquisition_functions.get_mgid_included_widgets_by_campaign import get_mgid_included_widgets_by_campaign
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
 from functions.classification_functions.classify_c_widget_for_all_campaigns import classify_c_widget_for_all_campaigns
 import re
 import os
 import sys
 import json
+
+from functions.misc.create_mgid_date_range import create_mgid_date_range
+
 
 def create_complete_c_widgets_dataset(date_range, output_name):
     
@@ -20,6 +24,12 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
+
+    date_ranges = {"yesterday": 1, "seven": 7, "thirty": 30, "ninety": 90, "oneeighty":180}
+    mgid_dates = create_mgid_date_range(date_ranges[date_range], mgid_timezone)
+    mgid_start_date = mgid_dates[0]
+    mgid_end_date = mgid_dates[1]
+
 
     ########################################################
 
@@ -96,6 +106,8 @@ def create_complete_c_widgets_dataset(date_range, output_name):
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
              json_file = json.load(file)
 
+        included_widgets = get_mgid_included_widgets_by_campaign(mgid_token,
+                mgid_id, mgid_start_date, mgid_end_date)
         excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
         c_widgets_for_one_campaign = {}
@@ -116,10 +128,12 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["sales"] += json_file["data"][widget]["sales"]
            else:
                 c_widgets_for_one_campaign[c_widget] = json_file["data"][widget]
-                if c_widget not in excluded_widgets and p_widget not in excluded_widgets:
+                if c_widget in included_widgets or p_widget in included_widgets:
                     c_widgets_for_one_campaign[c_widget]['status'] = "included"
-                else:
+                elif c_widget in excluded_widgets or p_widget in excluded_widgets:
                     c_widgets_for_one_campaign[c_widget]['status'] = "excluded"
+                else:
+                    c_widgets_for_one_campaign[c_widget]['status'] = "inactive"
                 c_widgets_for_one_campaign[c_widget]["vol_id"] = campaign["vol_id"]
                 c_widgets_for_one_campaign[c_widget]["mgid_id"] = campaign["mgid_id"]
                 c_widgets_for_one_campaign[c_widget]["name"] = campaign["name"]

@@ -15,7 +15,7 @@ class Records extends Component {
           <tr>
             <th>Offer Name</th>
             <th>Flow Rule</th>
-            <th>Classificaiton</th>
+            <th>Classification</th>
             <th>Score (roi+cvr+gpr)</th>
             <th>Vol Weight</th>
             <th>Rec Weight</th>
@@ -28,6 +28,7 @@ class Records extends Component {
             <th>Conversions</th>
             <th>CPA</th>
             <th>EPA</th>
+            <th>ROI</th>
             <th>CVR</th>
           </tr>
         </thead>

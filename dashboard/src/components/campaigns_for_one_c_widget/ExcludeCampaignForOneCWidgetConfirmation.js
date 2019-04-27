@@ -93,7 +93,7 @@ class ExcludeCampaignForOneCWidgetConfirmation extends Component {
 
         <div>
           <button onClick={() => this.confirmExcludeCampaignForOneCWidget()}>
-            Yes, confirm exclution
+            Yes, confirm exclusion
           </button>
         </div>
         <p style={{fontSize: 12}}>

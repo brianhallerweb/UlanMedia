@@ -3,6 +3,7 @@ from config.mgid_token import mgid_token
 from functions.classification_functions.classify_campaign_for_one_p_or_c_widget import classify_campaign_for_one_p_or_c_widget
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
+from functions.data_acquisition_functions.get_mgid_included_widgets_by_campaign import get_mgid_included_widgets_by_campaign
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -12,6 +13,9 @@ import os
 import re
 import sys
 
+from functions.misc.create_mgid_date_range import create_mgid_date_range
+
+
 def create_complete_p_widgets_dataset(date_range, output_name):
 
     # 1. get some prerequisite data
@@ -20,6 +24,11 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     widget_whitelist = get_whitelist()
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
+
+    date_ranges = {"yesterday": 1, "seven": 7, "thirty": 30, "ninety": 90, "oneeighty":180}
+    mgid_dates = create_mgid_date_range(date_ranges[date_range], mgid_timezone)
+    mgid_start_date = mgid_dates[0]
+    mgid_end_date = mgid_dates[1]
 
     ########################################################
 
@@ -79,6 +88,8 @@ def create_complete_p_widgets_dataset(date_range, output_name):
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_and_c_widgets_for_one_campaign/{vol_id}_{date_range}_p_and_c_widgets_for_one_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)
 
+        included_widgets = get_mgid_included_widgets_by_campaign(mgid_token,
+                mgid_id, mgid_start_date, mgid_end_date)
         excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
         mpc_pattern = re.compile(r'.*cpc_(.*)')
@@ -94,10 +105,12 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             else:
                 p_widgets_for_one_campaign[p_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[p_widget]["widget_id"] = p_widget
-                if p_widget not in excluded_widgets:
+                if p_widget in included_widgets:
                     p_widgets_for_one_campaign[p_widget]['status'] = "included" 
-                else:
+                elif p_widget in excluded_widgets:
                     p_widgets_for_one_campaign[p_widget]['status'] = "excluded" 
+                else:
+                    p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
                 p_widgets_for_one_campaign[p_widget]["vol_id"] = campaign["vol_id"]
                 p_widgets_for_one_campaign[p_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[p_widget]["name"] = campaign["name"]
@@ -105,7 +118,8 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                 p_widgets_for_one_campaign[p_widget]["mps"] = campaign["max_sale_cpa"]
                 res = mpc_pattern.findall(campaign["name"])
                 p_widgets_for_one_campaign[p_widget]["mpc"] = float(list(res)[0])
-
+        print("here")
+        sys.exit()
 
         for p_widget in p_widgets_for_one_campaign:
             if complete_p_widgets[p_widget]["for_each_campaign"]:

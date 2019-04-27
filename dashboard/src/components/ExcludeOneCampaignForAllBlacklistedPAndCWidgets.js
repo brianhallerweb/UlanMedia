@@ -116,7 +116,7 @@ class ExcludeOneCampaignForAllBlacklistedPAndCWidgets extends Component {
               !this.state.mgidCampaignID
             }
             onClick={() => this.excludeCampaign()}>
-            confirm exclutions
+            confirm exclusions
           </button>
         </div>
         <div>

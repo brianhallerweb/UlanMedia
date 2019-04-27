@@ -93,7 +93,7 @@ class ExcludeCampaignForOnePWidgetConfirmation extends Component {
 
         <div>
           <button onClick={() => this.confirmExcludeCampaign()}>
-            Yes, confirm exclution
+            Yes, confirm exclusion
           </button>
         </div>
         <p style={{fontSize: 12}}>

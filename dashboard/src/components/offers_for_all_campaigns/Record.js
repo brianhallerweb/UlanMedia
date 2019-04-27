@@ -26,6 +26,7 @@ class Record extends Component {
     this.epc = this.props.offer.epc;
     this.cpa = this.props.offer.cpa;
     this.epa = this.props.offer.epa;
+    this.roi = this.props.offer.roi;
     this.cpc = this.props.offer.cpc;
     this.hasMismatchVolWeightAndRecWeight = this.props.offer.has_mismatch_vol_weight_and_rec_weight;
     // link urls
@@ -54,12 +55,6 @@ class Record extends Component {
     }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
 
     this.ISPURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_b6851828-574a-44d8-a496-353edfbce0be/report/isp?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=isp&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=isp&valueFiltersGrouping=isp&from=${
-      this.props.volRequestStartDate
-    }T00:00:00Z&to=${
-      this.props.volRequestEndDate
-    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
-
-    this.ISPURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/isp?dateRange=custom-date&chart=0&columns=deviceName&columns=os&columns=browser&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=tree&include=ALL&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
       this.props.volRequestStartDate
     }T00:00:00Z&to=${
       this.props.volRequestEndDate
@@ -238,6 +233,7 @@ class Record extends Component {
         <td>{this.conversions}</td>
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
+        <td>{this.roi}%</td>
         <td>{this.cvr}%</td>
       </tr>
     );
