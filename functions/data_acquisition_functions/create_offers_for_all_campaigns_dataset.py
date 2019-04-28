@@ -239,6 +239,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "rec_weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["rec_weight"],
                                                           "vol_weight": data[campaign][offer]["vol_weight"],
                                                           "roi_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["roi_score"],
+                                                          "roi": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["roi"],
                                                           "cvr_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["cvr_score"],
                                                           "gpr": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["gpr"],
                                                           "total_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["total_score"],
@@ -249,9 +250,9 @@ def create_offers_for_all_campaigns_dataset(date_range):
     for offer in offers_for_all_campaigns["data"]:
         offers_for_all_campaigns["data"][offer]["classification"] = classify_offer_for_all_campaigns(offers_for_all_campaigns["data"][offer])
 
-    # 4/27 add roi too
-    for offer in offers_for_all_campaigns["data"]:
-        offers_for_all_campaigns["data"][offer]["roi"] = offers_for_all_campaigns["data"][offer]["profit"]/offers_for_all_campaigns["data"][offer]["cost"]
+    # 4/27 add roi too, this is the real roi, not the one used in roi_score
+    # for offer in offers_for_all_campaigns["data"]:
+        # offers_for_all_campaigns["data"][offer]["roi"] = offers_for_all_campaigns["data"][offer]["profit"]/offers_for_all_campaigns["data"][offer]["cost"]
 
     #######################################################
     # 8. Add has_mismatch_vol_weight_and_rec_weight to each offer
