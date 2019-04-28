@@ -25,7 +25,11 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    date_ranges = {"yesterday": 1, "seven": 7, "thirty": 30, "ninety": 90, "oneeighty":180}
+    # notice that "oneeighty": 90. That isn't a typo. That has to do with a
+    # quirk in the mgid dashboard/api.
+    # these date ranges are only used for determining status = included.
+    date_ranges = {"yesterday": 1, "seven": 7, "thirty": 30, "ninety": 90,
+            "oneeighty":90}
     mgid_dates = create_mgid_date_range(date_ranges[date_range], mgid_timezone)
     mgid_start_date = mgid_dates[0]
     mgid_end_date = mgid_dates[1]

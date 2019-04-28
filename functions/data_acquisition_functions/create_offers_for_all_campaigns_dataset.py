@@ -258,10 +258,6 @@ def create_offers_for_all_campaigns_dataset(date_range):
     for offer in offers_for_all_campaigns["data"]:
         offers_for_all_campaigns["data"][offer]["classification"] = classify_offer_for_all_campaigns(offers_for_all_campaigns["data"][offer])
 
-    # 4/27 add roi too, this is the real roi, not the one used in roi_score
-    # for offer in offers_for_all_campaigns["data"]:
-        # offers_for_all_campaigns["data"][offer]["roi"] = offers_for_all_campaigns["data"][offer]["profit"]/offers_for_all_campaigns["data"][offer]["cost"]
-
     #######################################################
     # 8. Add has_mismatch_vol_weight_and_rec_weight to each offer
     for offer in offers_for_all_campaigns["data"]:
