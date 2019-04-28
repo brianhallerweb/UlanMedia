@@ -4,6 +4,7 @@ from functions.classification_functions.classify_campaign_for_one_p_or_c_widget 
 from functions.classification_functions.classify_p_widget_for_all_campaigns import classify_p_widget_for_all_campaigns
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 from functions.data_acquisition_functions.get_mgid_included_widgets_by_campaign import get_mgid_included_widgets_by_campaign
+from functions.misc.create_mgid_date_range import create_mgid_date_range
 from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
@@ -13,7 +14,6 @@ import os
 import re
 import sys
 
-from functions.misc.create_mgid_date_range import create_mgid_date_range
 
 
 def create_complete_p_widgets_dataset(date_range, output_name):
@@ -109,10 +109,10 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             else:
                 p_widgets_for_one_campaign[p_widget] = json_file["data"][widget]
                 p_widgets_for_one_campaign[p_widget]["widget_id"] = p_widget
-                if p_widget in included_widgets:
-                    p_widgets_for_one_campaign[p_widget]['status'] = "included" 
-                elif p_widget in excluded_widgets:
+                if p_widget in excluded_widgets:
                     p_widgets_for_one_campaign[p_widget]['status'] = "excluded" 
+                elif p_widget in included_widgets:
+                    p_widgets_for_one_campaign[p_widget]['status'] = "included" 
                 else:
                     p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
                 p_widgets_for_one_campaign[p_widget]["vol_id"] = campaign["vol_id"]
