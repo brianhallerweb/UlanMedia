@@ -37,7 +37,14 @@ def create_offers_for_all_campaigns_dataset(date_range):
     for campaign in data:
         for offer in data[campaign]:
             flow_rule = data[campaign][offer]["flow_rule"]
-            offers_for_each_flow_rule[flow_rule][offer] = {
+            if offer in offers_for_each_flow_rule[flow_rule]: 
+                offers_for_each_flow_rule[flow_rule][offer]["clicks"] += data[campaign][offer]["clicks"]
+                offers_for_each_flow_rule[flow_rule][offer]["cost"] += data[campaign][offer]["cost"]
+                offers_for_each_flow_rule[flow_rule][offer]["profit"] += data[campaign][offer]["profit"]
+                offers_for_each_flow_rule[flow_rule][offer]["conversions"] += data[campaign][offer]["conversions"]
+                offers_for_each_flow_rule[flow_rule][offer]["revenue"] += data[campaign][offer]["revenue"]
+            else:
+                offers_for_each_flow_rule[flow_rule][offer] = {
                                                           "offer_name": data[campaign][offer]["offer_name"],
                                                           "p_offer_name": data[campaign][offer]["p_offer_name"],
                                                           "c_offer_name": data[campaign][offer]["c_offer_name"],
@@ -147,6 +154,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
             gpr = offers_for_each_flow_rule[flow_rule][offer]["gpr"]
 
             roi_score = get_roi_score(roi)
+
             cvr_score = get_cvr_score(cvr)
             total_score = roi_score + cvr_score + gpr
 
