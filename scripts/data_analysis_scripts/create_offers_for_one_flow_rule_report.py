@@ -19,6 +19,7 @@ for offer in data.values():
 df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)
 df["revenue"] = round(df["revenue"], 2)
+df["rec_weight"] = round(df["rec_weight"], 0)
 df["profit"] = round(df["profit"], 2)
 df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
         2)
@@ -26,6 +27,7 @@ df["epc"] = (df["revenue"] / df["clicks"]).round(3)
 df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
 df["epa"] = round(df["revenue"] / df["conversions"], 2)
+df["roi"] = round(df["roi"] * 100, 2)
 
 c1 = df["cost"] >= float(sys.argv[3])
 result1 = df[c1]
@@ -47,8 +49,9 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa"]
-            )
+    "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification",
+    "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
+    "total_score", "roi"])
 
 if final_result is None:
     final_result = df
@@ -62,6 +65,7 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["offer_name"] = "summary"
+    summary["classification"] = "NA"
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0
@@ -80,7 +84,9 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "cvr",
-    "epc", "cpa", "cpc", "epa"]].to_dict("records"))
+    "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification",
+    "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
+    "total_score", "roi"]].to_dict("records"))
 
 print(json_final_result)
 

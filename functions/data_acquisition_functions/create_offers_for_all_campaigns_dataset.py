@@ -9,7 +9,6 @@ from functions.classification_functions.classify_offer_for_all_campaigns import 
 # import pprint
 # pp=pprint.PrettyPrinter(indent=2)
 
-
 def create_offers_for_all_campaigns_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json', 'r') as file:
@@ -289,8 +288,8 @@ def get_roi_score(roi):
         return 12
     elif roi >= 1:
         return 10
-    elif roi >= 0:
-        return 5 
+    elif roi > -1:
+        return 2 
     else:
         return 0 
 
