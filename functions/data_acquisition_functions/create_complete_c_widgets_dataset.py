@@ -25,15 +25,11 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     widget_greylist = get_greylist()
     widget_blacklist = get_blacklist()
 
-    # notice that "oneeighty": 90. That isn't a typo. That has to do with a
-    # quirk in the mgid dashboard/api.
-    # these date ranges are only used for determining status = included.
-    date_ranges = {"yesterday": 1, "seven": 7, "thirty": 30, "ninety": 90,
-            "oneeighty":90}
-    mgid_dates = create_mgid_date_range(date_ranges[date_range], mgid_timezone)
+    # these dates are only used for determining status = included. 
+    # that is why they are hard coded to 90 days
+    mgid_dates = create_mgid_date_range(90, mgid_timezone)
     mgid_start_date = mgid_dates[0]
     mgid_end_date = mgid_dates[1]
-
 
     ########################################################
 
@@ -145,7 +141,6 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["mps"] = campaign["max_sale_cpa"]
                 res = mpc_pattern.findall(campaign["name"])
                 c_widgets_for_one_campaign[c_widget]["mpc"] = list(res)[0]
-
 
         for c_widget in c_widgets_for_one_campaign:
             if complete_c_widgets[c_widget]["for_each_campaign"]:

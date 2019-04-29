@@ -54,6 +54,7 @@ const ConditionCheckboxes = ({
           defaultValue={c2Value}>
           <option value="included">included</option>
           <option value="excluded">excluded</option>
+          <option value="inactive">inactive</option>
         </select>
       </div>
 

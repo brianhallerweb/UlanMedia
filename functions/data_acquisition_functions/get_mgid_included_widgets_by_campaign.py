@@ -10,7 +10,7 @@ def get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_da
     response = requests.get(url) 
     if response.status_code == 401:
         mgid_token = get_and_return_new_mgid_token()
-        return get_mgid_widget_clicks_and_costs_by_campaign(mgid_token, campaign_id, start_date, end_date)
+        return get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_date)
 
     response.raise_for_status()
     response = response.json()
