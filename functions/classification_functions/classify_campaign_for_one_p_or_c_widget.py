@@ -4,6 +4,7 @@
 def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales):
     #################
     # define variables
+    status = campaign["status"] 
     clicks = campaign["clicks"] 
     cost = campaign["cost"] 
     leads = campaign["leads"] 
@@ -28,7 +29,9 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
     #######################
     #######################
     # return classification
-    if sales > 0:
+    if status == "inactive":
+        return "not yet"
+    elif sales > 0:
         if (cost/sales) <= mps:
             return "good"
         elif (cost/(sales + 1)) <= mps:
