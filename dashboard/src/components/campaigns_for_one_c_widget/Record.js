@@ -11,7 +11,10 @@ class Record extends Component {
   }
 
   componentDidMount() {
-    if (this.props.campaignRecord.status === 'excluded') {
+    if (
+      this.props.campaignRecord.status === 'excluded' ||
+      this.props.campaignRecord.status === 'inactive'
+    ) {
       this.setState({clicked: true});
     }
   }

@@ -11,7 +11,10 @@ class Record extends Component {
   }
 
   componentDidMount() {
-    if (this.props.widgetRecord.status === 'excluded') {
+    if (
+      this.props.widgetRecord.status === 'excluded' ||
+      this.props.widgetRecord.status === 'inactive'
+    ) {
       this.setState({clicked: true});
     }
   }
