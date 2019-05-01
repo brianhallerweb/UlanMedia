@@ -111,7 +111,13 @@ def create_offers_for_all_campaigns_dataset(date_range):
 
     for p_offer in p_offers_gpr_lookup.values():
         p_offer["gpr"] = round((p_offer["rank"] ** 7) / (100000000))
-
+        # 5/1 mike is experimenting with gpr calculations so he had me double
+        # the gpr
+        p_offer["gpr"] = p_offer["gpr"] * 2
+    
+    # 4/30 this is for getting an output that I paste for mike to look at
+    # pp.pprint(p_offers_gpr_lookup)
+    # sys.exit()
 
     # At this point, offers_for_each_flow_rule exists and you have a
     # p_offers_gpr_lookup dictionary which tells you the gpr of each parent
@@ -278,18 +284,46 @@ def create_offers_for_all_campaigns_dataset(date_range):
 #################################
 # helper functions
 def get_roi_score(roi):
-    if roi >= 5:
-        return 20
+    if roi >= 100:
+        return 20 
+    elif roi >= 90:
+        return 19 
+    elif roi >= 70:
+        return 18
+    elif roi >= 50:
+        return 17 
+    elif roi >= 40:
+        return 16 
+    elif roi >= 35:
+        return 15 
+    elif roi >= 30:
+        return 14 
+    elif roi >= 25:
+        return 13 
+    elif roi >= 20:
+        return 12 
+    elif roi >= 15:
+        return 11 
+    elif roi >= 10:
+        return 10 
+    elif roi >= 9:
+        return 9 
+    elif roi >= 8:
+        return 8 
+    elif roi >= 7:
+        return 7 
+    elif roi >= 6:
+        return 6 
+    elif roi >= 5:
+        return 5 
     elif roi >= 4:
-        return 16
+        return 4
     elif roi >= 3:
-        return 14
-    elif roi >= 2:
-        return 12
-    elif roi >= 1:
-        return 10
+        return 3
+    elif roi >= 0:
+        return 2
     elif roi > -1:
-        return 2 
+        return 1
     else:
         return 0 
 
@@ -298,6 +332,8 @@ def get_cvr_score(cvr):
         return 8
     elif cvr >= .015:
         return 7 
+    elif cvr >= .0125:
+        return 6 
     elif cvr >= .010:
         return 5 
     elif cvr >= .006:
@@ -308,9 +344,7 @@ def get_cvr_score(cvr):
         return 2 
     elif cvr >= .002:
         return 1 
-    # this looks like a mistake but it is what was in mikes example php
     elif cvr >= .001:
         return 1 
     else:
         return 0 
-
