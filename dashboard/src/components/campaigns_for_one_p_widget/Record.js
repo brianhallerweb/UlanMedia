@@ -155,6 +155,7 @@ class Record extends Component {
   }
 
   render() {
+
     return (
       <tr
         style={{

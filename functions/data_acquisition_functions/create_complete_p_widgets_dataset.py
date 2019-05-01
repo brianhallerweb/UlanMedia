@@ -14,8 +14,6 @@ import os
 import re
 import sys
 
-
-
 def create_complete_p_widgets_dataset(date_range, output_name):
 
     # 1. get some prerequisite data
