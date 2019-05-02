@@ -7,6 +7,7 @@ cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_c_w
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_ads_datasets.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_ads_datasets.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_for_each_campaign_datasets.py
+cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_offers_for_each_flow_rule_datasets.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_countries_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_countries_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_languages_dataset.py

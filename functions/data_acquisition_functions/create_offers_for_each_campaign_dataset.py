@@ -11,9 +11,6 @@ import os
 # import pprint
 # pp=pprint.PrettyPrinter(indent=2)
 
-# This is the "step 1" offers dataset that all other offers datasets are
-# derived from. 
-
 def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, vol_end_date):
     try:
         url = f"https://api.voluum.com/report?from={vol_start_date}T00%3A00%3A00Z&to={vol_end_date}T00%3A00%3A00Z&tz=America%2FLos_Angeles&conversionTimeMode=VISIT&sort=offerName&direction=desc&columns=offerName&columns=campaignName&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&columns=campaignId&columns=cpa&groupBy=offer&groupBy=campaign&offset=0&limit=100000&include=ACTIVE&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc"
