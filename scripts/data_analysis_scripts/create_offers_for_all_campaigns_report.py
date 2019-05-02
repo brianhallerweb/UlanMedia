@@ -6,6 +6,9 @@ import numpy as np
 
 date_range = sys.argv[1]
 
+with open(f'{os.environ.get("ULANMEDIAAPP")}/data/active_flow_rules/active_flow_rules.json', 'r') as file:
+     active_flow_rules_list = json.load(file)
+
 with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_all_campaigns/{date_range}_offers_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
 
@@ -13,7 +16,8 @@ data = json_file["data"]
 
 offers = []
 for offer in data.values():
-    offers.append(offer)
+    if offer["flow_rule"] in active_flow_rules_list:
+        offers.append(offer)
 
 df = pd.DataFrame(offers)
 df["cost"] = round(df["cost"], 2)

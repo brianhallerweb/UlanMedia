@@ -5,8 +5,8 @@ import sys
 import re
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_offers_for_each_flow_rule_dataset(date_range):
 
@@ -235,27 +235,7 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 #################################
 # helper functions
 def get_roi_score(roi):
-    if roi >= 100:
-        return 20 
-    elif roi >= 90:
-        return 19 
-    elif roi >= 70:
-        return 18
-    elif roi >= 50:
-        return 17 
-    elif roi >= 40:
-        return 16 
-    elif roi >= 35:
-        return 15 
-    elif roi >= 30:
-        return 14 
-    elif roi >= 25:
-        return 13 
-    elif roi >= 20:
-        return 12 
-    elif roi >= 15:
-        return 11 
-    elif roi >= 10:
+    if roi >= 10:
         return 10 
     elif roi >= 9:
         return 9 

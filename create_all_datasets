@@ -12,4 +12,5 @@ cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_countries_da
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_countries_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_languages_dataset.py
 cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_complete_languages_dataset.py
+cd $ULANMEDIAAPP/scripts/data_acquisition_scripts && python3 create_active_flow_rules_list.py
 

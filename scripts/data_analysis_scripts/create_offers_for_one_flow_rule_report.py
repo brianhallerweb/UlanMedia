@@ -66,6 +66,8 @@ if len(final_result.index) > 0:
     summary = summary.round(2)
     summary["offer_name"] = "summary"
     summary["classification"] = "NA"
+    summary["vol_weight"] = "NA"
+    summary["rec_weight"] = "NA"
     if summary["clicks"] == 0:
         summary["cvr"] = 0
         summary["epc"] = 0

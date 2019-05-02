@@ -154,9 +154,13 @@ class Record extends Component {
           )}
         </td>
         <td>{this.classification}</td>
-        <td>
-          {this.roiScore} + {this.cvrScore} + {this.gpr} = {this.totalScore}
-        </td>
+        {this.offerName != 'summary' ? (
+          <td>
+            {this.roiScore} + {this.cvrScore} + {this.gpr} = {this.totalScore}
+          </td>
+        ) : (
+          <td>NA</td>
+        )}
         <td>{this.volWeight}</td>
         <td>{this.recWeight}</td>
         <td>${this.cost}</td>
