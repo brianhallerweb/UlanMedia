@@ -8,8 +8,8 @@ import sys
 import re
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, vol_end_date):
     try:
