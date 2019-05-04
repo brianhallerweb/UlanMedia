@@ -12,7 +12,8 @@ class Record extends Component {
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;
     this.profit = this.props.campaign.profit;
-    this.conversions = this.props.campaign.conversions;
+    this.leads = this.props.campaign.leads;
+    this.sales = this.props.campaign.sales;
     this.cvr = this.props.campaign.cvr;
     this.epc = this.props.campaign.epc;
     this.cpa = this.props.campaign.cpa;
@@ -66,7 +67,8 @@ class Record extends Component {
         <td>{this.clicks}</td>
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
-        <td>{this.conversions}</td>
+        <td>{this.leads}</td>
+        <td>{this.sales}</td>
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>

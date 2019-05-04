@@ -51,7 +51,7 @@ for i in range(len(conditions_args)):
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification",
     "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
-    "total_score", "roi"])
+    "total_score", "roi", "leads", "sales"])
 
 if final_result is None:
     final_result = df
@@ -88,7 +88,7 @@ json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_n
     "cost", "revenue", "profit","conversions", "cvr",
     "epc", "cpa", "cpc", "epa", "rec_weight", "vol_weight", "classification",
     "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
-    "total_score", "roi"]].to_dict("records"))
+    "total_score", "roi", "leads", "sales"]].to_dict("records"))
 
 print(json_final_result)
 

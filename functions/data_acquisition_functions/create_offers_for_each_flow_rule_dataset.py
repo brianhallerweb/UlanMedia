@@ -5,8 +5,8 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_offers_for_each_flow_rule_dataset(date_range):
 
@@ -163,10 +163,11 @@ def create_offers_for_each_flow_rule_dataset(date_range):
     for flow_rule in offers_for_each_flow_rule["data"]:
         for offer in offers_for_each_flow_rule["data"][flow_rule]:
             roi = offers_for_each_flow_rule["data"][flow_rule][offer]["roi"]
+            sales = offers_for_each_flow_rule["data"][flow_rule][offer]["sales"]
             cvr = offers_for_each_flow_rule["data"][flow_rule][offer]["cvr"]
             gpr = offers_for_each_flow_rule["data"][flow_rule][offer]["gpr"]
 
-            roi_score = get_roi_score(roi)
+            roi_score = get_roi_score(roi, sales)
 
             cvr_score = get_cvr_score(cvr)
             total_score = roi_score + cvr_score + gpr
@@ -187,7 +188,6 @@ def create_offers_for_each_flow_rule_dataset(date_range):
         for offer in ordered_offers_in_one_flow_rule:
             offers_for_each_flow_rule["data"][flow_rule][offer["offer_id"]]["total_score_rank"] = count
             count += 1
-
             
     ####################################
 
@@ -242,27 +242,27 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
 #################################
 # helper functions
-def get_roi_score(roi):
+def get_roi_score(roi, sales):
     if roi >= 10:
-        return 10 
+        return 10 * sales
     elif roi >= 9:
-        return 9 
+        return 9 * sales
     elif roi >= 8:
-        return 8 
+        return 8 * sales 
     elif roi >= 7:
-        return 7 
+        return 7 * sales 
     elif roi >= 6:
-        return 6 
+        return 6 * sales 
     elif roi >= 5:
-        return 5 
+        return 5 * sales 
     elif roi >= 4:
-        return 4
+        return 4 * sales
     elif roi >= 3:
-        return 3
+        return 3 * sales
     elif roi >= 0:
-        return 2
+        return 2 * sales
     elif roi > -1:
-        return 1
+        return 1 * sales
     else:
         return 0 
 
