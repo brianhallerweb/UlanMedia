@@ -40,6 +40,8 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                 offers_for_each_flow_rule["data"][flow_rule][offer]["cost"] += data[campaign][offer]["cost"]
                 offers_for_each_flow_rule["data"][flow_rule][offer]["profit"] += data[campaign][offer]["profit"]
                 offers_for_each_flow_rule["data"][flow_rule][offer]["conversions"] += data[campaign][offer]["conversions"]
+                offers_for_each_flow_rule["data"][flow_rule][offer]["sales"] += data[campaign][offer]["sales"]
+                offers_for_each_flow_rule["data"][flow_rule][offer]["leads"] += data[campaign][offer]["leads"]
                 offers_for_each_flow_rule["data"][flow_rule][offer]["revenue"] += data[campaign][offer]["revenue"]
             else:
                 offers_for_each_flow_rule["data"][flow_rule][offer] = {
@@ -52,6 +54,8 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                                                            "cost": data[campaign][offer]["cost"],
                                                            "profit": data[campaign][offer]["profit"], 
                                                            "conversions": data[campaign][offer]["conversions"],
+                                                           "sales": data[campaign][offer]["sales"],
+                                                           "leads": data[campaign][offer]["leads"],
                                                            "revenue": data[campaign][offer]["revenue"],
                                                            "vol_weight": data[campaign][offer]["vol_weight"]
                                                           }
@@ -70,6 +74,8 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                 c_offers_for_all_campaigns[offer]["cost"] += data[campaign][offer]["cost"]
                 c_offers_for_all_campaigns[offer]["profit"] += data[campaign][offer]["profit"]
                 c_offers_for_all_campaigns[offer]["conversions"] += data[campaign][offer]["conversions"]
+                c_offers_for_all_campaigns[offer]["sales"] += data[campaign][offer]["sales"]
+                c_offers_for_all_campaigns[offer]["leads"] += data[campaign][offer]["leads"]
                 c_offers_for_all_campaigns[offer]["revenue"] += data[campaign][offer]["revenue"]
             else:
                 c_offers_for_all_campaigns[offer] = {
@@ -82,6 +88,8 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                                                            "cost": data[campaign][offer]["cost"],
                                                            "profit": data[campaign][offer]["profit"],
                                                            "conversions": data[campaign][offer]["conversions"],
+                                                           "sales": data[campaign][offer]["sales"],
+                                                           "leads": data[campaign][offer]["leads"],
                                                            "revenue": data[campaign][offer]["revenue"]
                                                           }
 

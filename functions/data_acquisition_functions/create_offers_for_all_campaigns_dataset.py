@@ -34,6 +34,8 @@ def create_offers_for_all_campaigns_dataset(date_range):
                 offers_for_all_campaigns["data"][offer]["cost"] += data[campaign][offer]["cost"] 
                 offers_for_all_campaigns["data"][offer]["profit"] += data[campaign][offer]["profit"] 
                 offers_for_all_campaigns["data"][offer]["conversions"] += data[campaign][offer]["conversions"] 
+                offers_for_all_campaigns["data"][offer]["sales"] += data[campaign][offer]["sales"] 
+                offers_for_all_campaigns["data"][offer]["leads"] += data[campaign][offer]["leads"] 
                 offers_for_all_campaigns["data"][offer]["revenue"] += data[campaign][offer]["revenue"] 
             else:
                 offers_for_all_campaigns["data"][offer] = {
@@ -48,6 +50,8 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "profit": data[campaign][offer]["profit"], 
                                                           "revenue": data[campaign][offer]["revenue"], 
                                                           "conversions": data[campaign][offer]["conversions"],
+                                                          "sales": data[campaign][offer]["sales"],
+                                                          "leads": data[campaign][offer]["leads"],
                                                           "rec_weight": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["rec_weight"],
                                                           "vol_weight": data[campaign][offer]["vol_weight"],
                                                           "roi_score": offers_for_each_flow_rule[data[campaign][offer]["flow_rule"]][data[campaign][offer]["offer_id"]]["roi_score"],
