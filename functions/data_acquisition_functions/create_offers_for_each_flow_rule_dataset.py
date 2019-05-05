@@ -202,9 +202,9 @@ def create_offers_for_each_flow_rule_dataset(date_range):
         for offer in offers_for_each_flow_rule["data"][flow_rule]:
             total_score = offers_for_each_flow_rule["data"][flow_rule][offer]["total_score"] 
             if total_flow_rule_score == 0:
-                offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = 100 / number_of_offers_in_flow_rule
+                offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = round(100 / number_of_offers_in_flow_rule, 0)
             else:
-                offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = total_score / total_flow_rule_score * 100
+                offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = round(total_score / total_flow_rule_score * 100, 0)
 
         # The lines below handles the sitation where one offer is 100 and others are 0
         # it should reduce the top offer to 90 and give 10 to the second best
@@ -233,7 +233,7 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
     ########################################
 
-    # 9. Save file and return
+    # 6. Save file and return
 
     with open(f"../../data/offers_for_each_flow_rule/{date_range}_offers_for_each_flow_rule_dataset.json", "w") as file:
         json.dump(offers_for_each_flow_rule, file)
