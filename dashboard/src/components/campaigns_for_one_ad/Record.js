@@ -14,7 +14,8 @@ class Record extends Component {
     this.clicks = this.props.campaign.clicks;
     this.cpc = this.props.campaign.cpc;
     this.epc = this.props.campaign.epc;
-    this.conversions = this.props.campaign.conversions;
+    this.leads = this.props.campaign.leads;
+    this.sales = this.props.campaign.sales;
     this.cpa = this.props.campaign.cpa;
     this.epa = this.props.campaign.epa;
     this.cvr = this.props.campaign.cvr;
@@ -30,8 +31,7 @@ class Record extends Component {
       <div>
         <InternalLink
           className={'rowLink'}
-	                  stopPropagation={true}
-
+          stopPropagation={true}
           to={`/adsforonecampaign/${this.volID}/${this.name}/`}
           target={'_blank'}
           label={'ads'}
@@ -77,7 +77,8 @@ class Record extends Component {
         <td>{this.ctr}%</td>
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
-        <td>{this.conversions}</td>
+        <td>{this.leads}</td>
+        <td>{this.sales}</td>
         <td>${this.cpa}</td>
         <td>${this.epa}</td>
         <td>{this.cvr}%</td>

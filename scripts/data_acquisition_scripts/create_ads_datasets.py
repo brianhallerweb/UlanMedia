@@ -17,7 +17,8 @@ vol_dates = create_vol_date_range(1, mgid_timezone)
 vol_start_date = vol_dates[0]
 vol_end_date = vol_dates[1]
 
-vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+# vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+vol_data = get_vol_ads_data(date_range) 
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
@@ -33,7 +34,8 @@ vol_dates = create_vol_date_range(7, mgid_timezone)
 vol_start_date = vol_dates[0]
 vol_end_date = vol_dates[1]
 
-vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+# vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+vol_data = get_vol_ads_data(date_range)
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
@@ -49,7 +51,8 @@ vol_dates = create_vol_date_range(30, mgid_timezone)
 vol_start_date = vol_dates[0]
 vol_end_date = vol_dates[1]
 
-vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+# vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+vol_data = get_vol_ads_data(date_range)
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
@@ -65,7 +68,8 @@ vol_dates = create_vol_date_range(90, mgid_timezone)
 vol_start_date = vol_dates[0]
 vol_end_date = vol_dates[1]
 
-vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+# vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+vol_data = get_vol_ads_data(date_range)
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 
@@ -81,7 +85,8 @@ vol_dates = create_vol_date_range(180, mgid_timezone)
 vol_start_date = vol_dates[0]
 vol_end_date = vol_dates[1]
 
-vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+# vol_data = get_vol_ads_data(vol_token, vol_start_date, vol_end_date, mgid_timezone) 
+vol_data = get_vol_ads_data(date_range) 
 
 mgid_data = get_mgid_ads_data(mgid_token, mgid_client_id)
 

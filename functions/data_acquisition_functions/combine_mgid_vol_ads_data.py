@@ -41,11 +41,15 @@ def combine_mgid_vol_ads_data(mgid_token, vol_token, date_range, vol_start_date,
             ad["vol_id"] = vol_id
             ad["name"] = name
             ad["conversions"] = vol_ad_data["conversions"]
+            ad["sales"] = vol_ad_data["sales"]
+            ad["leads"] = vol_ad_data["leads"]
             ad["revenue"] = vol_ad_data["revenue"]
         else:
             ad["vol_id"] = vol_id
             ad["name"] = name
             ad["conversions"] = 0
+            ad["sales"] = 0
+            ad["leads"] = 0
             ad["revenue"] = 0 
         combined_ads["data"][ad_id] = ad 
 

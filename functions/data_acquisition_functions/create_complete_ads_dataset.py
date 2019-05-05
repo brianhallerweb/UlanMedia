@@ -32,6 +32,8 @@ def create_complete_ads_dataset(date_range):
         if image in complete_ads["data"]:
             complete_ads["data"][image]["for_all_campaigns"]["clicks"] += ad["clicks"] 
             complete_ads["data"][image]["for_all_campaigns"]["conversions"] += ad["conversions"] 
+            complete_ads["data"][image]["for_all_campaigns"]["sales"] += ad["sales"] 
+            complete_ads["data"][image]["for_all_campaigns"]["leads"] += ad["leads"] 
             complete_ads["data"][image]["for_all_campaigns"]["cost"] += ad["cost"] 
             complete_ads["data"][image]["for_all_campaigns"]["revenue"] += ad["revenue"] 
         else:
@@ -58,6 +60,8 @@ def create_complete_ads_dataset(date_range):
         cost = ad_image["for_all_campaigns"]["cost"]
         revenue = ad_image["for_all_campaigns"]["revenue"]
         profit = revenue - cost
+        sales = ad_image["for_all_campaigns"]["sales"]
+        leads = ad_image["for_all_campaigns"]["leads"]
         conversions = ad_image["for_all_campaigns"]["conversions"]
 
         ad_image["for_all_campaigns"]["profit"] = profit
@@ -81,7 +85,7 @@ def create_complete_ads_dataset(date_range):
         epc = ad_image["for_all_campaigns"]["epc"]
         roi = ad_image["for_all_campaigns"]["roi"]
         cvr = ad_image["for_all_campaigns"]["cvr"]
-        conversions = ad_image["for_all_campaigns"]["conversions"]
+        conversions = ad_image["for_all_campaigns"]["sales"] + ad_image["for_all_campaigns"]["leads"]
         if profit > 0:
             ad_image["for_all_campaigns"]["global_rank"] = clicks * profit * epc * roi
         elif conversions > 0:
@@ -115,6 +119,8 @@ def create_complete_ads_dataset(date_range):
             cost = ad["cost"]
             revenue = ad["revenue"]
             profit = revenue - cost
+            sales = ad["sales"]
+            leads = ad["leads"]
             conversions = ad["conversions"]
 
             ad["profit"] = profit
@@ -139,6 +145,8 @@ def create_complete_ads_dataset(date_range):
             epc = ad["epc"]
             roi = ad["roi"]
             cvr = ad["cvr"]
+            sales = ad["sales"]
+            leads = ad["leads"]
             conversions = ad["conversions"]
             if profit > 0:
                 ad["local_rank"] = clicks * profit * epc * roi
@@ -174,7 +182,7 @@ def create_complete_ads_dataset(date_range):
 
         df = pd.DataFrame(unordered_ads)
         df = df.sort_values("local_rank", ascending=False)
-        ordered_ads = df[["ad_id","clicks", "conversions", "cost", "cvr",
+        ordered_ads = df[["ad_id","clicks", "conversions", "leads", "sales", "cost", "cvr",
             "epc", "final_rank", "image", "local_rank", "mgid_id", "name",
             "profit", "revenue", "roi", "status", "url", "vol_id"]].to_dict("records")
         ads_for_each_campaign[campaign_id] = ordered_ads
@@ -216,7 +224,7 @@ def create_complete_ads_dataset(date_range):
 
         df = pd.DataFrame(unordered_ads)
         df = df.sort_values("final_rank", ascending=False)
-        ordered_ads = df[["ad_id","clicks", "conversions", "cost", "cvr",
+        ordered_ads = df[["ad_id","clicks", "conversions", "leads", "sales", "cost", "cvr",
             "epc", "final_rank", "image", "local_rank", "mgid_id", "name",
             "profit", "revenue", "roi", "status", "url", "vol_id"]].to_dict("records")
         ads_for_each_campaign[campaign_id] = ordered_ads
