@@ -94,14 +94,15 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
 
 
             if offer_id not in offers["data"][campaign_id]:
-                offers["data"][campaign_id][offer_id] = {"clicks": row["visits"],
+                if offer_id in vol_weight_lookup and vol_weight_lookup[offer_id] != 0:
+                    offers["data"][campaign_id][offer_id] = {"clicks": row["visits"],
                                                "cost": row["cost"],
                                                "offer_id": offer_id,
                                                "profit": row["profit"],
                                                "revenue": row["profit"] + row["cost"],
                                                "conversions": row["conversions"],
-                                               # leads and sales will be added
-                                               # next
+                                               # leads and sales are added in
+                                               # the next step
                                                "leads": 0,
                                                "sales": 0,
                                                "offer_id": offer_id,
@@ -124,10 +125,11 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
                 continue
             for conversion in conversions_for_each_campaign[campaign_id]:
                 offer_id = conversion["offerId"]   
-                if conversion["transactionId"] == "account":
-                    offers["data"][campaign_id][offer_id]["leads"] += 1
-                elif conversion["transactionId"] == "deposit":
-                    offers["data"][campaign_id][offer_id]["sales"] += 1
+                if offer_id in offers["data"][campaign_id]:
+                    if conversion["transactionId"] == "account":
+                        offers["data"][campaign_id][offer_id]["leads"] += 1
+                    elif conversion["transactionId"] == "deposit":
+                        offers["data"][campaign_id][offer_id]["sales"] += 1
                     
         with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json", "w") as file:
             json.dump(offers, file)
