@@ -113,7 +113,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Ad CVR is less than or equal to '}
+          {'Ad lead CVR is less than or equal to '}
           <input
             type="number"
             name="c5Value"

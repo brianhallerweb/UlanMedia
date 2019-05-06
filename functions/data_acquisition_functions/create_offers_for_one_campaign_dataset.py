@@ -16,6 +16,15 @@ def create_offers_for_one_campaign_dataset(date_range, vol_id):
     for offer in data[vol_id]:
         offers_for_one_campaign["data"].append(data[vol_id][offer])
 
+    for offer in offers_for_one_campaign["data"]:
+        profit = offer["profit"]
+        cost = offer["cost"]
+        if cost == 0:
+            offer["roi"] = 0
+        else:
+            offer["roi"] = profit/cost
+
+
     with open(f"../../data/offers_for_one_campaign/{vol_id}_{date_range}_offers_for_one_campaign_dataset.json", "w") as file:
         json.dump(offers_for_one_campaign, file)
     

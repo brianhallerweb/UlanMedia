@@ -8,20 +8,23 @@ class Record extends Component {
     super(props);
     this.countryName = this.props.country.country_name;
     this.classification = this.props.country.classification;
-    this.clicks = this.props.country.clicks;
     this.cost = this.props.country.cost;
     this.revenue = this.props.country.revenue;
     this.profit = this.props.country.profit;
-    this.leads = this.props.country.leads;
-    this.sales = this.props.country.sales;
-    this.cvr = this.props.country.cvr;
-    this.epc = this.props.country.epc;
-    this.cpa = this.props.country.cpa;
+    this.clicks = this.props.country.clicks;
     this.cpc = this.props.country.cpc;
-    this.epa = this.props.country.epa;
+    this.epc = this.props.country.epc;
+    this.leads = this.props.country.leads;
+    this.cpl = this.props.country.cpl;
+    this.epl = this.props.country.epl;
+    this.lead_cvr = this.props.country.lead_cvr;
+    this.sales = this.props.country.sales;
+    this.cps = this.props.country.cps;
+    this.eps = this.props.country.eps;
     this.roi = this.props.country.roi;
     this.state = {clicked: false, hovered: false};
   }
+
   stylizeClassificationText(row) {
     if ((row === 'bad') | (row === 'half bad')) {
       return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
@@ -91,7 +94,7 @@ class Record extends Component {
             </div>
           )}
         </td>
-        <td>{this.classification}</td>
+        {this.stylizeClassificationText(this.classification)}
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
@@ -99,10 +102,12 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
-        <td>{this.cvr}%</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
         <td>{this.roi}%</td>
       </tr>
     );

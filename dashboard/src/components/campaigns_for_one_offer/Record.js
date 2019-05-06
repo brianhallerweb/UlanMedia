@@ -8,17 +8,20 @@ class Record extends Component {
     super(props);
     this.campaignName = this.props.campaign.campaign_name;
     this.volID = this.props.campaign.campaign_id;
-    this.clicks = this.props.campaign.clicks;
     this.cost = this.props.campaign.cost;
     this.revenue = this.props.campaign.revenue;
     this.profit = this.props.campaign.profit;
-    this.leads = this.props.campaign.leads;
-    this.sales = this.props.campaign.sales;
-    this.cvr = this.props.campaign.cvr;
-    this.epc = this.props.campaign.epc;
-    this.cpa = this.props.campaign.cpa;
+    this.clicks = this.props.campaign.clicks;
     this.cpc = this.props.campaign.cpc;
-    this.epa = this.props.campaign.epa;
+    this.epc = this.props.campaign.epc;
+    this.leads = this.props.campaign.leads;
+    this.cpl = this.props.campaign.cpl;
+    this.epl = this.props.campaign.epl;
+    this.lead_cvr = this.props.campaign.lead_cvr;
+    this.sales = this.props.campaign.sales;
+    this.cps = this.props.campaign.cps;
+    this.eps = this.props.campaign.eps;
+    this.roi = this.props.campaign.roi;
     this.state = {};
   }
 
@@ -68,10 +71,13 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
-        <td>{this.cvr}%</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
+        <td>{this.roi}%</td>
       </tr>
     );
   }

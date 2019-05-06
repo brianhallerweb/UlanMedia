@@ -17,18 +17,20 @@ class Record extends Component {
     this.gpr = this.props.offer.gpr;
     this.totalScore = this.props.offer.total_score;
     this.offerName = this.props.offer.offer_name;
-    this.clicks = this.props.offer.clicks;
     this.cost = this.props.offer.cost;
     this.revenue = this.props.offer.revenue;
     this.profit = this.props.offer.profit;
-    this.leads = this.props.offer.leads;
-    this.sales = this.props.offer.sales;
-    this.cvr = this.props.offer.cvr;
-    this.epc = this.props.offer.epc;
-    this.cpa = this.props.offer.cpa;
-    this.epa = this.props.offer.epa;
-    this.roi = this.props.offer.roi;
+    this.clicks = this.props.offer.clicks;
     this.cpc = this.props.offer.cpc;
+    this.epc = this.props.offer.epc;
+    this.leads = this.props.offer.leads;
+    this.cpl = this.props.offer.cpl;
+    this.epl = this.props.offer.epl;
+    this.lead_cvr = this.props.offer.lead_cvr;
+    this.sales = this.props.offer.sales;
+    this.cps = this.props.offer.cps;
+    this.eps = this.props.offer.eps;
+    this.roi = this.props.offer.roi;
     this.hasMismatchVolWeightAndRecWeight = this.props.offer.has_mismatch_vol_weight_and_rec_weight;
 
     // link urls
@@ -171,11 +173,13 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
         <td>{this.roi}%</td>
-        <td>{this.cvr}%</td>
       </tr>
     );
   }

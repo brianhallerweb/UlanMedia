@@ -18,12 +18,14 @@ for ad in data.values():
 df = pd.DataFrame(ads)
 df["cost"] = round(df["cost"], 2)
 df["profit"] = round(df["revenue"] - df["cost"], 2)
-df["cvr"] = round((df["conversions"] / df["clicks"]) * 100,
-        2)
-df["epc"] = (df["revenue"] / df["clicks"]).round(3)
-df["cpa"] = round(df["cost"] / df["conversions"], 2)
 df["cpc"] = round(df["cost"] / df["clicks"], 2)
-df["epa"] = round(df["revenue"] / df["conversions"], 2)
+df["epc"] = (df["revenue"] / df["clicks"]).round(3)
+df["cpl"] = round(df["cost"] / df["leads"], 2)
+df["epl"] = round(df["revenue"] / df["leads"], 2)
+df["lead_cvr"] = round((df["leads"] / df["clicks"]) * 100,
+        2)
+df["cps"] = round(df["cost"] / df["sales"], 2)
+df["eps"] = round(df["revenue"] / df["sales"], 2)
 df["roi"] = round(df["roi"] * 100, 2)
 df["ctr"] = round(df["ctr"] * 100, 2) 
 df["ppi"] = round(df["profit"] / df["imps"], 6) 
@@ -41,7 +43,7 @@ result3 = df[c3]
 c4 = df["ctr"] <= float(sys.argv[5])
 result4 = df[c4]
 
-c5 = np.isfinite(df["cvr"]) & (df["cvr"] <= float(sys.argv[6]))
+c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(sys.argv[6]))
 result5 = df[c5]
 
 conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10],
@@ -54,10 +56,9 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["image", "clicks",
-    "cost", "revenue", "profit","conversions", "cvr",
-"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
-"global_rank_order",
+        on=["image", "name", "clicks",
+    "cost", "revenue", "profit","conversions", "cpc", "epc", "cpl", "epl", "lead_cvr", "cps",
+"eps", "mgid_id", "vol_id", "roi", "global_rank", "global_rank_order",
 "classification", "imps", "ctr", "ppi", "leads", "sales"] )
 
 if final_result is None:
@@ -67,10 +68,9 @@ final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["global_rank"]
 final_result = final_result.sort_values("sort", ascending=False)
-json_final_result = json.dumps(final_result[["image", "clicks",
-    "cost", "revenue", "profit","conversions", "cvr",
-"epc", "cpa", "name", "mgid_id", "vol_id", "cpc","epa", "roi", "global_rank",
-"global_rank_order",
+json_final_result = json.dumps(final_result[["image", "name", "clicks",
+    "cost", "revenue", "profit","conversions", "cpc", "epc", "cpl", "epl", "lead_cvr", "cps",
+"eps", "mgid_id", "vol_id", "roi", "global_rank", "global_rank_order",
 "classification", "imps", "ctr", "ppi", "leads", "sales"]].to_dict("records"))
 
 print(json_final_result)

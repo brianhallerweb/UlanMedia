@@ -10,17 +10,20 @@ class Record extends Component {
     this.offerID = this.props.offer.offer_id;
     this.flowRule = this.props.offer.flow_rule;
     this.offerName = this.props.offer.offer_name;
-    this.clicks = this.props.offer.clicks;
     this.cost = this.props.offer.cost;
     this.revenue = this.props.offer.revenue;
     this.profit = this.props.offer.profit;
-    this.leads = this.props.offer.leads;
-    this.sales = this.props.offer.sales;
-    this.cvr = this.props.offer.cvr;
+    this.clicks = this.props.offer.clicks;
+    this.cpc = this.props.offer.cpc;
     this.epc = this.props.offer.epc;
-    this.cpa = this.props.offer.cpa;
-    this.cpc = this.props.offer.epc;
-    this.epa = this.props.offer.cpa;
+    this.leads = this.props.offer.leads;
+    this.cpl = this.props.offer.cpl;
+    this.epl = this.props.offer.epl;
+    this.lead_cvr = this.props.offer.lead_cvr;
+    this.sales = this.props.offer.sales;
+    this.cps = this.props.offer.cps;
+    this.eps = this.props.offer.eps;
+    this.roi = this.props.offer.roi;
     // link urls
     this.widgetsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/custom-variable-1?dateRange=last-30-days&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=customVariable1&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ALL&reportDataType=0&tagsGrouping=custom-variable-1&valueFiltersGrouping=custom-variable-1&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc&filter2=offer&filter2Value=${
       this.offerID
@@ -186,10 +189,13 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
-        <td>{this.cvr}%</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
+        <td>{this.roi}%</td>
       </tr>
     );
   }

@@ -25,11 +25,13 @@ class Records extends Component {
             <th>CPC</th>
             <th>EPC</th>
             <th>Leads</th>
+            <th>CPL</th>
+            <th>EPL</th>
+            <th>Lead CVR</th>
             <th>Sales</th>
-            <th>CPA</th>
-            <th>EPA</th>
+            <th>CPS</th>
+            <th>EPS</th>
             <th>ROI</th>
-            <th>CVR</th>
           </tr>
         </thead>
         <tbody>

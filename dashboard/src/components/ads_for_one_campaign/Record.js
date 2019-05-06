@@ -8,17 +8,20 @@ class Record extends Component {
     super(props);
     this.image = this.props.ad.image;
     this.classification = this.props.ad.classification;
-    this.clicks = this.props.ad.clicks;
     this.cost = this.props.ad.cost;
     this.revenue = this.props.ad.revenue;
     this.profit = this.props.ad.profit;
-    this.leads = this.props.ad.leads;
-    this.sales = this.props.ad.sales;
-    this.cvr = this.props.ad.cvr;
-    this.epc = this.props.ad.epc;
-    this.cpa = this.props.ad.cpa;
+    this.clicks = this.props.ad.clicks;
+    this.ctr = this.props.ad.ctr;
     this.cpc = this.props.ad.cpc;
-    this.epa = this.props.ad.epa;
+    this.epc = this.props.ad.epc;
+    this.leads = this.props.ad.leads;
+    this.cpl = this.props.ad.cpl;
+    this.epl = this.props.ad.epl;
+    this.lead_cvr = this.props.ad.lead_cvr;
+    this.sales = this.props.ad.sales;
+    this.cps = this.props.ad.cps;
+    this.eps = this.props.ad.eps;
     this.roi = this.props.ad.roi;
     this.imps = this.props.ad.imps;
     this.ctr = this.props.ad.ctr;
@@ -113,7 +116,7 @@ class Record extends Component {
         <td>
           {this.finalRankOrder} ({this.finalRank})
         </td>
-        <td>{this.classification}</td>
+        {this.stylizeClassificationText(this.classification)}
         <td>${this.cost}</td>
         <td>${this.revenue}</td>
         <td>${this.profit}</td>
@@ -124,10 +127,12 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
-        <td>{this.cvr}%</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
         <td>{this.roi}%</td>
       </tr>
     );

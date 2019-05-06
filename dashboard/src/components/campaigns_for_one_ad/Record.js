@@ -12,16 +12,18 @@ class Record extends Component {
     this.revenue = this.props.campaign.revenue;
     this.profit = this.props.campaign.profit;
     this.clicks = this.props.campaign.clicks;
+    this.ctr = this.props.campaign.ctr;
     this.cpc = this.props.campaign.cpc;
     this.epc = this.props.campaign.epc;
     this.leads = this.props.campaign.leads;
+    this.cpl = this.props.campaign.cpl;
+    this.epl = this.props.campaign.epl;
+    this.lead_cvr = this.props.campaign.lead_cvr;
     this.sales = this.props.campaign.sales;
-    this.cpa = this.props.campaign.cpa;
-    this.epa = this.props.campaign.epa;
-    this.cvr = this.props.campaign.cvr;
+    this.cps = this.props.campaign.cps;
+    this.eps = this.props.campaign.eps;
     this.roi = this.props.campaign.roi;
     this.imps = this.props.campaign.imps;
-    this.ctr = this.props.campaign.ctr;
     this.ppi = this.props.campaign.ppi;
     this.state = {clicked: false, hovered: false};
   }
@@ -78,10 +80,12 @@ class Record extends Component {
         <td>${this.cpc}</td>
         <td>${this.epc}</td>
         <td>{this.leads}</td>
+        <td>${this.cpl}</td>
+        <td>${this.epl}</td>
+        <td>${this.lead_cvr}%</td>
         <td>{this.sales}</td>
-        <td>${this.cpa}</td>
-        <td>${this.epa}</td>
-        <td>{this.cvr}%</td>
+        <td>${this.cps}</td>
+        <td>${this.eps}</td>
         <td>{this.roi}%</td>
       </tr>
     );

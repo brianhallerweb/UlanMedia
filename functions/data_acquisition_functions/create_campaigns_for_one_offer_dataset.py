@@ -28,6 +28,12 @@ def create_campaigns_for_one_offer_dataset(date_range, offer_id):
         name = campaigns_lookup[campaign["campaign_id"]]
         campaign["campaign_name"] = name
 
+        profit = campaign["profit"]
+        cost = campaign["cost"]
+        if cost == 0:
+            campaign["roi"] = 0
+        else:
+            campaign["roi"] = profit/cost
 
     with open(f"../../data/campaigns_for_one_offer/{offer_id}_{date_range}_campaigns_for_one_offer_dataset.json", "w") as file:
         json.dump(campaigns_for_one_offer, file)
