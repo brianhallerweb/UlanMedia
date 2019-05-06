@@ -28,6 +28,8 @@ def create_complete_countries_dataset(date_range):
             else:
                 complete_countries["data"][country_name]["for_all_campaigns"]["clicks"] += json_file["data"][country_name][campaign_id]["clicks"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["conversions"] += json_file["data"][country_name][campaign_id]["conversions"]
+                complete_countries["data"][country_name]["for_all_campaigns"]["leads"] += json_file["data"][country_name][campaign_id]["leads"]
+                complete_countries["data"][country_name]["for_all_campaigns"]["sales"] += json_file["data"][country_name][campaign_id]["sales"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["profit"] += json_file["data"][country_name][campaign_id]["profit"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["cost"] += json_file["data"][country_name][campaign_id]["cost"]
                 complete_countries["data"][country_name]["for_all_campaigns"]["revenue"] += json_file["data"][country_name][campaign_id]["revenue"]

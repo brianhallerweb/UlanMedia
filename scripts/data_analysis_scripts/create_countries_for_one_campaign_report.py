@@ -41,7 +41,7 @@ for i in range(len(conditions_args)):
         final_result = conditions_dfs[i]
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
-        on=["country_name", "classification", "clicks", "cost", "conversions", "profit","revenue", "cvr", "epc", "cpa", "cpc", "epa", "roi"] )
+        on=["country_name", "classification", "clicks", "cost", "conversions", "leads", "sales", "profit","revenue", "cvr", "epc", "cpa", "cpc", "epa", "roi"] )
 
 if final_result is None:
     final_result = df
@@ -77,6 +77,6 @@ if len(final_result.index) > 0:
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
     final_result = final_result.replace(np.nan, "")
 
-json_final_result = json.dumps(final_result[["country_name", "classification", "clicks", "cost", "conversions", "profit","revenue", "cvr", "epc", "cpa", "cpc", "epa", "roi"]].to_dict("records"))
+json_final_result = json.dumps(final_result[["country_name", "classification", "clicks", "cost", "conversions", "leads", "sales", "profit","revenue", "cvr", "epc", "cpa", "cpc", "epa", "roi"]].to_dict("records"))
 
 print(json_final_result)
