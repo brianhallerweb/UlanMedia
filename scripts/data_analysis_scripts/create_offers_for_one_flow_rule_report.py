@@ -70,6 +70,7 @@ if len(final_result.index) > 0:
     summary["classification"] = "NA"
     summary["vol_weight"] = "NA"
     summary["rec_weight"] = "NA"
+    summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
     if summary["clicks"] == 0:
         summary["lead_cvr"] = "NaN" 
         summary["epc"] = "NaN"

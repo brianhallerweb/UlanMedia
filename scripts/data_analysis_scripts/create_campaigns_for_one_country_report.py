@@ -61,7 +61,7 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["campaign_name"] = "summary"
-    summary["roi"] = round(summary["profit"] / summary["cost"], 2)
+    summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
         summary["epc"] = 0

@@ -60,7 +60,7 @@ if len(final_result.index) > 0:
     summary = summary.round(2)
     summary["country_name"] = "summary"
     summary["classification"] = "NA"
-    summary["roi"] = round(summary["profit"] / summary["cost"], 2)
+    summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
         summary["epc"] = 0

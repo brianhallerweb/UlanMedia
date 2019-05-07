@@ -82,7 +82,7 @@ if len(final_result.index) > 0:
     summary["global_rank"] = "NA"
     summary["global_rank_order"] = "NA"
     summary["classification"] = "NA"
-    summary["roi"] = round(summary["profit"] / summary["cost"], 2)
+    summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
     summary["ppi"] = round((summary["profit"] / summary["imps"]),

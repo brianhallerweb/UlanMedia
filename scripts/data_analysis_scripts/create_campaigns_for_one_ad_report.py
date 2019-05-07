@@ -66,7 +66,7 @@ if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
     summary = summary.round(2)
     summary["name"] = "summary"
-    summary["roi"] = round(summary["profit"] / summary["cost"], 2)
+    summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
     summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
         2)
     summary["ppi"] = round((summary["profit"] / summary["imps"]),
