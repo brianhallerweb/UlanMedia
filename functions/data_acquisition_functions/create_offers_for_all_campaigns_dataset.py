@@ -45,6 +45,7 @@ def create_offers_for_all_campaigns_dataset(date_range):
                                                           "p_offer_name": data[campaign][offer]["p_offer_name"],
                                                           "c_offer_name": data[campaign][offer]["c_offer_name"],
                                                           "flow_rule": data[campaign][offer]["flow_rule"],
+                                                          "flow_rule_index": data[campaign][offer]["flow_rule_index"],
                                                           "clicks": data[campaign][offer]["clicks"],
                                                           "cost": data[campaign][offer]["cost"],
                                                           "profit": data[campaign][offer]["profit"], 

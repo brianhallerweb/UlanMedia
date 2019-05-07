@@ -71,7 +71,7 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values("flow_rule", ascending=True)
+final_result = final_result.sort_values("flow_rule_index", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
     "epc", "cpl", "epl", "cpc", "eps", "cps", "rec_weight", "vol_weight", "classification",

@@ -55,7 +55,7 @@ if final_result is None:
 
 final_result = final_result.replace([np.inf, -np.inf], 0)
 final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values(["offer_name", "clicks"],
+final_result = final_result.sort_values(["flow_rule_index", "clicks"],
         ascending=[True, False])
 
 # add a summary row at the top
