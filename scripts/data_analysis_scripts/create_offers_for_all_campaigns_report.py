@@ -61,7 +61,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
-    "epc", "cpl", "epl", "cpc", "epl", "eps", "rec_weight", "vol_weight", "classification",
+    "epc", "cpl", "epl", "cpc", "eps", "cps" "rec_weight", "vol_weight", "classification",
     "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
     "total_score", "roi", "sales", "leads"]
             )
@@ -74,7 +74,7 @@ final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("flow_rule", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
-    "epc", "cpl", "epl", "cpc", "epl", "eps", "rec_weight", "vol_weight", "classification",
+    "epc", "cpl", "epl", "cpc", "eps", "cps", "rec_weight", "vol_weight", "classification",
     "has_mismatch_vol_weight_and_rec_weight","roi_score", "cvr_score", "gpr",
     "total_score", "roi", "sales", "leads"]].to_dict("records"))
 

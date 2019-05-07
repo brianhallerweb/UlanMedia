@@ -129,7 +129,7 @@ class Record extends Component {
         <td>{this.leads}</td>
         <td>${this.cpl}</td>
         <td>${this.epl}</td>
-        <td>${this.lead_cvr}%</td>
+        <td>{this.lead_cvr}%</td>
         <td>{this.sales}</td>
         <td>${this.cps}</td>
         <td>${this.eps}</td>

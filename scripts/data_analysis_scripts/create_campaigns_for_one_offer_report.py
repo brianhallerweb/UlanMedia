@@ -46,7 +46,7 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["campaign_name", "offer_id","offer_name", "flow_rule", "campaign_id", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
-    "epc", "cpl", "epl", "cpc", "cpl", "epl", "leads", "sales", "roi"]
+    "epc", "cpl", "epl", "cpc", "cps", "eps", "leads", "sales", "roi"]
             )
 
 if final_result is None:
@@ -63,21 +63,21 @@ if len(final_result.index) > 0:
     summary = summary.round(2)
     summary["campaign_name"] = "summary"
     if summary["clicks"] == 0:
-        summary["lead_cvr"] = 0
-        summary["epc"] = 0
+        summary["lead_cvr"] = "NaN" 
+        summary["epc"] = "NaN" 
     else:
         summary["lead_cvr"] = round((summary["leads"] / summary["clicks"]) * 100,
         2)
         summary["epc"] = round(summary["revenue"] / summary["clicks"], 3)
     if summary["leads"] == 0:
-        summary["cpl"] = 0
-        summary["epl"] = 0
+        summary["cpl"] = "NaN" 
+        summary["epl"] = "NaN"
     else:
         summary["cpl"] = round(summary["cost"] / summary["leads"], 2)
         summary["epl"] = round(summary["revenue"] / summary["leads"], 2)
     if summary["sales"] == 0:
-        summary["cps"] = 0
-        summary["eps"] = 0
+        summary["cps"] = "NaN"
+        summary["eps"] = "NaN"
     else:
         summary["cps"] = round(summary["cost"] / summary["sales"], 2)
         summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
@@ -86,7 +86,7 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["campaign_name", "offer_id","offer_name", "flow_rule", "campaign_id", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
-    "epc", "cpl", "epl", "cpc", "cpl", "epl", "leads", "sales", "roi"]].to_dict("records"))
+    "epc", "cpl", "epl", "cpc", "cps", "eps", "leads", "sales", "roi"]].to_dict("records"))
 
 print(json_final_result)
 
