@@ -64,6 +64,7 @@ if len(final_result.index) > 0:
     summary = summary.round(2)
     summary["offer_name"] = "summary"
     summary["flow_rule"] = "NA"
+    summary["roi"] = summary["profit"]/summary["cost"]
     if summary["clicks"] == 0:
         summary["lead_cvr"] = "NaN" 
         summary["epc"] = "NaN" 

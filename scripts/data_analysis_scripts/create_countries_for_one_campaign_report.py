@@ -35,7 +35,8 @@ c3 = df["profit"] <= -1 * float(sys.argv[5])
 result3 = df[c3]
 
 conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]]
-conditions_dfs = [result1, result2, result3] final_result = None 
+conditions_dfs = [result1, result2, result3] 
+final_result = None 
 for i in range(len(conditions_args)):
     if conditions_args[i] == "true" and final_result is None:
         final_result = conditions_dfs[i]
