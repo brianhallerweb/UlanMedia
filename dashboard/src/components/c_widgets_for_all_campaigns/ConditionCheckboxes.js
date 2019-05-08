@@ -29,6 +29,7 @@ const ConditionCheckboxes = ({
         />
         <span>Widget classification is </span>
         <select
+          disabled={loading}
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
           <option value="not yet">not yet</option>
@@ -48,6 +49,7 @@ const ConditionCheckboxes = ({
         />
         <span>Widget global status is </span>
         <select
+          disabled={loading}
           onChange={e => setConditionValue('c2Value', e.target.value)}
           defaultValue={c2Value}>
           <option value="not yet listed">not yet listed</option>
@@ -74,12 +76,13 @@ const ConditionCheckboxes = ({
         <span>
           {'Widget cost is greater than or equal to $'}
           <input
+            disabled={loading}
             className="inputBox"
             type="number"
             name="c3Value"
             min="0"
             max="100"
-            step="10"
+            step="1"
             value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
@@ -103,7 +106,7 @@ const ConditionCheckboxes = ({
             name="c4Value"
             min="0"
             max="100"
-            step="10"
+            step="1"
             value={c4Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />

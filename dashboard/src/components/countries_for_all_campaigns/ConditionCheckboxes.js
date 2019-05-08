@@ -48,7 +48,7 @@ const ConditionCheckboxes = ({
             name="c2Value"
             min="0"
             max="1000"
-            step="20"
+            step="10"
             value={c2Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
@@ -70,7 +70,7 @@ const ConditionCheckboxes = ({
             name="c3Value"
             min="50"
             max="500"
-            step="50"
+            step="10"
             value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />

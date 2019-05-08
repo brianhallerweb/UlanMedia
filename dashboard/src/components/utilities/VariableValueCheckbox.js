@@ -29,6 +29,7 @@ const VariableValueCheckbox = ({
         className="inputBox"
         type="number"
         name={conditionValueName}
+        disabled={disabled}
         min={min}
         max={max}
         step={step}
