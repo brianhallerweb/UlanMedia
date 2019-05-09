@@ -106,27 +106,33 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
 
             if offer_id not in offers["data"][campaign_id]:
                 if offer_id in vol_weight_lookup and vol_weight_lookup[offer_id] != 0:
-                    if flow_rule in vol_flow_rule_index_lookup:
-                        offers["data"][campaign_id][offer_id] = {"clicks": row["visits"],
-                                                   "cost": row["cost"],
-                                                   "offer_id": offer_id,
-                                                   "profit": row["profit"],
-                                                   "revenue": row["profit"] + row["cost"],
-                                                   "conversions": row["conversions"],
-                                                   # leads and sales are added in
-                                                   # the next step
-                                                   "leads": 0,
-                                                   "sales": 0,
-                                                   "offer_id": offer_id,
-                                                   "campaign_id": campaign_id,
-                                                   "vol_offer_name": row["offerName"],
-                                                   "offer_name": f"{c_offer_name} {flow_rule}",
-                                                   "p_offer_name": p_offer_name,
-                                                   "c_offer_name": c_offer_name,
-                                                   "flow_rule": flow_rule,
-                                                   "flow_rule_index": vol_flow_rule_index_lookup[flow_rule],
-                                                   "vol_weight": vol_weight
-                                                   }
+                    if flow_rule not in vol_flow_rule_index_lookup:
+                        # 5/8 I would like to know which flow rules are being
+                        # skipped but there is a very large number - why?
+                        # send_email("brianshaller@gmail.com", "Failed - create_offers_for_each_campaign_dataset() at "
+                                # + str(datetime.now().strftime("%Y-%m-%d%H:%M")),
+                                # f'the flow rule name "{flow_rule}" is not in the voluum flow rules. There is likely a typo.')
+                        continue
+                    offers["data"][campaign_id][offer_id] = {"clicks": row["visits"],
+                               "cost": row["cost"],
+                               "offer_id": offer_id,
+                               "profit": row["profit"],
+                               "revenue": row["profit"] + row["cost"],
+                               "conversions": row["conversions"],
+                               # leads and sales are added in
+                               # the next step
+                               "leads": 0,
+                               "sales": 0,
+                               "offer_id": offer_id,
+                               "campaign_id": campaign_id,
+                               "vol_offer_name": row["offerName"],
+                               "offer_name": f"{c_offer_name} {flow_rule}",
+                               "p_offer_name": p_offer_name,
+                               "c_offer_name": c_offer_name,
+                               "flow_rule": flow_rule,
+                               "flow_rule_index": vol_flow_rule_index_lookup[flow_rule],
+                               "vol_weight": vol_weight
+                               }
 
         with open(f'{os.environ.get("ULANMEDIAAPP")}/data/conversions_for_each_campaign/{date_range}_conversions_for_each_campaign_dataset.json', 'r') as file:
             json_file = json.load(file)

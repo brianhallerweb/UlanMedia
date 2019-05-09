@@ -175,6 +175,16 @@ class Record extends Component {
 
             <InternalLink
               className={'rowLink'}
+              stopPropagation={true}
+              to={`/daysforonepwidgetforallcampaigns/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`}
+              target={'_blank'}
+              label={'days (new)'}
+            />
+
+            <InternalLink
+              className={'rowLink'}
               to={`/excludepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
                 /^\d*/,
               )}`}
