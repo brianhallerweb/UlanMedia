@@ -6,12 +6,13 @@ const Title = props => {
   let title = `days for one p widget for all campaigns (${props.pWidgetID})`;
   return (
     <div>
-      <div>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>{title}</title>
-        </Helmet>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+      </Helmet>
+      <div className="title">
         <h3>{title}</h3>
+        {props.volRequestDates && <p>(vol: {props.volRequestDates})</p>}
       </div>
     </div>
   );

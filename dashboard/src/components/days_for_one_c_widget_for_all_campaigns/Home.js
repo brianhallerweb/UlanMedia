@@ -11,6 +11,7 @@ class Home extends Component {
     super(props);
     this.state = {
       cWidgetID: this.props.match.params.cWidgetID,
+      volRequestDates: '',
       dayRecords: [],
       loading: false,
       authenticated: true,
@@ -42,6 +43,15 @@ class Home extends Component {
           }
           throw Error(res.statusText);
         }
+        return res;
+      })
+      .then(res => res.json())
+      .then(file => {
+        this.setState({
+          volRequestDates: `${file.metadata.vol_start_date} to ${
+            file.metadata.vol_end_date
+          }`,
+        });
       })
       .then(() =>
         fetch('/api/createDaysForOneCWidgetForAllCampaignsReport', {
@@ -87,8 +97,17 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title cWidgetID={this.state.cWidgetID} />
+        <Title
+          cWidgetID={this.state.cWidgetID}
+          volRequestDates={this.state.volRequestDates}
+        />
         <GlobalNavBar />
+        <div style={{marginBottom: 10}}>
+          *Remember the Cost, Clicks, CPC, CPL, Lead CVR, CPS, and ROI are not
+          highly accurate, they're just estimates based on Voluum's daily
+          averaged CPC evenly distributed across received clicks....instead of
+          being based on MGID's variable CPC actual charged clicks.
+        </div>
         <Records
           loading={this.state.loading}
           dayRecords={this.state.dayRecords}

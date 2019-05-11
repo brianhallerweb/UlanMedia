@@ -11,8 +11,8 @@ with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_p_widget_for_all_
     data = json.load(file)
 
 days = []
-for day in data:
-    days.append(data[day])
+for day in data["data"]:
+    days.append(data["data"][day])
     
 df = pd.DataFrame(days)
 

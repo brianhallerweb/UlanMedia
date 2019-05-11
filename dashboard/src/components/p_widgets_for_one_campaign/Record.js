@@ -74,6 +74,16 @@ class Record extends Component {
           label={'isp'}
         />
 
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/daysforonepwidgetforonecampaign/${this.props.widgetRecord.widget_id.match(
+            /^\d*/,
+          )}/${this.props.widgetRecord.vol_id}/${this.props.name}/`}
+          target={'_blank'}
+          label={'days'}
+        />
+
         <ExternalLink
           className={'rowLink'}
           href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${

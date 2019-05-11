@@ -13,6 +13,7 @@ class Home extends Component {
     super(props);
     this.state = {
       volid: this.props.match.params.volid,
+      name: this.props.match.params.name,
       widgetRecords: [],
       mgidRequestDates: '',
       volRequestDates: '',
@@ -197,6 +198,7 @@ class Home extends Component {
           loading={this.state.loading}
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
+	  name={this.state.name}
         />
       </div>
     );
