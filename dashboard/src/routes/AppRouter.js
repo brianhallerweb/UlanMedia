@@ -19,6 +19,7 @@ import offers_for_one_campaignHome from '../components/offers_for_one_campaign/H
 import offers_for_one_flow_ruleHome from '../components/offers_for_one_flow_rule/Home';
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
 import days_for_one_p_widget_for_all_campaignsHome from '../components/days_for_one_p_widget_for_all_campaigns/Home';
+import days_for_one_c_widget_for_all_campaignsHome from '../components/days_for_one_c_widget_for_all_campaigns/Home';
 import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_campaign/Home';
 import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_widget/Home';
 import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
@@ -68,6 +69,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/daysforonepwidgetforallcampaigns/:pWidgetID"
           Component={days_for_one_p_widget_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/daysforonecwidgetforallcampaigns/:cWidgetID"
+          Component={days_for_one_c_widget_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/pwidgetsforonecampaign/:volid/:name"

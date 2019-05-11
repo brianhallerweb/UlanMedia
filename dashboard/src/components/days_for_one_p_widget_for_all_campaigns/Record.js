@@ -40,7 +40,7 @@ class Record extends Component {
         <td>${this.props.dayRecord.cpc}</td>
         <td>${this.props.dayRecord.epc}</td>
         <td>{this.props.dayRecord.leads}</td>
-        <td>${this.props.dayRecord.cpc}</td>
+        <td>${this.props.dayRecord.cpl}</td>
         <td>${this.props.dayRecord.epl}</td>
         <td>{this.props.dayRecord.lead_cvr}%</td>
         <td>{this.props.dayRecord.sales}</td>

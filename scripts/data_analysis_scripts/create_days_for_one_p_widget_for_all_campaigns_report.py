@@ -17,7 +17,7 @@ for day in data:
 df = pd.DataFrame(days)
 
 df["cost"] = round(df["cost"], 2)
-df["profit"] = round(df["revenue"], 2)
+df["profit"] = round(df["profit"], 2)
 df["lead_cvr"] = round((df["leads"] / df["clicks"]) * 100,
         2)
 df["epc"] = (df["revenue"] / df["clicks"]).round(3)

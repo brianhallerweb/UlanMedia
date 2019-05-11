@@ -3,7 +3,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 
 const Title = props => {
-  let title = `days for one p widget for all campaigns`;
+  let title = `days for one p widget for all campaigns (${props.pWidgetID})`;
   return (
     <div>
       <div>

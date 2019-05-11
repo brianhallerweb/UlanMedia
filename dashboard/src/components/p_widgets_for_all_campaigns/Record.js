@@ -166,13 +166,6 @@ class Record extends Component {
               label={'months'}
             />
 
-            <ExternalLink
-              className={'rowLink'}
-              href={this.daysURL}
-              target={'_blank'}
-              label={'days'}
-            />
-
             <InternalLink
               className={'rowLink'}
               stopPropagation={true}
@@ -180,7 +173,7 @@ class Record extends Component {
                 /^\d*/,
               )}`}
               target={'_blank'}
-              label={'days (new)'}
+              label={'days'}
             />
 
             <InternalLink

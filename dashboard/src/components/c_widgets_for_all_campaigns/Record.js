@@ -172,9 +172,12 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
               label={'months'}
             />
 
-            <ExternalLink
+            <InternalLink
               className={'rowLink'}
-              href={this.daysURL}
+              stopPropagation={true}
+              to={`/daysforonecwidgetforallcampaigns/${
+                this.props.widgetRecord.widget_id
+              }`}
               target={'_blank'}
               label={'days'}
             />

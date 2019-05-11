@@ -87,7 +87,7 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title dayRecords={this.state.dayRecords} />
+        <Title pWidgetID={this.state.pWidgetID} />
         <GlobalNavBar />
         <Records
           loading={this.state.loading}
