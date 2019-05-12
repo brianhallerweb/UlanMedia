@@ -20,6 +20,7 @@ import offers_for_one_flow_ruleHome from '../components/offers_for_one_flow_rule
 import days_for_one_campaignHome from '../components/days_for_one_campaign/Home';
 import days_for_one_p_widget_for_all_campaignsHome from '../components/days_for_one_p_widget_for_all_campaigns/Home';
 import months_for_one_p_widget_for_all_campaignsHome from '../components/months_for_one_p_widget_for_all_campaigns/Home';
+import months_for_one_c_widget_for_all_campaignsHome from '../components/months_for_one_c_widget_for_all_campaigns/Home';
 import days_for_one_p_widget_for_one_campaignHome from '../components/days_for_one_p_widget_for_one_campaign/Home';
 import days_for_one_c_widget_for_one_campaignHome from '../components/days_for_one_c_widget_for_one_campaign/Home';
 import days_for_one_c_widget_for_all_campaignsHome from '../components/days_for_one_c_widget_for_all_campaigns/Home';
@@ -76,6 +77,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/monthsforonepwidgetforallcampaigns/:pWidgetID"
           Component={months_for_one_p_widget_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/monthsforonecwidgetforallcampaigns/:cWidgetID"
+          Component={months_for_one_c_widget_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/daysforonepwidgetforonecampaign/:pWidgetID/:volID/:name"
