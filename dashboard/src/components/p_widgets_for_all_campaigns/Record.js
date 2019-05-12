@@ -159,9 +159,12 @@ class Record extends Component {
               label={'isp'}
             />
 
-            <ExternalLink
+            <InternalLink
               className={'rowLink'}
-              href={this.monthsURL}
+              stopPropagation={true}
+              to={`/monthsforonepwidgetforallcampaigns/${this.props.widgetRecord.widget_id.match(
+                /^\d*/,
+              )}`}
               target={'_blank'}
               label={'months'}
             />
