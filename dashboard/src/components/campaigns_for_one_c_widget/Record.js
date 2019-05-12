@@ -87,17 +87,14 @@ class Record extends Component {
           label={'months'}
         />
 
-        <ExternalLink
+        <InternalLink
           className={'rowLink'}
-          href={`https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_32154ab0-b614-4ac5-b017-6d5a18447bc5/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
-            this.props.volRequestStartDate
-          }T00:00:00Z&to=${
-            this.props.volRequestEndDate
-          }T00:00:00Z&filter1=campaign&filter1Value=${
-            this.props.campaignRecord.vol_id
-          }&filter2=custom-variable-1&filter2Value=${
+          stopPropagation={true}
+          to={`/daysforonecwidgetforonecampaign/${
             this.props.campaignRecord.widget_id
-          }`}
+          }/${this.props.campaignRecord.vol_id}/${
+            this.props.campaignRecord.name
+          }/`}
           target={'_blank'}
           label={'days'}
         />
