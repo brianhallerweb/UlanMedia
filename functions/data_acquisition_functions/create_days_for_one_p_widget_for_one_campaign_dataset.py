@@ -48,19 +48,18 @@ def create_days_for_one_p_widget_for_one_campaign_dataset(token, start_date, end
 
     p_widget_id_pattern = re.compile(r'(\d*)(s*)(\d*)')
 
-    for campaign in conversions_for_each_campaign:
-        for conversion in conversions_for_each_campaign[campaign]:
-            widget_id = list(p_widget_id_pattern.findall(conversion["customVariable1"])[0])[0]
-            if widget_id != p_widget_id:
-                continue
-            day = conversion["visitTimestamp"].split(' ')[0] 
-            conversion_type = conversion["transactionId"]
-            if conversion_type == "account":
-                if day in days["data"]:
-                    days["data"][day]["leads"] += 1
-            elif conversion_type == "deposit":
-                if day in days["data"]:
-                    days["data"][day]["sales"] += 1
+    for conversion in conversions_for_each_campaign[campaign_id]:
+        widget_id = list(p_widget_id_pattern.findall(conversion["customVariable1"])[0])[0]
+        if widget_id != p_widget_id:
+            continue
+        day = conversion["visitTimestamp"].split(' ')[0] 
+        conversion_type = conversion["transactionId"]
+        if conversion_type == "account":
+            if day in days["data"]:
+                days["data"][day]["leads"] += 1
+        elif conversion_type == "deposit":
+            if day in days["data"]:
+                days["data"][day]["sales"] += 1
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/days_for_one_p_widget_for_one_campaign/{p_widget_id}_{campaign_id}_days_for_one_p_widget_for_one_campaign_dataset.json", "w") as file:
         json.dump(days, file)
