@@ -27,8 +27,6 @@ def create_months_for_one_p_widget_for_all_campaigns_dataset(token, start_date, 
         url = f"https://api.voluum.com/report?from={temp_start}T00:00:00Z&to={temp_end}T00:00:00Z&tz=America%2FLos_Angeles&filter={p_widget_id}&conversionTimeMode=VISIT&sort=month&direction=asc&columns=month&columns=customVariable1&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cv&columns=roi&columns=epv&groupBy=month&groupBy=custom-variable-1&offset=0&limit=1000000&include=ACTIVE&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc"
         res = requests.get(url, headers = {"cwauth-token": token}).json()
         for row in res["rows"]:
-            pp.pprint(res["rows"])
-            sys.exit()
             month = row["month"]
             clicks = row["visits"]
             cost = row["cost"]
