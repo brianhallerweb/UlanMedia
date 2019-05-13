@@ -1,5 +1,6 @@
 //@format
 import React, {Component} from 'react';
+import convertMonthNumberToMonthWord from './convertMonthNumberToMonthWord';
 
 class Record extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Record extends Component {
         onClick={e => {
           this.setState({clicked: !this.state.clicked});
         }}>
-        <td>{this.props.monthRecord.month}</td>
+        <td>{convertMonthNumberToMonthWord(this.props.monthRecord.month)}</td>
         <td>${this.props.monthRecord.cost}</td>
         <td>${this.props.monthRecord.revenue}</td>
         <td>${this.props.monthRecord.profit}</td>

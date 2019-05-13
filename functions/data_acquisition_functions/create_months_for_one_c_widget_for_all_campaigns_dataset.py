@@ -9,15 +9,10 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_months_for_one_c_widget_for_all_campaigns_dataset(token, start_date, end_date, c_widget_id):
-
-    monthsLookup: {1: "january", 2: "february", 3: "march", 4: "april", 5:
-            "may", 6: "june", 7: "july", 8: "august", 9: "september", 10:
-            "october", 11: "november", 12: "december"}
 
     start = datetime.strptime(start_date, "%Y-%m-%d").date()
     end = datetime.strptime(end_date, "%Y-%m-%d").date()
