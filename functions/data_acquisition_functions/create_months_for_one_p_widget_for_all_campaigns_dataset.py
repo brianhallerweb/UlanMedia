@@ -1,6 +1,7 @@
 from config.config import *
 from functions.misc.send_email import send_email
 from functions.misc.get_campaign_sets import get_campaign_sets
+from functions.misc.find_month_index_number import find_month_index_number
 from datetime import datetime
 from datetime import datetime, timedelta
 import requests
@@ -9,8 +10,8 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_months_for_one_p_widget_for_all_campaigns_dataset(token, start_date, end_date, p_widget_id):
 
@@ -44,7 +45,8 @@ def create_months_for_one_p_widget_for_all_campaigns_dataset(token, start_date, 
                         "profit": profit, 
                         "leads": 0,
                         "sales": 0,
-                        "month": month
+                        "month": month,
+                        "month_index": find_month_index_number(month)
                         }
         end = datetime.strptime(temp_start, "%Y-%m-%d").date()
     if (end - start).days > 0:
@@ -69,7 +71,8 @@ def create_months_for_one_p_widget_for_all_campaigns_dataset(token, start_date, 
                         "profit": profit, 
                         "leads": 0,
                         "sales": 0,
-                        "month": month
+                        "month": month,
+                        "month_index": find_month_index_number(month)
                         }
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/conversions_for_each_campaign/oneeighty_conversions_for_each_campaign_dataset.json', 'r') as file:

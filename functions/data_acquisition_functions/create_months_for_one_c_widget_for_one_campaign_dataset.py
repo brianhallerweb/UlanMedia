@@ -1,6 +1,7 @@
 from config.config import *
 from functions.misc.send_email import send_email
 from functions.misc.get_campaign_sets import get_campaign_sets
+from functions.misc.find_month_index_number import find_month_index_number
 from datetime import datetime
 from datetime import datetime, timedelta
 import requests
@@ -36,7 +37,9 @@ def create_months_for_one_c_widget_for_one_campaign_dataset(token, start_date, e
                     "profit": profit, 
                     "leads": 0,
                     "sales": 0,
-                    "month": month
+                    "month": month,
+                    "month_index": find_month_index_number(month)
+
                     }
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/conversions_for_each_campaign/oneeighty_conversions_for_each_campaign_dataset.json', 'r') as file:

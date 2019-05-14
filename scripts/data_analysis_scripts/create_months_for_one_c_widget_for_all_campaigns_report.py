@@ -30,9 +30,9 @@ df["roi"] = round((df["profit"] / df["cost"])*100, 2)
 
 df = df.replace([np.inf, -np.inf], "NaN")
 df = df.replace(np.nan, "NaN")
-df = df.sort_values("month", ascending=True)
+df = df.sort_values("month_index", ascending=True)
 
-json_final_result = json.dumps(df[["clicks", "cost", "month", "revenue",
+json_final_result = json.dumps(df[["clicks", "cost", "month", "month_index", "revenue",
     "profit", "leads", "sales",
     "lead_cvr", "epc", "cpl", "cps", "cpc", "epl", "eps", "roi"]].to_dict("records"))
 
