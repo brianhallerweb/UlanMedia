@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Logout from '../Logout';
 import Title from './Title';
+import Links from './Links';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
@@ -113,6 +114,11 @@ class Home extends Component {
           averaged CPC evenly distributed across received clicks....instead of
           being based on MGID's variable CPC actual charged clicks.
         </div>
+        <Links
+          pWidgetID={this.state.pWidgetID}
+          volID={this.state.volID}
+          name={this.state.name}
+        />
         <Records
           loading={this.state.loading}
           dayRecords={this.state.dayRecords}
