@@ -5,8 +5,8 @@ import sys
 import re
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_offers_for_each_flow_rule_dataset(date_range):
 
@@ -120,7 +120,7 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
 
     for p_offer in p_offers_gpr_lookup.values():
-        p_offer["gpr"] = round((p_offer["rank"] ** 7) / (100000000))
+        p_offer["gpr"] = (p_offer["rank"] ** 7) / (100000000)
         # 5/1 mike is experimenting with gpr calculations so he had me double
         # the gpr
         p_offer["gpr"] = p_offer["gpr"] * 2
@@ -228,6 +228,15 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                 if offers_for_each_flow_rule["data"][flow_rule][offer]["total_score_rank"] == 2: 
                     offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = 10
                     break
+        # 5/15/19 
+        # if (offerCost < $10) OR (offerClicks < 1000) than recommended weight = existing voluum weight.
+        for offer in offers_for_each_flow_rule["data"][flow_rule]:
+            cost = offers_for_each_flow_rule["data"][flow_rule][offer]["cost"]
+            clicks = offers_for_each_flow_rule["data"][flow_rule][offer]["clicks"]
+            vol_weight = offers_for_each_flow_rule["data"][flow_rule][offer]["vol_weight"]
+            if cost < 10 or clicks < 1000:
+                offers_for_each_flow_rule["data"][flow_rule][offer]["rec_weight"] = vol_weight
+
 
     # At this point, offers_for_each_flow_rule is a lookup dictionary to find
     # the weight of each offer. In the next step you will add that weight to
