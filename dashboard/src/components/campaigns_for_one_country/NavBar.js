@@ -30,6 +30,13 @@ class NavBar extends Component {
             c2={this.props.c2}
             c2Value={this.props.c2Value}
           />
+          <div style={{marginBottom: 10}}>
+            *Remember the Cost, Profit, Clicks, CPC, CPL, Lead CVR, CPS, and ROI
+            are not highly accurate, they're just estimates based on Voluum's
+            daily averaged CPC evenly distributed across received
+            clicks....instead of being based on MGID's variable CPC actual
+            charged clicks.
+          </div>
           <input type="submit" value="Submit" disabled={this.props.loading} />
         </form>
       </div>

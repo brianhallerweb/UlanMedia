@@ -14,17 +14,17 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Campaign</th>
-            <th>Cost</th>
+            <th>Cost*</th>
             <th>Revenue</th>
-            <th>Profit</th>
-            <th>Clicks</th>
-            <th>CPC</th>
+            <th>Profit*</th>
+            <th>Clicks*</th>
+            <th>CPC*</th>
             <th>EPC</th>
             <th>Conversions</th>
-            <th>CPA</th>
+            <th>CPA*</th>
             <th>EPA</th>
-            <th>CVR</th>
-            <th>ROI</th>
+            <th>CVR*</th>
+            <th>ROI*</th>
           </tr>
         </thead>
         <tbody>

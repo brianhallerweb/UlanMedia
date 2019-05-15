@@ -104,10 +104,11 @@ class Home extends Component {
         />
         <GlobalNavBar />
         <div style={{marginBottom: 10}}>
-          *Remember the Cost, Clicks, CPC, CPL, Lead CVR, CPS, and ROI are not
-          highly accurate, they're just estimates based on Voluum's daily
-          averaged CPC evenly distributed across received clicks....instead of
-          being based on MGID's variable CPC actual charged clicks.
+          *Remember the Cost, Clicks, Profit, CPC, CPL, Lead CVR, CPS, and ROI
+          are not highly accurate, they're just estimates based on Voluum's
+          daily averaged CPC evenly distributed across received
+          clicks....instead of being based on MGID's variable CPC actual charged
+          clicks.
         </div>
         <Links cWidgetID={this.state.cWidgetID} />
         <Records
