@@ -23,8 +23,13 @@ def create_gprs_for_each_p_offer_dataset(date_range):
         for offer in offers_for_each_flow_rule[flow_rule]:
             p_offer_name = offers_for_each_flow_rule[flow_rule][offer]["p_offer_name"]
             gpr = offers_for_each_flow_rule[flow_rule][offer]["gpr"]
-            gprs_for_each_p_offer[p_offer_name] = {"name": p_offer_name, "gpr":
-                    gpr}
+            profit = offers_for_each_flow_rule[flow_rule][offer]["profit"]
+            rank = offers_for_each_flow_rule[flow_rule][offer]["total_score_rank"]
+            if p_offer_name in gprs_for_each_p_offer:
+                gprs_for_each_p_offer[p_offer_name]["profit"] += profit
+            else:
+                gprs_for_each_p_offer[p_offer_name] = {"name": p_offer_name,
+                        "gpr": gpr, "profit": profit, "rank": rank }
 
     gprs_for_each_p_offer_list = []
     for p_offer_name in gprs_for_each_p_offer:

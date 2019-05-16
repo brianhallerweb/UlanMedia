@@ -53,11 +53,19 @@ class GprsForEachPOffer extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <table>
+          <thead>
+            <td>P Offer</td>
+            <td>GPR</td>
+            <td>Profit</td>
+            <td>Rank</td>
+          </thead>
           <tbody>
             {this.state.gprs.map(gpr => (
               <tr key={gpr.name}>
                 <td>{gpr.name}</td>
                 <td>{gpr.gpr}</td>
+                <td>{gpr.profit}</td>
+                <td>{gpr.rank}</td>
               </tr>
             ))}
           </tbody>

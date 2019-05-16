@@ -221,7 +221,6 @@ class Record extends Component {
           </div>
         </td>
         <td>{this.classification}</td>
-        <td>{this.gpr}</td>
         <td>
           {this.roiScore} + {this.cvrScore} + {this.gpr} = {this.totalScore}
         </td>
