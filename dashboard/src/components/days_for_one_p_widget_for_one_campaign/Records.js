@@ -18,7 +18,7 @@ class Records extends Component {
               <th>Day</th>
               <th>Cost*</th>
               <th>Revenue</th>
-              <th>Profit</th>
+              <th>Profit*</th>
               <th>Clicks*</th>
               <th>CPC*</th>
               <th>EPC</th>
