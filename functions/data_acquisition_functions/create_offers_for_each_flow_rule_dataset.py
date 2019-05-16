@@ -126,8 +126,8 @@ def create_offers_for_each_flow_rule_dataset(date_range):
         p_offer["gpr"] = p_offer["gpr"] * 2
     
     # 4/30 this is for getting an output that I paste for mike to look at
-    pp.pprint(p_offers_gpr_lookup)
-    sys.exit()
+    # pp.pprint(p_offers_gpr_lookup)
+    # sys.exit()
 
     # At this point, offers_for_each_flow_rule exists and you have a
     # p_offers_gpr_lookup dictionary which tells you the gpr of each parent
