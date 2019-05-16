@@ -16,6 +16,7 @@ class Records extends Component {
             <th>Offer Name</th>
             <th>Flow Rule</th>
             <th>Classification</th>
+            <th>GPR</th>
             <th>Score (roi+cvr+gpr)</th>
             <th>Vol Weight</th>
             <th>Rec Weight</th>

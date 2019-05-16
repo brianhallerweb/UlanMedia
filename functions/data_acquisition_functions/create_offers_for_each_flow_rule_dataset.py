@@ -120,10 +120,7 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
 
     for p_offer in p_offers_gpr_lookup.values():
-        p_offer["gpr"] = (p_offer["rank"] ** 7) / (100000000)
-        # 5/1 mike is experimenting with gpr calculations so he had me double
-        # the gpr
-        p_offer["gpr"] = p_offer["gpr"] * 2
+        p_offer["gpr"] = ((p_offer["rank"] ** 7) * 2) / (100000000)
     
     # 4/30 this is for getting an output that I paste for mike to look at
     # pp.pprint(p_offers_gpr_lookup)
