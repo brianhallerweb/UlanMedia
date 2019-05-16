@@ -3,6 +3,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
+import GprsForEachPOffer from '../components/GprsForEachPOffer.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
 import languages_for_all_campaignsHome from '../components/languages_for_all_campaigns/Home';
@@ -200,6 +201,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/updateoneeightydata"
           Component={UpdateOneEightyData}
+        />
+        <PrivateRoute
+          path="/gprsforeachpoffer/:dateRange"
+          Component={GprsForEachPOffer}
         />
         // redirect to campaigns_for_all_campaigns if url doesn't match a route
         <PrivateRoute Component={RedirectToHome} />

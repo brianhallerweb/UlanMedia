@@ -8,6 +8,7 @@ import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 import checkForMismatchVolWeightAndRecWeight from './checkForMismatchVolWeightAndRecWeight';
 import checkForBadOffers from './checkForBadOffers';
+import InternalLink from '../utilities/InternalLink';
 
 class Home extends Component {
   constructor(props) {
@@ -158,6 +159,15 @@ class Home extends Component {
             flowchart
           </a>
         </div>
+        <div style={{marginBottom: 10, fontSize: 12}}>
+          <InternalLink
+            className={'rowLink'}
+            stopPropagation={true}
+            to={`/gprsforeachpoffer/${this.state.dateRange}`}
+            target={'_blank'}
+            label={'View the gpr for each p offer'}
+          />
+        </div>
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
@@ -175,6 +185,7 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
+
         {this.state.mismatchVolWeightAndRecWeightCount !== 0 &&
           !this.state.loading && (
             <div style={{color: 'red', marginTop: 10}}>

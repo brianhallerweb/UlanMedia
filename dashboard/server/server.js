@@ -14,6 +14,8 @@ const addToList = require('./addToList');
 const login = require('./controllers/user_controllers/login');
 const logout = require('./controllers/user_controllers/logout');
 
+const createGprsForEachPOfferDataset = require('./controllers/data_acquisition_controllers/create_gprs_for_each_p_offer_dataset');
+
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCountriesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_countries_for_one_campaign_dataset');
 const createLanguagesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_languages_for_one_campaign_dataset');
@@ -153,6 +155,15 @@ app.get('/api/readblacklist', (req, res) => {
 app.post('/api/addtolist', authenticate, (req, res) => {
   res.json(addToList(req.body.widgetID, req.body.listType));
 });
+
+//---------------------------------------
+
+//////// gprs for each p offer //////////////
+app.post(
+  '/api/createGprsForEachPOfferDataset',
+  authenticate,
+  createGprsForEachPOfferDataset,
+);
 
 //---------------------------------------
 
