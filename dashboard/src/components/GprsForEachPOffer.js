@@ -44,6 +44,7 @@ class GprsForEachPOffer extends Component {
       .then(file => {
         this.setState({
           gprs: file,
+          loading: false,
         });
       });
   }
@@ -52,7 +53,7 @@ class GprsForEachPOffer extends Component {
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
-        <table>
+        <table style={{width: '50%'}}>
           <thead>
             <tr>
               <th>P Offer</th>
@@ -66,7 +67,7 @@ class GprsForEachPOffer extends Component {
               <tr key={gpr.name}>
                 <td>{gpr.name}</td>
                 <td>{gpr.gpr}</td>
-                <td>{gpr.profit}</td>
+                <td>${gpr.profit}</td>
                 <td>{gpr.rank}</td>
               </tr>
             ))}
