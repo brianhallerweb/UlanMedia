@@ -113,14 +113,16 @@ def create_offers_for_each_flow_rule_dataset(date_range):
     df = df.sort_values("profit")
     ordered_p_offers = list(df["p_offer_name"])
 
-
     for i in range(0, len(ordered_p_offers)):
         p_offer_name = ordered_p_offers[i]
         p_offers_gpr_lookup[p_offer_name]["rank"] = i + 1
 
+    number_of_offers = 0
+    for i in range(0, len(p_offers_gpr_lookup)):
+        number_of_offers += 1
 
     for p_offer in p_offers_gpr_lookup.values():
-        p_offer["gpr"] = ((p_offer["rank"] ** 7) * 2) / (100000000)
+        p_offer["gpr"] = (p_offer["rank"] ** (number_of_offers/2) * 2) / (100000000)
     
     # 4/30 this is for getting an output that I paste for mike to look at
     # pp.pprint(p_offers_gpr_lookup)

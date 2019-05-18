@@ -7,6 +7,7 @@ import requests
 import json
 import sys
 import os
+import re
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
@@ -33,9 +34,11 @@ def create_days_for_one_offer_for_all_campaigns_dataset(token, start_date,
         json_file = json.load(file)
     conversions_for_each_campaign = json_file["data"]
 
+    offer_pattern = re.compile(r'(\w* - \w* - )(.*)')
+
     for campaign in conversions_for_each_campaign:
         for conversion in conversions_for_each_campaign[campaign]:
-            offer = conversion["offerName"]
+            offer = list(offer_pattern.findall(conversion["offerName"])[0])[1]
             if offer != offer_name:
                 continue
             day = conversion["visitTimestamp"].split(' ')[0] 

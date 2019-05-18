@@ -41,7 +41,7 @@ def create_gprs_for_each_p_offer_dataset(date_range):
         gprs_for_each_p_offer_list.append(gprs_for_each_p_offer[p_offer_name])
 
     gprs_for_each_p_offer_list = pd.DataFrame(gprs_for_each_p_offer_list)
-    gprs_for_each_p_offer_list = gprs_for_each_p_offer_list.sort_values("rank", ascending=True)
+    gprs_for_each_p_offer_list = gprs_for_each_p_offer_list.sort_values("rank", ascending=False)
     
     return json.dumps(gprs_for_each_p_offer_list[["rank", "profit", "name",
         "gpr"]].to_dict("records"))
