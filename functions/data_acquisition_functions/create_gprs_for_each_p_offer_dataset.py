@@ -31,7 +31,10 @@ def create_gprs_for_each_p_offer_dataset(date_range):
             else:
                 gprs_for_each_p_offer[p_offer_name] = {"name": p_offer_name,
                         "gpr": gpr, "profit": profit, "rank": rank, "formula":
-                        "will fill in later"}
+                        ""}
+
+    for p_offer_name in gprs_for_each_p_offer:
+        gprs_for_each_p_offer[p_offer_name]["formula"] = f"((X ** {'something'}* 2) / (100000000)"
 
     for p_offer_name in gprs_for_each_p_offer:
         rounded_profit = round(gprs_for_each_p_offer[p_offer_name]["profit"], 2)
