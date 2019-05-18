@@ -30,7 +30,8 @@ def create_gprs_for_each_p_offer_dataset(date_range):
                 gprs_for_each_p_offer[p_offer_name]["profit"] += profit
             else:
                 gprs_for_each_p_offer[p_offer_name] = {"name": p_offer_name,
-                        "gpr": gpr, "profit": profit, "rank": rank }
+                        "gpr": gpr, "profit": profit, "rank": rank, "formula":
+                        "will fill in later"}
 
     for p_offer_name in gprs_for_each_p_offer:
         rounded_profit = round(gprs_for_each_p_offer[p_offer_name]["profit"], 2)
@@ -44,6 +45,6 @@ def create_gprs_for_each_p_offer_dataset(date_range):
     gprs_for_each_p_offer_list = gprs_for_each_p_offer_list.sort_values("rank", ascending=False)
     
     return json.dumps(gprs_for_each_p_offer_list[["rank", "profit", "name",
-        "gpr"]].to_dict("records"))
+        "gpr", "formula"]].to_dict("records"))
 
 

@@ -60,6 +60,7 @@ class GprsForEachPOffer extends Component {
               <th>GPR</th>
               <th>Profit</th>
               <th>Rank</th>
+              <th>Formula</th>
             </tr>
           </thead>
           <tbody>
@@ -69,6 +70,7 @@ class GprsForEachPOffer extends Component {
                 <td>{gpr.gpr}</td>
                 <td>${gpr.profit}</td>
                 <td>{gpr.rank}</td>
+                <td>{gpr.formula}</td>
               </tr>
             ))}
           </tbody>
