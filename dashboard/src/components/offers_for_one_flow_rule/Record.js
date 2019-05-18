@@ -147,9 +147,10 @@ class Record extends Component {
                 label={'months'}
               />
 
-              <ExternalLink
+              <InternalLink
                 className={'rowLink'}
-                href={this.daysURL}
+                stopPropagation={true}
+                to={`/daysforoneofferforallcampaigns/${this.offerName}`}
                 target={'_blank'}
                 label={'days'}
               />
