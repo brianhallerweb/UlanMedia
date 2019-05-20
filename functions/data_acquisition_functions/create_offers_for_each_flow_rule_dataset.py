@@ -118,11 +118,12 @@ def create_offers_for_each_flow_rule_dataset(date_range):
         p_offers_gpr_lookup[p_offer_name]["rank"] = i + 1
 
     number_of_offers = 0
-    for i in range(0, len(p_offers_gpr_lookup)):
+    for offer in p_offers_gpr_lookup:
         number_of_offers += 1
 
     for p_offer in p_offers_gpr_lookup.values():
         p_offer["gpr"] = (p_offer["rank"] ** (number_of_offers/2) * 2) / (100000000)
+        p_offer["formula"] = f"({p_offer['rank']} ** ({number_of_offers/2}) * 2) / (100000000)"
     
     # 4/30 this is for getting an output that I paste for mike to look at
     # pp.pprint(p_offers_gpr_lookup)
@@ -154,7 +155,13 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
             p_offer_name = offers_for_each_flow_rule["data"][flow_rule][offer]["p_offer_name"]
             gpr = p_offers_gpr_lookup[p_offer_name]["gpr"]
+            p_offer_profit = p_offers_gpr_lookup[p_offer_name]["profit"]
+            p_offer_profit_rank = p_offers_gpr_lookup[p_offer_name]["rank"]
+            formula = p_offers_gpr_lookup[p_offer_name]["formula"]
             offers_for_each_flow_rule["data"][flow_rule][offer]["gpr"] = gpr
+            offers_for_each_flow_rule["data"][flow_rule][offer]["p_offer_profit"] = p_offer_profit
+            offers_for_each_flow_rule["data"][flow_rule][offer]["p_offer_profit_rank"] = p_offer_profit_rank
+            offers_for_each_flow_rule["data"][flow_rule][offer]["formula"] = formula
 
     ###############################
     # 4. Calculate the total score of each offer (uses helper functions at the

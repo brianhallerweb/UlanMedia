@@ -24,30 +24,23 @@ def create_gprs_for_each_p_offer_dataset(date_range):
         for offer in offers_for_each_flow_rule[flow_rule]:
             p_offer_name = offers_for_each_flow_rule[flow_rule][offer]["p_offer_name"]
             gpr = offers_for_each_flow_rule[flow_rule][offer]["gpr"]
-            profit = offers_for_each_flow_rule[flow_rule][offer]["profit"]
-            rank = offers_for_each_flow_rule[flow_rule][offer]["total_score_rank"]
-            if p_offer_name in gprs_for_each_p_offer:
-                gprs_for_each_p_offer[p_offer_name]["profit"] += profit
-            else:
-                gprs_for_each_p_offer[p_offer_name] = {"name": p_offer_name,
-                        "gpr": gpr, "profit": profit, "rank": rank, "formula":
-                        ""}
-
-    for p_offer_name in gprs_for_each_p_offer:
-        gprs_for_each_p_offer[p_offer_name]["formula"] = f"((X ** {'something'}* 2) / (100000000)"
-
-    for p_offer_name in gprs_for_each_p_offer:
-        rounded_profit = round(gprs_for_each_p_offer[p_offer_name]["profit"], 2)
-        gprs_for_each_p_offer[p_offer_name]["profit"] = rounded_profit
+            p_offer_profit = round(offers_for_each_flow_rule[flow_rule][offer]["p_offer_profit"], 2)
+            p_offer_profit_rank = offers_for_each_flow_rule[flow_rule][offer]["p_offer_profit_rank"]
+            formula = offers_for_each_flow_rule[flow_rule][offer]["formula"]
+            if p_offer_name not in gprs_for_each_p_offer:
+                gprs_for_each_p_offer[p_offer_name] = {"p_offer_name": p_offer_name,
+                        "gpr": gpr, "p_offer_profit": p_offer_profit,
+                        "p_offer_profit_rank": p_offer_profit_rank, "formula": formula}
 
     gprs_for_each_p_offer_list = []
     for p_offer_name in gprs_for_each_p_offer:
         gprs_for_each_p_offer_list.append(gprs_for_each_p_offer[p_offer_name])
 
     gprs_for_each_p_offer_list = pd.DataFrame(gprs_for_each_p_offer_list)
-    gprs_for_each_p_offer_list = gprs_for_each_p_offer_list.sort_values("rank", ascending=False)
+    gprs_for_each_p_offer_list = gprs_for_each_p_offer_list.sort_values("p_offer_profit", ascending=True)
     
-    return json.dumps(gprs_for_each_p_offer_list[["rank", "profit", "name",
+    return json.dumps(gprs_for_each_p_offer_list[["p_offer_profit_rank",
+        "p_offer_profit", "p_offer_name",
         "gpr", "formula"]].to_dict("records"))
 
 
