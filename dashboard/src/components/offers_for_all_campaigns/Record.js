@@ -192,9 +192,10 @@ class Record extends Component {
               label={'isp'}
             />
 
-            <ExternalLink
+            <InternalLink
               className={'rowLink'}
-              href={this.monthsURL}
+              stopPropagation={true}
+              to={`/monthsforoneofferforallcampaigns/${this.offerName}`}
               target={'_blank'}
               label={'months'}
             />

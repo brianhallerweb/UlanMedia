@@ -52,7 +52,8 @@ def create_months_for_one_p_widget_for_one_campaign_dataset(token, start_date, e
         widget_id = list(p_widget_id_pattern.findall(conversion["customVariable1"])[0])[0]
         if widget_id != p_widget_id:
             continue
-        month = conversion["visitTimestamp"].split(' ')[0] 
+        # month = conversion["visitTimestamp"].split(' ')[0]
+        month = int(conversion["visitTimestamp"].split('-')[1])
         conversion_type = conversion["transactionId"]
         if conversion_type == "account":
             if month in months["data"]:
