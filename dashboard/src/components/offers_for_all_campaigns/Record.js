@@ -62,18 +62,6 @@ class Record extends Component {
       this.props.volRequestEndDate
     }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
 
-    this.monthsURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/month?dateRange=custom-date&sortKey=month&sortDirection=asc&page=1&chart=0&columns=month&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=month&valueFiltersGrouping=month&from=${
-      this.props.volRequestStartDate
-    }T00:00:00Z&to=${
-      this.props.volRequestEndDate
-    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
-
-    this.daysURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_eb062435-2077-4a1b-a48f-fdf3468aa823/report/day?dateRange=custom-date&sortKey=day&sortDirection=desc&page=1&chart=0&columns=day&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&from=${
-      this.props.volRequestStartDate
-    }T00:00:00Z&to=${
-      this.props.volRequestEndDate
-    }T00:00:00Z&filter1=offer&filter1Value=${this.offerID}`;
-
     /////////////////
 
     this.state = {clicked: false, hovered: false};
