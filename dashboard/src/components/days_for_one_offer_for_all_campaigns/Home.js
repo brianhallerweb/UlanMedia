@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Logout from '../Logout';
 import Title from './Title';
+import Links from './Links';
 import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
@@ -109,6 +110,7 @@ class Home extends Component {
           clicks....instead of being based on MGID's variable CPC actual charged
           clicks.
         </div>
+        <Links offerName={this.state.offerName} />
         <Records
           loading={this.state.loading}
           dayRecords={this.state.dayRecords}
