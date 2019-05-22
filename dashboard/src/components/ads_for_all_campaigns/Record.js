@@ -95,6 +95,21 @@ class Record extends Component {
               target={'_blank'}
               label={'campaigns'}
             />
+            <InternalLink
+              className={'rowLink'}
+              stopPropagation={true}
+              to={`/monthsforoneadforallcampaigns/${this.image}/`}
+              target={'_blank'}
+              label={'months'}
+            />
+
+            <InternalLink
+              className={'rowLink'}
+              stopPropagation={true}
+              to={`/daysforoneadforallcampaigns/${this.image}/`}
+              target={'_blank'}
+              label={'days'}
+            />
           </div>
         </td>
         <td>
