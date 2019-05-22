@@ -100,6 +100,22 @@ class Record extends Component {
               target={'_blank'}
               label={'widgets'}
             />
+
+            <InternalLink
+              className={'rowLink'}
+              stopPropagation={true}
+              to={`/monthsforonecountryforallcampaigns/${this.countryName}`}
+              target={'_blank'}
+              label={'months'}
+            />
+
+            <InternalLink
+              className={'rowLink'}
+              stopPropagation={true}
+              to={`/daysforonecountryforallcampaigns/${this.countryName}`}
+              target={'_blank'}
+              label={'days'}
+            />
           </div>
         </td>
         {this.stylizeClassificationText(this.classification)}

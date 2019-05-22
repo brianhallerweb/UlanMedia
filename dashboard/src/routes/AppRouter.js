@@ -22,6 +22,8 @@ import days_for_one_campaignHome from '../components/days_for_one_campaign/Home'
 import days_for_one_p_widget_for_all_campaignsHome from '../components/days_for_one_p_widget_for_all_campaigns/Home';
 import days_for_one_offer_for_all_campaignsHome from '../components/days_for_one_offer_for_all_campaigns/Home';
 import months_for_one_offer_for_all_campaignsHome from '../components/months_for_one_offer_for_all_campaigns/Home';
+import days_for_one_country_for_all_campaignsHome from '../components/days_for_one_country_for_all_campaigns/Home';
+import months_for_one_country_for_all_campaignsHome from '../components/months_for_one_country_for_all_campaigns/Home';
 import months_for_one_p_widget_for_all_campaignsHome from '../components/months_for_one_p_widget_for_all_campaigns/Home';
 import months_for_one_c_widget_for_all_campaignsHome from '../components/months_for_one_c_widget_for_all_campaigns/Home';
 import days_for_one_p_widget_for_one_campaignHome from '../components/days_for_one_p_widget_for_one_campaign/Home';
@@ -82,6 +84,14 @@ const AppRouter = () => (
         <PrivateRoute
           path="/monthsforoneofferforallcampaigns/:offerName"
           Component={months_for_one_offer_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/daysforonecountryforallcampaigns/:countryName"
+          Component={days_for_one_country_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/monthsforonecountryforallcampaigns/:countryName"
+          Component={months_for_one_country_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/daysforonepwidgetforallcampaigns/:pWidgetID"

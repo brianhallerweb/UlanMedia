@@ -6,7 +6,7 @@ function createMonthsForOneOfferForAllCampaignsDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.offerName],
+    args: [req.body.countryName],
   };
   PythonShell.run(
     'create_months_for_one_offer_for_all_campaigns_dataset.py',
