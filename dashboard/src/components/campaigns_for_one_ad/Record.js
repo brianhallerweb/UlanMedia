@@ -38,9 +38,29 @@ class Record extends Component {
           target={'_blank'}
           label={'ads'}
         />
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/monthsforoneadforonecampaign/${this.props.adImage}/${
+            this.volID
+          }/${this.name}/`}
+          target={'_blank'}
+          label={'months'}
+        />
+
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/daysforoneadforonecampaign/${this.props.adImage}/${
+            this.volID
+          }/${this.name}/`}
+          target={'_blank'}
+          label={'days'}
+        />
       </div>
     );
   }
+
   outlineRow(hovered) {
     if (hovered) {
       return 'black';

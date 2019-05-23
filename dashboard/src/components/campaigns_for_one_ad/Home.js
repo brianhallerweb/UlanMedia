@@ -163,6 +163,7 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           campaignRecords={this.state.campaignRecords}
+          adImage={this.state.adImage}
         />
       </div>
     );

@@ -35,7 +35,11 @@ class Records extends Component {
         </thead>
         <tbody>
           {this.props.campaignRecords.map(campaignRecord => (
-            <Record key={campaignRecord.mgid_id} campaign={campaignRecord} />
+            <Record
+              key={campaignRecord.mgid_id}
+              campaign={campaignRecord}
+              adImage={this.props.adImage}
+            />
           ))}
         </tbody>
       </table>
