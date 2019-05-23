@@ -95,55 +95,41 @@ def create_offers_for_each_flow_rule_dataset(date_range):
                                                            "revenue": data[campaign][offer]["revenue"]
                                                           }
 
-    p_offers_gpr_lookup_prep = {}
+    p_offers_gpr_lookup = {}
 
     for offer in c_offers_for_all_campaigns.values():
         p_offer_name = offer["p_offer_name"]
-        if p_offer_name in p_offers_gpr_lookup_prep:
-            p_offers_gpr_lookup_prep[p_offer_name]["profit"] += offer["profit"]
+        if p_offer_name in p_offers_gpr_lookup:
+            p_offers_gpr_lookup[p_offer_name]["profit"] += offer["profit"]
         else:
-            p_offers_gpr_lookup_prep[p_offer_name] = {"profit": offer["profit"]}
+            p_offers_gpr_lookup[p_offer_name] = {"profit": offer["profit"]}
+
 
     unordered_p_offers = []
-    for p_offer in p_offers_gpr_lookup_prep:
+    for p_offer in p_offers_gpr_lookup:
         unordered_p_offers.append({"p_offer_name": p_offer, "profit":
-            p_offers_gpr_lookup_prep[p_offer]["profit"]})
+            p_offers_gpr_lookup[p_offer]["profit"]})
 
     df = pd.DataFrame(unordered_p_offers)
     df = df.sort_values("profit")
     ordered_p_offers = list(df["p_offer_name"])
 
+    number_of_offers = len(ordered_p_offers)
+    number_of_offers_to_keep = round(number_of_offers * 0.3)
+
+    rank = 1
     for i in range(0, len(ordered_p_offers)):
         p_offer_name = ordered_p_offers[i]
-        p_offers_gpr_lookup_prep[p_offer_name]["rank"] = i + 1
-
-    number_of_offers = 0
-    for offer in p_offers_gpr_lookup_prep:
-        number_of_offers += 1
-
-    # 5/22 all these comments are for the strategy of removing the bottom 70%
-    # of offers that Mike wanted to try
-
-    # number_of_offers_to_keep = round(number_of_offers * 0.3)
-
-    p_offers_gpr_lookup = {}
-
-    # for p_offer in p_offers_gpr_lookup_prep:
-        # if p_offers_gpr_lookup_prep[p_offer]["rank"] > number_of_offers - number_of_offers_to_keep:
-            # p_offers_gpr_lookup[p_offer] = p_offers_gpr_lookup_prep[p_offer]
-
-    for p_offer in p_offers_gpr_lookup_prep:
-        p_offers_gpr_lookup[p_offer] = p_offers_gpr_lookup_prep[p_offer]
+        if i > number_of_offers - number_of_offers_to_keep:
+            p_offers_gpr_lookup[p_offer_name]["rank"] = rank
+            rank += 1
+        else: 
+            p_offers_gpr_lookup[p_offer_name]["rank"] = 0
 
     for p_offer in p_offers_gpr_lookup.values():
-        p_offer["gpr"] = (p_offer["rank"] ** (number_of_offers/2) * 2) / (100000000)
-        p_offer["formula"] = f"({p_offer['rank']} ** ({number_of_offers/2}) * 2) / (100000000)"
-        # p_offer["gpr"] = p_offer["rank"]
-        # p_offer["formula"] = f"What should the gpr formula be? I just set it to rank for now."
+        p_offer["gpr"] = p_offer["rank"]
+        p_offer["formula"] = f"gpr = rank"
     
-    # 4/30 this is for getting an output that I paste for mike to look at
-    # pp.pprint(p_offers_gpr_lookup)
-    # sys.exit()
 
     # At this point, offers_for_each_flow_rule exists and you have a
     # p_offers_gpr_lookup dictionary which tells you the gpr of each parent
