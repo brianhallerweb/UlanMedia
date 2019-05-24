@@ -57,18 +57,16 @@ class GprsForEachPOffer extends Component {
           <thead>
             <tr>
               <th>P Offer</th>
-              <th>GPR</th>
               <th>Profit</th>
-              <th>Rank</th>
+              <th>GPR</th>
             </tr>
           </thead>
           <tbody>
             {this.state.gprs.map(gpr => (
               <tr key={gpr.p_offer_name}>
                 <td>{gpr.p_offer_name}</td>
-                <td>{gpr.gpr}</td>
                 <td>${gpr.p_offer_profit}</td>
-                <td>{gpr.p_offer_profit_rank}</td>
+                <td>{gpr.gpr}</td>
               </tr>
             ))}
           </tbody>
