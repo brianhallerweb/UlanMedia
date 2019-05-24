@@ -18,7 +18,7 @@ def create_complete_ads_dataset(date_range):
 
 
     complete_ads = {"metadata": {"vol_start_date": json_file["metadata"]["vol_start_date"],
-                                 "vol_end_date": json_file["metadata"]["vol_start_date"],
+                                 "vol_end_date": json_file["metadata"]["vol_end_date"],
                                  },
                     "data": {}
                    }
