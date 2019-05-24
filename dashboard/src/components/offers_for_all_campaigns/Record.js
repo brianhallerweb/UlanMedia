@@ -13,6 +13,7 @@ class Record extends Component {
     this.recWeight = this.props.offer.rec_weight;
     this.classification = this.props.offer.classification;
     this.roiScore = this.props.offer.roi_score;
+    this.gpr = this.props.offer.gpr;
     this.cvrScore = this.props.offer.cvr_score;
     this.totalScore = this.props.offer.total_score;
     this.offerName = this.props.offer.offer_name;
