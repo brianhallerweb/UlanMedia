@@ -51,7 +51,7 @@ for i in range(len(conditions_args)):
 if final_result is None:
     final_result = df
 
-final_result = final_result.replace([np.inf, -np.inf], 0)
+final_result = final_result.replace([np.inf, -np.inf], "NaN")
 final_result = final_result.replace(np.nan, "NaN")
 final_result["sort"] = final_result["cost"]
 final_result = final_result.sort_values("sort", ascending=False)

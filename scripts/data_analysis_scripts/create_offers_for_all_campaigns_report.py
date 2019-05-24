@@ -69,7 +69,7 @@ for i in range(len(conditions_args)):
 if final_result is None:
     final_result = df
 
-final_result = final_result.replace([np.inf, -np.inf], 0)
+final_result = final_result.replace([np.inf, -np.inf], "NaN")
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("flow_rule_index", ascending=True)
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",

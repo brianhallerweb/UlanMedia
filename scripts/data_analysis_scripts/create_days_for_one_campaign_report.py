@@ -19,7 +19,7 @@ df["cpa"] = round(df["cost"]/df["conversions"], 2)
 df["epa"] = round(df["revenue"]/df["conversions"], 2)
 df["cvr"] = round(df["conversions"]/df["clicks"], 2)
 
-df = df.replace([np.inf, -np.inf], 0)
+df = df.replace([np.inf, -np.inf], "NaN")
 df = df.replace(np.nan, "NaN")
 df = df.sort_values("day", ascending=False)
 
