@@ -128,8 +128,9 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 
     for p_offer in p_offers_gpr_lookup.values():
         p_offer["gpr"] = p_offer["rank"]
-        p_offer["formula"] = f"gpr = rank"
-    
+        p_offer["gpr_formula"] = f"gpr = rank"
+        p_offer["roi_formula"] = "if roi >= 10:\n    return 10 * sales\nelif roi >= 9:\n    return 9 * sales\nelif roi >= 8:\n    return 8 * sales\nelif roi >= 7:\n    return 7 * sales\nelif roi >= 6:\n    return 6 * sales\nelif roi >= 5:\n    return 5 * sales\nelif roi >= 4:\n    return 4 * sales\nelif roi >= 3:\n    return 3 * sales\nelif roi >= 0:\n    return 2 * sales\nelif roi > -1:\n    return 1 * sales\nelse:\n    return 0\n" 
+        p_offer["cvr_formula"] = "if cvr >= .02:\n    return 8\nelif cvr >= .015:\n    return 7\nelif cvr >= .0125:\n    return 6\nelif cvr >= .010:\n    return 5\nelif cvr >= .006:\n    return 4\nelif cvr >= .005:\n    return 3\nelif cvr >= .003:\n    return 2\nelif cvr >= .002:\n    return 1\nelif cvr >= .001:\n    return 1\nelse:\n    return 0" 
 
     # At this point, offers_for_each_flow_rule exists and you have a
     # p_offers_gpr_lookup dictionary which tells you the gpr of each parent
@@ -159,11 +160,15 @@ def create_offers_for_each_flow_rule_dataset(date_range):
             gpr = p_offers_gpr_lookup[p_offer_name]["gpr"]
             p_offer_profit = p_offers_gpr_lookup[p_offer_name]["profit"]
             p_offer_profit_rank = p_offers_gpr_lookup[p_offer_name]["rank"]
-            formula = p_offers_gpr_lookup[p_offer_name]["formula"]
+            gpr_formula = p_offers_gpr_lookup[p_offer_name]["gpr_formula"]
+            roi_formula = p_offers_gpr_lookup[p_offer_name]["roi_formula"]
+            cvr_formula = p_offers_gpr_lookup[p_offer_name]["cvr_formula"]
             offers_for_each_flow_rule["data"][flow_rule][offer]["gpr"] = gpr
             offers_for_each_flow_rule["data"][flow_rule][offer]["p_offer_profit"] = p_offer_profit
             offers_for_each_flow_rule["data"][flow_rule][offer]["p_offer_profit_rank"] = p_offer_profit_rank
-            offers_for_each_flow_rule["data"][flow_rule][offer]["formula"] = formula
+            offers_for_each_flow_rule["data"][flow_rule][offer]["gpr_formula"] = gpr_formula
+            offers_for_each_flow_rule["data"][flow_rule][offer]["roi_formula"] = roi_formula
+            offers_for_each_flow_rule["data"][flow_rule][offer]["cvr_formula"] = cvr_formula
 
     ###############################
     # 4. Calculate the total score of each offer (uses helper functions at the

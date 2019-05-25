@@ -50,6 +50,12 @@ class GprsForEachPOffer extends Component {
   }
 
   render() {
+    this.state.gprs[0] &&
+      console.log(
+        `roi score formula \n${
+          this.state.gprs[0].roi_formula
+        } \n\n\ncvr score formula \n${this.state.gprs[0].cvr_formula}`,
+      );
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
@@ -72,8 +78,13 @@ class GprsForEachPOffer extends Component {
           </tbody>
         </table>
         {this.state.gprs[0] && (
-          <div style={{marginTop: 20}}>
-            Formula: {this.state.gprs[0].formula}
+          <div>
+            <div style={{marginTop: 20}}>
+              gpr formula: {this.state.gprs[0].gpr_formula}
+            </div>
+            <div style={{marginTop: 20}}>
+              look in console for roi score and cvr score formulas
+            </div>
           </div>
         )}
       </div>
