@@ -39,7 +39,12 @@ class Records extends Component {
         </thead>
         <tbody>
           {this.props.adsRecords.map(adRecord => (
-            <Record key={adRecord.image} ad={adRecord} />
+            <Record
+              key={adRecord.image}
+              ad={adRecord}
+              volID={this.props.volID}
+              name={this.props.name}
+            />
           ))}
         </tbody>
       </table>

@@ -184,6 +184,8 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           adsRecords={this.state.adsRecords}
+          volID={this.state.volID}
+          name={this.state.name}
         />
       </div>
     );

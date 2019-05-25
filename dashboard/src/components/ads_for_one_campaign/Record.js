@@ -44,6 +44,26 @@ class Record extends Component {
           target={'_blank'}
           label={'campaigns'}
         />
+
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/monthsforoneadforonecampaign/${this.image}/${
+            this.props.volID
+          }/${this.props.name}/`}
+          target={'_blank'}
+          label={'months'}
+        />
+
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/daysforoneadforonecampaign/${this.image}/${this.props.volID}/${
+            this.props.name
+          }/`}
+          target={'_blank'}
+          label={'days'}
+        />
       </div>
     );
   }
