@@ -207,14 +207,8 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     # "for_all_campaigns"
 
     for c_widget in complete_c_widgets.values():
-        if (c_widget['for_all_campaigns']['classification'] == "not yet") & (c_widget["for_all_campaigns"]["global_status"] == "p_whitelist" | c_widget["for_all_campaigns"]["global_status"] == "pc_whitelist"):
-            c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
-        elif (c_widget['for_all_campaigns']['classification'] == "not yet") & (c_widget["for_all_campaigns"]["global_status"] != f"{c_widget['for_all_campaigns']['classification']} listed"):
+        if (c_widget['for_all_campaigns']['classification'] != "not yet") & ((c_widget["for_all_campaigns"]["global_status"] != f"p_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"c_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"pc_{c_widget['for_all_campaigns']['classification']}list")):
             c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
-        
-        elif (c_widget['for_all_campaigns']['classification'] != "not yet") & ((c_widget["for_all_campaigns"]["global_status"] != f"p_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"c_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"pc_{c_widget['for_all_campaigns']['classification']}list")):
-            c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
-
         else:
             c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
 
