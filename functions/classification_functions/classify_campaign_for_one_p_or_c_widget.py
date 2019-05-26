@@ -30,7 +30,7 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
     #######################
     # return classification
     if status == "inactive":
-        return "not yet"
+        return "wait"
     elif sales > 0:
         if (cost/sales) <= mps:
             return "good"
@@ -43,7 +43,7 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
     else:
         if leads == 0:
             if clicks < 600:
-                return "not yet"
+                return "wait"
             else:
                 if p_or_c_widget_total_sales == 0:
                     if cost >= (4 * mpl):
@@ -56,18 +56,18 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                     elif cost >= (2 * mpl):
                         return "half bad"
                     else:
-                        return "not yet"
+                        return "wait"
                 else:
                     if cost >= (4 * mpl):
                         return "bad"
                     elif cost >= (3 * mpl):
                         return "half bad"
                     else:
-                        return "not yet"
+                        return "wait"
         else:
             if lead_cpa >= mpl:
                 if clicks < 600:
-                    return "not yet"
+                    return "wait"
                 else:
                     if p_or_c_widget_total_sales == 0:
                         if cost > (4 * mpl):
@@ -76,23 +76,23 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                             elif lead_cpa > (2 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         elif cost > (3 * mpl):
                             if lead_cpa > (3.5 * mpl):
                                 return "bad"
                             elif lead_cpa > (2.5 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         elif cost > (2 * mpl):
                             if lead_cpa > (4 * mpl):
                                 return "bad"
                             elif lead_cpa > (3 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         else:
-                            return "not yet"
+                            return "wait"
                     else:
                         if cost > (5 * mpl):
                             if lead_cpa > (3 * mpl):
@@ -100,30 +100,30 @@ def classify_campaign_for_one_p_or_c_widget(campaign, p_or_c_widget_total_sales)
                             elif lead_cpa > (2 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         elif cost > (4 * mpl):
                             if lead_cpa > (3.5 * mpl):
                                 return "bad"
                             elif lead_cpa > (2.5 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         elif cost > (3 * mpl):
                             if lead_cpa > (4 * mpl):
                                 return "bad"
                             elif lead_cpa > (3 * mpl):
                                 return "half bad"
                             else:
-                                return "not yet"
+                                return "wait"
                         else:
-                            return "not yet"
+                            return "wait"
             else:
                 if leads >= 3:
                     return "good"
                 elif leads == 2:
                     return "half good"
                 else:
-                    return "not yet"
+                    return "wait"
 
 
                 

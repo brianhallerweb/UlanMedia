@@ -29,7 +29,7 @@ const ConditionCheckboxes = ({
         <select
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
-          <option value="not yet">not yet</option>
+          <option value="wait">wait</option>
           <option value="good">good</option>
           <option value="half good">half good</option>
           <option value="bad">bad</option>

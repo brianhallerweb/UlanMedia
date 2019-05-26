@@ -129,7 +129,7 @@ def create_offers_for_each_flow_rule_dataset(date_range):
     for p_offer in p_offers_gpr_lookup.values():
         p_offer["gpr"] = p_offer["rank"]
         p_offer["gpr_formula"] = f"gpr = rank"
-        p_offer["roi_formula"] = "if roi >= 10:\n    return 10 * sales\nelif roi >= 9:\n    return 9 * sales\nelif roi >= 8:\n    return 8 * sales\nelif roi >= 7:\n    return 7 * sales\nelif roi >= 6:\n    return 6 * sales\nelif roi >= 5:\n    return 5 * sales\nelif roi >= 4:\n    return 4 * sales\nelif roi >= 3:\n    return 3 * sales\nelif roi >= 0:\n    return 2 * sales\nelif roi > -1:\n    return 1 * sales\nelse:\n    return 0\n" 
+        p_offer["roi_formula"] = "if roi >= 10:\n    return 10 * sales/2\nelif roi >= 9:\n    return 9 * sales/2\nelif roi >= 8:\n    return 8 * sales/2\nelif roi >= 7:\n    return 7 * sales/2\nelif roi >= 6:\n    return 6 * sales/2\nelif roi >= 5:\n    return 5 * sales/2\nelif roi >= 4:\n    return 4 * sales/2\nelif roi >= 3:\n    return 3 * sales/2\nelif roi >= 0:\n    return 2 * sales/2\nelif roi > -1:\n    return 1 * sales/2\nelse:\n    return 0\n" 
         p_offer["cvr_formula"] = "if cvr >= .02:\n    return 8\nelif cvr >= .015:\n    return 7\nelif cvr >= .0125:\n    return 6\nelif cvr >= .010:\n    return 5\nelif cvr >= .006:\n    return 4\nelif cvr >= .005:\n    return 3\nelif cvr >= .003:\n    return 2\nelif cvr >= .002:\n    return 1\nelif cvr >= .001:\n    return 1\nelse:\n    return 0" 
 
     # At this point, offers_for_each_flow_rule exists and you have a
@@ -268,25 +268,25 @@ def create_offers_for_each_flow_rule_dataset(date_range):
 # helper functions
 def get_roi_score(roi, sales):
     if roi >= 10:
-        return 10 * sales
+        return 10 * sales/2
     elif roi >= 9:
-        return 9 * sales
+        return 9 * sales/2
     elif roi >= 8:
-        return 8 * sales 
+        return 8 * sales/2
     elif roi >= 7:
-        return 7 * sales 
+        return 7 * sales/2
     elif roi >= 6:
-        return 6 * sales 
+        return 6 * sales/2
     elif roi >= 5:
-        return 5 * sales 
+        return 5 * sales/2 
     elif roi >= 4:
-        return 4 * sales
+        return 4 * sales/2
     elif roi >= 3:
-        return 3 * sales
+        return 3 * sales/2
     elif roi >= 0:
-        return 2 * sales
+        return 2 * sales/2
     elif roi > -1:
-        return 1 * sales
+        return 1 * sales/2
     else:
         return 0 
 

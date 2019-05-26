@@ -133,7 +133,7 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
 
                if (widget not in widget_whitelist) & (p_widget not in
                    widget_whitelist) & (widget not in widget_greylist) & (p_widget not in widget_greylist) & (widget not in widget_blacklist) & (p_widget not in widget_blacklist):
-                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "not yet listed" 
+                   c_widgets_for_one_p_widget["data"][widget]["global_status"] = "waiting" 
 
     ############################################################
     # 5. Save c_widgets_for_one_p_widget to a json file and return it as a

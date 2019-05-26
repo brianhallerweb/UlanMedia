@@ -17,7 +17,7 @@ class Home extends Component {
       volRequestDates: '',
       mgidRequestDates: '',
       c1: false,
-      c1Value: 'not yet',
+      c1Value: 'wait',
       c2: true,
       c2Value: 20,
       c3: false,

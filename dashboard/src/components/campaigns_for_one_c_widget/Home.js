@@ -28,7 +28,7 @@ class Home extends Component {
       cWidgetHasMismatchClassificationAndGlobalStatus: '',
       goodCampaignsCount: '',
       badCampaignsCount: '',
-      notYetCampaignsCount: '',
+      waitCampaignsCount: '',
       badAndIncludedCampaignsCount: 0,
       c1: false,
       c1Value: 'included',
@@ -101,7 +101,7 @@ class Home extends Component {
               .c_widget_has_mismatch_classification_and_global_status,
           goodCampaignsCount: file.metadata.good_campaigns_count,
           badCampaignsCount: file.metadata.bad_campaigns_count,
-          notYetCampaignsCount: file.metadata.not_yet_campaigns_count,
+          waitCampaignsCount: file.metadata.wait_campaigns_count,
         });
       })
       .then(() =>
@@ -191,12 +191,12 @@ class Home extends Component {
               c widget is bad in {this.state.badCampaignsCount} campaigns
             </div>
             <div>
-              c widget is not yet in {this.state.notYetCampaignsCount} campaigns
+              c widget is wait in {this.state.waitCampaignsCount} campaigns
             </div>
             <div>
               c widget classification is{' '}
-              {this.state.cWidgetClassification === 'not yet' ? (
-                'NOT YET'
+              {this.state.cWidgetClassification === 'wait' ? (
+                'WAIT'
               ) : (
                 <Link
                   to={{

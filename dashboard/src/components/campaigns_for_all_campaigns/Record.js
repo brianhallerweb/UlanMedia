@@ -146,7 +146,7 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
     } else if (classification === 'half bad') {
       //light red
       return '#f7d9e1';
-    } else if (classification === 'not yet') {
+    } else if (classification === 'wait') {
       //light grey
       return '#fafafa';
     }

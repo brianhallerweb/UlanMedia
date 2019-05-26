@@ -32,7 +32,7 @@ const ConditionCheckboxes = ({
           disabled={loading}
           onChange={e => setConditionValue('c1Value', e.target.value)}
           defaultValue={c1Value}>
-          <option value="not yet">not yet</option>
+          <option value="wait">wait</option>
           <option value="white">white</option>
           <option value="black">black</option>
           <option value="grey">grey</option>
@@ -52,7 +52,7 @@ const ConditionCheckboxes = ({
           disabled={loading}
           onChange={e => setConditionValue('c2Value', e.target.value)}
           defaultValue={c2Value}>
-          <option value="not yet listed">not yet listed</option>
+          <option value="waiting">waiting</option>
           <option value="pc_whitelist">pc_whitelist</option>
           <option value="pc_greylist">pc_greylist</option>
           <option value="pc_blacklist">pc_blacklist</option>

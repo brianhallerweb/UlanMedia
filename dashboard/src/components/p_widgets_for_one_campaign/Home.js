@@ -23,11 +23,11 @@ class Home extends Component {
       loading: false,
       badAndIncludedPWidgetsCount: 0,
       c1: false,
-      c1Value: 'not yet',
+      c1Value: 'wait',
       c2: false,
       c2Value: 'included',
       c3: false,
-      c3Value: 'not yet listed',
+      c3Value: 'waiting',
       c4: false,
       c4Value: 10,
       c5: false,
@@ -198,7 +198,7 @@ class Home extends Component {
           loading={this.state.loading}
           error={this.state.error}
           widgetRecords={this.state.widgetRecords}
-	  name={this.state.name}
+          name={this.state.name}
         />
       </div>
     );

@@ -25,12 +25,12 @@ def classify_campaign_for_all_campaigns(campaign):
             if cps > (2 * eps):
                 return "bad"
             elif cps > (1 * eps):
-                return "not yet"
+                return "wait"
             else:
                 return "good"
         else:
             if cps > (1 * eps):
-                return "not yet"
+                return "wait"
             else:
                 return "good"
     elif leads > 0:
@@ -40,29 +40,29 @@ def classify_campaign_for_all_campaigns(campaign):
             if cpl > (2 * mpl):
                 return "bad"
             elif cpl > (1 * mpl):
-                return "not yet"
+                return "wait"
             else:
                 return "good"
         elif cost > (10 * mpl):
             if cpl > (3 * mpl):
                 return "bad"
             elif cpl > (1 * mpl):
-                return "not yet"
+                return "wait"
             else:
                 return "good"
         elif cost > (3 * mpl):
             if cpl > (5 * mpl):
                 return "bad"
             elif cpl > (1 * mpl):
-                return "not yet"
+                return "wait"
             else:
                 return "good"
         else:
-            return "not yet"
+            return "wait"
     elif cost > (5 * mpl):
         return "bad"
     else:
-        return "not yet"
+        return "wait"
 
 
 

@@ -14,8 +14,6 @@ import os
 import sys
 import json
 
-
-
 def create_complete_c_widgets_dataset(date_range, output_name):
     
     # 1. get some prerequisite data
@@ -90,7 +88,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
 
                if (c_widget not in widget_whitelist) & (p_widget not in
                    widget_whitelist) & (c_widget not in widget_greylist) & (p_widget not in widget_greylist) & (c_widget not in widget_blacklist) & (p_widget not in widget_blacklist):
-                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "not yet listed" 
+                   complete_c_widgets[c_widget]["for_all_campaigns"]['global_status'] = "waiting" 
 
 
     #########################################################
@@ -157,15 +155,13 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     for c_widget in complete_c_widgets:
         complete_c_widgets[c_widget]["good_campaigns_count"] = 0
         complete_c_widgets[c_widget]["bad_campaigns_count"] = 0
-        complete_c_widgets[c_widget]["not_yet_campaigns_count"] = 0
+        complete_c_widgets[c_widget]["wait_campaigns_count"] = 0
 
     for c_widget in complete_c_widgets:
         total_sales = complete_c_widgets[c_widget]["for_all_campaigns"]["sales"]
         complete_c_widgets[c_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = False
         for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
-            # This is where each campaign is classified and the good/bad/not
-            # yet
-            # counts are recorded
+            # This is where each campaign is classified and the good/bad/not yet counts are recorded
             classification = classify_campaign_for_one_p_or_c_widget(campaign, total_sales)
             campaign["classification"] = classification
             if classification == "good":
@@ -178,8 +174,8 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                    complete_c_widgets[c_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = True
             elif classification == "half bad": 
                complete_c_widgets[c_widget]["bad_campaigns_count"] += .5 
-            elif classification == "not yet": 
-               complete_c_widgets[c_widget]["not_yet_campaigns_count"] += 1
+            elif classification == "wait": 
+               complete_c_widgets[c_widget]["wait_campaigns_count"] += 1
 
 
     #############################################################
@@ -207,7 +203,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
     # "for_all_campaigns"
 
     for c_widget in complete_c_widgets.values():
-        if (c_widget['for_all_campaigns']['classification'] != "not yet") & ((c_widget["for_all_campaigns"]["global_status"] != f"p_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"c_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"pc_{c_widget['for_all_campaigns']['classification']}list")):
+        if (c_widget['for_all_campaigns']['classification'] != "wait") & ((c_widget["for_all_campaigns"]["global_status"] != f"p_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"c_{c_widget['for_all_campaigns']['classification']}list") & (c_widget["for_all_campaigns"]["global_status"] != f"pc_{c_widget['for_all_campaigns']['classification']}list")):
             c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = True
         else:
             c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
