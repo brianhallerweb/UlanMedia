@@ -80,7 +80,6 @@ const ConditionCheckboxes = ({
           <option value="bad">bad</option>
         </select>
       </div>
-
       <VariableValueCheckbox
         conditionName={'c2'}
         condition={c2}
@@ -95,7 +94,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c3'}
         condition={c3}
@@ -110,7 +108,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <FixedValueCheckbox
         conditionName={'c4'}
         condition={c4}
@@ -118,7 +115,6 @@ const ConditionCheckboxes = ({
         toggleCondition={toggleCondition}
         disabled={loading}
       />
-
       <FixedValueCheckbox
         conditionName={'c5'}
         condition={c5}
@@ -126,13 +122,10 @@ const ConditionCheckboxes = ({
         toggleCondition={toggleCondition}
         disabled={loading}
       />
-
       <p>-----------------------------------------------------</p>
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         need to lower cost or tighten targeting:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c6'}
         condition={c6}
@@ -147,7 +140,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c7'}
         condition={c7}
@@ -162,7 +154,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c8'}
         condition={c8}
@@ -177,7 +168,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c9'}
         condition={c9}
@@ -192,11 +182,9 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise cost or loosen targeting:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c10'}
         condition={c10}
@@ -211,7 +199,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c11'}
         condition={c11}
@@ -226,7 +213,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c12'}
         condition={c12}
@@ -241,7 +227,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c13'}
         condition={c13}
@@ -256,14 +241,11 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p>-----------------------------------------------------</p>
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         need to lower cost or tighten targeting or raise max per
         click/lead/sale:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c14'}
         condition={c14}
@@ -278,7 +260,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c15'}
         condition={c15}
@@ -299,8 +280,8 @@ const ConditionCheckboxes = ({
         condition={c16}
         conditionValueName={'c16Value'}
         conditionValue={c16Value}
-        label1={'Campaign CPL is greater than or equal to MPL plus '}
-        label2={'% [CPL >= MPL+(MPL*0)]'}
+        label1={'Campaign CPL or Cost is greater than or equal to MPL plus '}
+        label2={'% [CPL or Cost >= MPL+(MPL*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -308,14 +289,13 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c17'}
         condition={c17}
         conditionValueName={'c17Value'}
         conditionValue={c17Value}
-        label1={'Campaign CPS is greater than or equal to MPS plus '}
-        label2={'% [CPS >= MPS+(MPS*0)]'}
+        label1={'Campaign CPS or Cost is greater than or equal to MPS plus '}
+        label2={'% [CPS or Cost >= MPS+(MPS*0)]'}
         toggleCondition={toggleCondition}
         setConditionValue={setConditionValue}
         disabled={loading}
@@ -323,11 +303,9 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise cost or loosen targeting or lower max per click/lead/sale:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c18'}
         condition={c18}
@@ -342,7 +320,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c19'}
         condition={c19}
@@ -357,7 +334,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c20'}
         condition={c20}
@@ -372,7 +348,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c21'}
         condition={c21}
@@ -387,13 +362,10 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p>-----------------------------------------------------</p>
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         need to lower max per click/lead/sale:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c22'}
         condition={c22}
@@ -408,7 +380,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c23'}
         condition={c23}
@@ -423,7 +394,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c24'}
         condition={c24}
@@ -438,11 +408,9 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p style={{marginBottom: 0, fontWeight: 'bold'}}>
         can raise max per click/lead/sale:
       </p>
-
       <VariableValueCheckbox
         conditionName={'c25'}
         condition={c25}
@@ -457,7 +425,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c26'}
         condition={c26}
@@ -472,7 +439,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <VariableValueCheckbox
         conditionName={'c27'}
         condition={c27}
@@ -487,7 +453,6 @@ const ConditionCheckboxes = ({
         max={'1000'}
         step={'1'}
       />
-
       <p>-----------------------------------------------------</p>
     </div>
   );

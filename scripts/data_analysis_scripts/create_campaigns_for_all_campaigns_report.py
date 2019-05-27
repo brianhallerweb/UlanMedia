@@ -85,10 +85,10 @@ result14 = df[c14]
 c15 = df["cpc"] >= (df["mpc"] + (df["mpc"]*float(sys.argv[14])/100))
 result15 = df[c15]
 
-c16 = df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100))
+c16 = (df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100))) | (df["cost"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100)))
 result16 = df[c16]
 
-c17 = df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100))
+c17 = (df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100))) | (df["cost"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100)))
 result17 = df[c17]
 
 ####################
