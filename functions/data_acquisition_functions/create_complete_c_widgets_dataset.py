@@ -161,7 +161,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
         total_sales = complete_c_widgets[c_widget]["for_all_campaigns"]["sales"]
         complete_c_widgets[c_widget]["for_all_campaigns"]["has_bad_and_included_campaigns"] = False
         for campaign in complete_c_widgets[c_widget]["for_each_campaign"]:
-            # This is where each campaign is classified and the good/bad/not yet counts are recorded
+            # This is where each campaign is classified and the good/bad/wait counts are recorded
             classification = classify_campaign_for_one_p_or_c_widget(campaign, total_sales)
             campaign["classification"] = classification
             if classification == "good":

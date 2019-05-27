@@ -216,7 +216,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
             </div>
           ) : (
             <div>
-              <div>not yet</div>
+              <div>wait</div>
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
