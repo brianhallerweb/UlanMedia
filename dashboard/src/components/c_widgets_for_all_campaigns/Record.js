@@ -56,7 +56,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
     } else if (classification === 'grey') {
       //grey
       return '#ededed';
-    } else if (classification === 'not yet') {
+    } else if (classification === 'wait') {
       //light grey
       return '#fafafa';
     }
@@ -196,7 +196,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
           </div>
         </td>
         <td>
-          {this.props.widgetRecord.classification !== 'not yet' ? (
+          {this.props.widgetRecord.classification !== 'wait' ? (
             <div>
               <Link
                 onClick={e => e.stopPropagation()}
@@ -211,7 +211,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
-                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
               </div>
             </div>
           ) : (
@@ -220,7 +220,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
-                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
               </div>
             </div>
           )}

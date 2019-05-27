@@ -129,7 +129,7 @@ class Record extends Component {
     } else if (classification === 'half bad') {
       //light red
       return '#f7d9e1';
-    } else if (classification === 'not yet') {
+    } else if (classification === 'wait') {
       //light grey
       return '#fafafa';
     }

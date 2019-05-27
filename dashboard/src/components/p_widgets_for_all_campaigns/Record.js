@@ -57,7 +57,7 @@ class Record extends Component {
     } else if (classification === 'grey') {
       //grey
       return '#ededed';
-    } else if (classification === 'not yet') {
+    } else if (classification === 'wait') {
       //light grey
       return '#fafafa';
     }
@@ -190,7 +190,7 @@ class Record extends Component {
           </div>
         </td>
         <td>
-          {this.props.widgetRecord.classification !== 'not yet' ? (
+          {this.props.widgetRecord.classification !== 'wait' ? (
             <div>
               <Link
                 onClick={e => e.stopPropagation()}
@@ -205,16 +205,16 @@ class Record extends Component {
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
-                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
               </div>
             </div>
           ) : (
             <div>
-              <div>not yet</div>
+              <div>wait</div>
               <div>
                 {`(${this.props.widgetRecord.good_campaigns_count}g/${
                   this.props.widgetRecord.bad_campaigns_count
-                }b/${this.props.widgetRecord.not_yet_campaigns_count}ny)`}
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
               </div>
             </div>
           )}
