@@ -33,20 +33,6 @@ class Record extends Component {
       this.mgid_id
     }`;
 
-    this.countriesURL = `https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/country-code?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&from=${
-      this.props.volRequestStartDate
-    }T00:00:00Z&to=${
-      this.props.volRequestEndDate
-    }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}`;
-
-    this.languagesURL = `
-https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/language?dateRange=custom-date&chart=0&columns=countryName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=country-code&valueFiltersGrouping=country-code&from=${
-      this.props.volRequestStartDate
-    }T00:00:00Z&to=${
-      this.props.volRequestEndDate
-    }T00:00:00Z&filter1=campaign&filter1Value=${this.vol_id}
-`;
-
     this.deviceOSBrowserURL = `
 https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0-bb64-410b-b72c-6579c9683de0_d8393dfa-ef8c-444e-8880-7b2e0e118cf5/report/device,os,browser?dateRange=custom-date&sortKey=visits&sortDirection=desc&page=1&chart=0&columns=deviceName&columns=visits&columns=suspiciousVisitsPercentage&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&filter=&limit=1000&reportType=&include=ACTIVE&reportDataType=0&tagsGrouping=device&valueFiltersGrouping=device&from=${
       this.props.volRequestStartDate
@@ -228,16 +214,18 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
               label={'ads'}
             />
 
-            <ExternalLink
+            <InternalLink
               className={'rowLink'}
-              href={this.countriesURL}
+              stopPropagation={true}
+              to={`/contriesforonecampaign/${this.vol_id}/${this.name}/`}
               target={'_blank'}
               label={'countries'}
             />
 
-            <ExternalLink
+            <InternalLink
               className={'rowLink'}
-              href={this.languagesURL}
+              stopPropagation={true}
+              to={`/languagesforonecampaign/${this.vol_id}/${this.name}/`}
               target={'_blank'}
               label={'languages'}
             />
