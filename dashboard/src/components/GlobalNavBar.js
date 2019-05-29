@@ -101,6 +101,14 @@ const GlobalNavBar = () => {
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
+        to={'/campaignsforgoodpwidgets'}
+        target={'_blank'}
+        label={'good p widgets'}
+      />
+
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
         to={'/excludeonecampaignforallblacklistedpandcwidgets'}
         target={'_blank'}
         label={'exclude new campaign from all blacklisted widgets'}

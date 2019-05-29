@@ -17,6 +17,7 @@ const logout = require('./controllers/user_controllers/logout');
 const createGprsForEachPOfferDataset = require('./controllers/data_acquisition_controllers/create_gprs_for_each_p_offer_dataset');
 
 const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
+const createCampaignsForGoodPWidgetsDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_good_p_widgets_dataset');
 const createCountriesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_countries_for_one_campaign_dataset');
 const createLanguagesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_languages_for_one_campaign_dataset');
 const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_ad_dataset');
@@ -62,6 +63,7 @@ const createCWidgetsForOnePWidgetReport = require('./controllers/data_analysis_c
 const createPWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_all_campaigns_report');
 const createCWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_all_campaigns_report');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
+const createCampaignsForGoodPWidgetsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_good_p_widgets_report');
 const createDaysForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_offer_for_all_campaigns_report');
 const createMonthsForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_offer_for_all_campaigns_report');
 const createDaysForOneAdForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_ad_for_all_campaigns_report');
@@ -371,6 +373,12 @@ app.post(
 );
 
 app.post(
+  '/api/createCampaignsForGoodPWidgetsDataset',
+  authenticate,
+  createCampaignsForGoodPWidgetsDataset,
+);
+
+app.post(
   '/api/createCampaignsForOneCountryDataset',
   authenticate,
   createCampaignsForOneCountryDataset,
@@ -521,6 +529,12 @@ app.post(
   '/api/createCampaignsForOnePWidgetReport',
   authenticate,
   createCampaignsForOnePWidgetReport,
+);
+
+app.post(
+  '/api/createCampaignsForGoodPWidgetsReport',
+  authenticate,
+  createCampaignsForGoodPWidgetsReport,
 );
 
 app.post(

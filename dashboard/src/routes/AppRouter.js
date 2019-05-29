@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import GprsForEachPOffer from '../components/GprsForEachPOffer.js';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
+import campaigns_for_good_p_widgetsHome from '../components/campaigns_for_good_p_widgets/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
 import languages_for_all_campaignsHome from '../components/languages_for_all_campaigns/Home';
 import campaigns_for_one_countryHome from '../components/campaigns_for_one_country/Home';
@@ -60,6 +61,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/campaignsforallcampaigns"
           Component={campaigns_for_all_campaignsHome}
+        />
+        <PrivateRoute
+          path="/campaignsforgoodpwidgets"
+          Component={campaigns_for_good_p_widgetsHome}
         />
         <PrivateRoute
           path="/countriesforallcampaigns"
