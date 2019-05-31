@@ -102,7 +102,10 @@ class Record extends Component {
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.props.campaignRecord.widget_id}</td>
-
+        <td>current bid</td>
+        <td>${this.props.campaignRecord.recommended_bid}</td>
+        <td>{this.props.campaignRecord.bid_coefficient}</td>
+        <td>recommended coefficient</td>
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>
@@ -119,6 +122,7 @@ class Record extends Component {
         <td>${this.props.campaignRecord.eps}</td>
         <td>${this.props.campaignRecord.mps}</td>
         <td>{this.props.campaignRecord.status}</td>
+        <td>{this.props.campaignRecord.global_status}</td>
       </tr>
     );
   }

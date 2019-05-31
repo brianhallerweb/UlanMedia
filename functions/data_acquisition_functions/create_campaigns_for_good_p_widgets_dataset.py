@@ -18,8 +18,17 @@ def create_campaigns_for_good_p_widgets_dataset(date_range):
         if p_widget not in good_widgets:
             continue
         for campaign in data[p_widget]["for_each_campaign"]:
+            campaign["global_status"] = data[p_widget]["for_all_campaigns"]["global_status"]
             campaigns_for_good_p_widgets.append(campaign)
 
+    for campaign in campaigns_for_good_p_widgets:
+        if campaign["sales"] > 0:
+            epc = campaign["revenue"]/campaign["clicks"]
+            campaign["recommended_bid"] = round(epc - epc*.3, 2)
+        elif campaign["leads"] > 0:
+            campaign["recommended_bid"] = "? (has leads)"
+        else:
+            campaign["recommended_bid"] = "? (no leads or sales)"
     with open(f"../../data/campaigns_for_good_p_widgets/{date_range}_campaigns_for_good_p_widgets_dataset.json", "w") as file:
         json.dump(campaigns_for_good_p_widgets, file)
 

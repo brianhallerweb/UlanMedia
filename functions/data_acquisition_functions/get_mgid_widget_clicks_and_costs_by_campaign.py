@@ -4,6 +4,9 @@ from datetime import datetime
 import requests 
 import sys
 
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
+
 def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date, end_date):
     try:
         url =f"https://api.mgid.com/v1/goodhits/campaigns/{campaign_id}/quality-analysis?token={token}&campaignId={campaign_id}&dateInterval=interval&startDate={start_date}&endDate={end_date}";
@@ -35,10 +38,12 @@ def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date,
                     if source_id is not "0":
                         widget_id = f"{id}s{source_id}"
                     widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
-                    source_data["clicks"], "cost": source_data["spent"]}
+                    source_data["clicks"], "cost": source_data["spent"],
+                    "bid_coefficient": source_data["qualityFactor"]}
             else: 
                 widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
-                data["clicks"], "cost": data["spent"]}
+                        data["clicks"], "cost": data["spent"],
+                        "bid_coefficient": data["qualityFactor"]}
 
         return widgets_data 
     except requests.exceptions.RequestException as e:

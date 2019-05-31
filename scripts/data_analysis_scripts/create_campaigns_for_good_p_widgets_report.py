@@ -63,6 +63,6 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
             "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
             "cps", "eps", "mps", "profit", "status",
-            "widget_id"]].to_dict("records"))
+            "widget_id", "global_status", "recommended_bid", "bid_coefficient"]].to_dict("records"))
 
 print(json_final_result)
