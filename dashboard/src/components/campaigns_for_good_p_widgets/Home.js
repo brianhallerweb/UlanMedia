@@ -17,10 +17,10 @@ class Home extends Component {
       error: false,
       authenticated: true,
       loading: false,
-      c1: false,
-      c1Value: 0,
-      c2: false,
-      c2Value: 0,
+      c1: true,
+      c1Value: 0.5,
+      c2: true,
+      c2Value: 2,
     };
   }
 
@@ -53,6 +53,8 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
+        max_recommended_bid: this.state.c1Value,
+        default_coefficient: this.state.c2Value,
       }),
     })
       .then(res => {
