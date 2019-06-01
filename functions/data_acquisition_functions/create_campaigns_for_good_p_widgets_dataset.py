@@ -42,7 +42,7 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid,
         else:
             campaign["recommended_widget_bid"] = round(widget_bid * float(default_coefficient), 2)
 
-        campaign["recommended_coefficient"] = round(widget_bid * bid_coefficient, 2)
+        campaign["recommended_coefficient"] = round(campaign["recommended_widget_bid"] / widget_bid, 2)
 
     with open(f"../../data/campaigns_for_good_p_widgets/{date_range}_campaigns_for_good_p_widgets_dataset.json", "w") as file:
         json.dump(campaigns_for_good_p_widgets, file)
