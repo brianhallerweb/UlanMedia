@@ -35,37 +35,8 @@ class Record extends Component {
     );
   }
 
-  stylizeClassificationText(row) {
-    if ((row === 'bad') | (row === 'half bad')) {
-      return <td style={{color: 'red', fontWeight: 900}}>{row}</td>;
-    } else if ((row === 'good') | (row === 'half good')) {
-      return <td style={{color: 'green', fontWeight: 900}}>{row}</td>;
-    } else {
-      return <td>{row}</td>;
-    }
-  }
-
-  colorizeRow(classification) {
-    if (classification === 'good') {
-      //green
-      return '#eafcea';
-    } else if (classification === 'half good') {
-      //light green
-      return '#edfcea';
-    } else if (classification === 'bad') {
-      //red
-      return '#f7d9d9';
-    } else if (classification === 'half bad') {
-      //light red
-      return '#f7d9e1';
-    } else if (classification === 'wait') {
-      //light grey
-      return '#fafafa';
-    }
-  }
-
-  outlineRow(hovered, isBadAndIncluded) {
-    if (isBadAndIncluded) {
+  outlineRow(hovered, mismatchBidAndRecBid, mismatchCoeffAndRecCoeff) {
+    if (mismatchBidAndRecBid || mismatchCoeffAndRecCoeff) {
       return 'red';
     } else if (hovered) {
       return 'black';
@@ -78,13 +49,11 @@ class Record extends Component {
     return (
       <tr
         style={{
-          backgroundColor: this.colorizeRow(
-            this.props.campaignRecord.classification,
-          ),
           outlineStyle: 'solid',
           outlineColor: this.outlineRow(
             this.state.hovered,
-            this.props.campaignRecord.is_bad_and_included,
+            this.props.campaignRecord.mismatch_bid_and_rec_bid,
+            this.props.campaignRecord.mismatch_coeff_and_rec_coeff,
           ),
         }}
         className={this.state.clicked && 'clicked'}
