@@ -31,16 +31,17 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid,
         if campaign["leads"] > 0:
             cpl = campaign["cost"]/campaign["leads"]
         epc = campaign["revenue"]/campaign["clicks"]
+        campaign_bid = campaign["campaign_bid"]
         widget_bid = campaign["widget_bid"]
         bid_coefficient = campaign["bid_coefficient"]
 
         if sales > 0:
             campaign["recommended_widget_bid"] = round(epc - epc * .3, 2)
         elif campaign["leads"] > 0:
-            campaign["recommended_widget_bid"] = round(widget_bid * mpl / cpl /
+            campaign["recommended_widget_bid"] = round(campaign_bid * mpl / cpl /
                     2, 2)
         else:
-            campaign["recommended_widget_bid"] = round(widget_bid * float(default_coefficient), 2)
+            campaign["recommended_widget_bid"] = round(campaign_bid * float(default_coefficient), 2)
 
         campaign["recommended_coefficient"] = round(campaign["recommended_widget_bid"] / widget_bid, 2)
 

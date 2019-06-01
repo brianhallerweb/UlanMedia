@@ -15,9 +15,9 @@ class Records extends Component {
             <th>Campaign</th>
             <th>P Widget</th>
             <th>Current Bid</th>
-            <th>Recommended Bid</th>
-            <th>Current Coefficient</th>
-            <th>Recommended Coefficient</th>
+            <th>Rec Bid</th>
+            <th>Current Coeff</th>
+            <th>Rec Coeff</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>

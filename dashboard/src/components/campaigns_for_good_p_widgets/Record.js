@@ -102,7 +102,7 @@ class Record extends Component {
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.props.campaignRecord.widget_id}</td>
-        <td>{this.props.campaignRecord.widget_bid}</td>
+        <td>${this.props.campaignRecord.widget_bid}</td>
         <td>${this.props.campaignRecord.recommended_widget_bid}</td>
         <td>{this.props.campaignRecord.bid_coefficient}</td>
         <td>{this.props.campaignRecord.recommended_coefficient}</td>
