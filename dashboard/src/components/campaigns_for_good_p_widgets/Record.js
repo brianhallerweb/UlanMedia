@@ -35,8 +35,8 @@ class Record extends Component {
     );
   }
 
-  outlineRow(hovered, mismatchBidAndRecBid, mismatchCoeffAndRecCoeff) {
-    if (mismatchBidAndRecBid || mismatchCoeffAndRecCoeff) {
+  outlineRow(hovered, mismatchWBidAndRecWBid, mismatchCoeffAndRecCoeff) {
+    if (mismatchWBidAndRecWBid || mismatchCoeffAndRecCoeff) {
       return 'red';
     } else if (hovered) {
       return 'black';
@@ -52,7 +52,7 @@ class Record extends Component {
           outlineStyle: 'solid',
           outlineColor: this.outlineRow(
             this.state.hovered,
-            this.props.campaignRecord.mismatch_bid_and_rec_bid,
+            this.props.campaignRecord.mismatch_w_bid_and_rec_w_bid,
             this.props.campaignRecord.mismatch_coeff_and_rec_coeff,
           ),
         }}
@@ -71,17 +71,16 @@ class Record extends Component {
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.props.campaignRecord.widget_id}</td>
-        <td>${this.props.campaignRecord.widget_bid}</td>
-        <td>${this.props.campaignRecord.recommended_widget_bid}</td>
-        <td>{this.props.campaignRecord.bid_coefficient}</td>
-        <td>{this.props.campaignRecord.recommended_coefficient}</td>
+        <td>${this.props.campaignRecord.w_bid}</td>
+        <td>${this.props.campaignRecord.rec_w_bid}</td>
+        <td>{this.props.campaignRecord.coeff}</td>
+        <td>{this.props.campaignRecord.rec_coeff}</td>
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>
         <td>{this.props.campaignRecord.clicks}</td>
         <td>${this.props.campaignRecord.cpc}</td>
         <td>${this.props.campaignRecord.epc}</td>
-        <td>${this.props.campaignRecord.mpc}</td>
         <td>{this.props.campaignRecord.leads}</td>
         <td>${this.props.campaignRecord.cpl}</td>
         <td>${this.props.campaignRecord.epl}</td>

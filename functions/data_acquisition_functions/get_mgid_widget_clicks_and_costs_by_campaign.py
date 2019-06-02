@@ -43,7 +43,7 @@ def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date,
             else: 
                 widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
                         data["clicks"], "cost": data["spent"],
-                        "bid_coefficient": data["qualityFactor"]}
+                        "coeff": data["qualityFactor"]}
 
         return widgets_data 
     except requests.exceptions.RequestException as e:

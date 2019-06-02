@@ -29,11 +29,11 @@ final_result = final_result.sort_values("name", ascending=True)
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
+            "cpc", "epc", "cpl", "epl", "mpl", "lead_cvr",
             "cps", "eps", "mps", "profit", "status",
-            "widget_id", "global_status", "campaign_bid",
-            "widget_bid", "bid_coefficient", "recommended_widget_bid",
-            "recommended_coefficient", "mismatch_bid_and_rec_bid",
+            "widget_id", "global_status", "c_bid",
+            "w_bid", "coeff", "rec_w_bid",
+            "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
             "mismatch_coeff_and_rec_coeff"]].to_dict("records"))
 
 print(json_final_result)

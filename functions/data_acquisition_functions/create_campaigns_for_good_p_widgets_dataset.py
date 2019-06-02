@@ -2,9 +2,9 @@ from config.config import *
 import os
 import json
 
-def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid, default_coefficient):
-    max_recommended_bid = float(max_recommended_bid)
-    default_coefficient = float(default_coefficient)
+def create_campaigns_for_good_p_widgets_dataset(date_range, max_rec_bid, default_coeff):
+    max_rec_bid = float(max_rec_bid)
+    default_coeff = float(default_coeff)
 
     good_widgets = ["5753946", "5763287", "5763288", "5763289", "5763290", "5763291", "5763292", "5763293", "5763294", "5763295", "5763296",
     "5763297", "5763298", "5763299", "5763300", "5763301", "5763302",
@@ -21,10 +21,7 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid,
             continue
         for campaign in data[p_widget]["for_each_campaign"]:
             campaign["global_status"] = data[p_widget]["for_all_campaigns"]["global_status"]
-            # 5/31/19 campaign bid isn't supposed to be mpc but it is for now.
-            # Mike hasn't decided how to calculate mpc properly.
-            campaign["campaign_bid"] = campaign["mpc"]
-            campaign["widget_bid"] = round(campaign["campaign_bid"] * campaign["bid_coefficient"], 2)
+            campaign["w_bid"] = round(campaign["c_bid"] * campaign["coeff"], 2)
             campaigns_for_good_p_widgets.append(campaign)
 
     for campaign in campaigns_for_good_p_widgets:
@@ -33,35 +30,35 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid,
         if campaign["leads"] > 0:
             cpl = campaign["cost"]/campaign["leads"]
         epc = campaign["revenue"]/campaign["clicks"]
-        campaign_bid = campaign["campaign_bid"]
-        widget_bid = campaign["widget_bid"]
-        bid_coefficient = campaign["bid_coefficient"]
+        c_bid = campaign["c_bid"]
+        w_bid = campaign["w_bid"]
+        coeff = campaign["coeff"]
 
         if sales > 0:
-            campaign["recommended_widget_bid"] = round(epc - epc * .3, 2)
+            campaign["rec_w_bid"] = round(epc - epc * .3, 2)
         elif campaign["leads"] > 0:
-            campaign["recommended_widget_bid"] = round(campaign_bid * mpl / cpl /
+            campaign["rec_w_bid"] = round(c_bid * mpl / cpl /
                     2, 2)
         else:
-            campaign["recommended_widget_bid"] = round(campaign_bid * default_coefficient, 2)
+            campaign["rec_w_bid"] = round(c_bid * default_coeff, 2)
 
-        if campaign["recommended_widget_bid"] > max_recommended_bid:
-            campaign["recommended_widget_bid"] = max_recommended_bid
+        if campaign["rec_w_bid"] > max_rec_bid:
+            campaign["rec_w_bid"] = max_rec_bid
 
-        campaign["recommended_coefficient"] = round(campaign["recommended_widget_bid"] / campaign_bid, 0)
+        campaign["rec_coeff"] = round(campaign["rec_w_bid"] / c_bid, 0)
 
     for campaign in campaigns_for_good_p_widgets:
-        widget_bid = campaign["widget_bid"]
-        bid_coefficient = campaign["bid_coefficient"]
-        recommended_widget_bid = campaign["recommended_widget_bid"]
-        recommended_coefficient = campaign["recommended_coefficient"]
+        w_bid = campaign["w_bid"]
+        coeff = campaign["coeff"]
+        rec_w_bid = campaign["rec_w_bid"]
+        rec_coeff = campaign["rec_coeff"]
 
-        if widget_bid != recommended_widget_bid:
-            campaign["mismatch_bid_and_rec_bid"] = True
+        if w_bid != rec_w_bid:
+            campaign["mismatch_w_bid_and_rec_w_bid"] = True
         else:
-            campaign["mismatch_bid_and_rec_bid"] = False
+            campaign["mismatch_w_bid_and_rec_w_bid"] = False
 
-        if bid_coefficient != recommended_coefficient:
+        if coeff != rec_coeff:
             campaign["mismatch_coeff_and_rec_coeff"] = True
         else:
             campaign["mismatch_coeff_and_rec_coeff"] = False

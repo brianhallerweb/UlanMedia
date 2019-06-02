@@ -28,7 +28,7 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
     mps = campaign["max_sale_cpa"] 
     mpc_pattern = re.compile(r'.*cpc_(.*)')
     res = mpc_pattern.findall(campaign["name"])
-    mpc = float(list(res)[0])
+    c_bid = float(list(res)[0])
 
     # create a metadata dictionary
     metadata = {"mgid_start_date": mgid_start_date,
@@ -40,7 +40,7 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             "vol_id": vol_id,
             "mpl": mpl,
             "mps": mps, 
-            "mpc": mpc 
+            "c_bid": c_bid 
              }
 
     # get clicks and costs for each widget from mgid

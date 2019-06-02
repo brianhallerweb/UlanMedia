@@ -6,11 +6,7 @@ function createCampaignsForGoodPWidgetsDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [
-      req.body.dateRange,
-      req.body.max_recommended_bid,
-      req.body.default_coefficient,
-    ],
+    args: [req.body.dateRange, req.body.max_rec_bid, req.body.default_coeff],
   };
   PythonShell.run(
     'create_campaigns_for_good_p_widgets_dataset.py',

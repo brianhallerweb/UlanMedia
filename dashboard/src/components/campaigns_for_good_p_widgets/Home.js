@@ -53,8 +53,8 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        max_recommended_bid: this.state.c1Value,
-        default_coefficient: this.state.c2Value,
+        max_rec_bid: this.state.c1Value,
+        default_coeff: this.state.c2Value,
       }),
     })
       .then(res => {
