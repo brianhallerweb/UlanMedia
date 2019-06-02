@@ -88,7 +88,7 @@ result15 = df[c15]
 c16 = ((df["cpl"] != np.inf) & (df["cpl"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100)))) | ((df["cost"] >= (df["mpl"] + (df["mpl"]*float(sys.argv[15])/100))) & df["leads"] == 0)
 result16 = df[c16]
 
-c17 = ((df["cps"] != np.inf) & (df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100)))) | (df["cost"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100)))
+c17 = ((df["cps"] != np.inf) & (df["cps"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100)))) | ((df["cost"] >= (df["mps"] + (df["mps"]*float(sys.argv[16])/100))) & df["sales"] == 0)
 result17 = df[c17]
 
 ####################
