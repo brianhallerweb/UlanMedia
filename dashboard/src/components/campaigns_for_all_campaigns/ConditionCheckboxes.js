@@ -281,7 +281,7 @@ const ConditionCheckboxes = ({
         conditionValueName={'c16Value'}
         conditionValue={c16Value}
         label1={
-          'Campaign CPL or Cost (no leads) is greater than or equal to MPL plus '
+          'Campaign CPL or Cost(no leads) is greater than or equal to MPL plus '
         }
         label2={
           '% [CPL >= MPL+(MPL*0)] or [leads == 0 AND Cost >= MPL+(MPL*0)]'
@@ -299,7 +299,7 @@ const ConditionCheckboxes = ({
         conditionValueName={'c17Value'}
         conditionValue={c17Value}
         label1={
-          'Campaign CPS or Cost (no sales) is greater than or equal to MPS plus '
+          'Campaign CPS or Cost(no sales) is greater than or equal to MPS plus '
         }
         label2={
           '% [CPS >= MPS+(MPS*0)] or [sales == 0 AND Cost >= MPS+(MPS*0)]'
