@@ -48,7 +48,7 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_recommended_bid,
         if campaign["recommended_widget_bid"] > max_recommended_bid:
             campaign["recommended_widget_bid"] = max_recommended_bid
 
-        campaign["recommended_coefficient"] = round(campaign["recommended_widget_bid"] / campaign_bid, 2)
+        campaign["recommended_coefficient"] = round(campaign["recommended_widget_bid"] / campaign_bid, 0)
 
     for campaign in campaigns_for_good_p_widgets:
         widget_bid = campaign["widget_bid"]
