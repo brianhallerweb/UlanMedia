@@ -31,6 +31,7 @@ df["cpl"] = round(df["cost"] / df["leads"], 2)
 df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
+df["w_bid"] = round(df["w_bid"], 2)
 
 c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
@@ -55,9 +56,9 @@ for i in range(len(conditions_args)):
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
+            "cpc", "epc", "cpl", "epl", "mpl", "lead_cvr",
             "cps", "eps", "mps", "profit", "status",
-            "classification", "is_bad_and_included"]
+            "classification", "is_bad_and_included", "w_bid", "coeff"]
             )
 
 if final_result is None:
@@ -74,7 +75,8 @@ if len(final_result.index) > 0:
     summary["name"] = "summary"
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
-    summary["mpc"] = "NA" 
+    summary["w_bid"] = "NA" 
+    summary["coeff"] = "NA" 
     summary["mpl"] = "NA"
     summary["mps"] = "NA" 
     summary["classification"] = "NA"  
@@ -107,8 +109,8 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
-            "cpc", "epc", "mpc", "cpl", "epl", "mpl", "lead_cvr",
+            "cpc", "epc", "cpl", "epl", "mpl", "lead_cvr",
             "cps", "eps", "mps", "profit", "status",
-            "classification", "is_bad_and_included"]].to_dict("records"))
+            "classification", "is_bad_and_included", "w_bid", "coeff"]].to_dict("records"))
 
 print(json_final_result)

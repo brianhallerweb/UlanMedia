@@ -138,7 +138,8 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                 c_widgets_for_one_campaign[c_widget]["mpl"] = campaign["max_lead_cpa"]
                 c_widgets_for_one_campaign[c_widget]["mps"] = campaign["max_sale_cpa"]
                 res = mpc_pattern.findall(campaign["name"])
-                c_widgets_for_one_campaign[c_widget]["mpc"] = list(res)[0]
+                c_widgets_for_one_campaign[c_widget]["c_bid"] = float(list(res)[0])
+                c_widgets_for_one_campaign[c_widget]["w_bid"] = c_widgets_for_one_campaign[c_widget]["c_bid"] * c_widgets_for_one_campaign[c_widget]["coeff"]
 
         for c_widget in c_widgets_for_one_campaign:
             if complete_c_widgets[c_widget]["for_each_campaign"]:

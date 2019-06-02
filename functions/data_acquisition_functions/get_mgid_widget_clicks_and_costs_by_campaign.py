@@ -39,7 +39,7 @@ def get_mgid_widget_clicks_and_costs_by_campaign(token, campaign_id, start_date,
                         widget_id = f"{id}s{source_id}"
                     widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
                     source_data["clicks"], "cost": source_data["spent"],
-                    "bid_coefficient": source_data["qualityFactor"]}
+                    "coeff": source_data["qualityFactor"]}
             else: 
                 widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
                         data["clicks"], "cost": data["spent"],

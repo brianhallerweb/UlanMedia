@@ -24,6 +24,7 @@ df["cpl"] = round(df["cost"] / df["leads"], 2)
 df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
+df["w_bid"] = round(df["w_bid"], 2)
 
 c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
@@ -53,9 +54,9 @@ for i in range(len(conditions_args)):
     elif conditions_args[i] == "true":
         final_result = final_result.merge(conditions_dfs[i], how="inner",
         on=["clicks", "cost", "leads", "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
-    "epc", "mpc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
+    "epc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
     "profit", "status", "global_status", "classification",
-    "is_bad_and_included"]
+    "is_bad_and_included", "w_bid", "coeff"]
             )
 
 if final_result is None:
@@ -73,10 +74,11 @@ if len(final_result.index) > 0:
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
     number_of_rows = len(final_result.index)
-    summary["mpc"] = round(summary["mpc"] / number_of_rows, 2)
     summary["mpl"] = round(summary["mpl"] / number_of_rows, 2)
     summary["mps"] = round(summary["mps"] / number_of_rows, 2)
     summary["classification"] = "NA"
+    summary["coeff"] = "NA"
+    summary["w_bid"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
     summary["is_bad_and_included"] = False 
@@ -108,8 +110,8 @@ if len(final_result.index) > 0:
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
     "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
-    "epc", "mpc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
+    "epc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
     "profit", "status", "global_status", "classification",
-    "is_bad_and_included"]].to_dict("records"))
+    "is_bad_and_included", "w_bid", "coeff"]].to_dict("records"))
 
 print(json_final_result)

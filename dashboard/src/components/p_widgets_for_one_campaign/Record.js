@@ -175,7 +175,8 @@ class Record extends Component {
         </td>
 
         {this.stylizeClassificationText(this.props.widgetRecord.classification)}
-
+        <td>${this.props.widgetRecord.w_bid}</td>
+        <td>{this.props.widgetRecord.coeff}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

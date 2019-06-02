@@ -21,6 +21,9 @@ df["cpl"] = round(df["cost"] / df["leads"], 2)
 df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
+df["w_bid"] = round(df["w_bid"], 2)
+df["rec_w_bid"] = round(df["rec_w_bid"], 2)
+df["rec_coeff"] = round(df["rec_coeff"])
 
 final_result = df
 final_result = final_result.replace([np.inf, -np.inf], "NaN")
