@@ -179,7 +179,9 @@ class Record extends Component {
           this.props.campaignRecord.classification,
         )}
         <td>${this.props.campaignRecord.w_bid}</td>
+        <td>${this.props.campaignRecord.rec_w_bid}</td>
         <td>{this.props.campaignRecord.coeff}</td>
+        <td>{this.props.campaignRecord.rec_coeff}</td>
         <td>${this.props.campaignRecord.cost}</td>
         <td>${this.props.campaignRecord.revenue}</td>
         <td>${this.props.campaignRecord.profit}</td>
