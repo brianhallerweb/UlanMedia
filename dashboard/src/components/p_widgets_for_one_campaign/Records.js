@@ -15,7 +15,9 @@ class Records extends Component {
             <th>P Widget</th>
             <th>Classification</th>
             <th>W Bid</th>
+            <th>Rec W Bid</th>
             <th>Coeff</th>
+            <th>Rec Coeff</th>
             <th>Cost</th>
             <th>Revenue</th>
             <th>Profit</th>

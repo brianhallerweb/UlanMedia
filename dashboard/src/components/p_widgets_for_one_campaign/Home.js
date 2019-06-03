@@ -33,6 +33,10 @@ class Home extends Component {
       c5: false,
       c5Value: 10,
       c6: false,
+      c7: true,
+      c7Value: 0.5,
+      c8: true,
+      c8Value: 2,
     };
   }
 
@@ -64,6 +68,8 @@ class Home extends Component {
       body: JSON.stringify({
         volID: this.state.volid,
         dateRange: this.state.dateRange,
+        max_rec_bid: this.state.c7Value,
+        default_coeff: this.state.c8Value,
       }),
     })
       .then(res => {
@@ -182,6 +188,10 @@ class Home extends Component {
           c5={this.state.c5}
           c5Value={this.state.c5Value}
           c6={this.state.c6}
+          c7={this.state.c7}
+          c7Value={this.state.c7Value}
+          c8={this.state.c8}
+          c8Value={this.state.c8Value}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
           maxLeadCPA={this.props.match.params.max_lead_cpa}

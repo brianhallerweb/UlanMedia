@@ -25,6 +25,8 @@ df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
 df["w_bid"] = round(df["w_bid"], 2)
+df["rec_w_bid"] = round(df["rec_w_bid"], 2)
+df["rec_coeff"] = round(df["rec_coeff"], 1)
 
 c1 = df["classification"] == sys.argv[3]
 result1 = df[c1]
@@ -56,7 +58,9 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
     "epc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
     "profit", "status", "global_status", "classification",
-    "is_bad_and_included", "w_bid", "coeff"]
+    "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
+            "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
+            "mismatch_coeff_and_rec_coeff"]
             )
 
 if final_result is None:
@@ -77,8 +81,10 @@ if len(final_result.index) > 0:
     summary["mpl"] = round(summary["mpl"] / number_of_rows, 2)
     summary["mps"] = round(summary["mps"] / number_of_rows, 2)
     summary["classification"] = "NA"
-    summary["coeff"] = "NA"
     summary["w_bid"] = "NA"
+    summary["coeff"] = "NA"
+    summary["rec_w_bid"] = "NA"
+    summary["rec_coeff"] = "NA"
     summary["status"] = "NA"
     summary["global_status"] = "NA"
     summary["is_bad_and_included"] = False 
@@ -112,6 +118,8 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
     "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
     "epc", "cpl", "epl", "mpl", "cps", "eps", "mps" ,"lead_cvr",
     "profit", "status", "global_status", "classification",
-    "is_bad_and_included", "w_bid", "coeff"]].to_dict("records"))
+    "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
+            "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
+            "mismatch_coeff_and_rec_coeff"]].to_dict("records"))
 
 print(json_final_result)

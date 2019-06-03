@@ -6,7 +6,12 @@ function createPWidgetsForOneCampaignDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.volID, req.body.dateRange],
+    args: [
+      req.body.volID,
+      req.body.dateRange,
+      req.body.max_rec_bid,
+      req.body.default_coeff,
+    ],
   };
   PythonShell.run(
     'create_p_widgets_for_one_campaign_dataset.py',

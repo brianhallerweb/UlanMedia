@@ -3,7 +3,11 @@ from config.mgid_token import mgid_token
 import os
 import json
 
-def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
+def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
+        max_rec_bid, default_coeff):
+    max_rec_bid = float(max_rec_bid)
+    default_coeff = float(default_coeff)
+
 
     p_widgets_for_one_campaign = {"metadata": {},
                                  "data": [] 
@@ -24,6 +28,42 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range):
             if campaign["vol_id"] == vol_id:
                 campaign["global_status"] = data[p_widget]["for_all_campaigns"]["global_status"]
                 p_widgets_for_one_campaign["data"].append(campaign)
+
+    for p_widget in p_widgets_for_one_campaign["data"]:
+        sales = p_widget["sales"]
+        mpl = p_widget["mpl"]
+        if p_widget["leads"] > 0:
+            cpl = p_widget["cost"]/p_widget["leads"]
+        if p_widget["clicks"] > 0:
+            epc = p_widget["revenue"]/p_widget["clicks"]
+        c_bid = p_widget["c_bid"]
+        w_bid = p_widget["w_bid"]
+        coeff = p_widget["coeff"]
+
+        if sales > 0:
+            p_widget["rec_w_bid"] = epc - epc * .3
+        elif p_widget["leads"] > 0:
+            p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
+        else:
+            p_widget["rec_w_bid"] = c_bid * default_coeff
+
+        if p_widget["rec_w_bid"] > max_rec_bid:
+            p_widget["rec_w_bid"] = max_rec_bid
+
+        p_widget["rec_coeff"] = p_widget["rec_w_bid"] / c_bid
+
+        rec_w_bid = p_widget["rec_w_bid"]
+        rec_coeff = p_widget["rec_coeff"]
+
+        if w_bid != rec_w_bid:
+            p_widget["mismatch_w_bid_and_rec_w_bid"] = True
+        else:
+            p_widget["mismatch_w_bid_and_rec_w_bid"] = False
+
+        if coeff != rec_coeff:
+            p_widget["mismatch_coeff_and_rec_coeff"] = True
+        else:
+            p_widget["mismatch_coeff_and_rec_coeff"] = False
 
     with open(f"../../data/p_widgets_for_one_campaign/{vol_id}_{date_range}_p_widgets_for_one_campaign_dataset.json", "w") as file:
         json.dump(p_widgets_for_one_campaign, file)
