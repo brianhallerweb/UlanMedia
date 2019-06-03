@@ -40,8 +40,6 @@ class Home extends Component {
       c4Value: 10,
       c5: true,
       c5Value: 0.5,
-      c6: true,
-      c6Value: 2,
     };
   }
 
@@ -79,7 +77,6 @@ class Home extends Component {
         dateRange: this.state.dateRange,
         pWidgetID: this.state.pWidgetID,
         max_rec_bid: this.state.c5Value,
-        default_coeff: this.state.c6Value,
       }),
     })
       .then(res => {
@@ -196,8 +193,6 @@ class Home extends Component {
           c4Value={this.state.c4Value}
           c5={this.state.c5}
           c5Value={this.state.c5Value}
-          c6={this.state.c6}
-          c6Value={this.state.c6Value}
           loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
         />

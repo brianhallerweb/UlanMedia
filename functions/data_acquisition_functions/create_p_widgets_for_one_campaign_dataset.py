@@ -4,9 +4,8 @@ import os
 import json
 
 def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
-        max_rec_bid, default_coeff):
+        max_rec_bid):
     max_rec_bid = float(max_rec_bid)
-    default_coeff = float(default_coeff)
 
 
     p_widgets_for_one_campaign = {"metadata": {},
@@ -45,7 +44,7 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
         elif p_widget["leads"] > 0:
             p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
         else:
-            p_widget["rec_w_bid"] = c_bid * default_coeff
+            p_widget["rec_w_bid"] = c_bid
 
         if p_widget["rec_w_bid"] > max_rec_bid:
             p_widget["rec_w_bid"] = max_rec_bid

@@ -6,7 +6,7 @@ function createCampaignsForOneCWidgetDataset(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_acquisition_scripts/',
-    args: [req.body.widgetID, req.body.dateRange],
+    args: [req.body.widgetID, req.body.dateRange, req.body.max_rec_bid],
   };
   PythonShell.run(
     'create_campaigns_for_one_c_widget_dataset.py',

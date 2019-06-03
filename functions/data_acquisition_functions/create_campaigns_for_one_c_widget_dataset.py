@@ -6,9 +6,10 @@ import sys
 import re
 
 def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
-        output_name):
+        max_rec_bid, output_name):
 
     # 1. get some prerequisite data
+    max_rec_bid = float(max_rec_bid)
 
     campaigns = get_campaign_sets()
 
@@ -50,6 +51,42 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
     # 4. Add the data
 
     campaigns_for_one_c_widget["data"] = complete_c_widget["for_each_campaign"]
+
+    for campaign in campaigns_for_one_c_widget["data"]:
+        sales = campaign["sales"]
+        mpl = campaign["mpl"]
+        if campaign["leads"] > 0:
+            cpl = campaign["cost"]/campaign["leads"]
+        epc = campaign["revenue"]/campaign["clicks"]
+        c_bid = campaign["c_bid"]
+        w_bid = campaign["w_bid"]
+        coeff = campaign["coeff"]
+
+        if sales > 0:
+            campaign["rec_w_bid"] = epc - epc * .3
+        elif campaign["leads"] > 0:
+            campaign["rec_w_bid"] = c_bid * mpl / cpl / 2
+        else:
+            campaign["rec_w_bid"] = c_bid
+
+        if campaign["rec_w_bid"] > max_rec_bid:
+            campaign["rec_w_bid"] = max_rec_bid
+
+        campaign["rec_coeff"] = campaign["rec_w_bid"] / c_bid
+
+        rec_w_bid = campaign["rec_w_bid"]
+        rec_coeff = campaign["rec_coeff"]
+
+        if w_bid != rec_w_bid:
+            campaign["mismatch_w_bid_and_rec_w_bid"] = True
+        else:
+            campaign["mismatch_w_bid_and_rec_w_bid"] = False
+
+        if coeff != rec_coeff:
+            campaign["mismatch_coeff_and_rec_coeff"] = True
+        else:
+            campaign["mismatch_coeff_and_rec_coeff"] = False
+
 
     ############################################################
     # 5. Save campaigns_for_one_c_widget to a json file and return it as a

@@ -22,7 +22,6 @@ class Records extends Component {
             <th>Clicks</th>
             <th>CPC</th>
             <th>EPC</th>
-            <th>MPC</th>
             <th>Leads</th>
             <th>CPL</th>
             <th>EPL</th>

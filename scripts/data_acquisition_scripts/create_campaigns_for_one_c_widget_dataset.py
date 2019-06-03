@@ -6,8 +6,9 @@ from functions.data_acquisition_functions.create_campaigns_for_one_c_widget_data
 
 widget_id = sys.argv[1]
 date_range = sys.argv[2]
+max_rec_bid = sys.argv[3]
 
 print(create_campaigns_for_one_c_widget_dataset(widget_id, date_range,
-        f"{widget_id}_{date_range}_campaigns_for_one_c_widget_dataset"))
+    max_rec_bid, f"{widget_id}_{date_range}_campaigns_for_one_c_widget_dataset"))
 
 

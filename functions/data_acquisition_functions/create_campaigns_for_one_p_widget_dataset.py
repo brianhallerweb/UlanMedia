@@ -9,14 +9,13 @@ import sys
 import re
 
 def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
-        max_rec_bid, default_coeff, output_name):
+        max_rec_bid, output_name):
 
     ########################################################
 
     # 1. get some prerequisite data
 
     max_rec_bid = float(max_rec_bid)
-    default_coeff = float(default_coeff)
 
     campaigns = get_campaign_sets()
     widget_whitelist = get_whitelist()
@@ -78,7 +77,7 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
         elif campaign["leads"] > 0:
             campaign["rec_w_bid"] = c_bid * mpl / cpl / 2
         else:
-            campaign["rec_w_bid"] = c_bid * default_coeff
+            campaign["rec_w_bid"] = c_bid
 
         if campaign["rec_w_bid"] > max_rec_bid:
             campaign["rec_w_bid"] = max_rec_bid

@@ -16,8 +16,6 @@ const ConditionCheckboxes = ({
   c4Value,
   c5,
   c5Value,
-  c6,
-  c6Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -122,29 +120,6 @@ const ConditionCheckboxes = ({
             max="10"
             step=".01"
             value={c5Value}
-            onChange={e => setConditionValue(e.target.name, e.target.value)}
-          />
-        </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          disabled={true}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        <span>
-          {'Default recommended coefficient if no sales and no leads '}
-          <input
-            className="inputBox"
-            type="number"
-            name="c6Value"
-            min="0"
-            max="10"
-            step=".1"
-            value={c6Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>

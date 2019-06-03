@@ -188,7 +188,6 @@ class Record extends Component {
         <td>{this.props.campaignRecord.clicks}</td>
         <td>${this.props.campaignRecord.cpc}</td>
         <td>${this.props.campaignRecord.epc}</td>
-        <td>${this.props.campaignRecord.mpc}</td>
         <td>{this.props.campaignRecord.leads}</td>
         <td>${this.props.campaignRecord.cpl}</td>
         <td>${this.props.campaignRecord.epl}</td>

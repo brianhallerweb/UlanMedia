@@ -36,6 +36,8 @@ class Home extends Component {
       c2Value: 10,
       c3: false,
       c3Value: 10,
+      c4: true,
+      c4Value: 0.5,
     };
   }
 
@@ -67,6 +69,7 @@ class Home extends Component {
       body: JSON.stringify({
         widgetID: this.state.widgetID,
         dateRange: this.state.dateRange,
+        max_rec_bid: this.state.c4Value,
       }),
     })
       .then(res => {
@@ -178,6 +181,8 @@ class Home extends Component {
           c2Value={this.state.c2Value}
           c3={this.state.c3}
           c3Value={this.state.c3Value}
+          c4={this.state.c4}
+          c4Value={this.state.c4Value}
           loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
         />
