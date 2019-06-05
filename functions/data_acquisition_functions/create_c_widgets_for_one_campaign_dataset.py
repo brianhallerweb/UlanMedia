@@ -42,7 +42,12 @@ def create_c_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
         if sales > 0:
             c_widget["rec_w_bid"] = epc - epc * .3
         elif c_widget["leads"] > 0:
-            c_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
+            # 6/4 there was a row with a lead and cpl=0, which doens't make
+            # sense, so I just added this to stop the error. 
+            if cpl == 0:
+                c_widget["rec_w_bid"] = 0
+            else:
+                c_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
         else:
             c_widget["rec_w_bid"] = c_bid
 
