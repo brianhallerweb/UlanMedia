@@ -39,17 +39,15 @@ class Record extends Component {
           target={'_blank'}
           label={'campaigns'}
         />
-
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
-          to={`/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
-            /^\d*/,
-          )}`}
+          to={`/cwidgetsforonecampaign/${this.props.widgetRecord.vol_id}/${
+            this.props.name
+          }/`}
           target={'_blank'}
           label={'c_widgets'}
         />
-
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
@@ -59,21 +57,18 @@ class Record extends Component {
           target={'_blank'}
           label={'exclude'}
         />
-
         <ExternalLink
           className={'rowLink'}
           href={deviceOSURL}
           target={'_blank'}
           label={'device/os'}
         />
-
         <ExternalLink
           className={'rowLink'}
           href={ISPURL}
           target={'_blank'}
           label={'isp'}
         />
-
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
@@ -83,7 +78,6 @@ class Record extends Component {
           target={'_blank'}
           label={'months'}
         />
-
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
@@ -93,7 +87,6 @@ class Record extends Component {
           target={'_blank'}
           label={'days'}
         />
-
         <ExternalLink
           className={'rowLink'}
           href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${

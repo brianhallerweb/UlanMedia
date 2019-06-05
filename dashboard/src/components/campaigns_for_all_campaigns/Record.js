@@ -201,6 +201,14 @@ https://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde
             <InternalLink
               className={'rowLink'}
               stopPropagation={true}
+              to={`/cwidgetsforonecampaign/${this.vol_id}/${this.name}/`}
+              target={'_blank'}
+              label={'c_widgets'}
+            />
+
+            <InternalLink
+              className={'rowLink'}
+              stopPropagation={true}
               to={`/offersforonecampaign/${this.vol_id}/${this.name}/`}
               target={'_blank'}
               label={'offers'}
