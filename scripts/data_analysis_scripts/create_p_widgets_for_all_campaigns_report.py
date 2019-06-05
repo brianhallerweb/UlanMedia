@@ -65,7 +65,8 @@ for i in range(len(conditions_args)):
             "classification","has_mismatch_classification_and_global_status", "has_children",
             "has_bad_and_included_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
+            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps",
+            "domain"]
             )
 
 if final_result is None:
@@ -82,6 +83,7 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
             "global_status","classification","has_mismatch_classification_and_global_status",
             "has_children", "has_bad_and_included_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]].to_dict("records"))
+            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps",
+            "domain"]].to_dict("records"))
 
 print(json_final_result)

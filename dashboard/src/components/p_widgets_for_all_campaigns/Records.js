@@ -13,6 +13,7 @@ class Records extends Component {
         <thead>
           <tr>
             <th>P Widget</th>
+            <th>Domain</th>
             <th>Classification</th>
             <th>Cost</th>
             <th>Revenue</th>

@@ -189,6 +189,7 @@ class Record extends Component {
             />
           </div>
         </td>
+        <td>{this.props.widgetRecord.domain}</td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>

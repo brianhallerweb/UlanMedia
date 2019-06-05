@@ -39,6 +39,14 @@ class Record extends Component {
           target={'_blank'}
           label={'campaigns'}
         />
+        <ExternalLink
+          className={'rowLink'}
+          href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+            this.props.widgetRecord.mgid_id
+          }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+          target={'_blank'}
+          label={'mgid'}
+        />
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
@@ -47,15 +55,6 @@ class Record extends Component {
           }/`}
           target={'_blank'}
           label={'c_widgets'}
-        />
-        <InternalLink
-          className={'rowLink'}
-          stopPropagation={true}
-          to={`/excludecampaignforonepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
-            /^\d*/,
-          )}/${this.props.widgetRecord.mgid_id}`}
-          target={'_blank'}
-          label={'exclude'}
         />
         <ExternalLink
           className={'rowLink'}
@@ -87,13 +86,14 @@ class Record extends Component {
           target={'_blank'}
           label={'days'}
         />
-        <ExternalLink
+        <InternalLink
           className={'rowLink'}
-          href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-            this.props.widgetRecord.mgid_id
-          }?search=${this.props.widgetRecord.widget_id.match(/^\d*/)}`}
+          stopPropagation={true}
+          to={`/excludecampaignforonepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+            /^\d*/,
+          )}/${this.props.widgetRecord.mgid_id}`}
           target={'_blank'}
-          label={'mgid'}
+          label={'exclude'}
         />
       </div>
     );
