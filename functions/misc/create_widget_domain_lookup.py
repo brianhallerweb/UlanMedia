@@ -14,7 +14,6 @@ def create_widget_domain_lookup():
     widget_domain_lookup = {} 
 
     domain_pattern = re.compile(r'(.*//)([a-zA-Z0-9.]*)')
-    n = 1
     for domain in domains:
         if len(domain) > 0:
             try:
@@ -33,6 +32,15 @@ def create_widget_domain_lookup():
                                 widget_domain_lookup[widget_id] = domain
             except requests.exceptions.RequestException as e:
                 print(e)
+
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/vol_widget_domain_list/vol_widget_domain_list.txt', 'r') as file:
+        widget_domain_list = file.read().split("\n")
+    
+    for widget_domain in widget_domain_list:
+        if len(widget_domain) > 0:
+            widget_id = widget_domain.split(",")[0]
+            domain = widget_domain.split(",")[1]
+            widget_domain_lookup[widget_id] = domain
 
     with open(f"../../data/widget_domain_lookup/widget_domain_lookup.json", "w") as file:
         json.dump(widget_domain_lookup, file)
