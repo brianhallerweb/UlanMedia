@@ -28,7 +28,7 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     if complete_p_widgets.get(p_widget_id):
         complete_p_widget = complete_p_widgets[p_widget_id]
     else:
-        complete_p_widget = {"for_each_campaign":[]}
+        complete_p_widget = {"for_all_campaigns":{"domain": "unknown"}, "for_each_campaign":[]}
 
 
     ########################################################
@@ -61,6 +61,9 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     # 4. Add the data
 
     campaigns_for_one_p_widget["data"] = complete_p_widget["for_each_campaign"]
+
+    for campaign in campaigns_for_one_p_widget["data"]:
+        campaign["domain"] = complete_p_widget["for_all_campaigns"]["domain"]
 
     for campaign in campaigns_for_one_p_widget["data"]:
         sales = campaign["sales"]

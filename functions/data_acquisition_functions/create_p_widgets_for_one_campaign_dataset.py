@@ -26,6 +26,7 @@ def create_p_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
         for campaign in data[p_widget]["for_each_campaign"]:
             if campaign["vol_id"] == vol_id:
                 campaign["global_status"] = data[p_widget]["for_all_campaigns"]["global_status"]
+                campaign["domain"] = data[p_widget]["for_all_campaigns"]["domain"]
                 p_widgets_for_one_campaign["data"].append(campaign)
 
     for p_widget in p_widgets_for_one_campaign["data"]:

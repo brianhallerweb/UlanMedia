@@ -62,7 +62,7 @@ for i in range(len(conditions_args)):
             "cps", "eps", "mps", "profit", "status",
             "classification", "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
             "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
-            "mismatch_coeff_and_rec_coeff"]
+            "mismatch_coeff_and_rec_coeff", "domain"]
             )
 
 if final_result is None:
@@ -87,6 +87,7 @@ if len(final_result.index) > 0:
     summary["mps"] = "NA" 
     summary["classification"] = "NA"  
     summary["status"] = "NA"  
+    summary["domain"] = "NA"  
     summary["is_bad_and_included"] = False  
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
@@ -119,6 +120,6 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
             "cps", "eps", "mps", "profit", "status",
             "classification", "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
             "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
-            "mismatch_coeff_and_rec_coeff"]].to_dict("records"))
+            "mismatch_coeff_and_rec_coeff", "domain"]].to_dict("records"))
 
 print(json_final_result)

@@ -185,6 +185,15 @@ class Record extends Component {
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
+        {this.props.campaignRecord.name !== 'summary' && (
+          <td>
+            <a
+              href={`http://${this.props.campaignRecord.domain}`}
+              target={'_blank'}>
+              {this.props.campaignRecord.domain}
+            </a>
+          </td>
+        )}
         {this.stylizeClassificationText(
           this.props.campaignRecord.classification,
         )}

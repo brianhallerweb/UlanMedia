@@ -13,6 +13,7 @@ class Records extends Component {
         <thead>
           <tr>
             <th>Campaign</th>
+            <th>Domain</th>
             <th>Classification</th>
             <th>W Bid</th>
             <th>Rec W Bid</th>

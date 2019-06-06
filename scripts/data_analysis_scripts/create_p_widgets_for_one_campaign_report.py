@@ -60,7 +60,7 @@ for i in range(len(conditions_args)):
     "profit", "status", "global_status", "classification",
     "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
             "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
-            "mismatch_coeff_and_rec_coeff"]
+            "mismatch_coeff_and_rec_coeff", "domain"]
             )
 
 if final_result is None:
@@ -120,6 +120,6 @@ json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
     "profit", "status", "global_status", "classification",
     "is_bad_and_included", "w_bid", "coeff", "rec_w_bid",
             "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
-            "mismatch_coeff_and_rec_coeff"]].to_dict("records"))
+            "mismatch_coeff_and_rec_coeff", "domain"]].to_dict("records"))
 
 print(json_final_result)

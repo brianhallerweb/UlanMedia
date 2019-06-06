@@ -166,7 +166,13 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
-
+        <td>
+          <a
+            href={`http://${this.props.widgetRecord.domain}`}
+            target={'_blank'}>
+            {this.props.widgetRecord.domain}
+          </a>
+        </td>
         {this.stylizeClassificationText(this.props.widgetRecord.classification)}
         <td>${this.props.widgetRecord.w_bid}</td>
         <td>${this.props.widgetRecord.rec_w_bid}</td>

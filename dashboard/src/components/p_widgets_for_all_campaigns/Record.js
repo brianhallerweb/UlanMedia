@@ -190,11 +190,11 @@ class Record extends Component {
           </div>
         </td>
         <td>
-          <ExternalLink
-            href={this.props.widgetRecord.domain}
-            target={'_blank'}
-            label={this.props.widgetRecord.domain}
-          />
+          <a
+            href={`http://${this.props.widgetRecord.domain}`}
+            target={'_blank'}>
+            {this.props.widgetRecord.domain}
+          </a>
         </td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
