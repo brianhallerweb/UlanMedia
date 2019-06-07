@@ -194,7 +194,10 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             widget_domains_lookup = json.load(file)
     for p_widget in complete_p_widgets:
         if p_widget in widget_domains_lookup:
-            complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = widget_domains_lookup[p_widget]
+            if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"]:
+                complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] + "," + widget_domains_lookup[p_widget]
+            else:
+                complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = widget_domains_lookup[p_widget]
         else:
             complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = "unknown"
 
