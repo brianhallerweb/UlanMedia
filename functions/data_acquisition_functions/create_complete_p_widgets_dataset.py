@@ -193,8 +193,9 @@ def create_complete_p_widgets_dataset(date_range, output_name):
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/widget_domain_lookup/widget_domain_lookup.json', 'r') as file:
             widget_domains_lookup = json.load(file)
     for p_widget in complete_p_widgets:
+
         if p_widget in widget_domains_lookup:
-            if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"]:
+            if complete_p_widgets[p_widget]["for_all_campaigns"].get("domain"):
                 complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] + "," + widget_domains_lookup[p_widget]
             else:
                 complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = widget_domains_lookup[p_widget]
