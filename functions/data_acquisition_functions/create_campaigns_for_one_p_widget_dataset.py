@@ -63,9 +63,7 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
     campaigns_for_one_p_widget["data"] = complete_p_widget["for_each_campaign"]
 
     for campaign in campaigns_for_one_p_widget["data"]:
-        campaign["domain"] = ""
-        for domain in complete_p_widget["for_all_campaigns"]["domain"]:
-            campaign["domain"] = campaign["domain"] + "," + domain
+        campaign["domain"] = complete_p_widget["for_all_campaigns"]["domain"]
 
     for campaign in campaigns_for_one_p_widget["data"]:
         sales = campaign["sales"]
