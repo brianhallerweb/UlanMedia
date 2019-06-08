@@ -1,0 +1,1 @@
+"innity.com,  1777, DIRECT, 47ea16374dff1d69\nappnexus.com, 3058, RESELLER\ngoogle.com, pub-2254427607846536, DIRECT, f08c47fec0942fa0\ngoogle.com, pub-3992036467687738, DIRECT, f08c47fec0942fa0111"

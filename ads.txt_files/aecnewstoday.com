@@ -1,0 +1,1 @@
+"# Advanced Ads ads.txt\ngoogle.com, pub-2995042694445204, DIRECT, f08c47fec0942fa0\n"

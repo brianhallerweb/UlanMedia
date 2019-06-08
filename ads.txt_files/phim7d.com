@@ -1,0 +1,1 @@
+"<html>\n<head>\n    <meta http-equiv=\"refresh\" content=\"0; url=http://suspended.hawkhost.com/\"/>\n</head>\n<body>\n</body>\n</html>\n"

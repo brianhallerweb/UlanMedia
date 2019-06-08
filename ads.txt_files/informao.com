@@ -1,0 +1,1 @@
+"mgid.com, 5659233, DIRECT\r\nmgid.com, 5707650, DIRECT\r\nmgid.com, 5718841, DIRECT\r\ngoogle.com, pub-6532578995430837, DIRECT, f08c47fec0942fa0\r\ngoogle.com, pub-0243119537643981, DIRECT, f08c47fec0942fa0\r\ngoogle.com, pub-4909899198784776, DIRECT, f08c47fec0942fa0"

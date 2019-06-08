@@ -1,0 +1,1 @@
+"<http://www.ghanatvon.com/ads.txt>\r\n<mgid.com, 5643079><DIRECT>\r\n<mgid.com, 5653259><DIRECT>\r\n<mgid.com, 5682923><DIRECT>"

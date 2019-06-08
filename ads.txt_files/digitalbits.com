@@ -1,0 +1,1 @@
+"sovrn.com, 98687, DIRECT, fafdf38b16bf6b2b\nlijit.com, 98687, DIRECT, fafdf38b16bf6b2b\ngumgum.com, 11645, RESELLER, ffdef49475d318a9\nopenx.com, 537120960, RESELLER\nopenx.com, 83499, RESELLER\nopenx.com, 538959099, RESELLER\npubmatic.com, 137711, RESELLER\npubmatic.com, 156212, RESELLER\npubmatic.com, 62483, RESELLER\npubmatic.com, 156700, RESELLER"

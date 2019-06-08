@@ -1,0 +1,1 @@
+"google.com, pub-6070398767421094, RESELLER, f08c47fec0942fa0\r\ngoogle.com, pub-0803530076129388, DIRECT, f08c47fec0942fa0\r\ngoogle.com, pub-3060933690289877, RESELLER, f08c47fec0942fa0\r\ngoogle.com, pub-5454875279695201, RESELLER, f08c47fec0942fa0"

@@ -1,0 +1,1 @@
+"mgid.com, 5662525, DIRECT\nmgid.com, 5662526, DIRECT\nmgid.com, 5663219, DIRECT\nmgid.com, 5667422, DIRECT\nmgid.com, 5719064, DIRECT\nmgid.com, 5723723, DIRECT\nmgid.com, 5723724, DIRECT\nmgid.com, 5723725, DIRECT\nmgid.com, 5723726, DIRECT\n"

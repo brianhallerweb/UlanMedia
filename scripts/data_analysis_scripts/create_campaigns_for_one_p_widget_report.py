@@ -25,8 +25,6 @@ if len(df.index) == 0:
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cost"] = round(df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
-df["cpc"] = round(df["cost"] / df["clicks"], 2)
-df["epc"] = round(df["revenue"] / df["clicks"], 2)
 df["cpl"] = round(df["cost"] / df["leads"], 2)
 df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
@@ -87,7 +85,7 @@ if len(final_result.index) > 0:
     summary["mps"] = "NA" 
     summary["classification"] = "NA"  
     summary["status"] = "NA"  
-    summary["domain"] = "NA"  
+    summary["domain"] = final_result["domain"][1] 
     summary["is_bad_and_included"] = False  
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0

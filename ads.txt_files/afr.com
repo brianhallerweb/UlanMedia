@@ -1,0 +1,1 @@
+"#17 Apr 2018\n#Ver 0.3.0\n\ngoogle.com, pub-4900384784953086, DIRECT, f08c47fec0942fa0\ngoogle.com, pub-8027655917349410, DIRECT, f08c47fec0942fa0\nindexexchange.com, 184665, RESELLER, 50b1c356f2c5c8fc\nappnexus.com, 6885, RESELLER"

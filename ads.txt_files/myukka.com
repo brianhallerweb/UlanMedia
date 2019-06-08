@@ -1,0 +1,1 @@
+"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<HTML><HEAD>\n<TITLE>404 Not Found</TITLE>\n</HEAD><BODY>\n\n<h1>Not Found (404)</h1>\n\nThe requested URL\n/ads.txt\nwas not found on this server.\n<hr>\n\nmyukka.com\n\n"

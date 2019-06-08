@@ -1,0 +1,1 @@
+"Display: adtech.com, 11584, Reseller #Oath\nVideo: advertising.com, 27882, Reseller #Oath\n\nrevcontent.com, 107035, DIRECT\nappnexus.com, 7666, DIRECT, f5ab79cb980f11d1\nrubiconproject.com, 156042, DIRECT, 0bfd66d529a55807\nteads.tv, 15898, DIRECT, 15a9c44f6d26cbe1  "
