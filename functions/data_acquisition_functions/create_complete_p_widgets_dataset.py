@@ -199,7 +199,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
             for domain in widget_domains_lookup[p_widget]:
                 complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] + "," + domain
         else:
-            complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = ["unknown"]
+            complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = "unknown"
 
     
     #############################################################
