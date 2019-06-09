@@ -1,1 +1,0 @@
-"<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;www&#46;jansatta&#46;com&#47;ads&#46;txt\" on this server.<P>\nReference&#32;&#35;18&#46;f7bc3b17&#46;1559921543&#46;7f14782\n</BODY>\n</HTML>\n"

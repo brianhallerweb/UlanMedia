@@ -1,1 +1,0 @@
-"google.com, pub-5685970572339577, DIRECT, f08c47fec0942fa0 # dfp\r\ngoogle.com, pub-3193782837561578, DIRECT , f08c47fec0942fa0 # adsense"

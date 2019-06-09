@@ -1,1 +1,0 @@
-"\r\ngoogle.com, pub-4964358903113472, DIRECT, f08c47fec0942fa0"

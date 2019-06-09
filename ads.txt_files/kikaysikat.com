@@ -1,1 +1,0 @@
-"# Created by Ads.txt Publisher by Brightcom\r\n\r\ngoogle.com, pub-0732933067461032, DIRECT, f08c47fec0942fa0\r\n\r\ninnity.com, 3582, DIRECT, 47ea16374dff1d69\r\n\r\nappnexus.com, 3058, RESELLER\t\r\n\r\ngoogle.com, pub-3992036467687738, DIRECT, f08c47fec0942fa0\t\r\n\r\ngoogle.com, pub-2254427607846536, DIRECT, f08c47fec0942fa0\r\n\r\n\r\n"

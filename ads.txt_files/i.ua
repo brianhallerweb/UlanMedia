@@ -1,1 +1,0 @@
-"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<HTML><HEAD>\n<TITLE>404 Not Found</TITLE>\n</HEAD><BODY>\n<H1>Not Found</H1>\nThe requested URL /ads.txt was not found on this server.<P>\n<HR>\n<ADDRESS>Apache/1.3.42 Server at i.ua Port 80</ADDRESS>\n</BODY></HTML>\n"

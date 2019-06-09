@@ -1,1 +1,0 @@
-"<!DOCTYPE html>\n<html>\n  <head>\n    <title>403 Forbidden</title>\n  </head>\n  <body>\n    <h1>Error 403 Forbidden</h1>\n    <p>Forbidden</p>\n    <h3>Guru Meditation:</h3>\n    <p>XID: 170053232</p>\n    <hr>\n    <p>Varnish cache server</p>\n  </body>\n</html>\n"

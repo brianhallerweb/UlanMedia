@@ -1,1 +1,0 @@
-"google.com, pub-6649970146044894, DIRECT\r\nmgid.com, 5656556, DIRECT\r\nmgid.com, 5657086, DIRECT\r\nmgid.com, 5657329, DIRECT\r\n"

@@ -1,1 +1,0 @@
-"google.com, pub-5271052033776811, DIRECT, f08c47fec0942fa0\nsurgeprice.com, naERhGiYLFbnsQPTZ, DIRECT\nsulvo.co, naERhGiYLFbnsQPTZ, DIRECT\nsulvo.com, naERhGiYLFbnsQPTZ, DIRECT\ngoogle.com, pub-3831894559014614, DIRECT, f08c47fec0942fa0\nopenx.com, 537532642, DIRECT, a698e2ec38604c6\ndemand.supply, naERhGiYLFbnsQPTZ, DIRECT\n"

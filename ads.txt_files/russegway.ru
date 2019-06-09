@@ -1,1 +1,0 @@
-"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\n<p>You don't have permission to access /ads.txt\non this server.<br />\n</p>\n<hr>\n<address>Apache/2.4.10 (Unix) Server at russegway.ru Port 80</address>\n</body></html>\n"

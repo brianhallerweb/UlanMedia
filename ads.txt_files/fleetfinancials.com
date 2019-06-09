@@ -1,1 +1,0 @@
-"\u00ef\u00bb\u00bf#ads.txt Bobit Business Media\r\n\r\ngoogle.com, 86855500, direct\r\ngoogle.com, pub-8515133308015529, direct #display, video"

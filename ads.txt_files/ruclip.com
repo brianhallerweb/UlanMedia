@@ -1,1 +1,0 @@
-"mgid.com, 5596567, DIRECT\nmgid.com, 5691463, DIRECT\nmgid.com, 5714887, DIRECT\nmgid.com, 5714888, DIRECT\nmgid.com, 5714889, DIRECT\nmgid.com, 5716820, DIRECT\n"

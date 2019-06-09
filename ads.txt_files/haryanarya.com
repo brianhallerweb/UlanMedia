@@ -1,1 +1,0 @@
-"google.com, pub-0420999097904620, DIRECT, f08c47fec0942fa0\r\ngoogle.com, pub-0420999097904620, RESELLER, f08c47fec0942fa0"
