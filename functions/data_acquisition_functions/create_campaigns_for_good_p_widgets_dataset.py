@@ -28,7 +28,8 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_rec_bid, default
         mpl = campaign["mpl"]
         if campaign["leads"] > 0:
             cpl = campaign["cost"]/campaign["leads"]
-        epc = campaign["revenue"]/campaign["clicks"]
+        if campaign["clicks"] > 0:
+            epc = campaign["revenue"]/campaign["clicks"]
         c_bid = campaign["c_bid"]
         w_bid = campaign["w_bid"]
         coeff = campaign["coeff"]
