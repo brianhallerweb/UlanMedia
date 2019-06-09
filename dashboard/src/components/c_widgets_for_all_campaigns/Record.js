@@ -195,6 +195,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
             />
           </div>
         </td>
+        <td>{this.props.widgetRecord.domain}</td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>

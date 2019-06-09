@@ -62,7 +62,8 @@ for i in range(len(conditions_args)):
             "revenue", "sales", "widget_id", "lead_cvr", "profit",
             "global_status", "classification", "has_mismatch_classification_and_global_status", "has_bad_and_included_campaigns",
             "good_campaigns_count", "bad_campaigns_count",
-            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps"]
+            "wait_campaigns_count", "cpc", "epc", "cpl", "epl", "cps", "eps",
+            "domain"]
             )
 
 if final_result is None:
