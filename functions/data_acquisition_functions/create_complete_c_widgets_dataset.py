@@ -209,6 +209,30 @@ def create_complete_c_widgets_dataset(date_range, output_name):
         else:
             c_widget["for_all_campaigns"]["has_mismatch_classification_and_global_status"] = False
 
+    ###########################################################
+
+    # add domains, if possible
+
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/widget_domain_lookup/widget_domain_lookup.json', 'r') as file:
+            widget_domains_lookup = json.load(file)
+
+    p_widget_pattern = re.compile(r'\d*')
+
+    for c_widget in complete_c_widgets:
+
+        p_widget = p_widget_pattern.search(c_widget).group()
+
+        if p_widget in widget_domains_lookup:
+            complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] = ""
+            for domain in widget_domains_lookup[p_widget]:
+                if complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] == "":
+                    complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] = domain
+                else:
+                    complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] = complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] + "," + domain
+        else:
+            complete_c_widgets[c_widget]["for_all_campaigns"]["domain"] = ""
+
+
     ############################################################
 
     # 9. Save complete_p_widgets to a json file and return it as a
