@@ -69,6 +69,7 @@ class Record extends Component {
             </div>
           )}
         </td>
+        <td>{this.props.widgetRecord.domain}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

@@ -78,7 +78,7 @@ if len(final_result.index) > 0:
     summary["rec_coeff"] = "NA"
     summary["mpl"] = "NA"
     summary["mps"] = "NA"
-    summary["domain"] = final_result["domain"][1]
+    summary["domain"] = final_result["domain"][0]
     summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["is_bad_and_included"] = False  

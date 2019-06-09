@@ -85,7 +85,7 @@ if len(final_result.index) > 0:
     summary["mps"] = "NA" 
     summary["classification"] = "NA"  
     summary["status"] = "NA"  
-    summary["domain"] = final_result["domain"][1] 
+    summary["domain"] = final_result["domain"][0] 
     summary["is_bad_and_included"] = False  
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0

@@ -58,7 +58,7 @@ for i in range(len(conditions_args)):
         on=["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr",
             "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-            "eps", "mps", "global_status"]
+            "eps", "mps", "global_status", "domain"]
             )                                                                             
 if final_result is None:                                                                  
     final_result = df                                                                     
@@ -75,6 +75,7 @@ if len(final_result.index) > 0:
     summary["cpc"] = round(summary["cost"] / summary["clicks"], 2)
     summary["epc"] = round(summary["revenue"] / summary["clicks"], 2)
     summary["global_status"] = "NA"
+    summary["domain"] = final_result["domain"][0] 
     if summary["clicks"] == 0:
         summary["lead_cvr"] = 0
     else:
@@ -102,6 +103,6 @@ if len(final_result.index) > 0:
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id", "lead_cvr",
             "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-            "eps", "mps", "global_status"]].to_dict("records"))
+            "eps", "mps", "global_status", "domain"]].to_dict("records"))
 
 print(json_final_result)

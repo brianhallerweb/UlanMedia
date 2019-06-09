@@ -135,6 +135,17 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                    widget_whitelist) & (widget not in widget_greylist) & (p_widget not in widget_greylist) & (widget not in widget_blacklist) & (p_widget not in widget_blacklist):
                    c_widgets_for_one_p_widget["data"][widget]["global_status"] = "waiting" 
 
+
+
+    # add the domain
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_p_widgets/{date_range}_complete_p_widgets_dataset.json', 'r') as file:
+        complete_p_widgets = json.load(file)
+
+    domain = complete_p_widgets[p_widget]["for_all_campaigns"]["domain"]
+
+    for c_widget in c_widgets_for_one_p_widget["data"]:
+        c_widgets_for_one_p_widget["data"][c_widget]["domain"] = domain
+        
     ############################################################
     # 5. Save c_widgets_for_one_p_widget to a json file and return it as a
     # json file 
