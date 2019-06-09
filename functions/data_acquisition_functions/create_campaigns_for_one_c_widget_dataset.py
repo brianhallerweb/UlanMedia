@@ -53,6 +53,9 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
     campaigns_for_one_c_widget["data"] = complete_c_widget["for_each_campaign"]
 
     for campaign in campaigns_for_one_c_widget["data"]:
+        campaign["domain"] = complete_c_widget["for_all_campaigns"]["domain"]
+
+    for campaign in campaigns_for_one_c_widget["data"]:
         sales = campaign["sales"]
         mpl = campaign["mpl"]
         if campaign["leads"] > 0:

@@ -155,7 +155,7 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
-
+        <td>{this.props.widgetRecord.domain}</td>
         {this.stylizeClassificationText(this.props.widgetRecord.classification)}
         <td>${this.props.widgetRecord.w_bid}</td>
         <td>${this.props.widgetRecord.rec_w_bid}</td>
