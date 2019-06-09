@@ -21,6 +21,7 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_rec_bid, default
             continue
         for campaign in data[p_widget]["for_each_campaign"]:
             campaign["global_status"] = data[p_widget]["for_all_campaigns"]["global_status"]
+            campaign["domain"] = data[p_widget]["for_all_campaigns"]["domain"]
             campaigns_for_good_p_widgets.append(campaign)
 
     for campaign in campaigns_for_good_p_widgets:
