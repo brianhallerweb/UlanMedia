@@ -185,7 +185,7 @@ class Record extends Component {
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
-        <td>${this.props.campaignRecord.domain}</td>
+        <td>{this.props.campaignRecord.domain}</td>
         {this.stylizeClassificationText(
           this.props.campaignRecord.classification,
         )}
