@@ -5,7 +5,6 @@ import os
 import sys
 import json
 
-
 def create_p_widgets_for_all_campaigns_dataset(date_range):
 
     # 1. get some prerequisite data

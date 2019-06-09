@@ -34,7 +34,7 @@ class Record extends Component {
       this.props.widgetRecord.widget_id
     }&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
 
-    this.state = {clicked: false, hovered: false};
+    this.state = {clicked: false, hovered: false, domains: []};
   }
 
   componentDidMount() {
@@ -45,6 +45,9 @@ class Record extends Component {
     ) {
       this.setState({clicked: true});
     }
+
+    let domains = this.props.widgetRecord.domain.split(',');
+    this.setState({domains: domains});
   }
 
   colorizeRow(classification) {
@@ -190,11 +193,15 @@ class Record extends Component {
           </div>
         </td>
         <td>
-          <a
-            href={`http://${this.props.widgetRecord.domain}`}
-            target={'_blank'}>
-            {this.props.widgetRecord.domain}
-          </a>
+          {this.state.domains.map(domain => (
+            <div>
+              <a
+                href={`https://refererhider.com/?http://${domain}`}
+                target={'_blank'}>
+                {domain}
+              </a>
+            </div>
+          ))}
         </td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
