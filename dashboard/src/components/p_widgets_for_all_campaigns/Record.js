@@ -34,7 +34,12 @@ class Record extends Component {
       this.props.widgetRecord.widget_id
     }&limit=1000&reportType=table&include=ALL&reportDataType=0&tagsGrouping=day&valueFiltersGrouping=day&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc`;
 
-    this.state = {clicked: false, hovered: false, domains: []};
+    this.state = {
+      clicked: false,
+      hovered: false,
+      domains: [],
+      domainsClicked: false,
+    };
   }
 
   componentDidMount() {
@@ -80,6 +85,49 @@ class Record extends Component {
       return 'black';
     } else {
       return 'transparent';
+    }
+  }
+
+  showDomains() {
+    if (this.state.domains.length === 1) {
+      return (
+        <a
+          href={`https://refererhider.com/?http://${this.state.domains[0]}`}
+          target={'_blank'}>
+          {this.state.domains[0]}
+        </a>
+      );
+    } else if (this.state.domainsClicked) {
+      return (
+        <div>
+          <p
+            onClick={e => {
+              e.stopPropagation();
+              this.setState({domainsClicked: false, clicked: false});
+            }}>
+            hide multiples &#8679;
+          </p>
+          {this.state.domains.map(domain => (
+            <div key={domain}>
+              <a
+                href={`https://refererhider.com/?http://${domain}`}
+                target={'_blank'}>
+                {domain}
+              </a>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <p
+          onClick={e => {
+            e.stopPropagation();
+            this.setState({domainsClicked: true, clicked: false});
+          }}>
+          show multiples &#8681;
+        </p>
+      );
     }
   }
 
@@ -192,17 +240,7 @@ class Record extends Component {
             />
           </div>
         </td>
-        <td>
-          {this.state.domains.map(domain => (
-            <div>
-              <a
-                href={`https://refererhider.com/?http://${domain}`}
-                target={'_blank'}>
-                {domain}
-              </a>
-            </div>
-          ))}
-        </td>
+        <td>{this.showDomains()}</td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>

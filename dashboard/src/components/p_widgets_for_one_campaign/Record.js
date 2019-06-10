@@ -7,7 +7,12 @@ import ExternalLink from '../utilities/ExternalLink';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false, hovered: false};
+    this.state = {
+      clicked: false,
+      hovered: false,
+      domains: [],
+      domainsClicked: false,
+    };
   }
 
   componentDidMount() {
@@ -17,6 +22,8 @@ class Record extends Component {
     ) {
       this.setState({clicked: true});
     }
+    let domains = this.props.widgetRecord.domain.split(',');
+    this.setState({domains: domains});
   }
 
   addRowLinks() {
@@ -138,6 +145,49 @@ class Record extends Component {
     }
   }
 
+  showDomains() {
+    if (this.state.domains.length === 1) {
+      return (
+        <a
+          href={`https://refererhider.com/?http://${this.state.domains[0]}`}
+          target={'_blank'}>
+          {this.state.domains[0]}
+        </a>
+      );
+    } else if (this.state.domainsClicked) {
+      return (
+        <div>
+          <p
+            onClick={e => {
+              e.stopPropagation();
+              this.setState({domainsClicked: false, clicked: false});
+            }}>
+            hide multiples &#8679;
+          </p>
+          {this.state.domains.map(domain => (
+            <div key={domain}>
+              <a
+                href={`https://refererhider.com/?http://${domain}`}
+                target={'_blank'}>
+                {domain}
+              </a>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <p
+          onClick={e => {
+            e.stopPropagation();
+            this.setState({domainsClicked: true, clicked: false});
+          }}>
+          show multiples &#8681;
+        </p>
+      );
+    }
+  }
+
   render() {
     return (
       <tr
@@ -166,13 +216,7 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
-        <td>
-          <a
-            href={`http://${this.props.widgetRecord.domain}`}
-            target={'_blank'}>
-            {this.props.widgetRecord.domain}
-          </a>
-        </td>
+        <td>{this.showDomains()}</td>
         {this.stylizeClassificationText(this.props.widgetRecord.classification)}
         <td>${this.props.widgetRecord.w_bid}</td>
         <td>${this.props.widgetRecord.rec_w_bid}</td>
