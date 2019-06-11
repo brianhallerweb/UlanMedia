@@ -11,7 +11,7 @@ def create_widget_domain_lookup():
     
     widget_domain_lookup = {} 
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/vol_widget_domain_list/vol_widget_domain_list.txt', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/widget_domain_list/widget_domain_list.txt', 'r') as file:
         widget_domain_list = file.read().split("\n")
     
     for widget_domain in widget_domain_list:
@@ -23,6 +23,9 @@ def create_widget_domain_lookup():
                 widget_domain_lookup[widget_id].append(domain)
             else:
                 widget_domain_lookup[widget_id] = [domain]
+
+    # 6/11 All this stuff below is the scrapper for ads.txt domains. I think
+    # Mike is going to curate the list so it may all be deleted. 
 
     # with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads.txt/ads.txt_list.txt', 'r') as file:
         # domains = file.read().split("\n")
