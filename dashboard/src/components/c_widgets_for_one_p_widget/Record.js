@@ -6,7 +6,12 @@ import InternalLink from '../utilities/InternalLink';
 class Record extends Component {
   constructor(props) {
     super(props);
-    this.state = {clicked: false, hovered: false};
+    this.state = {
+      clicked: false,
+      hovered: false,
+      domains: [],
+      domainsClicked: false,
+    };
   }
 
   componentDidMount() {
@@ -17,6 +22,8 @@ class Record extends Component {
     ) {
       this.setState({clicked: true});
     }
+    let domains = this.props.widgetRecord.domain.split(',');
+    this.setState({domains: domains});
   }
 
   outlineRow(hovered) {
@@ -24,6 +31,49 @@ class Record extends Component {
       return 'black';
     } else {
       return 'transparent';
+    }
+  }
+
+  showDomains() {
+    if (this.state.domains.length === 1) {
+      return (
+        <a
+          href={`https://refererhider.com/?http://${this.state.domains[0]}`}
+          target={'_blank'}>
+          {this.state.domains[0]}
+        </a>
+      );
+    } else if (this.state.domainsClicked) {
+      return (
+        <div>
+          <p
+            onClick={e => {
+              e.stopPropagation();
+              this.setState({domainsClicked: false, clicked: false});
+            }}>
+            hide multiples &#8679;
+          </p>
+          {this.state.domains.map(domain => (
+            <div key={domain}>
+              <a
+                href={`https://refererhider.com/?http://${domain}`}
+                target={'_blank'}>
+                {domain}
+              </a>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <p
+          onClick={e => {
+            e.stopPropagation();
+            this.setState({domainsClicked: true, clicked: false});
+          }}>
+          show multiples &#8681;
+        </p>
+      );
     }
   }
 
@@ -69,7 +119,7 @@ class Record extends Component {
             </div>
           )}
         </td>
-        <td>{this.props.widgetRecord.domain}</td>
+        <td>{this.showDomains()}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

@@ -164,6 +164,7 @@ class Record extends Component {
       return 'transparent';
     }
   }
+
   showDomains() {
     if (this.state.domains.length === 1) {
       return (

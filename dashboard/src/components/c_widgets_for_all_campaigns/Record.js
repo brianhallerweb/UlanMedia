@@ -33,7 +33,12 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
       this.props.widgetRecord.widget_id
     }`;
 
-    this.state = {clicked: false, hovered: false};
+    this.state = {
+      clicked: false,
+      hovered: false,
+      domains: [],
+      domainsClicked: false,
+    };
   }
 
   componentDidMount() {
@@ -44,6 +49,8 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
     ) {
       this.setState({clicked: true});
     }
+    let domains = this.props.widgetRecord.domain.split(',');
+    this.setState({domains: domains});
   }
 
   colorizeRow(classification) {
@@ -76,6 +83,49 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
       return 'black';
     } else {
       return 'transparent';
+    }
+  }
+
+  showDomains() {
+    if (this.state.domains.length === 1) {
+      return (
+        <a
+          href={`https://refererhider.com/?http://${this.state.domains[0]}`}
+          target={'_blank'}>
+          {this.state.domains[0]}
+        </a>
+      );
+    } else if (this.state.domainsClicked) {
+      return (
+        <div>
+          <p
+            onClick={e => {
+              e.stopPropagation();
+              this.setState({domainsClicked: false, clicked: false});
+            }}>
+            hide multiples &#8679;
+          </p>
+          {this.state.domains.map(domain => (
+            <div key={domain}>
+              <a
+                href={`https://refererhider.com/?http://${domain}`}
+                target={'_blank'}>
+                {domain}
+              </a>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <p
+          onClick={e => {
+            e.stopPropagation();
+            this.setState({domainsClicked: true, clicked: false});
+          }}>
+          show multiples &#8681;
+        </p>
+      );
     }
   }
 
@@ -195,7 +245,7 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
             />
           </div>
         </td>
-        <td>{this.props.widgetRecord.domain}</td>
+        <td>{this.showDomains()}</td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>
