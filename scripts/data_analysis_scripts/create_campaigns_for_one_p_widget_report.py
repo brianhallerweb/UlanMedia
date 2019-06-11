@@ -25,6 +25,8 @@ if len(df.index) == 0:
 df["profit"] = round(df["revenue"] - df["cost"], 2)
 df["cost"] = round(df["cost"], 2)
 df["lead_cvr"] = round(df["leads"] / df["clicks"] * 100, 2)
+df["cpc"] = round(df["cost"] / df["clicks"], 2)
+df["epc"] = round(df["revenue"] / df["clicks"], 2)
 df["cpl"] = round(df["cost"] / df["leads"], 2)
 df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["cps"] = round(df["cost"] / df["sales"], 2)
