@@ -21,6 +21,8 @@ class Home extends Component {
       c1Value: 0.5,
       c2: true,
       c2Value: 2,
+      c3: false,
+      c3Value: 10,
     };
   }
 
@@ -82,6 +84,8 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
+            c3Value: this.state.c3Value,
+            c3: this.state.c3,
           }),
         }),
       )
@@ -114,6 +118,8 @@ class Home extends Component {
           c1Value={this.state.c1Value}
           c2={this.state.c2}
           c2Value={this.state.c2Value}
+          c3={this.state.c3}
+          c3Value={this.state.c3Value}
           loading={this.state.loading}
           submitForm={this.submitForm.bind(this)}
         />

@@ -25,7 +25,31 @@ df["w_bid"] = round(df["w_bid"], 2)
 df["rec_w_bid"] = round(df["rec_w_bid"], 2)
 df["rec_coeff"] = round(df["rec_coeff"], 1)
 
-final_result = df
+c1 = df["cost"] >= float(sys.argv[2])
+result1 = df[c1]
+
+conditions_args = [sys.argv[3]]
+conditions_dfs = [result1]
+
+final_result = None 
+for i in range(len(conditions_args)):
+    if conditions_args[i] == "true" and final_result is None:
+        final_result = conditions_dfs[i]
+    elif conditions_args[i] == "true":
+        final_result = final_result.merge(conditions_dfs[i], how="inner",
+        on=["clicks", "cost", "leads", 
+            "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",
+            "cpc", "epc", "cpl", "epl", "mpl", "lead_cvr",
+            "cps", "eps", "mps", "profit", "status",
+            "widget_id", "global_status", "c_bid",
+            "w_bid", "coeff", "rec_w_bid",
+            "rec_coeff", "mismatch_w_bid_and_rec_w_bid",
+            "mismatch_coeff_and_rec_coeff", "domain"]
+            )
+
+if final_result is None:
+    final_result = df
+
 final_result = final_result.replace([np.inf, -np.inf], "NaN")
 final_result = final_result.replace(np.nan, "NaN")
 final_result = final_result.sort_values("name", ascending=True)

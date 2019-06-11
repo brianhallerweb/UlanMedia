@@ -29,15 +29,38 @@ class Record extends Component {
   addRowLinks() {
     return (
       <div>
-        <div className="rowLink">
-          <a
-            href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-              this.props.campaignRecord.mgid_id
-            }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
-            target="_blank">
-            mgid
-          </a>
-        </div>
+        <ExternalLink
+          className={'rowLink'}
+          href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+            this.props.campaignRecord.mgid_id
+          }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
+          target={'_blank'}
+          label={'mgid'}
+        />
+
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/monthsforonepwidgetforonecampaign/${this.props.campaignRecord.widget_id.match(
+            /^\d*/,
+          )}/${this.props.campaignRecord.vol_id}/${
+            this.props.campaignRecord.name
+          }/`}
+          target={'_blank'}
+          label={'months'}
+        />
+
+        <InternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          to={`/daysforonepwidgetforonecampaign/${this.props.campaignRecord.widget_id.match(
+            /^\d*/,
+          )}/${this.props.campaignRecord.vol_id}/${
+            this.props.campaignRecord.name
+          }/`}
+          target={'_blank'}
+          label={'days'}
+        />
       </div>
     );
   }

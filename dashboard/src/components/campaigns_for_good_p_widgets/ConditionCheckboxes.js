@@ -10,6 +10,8 @@ const ConditionCheckboxes = ({
   c1Value,
   c2,
   c2Value,
+  c3,
+  c3Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -54,6 +56,29 @@ const ConditionCheckboxes = ({
             max="10"
             step=".1"
             value={c2Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c3"
+          checked={c3}
+          disabled={loading}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Widget cost is greater than or equal to $'}
+          <input
+            className="inputBox"
+            type="number"
+            name="c3Value"
+            min="0"
+            max="100"
+            step="1"
+            value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
