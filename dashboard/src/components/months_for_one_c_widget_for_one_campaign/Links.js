@@ -50,7 +50,7 @@ const Links = props => {
           stopPropagation={true}
           to={`/monthsforonepwidgetforonecampaign/${props.cWidgetID.match(
             /^\d*/,
-          )}/${props.volID}/${props.name}/`}
+          )}/${props.volID}/${props.mgidID}/${props.name}/`}
           target={'_blank'}
           label={'Months'}
         />
@@ -59,7 +59,7 @@ const Links = props => {
           stopPropagation={true}
           to={`/daysforonepwidgetforonecampaign/${props.cWidgetID.match(
             /^\d*/,
-          )}/${props.volID}/${props.name}/`}
+          )}/${props.volID}/${props.mgidID}/${props.name}/`}
           target={'_blank'}
           label={'Days'}
         />
@@ -72,7 +72,7 @@ const Links = props => {
           stopPropagation={true}
           to={`/monthsforonecwidgetforonecampaign/${props.cWidgetID}/${
             props.volID
-          }/${props.name}/`}
+          }/${props.mgidID}/${props.name}/`}
           target={'_blank'}
           label={'Months'}
         />
@@ -81,7 +81,7 @@ const Links = props => {
           stopPropagation={true}
           to={`/daysforonecwidgetforonecampaign/${props.cWidgetID}/${
             props.volID
-          }/${props.name}/`}
+          }/${props.mgidID}/${props.name}/`}
           target={'_blank'}
           label={'Days'}
         />
