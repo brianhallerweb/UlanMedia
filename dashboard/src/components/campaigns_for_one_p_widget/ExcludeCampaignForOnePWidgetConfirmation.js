@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Logout from '../Logout';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import InternalLink from '../utilities/InternalLink';
 
 class ExcludeCampaignForOnePWidgetConfirmation extends Component {
   constructor(props) {
@@ -75,6 +76,13 @@ class ExcludeCampaignForOnePWidgetConfirmation extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
+        <InternalLink
+          className={'rowLink'}
+          to={`/excludepwidgetconfirmation/${this.state.pWidgetID}`}
+          target={'_blank'}
+          label={'exclude all campaigns'}
+        />
+
         <p>
           Are you sure you want to exclude campaign {this.state.mgidCampaignID}{' '}
           from p widget {this.state.pWidgetID}?

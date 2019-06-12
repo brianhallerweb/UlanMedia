@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       pWidgetID: this.props.match.params.pWidgetID,
       volID: this.props.match.params.volID,
+      mgidID: this.props.match.params.volID,
       name: this.props.match.params.name,
       volRequestDates: '',
       monthRecords: [],
@@ -109,14 +110,16 @@ class Home extends Component {
         />
         <GlobalNavBar />
         <div style={{marginBottom: 10}}>
-          *Remember the Cost, Clicks, Profit, CPC, CPL, Lead CVR, CPS, and ROI are not
-          highly accurate, they're just estimates based on Voluum's daily
-          averaged CPC evenly distributed across received clicks....instead of
-          being based on MGID's variable CPC actual charged clicks.
+          *Remember the Cost, Clicks, Profit, CPC, CPL, Lead CVR, CPS, and ROI
+          are not highly accurate, they're just estimates based on Voluum's
+          daily averaged CPC evenly distributed across received
+          clicks....instead of being based on MGID's variable CPC actual charged
+          clicks.
         </div>
         <Links
           pWidgetID={this.state.pWidgetID}
           volID={this.state.volID}
+          mgidID={this.state.mgidID}
           name={this.state.name}
         />
         <Records

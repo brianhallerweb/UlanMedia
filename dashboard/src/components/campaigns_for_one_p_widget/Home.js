@@ -8,6 +8,7 @@ import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import checkForBadAndIncludedCampaigns from './checkForBadAndIncludedCampaigns';
+import InternalLink from '../utilities/InternalLink';
 
 class Home extends Component {
   constructor(props) {
@@ -241,6 +242,16 @@ class Home extends Component {
               excluded from the p widget
             </div>
           )}
+        {this.state.campaignRecords.length > 0 && (
+          <div style={{marginTop: 10}}>
+            <InternalLink
+              className={'rowLink'}
+              to={`/excludepwidgetconfirmation/${this.state.pWidgetID}`}
+              target={'_blank'}
+              label={'exclude all campaigns'}
+            />
+          </div>
+        )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

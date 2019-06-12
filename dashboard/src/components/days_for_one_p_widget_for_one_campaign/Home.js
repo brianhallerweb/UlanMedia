@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       pWidgetID: this.props.match.params.pWidgetID,
       volID: this.props.match.params.volID,
+      mgidID: this.props.match.params.mgidID,
       name: this.props.match.params.name,
       volRequestDates: '',
       dayRecords: [],
@@ -118,6 +119,7 @@ class Home extends Component {
         <Links
           pWidgetID={this.state.pWidgetID}
           volID={this.state.volID}
+          mgidID={this.state.mgidID}
           name={this.state.name}
         />
         <Records

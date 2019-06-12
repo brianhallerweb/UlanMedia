@@ -44,6 +44,16 @@ const Links = props => {
         />
         for {props.pWidgetID} for {props.name}
       </div>
+      <div style={{marginTop: 10}}>
+        <InternalLink
+          className={'rowLink'}
+          to={`/excludecampaignforonepwidgetconfirmation/${props.pWidgetID}/${
+            props.mgidID
+          }`}
+          target={'_blank'}
+          label={'exclude p widget from campaign'}
+        />
+      </div>
     </div>
   );
 };

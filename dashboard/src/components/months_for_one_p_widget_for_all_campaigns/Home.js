@@ -7,6 +7,7 @@ import Records from './Records';
 import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 
+
 class Home extends Component {
   constructor(props) {
     super(props);

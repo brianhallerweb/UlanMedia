@@ -96,8 +96,8 @@ class Record extends Component {
           to={`/monthsforonepwidgetforonecampaign/${this.props.campaignRecord.widget_id.match(
             /^\d*/,
           )}/${this.props.campaignRecord.vol_id}/${
-            this.props.campaignRecord.name
-          }/`}
+            this.props.campaignRecord.mgid_id
+          }/${this.props.campaignRecord.name}/`}
           target={'_blank'}
           label={'months'}
         />
@@ -108,8 +108,8 @@ class Record extends Component {
           to={`/daysforonepwidgetforonecampaign/${this.props.campaignRecord.widget_id.match(
             /^\d*/,
           )}/${this.props.campaignRecord.vol_id}/${
-            this.props.campaignRecord.name
-          }/`}
+            this.props.campaignRecord.mgid_id
+          }/${this.props.campaignRecord.name}/`}
           target={'_blank'}
           label={'days'}
         />
