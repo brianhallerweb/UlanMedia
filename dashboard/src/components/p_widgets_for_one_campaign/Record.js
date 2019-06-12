@@ -80,7 +80,9 @@ class Record extends Component {
           stopPropagation={true}
           to={`/monthsforonepwidgetforonecampaign/${this.props.widgetRecord.widget_id.match(
             /^\d*/,
-          )}/${this.props.widgetRecord.vol_id}/${this.props.name}/`}
+          )}/${this.props.widgetRecord.vol_id}/${
+            this.props.widgetRecord.mgid_id
+          }/${this.props.name}/`}
           target={'_blank'}
           label={'months'}
         />
@@ -89,7 +91,9 @@ class Record extends Component {
           stopPropagation={true}
           to={`/daysforonepwidgetforonecampaign/${this.props.widgetRecord.widget_id.match(
             /^\d*/,
-          )}/${this.props.widgetRecord.vol_id}/${this.props.name}/`}
+          )}/${this.props.widgetRecord.vol_id}/${
+            this.props.widgetRecord.mgid_id
+          }/${this.props.name}/`}
           target={'_blank'}
           label={'days'}
         />

@@ -132,7 +132,7 @@ const AppRouter = () => (
           Component={days_for_one_ad_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/daysforonecwidgetforonecampaign/:cWidgetID/:volID/:name"
+          path="/daysforonecwidgetforonecampaign/:cWidgetID/:volID/:mgidID/:name"
           Component={days_for_one_c_widget_for_one_campaignHome}
         />
         <PrivateRoute
@@ -144,7 +144,7 @@ const AppRouter = () => (
           Component={months_for_one_ad_for_one_campaignHome}
         />
         <PrivateRoute
-          path="/monthsforonecwidgetforonecampaign/:cWidgetID/:volID/:name"
+          path="/monthsforonecwidgetforonecampaign/:cWidgetID/:volID/:mgidID/:name"
           Component={months_for_one_c_widget_for_one_campaignHome}
         />
         <PrivateRoute
