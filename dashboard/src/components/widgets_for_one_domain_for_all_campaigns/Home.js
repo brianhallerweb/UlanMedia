@@ -11,6 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      domain: this.props.match.params.domain,
       widgetRecords: [],
       dateRange: 'oneeighty',
       volRequestStartDate: '',
@@ -50,6 +51,7 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
+        domain: this.state.domain,
       }),
     })
       .then(res => {
@@ -68,16 +70,16 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(file => {
-        this.setState({
-          volRequestStartDate: file.metadata.vol_start_date,
-          volRequestEndDate: file.metadata.vol_end_date,
-          mgidRequestDates: `${file.metadata.mgid_start_date} to ${
-            file.metadata.mgid_end_date
-          }`,
-          volRequestDates: `${file.metadata.vol_start_date} to ${
-            file.metadata.vol_end_date
-          }`,
-        });
+        //this.setState({
+        //volRequestStartDate: file.metadata.vol_start_date,
+        //volRequestEndDate: file.metadata.vol_end_date,
+        //mgidRequestDates: `${file.metadata.mgid_start_date} to ${
+        //file.metadata.mgid_end_date
+        //}`,
+        //volRequestDates: `${file.metadata.vol_start_date} to ${
+        //file.metadata.vol_end_date
+        //}`,
+        //});
       })
       .then(() =>
         fetch('/api/createWidgetsForOneDomainForAllCampaignsReport', {
@@ -88,6 +90,7 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
+            domain: this.state.domain,
           }),
         }),
       )
@@ -126,16 +129,9 @@ class Home extends Component {
         <Title
           mgidRequestDates={this.state.mgidRequestDates}
           volRequestDates={this.state.volRequestDates}
+          domain={this.state.domain}
         />
         <GlobalNavBar />
-        <div style={{marginBottom: 10}}>
-          <a
-            style={{fontSize: 12}}
-            href="https://drive.google.com/file/d/1lTcfx6Vm72_NBLBkRFteKFbR9rxXhDbS/view?usp=sharing"
-            target="_blank">
-            flowchart
-          </a>
-        </div>
         <NavBar
           dateRange={this.state.dateRange}
           selectDateRange={this.selectDateRange.bind(this)}
@@ -144,20 +140,6 @@ class Home extends Component {
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
         />
-        {this.state.mismatchClassificationAndGlobalStatusCount !== 0 &&
-          !this.state.loading && (
-            <div style={{color: 'red', marginTop: 10}}>
-              {this.state.mismatchClassificationAndGlobalStatusCount} widgets
-              with mismatched classification and global status
-            </div>
-          )}
-        {this.state.hasBadAndIncludedCampaignsCount !== 0 &&
-          !this.state.loading && (
-            <div style={{color: 'red', marginTop: 10}}>
-              {this.state.hasBadAndIncludedCampaignsCount} widgets have bad and
-              included campaigns
-            </div>
-          )}
         <Records
           error={this.state.error}
           loading={this.state.loading}

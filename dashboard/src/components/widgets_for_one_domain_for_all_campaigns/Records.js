@@ -12,7 +12,7 @@ class Records extends Component {
       <table>
         <thead>
           <tr>
-            <th>P Widget</th>
+            <th>Widget</th>
             <th>Domain</th>
             <th>Classification</th>
             <th>Cost</th>

@@ -41,6 +41,7 @@ const createMonthsForOneAdForOneCampaignDataset = require('./controllers/data_ac
 const createMonthsForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_c_widget_for_one_campaign_dataset');
 const createDaysForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_one_campaign_dataset');
+const createWidgetsForOneDomainForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_widgets_for_one_domain_for_all_campaigns_dataset');
 const createCampaignsForOneCWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_c_widget_dataset');
 const createPWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_campaign_dataset');
 const createCWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_campaign_dataset');
@@ -66,6 +67,7 @@ const createPWidgetsForAllCampaignsReport = require('./controllers/data_analysis
 const createCWidgetsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_all_campaigns_report');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
 const createCampaignsForGoodPWidgetsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_good_p_widgets_report');
+const createWidgetsForOneDomainForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_widgets_for_one_domain_for_all_campaigns_report');
 const createDaysForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_offer_for_all_campaigns_report');
 const createMonthsForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_offer_for_all_campaigns_report');
 const createDaysForOneAdForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_ad_for_all_campaigns_report');
@@ -192,6 +194,12 @@ app.post(
   '/api/createAdsForOneCampaignDataset',
   authenticate,
   createAdsForOneCampaignDataset,
+);
+
+app.post(
+  '/api/createWidgetsForOneDomainForAllCampaignsDataset',
+  authenticate,
+  createWidgetsForOneDomainForAllCampaignsDataset,
 );
 
 app.post(
@@ -423,6 +431,12 @@ app.post(
   '/api/createDaysForOneOfferForAllCampaignsReport',
   authenticate,
   createDaysForOneOfferForAllCampaignsReport,
+);
+
+app.post(
+  '/api/createWidgetsForOneDomainForAllCampaignsReport',
+  authenticate,
+  createWidgetsForOneDomainForAllCampaignsReport,
 );
 
 app.post(

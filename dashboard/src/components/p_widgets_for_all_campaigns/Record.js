@@ -240,7 +240,23 @@ class Record extends Component {
             />
           </div>
         </td>
-        <td>{this.showDomains()}</td>
+        <td>
+          {this.showDomains()}
+          {this.props.widgetRecord.domain.length > 0 && (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/widgetsforonedomainforallcampaigns/${
+                    this.props.widgetRecord.domain
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+          )}
+        </td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>
