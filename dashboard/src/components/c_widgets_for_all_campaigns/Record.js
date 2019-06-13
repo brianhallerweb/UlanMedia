@@ -245,7 +245,23 @@ ttps://panel.voluum.com/?clientId=7f44bde0-bb64-410b-b72c-6579c9683de0#/7f44bde0
             />
           </div>
         </td>
-        <td>{this.showDomains()}</td>
+        <td>
+          {this.showDomains()}
+          {this.props.widgetRecord.domain.length > 0 && (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/widgetsforonedomainforallcampaigns/${
+                    this.props.widgetRecord.domain
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+          )}
+        </td>
         <td>
           {this.props.widgetRecord.classification !== 'wait' ? (
             <div>

@@ -138,13 +138,6 @@ class Home extends Component {
       )
       .then(res => res.json())
       .then(records => {
-        //3/13 I removed this because I think it is cleaner
-        //It gives the p widget classification in the summary row
-        //if (records.length) {
-        //records[0][
-        //'classification'
-        //] = this.state.pWidgetClassification.toUpperCase();
-        //}
         let badAndIncludedCampaignsCount = checkForBadAndIncludedCampaigns(
           records,
         );

@@ -220,7 +220,23 @@ class Record extends Component {
           {this.props.widgetRecord.widget_id !== 'summary' &&
             this.addRowLinks()}
         </td>
-        <td>{this.showDomains()}</td>
+        <td>
+          {this.showDomains()}
+          {this.props.widgetRecord.domain.length > 0 && (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/widgetsforonedomainforallcampaigns/${
+                    this.props.widgetRecord.domain
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+          )}
+        </td>
         {this.stylizeClassificationText(this.props.widgetRecord.classification)}
         <td>${this.props.widgetRecord.w_bid}</td>
         <td>${this.props.widgetRecord.rec_w_bid}</td>

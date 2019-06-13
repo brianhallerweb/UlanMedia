@@ -4,16 +4,16 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
+# import pprint
+# pp=pprint.PrettyPrinter(indent=2)
 
 def create_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain):
     
     domains = domain.split(",")
 
     widgets_for_one_domain_for_all_campaigns = {"metadata": {"vol_start_date":
-        "test", "vol_end_date":
-        "test"}, "data": {}}
+        "none", "vol_end_date":
+        "none"}, "data": {}}
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/complete_p_widgets/{date_range}_complete_p_widgets_dataset.json', 'r') as file:
         complete_p_widgets = json.load(file)

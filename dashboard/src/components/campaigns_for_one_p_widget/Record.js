@@ -235,7 +235,23 @@ class Record extends Component {
           {this.props.campaignRecord.name}
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
-        <td>{this.showDomains()}</td>
+        <td>
+          {this.showDomains()}
+          {this.props.campaignRecord.domain.length > 0 && (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/widgetsforonedomainforallcampaigns/${
+                    this.props.campaignRecord.domain
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+          )}
+        </td>
         {this.stylizeClassificationText(
           this.props.campaignRecord.classification,
         )}

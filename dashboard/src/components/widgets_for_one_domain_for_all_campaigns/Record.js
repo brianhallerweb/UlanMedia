@@ -44,17 +44,8 @@ class Record extends Component {
     }
   }
 
-  outlineRow(
-    hovered,
-    hasMismatchClassificationAndGlobalStatus,
-    hasBadAndIncludedCampaigns,
-  ) {
-    if (
-      hasMismatchClassificationAndGlobalStatus ||
-      hasBadAndIncludedCampaigns
-    ) {
-      return 'red';
-    } else if (hovered) {
+  outlineRow(hovered) {
+    if (hovered) {
       return 'black';
     } else {
       return 'transparent';
@@ -112,12 +103,7 @@ class Record extends Component {
             this.props.widgetRecord.classification,
           ),
           outlineStyle: 'solid',
-          outlineColor: this.outlineRow(
-            this.state.hovered,
-            this.props.widgetRecord
-              .has_mismatch_classification_and_global_status,
-            this.props.widgetRecord.has_bad_and_included_campaigns,
-          ),
+          outlineColor: this.outlineRow(this.state.hovered),
         }}
         className={this.state.clicked && 'clicked'}
         onMouseEnter={e => {
@@ -131,6 +117,7 @@ class Record extends Component {
         }}>
         <td>{this.props.widgetRecord.widget_id}</td>
         <td>{this.showDomains()}</td>
+        <td>{this.props.widgetRecord.classification}</td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>

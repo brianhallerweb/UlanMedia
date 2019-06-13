@@ -6,8 +6,11 @@ function createWidgetsForOneDomainForAllCampaignsReport(req, res) {
     pythonPath: '/usr/bin/python3',
     pythonOptions: ['-u'],
     scriptPath: '../../scripts/data_analysis_scripts/',
-    args: [req.body.dateRange, req.body.domain],
+    args: [],
   };
+  for (let arg in req.body) {
+    pythonOptions.args.push(req.body[arg]);
+  }
   PythonShell.run(
     'create_widgets_for_one_domain_for_all_campaigns_report.py',
     pythonOptions,

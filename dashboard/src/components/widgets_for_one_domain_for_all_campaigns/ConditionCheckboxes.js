@@ -14,8 +14,6 @@ const ConditionCheckboxes = ({
   c3Value,
   c4,
   c4Value,
-  c5,
-  c6,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -77,7 +75,6 @@ const ConditionCheckboxes = ({
             value={c3Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {' (warning, unchecking may cause browser to crash)'}
         </span>
       </div>
 
@@ -102,28 +99,6 @@ const ConditionCheckboxes = ({
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c5"
-          checked={c5}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        Widget has included bad campaigns
-      </div>
-
-      <div>
-        <input
-          type="checkbox"
-          name="c6"
-          checked={c6}
-          disabled={loading}
-          onChange={e => toggleCondition(e.target.name)}
-        />
-        Widget classification doesn't match global status
       </div>
     </div>
   );

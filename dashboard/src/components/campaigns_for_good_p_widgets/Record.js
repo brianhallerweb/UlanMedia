@@ -143,7 +143,23 @@ class Record extends Component {
           {this.props.campaignRecord.name !== 'summary' && this.addRowLinks()}
         </td>
         <td>{this.props.campaignRecord.widget_id}</td>
-        <td>{this.showDomains()}</td>
+        <td>
+          {this.showDomains()}
+          {this.props.campaignRecord.domain.length > 0 && (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/widgetsforonedomainforallcampaigns/${
+                    this.props.campaignRecord.domain
+                  }/`,
+                }}
+                target="_blank">
+                widgets
+              </Link>
+            </div>
+          )}
+        </td>
         <td>${this.props.campaignRecord.w_bid}</td>
         <td>${this.props.campaignRecord.rec_w_bid}</td>
         <td>{this.props.campaignRecord.coeff}</td>

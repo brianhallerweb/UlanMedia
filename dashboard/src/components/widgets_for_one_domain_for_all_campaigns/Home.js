@@ -14,18 +14,22 @@ class Home extends Component {
       domain: this.props.match.params.domain,
       widgetRecords: [],
       dateRange: 'oneeighty',
-      volRequestStartDate: '',
-      volRequestEndDate: '',
-      mgidRequestDates: '',
-      volRequestDates: '',
       error: false,
       authenticated: true,
       loading: false,
+      c1: false,
+      c1Value: 'wait',
+      c2: false,
+      c2Value: 'waiting',
+      c3: false,
+      c3Value: 10,
+      c4: false,
+      c4Value: 10,
     };
   }
 
   componentDidMount() {
-    //this.submitForm();
+    this.submitForm();
   }
 
   selectDateRange(dateRange) {
@@ -69,18 +73,6 @@ class Home extends Component {
         return res;
       })
       .then(res => res.json())
-      .then(file => {
-        //this.setState({
-        //volRequestStartDate: file.metadata.vol_start_date,
-        //volRequestEndDate: file.metadata.vol_end_date,
-        //mgidRequestDates: `${file.metadata.mgid_start_date} to ${
-        //file.metadata.mgid_end_date
-        //}`,
-        //volRequestDates: `${file.metadata.vol_start_date} to ${
-        //file.metadata.vol_end_date
-        //}`,
-        //});
-      })
       .then(() =>
         fetch('/api/createWidgetsForOneDomainForAllCampaignsReport', {
           method: 'POST',
@@ -91,6 +83,14 @@ class Home extends Component {
           body: JSON.stringify({
             dateRange: this.state.dateRange,
             domain: this.state.domain,
+            c1Value: this.state.c1Value,
+            c2Value: this.state.c2Value,
+            c3Value: this.state.c3Value,
+            c4Value: this.state.c4Value,
+            c1: this.state.c1,
+            c2: this.state.c2,
+            c3: this.state.c3,
+            c4: this.state.c4,
           }),
         }),
       )
@@ -126,11 +126,7 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <Logout />
-        <Title
-          mgidRequestDates={this.state.mgidRequestDates}
-          volRequestDates={this.state.volRequestDates}
-          domain={this.state.domain}
-        />
+        <Title domain={this.state.domain} />
         <GlobalNavBar />
         <NavBar
           dateRange={this.state.dateRange}
@@ -139,13 +135,19 @@ class Home extends Component {
           setConditionValue={this.setConditionValue.bind(this)}
           submitForm={this.submitForm.bind(this)}
           loading={this.state.loading}
+          c1={this.state.c1}
+          c1Value={this.state.c1Value}
+          c2={this.state.c2}
+          c2Value={this.state.c2Value}
+          c3={this.state.c3}
+          c3Value={this.state.c3Value}
+          c4={this.state.c4}
+          c4Value={this.state.c4Value}
         />
         <Records
           error={this.state.error}
           loading={this.state.loading}
           widgetRecords={this.state.widgetRecords}
-          volRequestStartDate={this.state.volRequestStartDate}
-          volRequestEndDate={this.state.volRequestEndDate}
         />
       </div>
     );
