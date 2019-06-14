@@ -3,17 +3,14 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 
 const Title = ({domain}) => {
-  const title = `widgets for one domain for all campaigns`;
+  const title = `widgets for one domain for all campaigns (${domain})`;
   return (
-    <div>
-      <div className="title">
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>{title}</title>
-        </Helmet>
-        <h3>{title}</h3>
-      </div>
-      <p>{domain}</p>
+    <div className="title">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+      </Helmet>
+      <h3>{title}</h3>
     </div>
   );
 };
