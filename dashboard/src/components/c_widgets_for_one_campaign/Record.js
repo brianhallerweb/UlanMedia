@@ -78,9 +78,9 @@ class Record extends Component {
         <InternalLink
           className={'rowLink'}
           stopPropagation={true}
-          to={`/daysforonecwidgetforonecampaign/${this.props.widgetRecord.widget_id.match(
-            /^\d*/,
-          )}/${this.props.widgetRecord.vol_id}/${
+          to={`/daysforonecwidgetforonecampaign/${
+            this.props.widgetRecord.widget_id
+          }/${this.props.widgetRecord.vol_id}/${
             this.props.widgetRecord.mgid_id
           }/${this.props.name}/`}
           target={'_blank'}
