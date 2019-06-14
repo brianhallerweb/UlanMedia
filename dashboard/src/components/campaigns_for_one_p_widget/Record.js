@@ -242,7 +242,7 @@ class Record extends Component {
               <Link
                 onClick={e => e.stopPropagation()}
                 to={{
-                  pathname: `/widgetsforonedomainforallcampaigns/${
+                  pathname: `/pwidgetsforonedomainforallcampaigns/${
                     this.props.campaignRecord.domain
                   }/`,
                 }}

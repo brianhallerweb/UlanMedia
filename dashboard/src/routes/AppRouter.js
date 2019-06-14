@@ -49,7 +49,7 @@ import campaigns_for_one_p_widgetExcludeCampaignForOnePWidgetConfirmation from '
 import campaigns_for_one_c_widgetExcludeCampaignForOneCWidgetConfirmation from '../components/campaigns_for_one_c_widget/ExcludeCampaignForOneCWidgetConfirmation';
 import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components/p_widgets_for_all_campaigns/ExcludePWidgetConfirmation';
 import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
-import widgets_for_one_domain_for_all_campaignsHome from '../components/widgets_for_one_domain_for_all_campaigns/Home';
+import p_widgets_for_one_domain_for_all_campaignsHome from '../components/p_widgets_for_one_domain_for_all_campaigns/Home';
 import ExcludeOneCampaignForAllBlacklistedPAndCWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPAndCWidgets';
 import UpdateAllData from '../components/UpdateAllData';
 import UpdateOneEightyData from '../components/UpdateOneEightyData';
@@ -61,8 +61,8 @@ const AppRouter = () => (
       <Switch>
         <Route path="/login" component={Login} />
         <PrivateRoute
-          path="/widgetsforonedomainforallcampaigns/:domain"
-          Component={widgets_for_one_domain_for_all_campaignsHome}
+          path="/pwidgetsforonedomainforallcampaigns/:domain"
+          Component={p_widgets_for_one_domain_for_all_campaignsHome}
         />
         <PrivateRoute
           path="/campaignsforallcampaigns"
