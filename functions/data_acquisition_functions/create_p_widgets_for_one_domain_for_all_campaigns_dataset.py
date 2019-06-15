@@ -9,7 +9,8 @@ import os
 
 def create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain):
     
-    domains = domain.split(",")
+    # 6/14 I'm not sure why I had this? But I think it is wrong
+    # domains = domain.split(",")
 
     p_widgets_for_one_domain_for_all_campaigns = {"metadata": {"vol_start_date":
         "none", "vol_end_date":
@@ -19,7 +20,7 @@ def create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain
         complete_p_widgets = json.load(file)
     
     for p_widget in complete_p_widgets:
-        if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] in domains:
+        if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] == domain:
             p_widgets_for_one_domain_for_all_campaigns["data"][p_widget] = complete_p_widgets[p_widget]["for_all_campaigns"]
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/p_widgets_for_one_domain_for_all_campaigns/{date_range}_{domain}_p_widgets_for_one_domain_for_all_campaigns_dataset.json", "w") as file:
