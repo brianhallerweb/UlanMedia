@@ -51,6 +51,7 @@ class Record extends Component {
         />
 
         <div className="rowLink">
+          stopPropagation={true}
           <a
             href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
               this.props.campaignRecord.mgid_id
