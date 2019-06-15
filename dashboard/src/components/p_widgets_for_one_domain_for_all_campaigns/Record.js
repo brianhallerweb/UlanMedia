@@ -148,6 +148,18 @@ class Record extends Component {
                 label={'campaigns'}
               />
 
+              {this.props.widgetRecord.has_children && (
+                <InternalLink
+                  className={'rowLink'}
+                  stopPropagation={true}
+                  to={`/cwidgetsforonepwidget/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}`}
+                  target={'_blank'}
+                  label={'c_widgets'}
+                />
+              )}
+
               <ExternalLink
                 className={'rowLink'}
                 href={this.countriesURL}
