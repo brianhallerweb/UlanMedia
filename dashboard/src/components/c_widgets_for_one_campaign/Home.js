@@ -28,7 +28,7 @@ class Home extends Component {
       c2Value: 'included',
       c3: false,
       c3Value: 'waiting',
-      c4: false,
+      c4: true,
       c4Value: 10,
       c5: false,
       c5Value: 10,
