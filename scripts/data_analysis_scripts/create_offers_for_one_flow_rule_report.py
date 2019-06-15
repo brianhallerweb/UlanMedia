@@ -92,7 +92,7 @@ if len(final_result.index) > 0:
         summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result],
             sort=False)
-    final_result = final_result.replace(np.nan, "")
+    final_result = final_result.replace(np.nan, "NaN")
     final_result = final_result.sort_values("flow_rule", ascending=True)
 
 json_final_result = json.dumps(final_result[["offer_id","offer_name", "p_offer_name", "c_offer_name", "flow_rule", "clicks",

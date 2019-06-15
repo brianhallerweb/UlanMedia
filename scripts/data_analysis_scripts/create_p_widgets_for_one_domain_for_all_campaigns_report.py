@@ -91,8 +91,6 @@ if len(final_result.index) > 0:
         summary["eps"] = 0
     # Append summary onto the top
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
-    final_result = final_result.replace(np.nan, "")
-
 
 final_result = final_result.replace([np.inf, -np.inf], "NaN")
 final_result = final_result.replace(np.nan, "NaN")

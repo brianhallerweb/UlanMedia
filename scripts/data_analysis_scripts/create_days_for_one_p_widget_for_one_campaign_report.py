@@ -28,7 +28,6 @@ df["epl"] = round(df["revenue"] / df["leads"], 2)
 df["eps"] = round(df["revenue"] / df["sales"], 2)
 df["roi"] = round((df["profit"] / df["cost"])*100, 2)
 
-
 df = df.replace([np.inf, -np.inf], "NaN")
 df = df.replace(np.nan, "NaN")
 df = df.sort_values("day", ascending=False)

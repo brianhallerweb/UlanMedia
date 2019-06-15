@@ -97,7 +97,7 @@ if len(final_result.index) > 0:
         summary["cps"] = 0
         summary["eps"] = 0
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
-    final_result = final_result.replace(np.nan, "")
+    final_result = final_result.replace(np.nan, "NaN")
 
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 

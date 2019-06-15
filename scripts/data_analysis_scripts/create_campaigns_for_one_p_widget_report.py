@@ -112,7 +112,7 @@ if len(final_result.index) > 0:
         summary["eps"] = 0
     # Append summary onto the top
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result], sort=True)
-    final_result = final_result.replace(np.nan, "")
+    final_result = final_result.replace(np.nan, "NaN")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
             "revenue", "sales", "widget_id","name", "vol_id", "mgid_id",

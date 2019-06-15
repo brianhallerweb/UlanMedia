@@ -96,7 +96,7 @@ if len(final_result.index) > 0:
         summary["eps"] = round((summary["revenue"] / summary["sales"]),
         2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
-    final_result = final_result.replace(np.nan, "")
+    final_result = final_result.replace(np.nan, "NaN")
 
 json_final_result = json.dumps(final_result[["image", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",
