@@ -50,16 +50,15 @@ class Record extends Component {
           label={'c_widgets'}
         />
 
-        <div className="rowLink">
-          <a
-            stopPropagation={true}
-            href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
-              this.props.campaignRecord.mgid_id
-            }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
-            target="_blank">
-            mgid
-          </a>
-        </div>
+        <ExternalLink
+          className={'rowLink'}
+          stopPropagation={true}
+          href={`https://dashboard.mgid.com/advertisers/campaign-quality-analysis/id/${
+            this.props.campaignRecord.mgid_id
+          }?search=${this.props.campaignRecord.widget_id.match(/^\d*/)}`}
+          target={'_blank'}
+          label={'mgid'}
+        />
 
         <ExternalLink
           className={'rowLink'}

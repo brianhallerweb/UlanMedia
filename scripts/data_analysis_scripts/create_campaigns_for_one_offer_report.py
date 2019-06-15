@@ -83,7 +83,7 @@ if len(final_result.index) > 0:
         summary["cps"] = round(summary["cost"] / summary["sales"], 2)
         summary["eps"] = round(summary["revenue"] / summary["sales"], 2)
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
-    final_result = final_result.replace(np.nan, "NaN")
+    final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["campaign_name", "offer_id","offer_name", "flow_rule", "campaign_id", "clicks",
     "cost", "revenue", "profit","conversions", "lead_cvr",

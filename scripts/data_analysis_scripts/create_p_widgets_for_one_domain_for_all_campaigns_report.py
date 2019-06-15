@@ -59,6 +59,10 @@ for i in range(len(conditions_args)):
 if final_result is None:
     final_result = df
 
+final_result = final_result.replace([np.inf, -np.inf], "NaN")
+final_result = final_result.replace(np.nan, "NaN")
+final_result = final_result.sort_values("cost", ascending=False)
+
 # add a summary row at the top
 if len(final_result.index) > 0:
     summary = final_result.sum(numeric_only=True)
@@ -91,10 +95,8 @@ if len(final_result.index) > 0:
         summary["eps"] = 0
     # Append summary onto the top
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
+    final_result = final_result.replace(np.nan, "")
 
-final_result = final_result.replace([np.inf, -np.inf], "NaN")
-final_result = final_result.replace(np.nan, "NaN")
-final_result = final_result.sort_values("cost", ascending=False)
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads", "revenue", "sales", "widget_id", "cpc",
     "epc", "cpl", "epl", "cps", "eps", "lead_cvr",

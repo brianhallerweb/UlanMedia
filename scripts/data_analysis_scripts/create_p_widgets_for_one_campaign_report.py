@@ -81,6 +81,7 @@ if len(final_result.index) > 0:
     summary["mpl"] = round(summary["mpl"] / number_of_rows, 2)
     summary["mps"] = round(summary["mps"] / number_of_rows, 2)
     summary["classification"] = "NA"
+    summary["domain"] = ""
     summary["w_bid"] = "NA"
     summary["coeff"] = "NA"
     summary["rec_w_bid"] = "NA"
@@ -111,8 +112,7 @@ if len(final_result.index) > 0:
         summary["eps"] = 0
     # Append summary onto the top
     final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
-    final_result = final_result.replace(np.nan, "NaN")
-
+    final_result = final_result.replace(np.nan, "")
 
 json_final_result = json.dumps(final_result[["clicks", "cost", "leads",
     "revenue", "sales","vol_id", "mgid_id", "widget_id", "cpc",
