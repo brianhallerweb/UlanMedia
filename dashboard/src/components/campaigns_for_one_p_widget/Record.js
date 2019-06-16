@@ -40,15 +40,17 @@ class Record extends Component {
           label={'p_widgets'}
         />
 
-        <InternalLink
-          className={'rowLink'}
-          stopPropagation={true}
-          to={`/cwidgetsforonecampaign/${this.props.campaignRecord.vol_id}/${
-            this.props.campaignRecord.name
-          }/`}
-          target={'_blank'}
-          label={'c_widgets'}
-        />
+        {this.props.pWidgetHasChildren && (
+          <InternalLink
+            className={'rowLink'}
+            stopPropagation={true}
+            to={`/cwidgetsforonecampaign/${this.props.campaignRecord.vol_id}/${
+              this.props.campaignRecord.name
+            }/`}
+            target={'_blank'}
+            label={'c_widgets'}
+          />
+        )}
 
         <ExternalLink
           className={'rowLink'}

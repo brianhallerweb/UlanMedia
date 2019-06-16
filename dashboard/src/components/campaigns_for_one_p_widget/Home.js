@@ -27,6 +27,7 @@ class Home extends Component {
       pWidgetClassification: '',
       pWidgetGlobalStatus: '',
       pWidgetHasMismatchClassificationAndGlobalStatus: '',
+      pWidgetHasChildren: '',
       goodCampaignsCount: '',
       badCampaignsCount: '',
       waitCampaignsCount: '',
@@ -110,6 +111,7 @@ class Home extends Component {
           pWidgetHasMismatchClassificationAndGlobalStatus:
             file.metadata
               .p_widget_has_mismatch_classification_and_global_status,
+          pWidgetHasChildren: file.metadata.p_widget_has_children,
           goodCampaignsCount: file.metadata.good_campaigns_count,
           badCampaignsCount: file.metadata.bad_campaigns_count,
           waitCampaignsCount: file.metadata.wait_campaigns_count,
@@ -249,6 +251,7 @@ class Home extends Component {
           error={this.state.error}
           loading={this.state.loading}
           campaignRecords={this.state.campaignRecords}
+          pWidgetHasChildren={this.state.pWidgetHasChildren}
           volRequestStartDate={this.state.volRequestStartDate}
           volRequestEndDate={this.state.volRequestEndDate}
         />
