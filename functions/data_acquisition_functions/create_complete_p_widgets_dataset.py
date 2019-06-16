@@ -190,7 +190,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
     # add domains, if possible
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/widget_domain_lookup/widget_domain_lookup.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/curated_lists/widget_domains/widget_domains.json', 'r') as file:
             widget_domains_lookup = json.load(file)
     for p_widget in complete_p_widgets:
 
