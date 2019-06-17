@@ -46,15 +46,19 @@ result4 = df[c4]
 c5 = df["leads"] >= float(sys.argv[6])
 result5 = df[c5]
 
-c6 = df["has_bad_and_included_campaigns"] == True 
+c6 = df["sales"] >= float(sys.argv[7])
 result6 = df[c6]
 
-c7 = df["has_mismatch_classification_and_global_status"] == True 
+c7 = df["has_bad_and_included_campaigns"] == True 
 result7 = df[c7]
 
-conditions_args = [sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10],
-        sys.argv[11], sys.argv[12], sys.argv[13]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6, result7]
+c8 = df["has_mismatch_classification_and_global_status"] == True
+result8 = df[c8]
+
+conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10],
+        sys.argv[11], sys.argv[12], sys.argv[13], sys.argv[14], sys.argv[15]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6,
+        result7, result8]
 
 final_result = None 
 for i in range(len(conditions_args)):

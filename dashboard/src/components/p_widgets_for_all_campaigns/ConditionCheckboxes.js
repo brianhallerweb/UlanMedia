@@ -17,7 +17,9 @@ const ConditionCheckboxes = ({
   c5,
   c5Value,
   c6,
+  c6Value,
   c7,
+  c8,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -137,7 +139,19 @@ const ConditionCheckboxes = ({
           disabled={loading}
           onChange={e => toggleCondition(e.target.name)}
         />
-        Widget has included bad campaigns
+        <span>
+          {'Widget sales is geater than or equal to '}
+          <input
+            className="inputBox"
+            type="number"
+            name="c6Value"
+            min="0"
+            max="1000"
+            step="1"
+            value={c6Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+        </span>
       </div>
 
       <div>
@@ -145,6 +159,17 @@ const ConditionCheckboxes = ({
           type="checkbox"
           name="c7"
           checked={c7}
+          disabled={loading}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        Widget has included bad campaigns
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c8"
+          checked={c8}
           disabled={loading}
           onChange={e => toggleCondition(e.target.name)}
         />

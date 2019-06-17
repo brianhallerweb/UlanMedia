@@ -84,6 +84,9 @@ class Record extends Component {
     if (this.state.domains.length === 1) {
       return (
         <a
+          onClick={e => {
+            e.stopPropagation();
+          }}
           href={`https://refererhider.com/?http://${this.state.domains[0]}`}
           target={'_blank'}>
           {this.state.domains[0]}
@@ -102,6 +105,9 @@ class Record extends Component {
           {this.state.domains.map(domain => (
             <div key={domain}>
               <a
+                onClick={e => {
+                  e.stopPropagation();
+                }}
                 href={`https://refererhider.com/?http://${domain}`}
                 target={'_blank'}>
                 {domain}
