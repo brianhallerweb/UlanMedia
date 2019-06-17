@@ -43,11 +43,19 @@ result4 = df[c4]
 c5 = df["profit"] <= -1 * float(sys.argv[7])
 result5 = df[c5]
 
-c6 = df["is_bad_and_included"] == True 
+c6 = df["cpl"] <= (df["mpl"] - (df["mpl"] * float(sys.argv[8])))
 result6 = df[c6]
 
-conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13]]
-conditions_dfs = [result1, result2, result3, result4, result5, result6]
+c7 = df["cps"] <= (df["mps"] - (df["mps"] * float(sys.argv[9])))
+result7 = df[c7]
+
+c8 = df["is_bad_and_included"] == True 
+result8 = df[c8]
+
+conditions_args = [ sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13],
+        sys.argv[14], sys.argv[15], sys.argv[16], sys.argv[17]]
+conditions_dfs = [result1, result2, result3, result4, result5, result6,
+        result7, result8]
 
 final_result = None 
 for i in range(len(conditions_args)):

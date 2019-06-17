@@ -17,8 +17,12 @@ const ConditionCheckboxes = ({
   c5,
   c5Value,
   c6,
+  c6Value,
   c7,
   c7Value,
+  c8,
+  c9,
+  c9Value,
 }) => {
   return (
     <div style={{paddingTop: 15, paddingBottom: 15}}>
@@ -131,7 +135,19 @@ const ConditionCheckboxes = ({
           disabled={loading}
           onChange={e => toggleCondition(e.target.name)}
         />
-        Widget has included bad campaigns
+        <span>
+          {'Widget CPL is less than or equal to MPL minus '}
+          <input
+            type="number"
+            name="c6Value"
+            min="0"
+            max="100"
+            step="1"
+            value={c6Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPL <= MPL-(MPL*0)]'}
+        </span>
       </div>
 
       <div>
@@ -139,6 +155,40 @@ const ConditionCheckboxes = ({
           type="checkbox"
           name="c7"
           checked={c7}
+          disabled={loading}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        <span>
+          {'Widget CPS is less than or equal to MPS minus '}
+          <input
+            type="number"
+            name="c7Value"
+            min="0"
+            max="100"
+            step="1"
+            value={c7Value}
+            onChange={e => setConditionValue(e.target.name, e.target.value)}
+          />
+          {'% [CPS <= MPS-(MPS*0)]'}
+        </span>
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c8"
+          checked={c8}
+          disabled={loading}
+          onChange={e => toggleCondition(e.target.name)}
+        />
+        Widget has included bad campaigns
+      </div>
+
+      <div>
+        <input
+          type="checkbox"
+          name="c9"
+          checked={c9}
           disabled={true}
           onChange={e => toggleCondition(e.target.name)}
         />
@@ -147,11 +197,11 @@ const ConditionCheckboxes = ({
           <input
             className="inputBox"
             type="number"
-            name="c7Value"
+            name="c9Value"
             min="0"
             max="10"
             step=".01"
-            value={c7Value}
+            value={c9Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
         </span>
