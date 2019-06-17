@@ -30,6 +30,7 @@ df["eps"] = round(df["revenue"] / df["sales"], 2)
 df["w_bid"] = round(df["w_bid"], 2)
 df["rec_w_bid"] = round(df["rec_w_bid"], 2)
 df["rec_coeff"] = round(df["rec_coeff"], 1)
+domain = df["domain"][0]
 
 c1 = df["status"] == sys.argv[3]
 result1 = df[c1]
@@ -40,8 +41,14 @@ result2 = df[c2]
 c3 = df["profit"] <= -1 * float(sys.argv[5])
 result3 = df[c3]
 
-conditions_args = [sys.argv[6], sys.argv[7], sys.argv[8]] 
-conditions_dfs = [result1, result2, result3]
+c4 = df["cpl"] <= (df["mpl"] - (df["mpl"] * float(sys.argv[6])/100))
+result4 = df[c4]
+
+c5 = df["cps"] <= (df["mps"] - (df["mps"] * float(sys.argv[7])/100))
+result5 = df[c5]
+
+conditions_args = [sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12]] 
+conditions_dfs = [result1, result2, result3, result4, result5]
 
 final_result = None 
 for i in range(len(conditions_args)):
@@ -78,7 +85,7 @@ if len(final_result.index) > 0:
     summary["rec_coeff"] = "NA"
     summary["mpl"] = "NA"
     summary["mps"] = "NA"
-    summary["domain"] = final_result["domain"][0]
+    summary["domain"] = domain
     summary["classification"] = "NA"
     summary["status"] = "NA"
     summary["is_bad_and_included"] = False  

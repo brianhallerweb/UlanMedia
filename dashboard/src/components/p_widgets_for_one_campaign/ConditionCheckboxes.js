@@ -146,7 +146,7 @@ const ConditionCheckboxes = ({
             value={c6Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [CPL <= MPL-(MPL*0)]'}
+          {`% [CPL <= MPL-(MPL*${c6Value})]`}
         </span>
       </div>
 
@@ -169,7 +169,7 @@ const ConditionCheckboxes = ({
             value={c7Value}
             onChange={e => setConditionValue(e.target.name, e.target.value)}
           />
-          {'% [CPS <= MPS-(MPS*0)]'}
+          {`% [CPS <= MPS-(MPS*${c7Value})]`}
         </span>
       </div>
 

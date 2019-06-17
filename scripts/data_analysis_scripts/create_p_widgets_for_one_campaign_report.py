@@ -43,10 +43,10 @@ result4 = df[c4]
 c5 = df["profit"] <= -1 * float(sys.argv[7])
 result5 = df[c5]
 
-c6 = df["cpl"] <= (df["mpl"] - (df["mpl"] * float(sys.argv[8])))
+c6 = df["cpl"] <= (df["mpl"] - (df["mpl"] * float(sys.argv[8])/100))
 result6 = df[c6]
 
-c7 = df["cps"] <= (df["mps"] - (df["mps"] * float(sys.argv[9])))
+c7 = df["cps"] <= (df["mps"] - (df["mps"] * float(sys.argv[9])/100))
 result7 = df[c7]
 
 c8 = df["is_bad_and_included"] == True 
