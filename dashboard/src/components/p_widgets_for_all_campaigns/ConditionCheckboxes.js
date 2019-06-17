@@ -117,7 +117,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Widget leads is geater than or equal to '}
+          {'Widget leads is greater than or equal to '}
           <input
             className="inputBox"
             type="number"
@@ -140,7 +140,7 @@ const ConditionCheckboxes = ({
           onChange={e => toggleCondition(e.target.name)}
         />
         <span>
-          {'Widget sales is geater than or equal to '}
+          {'Widget sales is greater than or equal to '}
           <input
             className="inputBox"
             type="number"
