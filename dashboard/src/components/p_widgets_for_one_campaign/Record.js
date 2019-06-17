@@ -99,7 +99,6 @@ class Record extends Component {
         />
         <InternalLink
           className={'rowLink'}
-          stopPropagation={true}
           to={`/excludecampaignforonepwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
             /^\d*/,
           )}/${this.props.widgetRecord.mgid_id}`}
