@@ -44,7 +44,9 @@ class Record extends Component {
           <InternalLink
             className={'rowLink'}
             stopPropagation={true}
-            to={`/cwidgetsforonecampaign/${this.props.campaignRecord.vol_id}/${
+            to={`/cwidgetsforonepwidgetforonecampaign/${
+              this.props.campaignRecord.vol_id
+            }/${this.props.campaignRecord.widget_id.match(/^\d*/)}/${
               this.props.campaignRecord.name
             }/`}
             target={'_blank'}
