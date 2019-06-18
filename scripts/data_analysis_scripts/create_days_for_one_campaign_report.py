@@ -17,7 +17,7 @@ df["cpc"] = round(df["cost"]/df["clicks"], 3)
 df["epc"] = round(df["revenue"]/df["clicks"], 3)
 df["cpa"] = round(df["cost"]/df["conversions"], 2)
 df["epa"] = round(df["revenue"]/df["conversions"], 2)
-df["cvr"] = round(df["conversions"]/df["clicks"], 2)
+df["cvr"] = round(df["conversions"]/df["clicks"], 3)
 
 df = df.replace([np.inf, -np.inf], "NaN")
 df = df.replace(np.nan, "NaN")
