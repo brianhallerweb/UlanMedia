@@ -4,8 +4,8 @@ import sys
 import re
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
+import pprint
+pp=pprint.PrettyPrinter(indent=2)
 
 def create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain):
     
@@ -22,6 +22,10 @@ def create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain
     for p_widget in complete_p_widgets:
         if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] == domain:
             p_widgets_for_one_domain_for_all_campaigns["data"][p_widget] = complete_p_widgets[p_widget]["for_all_campaigns"]
+            p_widgets_for_one_domain_for_all_campaigns["data"][p_widget]["good_campaigns_count"] = complete_p_widgets[p_widget]["good_campaigns_count"]
+            p_widgets_for_one_domain_for_all_campaigns["data"][p_widget]["bad_campaigns_count"] = complete_p_widgets[p_widget]["bad_campaigns_count"]
+            p_widgets_for_one_domain_for_all_campaigns["data"][p_widget]["wait_campaigns_count"] = complete_p_widgets[p_widget]["wait_campaigns_count"]
+
 
     with open(f"{os.environ.get('ULANMEDIAAPP')}/data/p_widgets_for_one_domain_for_all_campaigns/{date_range}_{domain}_p_widgets_for_one_domain_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_one_domain_for_all_campaigns, file)

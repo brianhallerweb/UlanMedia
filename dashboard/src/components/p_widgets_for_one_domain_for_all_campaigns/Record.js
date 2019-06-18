@@ -226,7 +226,37 @@ class Record extends Component {
           )}
         </td>
         <td>{this.showDomains()}</td>
-        <td>{this.props.widgetRecord.classification}</td>
+        <td>
+          {this.props.widgetRecord.classification !== 'wait' ||
+          this.props.widgetRecord.classification !== 'NA' ? (
+            <div>
+              <Link
+                onClick={e => e.stopPropagation()}
+                to={{
+                  pathname: `/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                    /^\d*/,
+                  )}/${this.props.widgetRecord.classification}`,
+                }}
+                target="_blank">
+                {this.props.widgetRecord.classification}
+              </Link>
+              <div>
+                {`(${this.props.widgetRecord.good_campaigns_count}g/${
+                  this.props.widgetRecord.bad_campaigns_count
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div>wait</div>
+              <div>
+                {`(${this.props.widgetRecord.good_campaigns_count}g/${
+                  this.props.widgetRecord.bad_campaigns_count
+                }b/${this.props.widgetRecord.wait_campaigns_count}w)`}
+              </div>
+            </div>
+          )}
+        </td>
         <td>${this.props.widgetRecord.cost}</td>
         <td>${this.props.widgetRecord.revenue}</td>
         <td>${this.props.widgetRecord.profit}</td>
@@ -240,7 +270,37 @@ class Record extends Component {
         <td>{this.props.widgetRecord.sales}</td>
         <td>${this.props.widgetRecord.cps}</td>
         <td>${this.props.widgetRecord.eps}</td>
-        <td>{this.props.widgetRecord.global_status}</td>
+        <td>
+          {this.props.widgetRecord.global_status}
+          {this.props.widgetRecord.global_status !== 'NA' && (
+            <div onClick={() => this.setState({clicked: true})}>
+              <InternalLink
+                className={'rowLink'}
+                to={`/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                  /^\d*/,
+                )}/white`}
+                target={'_blank'}
+                label={'white'}
+              />
+              <InternalLink
+                className={'rowLink'}
+                to={`/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                  /^\d*/,
+                )}/grey`}
+                target={'_blank'}
+                label={'grey'}
+              />
+              <InternalLink
+                className={'rowLink'}
+                to={`/listpwidgetconfirmation/${this.props.widgetRecord.widget_id.match(
+                  /^\d*/,
+                )}/black`}
+                target={'_blank'}
+                label={'black'}
+              />
+            </div>
+          )}
+        </td>
       </tr>
     );
   }

@@ -5,7 +5,7 @@ import sys
 date_range = sys.argv[1]
 domain = sys.argv[2]
 # date_range = "oneeighty" 
-# domain = "ru-clip.net"
+# domain = "malaysia-chronicle.com"
 
 print(create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain))
 
