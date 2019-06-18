@@ -38,6 +38,7 @@ import days_for_one_c_widget_for_one_campaignHome from '../components/days_for_o
 import days_for_one_c_widget_for_all_campaignsHome from '../components/days_for_one_c_widget_for_all_campaigns/Home';
 import p_widgets_for_one_campaignHome from '../components/p_widgets_for_one_campaign/Home';
 import c_widgets_for_one_campaignHome from '../components/c_widgets_for_one_campaign/Home';
+import c_widgets_for_one_p_widget_for_one_campaignHome from '../components/c_widgets_for_one_p_widget_for_one_campaign/Home';
 import c_widgets_for_one_p_widgetHome from '../components/c_widgets_for_one_p_widget/Home';
 import campaigns_for_one_p_widgetHome from '../components/campaigns_for_one_p_widget/Home';
 import campaigns_for_one_c_widgetHome from '../components/campaigns_for_one_c_widget/Home';
@@ -163,6 +164,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/cwidgetsforonecampaign/:volid/:name"
           Component={c_widgets_for_one_campaignHome}
+        />
+        <PrivateRoute
+          path="/cwidgetsforonepwidgetforonecampaign/:volid/:pWidget/:name"
+          Component={c_widgets_for_one_p_widget_for_one_campaignHome}
         />
         <PrivateRoute
           path="/pwidgetsforallcampaigns"
