@@ -9,6 +9,9 @@ domain = sys.argv[2]
 # date_range = "oneeighty" 
 # domain = "ru-clip.net"
 
+if len(domain) > 20:
+    domain = domain[:20]
+
 with open(f'{os.environ.get("ULANMEDIAAPP")}/data/p_widgets_for_one_domain_for_all_campaigns/{date_range}_{domain}_p_widgets_for_one_domain_for_all_campaigns_dataset.json', 'r') as file:
      json_file = json.load(file)
 
