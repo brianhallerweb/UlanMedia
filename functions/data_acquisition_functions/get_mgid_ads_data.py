@@ -79,6 +79,10 @@ def get_mgid_ads_data(token, mgid_client_id):
                     ads_data[ad_id]["status"] = "pending"
                 elif status == "rejected":
                     ads_data[ad_id]["status"] = "rejected"
+                else:
+                    # I believe this is from status = blocked or status =
+                    # campaignBlocked
+                    ads_data[ad_id]["status"] = "paused"
         
         return ads_data
     except requests.exceptions.RequestException as e:
