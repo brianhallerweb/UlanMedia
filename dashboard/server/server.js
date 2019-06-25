@@ -103,6 +103,10 @@ const User = require('./models/user');
 ///////////// Middleware /////////////////
 app.use(bodyParser.json());
 //---------------------------------------
+// test for flask
+app.post('/jsonapi/test', (req, res) => {
+  res.send('test');
+});
 
 //////// User routes //////////////
 app.post('/api/users/login', login);
