@@ -52,6 +52,7 @@ import p_widgets_for_all_campaignsExcludePWidgetConfirmation from '../components
 import c_widgets_for_all_campaignsExcludeCWidgetConfirmation from '../components/c_widgets_for_all_campaigns/ExcludeCWidgetConfirmation';
 import p_widgets_for_one_domain_for_all_campaignsHome from '../components/p_widgets_for_one_domain_for_all_campaigns/Home';
 import ExcludeOneCampaignForAllBlacklistedPAndCWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPAndCWidgets';
+import FlaskTest from '../components/FlaskTest';
 import UpdateAllData from '../components/UpdateAllData';
 import UpdateOneEightyData from '../components/UpdateOneEightyData';
 import RedirectToHome from '../components/RedirectToHome';
@@ -61,6 +62,7 @@ const AppRouter = () => (
     <div>
       <Switch>
         <Route path="/login" component={Login} />
+        <PrivateRoute path="/flasktest" Component={FlaskTest} />
         <PrivateRoute
           path="/pwidgetsforonedomainforallcampaigns/:domain"
           Component={p_widgets_for_one_domain_for_all_campaignsHome}

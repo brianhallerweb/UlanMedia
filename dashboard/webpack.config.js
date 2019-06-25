@@ -28,6 +28,10 @@ module.exports = {
         context: ['/api/'],
         target: 'http://localhost:3000',
       },
+      {
+        context: ['/jsonapi/'],
+        target: 'http://localhost:5000',
+      },
     ],
     historyApiFallback: true,
   },
