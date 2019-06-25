@@ -105,7 +105,7 @@ app.use(bodyParser.json());
 //---------------------------------------
 // test for flask
 app.post('/jsonapi/test', (req, res) => {
-  res.send('test');
+  res.json('test');
 });
 
 //////// User routes //////////////
