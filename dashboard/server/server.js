@@ -86,7 +86,6 @@ const createMonthsForOneAdForOneCampaignReport = require('./controllers/data_ana
 const createMonthsForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_months_for_one_c_widget_for_one_campaign_report');
 const createDaysForOneCWidgetForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_all_campaigns_report');
 const createDaysForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_one_campaign_report');
-const createCampaignsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_all_campaigns_report');
 const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
 const createCountriesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_countries_for_all_campaigns_report');
 const createLanguagesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_languages_for_all_campaigns_report');
@@ -618,12 +617,6 @@ app.post(
   authenticate,
   createDaysForOneCampaignReport,
 );
-
-//app.post(
-//'/api/createCampaignsForAllCampaignsReport',
-//authenticate,
-//createCampaignsForAllCampaignsReport,
-//);
 
 app.post(
   '/api/createCampaignsForOneOfferReport',
