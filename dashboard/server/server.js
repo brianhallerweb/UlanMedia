@@ -619,11 +619,11 @@ app.post(
   createDaysForOneCampaignReport,
 );
 
-app.post(
-  '/api/createCampaignsForAllCampaignsReport',
-  authenticate,
-  createCampaignsForAllCampaignsReport,
-);
+//app.post(
+//'/api/createCampaignsForAllCampaignsReport',
+//authenticate,
+//createCampaignsForAllCampaignsReport,
+//);
 
 app.post(
   '/api/createCampaignsForOneOfferReport',

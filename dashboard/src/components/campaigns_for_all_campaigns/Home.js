@@ -105,7 +105,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
-    fetch('/api/createCampaignsForAllCampaignsReport', {
+    fetch('/jsonapi/createCampaignsForAllCampaignsReport', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
