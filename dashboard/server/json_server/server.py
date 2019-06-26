@@ -65,7 +65,7 @@ def post():
     return create_campaigns_for_all_campaigns_report(date_range, c1, c1Value, c2, c2Value, c3, c3Value, c4, c5, c6, c6Value, c7, c7Value, c8, c8Value, c9, c9Value, c10, c10Value, c11, c11Value, c12, c12Value, c13, c13Value, c14, c14Value, c15, c15Value, c16, c16Value, c17, c17Value, c18, c18Value, c19, c19Value, c20, c20Value, c21, c21Value, c22, c22Value, c23, c23Value, c24, c24Value, c25, c25Value, c26, c26Value, c27, c27Value)
 
 @app.route("/jsonapi/createCampaignsForAllCampaignsReport", methods=["POST"])
-def create_campaigns_for_all_campaigns_report():
+def createCampaignsForAllCampaignsReport():
     date_range = request.json["dateRange"]
     c1 = request.json["c1"]
     c1Value = request.json["c1Value"]
