@@ -55,7 +55,7 @@ def create_p_widgets_for_all_campaigns_dataset(date_range):
     # 6. Save p_widgets_for_all_campaigns to a json file and return it as a
     # json file 
 
-    with open(f"../../data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/p_widgets_for_all_campaigns/{date_range}_p_widgets_for_all_campaigns_dataset.json", "w") as file:
         json.dump(p_widgets_for_all_campaigns, file)
 
     return json.dumps(p_widgets_for_all_campaigns)
