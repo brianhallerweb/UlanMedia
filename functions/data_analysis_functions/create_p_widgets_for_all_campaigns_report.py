@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import math
 
+
 def create_p_widgets_for_all_campaigns_report(date_range, c1_input, c2_input,
         c3_input, c4_input, c5_input, c6_input, c7_input, c8_input,
         c1Value_input, c2Value_input, c3Value_input, c4Value_input,
@@ -65,9 +66,9 @@ def create_p_widgets_for_all_campaigns_report(date_range, c1_input, c2_input,
     
     final_result = None 
     for i in range(len(conditions_args)):
-        if conditions_args[i] == "true" and final_result is None:
+        if conditions_args[i] == True and final_result is None:
             final_result = conditions_dfs[i]
-        elif conditions_args[i] == "true":
+        elif conditions_args[i] == True:
             final_result = final_result.merge(conditions_dfs[i], how="inner",
             on=["clicks", "cost", "leads", 
                 "revenue", "sales", "widget_id", "lead_cvr", "profit",
@@ -97,3 +98,7 @@ def create_p_widgets_for_all_campaigns_report(date_range, c1_input, c2_input,
                 "domain"]].to_dict("records"))
     
     return json_final_result
+
+# print(create_p_widgets_for_all_campaigns_report("oneeighty", "false", "false",
+    # "true", "false", "false", "false", "true", "false", "wait", "waiting",
+    # "10", "10", "10", "2"))
