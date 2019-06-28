@@ -61,7 +61,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
-    fetch(`/api/createPWidgetsForOneCampaignDataset`, {
+    fetch(`/jsonapi/createPWidgetsForOneCampaignDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ class Home extends Component {
       body: JSON.stringify({
         volID: this.state.volid,
         dateRange: this.state.dateRange,
-        max_rec_bid: this.state.c9Value,
+        maxRecBid: this.state.c9Value,
       }),
     })
       .then(res => {
@@ -99,7 +99,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createPWidgetsForOneCampaignReport', {
+        fetch('/jsonapi/createPWidgetsForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ class Home extends Component {
           },
           body: JSON.stringify({
             dateRange: this.state.dateRange,
-            volid: this.state.volid,
+            volID: this.state.volid,
             c1Value: this.state.c1Value,
             c2Value: this.state.c2Value,
             c3Value: this.state.c3Value,
