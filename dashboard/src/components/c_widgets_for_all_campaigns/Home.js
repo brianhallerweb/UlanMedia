@@ -60,7 +60,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
-    fetch('/api/createCWidgetsForAllCampaignsDataset', {
+    fetch('/jsonapi/createCWidgetsForAllCampaignsDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createCWidgetsForAllCampaignsReport', {
+        fetch('/jsonapi/createCWidgetsForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
