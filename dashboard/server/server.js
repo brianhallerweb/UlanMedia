@@ -24,7 +24,6 @@ const createCampaignsForOneAdDataset = require('./controllers/data_acquisition_c
 const createCampaignsForOneCountryDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_country_dataset');
 const createCampaignsForOneLanguageDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_language_dataset');
 const createCampaignsForOneOfferDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_offer_dataset');
-const createCampaignsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_p_widget_dataset');
 const createDaysForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_offer_for_all_campaigns_dataset');
 const createMonthsForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_offer_for_all_campaigns_dataset');
 const createDaysForOneAdForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_ad_for_all_campaigns_dataset');
@@ -42,7 +41,6 @@ const createMonthsForOneCWidgetForOneCampaignDataset = require('./controllers/da
 const createDaysForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_one_campaign_dataset');
 const createPWidgetsForOneDomainForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_domain_for_all_campaigns_dataset');
-const createCampaignsForOneCWidgetDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_c_widget_dataset');
 const createCWidgetsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_campaign_dataset');
 const createCWidgetsForOnePWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_p_widget_for_one_campaign_dataset');
 const createCWidgetsForOnePWidgetDataset = require('./controllers/data_acquisition_controllers/create_c_widgets_for_one_p_widget_dataset');
@@ -56,8 +54,6 @@ const createAdsForOneCampaignReport = require('./controllers/data_analysis_contr
 const createCountriesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_countries_for_one_campaign_report');
 const createLanguagesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_languages_for_one_campaign_report');
 const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
-const createCampaignsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_p_widget_report');
-const createCampaignsForOneCWidgetReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_c_widget_report');
 const createCWidgetsForOnePWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_one_p_widget_for_one_campaign_report');
 const createCWidgetsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_one_campaign_report');
 const createCWidgetsForOnePWidgetReport = require('./controllers/data_analysis_controllers/create_c_widgets_for_one_p_widget_report');
@@ -399,18 +395,6 @@ app.post(
   createCampaignsForOneOfferDataset,
 );
 
-app.post(
-  '/api/createCampaignsForOnePWidgetDataset',
-  authenticate,
-  createCampaignsForOnePWidgetDataset,
-);
-
-app.post(
-  '/api/createCampaignsForOneCWidgetDataset',
-  authenticate,
-  createCampaignsForOneCWidgetDataset,
-);
-
 //---------------------------------------
 
 /////// Data Analysis Routes ///////////
@@ -535,21 +519,9 @@ app.post(
 );
 
 app.post(
-  '/api/createCampaignsForOnePWidgetReport',
-  authenticate,
-  createCampaignsForOnePWidgetReport,
-);
-
-app.post(
   '/api/createCampaignsForGoodPWidgetsReport',
   authenticate,
   createCampaignsForGoodPWidgetsReport,
-);
-
-app.post(
-  '/api/createCampaignsForOneCWidgetReport',
-  authenticate,
-  createCampaignsForOneCWidgetReport,
 );
 
 app.post(

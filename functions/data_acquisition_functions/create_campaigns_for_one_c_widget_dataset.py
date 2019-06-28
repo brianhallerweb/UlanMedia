@@ -6,7 +6,7 @@ import sys
 import re
 
 def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
-        max_rec_bid, output_name):
+        max_rec_bid):
 
     # 1. get some prerequisite data
     max_rec_bid = float(max_rec_bid)
@@ -95,7 +95,7 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
     # 5. Save campaigns_for_one_c_widget to a json file and return it as a
     # json file 
 
-    with open(f"../../data/campaigns_for_one_c_widget/{output_name}.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/campaigns_for_one_c_widget/{c_widget_id}_{date_range}_campaigns_for_one_c_widget_dataset.json", "w") as file:
         json.dump(campaigns_for_one_c_widget, file)
 
     return json.dumps(campaigns_for_one_c_widget)

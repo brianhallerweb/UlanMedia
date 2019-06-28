@@ -64,7 +64,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
-    fetch(`/api/createCampaignsForOneCWidgetDataset`, {
+    fetch(`/jsonapi/createCampaignsForOneCWidgetDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ class Home extends Component {
       body: JSON.stringify({
         widgetID: this.state.widgetID,
         dateRange: this.state.dateRange,
-        max_rec_bid: this.state.c4Value,
+        maxRecBid: this.state.c4Value,
       }),
     })
       .then(res => {
@@ -112,7 +112,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch(`/api/createCampaignsForOneCWidgetReport`, {
+        fetch(`/jsonapi/createCampaignsForOneCWidgetReport`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
