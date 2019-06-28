@@ -1,12 +1,11 @@
 from config.config import *
-from config.mgid_token import mgid_token
 import os
 import json
 
-def create_c_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
+def create_c_widgets_for_one_campaign_dataset(vol_id, date_range,
         max_rec_bid):
-    max_rec_bid = float(max_rec_bid)
 
+    max_rec_bid = float(max_rec_bid)
 
     c_widgets_for_one_campaign = {"metadata": {},
                                  "data": [] 
@@ -70,7 +69,7 @@ def create_c_widgets_for_one_campaign_dataset(mgid_token, vol_id, date_range,
         else:
             c_widget["mismatch_coeff_and_rec_coeff"] = False
 
-    with open(f"../../data/c_widgets_for_one_campaign/{vol_id}_{date_range}_c_widgets_for_one_campaign_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/c_widgets_for_one_campaign/{vol_id}_{date_range}_c_widgets_for_one_campaign_dataset.json", "w") as file:
         json.dump(c_widgets_for_one_campaign, file)
 
     return json.dumps(c_widgets_for_one_campaign)
