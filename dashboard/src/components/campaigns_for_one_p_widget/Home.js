@@ -73,7 +73,7 @@ class Home extends Component {
       volRequestDates: '',
     });
 
-    fetch(`/api/createCampaignsForOnePWidgetDataset`, {
+    fetch(`/jsonapi/createCampaignsForOnePWidgetDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ class Home extends Component {
       body: JSON.stringify({
         dateRange: this.state.dateRange,
         pWidgetID: this.state.pWidgetID,
-        max_rec_bid: this.state.c5Value,
+        maxRecBid: this.state.c5Value,
       }),
     })
       .then(res => {
@@ -122,7 +122,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch(`/api/createCampaignsForOnePWidgetReport`, {
+        fetch(`/jsonapi/createCampaignsForOnePWidgetReport`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

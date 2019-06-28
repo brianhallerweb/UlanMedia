@@ -4,9 +4,11 @@ from flask_marshmallow import Marshmallow
 import os
 
 from functions.data_acquisition_functions.create_p_widgets_for_all_campaigns_dataset import create_p_widgets_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_campaigns_for_one_p_widget_dataset import create_campaigns_for_one_p_widget_dataset
 
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
+from functions.data_analysis_functions.create_campaigns_for_one_p_widget_report import create_campaigns_for_one_p_widget_report
 
 app = Flask(__name__)
 
@@ -91,6 +93,32 @@ def createPWidgetsForAllCampaignsReport():
     c8 = request.json["c8"]
     return create_p_widgets_for_all_campaigns_report(date_range, c1, c2, c3,
             c4, c5, c6, c7, c8, c1Value, c2Value, c3Value, c4Value, c5Value, c6Value)
+
+@app.route("/jsonapi/createCampaignsForOnePWidgetDataset", methods=["POST"])
+def createCampaignsForOnePWidgetDataset():
+    date_range = request.json["dateRange"]
+    p_widget_id = request.json["pWidgetID"]
+    max_rec_bid = request.json["maxRecBid"]
+    return create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range, max_rec_bid)
+
+@app.route("/jsonapi/createCampaignsForOnePWidgetReport", methods=["POST"])
+def createCampaignsForOnePWidgetReport():
+    date_range = request.json["dateRange"]
+    p_widget_id = request.json["pWidgetID"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    c4 = request.json["c4"]
+    c4Value = request.json["c4Value"]
+    c5 = request.json["c5"]
+    c5Value = request.json["c5Value"]
+    c6 = request.json["c6"]
+    c6Value = request.json["c6Value"]
+    return create_campaigns_for_one_p_widget_report(date_range, p_widget_id, c1, c2, c3,
+            c4, c5, c6, c1Value, c2Value, c3Value, c4Value, c5Value, c6Value)
 
 if __name__ == "__main__":
     app.run(debug=True)
