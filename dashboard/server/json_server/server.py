@@ -9,6 +9,7 @@ from functions.data_acquisition_functions.create_p_widgets_for_one_campaign_data
 from functions.data_acquisition_functions.create_c_widgets_for_all_campaigns_dataset import create_c_widgets_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_c_widget_dataset import create_campaigns_for_one_c_widget_dataset
 from functions.data_acquisition_functions.create_c_widgets_for_one_campaign_dataset import create_c_widgets_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_c_widgets_for_one_p_widget_for_one_campaign_dataset import create_c_widgets_for_one_p_widget_for_one_campaign_dataset
 
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
@@ -17,6 +18,7 @@ from functions.data_analysis_functions.create_p_widgets_for_one_campaign_report 
 from functions.data_analysis_functions.create_c_widgets_for_all_campaigns_report import create_c_widgets_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_c_widget_report import create_campaigns_for_one_c_widget_report
 from functions.data_analysis_functions.create_c_widgets_for_one_campaign_report import create_c_widgets_for_one_campaign_report
+from functions.data_analysis_functions.create_c_widgets_for_one_p_widget_for_one_campaign_report import create_c_widgets_for_one_p_widget_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -250,6 +252,37 @@ def createCWidgetsForOneCampaignReport():
     c5Value = request.json["c5Value"]
     c6 = request.json["c6"]
     return create_c_widgets_for_one_campaign_report(date_range, vol_id, c1, c2, c3,
+            c4, c5, c6, c1Value, c2Value, c3Value, c4Value, c5Value)
+
+#####################################
+# c widgets for one p widget for one campaign
+
+@app.route("/jsonapi/createCWidgetsForOnePWidgetForOneCampaignDataset", methods=["POST"])
+def createCWidgetsForOnePWidgetForOneCampaign():
+    vol_id = request.json["volID"]
+    p_widget = request.json["pWidget"]
+    date_range = request.json["dateRange"]
+    max_rec_bid = request.json["maxRecBid"]
+    return create_c_widgets_for_one_p_widget_for_one_campaign_dataset(vol_id,
+            p_widget, date_range, max_rec_bid)
+
+@app.route("/jsonapi/createCWidgetsForOnePWidgetForOneCampaignReport", methods=["POST"])
+def createCWidgetsForOnePWidgetForOneCampaignReport():
+    date_range = request.json["dateRange"]
+    vol_id = request.json["volID"]
+    p_widget = request.json["pWidget"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    c4 = request.json["c4"]
+    c4Value = request.json["c4Value"]
+    c5 = request.json["c5"]
+    c5Value = request.json["c5Value"]
+    c6 = request.json["c6"]
+    return create_c_widgets_for_one_p_widget_for_one_campaign_report(date_range, vol_id, p_widget,  c1, c2, c3,
             c4, c5, c6, c1Value, c2Value, c3Value, c4Value, c5Value)
 
 if __name__ == "__main__":
