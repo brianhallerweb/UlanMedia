@@ -336,12 +336,6 @@ app.post(
 );
 
 app.post(
-  '/api/createCWidgetsForOneCWidgetDataset',
-  authenticate,
-  createCWidgetsForOnePWidgetDataset,
-);
-
-app.post(
   '/api/createCampaignsForOneAdDataset',
   authenticate,
   createCampaignsForOneAdDataset,
