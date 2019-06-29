@@ -150,7 +150,7 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
     # 5. Save c_widgets_for_one_p_widget to a json file and return it as a
     # json file 
 
-    with open(f"../../data/c_widgets_for_one_p_widget/{p_widget}_{date_range}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/c_widgets_for_one_p_widget/{p_widget}_{date_range}_c_widgets_for_one_p_widget_dataset.json", "w") as file:
         json.dump(c_widgets_for_one_p_widget, file)
     
     return json.dumps(c_widgets_for_one_p_widget)
