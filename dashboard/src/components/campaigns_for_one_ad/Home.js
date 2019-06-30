@@ -18,6 +18,10 @@ class Home extends Component {
       c1Value: 20,
       c2: false,
       c2Value: 50,
+      c3: false,
+      c3Value: 0,
+      c4: false,
+      c4Value: 0,
       error: false,
       authenticated: true,
       loading: false,
@@ -44,7 +48,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createCampaignsForOneAdDataset`, {
+    fetch(`/jsonapi/createCampaignsForOneAdDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +82,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createCampaignsForOneAdReport', {
+        fetch('/jsonapi/createCampaignsForOneAdReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
