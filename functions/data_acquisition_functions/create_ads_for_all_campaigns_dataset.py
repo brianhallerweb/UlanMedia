@@ -17,7 +17,7 @@ def create_ads_for_all_campaigns_dataset(date_range):
         image = ad["for_all_campaigns"]["image"]
         ads_data_by_ad_image["data"][image] = ad["for_all_campaigns"] 
 
-    with open(f"../../data/ads_for_all_campaigns/{date_range}_ads_for_all_campaigns_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/ads_for_all_campaigns/{date_range}_ads_for_all_campaigns_dataset.json", "w") as file:
         json.dump(ads_data_by_ad_image, file)
     
     return json.dumps(ads_data_by_ad_image)

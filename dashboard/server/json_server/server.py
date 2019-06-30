@@ -11,6 +11,7 @@ from functions.data_acquisition_functions.create_campaigns_for_one_c_widget_data
 from functions.data_acquisition_functions.create_c_widgets_for_one_campaign_dataset import create_c_widgets_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_c_widgets_for_one_p_widget_for_one_campaign_dataset import create_c_widgets_for_one_p_widget_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_c_widgets_for_one_p_widget_dataset import create_c_widgets_for_one_p_widget_dataset
+from functions.data_acquisition_functions.create_ads_for_all_campaigns_dataset import create_ads_for_all_campaigns_dataset
 
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
@@ -21,6 +22,7 @@ from functions.data_analysis_functions.create_campaigns_for_one_c_widget_report 
 from functions.data_analysis_functions.create_c_widgets_for_one_campaign_report import create_c_widgets_for_one_campaign_report
 from functions.data_analysis_functions.create_c_widgets_for_one_p_widget_for_one_campaign_report import create_c_widgets_for_one_p_widget_for_one_campaign_report
 from functions.data_analysis_functions.create_c_widgets_for_one_p_widget_report import create_c_widgets_for_one_p_widget_report
+from functions.data_analysis_functions.create_ads_for_all_campaigns_report import create_ads_for_all_campaigns_report
 
 app = Flask(__name__)
 
@@ -307,6 +309,29 @@ def createCWidgetsForOnePWidgetReport():
     c3 = request.json["c3"]
     c3Value = request.json["c3Value"]
     return create_c_widgets_for_one_p_widget_report(date_range, p_widget_id, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# ads for all campaigns
+
+@app.route("/jsonapi/createAdsForAllCampaignsDataset", methods=["POST"])
+def createAdsForAllCampaignsDataset():
+    date_range = request.json["dateRange"]
+    return create_ads_for_all_campaigns_dataset(date_range)
+
+@app.route("/jsonapi/createAdsForAllCampaignsReport", methods=["POST"])
+def createAdsForAllCampaignsReport():
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    c4 = request.json["c4"]
+    c4Value = request.json["c4Value"]
+    c5 = request.json["c5"]
+    c5Value = request.json["c5Value"]
+    return create_ads_for_all_campaigns_report(date_range, c1, c2, c3, c4, c5, c1Value, c2Value, c3Value, c4Value, c5Value)
 
 if __name__ == "__main__":
     app.run(debug=True)

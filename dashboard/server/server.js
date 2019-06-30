@@ -41,7 +41,6 @@ const createMonthsForOneCWidgetForOneCampaignDataset = require('./controllers/da
 const createDaysForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_one_campaign_dataset');
 const createPWidgetsForOneDomainForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_domain_for_all_campaigns_dataset');
-const createAdsForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_ads_for_all_campaigns_dataset');
 const createCountriesForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_countries_for_all_campaigns_dataset');
 const createLanguagesForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_languages_for_all_campaigns_dataset');
 const createOffersForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_campaigns_dataset');
@@ -70,7 +69,6 @@ const createMonthsForOneAdForOneCampaignReport = require('./controllers/data_ana
 const createMonthsForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_months_for_one_c_widget_for_one_campaign_report');
 const createDaysForOneCWidgetForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_all_campaigns_report');
 const createDaysForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_one_campaign_report');
-const createAdsForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_ads_for_all_campaigns_report');
 const createCountriesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_countries_for_all_campaigns_report');
 const createLanguagesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_languages_for_all_campaigns_report');
 const createOffersForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_offers_for_all_campaigns_report');
@@ -85,12 +83,8 @@ const User = require('./models/user');
 
 ///////////// Middleware /////////////////
 app.use(bodyParser.json());
-//---------------------------------------
-// test for flask
-app.post('/jsonapi/test', (req, res) => {
-  res.json('test');
-});
 
+//---------------------------------------
 //////// User routes //////////////
 app.post('/api/users/login', login);
 
@@ -297,12 +291,6 @@ app.post(
   '/api/createLanguagesForOneCampaignDataset',
   authenticate,
   createLanguagesForOneCampaignDataset,
-);
-
-app.post(
-  '/api/createAdsForAllCampaignsDataset',
-  authenticate,
-  createAdsForAllCampaignsDataset,
 );
 
 app.post(
@@ -516,12 +504,6 @@ app.post(
   '/api/createCampaignsForOneLanguageReport',
   authenticate,
   createCampaignsForOneLanguageReport,
-);
-
-app.post(
-  '/api/createAdsForAllCampaignsReport',
-  authenticate,
-  createAdsForAllCampaignsReport,
 );
 
 app.post(
