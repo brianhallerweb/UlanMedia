@@ -16,7 +16,6 @@ const logout = require('./controllers/user_controllers/logout');
 
 const createGprsForEachPOfferDataset = require('./controllers/data_acquisition_controllers/create_gprs_for_each_p_offer_dataset');
 
-const createAdsForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_ads_for_one_campaign_dataset');
 const createCampaignsForGoodPWidgetsDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_good_p_widgets_dataset');
 const createCountriesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_countries_for_one_campaign_dataset');
 const createLanguagesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_languages_for_one_campaign_dataset');
@@ -45,7 +44,6 @@ const createLanguagesForAllCampaignsDataset = require('./controllers/data_acquis
 const createOffersForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_campaigns_dataset');
 const createOffersForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_campaign_dataset');
 const createOffersForOneFlowRuleDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_flow_rule_dataset');
-const createAdsForOneCampaignReport = require('./controllers/data_analysis_controllers/create_ads_for_one_campaign_report');
 const createCountriesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_countries_for_one_campaign_report');
 const createLanguagesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_languages_for_one_campaign_report');
 const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
@@ -171,11 +169,6 @@ app.post(
 //---------------------------------------
 
 /////// Data Acquisition Routes /////
-app.post(
-  '/api/createAdsForOneCampaignDataset',
-  authenticate,
-  createAdsForOneCampaignDataset,
-);
 
 app.post(
   '/api/createPWidgetsForOneDomainForAllCampaignsDataset',
@@ -448,12 +441,6 @@ app.post(
   '/api/createDaysForOneCWidgetForOneCampaignReport',
   authenticate,
   createDaysForOneCWidgetForOneCampaignReport,
-);
-
-app.post(
-  '/api/createAdsForOneCampaignReport',
-  authenticate,
-  createAdsForOneCampaignReport,
 );
 
 app.post(

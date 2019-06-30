@@ -53,7 +53,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createAdsForOneCampaignDataset`, {
+    fetch(`/jsonapi/createAdsForOneCampaignDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createAdsForOneCampaignReport', {
+        fetch('/jsonapi/createAdsForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

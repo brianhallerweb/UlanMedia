@@ -4,11 +4,11 @@ import json
 import pandas as pd
 import numpy as np
 
-def create_campaigns_for_one_ad_report(ad_image, date_range, c1_input,
-        c2_input, c3_input, c4_input, c1Value_input, c2Value_input,
-        c3Value_input, c4Value_input):
+def create_ads_for_one_campaign_report(vol_id, date_range, c1_input, c2_input,
+        c3_input, c4_input, c5_input, c1Value_input, c2Value_input, c3Value_input, c4Value_input,
+        c5Value_input):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/campaigns_for_one_ad/{ad_image}_{date_range}_campaigns_for_one_ad_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json', 'r') as file:
          json_file = json.load(file)
     
     data = json_file["data"]
@@ -26,22 +26,29 @@ def create_campaigns_for_one_ad_report(ad_image, date_range, c1_input,
     df["eps"] = round(df["revenue"] / df["sales"], 2)
     df["roi"] = round(df["roi"] * 100, 2)
     df["ctr"] = round(df["ctr"] * 100, 2)
-    df["ppi"] = round(df["profit"] / df["imps"], 6) 
+    df["ppi"] = round(df["profit"] / df["imps"], 6)
+    df["local_rank"] = round(df["local_rank"], 0)
+    df["final_rank"] = round(df["final_rank"], 0)
+    df["global_rank"] = round(df["global_rank"], 0)
     
-    c1 = df["cost"] >= float(c1Value_input)
+    c1 = df["classification"] == c1Value_input
     result1 = df[c1]
     
-    c2 = df["profit"] <= -1 * float(c2Value_input)
+    c2 = df["cost"] >= float(c2Value_input)
     result2 = df[c2]
     
-    c3 = df["ctr"] <= float(c3Value_input)
+    c3 = df["profit"] <= -1 * float(c3Value_input)
     result3 = df[c3]
     
-    c4 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(c4Value_input))
+    c4 = df["ctr"] <= float(c4Value_input)
     result4 = df[c4]
     
-    conditions_args = [c1_input, c2_input, c3_input, c4_input]
-    conditions_dfs = [result1, result2, result3, result4]
+    c5 = np.isfinite(df["lead_cvr"]) & (df["lead_cvr"] <= float(c5Value_input))
+    result5 = df[c5]
+    
+    conditions_args = [c1_input, c2_input, c3_input, c4_input, c5_input]
+    conditions_dfs = [result1, result2, result3, result4, result5]
+    
     
     final_result = None 
     for i in range(len(conditions_args)):
@@ -51,22 +58,30 @@ def create_campaigns_for_one_ad_report(ad_image, date_range, c1_input,
             final_result = final_result.merge(conditions_dfs[i], how="inner",
             on=["image", "clicks",
         "cost", "revenue", "profit","conversions", "lead_cvr",
-        "cpc", "epc", "cpl", "epl", "cps", "eps", "roi", "name", "mgid_id", "vol_id", "ctr",
-        "imps", "ppi", "leads", "sales"] )
+        "epc", "cpl", "cps", "cpc", "epl","eps", "roi", "classification", "local_rank",
+        "local_rank_order", "final_rank", "final_rank_order",
+        "global_rank", "global_rank_order", "imps", "ctr", "ppi", "leads", "sales" ] )
     
     if final_result is None:
         final_result = df
     
     final_result = final_result.replace([np.inf, -np.inf], "NaN")
     final_result = final_result.replace(np.nan, "NaN")
-    final_result["sort"] = final_result["cost"]
+    final_result["sort"] = final_result["final_rank"]
     final_result = final_result.sort_values("sort", ascending=False)
     
     # add a summary row at the top
     if len(final_result.index) > 0:
         summary = final_result.sum(numeric_only=True)
         summary = summary.round(2)
-        summary["name"] = "summary"
+        summary["image"] = "summary"
+        summary["local_rank"] = "NA"
+        summary["local_rank_order"] = "NA"
+        summary["final_rank"] = "NA"
+        summary["final_rank_order"] = "NA"
+        summary["global_rank"] = "NA"
+        summary["global_rank_order"] = "NA"
+        summary["classification"] = "NA"
         summary["roi"] = round(summary["profit"] / summary["cost"] * 100, 2)
         summary["ctr"] = round((summary["clicks"] / summary["imps"]) * 100,
             2)
@@ -99,10 +114,11 @@ def create_campaigns_for_one_ad_report(ad_image, date_range, c1_input,
         final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
         final_result = final_result.replace(np.nan, "")
     
+    
     json_final_result = json.dumps(final_result[["image", "clicks",
         "cost", "revenue", "profit","conversions", "lead_cvr",
-        "cpc", "epc", "cpl", "epl", "cps", "eps", "roi", "name", "mgid_id", "vol_id", "ctr",
-        "imps", "ppi", "leads", "sales"]].to_dict("records"))
+        "epc", "cpl", "cps", "cpc", "epl","eps", "roi", "classification", "local_rank", "local_rank_order", "final_rank", "final_rank_order",
+        "global_rank", "global_rank_order", "imps", "ctr", "ppi", "leads", "sales"]].to_dict("records"))
     
     return json_final_result
     

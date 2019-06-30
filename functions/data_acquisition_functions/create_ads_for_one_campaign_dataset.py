@@ -25,7 +25,7 @@ def create_ads_for_one_campaign_dataset(vol_id, date_range):
         ad["global_rank"] = data[ad_image]["for_all_campaigns"]["global_rank"]
         ad["global_rank_order"] = data[ad_image]["for_all_campaigns"]["global_rank_order"]
 
-    with open(f"../../data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/ads_for_one_campaign/{vol_id}_{date_range}_ads_for_one_campaign_dataset.json", "w") as file:
         json.dump(ads_for_one_campaign, file)
 
     return json.dumps(ads_for_one_campaign)
