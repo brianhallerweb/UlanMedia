@@ -14,6 +14,10 @@ from functions.data_acquisition_functions.create_c_widgets_for_one_p_widget_data
 from functions.data_acquisition_functions.create_ads_for_all_campaigns_dataset import create_ads_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_ad_dataset import create_campaigns_for_one_ad_dataset
 from functions.data_acquisition_functions.create_ads_for_one_campaign_dataset import create_ads_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_offers_for_all_campaigns_dataset import create_offers_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_campaigns_for_one_offer_dataset import create_campaigns_for_one_offer_dataset
+from functions.data_acquisition_functions.create_offers_for_one_campaign_dataset import create_offers_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_offers_for_one_flow_rule_dataset import create_offers_for_one_flow_rule_dataset
 
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
@@ -27,6 +31,10 @@ from functions.data_analysis_functions.create_c_widgets_for_one_p_widget_report 
 from functions.data_analysis_functions.create_ads_for_all_campaigns_report import create_ads_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_ad_report import create_campaigns_for_one_ad_report
 from functions.data_analysis_functions.create_ads_for_one_campaign_report import create_ads_for_one_campaign_report
+from functions.data_analysis_functions.create_offers_for_all_campaigns_report import create_offers_for_all_campaigns_report
+from functions.data_analysis_functions.create_campaigns_for_one_offer_report import create_campaigns_for_one_offer_report
+from functions.data_analysis_functions.create_offers_for_one_campaign_report import create_offers_for_one_campaign_report
+from functions.data_analysis_functions.create_offers_for_one_flow_rule_report import create_offers_for_one_flow_rule_report
 
 app = Flask(__name__)
 
@@ -385,6 +393,93 @@ def createAdsForOneCampaignReport():
     c5Value = request.json["c5Value"]
     return create_ads_for_one_campaign_report(vol_id, date_range, c1, c2, c3,
             c4, c5, c1Value, c2Value, c3Value, c4Value, c5Value)
+
+#####################################
+# offers for all campaigns
+
+@app.route("/jsonapi/createOffersForAllCampaignsDataset", methods=["POST"])
+def createOffersForAllCampaignsDataset():
+    date_range = request.json["dateRange"]
+    return create_offers_for_all_campaigns_dataset(date_range)
+
+@app.route("/jsonapi/createOffersForAllCampaignsReport", methods=["POST"])
+def createOffersForAllCampaignsReport():
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    c4 = request.json["c4"]
+    c4Value = request.json["c4Value"]
+    c5 = request.json["c5"]
+    return create_offers_for_all_campaigns_report(date_range, c1, c2, c3, c4, c5, c1Value, c2Value, c3Value, c4Value)
+
+#####################################
+# campaigns for one offer 
+
+@app.route("/jsonapi/createCampaignsForOneOfferDataset", methods=["POST"])
+def createCampaignsForOneOfferDataset():
+    offer_id = request.json["offerID"]
+    date_range = request.json["dateRange"]
+    return create_campaigns_for_one_offer_dataset(date_range, offer_id)
+
+@app.route("/jsonapi/createCampaignsForOneOfferReport", methods=["POST"])
+def createCampaignsForOneOfferReport():
+    offer_id = request.json["offerID"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_campaigns_for_one_offer_report(offer_id, date_range, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# offers for one campaign
+
+@app.route("/jsonapi/createOffersForOneCampaignDataset", methods=["POST"])
+def createOffersForOneCampaignDataset():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    return create_offers_for_one_campaign_dataset(date_range, campaign_id)
+
+@app.route("/jsonapi/createOffersForOneCampaignReport", methods=["POST"])
+def createOffersForOneCampaignReport():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_offers_for_one_campaign_report(campaign_id, date_range, c1, c2, c3,
+            c1Value, c2Value, c3Value)
+
+#####################################
+# offers for one flow rule
+
+@app.route("/jsonapi/createOffersForOneFlowRuleDataset", methods=["POST"])
+def createOffersForOneFlowRuleDataset():
+    flow_rule = request.json["flowRule"]
+    date_range = request.json["dateRange"]
+    return create_offers_for_one_flow_rule_dataset(date_range, flow_rule)
+
+@app.route("/jsonapi/createOffersForOneFlowRuleReport", methods=["POST"])
+def createOffersForOneFlowRuleReport():
+    flow_rule = request.json["flowRule"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_offers_for_one_flow_rule_report(flow_rule, date_range, c1, c2, c3,
+            c1Value, c2Value, c3Value)
 
 if __name__ == "__main__":
     app.run(debug=True)

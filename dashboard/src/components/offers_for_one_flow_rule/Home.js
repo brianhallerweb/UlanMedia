@@ -48,7 +48,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createOffersForOneFlowRuleDataset`, {
+    fetch(`/jsonapi/createOffersForOneFlowRuleDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createOffersForOneFlowRuleReport', {
+        fetch('/jsonapi/createOffersForOneFlowRuleReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

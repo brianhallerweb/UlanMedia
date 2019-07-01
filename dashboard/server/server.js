@@ -21,7 +21,6 @@ const createCountriesForOneCampaignDataset = require('./controllers/data_acquisi
 const createLanguagesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_languages_for_one_campaign_dataset');
 const createCampaignsForOneCountryDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_country_dataset');
 const createCampaignsForOneLanguageDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_language_dataset');
-const createCampaignsForOneOfferDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_offer_dataset');
 const createDaysForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_offer_for_all_campaigns_dataset');
 const createMonthsForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_offer_for_all_campaigns_dataset');
 const createDaysForOneAdForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_ad_for_all_campaigns_dataset');
@@ -41,12 +40,8 @@ const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data
 const createPWidgetsForOneDomainForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_domain_for_all_campaigns_dataset');
 const createCountriesForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_countries_for_all_campaigns_dataset');
 const createLanguagesForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_languages_for_all_campaigns_dataset');
-const createOffersForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_offers_for_all_campaigns_dataset');
-const createOffersForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_campaign_dataset');
-const createOffersForOneFlowRuleDataset = require('./controllers/data_acquisition_controllers/create_offers_for_one_flow_rule_dataset');
 const createCountriesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_countries_for_one_campaign_report');
 const createLanguagesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_languages_for_one_campaign_report');
-const createCampaignsForOneOfferReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_offer_report');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
 const createCampaignsForGoodPWidgetsReport = require('./controllers/data_analysis_controllers/create_campaigns_for_good_p_widgets_report');
 const createPWidgetsForOneDomainForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_one_domain_for_all_campaigns_report');
@@ -68,9 +63,6 @@ const createDaysForOneCWidgetForAllCampaignsReport = require('./controllers/data
 const createDaysForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_one_campaign_report');
 const createCountriesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_countries_for_all_campaigns_report');
 const createLanguagesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_languages_for_all_campaigns_report');
-const createOffersForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_offers_for_all_campaigns_report');
-const createOffersForOneCampaignReport = require('./controllers/data_analysis_controllers/create_offers_for_one_campaign_report');
-const createOffersForOneFlowRuleReport = require('./controllers/data_analysis_controllers/create_offers_for_one_flow_rule_report');
 const createCampaignsForOneCountryReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_country_report');
 const createCampaignsForOneLanguageReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_language_report');
 
@@ -297,24 +289,6 @@ app.post(
 );
 
 app.post(
-  '/api/createOffersForAllCampaignsDataset',
-  authenticate,
-  createOffersForAllCampaignsDataset,
-);
-
-app.post(
-  '/api/createOffersForOneCampaignDataset',
-  authenticate,
-  createOffersForOneCampaignDataset,
-);
-
-app.post(
-  '/api/createOffersForOneFlowRuleDataset',
-  authenticate,
-  createOffersForOneFlowRuleDataset,
-);
-
-app.post(
   '/api/createCampaignsForGoodPWidgetsDataset',
   authenticate,
   createCampaignsForGoodPWidgetsDataset,
@@ -330,12 +304,6 @@ app.post(
   '/api/createCampaignsForOneLanguageDataset',
   authenticate,
   createCampaignsForOneLanguageDataset,
-);
-
-app.post(
-  '/api/createCampaignsForOneOfferDataset',
-  authenticate,
-  createCampaignsForOneOfferDataset,
 );
 
 //---------------------------------------
@@ -468,12 +436,6 @@ app.post(
 );
 
 app.post(
-  '/api/createCampaignsForOneOfferReport',
-  authenticate,
-  createCampaignsForOneOfferReport,
-);
-
-app.post(
   '/api/createCampaignsForOneCountryReport',
   authenticate,
   createCampaignsForOneCountryReport,
@@ -495,24 +457,6 @@ app.post(
   '/api/createLanguagesForAllCampaignsReport',
   authenticate,
   createLanguagesForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createOffersForAllCampaignsReport',
-  authenticate,
-  createOffersForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createOffersForOneCampaignReport',
-  authenticate,
-  createOffersForOneCampaignReport,
-);
-
-app.post(
-  '/api/createOffersForOneFlowRuleReport',
-  authenticate,
-  createOffersForOneFlowRuleReport,
 );
 
 //--------------------------------------------

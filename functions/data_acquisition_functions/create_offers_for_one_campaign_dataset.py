@@ -25,7 +25,7 @@ def create_offers_for_one_campaign_dataset(date_range, vol_id):
             offer["roi"] = profit/cost
 
 
-    with open(f"../../data/offers_for_one_campaign/{vol_id}_{date_range}_offers_for_one_campaign_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers_for_one_campaign/{vol_id}_{date_range}_offers_for_one_campaign_dataset.json", "w") as file:
         json.dump(offers_for_one_campaign, file)
     
     return json.dumps(offers_for_one_campaign)

@@ -4,9 +4,6 @@ import sys
 import os
 from functions.classification_functions.classify_offer_for_all_campaigns import classify_offer_for_all_campaigns
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def create_offers_for_one_flow_rule_dataset(date_range, flow_rule_argument):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_flow_rule/{date_range}_offers_for_each_flow_rule_dataset.json', 'r') as file:
@@ -35,7 +32,7 @@ def create_offers_for_one_flow_rule_dataset(date_range, flow_rule_argument):
     ###############################################
     # Save file and return 
 
-    with open(f"../../data/offers_for_one_flow_rule/{flow_rule_argument}_{date_range}_offers_for_one_flow_rule_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/offers_for_one_flow_rule/{flow_rule_argument}_{date_range}_offers_for_one_flow_rule_dataset.json", "w") as file:
         json.dump(offers_for_one_flow_rule, file)
     
     return json.dumps(offers_for_one_flow_rule)
