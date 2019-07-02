@@ -47,7 +47,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
-    fetch('/api/createPWidgetsForOneDomainForAllCampaignsDataset', {
+    fetch('/jsonapi/createPWidgetsForOneDomainForAllCampaignsDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(() =>
-        fetch('/api/createPWidgetsForOneDomainForAllCampaignsReport', {
+        fetch('/jsonapi/createPWidgetsForOneDomainForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

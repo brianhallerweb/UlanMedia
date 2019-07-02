@@ -7,6 +7,7 @@ import os
 from functions.data_acquisition_functions.create_p_widgets_for_all_campaigns_dataset import create_p_widgets_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_p_widget_dataset import create_campaigns_for_one_p_widget_dataset
 from functions.data_acquisition_functions.create_p_widgets_for_one_campaign_dataset import create_p_widgets_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_p_widgets_for_one_domain_for_all_campaigns_dataset import create_p_widgets_for_one_domain_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_c_widgets_for_all_campaigns_dataset import create_c_widgets_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_c_widget_dataset import create_campaigns_for_one_c_widget_dataset
 from functions.data_acquisition_functions.create_c_widgets_for_one_campaign_dataset import create_c_widgets_for_one_campaign_dataset
@@ -32,6 +33,7 @@ from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_p_widget_report import create_campaigns_for_one_p_widget_report
 from functions.data_analysis_functions.create_p_widgets_for_one_campaign_report import create_p_widgets_for_one_campaign_report
+from functions.data_analysis_functions.create_p_widgets_for_one_domain_for_all_campaigns_report import create_p_widgets_for_one_domain_for_all_campaigns_report
 from functions.data_analysis_functions.create_c_widgets_for_all_campaigns_report import create_c_widgets_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_c_widget_report import create_campaigns_for_one_c_widget_report
 from functions.data_analysis_functions.create_c_widgets_for_one_campaign_report import create_c_widgets_for_one_campaign_report
@@ -175,7 +177,7 @@ def createCampaignsForOnePWidgetReport():
 # p widgets for one campaign
 
 @app.route("/jsonapi/createPWidgetsForOneCampaignDataset", methods=["POST"])
-def createPWidgetsForOneCampaign():
+def createPWidgetsForOneCampaignDataset():
     date_range = request.json["dateRange"]
     vol_id = request.json["volID"]
     max_rec_bid = request.json["maxRecBid"]
@@ -202,6 +204,30 @@ def createPWidgetsForOneCampaignReport():
     c8 = request.json["c8"]
     return create_p_widgets_for_one_campaign_report(date_range, vol_id, c1, c2, c3,
             c4, c5, c6, c7, c8, c1Value, c2Value, c3Value, c4Value, c5Value, c6Value, c7Value)
+
+#####################################
+# p widgets for one domain for all campaigns
+
+@app.route("/jsonapi/createPWidgetsForOneDomainForAllCampaignsDataset", methods=["POST"])
+def createPWidgetsForOneDomainForAllCampaignsDataset():
+    date_range = request.json["dateRange"]
+    domain = request.json["domain"]
+    return create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain)
+
+@app.route("/jsonapi/createPWidgetsForOneDomainForAllCampaignsReport", methods=["POST"])
+def createPWidgetsForOneDomainForAllCampaignsReport():
+    date_range = request.json["dateRange"]
+    domain = request.json["domain"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    c4 = request.json["c4"]
+    c4Value = request.json["c4Value"]
+    return create_p_widgets_for_one_domain_for_all_campaigns_report(date_range,
+            domain, c1, c2, c3, c4, c1Value, c2Value, c3Value, c4Value)
 
 #####################################
 # c widgets for all campaigns

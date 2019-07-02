@@ -4,9 +4,6 @@ import sys
 import re
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def create_p_widgets_for_one_domain_for_all_campaigns_dataset(date_range, domain):
     
     domains_to_check = domain.split(",")

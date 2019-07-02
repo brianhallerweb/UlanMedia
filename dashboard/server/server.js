@@ -16,8 +16,6 @@ const logout = require('./controllers/user_controllers/logout');
 
 const createGprsForEachPOfferDataset = require('./controllers/data_acquisition_controllers/create_gprs_for_each_p_offer_dataset');
 
-const createLanguagesForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_languages_for_one_campaign_dataset');
-const createCampaignsForOneLanguageDataset = require('./controllers/data_acquisition_controllers/create_campaigns_for_one_language_dataset');
 const createDaysForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_offer_for_all_campaigns_dataset');
 const createMonthsForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_offer_for_all_campaigns_dataset');
 const createDaysForOneAdForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_ad_for_all_campaigns_dataset');
@@ -34,11 +32,7 @@ const createMonthsForOneAdForOneCampaignDataset = require('./controllers/data_ac
 const createMonthsForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_c_widget_for_one_campaign_dataset');
 const createDaysForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_one_campaign_dataset');
-const createPWidgetsForOneDomainForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_p_widgets_for_one_domain_for_all_campaigns_dataset');
-const createLanguagesForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_languages_for_all_campaigns_dataset');
-const createLanguagesForOneCampaignReport = require('./controllers/data_analysis_controllers/create_languages_for_one_campaign_report');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
-const createPWidgetsForOneDomainForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_p_widgets_for_one_domain_for_all_campaigns_report');
 const createDaysForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_offer_for_all_campaigns_report');
 const createMonthsForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_offer_for_all_campaigns_report');
 const createDaysForOneAdForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_ad_for_all_campaigns_report');
@@ -55,8 +49,6 @@ const createMonthsForOneAdForOneCampaignReport = require('./controllers/data_ana
 const createMonthsForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_months_for_one_c_widget_for_one_campaign_report');
 const createDaysForOneCWidgetForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_all_campaigns_report');
 const createDaysForOneCWidgetForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_c_widget_for_one_campaign_report');
-const createLanguagesForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_languages_for_all_campaigns_report');
-const createCampaignsForOneLanguageReport = require('./controllers/data_analysis_controllers/create_campaigns_for_one_language_report');
 
 const authenticate = require('./middleware/authenticate');
 const User = require('./models/user');
@@ -155,12 +147,6 @@ app.post(
 /////// Data Acquisition Routes /////
 
 app.post(
-  '/api/createPWidgetsForOneDomainForAllCampaignsDataset',
-  authenticate,
-  createPWidgetsForOneDomainForAllCampaignsDataset,
-);
-
-app.post(
   '/api/createDaysForOneOfferForAllCampaignsDataset',
   authenticate,
   createDaysForOneOfferForAllCampaignsDataset,
@@ -256,24 +242,6 @@ app.post(
   createDaysForOneCWidgetForOneCampaignDataset,
 );
 
-app.post(
-  '/api/createLanguagesForOneCampaignDataset',
-  authenticate,
-  createLanguagesForOneCampaignDataset,
-);
-
-app.post(
-  '/api/createLanguagesForAllCampaignsDataset',
-  authenticate,
-  createLanguagesForAllCampaignsDataset,
-);
-
-app.post(
-  '/api/createCampaignsForOneLanguageDataset',
-  authenticate,
-  createCampaignsForOneLanguageDataset,
-);
-
 //---------------------------------------
 
 /////// Data Analysis Routes ///////////
@@ -281,12 +249,6 @@ app.post(
   '/api/createDaysForOneOfferForAllCampaignsReport',
   authenticate,
   createDaysForOneOfferForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createPWidgetsForOneDomainForAllCampaignsReport',
-  authenticate,
-  createPWidgetsForOneDomainForAllCampaignsReport,
 );
 
 app.post(
@@ -380,27 +342,9 @@ app.post(
 );
 
 app.post(
-  '/api/createLanguagesForOneCampaignReport',
-  authenticate,
-  createLanguagesForOneCampaignReport,
-);
-
-app.post(
   '/api/createDaysForOneCampaignReport',
   authenticate,
   createDaysForOneCampaignReport,
-);
-
-app.post(
-  '/api/createCampaignsForOneLanguageReport',
-  authenticate,
-  createCampaignsForOneLanguageReport,
-);
-
-app.post(
-  '/api/createLanguagesForAllCampaignsReport',
-  authenticate,
-  createLanguagesForAllCampaignsReport,
 );
 
 //--------------------------------------------
