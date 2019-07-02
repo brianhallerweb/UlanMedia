@@ -47,7 +47,7 @@ class Home extends Component {
       loading: true,
     });
 
-    fetch(`/api/createCampaignsForGoodPWidgetsDataset`, {
+    fetch(`/jsonapi/createCampaignsForGoodPWidgetsDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,8 +55,8 @@ class Home extends Component {
       },
       body: JSON.stringify({
         dateRange: this.state.dateRange,
-        max_rec_bid: this.state.c1Value,
-        default_coeff: this.state.c2Value,
+        maxRecBid: this.state.c1Value,
+        defaultCoeff: this.state.c2Value,
       }),
     })
       .then(res => {
@@ -76,7 +76,7 @@ class Home extends Component {
       .then(res => res.json())
       .then(file => {})
       .then(() =>
-        fetch(`/api/createCampaignsForGoodPWidgetsReport`, {
+        fetch(`/jsonapi/createCampaignsForGoodPWidgetsReport`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

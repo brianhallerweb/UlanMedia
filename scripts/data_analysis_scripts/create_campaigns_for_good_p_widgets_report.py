@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 
 date_range = sys.argv[1]
-# date_range = "oneeighty"
 
 with open(f'{os.environ.get("ULANMEDIAAPP")}/data/campaigns_for_good_p_widgets/{date_range}_campaigns_for_good_p_widgets_dataset.json', 'r') as file:
      campaigns = json.load(file)

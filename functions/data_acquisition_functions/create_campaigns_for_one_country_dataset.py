@@ -22,7 +22,7 @@ def create_campaigns_for_one_country_dataset(date_range, country_name):
     for campaign_id in campaigns_for_one_country["data"]:
         campaigns_for_one_country["data"][campaign_id]["campaign_name"] = campaigns_lookup[campaign_id]
 
-    with open(f"../../data/campaigns_for_one_country/{date_range}_{country_name}_campaigns_for_one_country_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/campaigns_for_one_country/{date_range}_{country_name}_campaigns_for_one_country_dataset.json", "w") as file:
         json.dump(campaigns_for_one_country, file)
 
     return json.dumps(campaigns_for_one_country)

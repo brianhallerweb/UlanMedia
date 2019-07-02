@@ -28,8 +28,8 @@ class Home extends Component {
     };
   }
 
-    componentDidMount() {
-  this.submitForm();
+  componentDidMount() {
+    this.submitForm();
   }
 
   selectDateRange(dateRange) {
@@ -47,7 +47,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createCountriesForAllCampaignsDataset`, {
+    fetch(`/jsonapi/createCountriesForAllCampaignsDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createCountriesForAllCampaignsReport', {
+        fetch('/jsonapi/createCountriesForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

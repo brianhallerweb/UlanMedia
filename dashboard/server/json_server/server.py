@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
 
+# create datasets
 from functions.data_acquisition_functions.create_p_widgets_for_all_campaigns_dataset import create_p_widgets_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_p_widget_dataset import create_campaigns_for_one_p_widget_dataset
 from functions.data_acquisition_functions.create_p_widgets_for_one_campaign_dataset import create_p_widgets_for_one_campaign_dataset
@@ -18,7 +19,12 @@ from functions.data_acquisition_functions.create_offers_for_all_campaigns_datase
 from functions.data_acquisition_functions.create_campaigns_for_one_offer_dataset import create_campaigns_for_one_offer_dataset
 from functions.data_acquisition_functions.create_offers_for_one_campaign_dataset import create_offers_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_offers_for_one_flow_rule_dataset import create_offers_for_one_flow_rule_dataset
+from functions.data_acquisition_functions.create_campaigns_for_good_p_widgets_dataset import create_campaigns_for_good_p_widgets_dataset
+from functions.data_acquisition_functions.create_countries_for_all_campaigns_dataset import create_countries_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_campaigns_for_one_country_dataset import create_campaigns_for_one_country_dataset
+from functions.data_acquisition_functions.create_countries_for_one_campaign_dataset import create_countries_for_one_campaign_dataset
 
+# create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
 from functions.data_analysis_functions.create_p_widgets_for_all_campaigns_report import create_p_widgets_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_p_widget_report import create_campaigns_for_one_p_widget_report
@@ -35,6 +41,10 @@ from functions.data_analysis_functions.create_offers_for_all_campaigns_report im
 from functions.data_analysis_functions.create_campaigns_for_one_offer_report import create_campaigns_for_one_offer_report
 from functions.data_analysis_functions.create_offers_for_one_campaign_report import create_offers_for_one_campaign_report
 from functions.data_analysis_functions.create_offers_for_one_flow_rule_report import create_offers_for_one_flow_rule_report
+from functions.data_analysis_functions.create_campaigns_for_good_p_widgets_report import create_campaigns_for_good_p_widgets_report
+from functions.data_analysis_functions.create_countries_for_all_campaigns_report import create_countries_for_all_campaigns_report
+from functions.data_analysis_functions.create_campaigns_for_one_country_report import create_campaigns_for_one_country_report
+from functions.data_analysis_functions.create_countries_for_one_campaign_report import create_countries_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -480,6 +490,82 @@ def createOffersForOneFlowRuleReport():
     c3Value = request.json["c3Value"]
     return create_offers_for_one_flow_rule_report(flow_rule, date_range, c1, c2, c3,
             c1Value, c2Value, c3Value)
+
+#####################################
+# campaigns for good p widgets 
+
+@app.route("/jsonapi/createCampaignsForGoodPWidgetsDataset", methods=["POST"])
+def createCampaignsForGoodPWidgetsDataset():
+    date_range = request.json["dateRange"]
+    max_rec_bid = request.json["maxRecBid"]
+    default_coeff = request.json["defaultCoeff"]
+    return create_campaigns_for_good_p_widgets_dataset(date_range, max_rec_bid, default_coeff)
+
+@app.route("/jsonapi/createCampaignsForGoodPWidgetsReport", methods=["POST"])
+def createCampaignsForGoodPWidgetsReport():
+    date_range = request.json["dateRange"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_campaigns_for_good_p_widgets_report(date_range, c3, c3Value)
+
+#####################################
+# countries for all campaigns
+
+@app.route("/jsonapi/createCountriesForAllCampaignsDataset", methods=["POST"])
+def createCountriesForAllCampaignsDataset():
+    date_range = request.json["dateRange"]
+    return create_countries_for_all_campaigns_dataset(date_range)
+
+@app.route("/jsonapi/createCountriesForAllCampaignsReport", methods=["POST"])
+def createCountriesForAllCampaignsReport():
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_countries_for_all_campaigns_report(date_range, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# campaigns for one country 
+
+@app.route("/jsonapi/createCampaignsForOneCountryDataset", methods=["POST"])
+def createCampaignsForOneCountryDataset():
+    country_name = request.json["countryName"]
+    date_range = request.json["dateRange"]
+    return create_campaigns_for_one_country_dataset(date_range, country_name)
+
+@app.route("/jsonapi/createCampaignsForOneCountryReport", methods=["POST"])
+def createCampaignsForOneCountryReport():
+    country_name = request.json["countryName"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    return create_campaigns_for_one_country_report(country_name, date_range, c1, c2, c1Value, c2Value)
+
+#####################################
+# countries for one campaign
+
+@app.route("/jsonapi/createCountriesForOneCampaignDataset", methods=["POST"])
+def createCountriesForOneCampaignDataset():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    return create_countries_for_one_campaign_dataset(date_range, campaign_id)
+
+@app.route("/jsonapi/createCountriesForOneCampaignReport", methods=["POST"])
+def createCountriesForOneCampaignReport():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_countries_for_one_campaign_report(campaign_id, date_range, c1, c2, c3, c1Value, c2Value, c3Value)
 
 if __name__ == "__main__":
     app.run(debug=True)

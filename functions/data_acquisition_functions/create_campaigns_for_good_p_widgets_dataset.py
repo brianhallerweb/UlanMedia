@@ -59,7 +59,7 @@ def create_campaigns_for_good_p_widgets_dataset(date_range, max_rec_bid, default
             campaign["mismatch_coeff_and_rec_coeff"] = False
 
         
-    with open(f"../../data/campaigns_for_good_p_widgets/{date_range}_campaigns_for_good_p_widgets_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/campaigns_for_good_p_widgets/{date_range}_campaigns_for_good_p_widgets_dataset.json", "w") as file:
         json.dump(campaigns_for_good_p_widgets, file)
 
     return json.dumps(campaigns_for_good_p_widgets)
