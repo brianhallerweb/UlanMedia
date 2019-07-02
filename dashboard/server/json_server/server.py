@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
+from config.config import *
+from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
+from functions.misc.create_vol_date_range import create_vol_date_range
 
 # create datasets
 from functions.data_acquisition_functions.create_p_widgets_for_all_campaigns_dataset import create_p_widgets_for_all_campaigns_dataset
@@ -27,6 +30,8 @@ from functions.data_acquisition_functions.create_countries_for_one_campaign_data
 from functions.data_acquisition_functions.create_languages_for_all_campaigns_dataset import create_languages_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_language_dataset import create_campaigns_for_one_language_dataset
 from functions.data_acquisition_functions.create_languages_for_one_campaign_dataset import create_languages_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_languages_for_one_campaign_dataset import create_languages_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_days_for_one_p_widget_for_all_campaigns_dataset import create_days_for_one_p_widget_for_all_campaigns_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -53,6 +58,7 @@ from functions.data_analysis_functions.create_countries_for_one_campaign_report 
 from functions.data_analysis_functions.create_languages_for_all_campaigns_report import create_languages_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_language_report import create_campaigns_for_one_language_report
 from functions.data_analysis_functions.create_languages_for_one_campaign_report import create_languages_for_one_campaign_report
+from functions.data_analysis_functions.create_days_for_one_p_widget_for_all_campaigns_report import create_days_for_one_p_widget_for_all_campaigns_report
 
 app = Flask(__name__)
 
@@ -657,6 +663,24 @@ def createLanguagesForOneCampaignReport():
     c3 = request.json["c3"]
     c3Value = request.json["c3Value"]
     return create_languages_for_one_campaign_report(campaign_id, date_range, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# days for one p widget for all campaigns
+
+@app.route("/jsonapi/createDaysForOnePWidgetForAllCampaignsDataset", methods=["POST"])
+def createDaysForOnePWidgetForAllCampaignsDataset():
+    p_widget_id = request.json["pWidgetID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_days_for_one_p_widget_for_all_campaigns_dataset(vol_token,
+            vol_start_date, vol_end_date, p_widget_id)
+
+@app.route("/jsonapi/createDaysForOnePWidgetForAllCampaignsReport", methods=["POST"])
+def createDaysForOnePWidgetForAllCampaignsReport():
+    p_widget_id = request.json["pWidgetID"]
+    return create_days_for_one_p_widget_for_all_campaigns_report(p_widget_id)
 
 if __name__ == "__main__":
     app.run(debug=True)
