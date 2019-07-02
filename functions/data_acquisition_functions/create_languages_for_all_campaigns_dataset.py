@@ -15,7 +15,7 @@ def create_languages_for_all_campaigns_dataset(date_range):
     for language_name in data:
         languages_for_all_campaigns["data"].append(data[language_name]["for_all_campaigns"])
 
-    with open(f"../../data/languages_for_all_campaigns/{date_range}_languages_for_all_campaigns_dataset.json", "w") as file:
+    with open(f"{os.environ.get('ULANMEDIAAPP')}/data/languages_for_all_campaigns/{date_range}_languages_for_all_campaigns_dataset.json", "w") as file:
         json.dump(languages_for_all_campaigns, file)
     
     return json.dumps(languages_for_all_campaigns)

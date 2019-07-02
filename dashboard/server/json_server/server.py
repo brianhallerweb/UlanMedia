@@ -23,6 +23,9 @@ from functions.data_acquisition_functions.create_campaigns_for_good_p_widgets_da
 from functions.data_acquisition_functions.create_countries_for_all_campaigns_dataset import create_countries_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_campaigns_for_one_country_dataset import create_campaigns_for_one_country_dataset
 from functions.data_acquisition_functions.create_countries_for_one_campaign_dataset import create_countries_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_languages_for_all_campaigns_dataset import create_languages_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_campaigns_for_one_language_dataset import create_campaigns_for_one_language_dataset
+from functions.data_acquisition_functions.create_languages_for_one_campaign_dataset import create_languages_for_one_campaign_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -45,6 +48,9 @@ from functions.data_analysis_functions.create_campaigns_for_good_p_widgets_repor
 from functions.data_analysis_functions.create_countries_for_all_campaigns_report import create_countries_for_all_campaigns_report
 from functions.data_analysis_functions.create_campaigns_for_one_country_report import create_campaigns_for_one_country_report
 from functions.data_analysis_functions.create_countries_for_one_campaign_report import create_countries_for_one_campaign_report
+from functions.data_analysis_functions.create_languages_for_all_campaigns_report import create_languages_for_all_campaigns_report
+from functions.data_analysis_functions.create_campaigns_for_one_language_report import create_campaigns_for_one_language_report
+from functions.data_analysis_functions.create_languages_for_one_campaign_report import create_languages_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -566,6 +572,65 @@ def createCountriesForOneCampaignReport():
     c3 = request.json["c3"]
     c3Value = request.json["c3Value"]
     return create_countries_for_one_campaign_report(campaign_id, date_range, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# languages for all campaigns
+
+@app.route("/jsonapi/createLanguagesForAllCampaignsDataset", methods=["POST"])
+def createLanguagesForAllCampaignsDataset():
+    date_range = request.json["dateRange"]
+    return create_languages_for_all_campaigns_dataset(date_range)
+
+@app.route("/jsonapi/createLanguagesForAllCampaignsReport", methods=["POST"])
+def createLanguagesForAllCampaignsReport():
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_languages_for_all_campaigns_report(date_range, c1, c2, c3, c1Value, c2Value, c3Value)
+
+#####################################
+# campaigns for one language 
+
+@app.route("/jsonapi/createCampaignsForOneLanguageDataset", methods=["POST"])
+def createCampaignsForOneLanguageDataset():
+    language_name = request.json["languageName"]
+    date_range = request.json["dateRange"]
+    return create_campaigns_for_one_language_dataset(date_range, language_name)
+
+@app.route("/jsonapi/createCampaignsForOneLanguageReport", methods=["POST"])
+def createCampaignsForOneLanguageReport():
+    language_name = request.json["languageName"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    return create_campaigns_for_one_language_report(language_name, date_range, c1, c2, c1Value, c2Value)
+
+#####################################
+# languages for one campaign
+
+@app.route("/jsonapi/createLanguagesForOneCampaignDataset", methods=["POST"])
+def createLanguagessForOneCampaignDataset():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    return create_languages_for_one_campaign_dataset(date_range, campaign_id)
+
+@app.route("/jsonapi/createLanguagesForOneCampaignReport", methods=["POST"])
+def createLanguagesForOneCampaignReport():
+    campaign_id = request.json["campaignID"]
+    date_range = request.json["dateRange"]
+    c1 = request.json["c1"]
+    c1Value = request.json["c1Value"]
+    c2 = request.json["c2"]
+    c2Value = request.json["c2Value"]
+    c3 = request.json["c3"]
+    c3Value = request.json["c3Value"]
+    return create_languages_for_one_campaign_report(campaign_id, date_range, c1, c2, c3, c1Value, c2Value, c3Value)
 
 if __name__ == "__main__":
     app.run(debug=True)

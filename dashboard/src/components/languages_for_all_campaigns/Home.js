@@ -47,7 +47,7 @@ class Home extends Component {
   submitForm() {
     this.setState({loading: true, volRequestDates: ''});
 
-    fetch(`/api/createLanguagesForAllCampaignsDataset`, {
+    fetch(`/jsonapi/createLanguagesForAllCampaignsDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createLanguagesForAllCampaignsReport', {
+        fetch('/jsonapi/createLanguagesForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
