@@ -33,6 +33,8 @@ from functions.data_acquisition_functions.create_languages_for_one_campaign_data
 from functions.data_acquisition_functions.create_languages_for_one_campaign_dataset import create_languages_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_days_for_one_p_widget_for_all_campaigns_dataset import create_days_for_one_p_widget_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_months_for_one_p_widget_for_all_campaigns_dataset import create_months_for_one_p_widget_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_days_for_one_p_widget_for_one_campaign_dataset import create_days_for_one_p_widget_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_months_for_one_p_widget_for_one_campaign_dataset import create_months_for_one_p_widget_for_one_campaign_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -61,6 +63,8 @@ from functions.data_analysis_functions.create_campaigns_for_one_language_report 
 from functions.data_analysis_functions.create_languages_for_one_campaign_report import create_languages_for_one_campaign_report
 from functions.data_analysis_functions.create_days_for_one_p_widget_for_all_campaigns_report import create_days_for_one_p_widget_for_all_campaigns_report
 from functions.data_analysis_functions.create_months_for_one_p_widget_for_all_campaigns_report import create_months_for_one_p_widget_for_all_campaigns_report
+from functions.data_analysis_functions.create_days_for_one_p_widget_for_one_campaign_report import create_days_for_one_p_widget_for_one_campaign_report
+from functions.data_analysis_functions.create_months_for_one_p_widget_for_one_campaign_report import create_months_for_one_p_widget_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -701,6 +705,48 @@ def createMonthsForOnePWidgetForAllCampaignsDataset():
 def createMonthsForOnePWidgetForAllCampaignsReport():
     p_widget_id = request.json["pWidgetID"]
     return create_months_for_one_p_widget_for_all_campaigns_report(p_widget_id)
+
+#####################################
+# days for one p widget for one campaign
+
+@app.route("/jsonapi/createDaysForOnePWidgetForOneCampaignDataset", methods=["POST"])
+def createDaysForOnePWidgetForOneCampaignDataset():
+    p_widget_id = request.json["pWidgetID"]
+    vol_id = request.json["volID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_days_for_one_p_widget_for_one_campaign_dataset(vol_token,
+            vol_start_date, vol_end_date, p_widget_id, vol_id)
+
+@app.route("/jsonapi/createDaysForOnePWidgetForOneCampaignReport", methods=["POST"])
+def createDaysForOnePWidgetForOneCampaignReport():
+    p_widget_id = request.json["pWidgetID"]
+    vol_id = request.json["volID"]
+    return create_days_for_one_p_widget_for_one_campaign_report(p_widget_id,
+            vol_id)
+
+#####################################
+# months for one p widget for one campaign
+
+@app.route("/jsonapi/createMonthsForOnePWidgetForOneCampaignDataset", methods=["POST"])
+def createMonthsForOnePWidgetForOneCampaignDataset():
+    p_widget_id = request.json["pWidgetID"]
+    vol_id = request.json["volID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_months_for_one_p_widget_for_one_campaign_dataset(vol_token,
+            vol_start_date, vol_end_date, p_widget_id, vol_id)
+
+@app.route("/jsonapi/createMonthsForOnePWidgetForOneCampaignReport", methods=["POST"])
+def createMonthsForOnePWidgetForOneCampaignReport():
+    p_widget_id = request.json["pWidgetID"]
+    vol_id = request.json["volID"]
+    return create_months_for_one_p_widget_for_one_campaign_report(p_widget_id,
+            vol_id)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -25,7 +25,7 @@ class Home extends Component {
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch('/api/createDaysForOnePWidgetForOneCampaignDataset', {
+    fetch('/jsonapi/createDaysForOnePWidgetForOneCampaignDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createDaysForOnePWidgetForOneCampaignReport', {
+        fetch('/jsonapi/createDaysForOnePWidgetForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

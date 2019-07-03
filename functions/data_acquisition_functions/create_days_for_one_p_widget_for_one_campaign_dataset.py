@@ -9,8 +9,6 @@ import sys
 import re
 import os
 
-import pprint
-
 
 def create_days_for_one_p_widget_for_one_campaign_dataset(token, start_date, end_date, p_widget_id, campaign_id):
     start = datetime.strptime(start_date, "%Y-%m-%d").date()
