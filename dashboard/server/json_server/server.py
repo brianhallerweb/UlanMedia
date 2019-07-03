@@ -35,6 +35,10 @@ from functions.data_acquisition_functions.create_days_for_one_p_widget_for_all_c
 from functions.data_acquisition_functions.create_months_for_one_p_widget_for_all_campaigns_dataset import create_months_for_one_p_widget_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_days_for_one_p_widget_for_one_campaign_dataset import create_days_for_one_p_widget_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_months_for_one_p_widget_for_one_campaign_dataset import create_months_for_one_p_widget_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_days_for_one_c_widget_for_all_campaigns_dataset import create_days_for_one_c_widget_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_months_for_one_c_widget_for_all_campaigns_dataset import create_months_for_one_c_widget_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_days_for_one_c_widget_for_one_campaign_dataset import create_days_for_one_c_widget_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_months_for_one_c_widget_for_one_campaign_dataset import create_months_for_one_c_widget_for_one_campaign_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -65,6 +69,10 @@ from functions.data_analysis_functions.create_days_for_one_p_widget_for_all_camp
 from functions.data_analysis_functions.create_months_for_one_p_widget_for_all_campaigns_report import create_months_for_one_p_widget_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_p_widget_for_one_campaign_report import create_days_for_one_p_widget_for_one_campaign_report
 from functions.data_analysis_functions.create_months_for_one_p_widget_for_one_campaign_report import create_months_for_one_p_widget_for_one_campaign_report
+from functions.data_analysis_functions.create_days_for_one_c_widget_for_all_campaigns_report import create_days_for_one_c_widget_for_all_campaigns_report
+from functions.data_analysis_functions.create_months_for_one_c_widget_for_all_campaigns_report import create_months_for_one_c_widget_for_all_campaigns_report
+from functions.data_analysis_functions.create_days_for_one_c_widget_for_one_campaign_report import create_days_for_one_c_widget_for_one_campaign_report
+from functions.data_analysis_functions.create_months_for_one_c_widget_for_one_campaign_report import create_months_for_one_c_widget_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -746,6 +754,84 @@ def createMonthsForOnePWidgetForOneCampaignReport():
     p_widget_id = request.json["pWidgetID"]
     vol_id = request.json["volID"]
     return create_months_for_one_p_widget_for_one_campaign_report(p_widget_id,
+            vol_id)
+
+#####################################
+# days for one c widget for all campaigns
+
+@app.route("/jsonapi/createDaysForOneCWidgetForAllCampaignsDataset", methods=["POST"])
+def createDaysForOneCWidgetForAllCampaignsDataset():
+    c_widget_id = request.json["cWidgetID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_days_for_one_c_widget_for_all_campaigns_dataset(vol_token,
+            vol_start_date, vol_end_date, c_widget_id)
+
+@app.route("/jsonapi/createDaysForOneCWidgetForAllCampaignsReport", methods=["POST"])
+def createDaysForOneCWidgetForAllCampaignsReport():
+    c_widget_id = request.json["cWidgetID"]
+    return create_days_for_one_c_widget_for_all_campaigns_report(c_widget_id)
+
+#####################################
+# months for one c widget for all campaigns
+
+@app.route("/jsonapi/createMonthsForOneCWidgetForAllCampaignsDataset", methods=["POST"])
+def createMonthsForOneCWidgetForAllCampaignsDataset():
+    c_widget_id = request.json["cWidgetID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_months_for_one_c_widget_for_all_campaigns_dataset(vol_token,
+            vol_start_date, vol_end_date, c_widget_id)
+
+@app.route("/jsonapi/createMonthsForOneCWidgetForAllCampaignsReport", methods=["POST"])
+def createMonthsForOneCWidgetForAllCampaignsReport():
+    c_widget_id = request.json["cWidgetID"]
+    return create_months_for_one_c_widget_for_all_campaigns_report(c_widget_id)
+
+#####################################
+# days for one c widget for one campaign
+
+@app.route("/jsonapi/createDaysForOneCWidgetForOneCampaignDataset", methods=["POST"])
+def createDaysForOneCWidgetForOneCampaignDataset():
+    c_widget_id = request.json["cWidgetID"]
+    vol_id = request.json["volID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_days_for_one_c_widget_for_one_campaign_dataset(vol_token,
+            vol_start_date, vol_end_date, c_widget_id, vol_id)
+
+@app.route("/jsonapi/createDaysForOneCWidgetForOneCampaignReport", methods=["POST"])
+def createDaysForOneCWidgetForOneCampaignReport():
+    c_widget_id = request.json["cWidgetID"]
+    vol_id = request.json["volID"]
+    return create_days_for_one_c_widget_for_one_campaign_report(c_widget_id,
+            vol_id)
+
+#####################################
+# months for one c widget for one campaign
+
+@app.route("/jsonapi/createMonthsForOneCWidgetForOneCampaignDataset", methods=["POST"])
+def createMonthsForOneCWidgetForOneCampaignDataset():
+    c_widget_id = request.json["cWidgetID"]
+    vol_id = request.json["volID"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_months_for_one_c_widget_for_one_campaign_dataset(vol_token,
+            vol_start_date, vol_end_date, c_widget_id, vol_id)
+
+@app.route("/jsonapi/createMonthsForOneCWidgetForOneCampaignReport", methods=["POST"])
+def createMonthsForOneCWidgetForOneCampaignReport():
+    c_widget_id = request.json["cWidgetID"]
+    vol_id = request.json["volID"]
+    return create_months_for_one_c_widget_for_one_campaign_report(c_widget_id,
             vol_id)
 
 if __name__ == "__main__":

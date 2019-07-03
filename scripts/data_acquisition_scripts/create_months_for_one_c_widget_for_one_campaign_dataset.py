@@ -6,6 +6,8 @@ import sys
 
 c_widget_id = sys.argv[1]
 campaign_id = sys.argv[2]
+# c_widget_id = "5712703s673336"
+# campaign_id = "2d32eca2-406a-48df-b4f4-1fb8e4c98e77"
 
 vol_token = get_vol_access_token(vol_access_id, vol_access_key)
 

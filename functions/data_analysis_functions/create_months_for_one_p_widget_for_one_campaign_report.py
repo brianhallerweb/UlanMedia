@@ -15,6 +15,10 @@ def create_months_for_one_p_widget_for_one_campaign_report(p_widget_id,
         months.append(data["data"][month])
         
     df = pd.DataFrame(months)
+
+    if len(df.index) == 0:
+        return json.dumps({})
+        sys.exit()
     
     df["cost"] = round(df["cost"], 2)
     df["profit"] = round(df["profit"], 2)

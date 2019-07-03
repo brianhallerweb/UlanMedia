@@ -4,9 +4,9 @@ import json
 import pandas as pd
 import numpy as np
 
-def create_days_for_one_p_widget_for_all_campaigns_report(p_widget_id):
+def create_days_for_one_c_widget_for_all_campaigns_report(c_widget_id):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_p_widget_for_all_campaigns/{p_widget_id}_days_for_one_p_widget_for_all_campaigns_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_c_widget_for_all_campaigns/{c_widget_id}_days_for_one_c_widget_for_all_campaigns_dataset.json', 'r') as file:
         data = json.load(file)
     
     days = []
@@ -30,6 +30,7 @@ def create_days_for_one_p_widget_for_all_campaigns_report(p_widget_id):
     df["epl"] = round(df["revenue"] / df["leads"], 2)
     df["eps"] = round(df["revenue"] / df["sales"], 2)
     df["roi"] = round((df["profit"] / df["cost"])*100, 2)
+    
     
     df = df.replace([np.inf, -np.inf], "NaN")
     df = df.replace(np.nan, "NaN")

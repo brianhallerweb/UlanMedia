@@ -19,13 +19,14 @@ class Home extends Component {
       monthRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch('/api/createMonthsForOneCWidgetForOneCampaignDataset', {
+    fetch('/jsonapi/createMonthsForOneCWidgetForOneCampaignDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createMonthsForOneCWidgetForOneCampaignReport', {
+        fetch('/jsonapi/createMonthsForOneCWidgetForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -123,6 +124,7 @@ class Home extends Component {
           name={this.state.name}
         />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           monthRecords={this.state.monthRecords}
         />

@@ -4,16 +4,16 @@ import json
 import pandas as pd
 import numpy as np
 
-def create_days_for_one_p_widget_for_all_campaigns_report(p_widget_id):
+def create_months_for_one_c_widget_for_all_campaigns_report(c_widget_id):
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/days_for_one_p_widget_for_all_campaigns/{p_widget_id}_days_for_one_p_widget_for_all_campaigns_dataset.json', 'r') as file:
+    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/months_for_one_c_widget_for_all_campaigns/{c_widget_id}_months_for_one_c_widget_for_all_campaigns_dataset.json', 'r') as file:
         data = json.load(file)
     
-    days = []
-    for day in data["data"]:
-        days.append(data["data"][day])
+    months = []
+    for month in data["data"]:
+        months.append(data["data"][month])
         
-    df = pd.DataFrame(days)
+    df = pd.DataFrame(months)
 
     if len(df.index) == 0:
         return json.dumps({})
@@ -33,9 +33,9 @@ def create_days_for_one_p_widget_for_all_campaigns_report(p_widget_id):
     
     df = df.replace([np.inf, -np.inf], "NaN")
     df = df.replace(np.nan, "NaN")
-    df = df.sort_values("day", ascending=False)
+    df = df.sort_values("month_index", ascending=True)
     
-    json_final_result = json.dumps(df[["clicks", "cost", "day", "revenue",
+    json_final_result = json.dumps(df[["clicks", "cost", "month", "month_index", "revenue",
         "profit", "leads", "sales",
         "lead_cvr", "epc", "cpl", "cps", "cpc", "epl", "eps", "roi"]].to_dict("records"))
     

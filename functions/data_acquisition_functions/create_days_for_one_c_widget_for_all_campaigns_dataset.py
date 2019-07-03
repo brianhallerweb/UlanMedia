@@ -8,9 +8,6 @@ import json
 import sys
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def create_days_for_one_c_widget_for_all_campaigns_dataset(token, start_date, end_date, c_widget_id):
     start = datetime.strptime(start_date, "%Y-%m-%d").date()
     end = datetime.strptime(end_date, "%Y-%m-%d").date()

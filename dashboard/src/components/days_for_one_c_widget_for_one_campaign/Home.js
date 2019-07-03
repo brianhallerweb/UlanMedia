@@ -19,13 +19,14 @@ class Home extends Component {
       dayRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch('/api/createDaysForOneCWidgetForOneCampaignDataset', {
+    fetch('/jsonapi/createDaysForOneCWidgetForOneCampaignDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createDaysForOneCWidgetForOneCampaignReport', {
+        fetch('/jsonapi/createDaysForOneCWidgetForOneCampaignReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -122,6 +123,7 @@ class Home extends Component {
           name={this.state.name}
         />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           dayRecords={this.state.dayRecords}
         />
