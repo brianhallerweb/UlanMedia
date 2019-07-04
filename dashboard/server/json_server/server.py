@@ -43,6 +43,8 @@ from functions.data_acquisition_functions.create_days_for_one_ad_for_all_campaig
 from functions.data_acquisition_functions.create_months_for_one_ad_for_all_campaigns_dataset import create_months_for_one_ad_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_days_for_one_ad_for_one_campaign_dataset import create_days_for_one_ad_for_one_campaign_dataset
 from functions.data_acquisition_functions.create_months_for_one_ad_for_one_campaign_dataset import create_months_for_one_ad_for_one_campaign_dataset
+from functions.data_acquisition_functions.create_days_for_one_offer_for_all_campaigns_dataset import create_days_for_one_offer_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_months_for_one_offer_for_all_campaigns_dataset import create_months_for_one_offer_for_all_campaigns_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -81,6 +83,8 @@ from functions.data_analysis_functions.create_days_for_one_ad_for_all_campaigns_
 from functions.data_analysis_functions.create_months_for_one_ad_for_all_campaigns_report import create_months_for_one_ad_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_ad_for_one_campaign_report import create_days_for_one_ad_for_one_campaign_report
 from functions.data_analysis_functions.create_months_for_one_ad_for_one_campaign_report import create_months_for_one_ad_for_one_campaign_report
+from functions.data_analysis_functions.create_days_for_one_offer_for_all_campaigns_report import create_days_for_one_offer_for_all_campaigns_report
+from functions.data_analysis_functions.create_months_for_one_offer_for_all_campaigns_report import create_months_for_one_offer_for_all_campaigns_report
 
 app = Flask(__name__)
 
@@ -915,6 +919,42 @@ def createMonthsForOneAdForOneCampaignReport():
     ad_image = request.json["adImage"]
     vol_id = request.json["volID"]
     return create_months_for_one_ad_for_one_campaign_report(ad_image, vol_id)
+
+#####################################
+# days for one offer for all campaigns
+
+@app.route("/jsonapi/createDaysForOneOfferForAllCampaignsDataset", methods=["POST"])
+def createDaysForOneOfferForAllCampaignsDataset():
+    offer_name = request.json["offerName"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_days_for_one_offer_for_all_campaigns_dataset(vol_token,
+            vol_start_date, vol_end_date, offer_name) 
+
+@app.route("/jsonapi/createDaysForOneOfferForAllCampaignsReport", methods=["POST"])
+def createDaysForOneOfferForAllCampaignsReport():
+    offer_name = request.json["offerName"]
+    return create_days_for_one_offer_for_all_campaigns_report(offer_name)
+
+#####################################
+# months for one offer for all campaigns
+
+@app.route("/jsonapi/createMonthsForOneOfferForAllCampaignsDataset", methods=["POST"])
+def createMonthsForOneOfferForAllCampaignsDataset():
+    offer_name = request.json["offerName"]
+    vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+    vol_dates = create_vol_date_range(180, mgid_timezone)
+    vol_start_date = vol_dates[0]
+    vol_end_date = vol_dates[1]
+    return create_months_for_one_offer_for_all_campaigns_dataset(vol_token,
+            vol_start_date, vol_end_date, offer_name)
+
+@app.route("/jsonapi/createMonthsForOneOfferForAllCampaignsReport", methods=["POST"])
+def createMonthsForOneOfferForAllCampaignsReport():
+    offer_name = request.json["offerName"]
+    return create_months_for_one_offer_for_all_campaigns_report(offer_name)
 
 
 

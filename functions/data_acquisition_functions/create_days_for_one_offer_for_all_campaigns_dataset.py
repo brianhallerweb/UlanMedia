@@ -9,9 +9,6 @@ import sys
 import os
 import re
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
 def create_days_for_one_offer_for_all_campaigns_dataset(token, start_date,
         end_date, offer_name):
     end = datetime.strptime(end_date, "%Y-%m-%d").date()

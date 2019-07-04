@@ -10,9 +10,6 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
 def create_months_for_one_offer_for_all_campaigns_dataset(token, start_date, end_date, offer_name):
 
     start = datetime.strptime(start_date, "%Y-%m-%d").date()
