@@ -16,12 +16,8 @@ const logout = require('./controllers/user_controllers/logout');
 
 const createGprsForEachPOfferDataset = require('./controllers/data_acquisition_controllers/create_gprs_for_each_p_offer_dataset');
 
-const createDaysForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_offer_for_all_campaigns_dataset');
-const createMonthsForOneOfferForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_offer_for_all_campaigns_dataset');
 const createDaysForOneAdForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_ad_for_all_campaigns_dataset');
 const createMonthsForOneAdForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_ad_for_all_campaigns_dataset');
-const createDaysForOneCountryForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_country_for_all_campaigns_dataset');
-const createMonthsForOneCountryForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_country_for_all_campaigns_dataset');
 const createMonthsForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneAdForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_ad_for_one_campaign_dataset');
 const createMonthsForOneAdForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_months_for_one_ad_for_one_campaign_dataset');
@@ -29,12 +25,8 @@ const createMonthsForOneCWidgetForOneCampaignDataset = require('./controllers/da
 const createDaysForOneCWidgetForAllCampaignsDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_all_campaigns_dataset');
 const createDaysForOneCWidgetForOneCampaignDataset = require('./controllers/data_acquisition_controllers/create_days_for_one_c_widget_for_one_campaign_dataset');
 const createDaysForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_campaign_report');
-const createDaysForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_offer_for_all_campaigns_report');
-const createMonthsForOneOfferForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_offer_for_all_campaigns_report');
 const createDaysForOneAdForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_ad_for_all_campaigns_report');
 const createMonthsForOneAdForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_ad_for_all_campaigns_report');
-const createDaysForOneCountryForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_days_for_one_country_for_all_campaigns_report');
-const createMonthsForOneCountryForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_country_for_all_campaigns_report');
 const createMonthsForOneCWidgetForAllCampaignsReport = require('./controllers/data_analysis_controllers/create_months_for_one_c_widget_for_all_campaigns_report');
 const createDaysForOneAdForOneCampaignReport = require('./controllers/data_analysis_controllers/create_days_for_one_ad_for_one_campaign_report');
 const createMonthsForOneAdForOneCampaignReport = require('./controllers/data_analysis_controllers/create_months_for_one_ad_for_one_campaign_report');
@@ -139,18 +131,6 @@ app.post(
 /////// Data Acquisition Routes /////
 
 app.post(
-  '/api/createDaysForOneOfferForAllCampaignsDataset',
-  authenticate,
-  createDaysForOneOfferForAllCampaignsDataset,
-);
-
-app.post(
-  '/api/createMonthsForOneOfferForAllCampaignsDataset',
-  authenticate,
-  createMonthsForOneOfferForAllCampaignsDataset,
-);
-
-app.post(
   '/api/createDaysForOneAdForAllCampaignsDataset',
   authenticate,
   createDaysForOneAdForAllCampaignsDataset,
@@ -160,18 +140,6 @@ app.post(
   '/api/createMonthsForOneAdForAllCampaignsDataset',
   authenticate,
   createMonthsForOneAdForAllCampaignsDataset,
-);
-
-app.post(
-  '/api/createDaysForOneCountryForAllCampaignsDataset',
-  authenticate,
-  createDaysForOneCountryForAllCampaignsDataset,
-);
-
-app.post(
-  '/api/createMonthsForOneCountryForAllCampaignsDataset',
-  authenticate,
-  createMonthsForOneCountryForAllCampaignsDataset,
 );
 
 app.post(
@@ -213,17 +181,6 @@ app.post(
 //---------------------------------------
 
 /////// Data Analysis Routes ///////////
-app.post(
-  '/api/createDaysForOneOfferForAllCampaignsReport',
-  authenticate,
-  createDaysForOneOfferForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createMonthsForOneOfferForAllCampaignsReport',
-  authenticate,
-  createMonthsForOneOfferForAllCampaignsReport,
-);
 
 app.post(
   '/api/createDaysForOneAdForAllCampaignsReport',
@@ -235,18 +192,6 @@ app.post(
   '/api/createMonthsForOneAdForAllCampaignsReport',
   authenticate,
   createMonthsForOneAdForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createDaysForOneCountryForAllCampaignsReport',
-  authenticate,
-  createDaysForOneCountryForAllCampaignsReport,
-);
-
-app.post(
-  '/api/createMonthsForOneCountryForAllCampaignsReport',
-  authenticate,
-  createMonthsForOneCountryForAllCampaignsReport,
 );
 
 app.post(

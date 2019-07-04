@@ -16,13 +16,14 @@ class Home extends Component {
       monthRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch('/api/createMonthsForOneCountryForAllCampaignsDataset', {
+    fetch('/jsonapi/createMonthsForOneCountryForAllCampaignsDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +56,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createMonthsForOneCountryForAllCampaignsReport', {
+        fetch('/jsonapi/createMonthsForOneCountryForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -112,6 +113,7 @@ class Home extends Component {
         </div>
         <Links countryName={this.state.countryName} />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           monthRecords={this.state.monthRecords}
         />
