@@ -16,13 +16,14 @@ class Home extends Component {
       monthRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch('/api/createMonthsForOneAdForAllCampaignsDataset', {
+    fetch('/jsonapi/createMonthsForOneAdForAllCampaignsDataset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +56,7 @@ class Home extends Component {
         });
       })
       .then(() =>
-        fetch('/api/createMonthsForOneAdForAllCampaignsReport', {
+        fetch('/jsonapi/createMonthsForOneAdForAllCampaignsReport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,13 +105,15 @@ class Home extends Component {
         />
         <GlobalNavBar />
         <div style={{marginBottom: 10}}>
-          *Remember the Cost, Clicks, Profit, CPC, CPL, Lead CVR, CPS, and ROI are not
-          highly accurate, they're just estimates based on Voluum's daily
-          averaged CPC evenly distributed across received clicks....instead of
-          being based on MGID's variable CPC actual charged clicks.
+          *Remember the Cost, Clicks, Profit, CPC, CPL, Lead CVR, CPS, and ROI
+          are not highly accurate, they're just estimates based on Voluum's
+          daily averaged CPC evenly distributed across received
+          clicks....instead of being based on MGID's variable CPC actual charged
+          clicks.
         </div>
         <Links adImage={this.state.adImage} />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           monthRecords={this.state.monthRecords}
         />

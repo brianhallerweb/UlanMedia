@@ -9,7 +9,6 @@ import sys
 import re
 import os
 
-
 def create_days_for_one_ad_for_one_campaign_dataset(token, start_date, end_date, ad_image, campaign_id):
     start = datetime.strptime(start_date, "%Y-%m-%d").date()
     end = datetime.strptime(end_date, "%Y-%m-%d").date()

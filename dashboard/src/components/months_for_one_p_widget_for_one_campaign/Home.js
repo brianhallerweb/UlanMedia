@@ -19,6 +19,7 @@ class Home extends Component {
       monthRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
@@ -123,6 +124,7 @@ class Home extends Component {
           name={this.state.name}
         />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           monthRecords={this.state.monthRecords}
         />

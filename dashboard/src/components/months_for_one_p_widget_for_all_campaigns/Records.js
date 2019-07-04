@@ -7,6 +7,7 @@ class Records extends Component {
     super(props);
     this.state = {};
   }
+
   createTable() {
     return (
       <table>

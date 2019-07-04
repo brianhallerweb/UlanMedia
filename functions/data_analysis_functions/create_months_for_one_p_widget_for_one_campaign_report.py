@@ -32,7 +32,6 @@ def create_months_for_one_p_widget_for_one_campaign_report(p_widget_id,
     df["eps"] = round(df["revenue"] / df["sales"], 2)
     df["roi"] = round((df["profit"] / df["cost"])*100, 2)
     
-    
     df = df.replace([np.inf, -np.inf], "NaN")
     df = df.replace(np.nan, "NaN")
     df = df.sort_values("month_index", ascending=True)

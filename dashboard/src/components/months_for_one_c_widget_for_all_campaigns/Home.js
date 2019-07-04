@@ -16,6 +16,7 @@ class Home extends Component {
       monthRecords: [],
       loading: false,
       authenticated: true,
+      error: false,
     };
   }
 
@@ -112,6 +113,7 @@ class Home extends Component {
         </div>
         <Links cWidgetID={this.state.cWidgetID} />
         <Records
+          error={this.state.error}
           loading={this.state.loading}
           monthRecords={this.state.monthRecords}
         />
