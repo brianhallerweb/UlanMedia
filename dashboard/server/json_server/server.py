@@ -89,6 +89,7 @@ from functions.data_analysis_functions.create_days_for_one_offer_for_all_campaig
 from functions.data_analysis_functions.create_months_for_one_offer_for_all_campaigns_report import create_months_for_one_offer_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_country_for_all_campaigns_report import create_days_for_one_country_for_all_campaigns_report
 from functions.data_analysis_functions.create_months_for_one_country_for_all_campaigns_report import create_months_for_one_country_for_all_campaigns_report
+from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
 app = Flask(__name__)
 
@@ -995,6 +996,14 @@ def createMonthsForOneCountryForAllCampaignsDataset():
 def createMonthsForOneCountryForAllCampaignsReport():
     country_name = request.json["countryName"]
     return create_months_for_one_country_for_all_campaigns_report(country_name)
+
+#####################################
+# days for one campaign
+
+@app.route("/jsonapi/createDaysForOneCampaignReport", methods=["POST"])
+def createDaysForOneCampaignReport():
+    vol_id = request.json["volid"]
+    return create_days_for_one_campaign_report(vol_id)
 
 
 

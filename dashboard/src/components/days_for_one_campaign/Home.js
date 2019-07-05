@@ -19,7 +19,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.setState({loading: true});
-    fetch('/api/createDaysForOneCampaignReport', {
+    fetch('/jsonapi/createDaysForOneCampaignReport', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
