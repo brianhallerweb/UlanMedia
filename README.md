@@ -1,9 +1,9 @@
 ### Technologies
 
-The front end uses: 
+Front end: 
 * React with React-Router 
 
-The back end uses:
+Back end:
 * Ubuntu Server 18.04 (vpn from digital ocean)
 * Cron (daily data updates)
 * Nginx (web server - reverse proxy to port 3000 and 5000)
