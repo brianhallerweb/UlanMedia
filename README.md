@@ -4,14 +4,14 @@ The front end uses:
 React with React-Router 
 
 The back end uses:
-*Ubuntu Server 18.04 (vpn from digital ocean)
-*Cron (daily data updates)
-*Nginx (web server - reverse proxy to port 3000 and 5000)
-*Pm2 (process management)
-*Gunicorn (Running flask server in production)
-*Node with MongoDB (Authentication, some list management routes)
-*Flask (json data server)
-*Python and Pandas (API requests, spreadsheet calculations)
+* Ubuntu Server 18.04 (vpn from digital ocean)
+* Cron (daily data updates)
+* Nginx (web server - reverse proxy to port 3000 and 5000)
+* Pm2 (process management)
+* Gunicorn (Running flask server in production)
+* Node with MongoDB (Authentication, some list management routes)
+* Flask (json data server)
+* Python and Pandas (API requests, spreadsheet calculations)
 
 ### Authentication
 
@@ -43,18 +43,18 @@ spreadsheet where each row is a p_widget in one particular campaign.
 
 ### Terminology 
 
-Campaign
-p widget
-c widget
-p offer
-c offer
-flow rule
-ad
-ad image
-country
+* Campaign
+* p widget
+* c widget
+* p offer
+* c offer
+* flow rule
+* ad
+* ad image
+* country
 
 ### Detailed information on each report type
 
-#### Campaigns for all campaigns
+* Campaigns for all campaigns
 
 This is how campaigns for all campaigns works. 
