@@ -1,4 +1,4 @@
-### Technologies
+## Technologies
 
 Front end: 
 * React with React-Router 
