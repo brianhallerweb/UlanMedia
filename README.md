@@ -1,7 +1,7 @@
 ### Technologies
 
 The front end uses: 
-React with React-Router 
+* React with React-Router 
 
 The back end uses:
 * Ubuntu Server 18.04 (vpn from digital ocean)
