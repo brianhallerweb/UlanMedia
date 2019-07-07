@@ -43,18 +43,18 @@ spreadsheet where each row is a p_widget in one particular campaign.
 
 ### Terminology 
 
-* Campaign
-* p widget
-* c widget
-* p offer
-* c offer
-* flow rule
-* ad
-* ad image
-* country
+* campaign -
+* p widget -
+* c widget -
+* p offer -
+* c offer -
+* flow rule -
+* ad -
+* ad image -
+* country -
 
 ### Detailed information on each report type
 
-* Campaigns for all campaigns
+##### Campaigns for all campaigns
 
 This is how campaigns for all campaigns works. 
