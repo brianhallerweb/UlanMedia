@@ -13,7 +13,7 @@ Back end:
 * Flask (json data server)
 * Python and Pandas (API requests, spreadsheet calculations)
 
-### Authentication
+## Authentication
 
 There are two separate systems for authentication: one on the node server
 (authentication middleware) and in React Router, the client side router (a created a higher order
@@ -21,7 +21,7 @@ component called ProtectedRoute). I have detailed explanations of those approach
 in separate repositories. The repositories are called secure_todos_API and
 protected_route. As of 7/07/19, the Flask routes have been left unprotected. 
 
-### The big picture of how data flows
+## The big picture of how data flows
 
 1. Every morning, new data is acquired from a combination of MGID and Voluum.
    That data is stored in json files on the server and is usually named complete_xyz_data
@@ -35,13 +35,13 @@ according the checkbox selections.
 numbers of campaigns that are both bad and included) are shown in little red
 text above the report data. 
 
-### Naming convention for each report
+## Naming convention for each report
 
 The page names are organized around the the observational type (row
 type) of each spreadsheet. For example, p_widgets_for_one_campaign means a
 spreadsheet where each row is a p_widget in one particular campaign. 
 
-### Terminology 
+## Terminology 
 
 * campaign -
 * p widget -
@@ -53,8 +53,8 @@ spreadsheet where each row is a p_widget in one particular campaign.
 * ad image -
 * country -
 
-### Detailed information on each report type
+## Detailed information on each report type
 
-##### Campaigns for all campaigns
+### Campaigns for all campaigns
 
 This is how campaigns for all campaigns works. 
