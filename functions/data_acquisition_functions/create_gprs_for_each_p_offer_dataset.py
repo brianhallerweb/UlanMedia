@@ -7,9 +7,6 @@ import os
 from functions.classification_functions.classify_offer_for_all_campaigns import classify_offer_for_all_campaigns
 import pandas as pd
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def create_gprs_for_each_p_offer_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_flow_rule/{date_range}_offers_for_each_flow_rule_dataset.json', 'r') as file:

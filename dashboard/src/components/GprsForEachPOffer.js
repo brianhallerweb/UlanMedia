@@ -16,7 +16,7 @@ class GprsForEachPOffer extends Component {
   componentDidMount() {
     this.setState({loading: true});
 
-    fetch(`/api/createGprsForEachPOfferDataset`, {
+    fetch(`/jsonapi/createGprsForEachPOfferDataset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

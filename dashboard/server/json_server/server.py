@@ -47,6 +47,7 @@ from functions.data_acquisition_functions.create_days_for_one_offer_for_all_camp
 from functions.data_acquisition_functions.create_months_for_one_offer_for_all_campaigns_dataset import create_months_for_one_offer_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_days_for_one_country_for_all_campaigns_dataset import create_days_for_one_country_for_all_campaigns_dataset
 from functions.data_acquisition_functions.create_months_for_one_country_for_all_campaigns_dataset import create_months_for_one_country_for_all_campaigns_dataset
+from functions.data_acquisition_functions.create_gprs_for_each_p_offer_dataset import create_gprs_for_each_p_offer_dataset
 
 # create reports
 from functions.data_analysis_functions.create_campaigns_for_all_campaigns_report import create_campaigns_for_all_campaigns_report
@@ -1004,6 +1005,14 @@ def createMonthsForOneCountryForAllCampaignsReport():
 def createDaysForOneCampaignReport():
     vol_id = request.json["volid"]
     return create_days_for_one_campaign_report(vol_id)
+
+#####################################
+# gprs for each p widget
+
+@app.route("/jsonapi/createGprsForEachPOfferDataset", methods=["POST"])
+def createGprsForEachPOfferDataset():
+    date_range = request.json["dateRange"]
+    return create_gprs_for_each_p_offer_dataset(date_range)
 
 
 
