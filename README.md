@@ -4,14 +4,14 @@ The front end uses:
 React with React-Router 
 
 The back end uses:
-Ubuntu Server 18.04 (vpn from digital ocean)
-Cron (daily data updates)
-Nginx (web server - reverse proxy to port 3000 and 5000)
-Pm2 (process management)
-Gunicorn (Running flask server in production)
-Node with MongoDB (Authentication, some list management routes)
-Flask (json data server)
-Python and Pandas (API requests, spreadsheet calculations)
+*Ubuntu Server 18.04 (vpn from digital ocean)
+*Cron (daily data updates)
+*Nginx (web server - reverse proxy to port 3000 and 5000)
+*Pm2 (process management)
+*Gunicorn (Running flask server in production)
+*Node with MongoDB (Authentication, some list management routes)
+*Flask (json data server)
+*Python and Pandas (API requests, spreadsheet calculations)
 
 ### Authentication
 
