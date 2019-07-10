@@ -41,20 +41,33 @@ The page names are organized around the the observational type (row
 type) of each spreadsheet. For example, p_widgets_for_one_campaign means a
 spreadsheet where each row is a p_widget in one particular campaign. 
 
-## Terminology 
-
-* campaign -
-* p widget -
-* c widget -
-* p offer -
-* c offer -
-* flow rule -
-* ad -
-* ad image -
-* country -
-
 ## Detailed information on each report type
 
-### Campaigns for all campaigns
+### campaigns for all campaigns
 
-This is how campaigns for all campaigns works. 
+Campaigns for all campaigns is one of the few exceptions to the pattern of
+sending two POST requests on every page. It only requires one "report" POST
+request because the datasets are preprocessed in CRON. 
+
+1. data_acquisition_scripts/create_campaigns_for_all_campaigns_datasets.py
+   is run in CRON.
+2. /campaignsforallcampaigns runs a POST request to data_analysis_functions/create_campaigns_for_all_campaigns_report.py
+
+### p widgets for all campaigns
+
+All p widget pages begin with the construction of complete_p_widgets_dataset,
+which happens in CRON.
+
+1. Data arrives from MGID and voluum through /data_acquisition_scripts/create_p_and_c_widgets_for_one_campaign_datasets.py. It creates a separate file for each campaign. 
+2. /data_adquisition_scripts/create_complete_p_widgets_datasets.py takes the data from p_and_widgets_for_one_campaign and processes into a dictionary of p widgets. All the needed data for each widget is contained there. 
+
+Then /pwidgetsforallcampaigns is easily created with the typical 2 POST request
+process
+
+1. /pwidgetsforallcampaigns runs a POST request to data_aquisition_functions/create_p_widgets_for_all_campaigns_dataset.py
+2. /pwidgetsforallcampaigns runs a POST request to data_analysis_functions/create_p_widgets_for_all_campaigns_report.py
+
+### campaigns for one p widget
+
+1. /campaignsforonepwidget/<pwidget> runs a POST request to data_aquisition_functions/create_p_widgets_for_all_campaigns_dataset.py
+2. /campaignsforonepwidget/<pwidget> runs a POST request to data_analysis_functions/create_p_widgets_for_all_campaigns_report.py
