@@ -69,5 +69,5 @@ process
 
 ### campaigns for one p widget
 
-1. /campaignsforonepwidget/<pwidget> runs a POST request to data_aquisition_functions/create_p_widgets_for_all_campaigns_dataset.py
-2. /campaignsforonepwidget/<pwidget> runs a POST request to data_analysis_functions/create_p_widgets_for_all_campaigns_report.py
+1. /campaignsforonepwidget/pwidgetid runs a POST request to data_aquisition_functions/create_p_widgets_for_all_campaigns_dataset.py
+2. /campaignsforonepwidget/pwidgetid runs a POST request to data_analysis_functions/create_p_widgets_for_all_campaigns_report.py
