@@ -39,12 +39,13 @@ def create_p_widgets_for_one_campaign_dataset(vol_id, date_range,
         w_bid = p_widget["w_bid"]
         coeff = p_widget["coeff"]
 
-        if sales > 0:
-            p_widget["rec_w_bid"] = epc - epc * .3
-        elif p_widget["leads"] > 0:
-            p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
-        else:
-            p_widget["rec_w_bid"] = c_bid
+        # if sales > 0:
+            # p_widget["rec_w_bid"] = epc - epc * .3
+        # elif p_widget["leads"] > 0:
+            # p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
+        # else:
+            # p_widget["rec_w_bid"] = c_bid
+        p_widget["rec_w_bid"] = 0
 
         if p_widget["rec_w_bid"] > max_rec_bid:
             p_widget["rec_w_bid"] = max_rec_bid
