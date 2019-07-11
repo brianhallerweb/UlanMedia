@@ -41,6 +41,10 @@ The page names are organized around the the observational type (row
 type) of each spreadsheet. For example, p_widgets_for_one_campaign means a
 spreadsheet where each row is a p_widget in one particular campaign. 
 
+## Starting the development environment
+
+## Starting the production environment
+
 ## Detailed information on each report type
 
 ### campaigns for all campaigns
@@ -71,3 +75,8 @@ process
 
 1. /campaignsforonepwidget/pwidgetid runs a POST request to data_aquisition_functions/create_p_widgets_for_all_campaigns_dataset.py
 2. /campaignsforonepwidget/pwidgetid runs a POST request to data_analysis_functions/create_p_widgets_for_all_campaigns_report.py
+
+### p widgets for one campaign
+
+1. /pwidgetsforonecampaign/campaignid runs a POST request to data_aquisition_functions/create_campaigns_for_all_p_widgets_dataset.py
+2. /pwidgetsforonecampaign/campaignid runs a POST request to data_analysis_functions/create_campaigns_for_all_p_widgets_report.py
