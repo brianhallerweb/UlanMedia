@@ -43,9 +43,7 @@ def create_p_widgets_for_one_campaign_dataset(vol_id, date_range,
             p_widget["rec_w_bid"] = epc - epc * .3
         elif p_widget["leads"] > 0:
             p_widget["rec_w_bid"] = c_bid
-            # if cpl == 0:
-            # else:
-                # p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
+            # p_widget["rec_w_bid"] = c_bid * mpl / cpl / 2
         else:
             p_widget["rec_w_bid"] = c_bid
 
