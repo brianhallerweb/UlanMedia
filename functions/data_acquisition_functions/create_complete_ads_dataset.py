@@ -8,9 +8,6 @@ import sys
 import json
 import os
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def create_complete_ads_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/ads/{date_range}_ads_dataset.json', 'r') as file:

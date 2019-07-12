@@ -5,9 +5,6 @@ import sys
 import re
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
 def create_offers_for_each_flow_rule_dataset(date_range):
 
     with open(f'{os.environ.get("ULANMEDIAAPP")}/data/offers_for_each_campaign/{date_range}_offers_for_each_campaign_dataset.json', 'r') as file:
