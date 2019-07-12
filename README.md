@@ -145,7 +145,7 @@ All ads pages begin with the construction of complete_ads_dataset,
 which happens in CRON.
 
 1. Data arrives from MGID and voluum at /data_acquisition_scripts/create_ads_datasets.py. The script uses /data_acquisition_functions/get_mgid_ads_data.py and /data_acquisition_functions/get_vol_ads_data.py to get data from mgid and volume. That data is combined in /data_acquisition_scripts/combine_mgid_vol_ads_data. 
-2. /data_adquisition_scripts/create_complete_ads_datasets.py takes the data created in step 1 and creates a complete dictionary of ads. All the needed data for each ad is contained there. 
+2. /data_acquisition_scripts/create_complete_ads_datasets.py takes the data created in step 1 and creates a complete dictionary of ads. All the needed data for each ad is contained there. 
 
 Then /adsforallcampaigns is easily created with the typical 2 POST request
 process
@@ -189,3 +189,51 @@ process
 
 1. /offersforoneflowrule/flowrule runs a POST request to data_aquisition_functions/create_offers_for_one_flow_rule_dataset.py
 2. /offerssforoneflowrule/flowrule runs a POST request to data_analysis_functions/create_offers_for_one_flow_rule_report.py
+
+### countries for all campaigns
+
+All countries pages begin with the construction of complete_countries_dataset,
+which happens in CRON.
+
+1. Data arrives from Voluum at /data_acquisition_scripts/create_countries_datasets.py. 
+2. /data_acquisition_scripts/create_complete_countries_datasets.py takes the data created in step 1 and creates a complete dictionary of countriess. All the needed data for each country is contained there. 
+
+Then /countriesforallcampaigns is created with the typical 2 POST request
+process
+
+1. /countriesforallcampaigns runs a POST request to data_aquisition_functions/create_countries_for_all_campaigns_dataset.py
+2. /countriesforallcampaigns runs a POST request to data_analysis_functions/create_countries_for_all_campaigns_report.py
+
+### campaigns for one country 
+
+1. /campaignsforonecountry/countryname runs a POST request to data_aquisition_functions/create_campaigns_for_one_country_dataset.py
+2. /campaignsforonecountry/countryname runs a POST request to data_analysis_functions/create_campaigns_for_one_country_report.py
+
+### countries for one campaign
+
+1. /countriesforonecampaign/campaignid runs a POST request to data_aquisition_functions/create_countries_for_one_campaign_dataset.py
+2. /countriesforonecampaign/campaignid runs a POST request to data_analysis_functions/create_countries_for_one_campaign_report.py
+
+### languages for all campaigns
+
+All countries pages begin with the construction of complete_languages_dataset,
+which happens in CRON.
+
+1. Data arrives from Voluum at /data_acquisition_scripts/create_languages_datasets.py. 
+2. /data_acquisition_scripts/create_complete_languages_datasets.py takes the data created in step 1 and creates a complete dictionary of languages. All the needed data for each language is contained there. 
+
+Then /languagessforallcampaigns is created with the typical 2 POST request
+process
+
+1. /languagesforallcampaigns runs a POST request to data_aquisition_functions/create_languages_for_all_campaigns_dataset.py
+2. /languagesforallcampaigns runs a POST request to data_analysis_functions/create_languages_for_all_campaigns_report.py
+
+### campaigns for one language 
+
+1. /campaignsforonecountry/countryname runs a POST request to data_aquisition_functions/create_campaigns_for_one_country_dataset.py
+2. /campaignsforonecountry/countryname runs a POST request to data_analysis_functions/create_campaigns_for_one_country_report.py
+
+### languages for one campaign
+
+1. /languagesforonecampaign/campaignid runs a POST request to data_aquisition_functions/create_languages_for_one_campaign_dataset.py
+2. /languagesforonecampaign/campaignid runs a POST request to data_analysis_functions/create_languages_for_one_campaign_report.py

@@ -7,9 +7,6 @@ import sys
 import json
 import os
 
-import pprint
-pp=pprint.PrettyPrinter(indent=2)
-
 def create_conversions_for_each_campaign_dataset(token, start_date, end_date, date_range):
     try:
         url = f"https://api.voluum.com/report/conversions?from={start_date}T00:00:00Z&to={end_date}T00:00:00Z&tz=America%2FLos_Angeles&conversionTimeMode=VISIT&sort=visitTimestamp&direction=desc&columns=visitTimestamp&columns=transactionId&columns=campaignId&columns=offerId&columns=countryName&columns=trafficSourceId&columns=deviceName&columns=os&columns=browser&columns=isp&columns=customVariable1&columns=customVariable3&groupBy=conversion&offset=0&limit=1000000&include=ACTIVE&filter=37bbd390-ed90-4978-9066-09affa682bcc"
