@@ -125,7 +125,7 @@ product_schema = ProductSchema(strict=True)
 products_schema = ProductSchema(many=True, strict=True)
 
 
-@app.route("/product", methods=["POST"])
+@app.route("/jsonapi/product", methods=["POST"])
 def add_product():
     name = request.json["name"]
     description = request.json["description"]
@@ -140,7 +140,7 @@ def add_product():
     # this isn't getting returned for some reason
     return product_schema.jsonify(new_product)
 
-@app.route("/product", methods=["GET"])
+@app.route("/jsonapi/product", methods=["GET"])
 def get_products():
     all_products = Product.query.all()
     # the schema seems to just control what is taken out of the query (if the
