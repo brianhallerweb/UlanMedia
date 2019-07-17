@@ -93,6 +93,63 @@ from functions.data_analysis_functions.create_months_for_one_country_for_all_cam
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
+# you might need below to avoid a printed warning
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+
+# the product class inherits from db.Model
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+    description = db.Column(db.String(200))
+    price = db.Column(db.Float)
+    qty = db.Column(db.Integer)
+
+    def __init__(self, name, description, price, qty):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.qty = qty
+
+# marshmallow is used for the schema
+class ProductSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "description", "price", "qty")
+
+product_schema = ProductSchema(strict=True)
+# I'm not totally sure why there needs to be a plural schema but thats's how it
+# works
+products_schema = ProductSchema(many=True, strict=True)
+
+
+@app.route("/product", methods=["POST"])
+def add_product():
+    name = request.json["name"]
+    description = request.json["description"]
+    price = request.json["price"]
+    qty = request.json["qty"]
+
+    new_product = Product(name, description, price, qty)
+
+    db.session.add(new_product)
+    db.session.commit()
+
+    # this isn't getting returned for some reason
+    return product_schema.jsonify(new_product)
+
+@app.route("/product", methods=["GET"])
+def get_products():
+    all_products = Product.query.all()
+    # the schema seems to just control what is taken out of the query (if the
+    # shchema didn't include id, than id would be taken out of the query)
+    result = products_schema.dump(all_products)
+    # the .data property seems to just clean the reponse a little
+    return jsonify(result.data)
+
+
 
 #####################################
 # campaigns for all campaigns
