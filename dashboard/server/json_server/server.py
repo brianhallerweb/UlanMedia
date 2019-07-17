@@ -94,8 +94,8 @@ from functions.data_analysis_functions.create_days_for_one_campaign_report impor
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
-# you might need below to avoid a printed warning
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# to avoid a printed warning
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
