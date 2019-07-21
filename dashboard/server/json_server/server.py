@@ -93,7 +93,7 @@ from functions.data_analysis_functions.create_months_for_one_country_for_all_cam
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
+app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://bsh:kensington@localhost/ulanmedia"
 # to avoid a printed warning
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -101,51 +101,46 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 # the product class inherits from db.Model
-class Product(db.Model):
+# when you run db.create_all(), this class gets created as a mysql table (it
+# also changes from upper camel case to lower snake case)
+# Also, running db.create_all() will not delete old tables, it will just add
+# new ones
+class Whitelist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True)
-    description = db.Column(db.String(200))
-    price = db.Column(db.Float)
-    qty = db.Column(db.Integer)
+    widget = db.Column(db.String(100), unique=True)
 
-    def __init__(self, name, description, price, qty):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.qty = qty
+    def __init__(self, widget):
+        self.widget = widget
 
 # marshmallow is used for the schema
-class ProductSchema(ma.Schema):
+class WhitelistSchema(ma.Schema):
     class Meta:
-        fields = ("id", "name", "description", "price", "qty")
+        fields = ("id", "widget")
 
-product_schema = ProductSchema(strict=True)
+whitelist_schema = WhitelistSchema(strict=True)
 # I'm not totally sure why there needs to be a plural schema but thats's how it
 # works
-products_schema = ProductSchema(many=True, strict=True)
+whitelist_schema = WhitelistSchema(many=True, strict=True)
 
 
-@app.route("/jsonapi/product", methods=["POST"])
-def add_product():
-    name = request.json["name"]
-    description = request.json["description"]
-    price = request.json["price"]
-    qty = request.json["qty"]
+@app.route("/jsonapi/whitelist", methods=["POST"])
+def add_widget():
+    widget = request.json["widget"]
+    new_whitelist_widget = Whitelist(widget)
 
-    new_product = Product(name, description, price, qty)
-
-    db.session.add(new_product)
+    db.session.add(new_whitelist_widget)
     db.session.commit()
 
-    # this isn't getting returned for some reason
-    return product_schema.jsonify(new_product)
+    return new_whitelist_widget.widget
+    # this line was causing an error
+    # return whitelist_schema.jsonify(new_whitelist_widget)
 
-@app.route("/jsonapi/product", methods=["GET"])
-def get_products():
-    all_products = Product.query.all()
+@app.route("/jsonapi/whitelist", methods=["GET"])
+def get_whitelist_widgets():
+    all_whitelist_widgets = Whitelist.query.all()
     # the schema seems to just control what is taken out of the query (if the
     # shchema didn't include id, than id would be taken out of the query)
-    result = products_schema.dump(all_products)
+    result = whitelist_schema.dump(all_whitelist_widgets)
     # the .data property seems to just clean the reponse a little
     return jsonify(result.data)
 
