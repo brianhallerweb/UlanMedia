@@ -22,7 +22,7 @@ def exclude_all_campaigns_for_blacklisted_p_widgets(date_range):
             for campaign in p_widget["for_each_campaign"]:
                 if campaign["status"] == "included":
                     subject = 'ALERT - found an "included" campaign in a blacklisted widget' 
-                    message = f'found an included campaign on a blacklisted p widget:\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign {campaign["mgid_id"]}'
+                    message = f'found an included campaign on a blacklisted p widget:\np widget id {p_widget["for_all_campaigns"]["widget_id"]}\ncampaign {campaign["mgid_id"]}\nhttps://ulanmedia.brianhaller.net/campaignsforonepwidget/{p_widget["for_all_campaigns"]["widget_id"]}'
                     print(message)
                     emails_sent += 1
                     send_email("brianshaller@gmail.com", subject, message)

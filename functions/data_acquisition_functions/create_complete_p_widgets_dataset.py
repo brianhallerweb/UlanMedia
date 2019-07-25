@@ -110,6 +110,22 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                     p_widgets_for_one_campaign[p_widget]['status'] = "included" 
                 else:
                     p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
+                #############
+                # hardcoded inactive
+                # this is for when the mgid api shows clicks for a campaign
+                # widget, but the mgid web dashboard doesn't show any clicks for
+                # the same campaign widget, even though the date range is the
+                # same. 
+                # These should manually removed after enough time has passed
+                # for the api to no longer show any clicks for the campaign
+                # widget
+                hardcoded_campaigns = ["506299", "506320", "506244", "506323"]
+                hardcoded_p_widgets = ["5722923"]
+                if p_widget in hardcoded_p_widgets and mgid_id in hardcoded_campaigns:
+                    p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
+                ############
+                ############
+                ############
                 p_widgets_for_one_campaign[p_widget]["vol_id"] = campaign["vol_id"]
                 p_widgets_for_one_campaign[p_widget]["mgid_id"] = campaign["mgid_id"]
                 p_widgets_for_one_campaign[p_widget]["name"] = campaign["name"]

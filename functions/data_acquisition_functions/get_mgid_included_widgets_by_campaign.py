@@ -5,9 +5,6 @@ from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign 
 import requests
 import sys
 
-# import pprint
-# pp=pprint.PrettyPrinter(indent=2)
-
 def get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_date):
     url =f"https://api.mgid.com/v1/goodhits/campaigns/{campaign_id}/quality-analysis?token={token}&campaignId={campaign_id}&dateInterval=interval&startDate={start_date}&endDate={end_date}";
     response = requests.get(url) 
@@ -38,17 +35,20 @@ def get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_da
 
     return included_widgets
 
-# experimentation from 5/28/19
-# from functions.misc.create_mgid_date_range import create_mgid_date_range
-# dates = create_mgid_date_range(82, mgid_timezone)
-# start = dates[0]
-# print(start)
-# end = dates[1]
+# problem solving from 5/28/19
+from functions.misc.create_mgid_date_range import create_mgid_date_range
+dates = create_mgid_date_range(80, mgid_timezone)
+start = dates[0]
+print(start)
+end = dates[1]
 
-# widgets = get_mgid_included_widgets_by_campaign(mgid_token, "506244", start, end)
+# for campaign 506299, the widget is included 80 or more days ago, and not included 79
+# or less
 
-# if "5775580" in widgets:
-    # print("yes")
-# else:
-    # print("no")
+widgets = get_mgid_included_widgets_by_campaign(mgid_token, "506299", start, end)
+
+if "5722923" in widgets:
+    print("yes")
+else:
+    print("no")
 
