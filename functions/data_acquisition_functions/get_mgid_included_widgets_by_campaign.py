@@ -36,19 +36,19 @@ def get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_da
     return included_widgets
 
 # problem solving from 5/28/19
-from functions.misc.create_mgid_date_range import create_mgid_date_range
-dates = create_mgid_date_range(80, mgid_timezone)
-start = dates[0]
-print(start)
-end = dates[1]
+# from functions.misc.create_mgid_date_range import create_mgid_date_range
+# dates = create_mgid_date_range(80, mgid_timezone)
+# start = dates[0]
+# print(start)
+# end = dates[1]
 
-# for campaign 506299, the widget is included 80 or more days ago, and not included 79
-# or less
+# # for campaign 506299, the widget is included 80 or more days ago, and not included 79
+# # or less
 
-widgets = get_mgid_included_widgets_by_campaign(mgid_token, "506299", start, end)
+# widgets = get_mgid_included_widgets_by_campaign(mgid_token, "506299", start, end)
 
-if "5722923" in widgets:
-    print("yes")
-else:
-    print("no")
+# if "5722923" in widgets:
+    # print("yes")
+# else:
+    # print("no")
 
