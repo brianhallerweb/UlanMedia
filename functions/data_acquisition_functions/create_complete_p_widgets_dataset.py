@@ -121,7 +121,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                 # widget
                 hardcoded_campaigns = ["506299", "506320", "506244", "506323"]
                 hardcoded_p_widgets = ["5722923"]
-                if p_widget in hardcoded_p_widgets and mgid_id in hardcoded_campaigns:
+                if p_widgets_for_one_campaign[p_widget]["widget_id"] in hardcoded_p_widgets and mgid_id in hardcoded_campaigns:
                     p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
                 ############
                 ############
