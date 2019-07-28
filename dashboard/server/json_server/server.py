@@ -104,8 +104,8 @@ api = Api(app)
 def create_tables():
     db.create_all()
 
-api.add_resource(Colorlist, '/colorlist/<string:color>')
-api.add_resource(CompleteColorlist, '/completecolorlist/<string:color>')
+api.add_resource(Colorlist, '/jsonapi/colorlist/<string:color>')
+api.add_resource(CompleteColorlist, '/jsonapi/completecolorlist/<string:color>')
 
 #####################################
 # campaigns for all campaigns
