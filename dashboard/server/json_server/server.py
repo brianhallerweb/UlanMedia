@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
+from flask_restful import Api
+from flask_jwt import JWT
 import os
 from config.config import *
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
@@ -92,59 +93,19 @@ from functions.data_analysis_functions.create_days_for_one_country_for_all_campa
 from functions.data_analysis_functions.create_months_for_one_country_for_all_campaigns_report import create_months_for_one_country_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
+from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://bsh:kensington@localhost/ulanmedia"
-# to avoid a printed warning
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+api = Api(app)
 
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
-# the product class inherits from db.Model
-# when you run db.create_all(), this class gets created as a mysql table (it
-# also changes from upper camel case to lower snake case)
-# Also, running db.create_all() will not delete old tables, it will just add
-# new ones
-class Whitelist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    widget = db.Column(db.String(100), unique=True)
-
-    def __init__(self, widget):
-        self.widget = widget
-
-# marshmallow is used for the schema
-class WhitelistSchema(ma.Schema):
-    class Meta:
-        fields = ("id", "widget")
-
-whitelist_schema = WhitelistSchema(strict=True)
-# I'm not totally sure why there needs to be a plural schema but thats's how it
-# works
-whitelist_schema = WhitelistSchema(many=True, strict=True)
-
-
-@app.route("/jsonapi/whitelist", methods=["POST"])
-def add_widget():
-    widget = request.json["widget"]
-    new_whitelist_widget = Whitelist(widget)
-
-    db.session.add(new_whitelist_widget)
-    db.session.commit()
-
-    return new_whitelist_widget.widget
-    # this line was causing an error
-    # return whitelist_schema.jsonify(new_whitelist_widget)
-
-@app.route("/jsonapi/whitelist", methods=["GET"])
-def get_whitelist_widgets():
-    all_whitelist_widgets = Whitelist.query.all()
-    # the schema seems to just control what is taken out of the query (if the
-    # shchema didn't include id, than id would be taken out of the query)
-    result = whitelist_schema.dump(all_whitelist_widgets)
-    # the .data property seems to just clean the reponse a little
-    return jsonify(result.data)
-
-
+api.add_resource(Colorlist, '/colorlist/<string:color>')
+api.add_resource(CompleteColorlist, '/completecolorlist/<string:color>')
 
 #####################################
 # campaigns for all campaigns
@@ -1067,6 +1028,8 @@ def createGprsForEachPOfferDataset():
     return create_gprs_for_each_p_offer_dataset(date_range)
 
 
+if __name__ == '__main__':
+    from db import db
+    db.init_app(app)
+    app.run(port=5000, debug=True)
 
-if __name__ == "__main__":
-    app.run(debug=True)
