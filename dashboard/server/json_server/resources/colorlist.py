@@ -32,7 +32,7 @@ class Colorlist(Resource):
             return {'message': f'widget {widget_id} successfully added to the {color}list'}, 201
 
 
-    def delete(self):
+    def delete(self, color):
         widget_id = request.json['widget_id']
 
         widget_to_be_deleted = ColorlistModel.find_by_widget_id(widget_id)
