@@ -103,6 +103,17 @@ class Home extends Component {
   }
 
   submitForm() {
+    // test for posting to colorlist
+    fetch('/jsonapi/colorlist/white', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        widget_id: '123',
+      }),
+    });
+
     this.setState({loading: true, mgidRequestDates: '', volRequestDates: ''});
 
     fetch('/jsonapi/createCampaignsForAllCampaignsReport', {
