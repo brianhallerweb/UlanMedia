@@ -93,12 +93,15 @@ from functions.data_analysis_functions.create_days_for_one_country_for_all_campa
 from functions.data_analysis_functions.create_months_for_one_country_for_all_campaigns_report import create_months_for_one_country_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
+from dashboard.server.json_server.db import db
 from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
 
+
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://bsh:kensington@localhost/ulanmedia"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://bsh:kensington@localhost/ulanmedia"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 api = Api(app)
+db.init_app(app)
 
 @app.before_first_request
 def create_tables():
@@ -1029,7 +1032,5 @@ def createGprsForEachPOfferDataset():
 
 
 if __name__ == '__main__':
-    from db import db
-    db.init_app(app)
     app.run(port=5000, debug=True)
 

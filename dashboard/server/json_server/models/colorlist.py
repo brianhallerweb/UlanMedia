@@ -1,4 +1,4 @@
-from db import db
+from dashboard.server.json_server.db import db
 
 class ColorlistModel(db.Model):
 
