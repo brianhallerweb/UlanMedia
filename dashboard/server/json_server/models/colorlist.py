@@ -2,7 +2,7 @@ from dashboard.server.json_server.db import db
 
 class ColorlistModel(db.Model):
 
-    __tablename__ = 'whitelist'
+    __tablename__ = 'colorlist'
     _id = db.Column(db.Integer, primary_key=True)
     widget_id = db.Column(db.String(50), unique=True)
     color = db.Column(db.String(20))
