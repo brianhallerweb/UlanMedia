@@ -10,12 +10,6 @@ requests = "*"
 pandas = "*"
 numpy = "*"
 flask = "*"
-flask-sqlalchemy = "*"
-flask-marshmallow = "*"
-marshmallow-sqlalchemy = "*"
-pymysql = "*"
-flask-restful = "*"
-flask-jwt = "*"
 
 [requires]
 python_version = "3.7"
