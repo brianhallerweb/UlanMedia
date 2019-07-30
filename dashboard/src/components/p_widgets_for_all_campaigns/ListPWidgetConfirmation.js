@@ -17,13 +17,15 @@ class ListPWidgetConfirmation extends Component {
   }
 
   confirmPWidgetListing() {
-    fetch(`/jsonapi/colorlist/${this.state.listType}`, {
+    fetch(`/api/addtolist`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-auth': localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        widget_id: this.state.pWidgetID,
+        widgetID: this.state.pWidgetID,
+        listType: this.state.listType,
       }),
     })
       .then(res => {
@@ -43,7 +45,7 @@ class ListPWidgetConfirmation extends Component {
       .then(res =>
         this.setState({
           response: true,
-          responseMessage: res.message,
+          responseMessage: res,
         }),
       )
       .catch(err => {

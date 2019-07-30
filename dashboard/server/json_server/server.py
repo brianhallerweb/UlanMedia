@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_restful import Api
-from flask_jwt import JWT
+from flask_marshmallow import Marshmallow
 import os
 from config.config import *
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
@@ -93,22 +92,7 @@ from functions.data_analysis_functions.create_days_for_one_country_for_all_campa
 from functions.data_analysis_functions.create_months_for_one_country_for_all_campaigns_report import create_months_for_one_country_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
-from dashboard.server.json_server.db import db
-from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
-
-
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://bsh:kensington@localhost/ulanmedia"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-api = Api(app)
-db.init_app(app)
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
-api.add_resource(Colorlist, '/jsonapi/colorlist/<string:color>')
-api.add_resource(CompleteColorlist, '/jsonapi/completecolorlist/<string:color>')
 
 #####################################
 # campaigns for all campaigns
@@ -1031,6 +1015,6 @@ def createGprsForEachPOfferDataset():
     return create_gprs_for_each_p_offer_dataset(date_range)
 
 
-if __name__ == '__main__':
-    app.run(port=5000, debug=True)
 
+if __name__ == "__main__":
+    app.run(debug=True)

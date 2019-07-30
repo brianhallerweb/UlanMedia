@@ -139,6 +139,7 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(records => {
+        console.log(records);
         let mismatchClassificationAndGlobalStatusCount = checkForMismatchClassificationAndGlobalStatus(
           records,
         );
