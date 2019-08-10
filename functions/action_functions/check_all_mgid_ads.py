@@ -42,10 +42,10 @@ def check_all_mgid_ads(token):
                     ads_data[ad_id]["campaignId"]}
 
 
-    subject = f"ok - {len(ads_data)} ads: {ad_status_counts['active']} active, {ad_status_counts['paused']} paused, {ad_status_counts['rejected']} rejected"
-    body = f"{ad_status_counts['active']} of {len(ads_data)} ads in all campaigns are active.\n{ad_status_counts['paused']} of {len(ads_data)} ads in all campaigns are paused.\n{ad_status_counts['rejected']} of {len(ads_data)} ads in all campaigns are rejected."
+    subject = f"ok - {len(ads_data)} ads: {ad_status_counts['active']} active, {ad_status_counts['paused']} paused, {ad_status_counts['pending']} pending, {ad_status_counts['rejected']} rejected"
+    body = f"{ad_status_counts['active']} of {len(ads_data)} ads in all campaigns are active.\n{ad_status_counts['paused']} of {len(ads_data)} ads in all campaigns are paused.\n{ad_status_counts['pending']} of {len(ads_data)} ads in all campaigns are pending.\n{ad_status_counts['rejected']} of {len(ads_data)} ads in all campaigns are rejected."
     if ad_status_counts["rejected"] > 0:
-        subject = f"ALERT - {len(ads_data)} ads: {ad_status_counts['active']} active, {ad_status_counts['paused']} paused, {ad_status_counts['rejected']} rejected"
+        subject = f"ALERT - {len(ads_data)} ads: {ad_status_counts['active']} active, {ad_status_counts['paused']} paused, {ad_status_counts['pending']} pending, {ad_status_counts['rejected']} rejected"
         for ad_id in rejected_ads:
             body += f'\n\nad {rejected_ads[ad_id]["ad_id"]} rejected in campaign {rejected_ads[ad_id]["campaign_id"]}\nhttps://dashboard.mgid.com/advertisers/teasers-goods/campaign_id/{rejected_ads[ad_id]["campaign_id"]}'
     print(subject)
