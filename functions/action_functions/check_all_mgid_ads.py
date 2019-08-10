@@ -23,7 +23,7 @@ def check_all_mgid_ads(token):
 
 
     ad_status_counts = {"active": 0,
-            "paused": 0, "rejected": 0}
+            "paused": 0, "pending": 0, "rejected": 0}
     rejected_ads = {}
     for ad_id in ads_data:
         if (ads_data[ad_id]["status"]["code"] == 'goodPerformance'):
@@ -34,6 +34,8 @@ def check_all_mgid_ads(token):
             ad_status_counts["paused"] += 1
         elif (ads_data[ad_id]["status"]["code"] == 'blocked'):
             ad_status_counts["paused"] += 1
+        elif (ads_data[ad_id]["status"]["code"] == 'onModeration'):
+            ad_status_counts["pending"] += 1
         else:
             ad_status_counts["rejected"] += 1
             rejected_ads[ad_id] = {"ad_id": ad_id, "campaign_id":
