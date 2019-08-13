@@ -92,7 +92,17 @@ from functions.data_analysis_functions.create_days_for_one_country_for_all_campa
 from functions.data_analysis_functions.create_months_for_one_country_for_all_campaigns_report import create_months_for_one_country_for_all_campaigns_report
 from functions.data_analysis_functions.create_days_for_one_campaign_report import create_days_for_one_campaign_report
 
+from functions.action_functions.check_all_mgid_ads import check_all_mgid_ads
+from config.mgid_token import mgid_token
+
 app = Flask(__name__)
+
+###############
+# check all mgid ads
+@app.route("/jsonapi/checkads", methods=["POST"])
+def check_ads():
+    check_all_mgid_ads(mgid_token)
+    return jsonify("check ads complete")
 
 #####################################
 # campaigns for all campaigns

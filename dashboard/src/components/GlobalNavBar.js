@@ -117,6 +117,14 @@ const GlobalNavBar = () => {
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
+        to={'/checkads'}
+        target={'_blank'}
+        label={'check ads'}
+      />
+
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
         to={'/updatealldata'}
         target={'_blank'}
         label={'update all data'}

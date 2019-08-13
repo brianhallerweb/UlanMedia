@@ -54,6 +54,7 @@ import p_widgets_for_one_domain_for_all_campaignsHome from '../components/p_widg
 import ExcludeOneCampaignForAllBlacklistedPAndCWidgets from '../components/ExcludeOneCampaignForAllBlacklistedPAndCWidgets';
 import UpdateAllData from '../components/UpdateAllData';
 import UpdateOneEightyData from '../components/UpdateOneEightyData';
+import CheckAds from '../components/CheckAds';
 import RedirectToHome from '../components/RedirectToHome';
 
 const AppRouter = () => (
@@ -262,6 +263,7 @@ const AppRouter = () => (
           path="/updateoneeightydata"
           Component={UpdateOneEightyData}
         />
+        <PrivateRoute path="/checkads" Component={CheckAds} />
         <PrivateRoute
           path="/gprsforeachpoffer/:dateRange"
           Component={GprsForEachPOffer}
