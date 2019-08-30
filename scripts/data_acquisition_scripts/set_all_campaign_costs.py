@@ -38,8 +38,6 @@ for row in campaign_sets:
     vol_campaign_id = str(row["vol_id"])
     mgid_campaign_cost = mgid_campaign_costs["campaigns-stat"][mgid_campaign_id]["spent"]
 
-    # 3/9/19 set_vol_campaign_cost() started to fail in what seemed to be a
-    # random way
     attempt_number = 0
     while attempt_number < 10:
         status = set_vol_campaign_cost(vol_token, vol_campaign_id,

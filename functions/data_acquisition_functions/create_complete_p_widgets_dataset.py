@@ -119,10 +119,11 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                 # These should manually removed after enough time has passed
                 # for the api to no longer show any clicks for the campaign
                 # widget
-                hardcoded_campaigns = ["506299", "506320", "506244", "506323"]
-                hardcoded_p_widgets = ["5722923"]
-                if p_widgets_for_one_campaign[p_widget]["widget_id"] in hardcoded_p_widgets and mgid_id in hardcoded_campaigns:
-                    p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
+                # these were removed on 8/23/19
+                # hardcoded_campaigns = ["506299", "506320", "506244", "506323"]
+                # hardcoded_p_widgets = ["5722923"]
+                # if p_widgets_for_one_campaign[p_widget]["widget_id"] in hardcoded_p_widgets and mgid_id in hardcoded_campaigns:
+                    # p_widgets_for_one_campaign[p_widget]['status'] = "inactive" 
                 ############
                 ############
                 ############
