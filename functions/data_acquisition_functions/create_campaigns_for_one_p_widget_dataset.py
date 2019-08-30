@@ -80,7 +80,10 @@ def create_campaigns_for_one_p_widget_dataset(p_widget_id, date_range,
         if sales > 0:
             campaign["rec_w_bid"] = epc - epc * .3
         elif campaign["leads"] > 0:
-            campaign["rec_w_bid"] = c_bid * mpl / cpl / 2
+            if cpl == 0:
+                campaign["rec_w_bid"] = c_bid
+            else:
+                campaign["rec_w_bid"] = c_bid * mpl / cpl / 2
         else:
             campaign["rec_w_bid"] = c_bid
 
