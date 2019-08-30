@@ -1,6 +1,4 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 import os
 from config.config import *
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
