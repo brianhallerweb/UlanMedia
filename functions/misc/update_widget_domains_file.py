@@ -19,12 +19,21 @@ def update_widget_domains_file():
 
         for widget_domain in widget_domains:
             if len(widget_domain) > 0:
-                widget_id = widget_domain.split(",")[0]
-                domain = widget_domain.split(",")[1]
+                split_widget_domain = widget_domain.split(",")
+                if len(split_widget_domain) != 4:
+                    continue
+                traffic_source = split_widget_domain[0]
+                widget_id = split_widget_domain[1]
+                domain = split_widget_domain[2]
+                widget_domain_source = split_widget_domain[3]
                 if widget_id in widget_domain_lookup:
-                    widget_domain_lookup[widget_id].append(domain)
+                    widget_domain_lookup[widget_id]['domains'].append(domain)
                 else:
-                    widget_domain_lookup[widget_id] = [domain]
+                    widget_domain_lookup[widget_id] = {'widget_id': widget_id,
+                            'domains': [domain], 'traffic_source':
+                            traffic_source, 'widget_domain_source':
+                            widget_domain_source}
+
 
 
         with open(f"{os.environ.get('ULANMEDIAAPP')}/curated_lists/widget_domains/widget_domains.json", "w") as file:

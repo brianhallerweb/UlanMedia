@@ -213,7 +213,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
         if p_widget in widget_domains_lookup:
             complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = ""
-            for domain in widget_domains_lookup[p_widget]:
+            for domain in widget_domains_lookup[p_widget]["domains"]:
                 if complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] == "":
                     complete_p_widgets[p_widget]["for_all_campaigns"]["domain"] = domain
                 else:
