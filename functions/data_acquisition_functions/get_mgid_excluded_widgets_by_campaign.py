@@ -24,6 +24,8 @@ def get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_campa
         # to be in a list but the [] are actually just part of the source id
         # string.
         excluded_widgets = []
+        if response["widgetsFilterUid"]["widgets"] == []:
+            return excluded_widgets
         for key, value in response["widgetsFilterUid"]["widgets"].items():
             if (value == "[]") | (value == None):
                 excluded_widgets.append(key)
