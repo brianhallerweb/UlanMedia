@@ -9,6 +9,7 @@ from functions.misc.get_campaign_sets import get_campaign_sets
 from functions.misc.get_whitelist import get_whitelist
 from functions.misc.get_greylist import get_greylist
 from functions.misc.get_blacklist import get_blacklist
+from functions.misc.send_email import send_email
 import json
 import os
 import re
@@ -234,6 +235,7 @@ def create_complete_p_widgets_dataset(date_range, output_name):
         return complete_p_widgets
 
     except:
+        print("Failed - email sent")
         send_email("brianshaller@gmail.com", "Failed - create_complete_p_widgets_dataset()", "Failed - create_complete_p_widgets_dataset()")
         sys.exit()
 
