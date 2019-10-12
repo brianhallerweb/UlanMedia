@@ -66,6 +66,9 @@ class Home extends Component {
   }
 
   submitForm() {
+    console.log(this.state.dateRange);
+    console.log(this.state.pWidgetID);
+    console.log(this.state.c5Value);
     this.setState({
       loading: true,
       classification: '',
