@@ -66,9 +66,6 @@ class Home extends Component {
   }
 
   submitForm() {
-    console.log(this.state.dateRange);
-    console.log(this.state.pWidgetID);
-    console.log(this.state.c5Value);
     this.setState({
       loading: true,
       classification: '',
@@ -85,7 +82,7 @@ class Home extends Component {
       body: JSON.stringify({
         dateRange: this.state.dateRange,
         pWidgetID: this.state.pWidgetID,
-        maxRecBid: this.state.c5Value,
+        maxRecBid: this.state.c7Value,
       }),
     })
       .then(res => {
