@@ -8,49 +8,55 @@ import os
 import json
 
 def get_vol_ads_data(date_range):
+    try:
 
-    with open(f'{os.environ.get("ULANMEDIAAPP")}/data/conversions_for_each_campaign/{date_range}_conversions_for_each_campaign_dataset.json', 'r') as file:
-        json_file = json.load(file)
-    metadata = json_file["metadata"]
-    conversions_for_each_campaign = json_file["data"]
+        with open(f'{os.environ.get("ULANMEDIAAPP")}/data/conversions_for_each_campaign/{date_range}_conversions_for_each_campaign_dataset.json', 'r') as file:
+            json_file = json.load(file)
+        metadata = json_file["metadata"]
+        conversions_for_each_campaign = json_file["data"]
 
-    # campaigns will be a list of dictionaries, where each dictionary is a
-    # campaign with keys and values like {vol_id: "123", mgid_id: 123, ...}
-    campaigns = get_campaign_sets()
+        # campaigns will be a list of dictionaries, where each dictionary is a
+        # campaign with keys and values like {vol_id: "123", mgid_id: 123, ...}
+        campaigns = get_campaign_sets()
 
-    # The ads_data dictionary will  have this structure: each key is an ad id 
-    # (customvariable3) and each value is a dictionary with stats for that ad
+        # The ads_data dictionary will  have this structure: each key is an ad id 
+        # (customvariable3) and each value is a dictionary with stats for that ad
 
-    ads_data = {}
-    for campaign in campaigns:
-        vol_id = campaign["vol_id"]
-        name = campaign["name"]
-        if vol_id not in conversions_for_each_campaign:
-            continue
-        for conversion in conversions_for_each_campaign[vol_id]:
-            ad_id = conversion["customVariable3"]
-            if ad_id not in ads_data:
-                ads_data[ad_id] = {} 
-                ads_data[ad_id]["ad_id"] = ad_id
-                ads_data[ad_id]["vol_id"] = vol_id
-                ads_data[ad_id]["name"] = name 
-                ads_data[ad_id]["revenue"] = conversion["revenue"]
-                ads_data[ad_id]["conversions"] = 1
-                if conversion["transactionId"] == "account":
-                   ads_data[ad_id]["leads"] = 1
-                   ads_data[ad_id]["sales"] = 0
-                elif conversion["transactionId"] == "deposit":
-                   ads_data[ad_id]["sales"] = 1
-                   ads_data[ad_id]["leads"] = 0
-            else:
-                ads_data[ad_id]["revenue"] += conversion["revenue"]
-                ads_data[ad_id]["conversions"] += 1
-                if conversion["transactionId"] == "account":
-                   ads_data[ad_id]["leads"] += 1
-                elif conversion["transactionId"] == "deposit":
-                   ads_data[ad_id]["sales"] += 1
+        ads_data = {}
+        for campaign in campaigns:
+            vol_id = campaign["vol_id"]
+            name = campaign["name"]
+            if vol_id not in conversions_for_each_campaign:
+                continue
+            for conversion in conversions_for_each_campaign[vol_id]:
+                ad_id = conversion["customVariable3"]
+                if ad_id not in ads_data:
+                    ads_data[ad_id] = {} 
+                    ads_data[ad_id]["ad_id"] = ad_id
+                    ads_data[ad_id]["vol_id"] = vol_id
+                    ads_data[ad_id]["name"] = name 
+                    ads_data[ad_id]["revenue"] = conversion["revenue"]
+                    ads_data[ad_id]["conversions"] = 1
+                    if conversion["transactionId"] == "account":
+                       ads_data[ad_id]["leads"] = 1
+                       ads_data[ad_id]["sales"] = 0
+                    elif conversion["transactionId"] == "deposit":
+                       ads_data[ad_id]["sales"] = 1
+                       ads_data[ad_id]["leads"] = 0
+                else:
+                    ads_data[ad_id]["revenue"] += conversion["revenue"]
+                    ads_data[ad_id]["conversions"] += 1
+                    if conversion["transactionId"] == "account":
+                       ads_data[ad_id]["leads"] += 1
+                    elif conversion["transactionId"] == "deposit":
+                       ads_data[ad_id]["sales"] += 1
 
-    return ads_data
+        return ads_data
+    except:
+        print("Failed - email sent")
+        send_email("brianshaller@gmail.com", "Failed - get_vol_ads_data()", "Failed - get_vol_ads_data()")
+        sys.exit()
+
   
 # 5/05/19 function before using the voluum conversions report
 # def get_vol_ads_data(token, start_date, end_date, timezone):

@@ -6,6 +6,8 @@ import requests
 import sys
 import json
 import os
+from functions.misc.send_email import send_email
+
 
 def create_languages_dataset(token, start_date, end_date, date_range):
     try:

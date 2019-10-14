@@ -5,6 +5,8 @@ import requests
 import re
 import sys
 import json
+from functions.misc.send_email import send_email
+
 
 def get_all_campaign_conversions_by_traffic_source(token,
         traffic_source_id, start_date, end_date):

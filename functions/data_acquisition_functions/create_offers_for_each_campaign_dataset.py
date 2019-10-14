@@ -7,6 +7,8 @@ import json
 import sys
 import re
 import os
+from functions.misc.send_email import send_email
+
 
 def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, vol_end_date):
     try:

@@ -13,6 +13,8 @@ import re
 import os
 import sys
 import json
+from functions.misc.send_email import send_email
+
 
 def create_complete_c_widgets_dataset(date_range, output_name):
     try:

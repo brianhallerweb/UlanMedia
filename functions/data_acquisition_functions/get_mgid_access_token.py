@@ -3,6 +3,7 @@ from datetime import datetime
 import sys
 from functions.misc.send_email import send_email
 
+
 def get_mgid_access_token(login, password):
     try:
         res = requests.post("https://api.mgid.com/v1/auth/token",  headers={"Content-type":

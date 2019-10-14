@@ -4,36 +4,43 @@ from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid
 from functions.data_acquisition_functions.get_mgid_excluded_widgets_by_campaign import get_mgid_excluded_widgets_by_campaign
 import requests
 import sys
+from functions.misc.send_email import send_email
+
 
 def get_mgid_included_widgets_by_campaign(token, campaign_id, start_date, end_date):
-    url =f"https://api.mgid.com/v1/goodhits/campaigns/{campaign_id}/quality-analysis?token={token}&campaignId={campaign_id}&dateInterval=interval&startDate={start_date}&endDate={end_date}";
-    response = requests.get(url) 
-    if response.status_code == 401:
-        mgid_token = get_and_return_new_mgid_token()
-        return get_mgid_included_widgets_by_campaign(mgid_token, campaign_id, start_date, end_date)
+    try:
+        url =f"https://api.mgid.com/v1/goodhits/campaigns/{campaign_id}/quality-analysis?token={token}&campaignId={campaign_id}&dateInterval=interval&startDate={start_date}&endDate={end_date}";
+        response = requests.get(url) 
+        if response.status_code == 401:
+            mgid_token = get_and_return_new_mgid_token()
+            return get_mgid_included_widgets_by_campaign(mgid_token, campaign_id, start_date, end_date)
 
-    response.raise_for_status()
-    response = response.json()
+        response.raise_for_status()
+        response = response.json()
 
-    widgets = []
-    if response[campaign_id][start_date + "_" + end_date] == []:
-        return widgets
-    for id, data in response[campaign_id][start_date + "_" + end_date].items():
-        widget_id = id
-        widgets.append(widget_id)
-        if data["sources"]:
-            for source_id, source_data in data["sources"].items():
-                if source_id is not "0":
-                    widget_id = f"{id}s{source_id}"
-                    widgets.append(widget_id)
+        widgets = []
+        if response[campaign_id][start_date + "_" + end_date] == []:
+            return widgets
+        for id, data in response[campaign_id][start_date + "_" + end_date].items():
+            widget_id = id
+            widgets.append(widget_id)
+            if data["sources"]:
+                for source_id, source_data in data["sources"].items():
+                    if source_id is not "0":
+                        widget_id = f"{id}s{source_id}"
+                        widgets.append(widget_id)
 
-    excluded_widgets = get_mgid_excluded_widgets_by_campaign(token, mgid_client_id, campaign_id)
-    included_widgets = []
-    for widget in widgets:
-        if widget not in excluded_widgets:
-            included_widgets.append(widget)
+        excluded_widgets = get_mgid_excluded_widgets_by_campaign(token, mgid_client_id, campaign_id)
+        included_widgets = []
+        for widget in widgets:
+            if widget not in excluded_widgets:
+                included_widgets.append(widget)
 
-    return included_widgets
+        return included_widgets
+    except:
+        print("Failed - email sent")
+        send_email("brianshaller@gmail.com", "Failed - get_mgid_included_widgets_by_campaign()", "Failed - get_mgid_included_widgets_by_campaign()")
+        sys.exit()
 
 # problem solving from 5/28/19
 # from functions.misc.create_mgid_date_range import create_mgid_date_range

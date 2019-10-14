@@ -6,6 +6,8 @@ import requests
 import sys
 import json
 import os
+from functions.misc.send_email import send_email
+
 
 def create_conversions_for_each_campaign_dataset(token, start_date, end_date, date_range):
     try:

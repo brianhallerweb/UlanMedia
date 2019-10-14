@@ -3,6 +3,8 @@ from datetime import datetime
 import requests
 import json
 import sys
+from functions.misc.send_email import send_email
+
 
 def get_vol_access_token(id, key):
     try:

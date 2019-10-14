@@ -3,6 +3,8 @@ from functions.misc.get_and_return_new_mgid_token import get_and_return_new_mgid
 from datetime import datetime
 import requests 
 import sys
+from functions.misc.send_email import send_email
+
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)

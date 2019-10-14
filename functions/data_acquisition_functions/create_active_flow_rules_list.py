@@ -5,6 +5,8 @@ import requests
 import re
 import sys
 import json
+from functions.misc.send_email import send_email
+
 
 # import pprint
 # pp=pprint.PrettyPrinter(indent=2)
