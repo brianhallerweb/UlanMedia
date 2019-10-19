@@ -34,8 +34,6 @@ def update_campaign_sets_file():
         #    'mgid_id': '517506',
         #    'name': 'bin_world-wide-t2_swedish_mobile_cpc_0.04',
         #    'vol_id': 'e6f4ac2b-ccec-4606-bd1a-9084088c4df0'}
-        pp.pprint(campaign_sets_data)
-        sys.exit()
         with open(f"{os.environ.get('ULANMEDIAAPP')}/campaign_sets/campaign_sets.json", "w") as file:
            json.dump(campaign_sets_data, file)
     except requests.exceptions.RequestException as e:
