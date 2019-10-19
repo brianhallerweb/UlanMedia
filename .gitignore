@@ -5,3 +5,6 @@ data/
 widget_lists/
 campaign_sets/
 curated_lists/
+Pipfile
+Pipfile.lock
+
