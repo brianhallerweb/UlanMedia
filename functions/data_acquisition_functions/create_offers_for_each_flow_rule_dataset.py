@@ -110,9 +110,11 @@ def create_offers_for_each_flow_rule_dataset(date_range):
             unordered_p_offers.append({"p_offer_name": p_offer, "profit":
                 p_offers_gpr_lookup[p_offer]["profit"]})
 
-        df = pd.DataFrame(unordered_p_offers)
-        df = df.sort_values("profit")
-        ordered_p_offers = list(df["p_offer_name"])
+        ordered_p_offers = []
+        if len(unordered_p_offers) > 0:
+            df = pd.DataFrame(unordered_p_offers)
+            df = df.sort_values("profit")
+            ordered_p_offers = list(df["p_offer_name"])
 
         number_of_offers = len(ordered_p_offers)
         number_of_offers_to_keep = round(number_of_offers * 0.3)
