@@ -11,6 +11,13 @@ from functions.misc.send_email import send_email
 
 
 def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, vol_end_date):
+    # Overview of how this function works
+    # 1. get the flow rules and offers from https://api.voluum.com/flow/{vol_flow_id}
+    # 2. get the offers from https://api.voluum.com/report....
+    # 3. get the flow rule names from the parenthesis from each offer name.
+    # 4. get the voluum flow index numbers to display on the dashboard in the same order as in voluum.
+    # 5. get the current flow offer weights from the voluum api flow url.
+    # 6. get the offer stats from the voluum api offers report url.
     try:
         url = f"https://api.voluum.com/report?from={vol_start_date}T00%3A00%3A00Z&to={vol_end_date}T00%3A00%3A00Z&tz=America%2FLos_Angeles&conversionTimeMode=VISIT&sort=offerName&direction=desc&columns=offerName&columns=campaignName&columns=visits&columns=conversions&columns=revenue&columns=cost&columns=profit&columns=cpv&columns=cv&columns=roi&columns=epv&columns=campaignId&columns=cpa&groupBy=offer&groupBy=campaign&offset=0&limit=100000&include=ACTIVE&filter1=traffic-source&filter1Value=37bbd390-ed90-4978-9066-09affa682bcc"
         res = requests.get(url, headers = {"cwauth-token": token})
@@ -76,6 +83,10 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
             if (campaign_id not in campaign_ids) | (row["offerName"].startswith("Global - 404")):
                 continue
             else:    
+                # 11/06/19 This conditional was added because mike updated his naming convention for offer names and flow rule names to include the landin page within square brackets. The old inactive offers don't have square brackets, which breaks the regex, but their data is unneeded anyway, so it is okay to skip them. 
+                if ']' not in row["offerName"]:
+                    continue
+
                 pattern = re.compile(r'(^\w* - \w* - {1})(.[^(]*) (.*)')
                 res = pattern.findall(row["offerName"])
                 offer_string_parts = list(res[0])
@@ -106,7 +117,12 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
             if offer_id not in offers["data"][campaign_id]:
                 if offer_id in vol_weight_lookup and vol_weight_lookup[offer_id] != 0:
                     if flow_rule not in vol_flow_rule_index_lookup:
-                        # 5/8 I would like to know which flow rules are being
+                        # 11/01/19
+                        # Mike changed the names of the flow rules which caused
+                        # every flow rule to be in the conditional. That
+                        # results in the offers dictionary being empty. 
+
+                        # 5/8/19 I would like to know which flow rules are being
                         # skipped but there is a very large number - why?
                         # send_email("brianshaller@gmail.com", "Failed - create_offers_for_each_campaign_dataset() at "
                                 # + str(datetime.now().strftime("%Y-%m-%d%H:%M")),
