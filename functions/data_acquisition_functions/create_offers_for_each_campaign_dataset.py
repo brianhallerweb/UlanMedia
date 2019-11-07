@@ -54,9 +54,7 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
         for flow_rule in vol_weight_res["conditionalPathsGroups"]:
             vol_flow_rule_index_lookup[flow_rule["name"]] = index
             index += 1
-        for flow_rule in vol_weight_res["defaultPaths"]:
-            vol_flow_rule_index_lookup[flow_rule["name"]] = index
-            index += 1
+        vol_flow_rule_index_lookup["default"] = index
 
         ########################
 
@@ -117,11 +115,6 @@ def create_offers_for_each_campaign_dataset(token, date_range, vol_start_date, v
             if offer_id not in offers["data"][campaign_id]:
                 if offer_id in vol_weight_lookup and vol_weight_lookup[offer_id] != 0:
                     if flow_rule not in vol_flow_rule_index_lookup:
-                        # 11/01/19
-                        # Mike changed the names of the flow rules which caused
-                        # every flow rule to be in the conditional. That
-                        # results in the offers dictionary being empty. 
-
                         # 5/8/19 I would like to know which flow rules are being
                         # skipped but there is a very large number - why?
                         # send_email("brianshaller@gmail.com", "Failed - create_offers_for_each_campaign_dataset() at "
