@@ -30,7 +30,7 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
         mpl = campaign["max_lead_cpa"] 
         mps = campaign["max_sale_cpa"] 
         list_to_get_c_bid = campaign["name"].split('_')
-        c_bid = list_to_get_c_bid[len(list_to_get_c_bid) - 1]
+        c_bid = float(list_to_get_c_bid[len(list_to_get_c_bid) - 1])
 
         # create a metadata dictionary
         metadata = {"mgid_start_date": mgid_start_date,

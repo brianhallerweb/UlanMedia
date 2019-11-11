@@ -95,7 +95,6 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                     mgid_id, mgid_start_date, mgid_end_date)
             excluded_widgets = get_mgid_excluded_widgets_by_campaign(mgid_token, mgid_client_id, mgid_id)
 
-            mpc_pattern = re.compile(r'.*cpc_(.*)')
             p_widgets_for_one_campaign = {}
             for widget in json_file["data"]:
                 p_widget = pattern.search(widget).group()
@@ -137,8 +136,9 @@ def create_complete_p_widgets_dataset(date_range, output_name):
                     p_widgets_for_one_campaign[p_widget]["mpl"] = campaign["max_lead_cpa"]
                     p_widgets_for_one_campaign[p_widget]["mps"] = campaign["max_sale_cpa"]
 
-                    res = mpc_pattern.findall(campaign["name"])
-                    p_widgets_for_one_campaign[p_widget]["c_bid"] = float(list(res)[0])
+                    list_to_get_c_bid = campaign["name"].split('_')
+                    c_bid = float(list_to_get_c_bid[len(list_to_get_c_bid) - 1])
+                    p_widgets_for_one_campaign[p_widget]["c_bid"] = c_bid
                     p_widgets_for_one_campaign[p_widget]["w_bid"] = p_widgets_for_one_campaign[p_widget]["c_bid"] * p_widgets_for_one_campaign[p_widget]["coeff"]
 
             for p_widget in p_widgets_for_one_campaign:

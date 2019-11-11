@@ -113,7 +113,7 @@ def create_complete_c_widgets_dataset(date_range, output_name):
             c_widgets_for_one_campaign = {}
             c_widget_pattern = re.compile(r'.*s.*')
             p_widget_pattern = re.compile(r'\d*')
-            mpc_pattern = re.compile(r'.*cpc_(.*)')
+            # mpc_pattern = re.compile(r'.*cpc_(.*)')
             for widget in json_file["data"]:
                c_widget = c_widget_pattern.search(widget)
                if c_widget == None:
@@ -139,8 +139,11 @@ def create_complete_c_widgets_dataset(date_range, output_name):
                     c_widgets_for_one_campaign[c_widget]["name"] = campaign["name"]
                     c_widgets_for_one_campaign[c_widget]["mpl"] = campaign["max_lead_cpa"]
                     c_widgets_for_one_campaign[c_widget]["mps"] = campaign["max_sale_cpa"]
-                    res = mpc_pattern.findall(campaign["name"])
-                    c_widgets_for_one_campaign[c_widget]["c_bid"] = float(list(res)[0])
+                    list_to_get_c_bid = campaign["name"].split('_')
+                    c_bid = float(list_to_get_c_bid[len(list_to_get_c_bid) - 1])
+                    c_widgets_for_one_campaign[c_widget]["c_bid"] = c_bid
+                    # res = mpc_pattern.findall(campaign["name"])
+                    # c_widgets_for_one_campaign[c_widget]["c_bid"] = float(list(res)[0])
                     c_widgets_for_one_campaign[c_widget]["w_bid"] = c_widgets_for_one_campaign[c_widget]["c_bid"] * c_widgets_for_one_campaign[c_widget]["coeff"]
 
             for c_widget in c_widgets_for_one_campaign:
