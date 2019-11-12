@@ -96,9 +96,9 @@ def create_campaigns_for_all_campaigns_dataset(vol_token, mgid_token, days_ago, 
             json.dump(campaigns_data, file)
 
         print(f"{output_name} created")
-    except:
+    except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_campaigns_for_all_campaigns_dataset()", "Failed - create_campaigns_for_all_campaigns_dataset()")
+        send_email("brianshaller@gmail.com", "Failed - create_campaigns_for_all_campaigns_dataset()", e)
         sys.exit()
 
 
