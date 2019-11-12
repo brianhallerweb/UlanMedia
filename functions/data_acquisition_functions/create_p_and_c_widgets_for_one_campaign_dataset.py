@@ -77,9 +77,9 @@ def create_p_and_c_widgets_for_one_campaign_dataset(mgid_token, vol_token,
             json.dump(complete_data_ready_for_json, file)
 
         print(f"{output_name} created")
-    except:
+    except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_p_and_c_widgets_for_one_campaign_dataset()", "Failed - create_p_and_c_widgets_for_one_campaign_dataset()")
+        send_email("brianshaller@gmail.com", "Failed - create_p_and_c_widgets_for_one_campaign_dataset()", e)
         sys.exit()
 
 
