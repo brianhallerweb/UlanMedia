@@ -237,9 +237,9 @@ def create_complete_p_widgets_dataset(date_range, output_name):
 
         return complete_p_widgets
 
-    except:
+    except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_complete_p_widgets_dataset()", "Failed - create_complete_p_widgets_dataset()")
+        send_email("brianshaller@gmail.com", "Failed - create_complete_p_widgets_dataset()", e)
         sys.exit()
 
 
