@@ -29,7 +29,7 @@ class Home extends Component {
       c2: false,
       c2Value: 'waiting',
       c3: true,
-      c3Value: 10,
+      c3Value: 5,
       c4: false,
       c4Value: 10,
       c5: false,
