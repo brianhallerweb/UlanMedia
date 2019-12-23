@@ -19,7 +19,6 @@ from functions.misc.send_email import send_email
 
 def create_complete_p_widgets_dataset(date_range, output_name):
     try:
-
         # 1. get some prerequisite data
 
         campaigns = get_campaign_sets()

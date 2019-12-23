@@ -115,7 +115,8 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                    c_widgets_for_one_p_widget["data"][widget]["mpl"] = campaign["max_lead_cpa"]
                    c_widgets_for_one_p_widget["data"][widget]["mps"] = campaign["max_sale_cpa"]
                    # res = mpc_pattern.findall(campaign["name"])
-                   c_widgets_for_one_p_widget["data"][widget]["mpc"] = 0
+                   list_to_get_mpc = campaign["name"].split('_')
+                   c_widgets_for_one_p_widget["data"][widget]["mpc"] = float(list_to_get_mpc[len(list_to_get_mpc) - 1])
                    if p_widget in widget_whitelist:
                        c_widgets_for_one_p_widget["data"][widget]["global_status"] = "p_whitelist" 
                    elif p_widget in widget_greylist:
