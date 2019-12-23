@@ -94,10 +94,6 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
             data = json_file["data"]
         
             pattern = re.compile(r'\d*')
-            # 12/23/19 This is wrong. We changed the campaign name to not use
-            # cpc_. I don't know if something else should be in its place. 
-            # It looks like c_bid is being used in place of mpc?
-            # mpc_pattern = re.compile(r'.*cpc_(.*)')
             for widget in data:
                extracted_p_widget = pattern.search(widget).group()
                if extracted_p_widget != p_widget:
@@ -114,7 +110,6 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
                    c_widgets_for_one_p_widget["data"][widget]["mgid_id"] = campaign["mgid_id"]
                    c_widgets_for_one_p_widget["data"][widget]["mpl"] = campaign["max_lead_cpa"]
                    c_widgets_for_one_p_widget["data"][widget]["mps"] = campaign["max_sale_cpa"]
-                   # res = mpc_pattern.findall(campaign["name"])
                    list_to_get_mpc = campaign["name"].split('_')
                    c_widgets_for_one_p_widget["data"][widget]["mpc"] = float(list_to_get_mpc[len(list_to_get_mpc) - 1])
                    if p_widget in widget_whitelist:
