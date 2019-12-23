@@ -55,18 +55,10 @@ def create_c_widgets_for_one_p_widget_report(date_range, p_widget_id, c1_input, 
         if conditions_args[i] == True and final_result is None:
             final_result = conditions_dfs[i]
         elif conditions_args[i] == True:
-
-            # final_result = final_result.merge(conditions_dfs[i], how="inner",
-            # on=["clicks", "cost", "leads", 
-                # "revenue", "sales", "widget_id", "lead_cvr",
-                # "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-                # "eps", "mps", "global_status", "domain"]
-                # )                                                                             
-            # 12/23/19 I removed mpc
             final_result = final_result.merge(conditions_dfs[i], how="inner",
             on=["clicks", "cost", "leads", 
                 "revenue", "sales", "widget_id", "lead_cvr",
-                "profit","cpc","epc","cpl", "epl", "mpl", "cps",
+                "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
                 "eps", "mps", "global_status", "domain"]
                 )                                                                             
     if final_result is None:                                                                  
@@ -108,14 +100,9 @@ def create_c_widgets_for_one_p_widget_report(date_range, p_widget_id, c1_input, 
         final_result = pd.concat([pd.DataFrame(summary).transpose(),final_result])
         final_result = final_result.replace(np.nan, "")
     
-    # json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
-                # "revenue", "sales", "widget_id", "lead_cvr",
-                # "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
-                # "eps", "mps", "global_status", "domain"]].to_dict("records"))
-    # 12/23/19 I removed mpc
     json_final_result = json.dumps(final_result[["clicks", "cost", "leads", 
                 "revenue", "sales", "widget_id", "lead_cvr",
-                "profit","cpc","epc", "cpl", "epl", "mpl", "cps",
+                "profit","cpc","epc","mpc", "cpl", "epl", "mpl", "cps",
                 "eps", "mps", "global_status", "domain"]].to_dict("records"))
     
     return json_final_result
