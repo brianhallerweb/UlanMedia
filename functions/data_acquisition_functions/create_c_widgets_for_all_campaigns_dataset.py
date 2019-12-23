@@ -62,9 +62,9 @@ def create_c_widgets_for_all_campaigns_dataset(date_range):
             json.dump(c_widgets_for_all_campaigns, file)
 
         return json.dumps(c_widgets_for_all_campaigns)
-    except:
+    except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_c_widgets_for_all_campaigns_dataset()", "Failed - create_c_widgets_for_all_campaigns_dataset()")
+        send_email("brianshaller@gmail.com", "Failed - create_c_widgets_for_all_campaigns_dataset()", e)
         sys.exit()
 
 

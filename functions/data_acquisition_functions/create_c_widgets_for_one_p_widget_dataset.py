@@ -160,9 +160,9 @@ def create_c_widgets_for_one_p_widget_dataset(p_widget, date_range):
             json.dump(c_widgets_for_one_p_widget, file)
         
         return json.dumps(c_widgets_for_one_p_widget)
-    except:
+    except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_c_widgets_for_one_p_widget_dataset()", "Failed - create_c_widgets_for_one_p_widget_dataset()")
+        send_email("brianshaller@gmail.com", "Failed - create_c_widgets_for_one_p_widget_dataset()", e)
         sys.exit()
 
 
