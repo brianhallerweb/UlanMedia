@@ -64,9 +64,9 @@ def create_campaigns_for_one_c_widget_dataset(c_widget_id, date_range,
             if campaign["leads"] > 0:
                 cpl = campaign["cost"]/campaign["leads"]
             if campaign["clicks"] == 0:
-                epc = campaign["revenue"]/campaign["clicks"]
-            else:
                 epc = 0
+            else:
+                epc = campaign["revenue"]/campaign["clicks"]
             c_bid = campaign["c_bid"]
             w_bid = campaign["w_bid"]
             coeff = campaign["coeff"]
